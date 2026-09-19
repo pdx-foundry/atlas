@@ -25,7 +25,7 @@ In the 20 mixed soft/hard ranges, policy coverage cannot substitute for the hard
 - Sorted config manifest SHA-256: `ad0637833d99e28c8f8eb1a4cd5f835d6b92d65d1183b1a16a062ce76f98b8df`.
 - Retained SDK-519 registry capture: Native's `.local/sdk-519/live/normal-serial.json`.
 - Capture SHA-256: `b87a98b809620b0fa1ec1b532f540ed1824d0967c4c30393fb55f7fbbb233b93`.
-- Parser Git revision: `a5458bea619f3e7620848d079a9c28b180546dd6`.
+- Parser Git revision: `7cf9f1516ebc10d5114af78bb4cd46614e4357ce`.
 
 The capture hash matches Native's `docs/native/atlas-consumer-verification.json`. The test uses
 the retained capture; it does not launch the game or refresh evidence.
