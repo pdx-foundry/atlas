@@ -1,16 +1,16 @@
 # SDK-523 baseline
 
-The retained registry capture gives **0 / 56,551 (0%)** coverage of Atlas-owned questions.
+The retained registry capture gives **0 / 57,282 (0%)** coverage of Atlas-owned questions.
 It observes 234 traditions and 33 tradition categories. These item names establish no field,
 value-form, cardinality, scope, or other rule answers. Agreement with CWT is never scored.
 
 | Owner | Covered | Total |
 | --- | ---: | ---: |
-| Engine fact | 0 | 53,465 |
+| Engine fact | 0 | 54,196 |
 | Content-derived | 0 | 3,086 |
-| Consumer policy | 0 | 2,637 |
+| Consumer policy | 0 | 2,672 |
 | Authored text | 0 | 192 |
-| All claims | 0 | 59,380 |
+| All claims | 0 | 60,146 |
 
 All 172 config files were read. All 42,973 meaningful lines have claim or diagnostic links;
 the files contain 49,201 physical lines, including five final lines without a newline. Every
@@ -63,8 +63,8 @@ The first command's exit 2 is expected for this baseline. The acceptance test mu
 if either required input is absent or changed. The fixture pins input hashes, counts, diagnostics,
 observations, and both complete output digests:
 
-- `ledger.json`: `3b8c72dc7b564ada07ede0018841a24541cf634d84d57704bc825598d1fc57ae`.
-- `coverage.json`: `fade786fae55d4194344ffe6ee2c556a6d5c0ee947040e58445619c9854bd56f`.
+- `ledger.json`: `b17ab1da853cae63fb6efeb8093a54b16696ed0e8dec86cc3c67757b9a61dda8`.
+- `coverage.json`: `a54dc3d5ece6be42b1db5c0f4d11be8c3d9be90c5dc0cdaebf14d22e6cbc7686`.
 
 Repeated runs and relocated copies of the full input must produce those same bytes. Game-free CI
 runs the focused inventory, evidence, and command tests; it does not substitute synthetic data for

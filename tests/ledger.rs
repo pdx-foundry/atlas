@@ -166,3 +166,62 @@ fn mixed_cardinality_and_scope_operations_are_independent_questions() {
     assert_eq!(scopes.len(), 2);
     assert_ne!(scopes[0].question, scopes[1].question);
 }
+
+#[test]
+fn grammar_subtypes_preserve_base_properties_and_ownership() {
+    let ledger = scan(
+        "x = { subtype[special] = { field = int alias[example:field] = bool complex_enum[items] = { path = common/items } } }",
+    );
+    for property in [
+        "field_existence",
+        "value_form",
+        "alias_factoring",
+        "content_query",
+    ] {
+        let claims: Vec<_> = ledger
+            .claims
+            .iter()
+            .filter(|c| c.property == property && c.subject.iter().any(|s| s == "subtype[special]"))
+            .collect();
+        assert!(!claims.is_empty(), "{property}");
+        assert!(claims.iter().all(|c| c.conditions == ["subtype[special]"]));
+        let owner = match property {
+            "alias_factoring" => Owner::ConsumerPolicy,
+            "content_query" => Owner::ContentDerived,
+            _ => Owner::EngineFact,
+        };
+        assert!(claims.iter().all(|c| c.owner == owner));
+    }
+}
+
+#[test]
+fn type_metadata_container_does_not_assert_game_value_shape() {
+    let ledger = scan("types = { type[x] = { path = common/x } }\nx = int");
+    assert!(ledger.claims.iter().any(|c| c.property == "type_existence"));
+    let forms: Vec<_> = ledger
+        .claims
+        .iter()
+        .filter(|c| c.property == "value_form")
+        .collect();
+    assert_eq!(forms.len(), 1);
+    assert_eq!(forms[0].subject, ["x"]);
+    assert_eq!(forms[0].config_answer, "int");
+}
+
+#[test]
+fn alternative_annotation_separator_is_not_part_of_the_answer() {
+    let ledger = scan("## cardinality <> 0..1\n## scopes <> { country }\nx = bool");
+    assert!(ledger.diagnostics.is_empty());
+    assert!(
+        ledger
+            .claims
+            .iter()
+            .filter(|c| c.subject.iter().any(|s| s.starts_with("$annotation:")))
+            .all(|c| !c.config_answer.contains("<>"))
+    );
+    assert!(
+        !scan("## scopes <> { country\nx = bool")
+            .diagnostics
+            .is_empty()
+    );
+}

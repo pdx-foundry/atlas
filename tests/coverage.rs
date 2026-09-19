@@ -210,3 +210,48 @@ fn soft_minimum_evidence_does_not_cover_a_hard_maximum() {
     assert_eq!(report.totals.all_claims.covered, 1);
     assert_eq!(report.totals.atlas_owned.covered, 0);
 }
+
+#[test]
+fn gap_only_questions_are_retained_and_malformed_gaps_rejected() {
+    let (ledger, mut snapshot) = fixture();
+    snapshot.gaps.push(Gap {
+        question: "question:gap-only".into(),
+        conditions: vec![],
+        reason: "Not examined".into(),
+    });
+    assert_eq!(
+        score(&ledger, &snapshot).atlas_only_questions,
+        ["question:gap-only"]
+    );
+    for field in ["question", "reason"] {
+        let mut invalid = snapshot.clone();
+        if field == "question" {
+            invalid.gaps[0].question = "  ".into();
+        } else {
+            invalid.gaps[0].reason = "  ".into();
+        }
+        assert!(evaluate(&ledger, Some(&serde_json::to_vec(&invalid).unwrap())).is_err());
+    }
+}
+
+#[test]
+fn incomplete_answer_states_remain_visible() {
+    let (ledger, mut snapshot) = fixture();
+    for status in [
+        Status::Partial,
+        Status::Untested,
+        Status::Unknown,
+        Status::Unsupported,
+    ] {
+        snapshot.answers[0].status = status;
+        let report = score(&ledger, &snapshot);
+        let claim = ledger
+            .claims
+            .iter()
+            .find(|c| c.question == snapshot.answers[0].question)
+            .unwrap();
+        let assessment = report.claims.iter().find(|a| a.claim == claim.id).unwrap();
+        assert_eq!(assessment.answer_states, [status]);
+        assert!(!assessment.covered);
+    }
+}

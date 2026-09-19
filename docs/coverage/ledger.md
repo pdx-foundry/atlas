@@ -18,6 +18,10 @@ lines attached to one entry form one documentation claim. Unknown annotations re
 and a diagnostic; expected method assignment does not prove that the method already works.
 Minimum and maximum cardinality are separate questions. Each soft bound belongs to consumer policy;
 the other bound can still be an engine fact. Define-derived bounds retain a separate reference question.
+The block around `type[...]` is CWT metadata, not a claim that game definitions must be blocks.
+Value-form questions come from the separate schema entries. Subtype selectors inside type metadata
+express field predicates; subtype arms inside a schema retain the base field, alias, or content
+questions and their ownership, with the subtype carried in their conditions.
 
 The question ID hashes relative file, subject path, property, and structural conditions. Occurrence
 IDs append an ordinal to distinguish repeated declarations of the same question. CWT answer text
@@ -111,8 +115,10 @@ observations, and policy/authored questions require authored authority. `synthet
 grants coverage. An empty evidence list, another target, narrower conditions, an applicable gap,
 `conflicted`, or incompatible qualified answers prevents full credit. The other states are
 `partial`, `untested`, `unknown`, and `unsupported`; these remain distinct input states.
+Assessments retain applicable states in `answer_states`, including when none earns complete credit.
 
-An explicit gap has `question`, `conditions`, and `reason`. Conflicts are between applicable Atlas
+An explicit gap has `question`, `conditions`, and a nonempty `reason`. Gap-only questions absent
+from the ledger also appear in `atlas_only_questions`. Conflicts are between applicable Atlas
 answers, not between Atlas and CWT. Source answer equality is never used. Conditions currently match
 exactly; there is no inferred implication or nearest-target fallback. Snapshot answers are indexed
 by question so scoring does not scan every answer for every source claim.

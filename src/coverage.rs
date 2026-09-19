@@ -6,7 +6,7 @@ use sha2::{Digest, Sha256};
 use std::collections::{BTreeMap, BTreeSet};
 
 /// Qualification state of an exact answer, not a correctness grade for CWT.
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub enum Status {
     /// Qualified answer under the recorded conditions.
@@ -163,6 +163,9 @@ pub struct Assessment {
     pub covered: bool,
     /// Why credit was granted or withheld.
     pub reason: String,
+    /// Distinct states supplied by applicable answers, including incomplete answers.
+    #[serde(skip_serializing_if = "Vec::is_empty", default)]
+    pub answer_states: Vec<Status>,
     /// Evidence identities used for credited answers.
     pub evidence: Vec<String>,
 }
@@ -199,8 +202,13 @@ fn validate(snapshot: &Snapshot) -> Result<(), String> {
     if snapshot.snapshot_id.trim().is_empty() || snapshot.target.trim().is_empty() {
         return Err("Snapshot identity and exact target must be nonempty".into());
     }
+    for gap in &snapshot.gaps {
+        if gap.question.trim().is_empty() || gap.reason.trim().is_empty() {
+            return Err("Gaps require a question and a nonempty explanation".into());
+        }
+    }
     for answer in &snapshot.answers {
-        if answer.question.is_empty() || answer.value.is_null() {
+        if answer.question.trim().is_empty() || answer.value.is_null() {
             return Err("Answers require a question and a non-null answer".into());
         }
         if answer.evidence.iter().any(|e| {
@@ -252,10 +260,27 @@ fn assessment(claim: &crate::ledger::Claim, snapshot: Option<&SnapshotIndex<'_>>
         covered: false,
         reason: "No qualified answer to this question".into(),
         evidence: Vec::new(),
+        answer_states: Vec::new(),
     };
     let Some(snapshot) = snapshot else {
         return result;
     };
+    let answers: Vec<_> = snapshot
+        .answers
+        .get(claim.question.as_str())
+        .into_iter()
+        .flatten()
+        .filter(|a| a.conditions == claim.conditions)
+        .collect();
+    result.answer_states = answers
+        .iter()
+        .map(|a| a.status)
+        .collect::<BTreeSet<_>>()
+        .into_iter()
+        .collect();
+    if !answers.is_empty() {
+        result.reason = "Applicable answers do not establish complete qualified support".into();
+    }
     if snapshot
         .gaps
         .get(claim.question.as_str())
@@ -266,13 +291,6 @@ fn assessment(claim: &crate::ledger::Claim, snapshot: Option<&SnapshotIndex<'_>>
         result.reason = "Snapshot records an applicable gap".into();
         return result;
     }
-    let answers: Vec<_> = snapshot
-        .answers
-        .get(claim.question.as_str())
-        .into_iter()
-        .flatten()
-        .filter(|a| a.conditions == claim.conditions)
-        .collect();
     if answers.iter().any(|a| a.status == Status::Conflicted) {
         result.reason = "Unresolved evidence conflict".into();
         return result;
@@ -383,8 +401,10 @@ pub fn evaluate(ledger: &Ledger, input: Option<&[u8]>) -> Result<Report, String>
         .map(|s| {
             s.answers
                 .iter()
-                .filter(|a| !questions.contains(a.question.as_str()))
-                .map(|a| a.question.clone())
+                .map(|a| a.question.as_str())
+                .chain(s.gaps.iter().map(|g| g.question.as_str()))
+                .filter(|question| !questions.contains(question))
+                .map(str::to_owned)
                 .collect::<BTreeSet<_>>()
                 .into_iter()
                 .collect()

@@ -39,6 +39,12 @@ fn visit(root: &Path, dir: &Path, sources: &mut Sources) -> io::Result<()> {
 }
 /// Reads all CWT files below an explicit root. Rejects symlinks and empty inputs rather than skipping them.
 pub fn read_sources(root: &Path) -> io::Result<Sources> {
+    if fs::symlink_metadata(root)?.is_symlink() {
+        return Err(io::Error::new(
+            io::ErrorKind::InvalidInput,
+            "Config root must not be a symlink",
+        ));
+    }
     let mut sources = Sources::new();
     visit(root, root, &mut sources)?;
     if sources.is_empty() {

@@ -311,16 +311,6 @@ pub(super) fn node(
             "Subtype naming and partition are CWT modeling",
         );
     }
-    if context.contains("subtype[")
-        && !context.contains("/localisation")
-        && !context.contains("/images")
-    {
-        return (
-            "conditional_constraint",
-            Owner::EngineFact,
-            "Underlying field condition is separate from CWT subtype naming",
-        );
-    }
     if key.starts_with("alias[effect:") || key.starts_with("alias[trigger:") {
         if key.contains('<') {
             return (
@@ -379,6 +369,13 @@ pub(super) fn node(
             "naming_rule",
             Owner::EngineFact,
             "Derived localisation or asset name requires evidence",
+        );
+    }
+    if context.starts_with("types/") && context.contains("subtype[") {
+        return (
+            "conditional_constraint",
+            Owner::EngineFact,
+            "Type metadata selects a subtype using a game-field predicate",
         );
     }
     if context.contains("type[") {

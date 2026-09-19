@@ -222,6 +222,7 @@ impl Builder<'_> {
                 let value = text[name.len()..]
                     .trim()
                     .strip_prefix('=')
+                    .or_else(|| text[name.len()..].trim().strip_prefix("<>"))
                     .unwrap_or(text[name.len()..].trim())
                     .trim();
                 if let Some(problem) =
