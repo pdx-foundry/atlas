@@ -3,11 +3,19 @@ use std::{collections::BTreeMap, path::PathBuf, process::ExitCode};
 fn run() -> Result<bool, Box<dyn std::error::Error>> {
     let mut args = std::env::args().skip(1);
     if args.next().as_deref() != Some("ledger") {
-        return Err("usage: pdx-atlas ledger --config DIR [--snapshot FILE] --output DIR".into());
+        return Err("usage: pdx-atlas ledger --config DIR [--snapshot FILE] [--game-content DIR --engine-docs DIR] --output DIR".into());
     }
     let mut options = BTreeMap::new();
     while let Some(key) = args.next() {
-        if !["--config", "--snapshot", "--output"].contains(&key.as_str()) {
+        if ![
+            "--config",
+            "--snapshot",
+            "--output",
+            "--game-content",
+            "--engine-docs",
+        ]
+        .contains(&key.as_str())
+        {
             return Err(format!("Unknown argument: {key}").into());
         }
         let value = args.next().ok_or("Missing argument value")?;
@@ -20,10 +28,16 @@ fn run() -> Result<bool, Box<dyn std::error::Error>> {
     }
     let config = options.get("--config").ok_or("--config is required")?;
     let output = options.get("--output").ok_or("--output is required")?;
+    let corpus = match (options.get("--game-content"), options.get("--engine-docs")) {
+        (Some(game), Some(engine)) => Some(pdx_atlas::provenance::read_corpus(game, engine)?),
+        (None, None) => None,
+        _ => return Err("--game-content and --engine-docs must be supplied together".into()),
+    };
     let (ledger, coverage) = report::generate(
         config,
         options.get("--snapshot").map(PathBuf::as_path),
         output,
+        corpus.as_ref(),
     )?;
     let headline = &coverage.totals.atlas_owned;
     let percentage = headline
@@ -43,7 +57,13 @@ fn run() -> Result<bool, Box<dyn std::error::Error>> {
             ledger.diagnostics.len()
         );
     }
-    Ok(ledger.diagnostics.is_empty())
+    let source_problems = corpus.as_ref().map_or(0, |corpus| corpus.diagnostics.len());
+    if source_problems > 0 {
+        eprintln!(
+            "{source_problems} documentation source parsing diagnostics remain. See documentation.json."
+        );
+    }
+    Ok(ledger.diagnostics.is_empty() && source_problems == 0)
 }
 fn main() -> ExitCode {
     match run() {

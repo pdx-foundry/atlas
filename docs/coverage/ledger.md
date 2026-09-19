@@ -55,10 +55,11 @@ this does not qualify the underlying game condition.
 | Consumer policy | Severity, soft bounds, subtype naming, aliases, scope groups | Consumer modeling choices |
 | Authored text | Unattributed documentation outside expected engine/content families | Its author |
 
-Documentation assignments are **provisional**. Effects/triggers route to expected engine text;
-common schemas, defines, on_actions and game rules route to expected shipped comments. Other prose
-has a provisional authored-text assignment. SDK-525 must establish actual provenance, including the
-handwritten remainder. None of these assignments supplies coverage or asserts a verified origin.
+Documentation assignments are provisional until the optional [provenance pass](documentation.md)
+compares every entry against explicit engine dumps and installed comments. The pass tags all
+entries, records matching source locations, separates rewritten candidates, and lists the authored
+remainder. Without source inputs, the original expected-owner assignments remain provisional.
+Neither expected ownership nor a text match supplies qualified rule coverage.
 Unknown metadata has a provisional policy assignment plus a diagnostic; it is not declared
 inherently manual.
 
@@ -136,5 +137,5 @@ unknown formats, and relocated CLI inputs. The full-config gate separately pins 
 and both output digests. Baseline changes require inspecting the changed findings before updating
 the fixture; a changed digest is not a reason to rebaseline automatically.
 
-CWT emission/comparison is SDK-524. Documentation source matching is SDK-525. Neither is implemented
-by this tool, and none of its outputs promotes Native evidence or publishes a rule snapshot.
+CWT emission/comparison remains SDK-524. Documentation source matching is implemented by SDK-525.
+None of these outputs promotes Native evidence or publishes a rule snapshot.
