@@ -4,7 +4,7 @@ Atlas inventories the questions in CWTools config and measures which ones an Atl
 answer. **Coverage is not agreement with CWT.** An evidence-backed contradictory answer earns the
 same coverage as an agreeing answer. The config is a migration/discovery input, not the game oracle.
 
-The current implementation is the game-free SDK-523 scoreboard. Native extraction and the full
+The current implementation is the game-free SDK-523 scoreboard and SDK-525 documentation attribution. Native extraction and the full
 published rule-snapshot system remain separate work.
 
 ```sh
@@ -42,6 +42,16 @@ cargo clippy --all-targets --locked -- -D warnings
 PDX_CONFIG_PATH=/path/to/cwtools-stellaris-config/config \
 ATLAS_REGISTRY_SNAPSHOT=/path/to/normal-serial.json \
 cargo test --locked --test full_config -- --ignored
+```
+
+For a complete documentation-source measurement, add `--game-content /path/to/Stellaris` and
+`--engine-docs /path/to/script-docs/v4.4.1`. This tags every documentation claim and also writes
+`documentation.json`, including exact matches, rewritten candidates, and the authored remainder.
+Text matching does not grant rule coverage. See [provenance and the full measurement](docs/coverage/documentation.md).
+The provenance acceptance gate additionally requires `PDX_GAME_CONTENT` and `PDX_ENGINE_DOCS`:
+
+```sh
+cargo test --locked --test full_provenance -- --ignored
 ```
 
 Ordinary CI uses self-contained fixtures. The explicit full-config gate checks the pinned fork and

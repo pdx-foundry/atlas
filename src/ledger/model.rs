@@ -54,10 +54,13 @@ pub struct Claim {
     pub owner: Owner,
     /// Explanation of the assignment.
     pub ownership_reason: String,
-    /// True until a later documentation provenance pass establishes the source.
+    /// True for unmeasured documentation or an unconfirmed rewritten-source candidate.
     pub provisional_owner: bool,
     /// Required for engine-fact questions; expected, not demonstrated.
     pub expected_method: Option<Method>,
+    /// Documentation attribution, absent until measured against explicit source inputs.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub provenance: Option<crate::provenance::Attribution>,
 }
 /// A diagnostic that prevents claiming a complete inventory.
 #[derive(Clone, Debug, Serialize, Deserialize)]

@@ -61,6 +61,7 @@ impl Builder<'_> {
             owner,
             ownership_reason: reason.into(),
             provisional_owner: provisional,
+            provenance: None,
             expected_method: (owner == Owner::EngineFact)
                 .then(|| classify::route(self.file, subject, property, &answer)),
         });

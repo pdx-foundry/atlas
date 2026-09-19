@@ -4,3 +4,6 @@
 pub mod coverage;
 pub mod ledger;
 pub mod report;
+
+/// Documentation source matching and complete provenance measurements.
+pub mod provenance;

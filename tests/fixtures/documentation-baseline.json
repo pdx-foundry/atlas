@@ -1,0 +1,175 @@
+{
+  "config_sha256": "ad0637833d99e28c8f8eb1a4cd5f835d6b92d65d1183b1a16a062ce76f98b8df",
+  "totals": {
+    "entries": 5784,
+    "lines": 7282,
+    "exact": 4014,
+    "rewritten": 295,
+    "authored": 1475
+  },
+  "by_family": {
+    "defines": {
+      "entries": 1329,
+      "lines": 1348,
+      "exact": 1286,
+      "rewritten": 7,
+      "authored": 36
+    },
+    "effects": {
+      "entries": 1520,
+      "lines": 1553,
+      "exact": 967,
+      "rewritten": 79,
+      "authored": 474
+    },
+    "game_rules": {
+      "entries": 195,
+      "lines": 382,
+      "exact": 152,
+      "rewritten": 13,
+      "authored": 30
+    },
+    "on_actions": {
+      "entries": 342,
+      "lines": 916,
+      "exact": 269,
+      "rewritten": 38,
+      "authored": 35
+    },
+    "other": {
+      "entries": 192,
+      "lines": 205,
+      "exact": 0,
+      "rewritten": 0,
+      "authored": 192
+    },
+    "triggers": {
+      "entries": 1152,
+      "lines": 1175,
+      "exact": 939,
+      "rewritten": 90,
+      "authored": 123
+    },
+    "type_schemas": {
+      "entries": 1054,
+      "lines": 1703,
+      "exact": 401,
+      "rewritten": 68,
+      "authored": 585
+    }
+  },
+  "source_parse_complete": false,
+  "diagnostics": [
+    "common/HOW_TO_MAKE_NEW_SHIPS.txt:55: Unexpected '!'",
+    "common/ai_budget/00_README.txt:9: Expected a value",
+    "common/anomalies/99_README_ANOMALIES.txt:23: Expected a value",
+    "common/archaeological_site_types/99_README_ARC_SITES.txt:5: Expected a value",
+    "common/colony_types/00_README.txt:30: Expected a key or value",
+    "common/component_templates/000_documentation.txt:5: UnclosedAtEof",
+    "common/council_agendas/99_README_AGENDAS.txt:11: Expected a value",
+    "common/districts/00_DOCUMENTATION.txt:100: Expected a value",
+    "common/economic_categories/99_README_ECONOMIC_CATEGORIES.txt:6: Expected a value",
+    "common/espionage_operation_types/example.txt:2: Expected a value",
+    "common/ethics/99_documentation.txt:89: Expected a value",
+    "common/first_contact/99_README_FIRST_CONTACT.txt:58: Expected a value",
+    "common/global_ship_designs/000_documentation.txt:8: Expected a value",
+    "common/inline_scripts/00_README.txt:41: UnclosedAtEof",
+    "common/inline_scripts/00_README.txt:35: UnclosedAtEof",
+    "common/megastructure_overclock_types/99_README_OVERCLOCKS.txt:25: StrayClosingBrace",
+    "common/megastructure_overclock_types/99_README_OVERCLOCKS.txt:77: StrayClosingBrace",
+    "common/megastructure_overclock_types/99_README_OVERCLOCKS.txt:78: StrayClosingBrace",
+    "common/missions/missions/99_README_MISSIONS.txt:49: Expected a value",
+    "common/mutations/README.txt:14: Expected a value",
+    "common/named_colors/01_trait_colors.txt:65: OperatorLessEntry",
+    "common/pop_faction_types/99_documentation.txt:5: Expected a value",
+    "common/relics/99_documentation.txt:5: Expected a value",
+    "common/scripted_actions/99_README_SCRIPTED_ACTIONS.txt:176: Expected a value",
+    "common/scripted_effects/99_advanced_documentation.txt:17: StrayClosingBrace",
+    "common/scripted_effects/99_advanced_documentation.txt:26: StrayClosingBrace",
+    "common/scripted_effects/99_advanced_documentation.txt:34: StrayClosingBrace",
+    "common/scripted_effects/99_advanced_documentation.txt:43: StrayClosingBrace",
+    "common/scripted_loc/scripted_loc_ruloc.txt:312: UnclosedAtEof",
+    "common/solar_system_initializers/example.txt:81: Expected a value",
+    "common/special_projects/documentation.txt:51: Expected a value",
+    "common/starbase_levels/00_documentation.txt:20: Expected a key or value",
+    "common/starbase_modules/00_example.txt:61: Expected a key or value",
+    "common/tradable_actions/00_README.txt:23: Expected a value",
+    "common/traits/000_documentation_species_traits.txt:23: Expected a value",
+    "common/war_goals/wg_example.txt:66: Expected a value"
+  ],
+  "input_files": 2062,
+  "inputs_sha256": "3d744becf7976e9ddd52e57f2d92cbaaf0b56f60b57af61852e45052519d3007",
+  "report_sha256": {
+    "ledger.json": "f524f5102eb2f6eb9f8d87ca54500993a9b40d9a399fe8568916d1fc13e82330",
+    "coverage.json": "45f3fa348695ad131a9895db175f9b3339e009b3eec5b21e10bfe1a50549c586",
+    "documentation.json": "ca48c210bfacc029b1559b7c8f33a5429ba8c3e53c65695eb860926599a0ad92"
+  },
+  "examples": [
+    {
+      "claim": "question:03984461eddb301d34bd12fce13fa46210cca65ea9bb359a4bd47cb0b1150d52:1",
+      "text": "Field-of-View",
+      "source": {
+        "origin": "shipped_comment",
+        "file": "common/defines/00_defines.txt",
+        "sha256": "c491a11c081e5c783b22ae531c8fcdffa34ef1ea1031479c32b1a8a088157afd",
+        "line": 2,
+        "end_line": 2,
+        "key": [
+          "NCamera",
+          "FOV"
+        ],
+        "association": "inline",
+        "text": "Field-of-View"
+      }
+    },
+    {
+      "claim": "question:5cbf4f09c9d749fcf1686cb351f3725d758a559942569f8937d97090610f0ca3:1",
+      "text": "Triggers when the game starts",
+      "source": {
+        "origin": "shipped_comment",
+        "file": "common/on_actions/00_on_actions.txt",
+        "sha256": "15e32020f7cf1423e2e6e92f4b0d9cae40ba942ab5da536851f4117e70c2abb3",
+        "line": 1,
+        "end_line": 1,
+        "key": [
+          "on_game_start"
+        ],
+        "association": "leading",
+        "text": "Triggers when the game starts"
+      }
+    },
+    {
+      "claim": "question:9a040c4d5f1b987420bdd6f4d8e6d8532c83e5970cb95d8b9e09e72c38c97420:1",
+      "text": "Root = target country\nThis = country",
+      "source": {
+        "origin": "shipped_comment",
+        "file": "common/game_rules/00_rules.txt",
+        "sha256": "c04b65d6c5cf5f46090aaf1cb7346981d88eca8510b135da74ea8dcf4dc43f71",
+        "line": 6,
+        "end_line": 7,
+        "key": [
+          "is_valid_rival"
+        ],
+        "association": "leading",
+        "text": "Root = target country\nThis = country"
+      }
+    },
+    {
+      "claim": "question:0569d5ca6aabc4015d3ef6f231e152428b344013774b443d8c9ccd5bb9d29cf4:1",
+      "text": "set building to ruined if this trigger returns true",
+      "source": {
+        "origin": "shipped_comment",
+        "file": "common/buildings/00_example.txt",
+        "sha256": "c1a289972f18146767b49f096b757ad2d0a9a7bb65e90b2a558d167f67bc5595",
+        "line": 73,
+        "end_line": 73,
+        "key": [
+          "building_colony_shelter",
+          "ruined_trigger"
+        ],
+        "association": "block",
+        "text": "set building to ruined if this trigger returns true"
+      }
+    }
+  ]
+}
