@@ -102,7 +102,12 @@ fn comments(source: &str) -> Vec<Comment> {
             }
             continue;
         }
-        let inline = !line[..column].trim().is_empty();
+        let prefix = if index == 0 {
+            line[..column].trim_start_matches('\u{feff}')
+        } else {
+            &line[..column]
+        };
+        let inline = !prefix.trim().is_empty();
         if let Some(previous) = result.last_mut()
             && !inline
             && previous.end_line == index
@@ -186,7 +191,11 @@ pub fn parse_comments(file: &str, source: &str) -> (Vec<Source>, Vec<String>) {
                         {
                             continue;
                         }
-                        let between = &lines[next.span.line..sibling.span.line - 1];
+                        let between = if next.span.line == sibling.span.line {
+                            &[][..]
+                        } else {
+                            &lines[next.span.line..sibling.span.line - 1]
+                        };
                         if between.iter().any(|line| {
                             line.trim().is_empty() || line.trim_start().starts_with('#')
                         }) {

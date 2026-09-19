@@ -240,3 +240,103 @@ fn commented_quoted_hashes_are_not_documentation_delimiters() {
     );
     assert!(!parsed.iter().any(|source| source.text.contains("not #")));
 }
+
+#[test]
+fn same_line_define_siblings_share_a_leading_group_without_panicking() {
+    let (parsed, errors) = parse_comments(
+        "common/defines/00.txt",
+        "N = {\n # Shared group\n A = 1 B = 2\n}\n",
+    );
+    assert!(errors.is_empty());
+    for key in ["A", "B"] {
+        assert!(
+            parsed
+                .iter()
+                .any(|source| source.key == ["N", key] && source.text == "Shared group")
+        );
+    }
+}
+
+#[test]
+fn leading_bom_does_not_turn_first_line_documentation_into_inline_text() {
+    let (parsed, errors) = parse_comments(
+        "common/things/00.txt",
+        "\u{feff}# Leading documentation\nfield = 1\n",
+    );
+    assert!(errors.is_empty());
+    assert!(parsed.iter().any(|source| source.key == ["field"]
+        && source.text == "Leading documentation"
+        && source.line == 1));
+    let (parsed, errors) = parse_comments(
+        "common/things/guide.txt",
+        "\u{feff}# field: Named documentation\n",
+    );
+    assert!(errors.is_empty());
+    assert!(parsed.iter().any(|source| source.key == ["field"]
+        && source.text == "Named documentation"
+        && source.line == 1));
+}
+
+#[test]
+fn loader_paths_include_descendants_but_not_sibling_directory_prefixes() {
+    let config = sources(&[(
+        "common/schema.cwt",
+        "types = { type[thing] = { path = game/common/things } }\nthing = {\n ### Nested documentation\n field = int\n ### Sibling documentation\n other = int\n}\n",
+    )]);
+    let corpus = Corpus::from_sources(
+        &sources(&[
+            (
+                "common/things/guides/example.txt",
+                "# field: Nested documentation\n",
+            ),
+            (
+                "common/things_elsewhere/guide.txt",
+                "# other: Sibling documentation\n",
+            ),
+        ]),
+        &BTreeMap::new(),
+    );
+    let mut ledger = ledger::inventory(&config);
+    let measured = provenance::annotate(&mut ledger, &corpus);
+    assert_eq!(measured.totals.exact, 1);
+    assert_eq!(measured.totals.authored, 1);
+}
+
+#[test]
+fn all_equally_best_excerpts_in_one_block_keep_their_physical_locations() {
+    for (documentation, prose, comparison) in [
+        ("Repeated description", "Repeated description", Match::Exact),
+        (
+            "Changes the total amount of energy stored by the country",
+            "Changes the amount of energy stored by the country",
+            Match::Rewritten,
+        ),
+    ] {
+        let mut ledger = ledger::inventory(&sources(&[(
+            "effects.cwt",
+            &format!("### {documentation}\nalias[effect:command] = int\n"),
+        )]));
+        let corpus = Corpus::from_sources(
+            &BTreeMap::new(),
+            &sources(&[(
+                "effects.log",
+                &format!("command - {prose}\n\n{prose}\nSupported Scopes: all\n"),
+            )]),
+        );
+        provenance::annotate(&mut ledger, &corpus);
+        let attribution = ledger
+            .claims
+            .iter()
+            .find_map(|claim| claim.provenance.as_ref())
+            .unwrap();
+        assert_eq!(attribution.comparison, comparison);
+        assert_eq!(
+            attribution
+                .sources
+                .iter()
+                .map(|source| (source.line, source.end_line))
+                .collect::<Vec<_>>(),
+            [(1, 1), (3, 3)]
+        );
+    }
+}

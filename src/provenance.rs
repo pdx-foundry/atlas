@@ -16,7 +16,7 @@ fn hash(bytes: &[u8]) -> String {
 
 /// Hashed, parsed text sources for one bounded documentation measurement.
 pub struct Corpus {
-    sources: BTreeMap<(String, String), Vec<Source>>,
+    sources: BTreeMap<String, Vec<Source>>,
     inputs: BTreeMap<String, String>,
     /// Source parsing problems retained in the report; callers must surface these limits.
     pub diagnostics: Vec<String>,
@@ -40,14 +40,9 @@ impl Corpus {
             let (sources, diagnostics) = parse_comments(file, text);
             corpus.diagnostics.extend(diagnostics);
             for source in sources {
-                let family = source
-                    .file
-                    .rsplit_once('/')
-                    .map_or("", |(dir, _)| dir)
-                    .to_string();
                 corpus
                     .sources
-                    .entry((family, source.key.last().unwrap().clone()))
+                    .entry(source.key.last().unwrap().clone())
                     .or_default()
                     .push(source);
             }
@@ -65,7 +60,7 @@ impl Corpus {
             for source in sources {
                 corpus
                     .sources
-                    .entry((file.trim_end_matches(".log").into(), source.key[0].clone()))
+                    .entry(source.key[0].clone())
                     .or_default()
                     .push(source);
             }
@@ -166,11 +161,14 @@ fn similarity(left: &str, right: &str) -> usize {
     let score = (a.len().max(b.len()) - row[b.len()]) * 10000 / a.len().max(b.len());
     if score >= 8500 { score.min(9999) } else { 0 }
 }
-fn best_excerpt(doc: &str, source: &Source) -> Option<(usize, Source)> {
+fn best_excerpts(doc: &str, source: &Source) -> (usize, Vec<Source>) {
     let lines: Vec<_> = source.text.lines().collect();
-    let mut best = None;
+    let mut best = Vec::new();
     let mut score = 0;
     for first in 0..lines.len() {
+        if lines[first].trim().is_empty() {
+            continue;
+        }
         let mut text = String::new();
         for (last, line) in lines.iter().enumerate().skip(first) {
             if last > first {
@@ -181,18 +179,21 @@ fn best_excerpt(doc: &str, source: &Source) -> Option<(usize, Source)> {
             let candidate = similarity(doc, &normalized);
             if candidate > score {
                 score = candidate;
+                best.clear();
+            }
+            if candidate == score && score > 0 && !line.trim().is_empty() {
                 let mut excerpt = source.clone();
                 excerpt.line += first;
                 excerpt.end_line = source.line + last;
                 excerpt.text = text.clone();
-                best = Some((score, excerpt));
+                best.push(excerpt);
             }
             if normalized.len() > doc.len() * 2 + 100 {
                 break;
             }
         }
     }
-    best
+    (score, best)
 }
 fn family(claim: &Claim) -> &'static str {
     if claim.file == "effects.cwt" {
@@ -269,29 +270,41 @@ fn attribute(claim: &Claim, key: &str, paths: &[String], corpus: &Corpus) -> Att
     let doc = folded(&claim.config_answer);
     let mut best_score = 0;
     let mut sources = Vec::new();
-    for path in paths {
-        for source in corpus
-            .sources
-            .get(&(path.clone(), key.into()))
-            .into_iter()
-            .flatten()
+    for source in corpus.sources.get(key).into_iter().flatten() {
+        let in_directory = match source.origin {
+            Origin::EngineText => paths
+                .iter()
+                .any(|path| source.file == format!("{path}.log")),
+            Origin::ShippedComment => {
+                let directory = source
+                    .file
+                    .rsplit_once('/')
+                    .map_or("", |(directory, _)| directory);
+                paths.iter().any(|path| {
+                    directory == path
+                        || directory
+                            .strip_prefix(path.as_str())
+                            .is_some_and(|suffix| suffix.starts_with('/'))
+                })
+            }
+            Origin::Authored => false,
+        };
+        if !in_directory {
+            continue;
+        }
+        if family(claim) == "defines"
+            && (source.key.len() + 1 != claim.subject.len()
+                || !claim.subject.ends_with(&source.key))
         {
-            if family(claim) == "defines"
-                && (source.key.len() + 1 != claim.subject.len()
-                    || !claim.subject.ends_with(&source.key))
-            {
-                continue;
-            }
-            let Some((score, excerpt)) = best_excerpt(&doc, source) else {
-                continue;
-            };
-            if score > best_score {
-                best_score = score;
-                sources.clear();
-            }
-            if score == best_score {
-                sources.push(excerpt);
-            }
+            continue;
+        }
+        let (score, excerpts) = best_excerpts(&doc, source);
+        if score > best_score {
+            best_score = score;
+            sources.clear();
+        }
+        if score == best_score {
+            sources.extend(excerpts);
         }
     }
     sources.sort_by(|a, b| {

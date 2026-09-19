@@ -54,9 +54,10 @@ endings retain their source meaning.
 
 Engine entries are identified by command name; descriptions and usage are kept, scope metadata is
 excluded. Nested config documentation can match text within its enclosing engine command. Content
-candidates must share a key and a content directory selected from the config's loader paths (or its
-relative file stem). Defines additionally require their namespace path. This is a text-source join,
-not a qualified mapping between a CWT field and an engine reader.
+candidates must share a key and be inside a content directory selected from the config's loader
+paths (or its relative file stem), including descendant directories. Defines additionally require
+their namespace path. This is a text-source join, not a qualified mapping between a CWT field and
+an engine reader.
 
 An exact match removes comment markers and folds whitespace only. It can select a consecutive
 range of source lines, allowing a description to match without copying the following usage example.
