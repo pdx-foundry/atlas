@@ -1,6 +1,9 @@
 # PDX Atlas
 
-This project is currently in *planning*. There is no implementation yet.
+Atlas implements a game-free config claim ledger and coverage CLI. For ledger changes, read
+[the contract](docs/coverage/ledger.md) and run the checks in [README.md](README.md).
+Coverage measures established answers to config questions; agreement with CWT is not a requirement.
+Use paired `<module>.rs` and `<module>/` files instead of `mod.rs`.
 
 ## Useful References
 

@@ -1,0 +1,125 @@
+{
+  "config_revision": "76be5782683d09a9dbe304a512690eed6a2fa425",
+  "config_sha256": "ad0637833d99e28c8f8eb1a4cd5f835d6b92d65d1183b1a16a062ce76f98b8df",
+  "snapshot_sha256": "b87a98b809620b0fa1ec1b532f540ed1824d0967c4c30393fb55f7fbbb233b93",
+  "files": 172,
+  "physical_lines": 49201,
+  "meaningful_lines": 42973,
+  "claims": 52796,
+  "totals": {
+    "atlas_owned": {
+      "covered": 0,
+      "total": 49967,
+      "percent": 0.0
+    },
+    "all_claims": {
+      "covered": 0,
+      "total": 52796,
+      "percent": 0.0
+    },
+    "by_owner": {
+      "engine_fact": {
+        "covered": 0,
+        "total": 46881,
+        "percent": 0.0
+      },
+      "content_derived": {
+        "covered": 0,
+        "total": 3086,
+        "percent": 0.0
+      },
+      "consumer_policy": {
+        "covered": 0,
+        "total": 2637,
+        "percent": 0.0
+      },
+      "authored_text": {
+        "covered": 0,
+        "total": 192,
+        "percent": 0.0
+      }
+    }
+  },
+  "diagnostics": [
+    {
+      "file": "common/country_types.cwt",
+      "line": 323,
+      "kind": "unknown-annotation"
+    },
+    {
+      "file": "common/country_types.cwt",
+      "line": 324,
+      "kind": "unknown-annotation"
+    },
+    {
+      "file": "game_rules.cwt",
+      "line": 14,
+      "kind": "unknown-annotation"
+    },
+    {
+      "file": "game_rules.cwt",
+      "line": 15,
+      "kind": "unknown-annotation"
+    },
+    {
+      "file": "gfx/particles.cwt",
+      "line": 533,
+      "kind": "malformed-annotation"
+    },
+    {
+      "file": "gfx/particles.cwt",
+      "line": 542,
+      "kind": "malformed-annotation"
+    },
+    {
+      "file": "gfx/particles.cwt",
+      "line": 551,
+      "kind": "malformed-annotation"
+    },
+    {
+      "file": "triggers.cwt",
+      "line": 5160,
+      "kind": "unknown-annotation"
+    }
+  ],
+  "registry_observations": [
+    {
+      "activation": "demonstrated",
+      "completion": "complete",
+      "gaps": [
+        "Fixture execution is not requested by registry enumeration",
+        "Fixture tree_template storage and traditions relationships are unknown",
+        "Engine validation and runtime behavior are unknown",
+        "Field discovery, schema completeness, and rule coverage are unknown"
+      ],
+      "limits": [
+        "Collection keys at the initial loader return, before post-load validation; no field values, rules, or gameplay availability established",
+        "Private copies of pinned installed tradition files replace the two registry directories; DLC additions, user mods, and later registry changes are outside this answer"
+      ],
+      "observed_items": 33,
+      "origin": "live",
+      "registry": "tradition_categories",
+      "rule_credit": false
+    },
+    {
+      "activation": "demonstrated",
+      "completion": "complete",
+      "gaps": [
+        "Fixture execution is not requested by registry enumeration",
+        "Fixture tree_template storage and traditions relationships are unknown",
+        "Engine validation and runtime behavior are unknown",
+        "Field discovery, schema completeness, and rule coverage are unknown"
+      ],
+      "limits": [
+        "Collection keys at the initial loader return, before post-load validation; no field values, rules, or gameplay availability established",
+        "Private copies of pinned installed tradition files replace the two registry directories; DLC additions, user mods, and later registry changes are outside this answer"
+      ],
+      "observed_items": 234,
+      "origin": "live",
+      "registry": "traditions",
+      "rule_credit": false
+    }
+  ],
+  "ledger_sha256": "ce31cac54d7ff0500d92df2ffbef215083a8e86750d1b46c5af161fb99eb28d9",
+  "coverage_sha256": "5b1c16e984dde027c8c00a549fbb62009bc920cfd9967daefce87b65f7a4f35e"
+}
