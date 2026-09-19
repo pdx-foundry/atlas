@@ -276,7 +276,10 @@ fn attribute(claim: &Claim, key: &str, paths: &[String], corpus: &Corpus) -> Att
             .into_iter()
             .flatten()
         {
-            if family(claim) == "defines" && !claim.subject.ends_with(&source.key) {
+            if family(claim) == "defines"
+                && (source.key.len() + 1 != claim.subject.len()
+                    || !claim.subject.ends_with(&source.key))
+            {
                 continue;
             }
             let Some((score, excerpt)) = best_excerpt(&doc, source) else {

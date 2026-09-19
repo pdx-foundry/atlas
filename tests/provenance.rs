@@ -160,7 +160,7 @@ fn define_namespaces_and_content_families_cannot_borrow_matches() {
         &sources(&[
             (
                 "common/defines/00.txt",
-                "Right = { VALUE = 1 # shared words\n}\n",
+                "Right = { VALUE = 1 # shared words\n # VALUE = 2 # shared words\n}\n",
             ),
             (
                 "common/other/00.txt",
