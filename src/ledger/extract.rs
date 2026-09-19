@@ -94,6 +94,36 @@ impl Builder<'_> {
             message,
         });
     }
+    fn cardinality(&mut self, subject: &[String], value: &str, span: Span) -> bool {
+        let range = value.split('#').next().unwrap_or(value).trim();
+        let Some((minimum, maximum)) = range.split_once("..") else {
+            return false;
+        };
+        for (bound, hard_property, soft_property) in [
+            (minimum, "cardinality_minimum", "soft_cardinality_minimum"),
+            (maximum, "cardinality_maximum", "soft_cardinality_maximum"),
+        ] {
+            let soft = bound.starts_with('~');
+            self.claim(Question {
+                subject,
+                property: if soft { soft_property } else { hard_property },
+                answer: bound.trim_start_matches('~').into(),
+                span,
+                owner: if soft {
+                    Owner::ConsumerPolicy
+                } else {
+                    Owner::EngineFact
+                },
+                reason: if soft {
+                    "Soft occurrence recommendation belongs to the consumer"
+                } else {
+                    "Hard occurrence bound requires engine evidence"
+                },
+                provisional: false,
+            });
+        }
+        true
+    }
     fn nodes(&mut self, nodes: &[Node], path: &[String]) {
         let mut bare_index = 0;
         for node in nodes {
@@ -199,10 +229,17 @@ impl Builder<'_> {
                 {
                     self.diagnostic("malformed-annotation", annotation.span, problem);
                 }
+                let mut annotation_subject = subject.clone();
+                annotation_subject.push(format!("$annotation:{name}"));
+                if name == "cardinality"
+                    && self.cardinality(&annotation_subject, value, annotation.span)
+                {
+                    continue;
+                }
                 if let Some((property, owner, reason)) = classify::annotation_property(name, value)
                 {
                     self.claim(Question {
-                        subject: &subject,
+                        subject: &annotation_subject,
                         property,
                         answer: format!("{name}: {value}"),
                         span: annotation.span,

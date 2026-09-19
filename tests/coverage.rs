@@ -125,6 +125,7 @@ fn registry_names_are_observations_without_rule_credit() {
     let report = evaluate(&ledger, Some(&serde_json::to_vec(&input).unwrap())).unwrap();
     assert_eq!(report.totals.atlas_owned.covered, 0);
     assert_eq!(report.registry_observations[0]["observed_items"], 1);
+    assert_eq!(report.registry_observations[0]["items"][0]["key"], "x");
 }
 #[test]
 fn empty_denominators_and_unknown_formats_are_explicit() {
@@ -185,4 +186,27 @@ fn duplicate_evidence_does_not_add_credit_and_atlas_only_answers_do_not_change_d
     assert_eq!(report.totals.atlas_owned.covered, 1);
     assert_eq!(report.totals.atlas_owned.total, 2);
     assert_eq!(report.atlas_only_questions, vec!["question:atlas-only"]);
+}
+
+#[test]
+fn soft_minimum_evidence_does_not_cover_a_hard_maximum() {
+    let ledger = inventory(
+        &[(
+            "example.cwt".into(),
+            "## cardinality = ~1..1\nx = bool".into(),
+        )]
+        .into(),
+    );
+    let (_, mut snapshot) = fixture();
+    let minimum = ledger
+        .claims
+        .iter()
+        .find(|c| c.property == "soft_cardinality_minimum")
+        .unwrap();
+    snapshot.answers[0].question = minimum.question.clone();
+    snapshot.answers[0].value = json!(1);
+    snapshot.answers[0].evidence[0].origin = Origin::Authored;
+    let report = score(&ledger, &snapshot);
+    assert_eq!(report.totals.all_claims.covered, 1);
+    assert_eq!(report.totals.atlas_owned.covered, 0);
 }

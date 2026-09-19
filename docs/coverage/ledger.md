@@ -16,11 +16,15 @@ spans are half-open UTF-8 byte offsets with one-based physical line numbers. Typ
 are separate from value forms, occurrence bounds, scopes, and documentation. Adjacent documentation
 lines attached to one entry form one documentation claim. Unknown annotations retain their text
 and a diagnostic; expected method assignment does not prove that the method already works.
+Minimum and maximum cardinality are separate questions. Each soft bound belongs to consumer policy;
+the other bound can still be an engine fact. Define-derived bounds retain a separate reference question.
 
 The question ID hashes relative file, subject path, property, and structural conditions. Occurrence
 IDs append an ordinal to distinguish repeated declarations of the same question. CWT answer text
 and line positions do not affect those IDs. Bare values use their position among bare siblings as
-the subject segment. Moving a file, renaming a subject, or reordering bare items can change identity;
+the subject segment. Annotation subjects include the annotation name, so distinct scope operations
+cannot share credit merely because both concern scope context. Moving a file, renaming a subject,
+or reordering bare items can change identity;
 this first format does not claim identity across those changes.
 
 The denominator counts source claim occurrences, not unique engine facts. One qualified question
@@ -63,7 +67,8 @@ to SDK-554–556. These are expected methods, not qualifications or hardcoded ga
 ## Snapshot input
 
 The tool reads the retained Atlas caller's live JSON (`queries`) or replay JSON (`startup` and
-`final_snapshots`). It reports observed registry counts, activation/completion, limits and gaps.
+`final_snapshots`). It retains observed item names/identities and reports registry counts, activation/completion, limits
+and gaps.
 Item enumeration establishes no config-rule answers, even when a registry name matches a CWT type.
 
 Future qualified answers use this deliberately bounded scoreboard input, not the full publication

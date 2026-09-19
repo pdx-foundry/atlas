@@ -70,7 +70,7 @@ fn owner_and_method_classification_separates_policy() {
     for property in [
         "subtype_partition",
         "consumer_annotation",
-        "soft_cardinality",
+        "soft_cardinality_minimum",
     ] {
         assert!(
             ledger
@@ -138,4 +138,31 @@ fn malformed_known_annotations_are_reported() {
             "{annotation}"
         );
     }
+}
+
+#[test]
+fn mixed_cardinality_and_scope_operations_are_independent_questions() {
+    let ledger = scan(
+        "## cardinality = ~1..1\n## push_scope = country\n## replace_scope = planet\nx = bool",
+    );
+    let minimum = ledger
+        .claims
+        .iter()
+        .find(|c| c.property == "soft_cardinality_minimum")
+        .unwrap();
+    let maximum = ledger
+        .claims
+        .iter()
+        .find(|c| c.property == "cardinality_maximum")
+        .unwrap();
+    assert_eq!(minimum.owner, Owner::ConsumerPolicy);
+    assert_eq!(maximum.owner, Owner::EngineFact);
+    assert_eq!(maximum.expected_method.as_ref().unwrap().ticket, "SDK-541");
+    let scopes: Vec<_> = ledger
+        .claims
+        .iter()
+        .filter(|c| c.property == "scope_context")
+        .collect();
+    assert_eq!(scopes.len(), 2);
+    assert_ne!(scopes[0].question, scopes[1].question);
 }

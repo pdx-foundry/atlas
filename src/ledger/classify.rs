@@ -86,7 +86,7 @@ pub(super) fn route(file: &str, subject: &[String], property: &str, answer: &str
         "SDK-535"
     } else if property == "declared_scopes" {
         "SDK-549"
-    } else if property == "cardinality" || property == "conditional_constraint" {
+    } else if property.starts_with("cardinality") || property == "conditional_constraint" {
         "SDK-541"
     } else if filename == "modifier_rule.cwt" || answer.contains("modifier_rule") {
         "SDK-545"
@@ -150,7 +150,12 @@ pub(super) fn annotation_property(
             Owner::ConsumerPolicy,
             "Soft occurrence recommendation belongs to the consumer",
         ),
-        "cardinality" | "cardinality_max_define" => (
+        "cardinality_max_define" => (
+            "cardinality_maximum_reference",
+            Owner::EngineFact,
+            "Define-derived occurrence bound requires engine evidence",
+        ),
+        "cardinality" => (
             "cardinality",
             Owner::EngineFact,
             "Occurrence constraint requires engine evidence",

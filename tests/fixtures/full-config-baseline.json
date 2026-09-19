@@ -5,22 +5,22 @@
   "files": 172,
   "physical_lines": 49201,
   "meaningful_lines": 42973,
-  "claims": 52796,
+  "claims": 59380,
   "totals": {
     "atlas_owned": {
       "covered": 0,
-      "total": 49967,
+      "total": 56551,
       "percent": 0.0
     },
     "all_claims": {
       "covered": 0,
-      "total": 52796,
+      "total": 59380,
       "percent": 0.0
     },
     "by_owner": {
       "engine_fact": {
         "covered": 0,
-        "total": 46881,
+        "total": 53465,
         "percent": 0.0
       },
       "content_derived": {
@@ -120,6 +120,6 @@
       "rule_credit": false
     }
   ],
-  "ledger_sha256": "ce31cac54d7ff0500d92df2ffbef215083a8e86750d1b46c5af161fb99eb28d9",
-  "coverage_sha256": "5b1c16e984dde027c8c00a549fbb62009bc920cfd9967daefce87b65f7a4f35e"
+  "ledger_sha256": "3b8c72dc7b564ada07ede0018841a24541cf634d84d57704bc825598d1fc57ae",
+  "coverage_sha256": "fade786fae55d4194344ffe6ee2c556a6d5c0ee947040e58445619c9854bd56f"
 }

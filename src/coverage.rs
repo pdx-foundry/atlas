@@ -326,7 +326,7 @@ fn registry_observations(value: &Value) -> Result<Vec<Value>, String> {
                 .get("registeredItems")
                 .and_then(Value::as_array)
                 .ok_or("Invalid registry observation: items missing")?;
-            observations.push(serde_json::json!({"registry":name,"observed_items":items.len(),"activation":native.get("activation"),"completion":native.get("completion"),"origin":native.get("origin"),"limits":native.get("limits"),"gaps":ok.get("gaps"),"rule_credit":false}));
+            observations.push(serde_json::json!({"registry":name,"observed_items":items.len(),"items":items,"activation":native.get("activation"),"completion":native.get("completion"),"origin":native.get("origin"),"limits":native.get("limits"),"gaps":ok.get("gaps"),"rule_credit":false}));
         } else if answer.get("Err").is_some() {
             observations
                 .push(serde_json::json!({"registry":name,"unavailable":true,"rule_credit":false}));
