@@ -132,36 +132,29 @@ pub async fn run(native: &Native, options: impl Fn() -> GameOptions) -> Report {
     if let Some(name) = tree_registry {
         baseline_names.push(name);
     }
-    let sessions = vec![
-        session(native, &options, "baseline", None, baseline_names).await,
-        session(
-            native,
-            &options,
-            "tradition_outcomes",
-            Some(tradition_fixture()),
-            vec![],
-        )
-        .await,
-        session(
-            native,
-            &options,
-            "category_outcomes",
-            Some(category_fixture()),
-            vec![],
-        )
-        .await,
-        session(
-            native,
-            &options,
+    let requests = [
+        ("baseline", None, baseline_names),
+        ("tradition_outcomes", Some(tradition_fixture()), vec![]),
+        ("category_outcomes", Some(category_fixture()), vec![]),
+        (
             "category_reads",
             Some(FixtureRequest::new(
                 "common/tradition_categories/atlas_category.txt",
                 crate::CATEGORY_FIXTURE,
             )),
             vec![],
-        )
-        .await,
+        ),
     ];
+    let mut sessions = Vec::with_capacity(requests.len());
+    let mut blocker = None;
+    for (name, fixture, item_names) in requests {
+        let result = match &blocker {
+            Some(error) => skipped_session(name, fixture.is_some(), item_names, error),
+            None => session(native, &options, name, fixture, item_names).await,
+        };
+        blocker = blocker.or_else(|| disposal_blocker(&result));
+        sessions.push(result);
+    }
     let answers = Answers {
         registries,
         fields,
@@ -229,6 +222,35 @@ async fn session(
         items,
         fixture,
         termination,
+    }
+}
+
+fn disposal_blocker(session: &SessionReport) -> Option<Error> {
+    match &session.termination {
+        Ok(Disposal::Confirmed | Disposal::NotApplicable) => None,
+        Ok(disposal @ Disposal::Unconfirmed(_)) => Some(Error::Startup {
+            reason: format!("{} did not confirm game disposal", session.name),
+            disposal: disposal.clone(),
+        }),
+        Err(error) => Some(error.clone()),
+    }
+}
+
+fn skipped_session(
+    name: &'static str,
+    has_fixture: bool,
+    item_names: Vec<String>,
+    error: &Error,
+) -> SessionReport {
+    SessionReport {
+        name,
+        readiness: None,
+        items: item_names
+            .into_iter()
+            .map(|name| (name, Err(error.clone())))
+            .collect(),
+        fixture: has_fixture.then(|| Err(error.clone())),
+        termination: Err(error.clone()),
     }
 }
 
@@ -317,6 +339,7 @@ fn evaluate(question: &Question, answers: &Answers) -> Outcome {
                 question,
                 answer.completeness,
                 &answer.gaps,
+                format!("answers.registries:{name}"),
                 "registry was not named",
             ),
         },
@@ -336,6 +359,7 @@ fn evaluate(question: &Question, answers: &Answers) -> Outcome {
                 question,
                 answer.completeness,
                 &answer.gaps,
+                format!("answers.fields.{registry}:{field}"),
                 "field was not discovered",
             ),
         },
@@ -395,9 +419,11 @@ fn evaluate(question: &Question, answers: &Answers) -> Outcome {
                     } => observed(format!(
                         "answers.sessions.{session_name}.fixture:{definition}.{field}.storage"
                     )),
-                    FixtureStorage::String { .. } => {
-                        unanswered(&observation_error("field storage window is incomplete"))
-                    }
+                    FixtureStorage::String { .. } => gap(
+                        question,
+                        "field storage window is incomplete",
+                        &gaps_for_field(answer, field),
+                    ),
                     FixtureStorage::Unavailable(reason) => {
                         gap(question, reason, &gaps_for_field(answer, field))
                     }
@@ -424,7 +450,7 @@ fn evaluate(question: &Question, answers: &Answers) -> Outcome {
                 &answer.gaps,
             ),
         },
-        Check::Diagnostic(text) => match fixture(answers, "tradition_outcomes") {
+        Check::Diagnostic(text, source_line) => match fixture(answers, "tradition_outcomes") {
             Err(error) => unanswered(&error),
             Ok(answer) => {
                 if !matches!(
@@ -439,9 +465,11 @@ fn evaluate(question: &Question, answers: &Answers) -> Outcome {
                         &answer.gaps,
                     );
                 }
+                let expected_line = tradition_fixture_line(source_line);
                 if answer.value.diagnostics.iter().any(|diagnostic| {
                     diagnostic.text.contains(text)
-                        && matches!(diagnostic.join, DiagnosticJoin::Source { .. })
+                        && matches!(&diagnostic.join, DiagnosticJoin::Source { file, line, .. }
+                            if file == "common/traditions/atlas_frozen.txt" && *line == expected_line)
                 }) {
                     observed(format!(
                         "answers.sessions.tradition_outcomes.fixture.diagnostics:{text}"
@@ -485,6 +513,7 @@ fn evaluate(question: &Question, answers: &Answers) -> Outcome {
                 question,
                 answer.completeness,
                 &answer.gaps,
+                format!("answers.sessions.category_reads.fixture.field_reads:{field}"),
                 "category field read was not observed",
             ),
         },
@@ -497,6 +526,7 @@ fn evaluate(question: &Question, answers: &Answers) -> Outcome {
                 question,
                 answer.completeness,
                 &answer.gaps,
+                "answers.sessions.category_reads.fixture.registration_entries".into(),
                 "registration entry was not observed",
             ),
         },
@@ -604,17 +634,32 @@ fn missing_from_answer(
     question: &Question,
     completeness: Completeness,
     native_gaps: &[Gap],
+    evidence: String,
     reason: &str,
 ) -> Outcome {
-    if completeness == Completeness::Partial {
+    if completeness == Completeness::Complete {
+        observed(format!("{evidence}:absent"))
+    } else {
         gap(
             question,
             format!("{reason}; Native answer is partial"),
             native_gaps,
         )
-    } else {
-        gap(question, reason, native_gaps)
     }
+}
+
+fn tradition_fixture_line(marker: &str) -> u64 {
+    let lines: Vec<_> = include_str!("../fixtures/frozen-traditions.txt")
+        .lines()
+        .enumerate()
+        .filter(|(_, line)| line.contains(marker))
+        .collect();
+    assert_eq!(
+        lines.len(),
+        1,
+        "fixture marker must identify one source line"
+    );
+    (lines[0].0 + 1) as u64
 }
 
 /// Compare live and recorded answers while ignoring only basis and session lifecycle.
@@ -643,4 +688,50 @@ pub fn comparable(report: &Report) -> serde_json::Value {
     }
     normalize(&mut value);
     value
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn complete_omission_is_evidence_but_partial_omission_is_a_gap() {
+        let question = questions().into_iter().next().unwrap();
+        assert!(matches!(
+            missing_from_answer(&question, Completeness::Complete, &[], "answer".into(), "missing"),
+            Outcome::Observed { evidence } if evidence == "answer:absent"
+        ));
+        assert!(matches!(
+            missing_from_answer(
+                &question,
+                Completeness::Partial,
+                &[],
+                "answer".into(),
+                "missing"
+            ),
+            Outcome::Gap { .. }
+        ));
+    }
+
+    #[test]
+    fn unconfirmed_disposal_blocks_following_sessions() {
+        let first = SessionReport {
+            name: "baseline",
+            readiness: None,
+            items: BTreeMap::new(),
+            fixture: None,
+            termination: Ok(Disposal::Unconfirmed("game may still be alive".into())),
+        };
+        let error = disposal_blocker(&first).unwrap();
+        let skipped = skipped_session("tradition_outcomes", true, vec![], &error);
+        assert!(matches!(skipped.fixture, Some(Err(Error::Startup { .. }))));
+        assert!(matches!(skipped.termination, Err(Error::Startup { .. })));
+        assert!(
+            disposal_blocker(&SessionReport {
+                termination: Ok(Disposal::NotApplicable),
+                ..first
+            })
+            .is_none()
+        );
+    }
 }

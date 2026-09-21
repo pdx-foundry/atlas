@@ -84,6 +84,21 @@ fn copy_recording(from: &Path, to: &Path) {
     }
 }
 
+fn tradition_fixture_answer(root: &Path) -> std::path::PathBuf {
+    for subject in std::fs::read_dir(root.join("observe_fixture")).unwrap() {
+        for answer in std::fs::read_dir(subject.unwrap().path()).unwrap() {
+            let path = answer.unwrap().path();
+            if std::fs::read_to_string(&path)
+                .unwrap()
+                .contains("Malformed token")
+            {
+                return path;
+            }
+        }
+    }
+    panic!("tradition fixture answer is absent")
+}
+
 #[tokio::test]
 async fn retained_m45_answers_cover_every_requested_field() {
     let native = Native::from_recorded_answers(recording()).unwrap();
@@ -254,6 +269,63 @@ async fn authored_field_error_is_preserved_for_dependent_questions() {
 }
 
 #[tokio::test]
+async fn unrelated_diagnostic_line_does_not_answer_the_malformed_case() {
+    let root = tempfile::tempdir().unwrap();
+    copy_recording(&recording(), root.path());
+    let path = tradition_fixture_answer(root.path());
+    let mut answer: Value = serde_json::from_slice(&std::fs::read(&path).unwrap()).unwrap();
+    answer["Ok"]["value"]["diagnostics"][0]["join"]["Source"]["line"] = json!(1);
+    std::fs::write(path, serde_json::to_vec(&answer).unwrap()).unwrap();
+
+    let native = Native::from_recorded_answers(root.path()).unwrap();
+    let report = run(&native, || GameOptions::new(Command::new("/no-supervisor"))).await;
+    assert!(matches!(
+        row(&report, "tradition.parser.malformed"),
+        Outcome::Gap {
+            owner: "SDK-541",
+            ..
+        }
+    ));
+    assert!(matches!(
+        row(&report, "tradition.parser.unknown_field"),
+        Outcome::Observed { .. }
+    ));
+}
+
+#[tokio::test]
+async fn partial_field_storage_keeps_its_owned_gap() {
+    let root = tempfile::tempdir().unwrap();
+    copy_recording(&recording(), root.path());
+    let path = tradition_fixture_answer(root.path());
+    let mut answer: Value = serde_json::from_slice(&std::fs::read(&path).unwrap()).unwrap();
+    let outcomes = answer["Ok"]["value"]["field_outcomes"]
+        .as_array_mut()
+        .unwrap();
+    let agenda = outcomes
+        .iter_mut()
+        .find(|outcome| {
+            outcome["question"]["definition"] == "atlas_valid"
+                && outcome["question"]["field"] == "unlocks_agenda"
+        })
+        .unwrap();
+    agenda["storage"]["String"]["completeness"] = json!("Partial");
+    answer["Ok"]["gaps"].as_array_mut().unwrap().push(json!({
+        "kind": "IncompleteObservation",
+        "subject": "unlocks_agenda",
+        "detail": "authored partial window"
+    }));
+    std::fs::write(path, serde_json::to_vec(&answer).unwrap()).unwrap();
+
+    let native = Native::from_recorded_answers(root.path()).unwrap();
+    let report = run(&native, || GameOptions::new(Command::new("/no-supervisor"))).await;
+    assert!(matches!(
+        row(&report, "tradition.agenda.storage.valid"),
+        Outcome::Gap { owner: "SDK-541", native_gaps, .. }
+            if native_gaps.iter().any(|gap| gap.detail == "authored partial window")
+    ));
+}
+
+#[tokio::test]
 async fn absent_answer_is_unanswered_without_starting_a_process() {
     let root = tempfile::tempdir().unwrap();
     authored_answers(root.path());
@@ -280,6 +352,10 @@ async fn absent_answer_is_unanswered_without_starting_a_process() {
             owner: "SDK-541",
             ..
         }
+    ));
+    assert!(matches!(
+        row(&report, "category.desc.field"),
+        Outcome::Observed { evidence } if evidence.ends_with(":absent")
     ));
     assert!(matches!(
         row(&report, "tradition.icon"),
