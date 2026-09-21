@@ -1,0 +1,47 @@
+{
+  "Ok": {
+    "value": [
+      "tradition_adaptability",
+      "tradition_aptitude",
+      "tradition_archivism",
+      "tradition_mercantile",
+      "tradition_diplomacy",
+      "tradition_discovery",
+      "tradition_domestication",
+      "tradition_domination",
+      "tradition_enmity",
+      "tradition_expansion",
+      "tradition_unyielding",
+      "tradition_harmony",
+      "tradition_logistics",
+      "tradition_politics",
+      "tradition_prosperity",
+      "tradition_statecraft",
+      "tradition_subterfuge",
+      "tradition_supremacy",
+      "tradition_synchronicity",
+      "tradition_versatility",
+      "tradition_cloning",
+      "tradition_cybernetics",
+      "tradition_cybernetics_assimilator",
+      "tradition_genetics",
+      "tradition_modularity",
+      "tradition_mutation",
+      "tradition_nanotech",
+      "tradition_psionics",
+      "tradition_psionics_shroud",
+      "tradition_purity",
+      "tradition_synthetics",
+      "tradition_virtuality",
+      "tradition_dummy"
+    ],
+    "completeness": "Complete",
+    "gaps": [],
+    "source": {
+      "build": "3d4c8a7046d87175ce7e3b513b1a2ce589050d654d332744518a49d13ac82216",
+      "native_version": "0.1.0",
+      "method": "registry-items/v1",
+      "basis": "LiveObservation"
+    }
+  }
+}

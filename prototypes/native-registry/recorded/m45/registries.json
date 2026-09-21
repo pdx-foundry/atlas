@@ -1,0 +1,512 @@
+{
+  "Ok": {
+    "value": [
+      {
+        "name": "common/agreement_presets"
+      },
+      {
+        "name": "common/agreement_resources"
+      },
+      {
+        "name": "common/agreement_term_values"
+      },
+      {
+        "name": "common/agreement_terms"
+      },
+      {
+        "name": "common/ai_budget"
+      },
+      {
+        "name": "common/ai_espionage/operations"
+      },
+      {
+        "name": "common/ai_espionage/spynetworks"
+      },
+      {
+        "name": "common/ai_espionage/targets"
+      },
+      {
+        "name": "common/anomalies"
+      },
+      {
+        "name": "common/archaeological_site_types"
+      },
+      {
+        "name": "common/armies"
+      },
+      {
+        "name": "common/artifact_actions"
+      },
+      {
+        "name": "common/ascension_perk_categories"
+      },
+      {
+        "name": "common/ascension_perks"
+      },
+      {
+        "name": "common/asteroid_belts"
+      },
+      {
+        "name": "common/astral_actions"
+      },
+      {
+        "name": "common/astral_rifts"
+      },
+      {
+        "name": "common/attitudes"
+      },
+      {
+        "name": "common/bombardment_stances"
+      },
+      {
+        "name": "common/buildings"
+      },
+      {
+        "name": "common/button_effects"
+      },
+      {
+        "name": "common/bypass"
+      },
+      {
+        "name": "common/casus_belli"
+      },
+      {
+        "name": "common/cloaking_strength_levels"
+      },
+      {
+        "name": "common/colony_automation"
+      },
+      {
+        "name": "common/colony_automation_categories"
+      },
+      {
+        "name": "common/colony_automation_exceptions"
+      },
+      {
+        "name": "common/colony_types"
+      },
+      {
+        "name": "common/component_slot_templates"
+      },
+      {
+        "name": "common/council_agendas"
+      },
+      {
+        "name": "common/country_container"
+      },
+      {
+        "name": "common/country_customization"
+      },
+      {
+        "name": "common/country_focus/card_categories"
+      },
+      {
+        "name": "common/country_focus/focus_cards"
+      },
+      {
+        "name": "common/country_focus/focus_rewards"
+      },
+      {
+        "name": "common/country_limits/ownership_limits"
+      },
+      {
+        "name": "common/country_limits/ship_of_size_limits"
+      },
+      {
+        "name": "common/country_types"
+      },
+      {
+        "name": "common/crisis_levels"
+      },
+      {
+        "name": "common/crisis_objectives"
+      },
+      {
+        "name": "common/crisis_paths"
+      },
+      {
+        "name": "common/decisions"
+      },
+      {
+        "name": "common/deposit_categories"
+      },
+      {
+        "name": "common/deposits"
+      },
+      {
+        "name": "common/diplomacy_economy"
+      },
+      {
+        "name": "common/diplomatic_actions"
+      },
+      {
+        "name": "common/districts"
+      },
+      {
+        "name": "common/dust_clouds"
+      },
+      {
+        "name": "common/dynamic_text"
+      },
+      {
+        "name": "common/economic_categories"
+      },
+      {
+        "name": "common/economic_plans"
+      },
+      {
+        "name": "common/edicts"
+      },
+      {
+        "name": "common/espionage_assets"
+      },
+      {
+        "name": "common/espionage_operation_categories"
+      },
+      {
+        "name": "common/espionage_operation_types"
+      },
+      {
+        "name": "common/ethic_categories"
+      },
+      {
+        "name": "common/ethics"
+      },
+      {
+        "name": "common/event_chains"
+      },
+      {
+        "name": "common/federation_law_categories"
+      },
+      {
+        "name": "common/federation_laws"
+      },
+      {
+        "name": "common/federation_perks"
+      },
+      {
+        "name": "common/federation_types"
+      },
+      {
+        "name": "common/first_contact"
+      },
+      {
+        "name": "common/frontend_backgrounds"
+      },
+      {
+        "name": "common/galactic_community_actions"
+      },
+      {
+        "name": "common/galactic_focuses"
+      },
+      {
+        "name": "common/game_concept_categories"
+      },
+      {
+        "name": "common/game_concepts"
+      },
+      {
+        "name": "common/game_scenarios"
+      },
+      {
+        "name": "common/governments"
+      },
+      {
+        "name": "common/governments/authorities"
+      },
+      {
+        "name": "common/governments/civics"
+      },
+      {
+        "name": "common/governments/councilors"
+      },
+      {
+        "name": "common/greeting_overlay_sounds"
+      },
+      {
+        "name": "common/intel_categories"
+      },
+      {
+        "name": "common/intel_levels"
+      },
+      {
+        "name": "common/job_tags"
+      },
+      {
+        "name": "common/lawsuits"
+      },
+      {
+        "name": "common/leader_classes"
+      },
+      {
+        "name": "common/leader_tiers"
+      },
+      {
+        "name": "common/map_modes"
+      },
+      {
+        "name": "common/megastructure_overclock_types"
+      },
+      {
+        "name": "common/megastructures"
+      },
+      {
+        "name": "common/menace_perks"
+      },
+      {
+        "name": "common/missions/mission_categories"
+      },
+      {
+        "name": "common/missions/missions"
+      },
+      {
+        "name": "common/mutations"
+      },
+      {
+        "name": "common/named_colors"
+      },
+      {
+        "name": "common/notification_modifiers"
+      },
+      {
+        "name": "common/observation_station_missions"
+      },
+      {
+        "name": "common/patrons"
+      },
+      {
+        "name": "common/patrons/callings"
+      },
+      {
+        "name": "common/patrons/deeds"
+      },
+      {
+        "name": "common/patrons/psionic_auras"
+      },
+      {
+        "name": "common/personalities"
+      },
+      {
+        "name": "common/planet_modifiers"
+      },
+      {
+        "name": "common/policies"
+      },
+      {
+        "name": "common/policy_categories"
+      },
+      {
+        "name": "common/pop_categories"
+      },
+      {
+        "name": "common/pop_faction_types"
+      },
+      {
+        "name": "common/pop_jobs"
+      },
+      {
+        "name": "common/portrait_categories"
+      },
+      {
+        "name": "common/portrait_sets"
+      },
+      {
+        "name": "common/precursor_civilizations"
+      },
+      {
+        "name": "common/prescripted_flags"
+      },
+      {
+        "name": "common/relics"
+      },
+      {
+        "name": "common/resolution_categories"
+      },
+      {
+        "name": "common/resolution_groups"
+      },
+      {
+        "name": "common/resolutions"
+      },
+      {
+        "name": "common/resource_converters"
+      },
+      {
+        "name": "common/resource_regions"
+      },
+      {
+        "name": "common/script_values"
+      },
+      {
+        "name": "common/scripted_actions"
+      },
+      {
+        "name": "common/scripted_effects"
+      },
+      {
+        "name": "common/scripted_modifiers"
+      },
+      {
+        "name": "common/scripted_triggers"
+      },
+      {
+        "name": "common/sector_types"
+      },
+      {
+        "name": "common/ship_categories"
+      },
+      {
+        "name": "common/ship_sets"
+      },
+      {
+        "name": "common/ship_sizes"
+      },
+      {
+        "name": "common/situation_log/categories"
+      },
+      {
+        "name": "common/situations"
+      },
+      {
+        "name": "common/specialist_subject_perks"
+      },
+      {
+        "name": "common/specialist_subject_types"
+      },
+      {
+        "name": "common/species_archetypes"
+      },
+      {
+        "name": "common/species_classes"
+      },
+      {
+        "name": "common/species_rights/citizenship_types"
+      },
+      {
+        "name": "common/species_rights/colonization_controls"
+      },
+      {
+        "name": "common/species_rights/living_standards"
+      },
+      {
+        "name": "common/species_rights/migration_controls"
+      },
+      {
+        "name": "common/species_rights/military_service_types"
+      },
+      {
+        "name": "common/species_rights/population_controls"
+      },
+      {
+        "name": "common/species_rights/purge_types"
+      },
+      {
+        "name": "common/species_rights/slavery_types"
+      },
+      {
+        "name": "common/species_rights/subspecies_integration_types"
+      },
+      {
+        "name": "common/specimens"
+      },
+      {
+        "name": "common/star_classes"
+      },
+      {
+        "name": "common/star_classes/randomizers"
+      },
+      {
+        "name": "common/starbase_buildings"
+      },
+      {
+        "name": "common/starbase_levels"
+      },
+      {
+        "name": "common/starbase_modules"
+      },
+      {
+        "name": "common/starbase_types"
+      },
+      {
+        "name": "common/storm_types"
+      },
+      {
+        "name": "common/system_tooltips"
+      },
+      {
+        "name": "common/system_types"
+      },
+      {
+        "name": "common/target_types"
+      },
+      {
+        "name": "common/technology"
+      },
+      {
+        "name": "common/technology/category"
+      },
+      {
+        "name": "common/technology/tier"
+      },
+      {
+        "name": "common/technology_ages/preftl"
+      },
+      {
+        "name": "common/timeline_events"
+      },
+      {
+        "name": "common/tradable_actions"
+      },
+      {
+        "name": "common/tradition_categories"
+      },
+      {
+        "name": "common/traditions"
+      },
+      {
+        "name": "common/trait_tags"
+      },
+      {
+        "name": "common/war_goals"
+      },
+      {
+        "name": "common/zone_slots"
+      },
+      {
+        "name": "common/zones"
+      },
+      {
+        "name": "dlc_metadata/dlc_recommendations"
+      },
+      {
+        "name": "gfx/portraits/sprite_configurations"
+      },
+      {
+        "name": "gfx/projectiles/planet_destruction"
+      },
+      {
+        "name": "interface/resource_groups"
+      },
+      {
+        "name": "map/galaxy"
+      },
+      {
+        "name": "sound/advisor_voice_types"
+      }
+    ],
+    "completeness": "Partial",
+    "gaps": [
+      {
+        "kind": "OutsideMethod",
+        "subject": null,
+        "detail": "Registries with custom, nested, or late loaders are not listed."
+      }
+    ],
+    "source": {
+      "build": "3d4c8a7046d87175ce7e3b513b1a2ce589050d654d332744518a49d13ac82216",
+      "native_version": "0.1.0",
+      "method": "registry-directories/v2",
+      "basis": "StaticAnalysis"
+    }
+  }
+}

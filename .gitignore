@@ -2,4 +2,6 @@
 .idea
 .scratch
 docs/research
-prototypes/
+docs/prototypes/
+prototypes/*
+!prototypes/native-registry/
