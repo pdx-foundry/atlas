@@ -59,8 +59,10 @@ async fn live_and_recorded_snapshots_match_after_basis_normalization() {
             .all(|session| session.disposal == Ok(Disposal::NotApplicable))
     );
     let replay_snapshot = snapshot::assemble(&replay_answers).unwrap();
+    let mut normalized_live = recorded_basis(live_snapshot);
+    normalized_live.snapshot = replay_snapshot.snapshot.clone();
     assert_eq!(
-        snapshot::json_bytes(&recorded_basis(live_snapshot)).unwrap(),
+        snapshot::json_bytes(&normalized_live).unwrap(),
         snapshot::json_bytes(&replay_snapshot).unwrap()
     );
 }

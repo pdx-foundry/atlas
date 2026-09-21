@@ -1,5 +1,6 @@
 use pdx_atlas::{coverage, extraction, ledger, snapshot};
 use pdx_native::{Basis, GameOptions, Native};
+use serde_json::json;
 use std::{collections::BTreeMap, path::Path, process::Command};
 
 fn ledger() -> ledger::Ledger {
@@ -101,5 +102,92 @@ async fn invalid_rule_snapshot_is_rejected() {
     snapshot.contract_version = 2;
     assert!(
         coverage::evaluate(&ledger(), Some(&snapshot::json_bytes(&snapshot).unwrap())).is_err()
+    );
+    snapshot.contract_version = 1;
+    snapshot.schema_dialect = "https://json-schema.org/draft-07/schema".into();
+    assert!(
+        coverage::evaluate(&ledger(), Some(&snapshot::json_bytes(&snapshot).unwrap())).is_err()
+    );
+    snapshot.schema_dialect = "https://json-schema.org/draft/2020-12/schema".into();
+    snapshot.schemas.dialect = "https://json-schema.org/draft-07/schema".into();
+    assert!(
+        coverage::evaluate(&ledger(), Some(&snapshot::json_bytes(&snapshot).unwrap())).is_err()
+    );
+}
+
+#[tokio::test]
+async fn conditional_rule_maps_to_conditional_ledger_question() {
+    let source = r#"
+types = { type[tradition] = { path = "game/common/traditions" } }
+tradition = { subtype[special] = { unlocks_agenda = scalar } }
+"#;
+    let ledger = ledger::inventory(&BTreeMap::from([("traditions.cwt".into(), source.into())]));
+    let mut snapshot = recorded_snapshot().await;
+    qualify_as_live(&mut snapshot);
+    let rule = snapshot
+        .rules
+        .iter_mut()
+        .find(|rule| rule.id == "field:common/traditions/unlocks_agenda#existence")
+        .unwrap();
+    rule.conditions = vec!["subtype[special]".into()];
+    let report =
+        coverage::evaluate(&ledger, Some(&snapshot::json_bytes(&snapshot).unwrap())).unwrap();
+    let claim = ledger
+        .claims
+        .iter()
+        .find(|claim| {
+            claim.property == "field_existence"
+                && claim.subject == ["tradition", "subtype[special]", "unlocks_agenda"]
+        })
+        .unwrap();
+    assert!(
+        report
+            .claims
+            .iter()
+            .find(|item| item.claim == claim.id)
+            .unwrap()
+            .covered
+    );
+}
+
+#[tokio::test]
+async fn reference_facet_does_not_conflict_with_value_form() {
+    let mut snapshot = recorded_snapshot().await;
+    qualify_as_live(&mut snapshot);
+    let subject = "field:common/traditions/unlocks_agenda";
+    snapshot
+        .gaps
+        .retain(|gap| gap.id != format!("{subject}#reference"));
+    let base = snapshot
+        .rules
+        .iter()
+        .find(|rule| rule.id == format!("{subject}#value_form"))
+        .unwrap()
+        .clone();
+    snapshot.rules.push(snapshot::Rule {
+        id: format!("{subject}#reference"),
+        subject: subject.into(),
+        property: "reference".into(),
+        conditions: Vec::new(),
+        answer: json!({"target":"agenda"}),
+        evidence: base.evidence,
+    });
+    let ledger = ledger();
+    let report =
+        coverage::evaluate(&ledger, Some(&snapshot::json_bytes(&snapshot).unwrap())).unwrap();
+    let form = ledger
+        .claims
+        .iter()
+        .find(|claim| {
+            claim.property == "value_form" && claim.subject == ["tradition", "unlocks_agenda"]
+        })
+        .unwrap();
+    assert!(
+        report
+            .claims
+            .iter()
+            .find(|item| item.claim == form.id)
+            .unwrap()
+            .covered
     );
 }

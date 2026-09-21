@@ -2,12 +2,13 @@
 
 use crate::extraction::{CATEGORIES, Extraction, TRADITIONS};
 use pdx_native::{
-    Answer, Completeness, DiagnosticCoverage, DiagnosticJoin, Field, FixtureFieldOutcome,
+    Answer, Completeness, DiagnosticCoverage, DiagnosticJoin, Disposal, Field, FixtureFieldOutcome,
     FixtureObservation, FixtureRuntime, FixtureStorage, Gap as NativeGap, ReaderKind, Source,
     Support,
 };
 use serde::{Deserialize, Serialize};
 use serde_json::{Value, json};
+use sha2::{Digest, Sha256};
 use std::collections::{BTreeMap, BTreeSet};
 
 /// The versioned offline rule snapshot.
@@ -221,6 +222,8 @@ pub fn assemble(extraction: &Extraction) -> Result<Snapshot, String> {
     snapshot.subjects.sort_by(|a, b| a.id.cmp(&b.id));
     snapshot.rules.sort_by(|a, b| a.id.cmp(&b.id));
     snapshot.gaps.sort_by(|a, b| a.id.cmp(&b.id));
+    let content = serde_json::to_vec(&snapshot).map_err(|error| error.to_string())?;
+    snapshot.snapshot.name = format!("stellaris-traditions/{:x}", Sha256::digest(content));
     verify(&snapshot)?;
     Ok(snapshot)
 }
@@ -693,6 +696,29 @@ fn classify_parser_outcome(
 fn assemble_outcomes(snapshot: &mut Snapshot, extraction: &Extraction) -> Result<(), String> {
     let mut outcomes: BTreeMap<String, Occurrences> = BTreeMap::new();
     for session in &extraction.sessions {
+        if !matches!(
+            &session.disposal,
+            Ok(Disposal::Confirmed | Disposal::NotApplicable)
+        ) {
+            let registry = if session.name.starts_with("tradition") {
+                TRADITIONS
+            } else {
+                CATEGORIES
+            };
+            gap(
+                snapshot,
+                &registry_id(registry),
+                &format!("fixture.{}", session.name),
+                format!(
+                    "Native fixture session disposal failed: {:?}",
+                    session.disposal
+                ),
+                None,
+                Vec::new(),
+                Vec::new(),
+            );
+            continue;
+        }
         let observation = match &session.observation {
             Ok(answer) => answer,
             Err(error) => {
@@ -736,7 +762,10 @@ fn assemble_outcomes(snapshot: &mut Snapshot, extraction: &Extraction) -> Result
                     }
                     entry.evidence.push(evidence);
                 }
-                ParserOutcome::Rejected(rejected) => entry.rejected.extend(rejected),
+                ParserOutcome::Rejected(rejected) => {
+                    entry.rejected.extend(rejected);
+                    entry.evidence.push(evidence);
+                }
                 ParserOutcome::Unavailable { property, reason } => {
                     entry.reasons.entry(property).or_default().push(reason)
                 }
@@ -815,6 +844,9 @@ fn assemble_outcomes(snapshot: &mut Snapshot, extraction: &Extraction) -> Result
 pub fn verify(snapshot: &Snapshot) -> Result<(), String> {
     if snapshot.kind != "atlas_rule_snapshot" || snapshot.contract_version != 1 {
         return Err("Unsupported rule snapshot contract".into());
+    }
+    if snapshot.schema_dialect != DIALECT || snapshot.schemas.dialect != DIALECT {
+        return Err("Unsupported rule snapshot schema dialect".into());
     }
     if snapshot.coverage.whole_registry_validity != "not_established" {
         return Err("Whole-registry validity was not established".into());

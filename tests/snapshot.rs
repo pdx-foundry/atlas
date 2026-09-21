@@ -1,5 +1,5 @@
 use pdx_atlas::{extraction, snapshot};
-use pdx_native::{Basis, Completeness, Field, GameOptions, Native};
+use pdx_native::{Basis, Completeness, Disposal, Field, GameOptions, Native};
 use serde_json::{Value, json};
 use std::{path::PathBuf, process::Command};
 
@@ -39,6 +39,7 @@ async fn recorded_snapshot_validates_and_is_byte_stable() {
             .all(|source| source.basis == Basis::Recorded)
     );
     assert_eq!(first.coverage.whole_registry_validity, "not_established");
+    assert!(first.snapshot.name.starts_with("stellaris-traditions/"));
     for subject in first
         .subjects
         .iter()
@@ -75,6 +76,33 @@ async fn recorded_snapshot_validates_and_is_byte_stable() {
 }
 
 #[tokio::test]
+async fn incomplete_or_undisposed_fixtures_cannot_reuse_complete_rules() {
+    let complete = recorded().await;
+    let complete_snapshot = snapshot::assemble(&complete).unwrap();
+
+    let mut incomplete = recorded().await;
+    incomplete.sessions[0].disposal = Ok(Disposal::Unconfirmed("test".into()));
+    let failed_snapshot = snapshot::assemble(&incomplete).unwrap();
+    assert_ne!(
+        complete_snapshot.snapshot.name,
+        failed_snapshot.snapshot.name
+    );
+    assert!(
+        failed_snapshot
+            .gaps
+            .iter()
+            .any(|gap| gap.property == "fixture.tradition_outcomes")
+    );
+    assert!(
+        !failed_snapshot
+            .rules
+            .iter()
+            .any(|rule| rule.property == "occurrences.parser_accepted"
+                && rule.subject.starts_with("field:common/traditions/"))
+    );
+}
+
+#[tokio::test]
 async fn fixture_counts_and_gaps_are_bounded() {
     let snapshot = snapshot::assemble(&recorded().await).unwrap();
     let rule = snapshot
@@ -91,6 +119,11 @@ async fn fixture_counts_and_gaps_are_bounded() {
             .unwrap()
             .iter()
             .any(|value| value["text"] == "Malformed token")
+    );
+    assert!(
+        rule.evidence
+            .iter()
+            .any(|evidence| evidence.location.contains("atlas_malformed"))
     );
     assert!(
         snapshot

@@ -13,8 +13,9 @@ cargo run --release --locked -- snapshot /path/to/Stellaris /path/to/recorded-an
 cargo run --release --locked -- snapshot --recorded tests/fixtures/native/m45 /path/to/traditions.json
 ```
 
-Both modes write deterministic JSON and a `.sha256` sidecar. Recorded answers keep their recorded
-basis and earn no current-engine coverage credit. The [version-1 schema](docs/contract/rule-snapshot-v1.schema.json)
+Both modes write deterministic JSON and a `.sha256` sidecar. The snapshot name includes a digest
+of its contents, so different builds and incomplete extractions have distinct identities.
+Recorded answers keep their recorded basis and earn no current-engine coverage credit. The [version-1 schema](docs/contract/rule-snapshot-v1.schema.json)
 describes the snapshot. The historical `prototypes/native-registry` caller is retained for its
 experiment and tests; production extraction does not invoke it.
 

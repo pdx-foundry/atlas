@@ -25,7 +25,14 @@ pub(super) fn project(ledger: &Ledger, rules: &snapshot::Snapshot) -> Result<Sna
         gaps: Vec::new(),
     };
     for rule in &rules.rules {
-        let questions = questions(ledger, &registry_types, &rule.subject, &rule.property);
+        let questions = questions(
+            ledger,
+            &registry_types,
+            &rule.subject,
+            &rule.property,
+            &rule.conditions,
+            false,
+        );
         let questions = if questions.is_empty() {
             vec![format!("atlas:{}", rule.id)]
         } else {
@@ -62,7 +69,14 @@ pub(super) fn project(ledger: &Ledger, rules: &snapshot::Snapshot) -> Result<Sna
         }
     }
     for gap in &rules.gaps {
-        let questions = questions(ledger, &registry_types, &gap.subject, &gap.property);
+        let questions = questions(
+            ledger,
+            &registry_types,
+            &gap.subject,
+            &gap.property,
+            &[],
+            true,
+        );
         let questions = if questions.is_empty() {
             vec![format!("atlas:{}", gap.id)]
         } else {
@@ -113,6 +127,8 @@ fn questions(
     registry_types: &BTreeMap<String, (String, String)>,
     subject: &str,
     property: &str,
+    conditions: &[String],
+    gap_facet: bool,
 ) -> Vec<String> {
     let (registry, field) = if let Some(registry) = subject.strip_prefix("registry:") {
         (registry, None)
@@ -137,7 +153,14 @@ fn questions(
             ],
             "field_existence",
         ),
-        (Some(field), "value_form" | "reference" | "nested_grammar") => (
+        (Some(field), "value_form") => (
+            vec![
+                type_name.trim_start_matches("type[").trim_end_matches(']'),
+                field,
+            ],
+            "value_form",
+        ),
+        (Some(field), "reference" | "nested_grammar") if gap_facet => (
             vec![
                 type_name.trim_start_matches("type[").trim_end_matches(']'),
                 field,
@@ -170,6 +193,20 @@ fn questions(
         ),
         _ => return Vec::new(),
     };
+    let path = if field.is_some() {
+        let mut expanded = Vec::with_capacity(path.len() + conditions.len());
+        expanded.push(path[0]);
+        expanded.extend(
+            conditions
+                .iter()
+                .filter(|condition| condition.starts_with("subtype["))
+                .map(String::as_str),
+        );
+        expanded.extend_from_slice(&path[1..]);
+        expanded
+    } else {
+        path
+    };
     ledger
         .claims
         .iter()
@@ -181,7 +218,7 @@ fn questions(
                     .iter()
                     .map(String::as_str)
                     .eq(path.iter().copied())
-                && claim.conditions.is_empty()
+                && claim.conditions == conditions
         })
         .map(|claim| claim.question.clone())
         .collect::<BTreeSet<_>>()
