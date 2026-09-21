@@ -1,0 +1,86 @@
+{
+  "Ok": {
+    "completeness": "Partial",
+    "gaps": [
+      {
+        "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification.",
+        "kind": "OutsideMethod",
+        "subject": "common/leader_classes"
+      },
+      {
+        "detail": "The field's reader could not be established on at least one path.",
+        "kind": "UnresolvedReader",
+        "subject": "common/leader_classes"
+      },
+      {
+        "detail": "A path through the registry's reader could not be followed to its end.",
+        "kind": "UnresolvedPath",
+        "subject": "common/leader_classes"
+      }
+    ],
+    "source": {
+      "basis": "StaticAnalysis",
+      "build": "3d4c8a7046d87175ce7e3b513b1a2ce589050d654d332744518a49d13ac82216",
+      "method": "registry-fields/v3",
+      "native_version": "0.1.0"
+    },
+    "value": [
+      {
+        "conditional": false,
+        "name": "name",
+        "reader": {
+          "id": "325efaa17499c32d",
+          "kind": "String"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "icon",
+        "reader": {
+          "id": "d7a95ab8c8d44489",
+          "kind": "Integer"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "minimum_ai_target",
+        "reader": {
+          "id": "d7a95ab8c8d44489",
+          "kind": "Integer"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "name_plural",
+        "reader": {
+          "id": "325efaa17499c32d",
+          "kind": "String"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "leader_capacity",
+        "reader": {
+          "id": "d7a95ab8c8d44489",
+          "kind": "Integer"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "description",
+        "reader": {
+          "id": "325efaa17499c32d",
+          "kind": "String"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "ai_weight",
+        "reader": {
+          "id": "97942c9a3d3c9c1b",
+          "kind": "Block"
+        }
+      }
+    ]
+  }
+}

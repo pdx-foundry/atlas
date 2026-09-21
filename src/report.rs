@@ -73,17 +73,14 @@ pub fn json_bytes(value: &impl serde::Serialize) -> Result<Vec<u8>, serde_json::
     bytes.push(b'\n');
     Ok(bytes)
 }
-/// Writes ledger and coverage, plus documentation.json when a source corpus is supplied.
-/// Attribution changes documentation ownership but never creates qualified answers.
+/// Writes the ledger and coverage report.
 pub fn generate(
     config: &Path,
     snapshot: Option<&Path>,
     output: &Path,
-    corpus: Option<&crate::provenance::Corpus>,
 ) -> Result<(Ledger, coverage::Report), Box<dyn std::error::Error>> {
     let sources = read_sources(config)?;
-    let mut ledger = ledger::inventory(&sources);
-    let documentation = corpus.map(|corpus| crate::provenance::annotate(&mut ledger, corpus));
+    let ledger = ledger::inventory(&sources);
     let input = snapshot.map(fs::read).transpose()?;
     let report = coverage::evaluate(&ledger, input.as_deref()).map_err(io::Error::other)?;
     let ledger_bytes = json_bytes(&ledger)?;
@@ -91,15 +88,5 @@ pub fn generate(
     fs::create_dir_all(output)?;
     fs::write(output.join("ledger.json"), ledger_bytes)?;
     fs::write(output.join("coverage.json"), report_bytes)?;
-    if let Some(documentation) = documentation {
-        fs::write(
-            output.join("documentation.json"),
-            json_bytes(&documentation)?,
-        )?;
-    } else if let Err(error) = fs::remove_file(output.join("documentation.json"))
-        && error.kind() != io::ErrorKind::NotFound
-    {
-        return Err(error.into());
-    }
     Ok((ledger, report))
 }

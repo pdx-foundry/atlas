@@ -16,8 +16,8 @@ cargo run --release --locked -- snapshot --recorded tests/fixtures/native/m45 /p
 Both modes write deterministic JSON and a `.sha256` sidecar. The snapshot name includes a digest
 of its contents, so different builds and incomplete extractions have distinct identities.
 Recorded answers keep their recorded basis and earn no current-engine coverage credit. The [version-1 schema](docs/contract/rule-snapshot-v1.schema.json)
-describes the snapshot. The historical `prototypes/native-registry` caller is retained for its
-experiment and tests; production extraction does not invoke it.
+describes the snapshot. The historical caller's findings and original source remain in the
+preserved Native evidence bundle; the production tests cover its recorded-answer and fixture cases.
 
 ```sh
 cargo run --locked -- ledger \
@@ -75,15 +75,8 @@ ATLAS_REGISTRY_SNAPSHOT=/path/to/normal-serial.json \
 cargo test --locked --test full_config -- --ignored
 ```
 
-For a complete documentation-source measurement, add `--game-content /path/to/Stellaris` and
-`--engine-docs /path/to/script-docs/v4.4.1`. This tags every documentation claim and also writes
-`documentation.json`, including exact matches, rewritten candidates, and the authored remainder.
-Text matching does not grant rule coverage. See [provenance and the full measurement](docs/coverage/documentation.md).
-The provenance acceptance gate additionally requires `PDX_GAME_CONTENT` and `PDX_ENGINE_DOCS`:
-
-```sh
-cargo test --locked --test full_provenance -- --ignored
-```
+The finished documentation-source measurement and its input identities remain in the
+[historical report](docs/coverage/documentation.md). It is outside the product build.
 
 Ordinary CI uses self-contained fixtures. The explicit full-config gate checks the pinned fork and
 retained current registry capture, including exact deterministic report digests; it never launches

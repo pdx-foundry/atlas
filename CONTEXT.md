@@ -77,12 +77,6 @@ A claim challenged by applicable evidence. The challenge does not by itself esta
 **Untested**:
 Not examined by a specified test or validation method. A property can be untested by that method while supported by other evidence.
 
-**Shared evidence**:
-Evidence supporting multiple exact claims without duplication. Each claim remains traceable to the material and conditions that support that particular property.
-
-**Evidence requalification**:
-Establishing that evidence supports a claim on a changed executable or content target through relevant checks or demonstrated unchanged dependencies. Evidence for the original target does not automatically establish the claim on the changed target.
-
 **Extraction target**:
 The game build and platform from which Atlas produces engine evidence. It is distinct from the platform on which an offline consumer runs.
 

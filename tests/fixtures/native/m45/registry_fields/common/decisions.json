@@ -1,0 +1,155 @@
+{
+  "Ok": {
+    "completeness": "Partial",
+    "gaps": [
+      {
+        "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification.",
+        "kind": "OutsideMethod",
+        "subject": "common/decisions"
+      },
+      {
+        "detail": "The field's alternatives do not establish one shared reader.",
+        "kind": "UnresolvedReader",
+        "subject": "resources"
+      },
+      {
+        "detail": "The field's reader could not be established on at least one path.",
+        "kind": "UnresolvedReader",
+        "subject": "common/decisions"
+      },
+      {
+        "detail": "A path through the registry's reader could not be followed to its end.",
+        "kind": "UnresolvedPath",
+        "subject": "common/decisions"
+      }
+    ],
+    "source": {
+      "basis": "StaticAnalysis",
+      "build": "3d4c8a7046d87175ce7e3b513b1a2ce589050d654d332744518a49d13ac82216",
+      "method": "registry-fields/v3",
+      "native_version": "0.1.0"
+    },
+    "value": [
+      {
+        "conditional": false,
+        "name": "effect",
+        "reader": {
+          "id": "6e28a363faf61c52",
+          "kind": "Block"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "sound",
+        "reader": {
+          "id": "325efaa17499c32d",
+          "kind": "String"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "custom_tooltip",
+        "reader": {
+          "id": "c81625955ad8e679",
+          "kind": "Block"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "enactment_time",
+        "reader": {
+          "id": "d7a95ab8c8d44489",
+          "kind": "Integer"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "owned_planets_only",
+        "reader": {
+          "id": "b894933b2b2853a5",
+          "kind": "Boolean"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "potential",
+        "reader": {
+          "id": "e044b50825a1841d",
+          "kind": "Block"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "allow",
+        "reader": {
+          "id": "e044b50825a1841d",
+          "kind": "Block"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "abort_trigger",
+        "reader": {
+          "id": "e044b50825a1841d",
+          "kind": "Block"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "abort_effect",
+        "reader": {
+          "id": "6e28a363faf61c52",
+          "kind": "Block"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "on_queued",
+        "reader": {
+          "id": "6e28a363faf61c52",
+          "kind": "Block"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "on_unqueued",
+        "reader": {
+          "id": "6e28a363faf61c52",
+          "kind": "Block"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "ai_weight",
+        "reader": {
+          "id": "97942c9a3d3c9c1b",
+          "kind": "Block"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "important",
+        "reader": {
+          "id": "b894933b2b2853a5",
+          "kind": "Boolean"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "show_tech_unlock_if",
+        "reader": {
+          "id": "e044b50825a1841d",
+          "kind": "Block"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "resources",
+        "reader": {
+          "id": null,
+          "kind": "Unknown"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "Ok": {
+    "completeness": "Partial",
+    "gaps": [
+      {
+        "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification.",
+        "kind": "OutsideMethod",
+        "subject": "common/species_archetypes"
+      },
+      {
+        "detail": "The field's alternatives do not establish one shared reader.",
+        "kind": "UnresolvedReader",
+        "subject": "inherit_traits_from"
+      },
+      {
+        "detail": "The field's alternatives do not establish one shared reader.",
+        "kind": "UnresolvedReader",
+        "subject": "resources"
+      }
+    ],
+    "source": {
+      "basis": "StaticAnalysis",
+      "build": "3d4c8a7046d87175ce7e3b513b1a2ce589050d654d332744518a49d13ac82216",
+      "method": "registry-fields/v3",
+      "native_version": "0.1.0"
+    },
+    "value": [
+      {
+        "conditional": false,
+        "name": "robotic",
+        "reader": {
+          "id": "b894933b2b2853a5",
+          "kind": "Boolean"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "species_trait_points",
+        "reader": {
+          "id": "d7a95ab8c8d44489",
+          "kind": "Integer"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "species_max_traits",
+        "reader": {
+          "id": "d7a95ab8c8d44489",
+          "kind": "Integer"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "uses_modifiers",
+        "reader": {
+          "id": "b894933b2b2853a5",
+          "kind": "Boolean"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "inherit_traits_from",
+        "reader": {
+          "id": null,
+          "kind": "Unknown"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "inherit_trait_points_from",
+        "reader": {
+          "id": "325efaa17499c32d",
+          "kind": "String"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "resources",
+        "reader": {
+          "id": null,
+          "kind": "Unknown"
+        }
+      }
+    ]
+  }
+}

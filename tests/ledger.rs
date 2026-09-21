@@ -86,14 +86,18 @@ fn owner_and_method_classification_separates_policy() {
             .claims
             .iter()
             .any(|c| c.property == "conditional_constraint"
-                && c.expected_method.as_ref().unwrap().ticket == "SDK-541")
+                && c.expected_method.as_ref().unwrap().name
+                    == "Field shapes and conditional constraints")
     );
     let schema = ledger
         .claims
         .iter()
         .find(|c| c.property == "value_form" && c.config_answer == "int")
         .unwrap();
-    assert_eq!(schema.expected_method.as_ref().unwrap().ticket, "SDK-544");
+    assert_eq!(
+        schema.expected_method.as_ref().unwrap().name,
+        "Numeric conversion and duration rules"
+    );
 }
 #[test]
 fn source_accounting_handles_multiline_quotes_and_unterminated_last_line() {
@@ -157,7 +161,10 @@ fn mixed_cardinality_and_scope_operations_are_independent_questions() {
         .unwrap();
     assert_eq!(minimum.owner, Owner::ConsumerPolicy);
     assert_eq!(maximum.owner, Owner::EngineFact);
-    assert_eq!(maximum.expected_method.as_ref().unwrap().ticket, "SDK-541");
+    assert_eq!(
+        maximum.expected_method.as_ref().unwrap().name,
+        "Field shapes and conditional constraints"
+    );
     let scopes: Vec<_> = ledger
         .claims
         .iter()

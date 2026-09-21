@@ -8,7 +8,9 @@ Use paired `<module>.rs` and `<module>/` files instead of `mod.rs`.
 ## Useful References
 
 ### Native Integration Knowledge
-Before game launch, cleanup, injection, engine calls, memory analysis, or native target qualification, read `/Users/jackson/Developer/pdx-native/docs/native-evidence.md`. Native owns the reusable findings and verified local evidence imports. The SDK and Typed prototype paths below remain historical sources and replay dependencies; Atlas owns their consumer rule conclusions and fixtures.
+Before game launch, cleanup, injection, engine calls, memory analysis, or native target changes,
+read `/Users/jackson/Developer/pdx-native/docs/engine-knowledge.md`. Native owns reusable engine
+methods. Atlas owns the rule conclusions and extraction fixtures.
 
 ### CWTools Config
 Path: `/Users/jackson/Developer/cwtools-stellaris-config`

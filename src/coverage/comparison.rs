@@ -1,6 +1,6 @@
 //! Test-only comparison of projected Atlas answers with CWT claims.
 
-use super::{Answer, Gap, Snapshot, rules};
+use super::{Answer, Gap, Projection, projection};
 use crate::{ledger::Ledger, snapshot};
 use serde::Serialize;
 use serde_json::Value;
@@ -191,7 +191,7 @@ fn comparison_outcome(
     }
 }
 
-fn entry(claim: &crate::ledger::Claim, projection: &Snapshot) -> Entry {
+fn entry(claim: &crate::ledger::Claim, projection: &Projection) -> Entry {
     let answers = applicable(
         &projection.answers,
         &claim.question,
@@ -231,7 +231,7 @@ fn entry(claim: &crate::ledger::Claim, projection: &Snapshot) -> Entry {
 pub fn evaluate(ledger: &Ledger, input: &[u8]) -> Result<Report, String> {
     let rules: snapshot::Snapshot =
         serde_json::from_slice(input).map_err(|error| format!("Invalid rule snapshot: {error}"))?;
-    let projection = rules::project_for_comparison(ledger, &rules)?;
+    let projection = projection::project_for_comparison(ledger, &rules)?;
     let mut entries = ledger
         .claims
         .iter()

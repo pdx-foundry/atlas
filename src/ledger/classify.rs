@@ -1,73 +1,39 @@
 use super::{Method, Owner};
 
-pub(super) fn method(ticket: &str) -> Method {
-    let name = match ticket {
-        "SDK-528" => "Registry discovery and loader ownership",
-        "SDK-529" => "Registry item observations",
-        "SDK-530" => "Root field discovery",
-        "SDK-531" => "Shared-reader binding",
-        "SDK-535" => "Effect and trigger declarations",
-        "SDK-536" => "Modifier, scope and link declarations",
-        "SDK-537" => "Localisation commands and scope links",
-        "SDK-538" => "Callbacks and entry scopes",
-        "SDK-539" => "Define inventory and value types",
-        "SDK-540" => "Generated modifier families",
-        "SDK-541" => "Field shapes and conditional constraints",
-        "SDK-542" => "Nested command and control-block grammar",
-        "SDK-543" => "References and dynamic names",
-        "SDK-544" => "Numeric conversion and duration rules",
-        "SDK-545" => "Weight and arithmetic modifier rules",
-        "SDK-546" => "Localisation-key and asset naming rules",
-        "SDK-547" => "Modifier application and propagation",
-        "SDK-548" => "Effect and trigger argument grammars",
-        "SDK-549" => "Scope context for blocks and fields",
-        "SDK-550" => "Script expansion and parameter rules",
-        "SDK-551" => "Custom, nested and late registry discovery",
-        "SDK-552" => "Mounted file selection and duplicate definition rules",
-        "SDK-554" => "Interface and graphics loaders",
-        "SDK-555" => "Sound and music loaders",
-        "SDK-556" => "Map and descriptor loaders",
-        _ => unreachable!("unregistered roadmap method"),
-    };
-    Method {
-        ticket: ticket.into(),
-        name: name.into(),
-    }
-}
 pub(super) fn route(file: &str, subject: &[String], property: &str, answer: &str) -> Method {
     let context = subject.join("/");
     let filename = file.rsplit('/').next().unwrap_or(file);
-    let ticket = if file.starts_with("interface/")
+    let name = if file.starts_with("interface/")
         || file.starts_with("gfx/")
         || file.starts_with("fonts/")
     {
-        "SDK-554"
+        "Interface and graphics loaders"
     } else if file.starts_with("sound/") || filename == "music.cwt" {
-        "SDK-555"
+        "Sound and music loaders"
     } else if file.starts_with("map/")
         || filename.contains("descriptor")
         || filename == "dlc_list.cwt"
     {
-        "SDK-556"
+        "Map and descriptor loaders"
     } else if property == "loader_path" || filename == "overrides.cwt" {
-        "SDK-552"
+        "Mounted file selection and duplicate definition rules"
     } else if property == "naming_rule"
         || context.contains("/localisation/")
         || context.contains("/images/")
     {
-        "SDK-546"
+        "Localisation-key and asset naming rules"
     } else if context.contains("/modifiers/") && context.contains("type[") {
-        "SDK-540"
+        "Generated modifier families"
     } else if property == "scope_context" {
-        "SDK-549"
+        "Scope context for blocks and fields"
     } else if property == "modifier_context" {
-        "SDK-547"
+        "Modifier application and propagation"
     } else if filename == "defines.cwt" {
-        "SDK-539"
+        "Define inventory and value types"
     } else if filename == "on_actions.cwt" || filename == "game_rules.cwt" {
-        "SDK-538"
+        "Callbacks and entry scopes"
     } else if filename == "localisation.cwt" || filename == "localisation_links.cwt" {
-        "SDK-537"
+        "Localisation commands and scope links"
     } else if [
         "modifiers.cwt",
         "modifier_categories.cwt",
@@ -78,65 +44,65 @@ pub(super) fn route(file: &str, subject: &[String], property: &str, answer: &str
     .contains(&filename)
         && !file.starts_with("common/")
     {
-        "SDK-536"
+        "Modifier, scope and link declarations"
     } else if property == "command_existence"
         || (["declared_scopes", "documentation"].contains(&property)
             && ["effects.cwt", "triggers.cwt"].contains(&filename))
     {
-        "SDK-535"
+        "Effect and trigger declarations"
     } else if property == "declared_scopes" {
-        "SDK-549"
+        "Scope context for blocks and fields"
     } else if property.starts_with("cardinality") || property == "conditional_constraint" {
-        "SDK-541"
+        "Field shapes and conditional constraints"
     } else if filename == "modifier_rule.cwt" || answer.contains("modifier_rule") {
-        "SDK-545"
+        "Weight and arithmetic modifier rules"
     } else if context.contains("scripted_")
         || answer.starts_with('$')
         || answer.contains("value_set[parameter")
     {
-        "SDK-550"
+        "Script expansion and parameter rules"
     } else if answer.contains("single_alias_right[") || context.contains("single_alias[") {
-        "SDK-542"
+        "Nested command and control-block grammar"
     } else if answer.starts_with('<')
         || answer.contains("value_set[")
         || answer.starts_with("value[")
     {
-        "SDK-543"
+        "References and dynamic names"
     } else if answer.starts_with("int") || answer.starts_with("float") || answer == "value_field" {
-        "SDK-544"
+        "Numeric conversion and duration rules"
     } else if ["effects.cwt", "triggers.cwt"].contains(&filename) {
-        "SDK-548"
+        "Effect and trigger argument grammars"
     } else if property == "type_existence" {
-        "SDK-528"
+        "Registry discovery and loader ownership"
     } else if property == "field_existence" {
-        "SDK-530"
+        "Root field discovery"
     } else if property == "content_membership" {
-        "SDK-529"
+        "Registry item observations"
     } else if property == "nested_type" {
-        "SDK-551"
+        "Custom, nested and late registry discovery"
     } else {
-        "SDK-531"
+        "Shared-reader binding"
     };
-    method(ticket)
+    Method { name: name.into() }
 }
 pub(super) fn documentation_owner(file: &str) -> (Owner, &'static str) {
     let name = file.rsplit('/').next().unwrap_or(file);
     if ["effects.cwt", "triggers.cwt"].contains(&name) {
         (
             Owner::EngineFact,
-            "Expected engine declaration text; provenance pending SDK-525",
+            "Expected engine declaration text; attribution is outside the current ledger",
         )
     } else if file.starts_with("common/")
         || ["defines.cwt", "on_actions.cwt", "game_rules.cwt"].contains(&name)
     {
         (
             Owner::ContentDerived,
-            "Expected shipped-content documentation; provenance pending SDK-525",
+            "Expected shipped-content documentation; attribution is outside the current ledger",
         )
     } else {
         (
             Owner::AuthoredText,
-            "Unattributed config prose; provisional assignment pending SDK-525",
+            "Unattributed config prose; provisional assignment",
         )
     }
 }

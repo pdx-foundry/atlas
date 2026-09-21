@@ -6,6 +6,3 @@ pub mod extraction;
 pub mod ledger;
 pub mod report;
 pub mod snapshot;
-
-/// Documentation source matching and complete provenance measurements.
-pub mod provenance;

@@ -1,0 +1,65 @@
+{
+  "Ok": {
+    "completeness": "Partial",
+    "gaps": [
+      {
+        "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification.",
+        "kind": "OutsideMethod",
+        "subject": "common/patrons/callings"
+      },
+      {
+        "detail": "The field's alternatives do not establish one shared reader.",
+        "kind": "UnresolvedReader",
+        "subject": "tier"
+      }
+    ],
+    "source": {
+      "basis": "StaticAnalysis",
+      "build": "3d4c8a7046d87175ce7e3b513b1a2ce589050d654d332744518a49d13ac82216",
+      "method": "registry-fields/v3",
+      "native_version": "0.1.0"
+    },
+    "value": [
+      {
+        "conditional": false,
+        "name": "potential",
+        "reader": {
+          "id": "e044b50825a1841d",
+          "kind": "Block"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "tier",
+        "reader": {
+          "id": null,
+          "kind": "Unknown"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "on_start",
+        "reader": {
+          "id": "6e28a363faf61c52",
+          "kind": "Block"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "first_tier",
+        "reader": {
+          "id": "d7a95ab8c8d44489",
+          "kind": "Integer"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "on_dismissed",
+        "reader": {
+          "id": "6e28a363faf61c52",
+          "kind": "Block"
+        }
+      }
+    ]
+  }
+}

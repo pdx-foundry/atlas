@@ -1,0 +1,90 @@
+{
+  "Ok": {
+    "completeness": "Partial",
+    "gaps": [
+      {
+        "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification.",
+        "kind": "OutsideMethod",
+        "subject": "common/starbase_modules"
+      },
+      {
+        "detail": "The field's alternatives do not establish one shared reader.",
+        "kind": "UnresolvedReader",
+        "subject": "section"
+      },
+      {
+        "detail": "The field's alternatives do not establish one shared reader.",
+        "kind": "UnresolvedReader",
+        "subject": "component_set"
+      },
+      {
+        "detail": "The field's alternatives do not establish one shared reader.",
+        "kind": "UnresolvedReader",
+        "subject": "triggered_component_set"
+      },
+      {
+        "detail": "The field's reader could not be established on at least one path.",
+        "kind": "UnresolvedReader",
+        "subject": "common/starbase_modules"
+      },
+      {
+        "detail": "A path through the registry's reader could not be followed to its end.",
+        "kind": "UnresolvedPath",
+        "subject": "common/starbase_modules"
+      },
+      {
+        "detail": "7 reader paths have no recovered field name.",
+        "kind": "UnnamedField",
+        "subject": "common/starbase_modules"
+      }
+    ],
+    "source": {
+      "basis": "StaticAnalysis",
+      "build": "3d4c8a7046d87175ce7e3b513b1a2ce589050d654d332744518a49d13ac82216",
+      "method": "registry-fields/v3",
+      "native_version": "0.1.0"
+    },
+    "value": [
+      {
+        "conditional": false,
+        "name": "section",
+        "reader": {
+          "id": null,
+          "kind": "Unknown"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "component_set",
+        "reader": {
+          "id": null,
+          "kind": "Unknown"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "abort_trigger",
+        "reader": {
+          "id": "e044b50825a1841d",
+          "kind": "Block"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "destroy_trigger",
+        "reader": {
+          "id": "e044b50825a1841d",
+          "kind": "Block"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "triggered_component_set",
+        "reader": {
+          "id": null,
+          "kind": "Unknown"
+        }
+      }
+    ]
+  }
+}

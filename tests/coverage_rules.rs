@@ -30,7 +30,7 @@ fn qualify_as_live(snapshot: &mut snapshot::Snapshot) {
     let sources = std::mem::take(&mut snapshot.sources);
     for (old, mut source) in sources {
         source.basis = Basis::LiveObservation;
-        let new = format!("{}@LiveObservation", source.method);
+        let new = format!("{}@live_observation", source.method);
         keys.insert(old, new.clone());
         snapshot.sources.insert(new, source);
     }

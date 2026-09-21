@@ -1,0 +1,57 @@
+{
+  "Ok": {
+    "completeness": "Partial",
+    "gaps": [
+      {
+        "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification.",
+        "kind": "OutsideMethod",
+        "subject": "common/resolution_categories"
+      },
+      {
+        "detail": "The field's alternatives do not establish one shared reader.",
+        "kind": "UnresolvedReader",
+        "subject": "resolution_types"
+      }
+    ],
+    "source": {
+      "basis": "StaticAnalysis",
+      "build": "3d4c8a7046d87175ce7e3b513b1a2ce589050d654d332744518a49d13ac82216",
+      "method": "registry-fields/v3",
+      "native_version": "0.1.0"
+    },
+    "value": [
+      {
+        "conditional": false,
+        "name": "group",
+        "reader": {
+          "id": "325efaa17499c32d",
+          "kind": "String"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "icon",
+        "reader": {
+          "id": "325efaa17499c32d",
+          "kind": "String"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "resolution_types",
+        "reader": {
+          "id": null,
+          "kind": "Unknown"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "multiple_active_resolutions",
+        "reader": {
+          "id": "b894933b2b2853a5",
+          "kind": "Boolean"
+        }
+      }
+    ]
+  }
+}

@@ -7,7 +7,7 @@ fn recorded_basis(mut snapshot: snapshot::Snapshot) -> snapshot::Snapshot {
     let mut keys = BTreeMap::new();
     for (old, mut source) in snapshot.sources {
         source.basis = Basis::Recorded;
-        let new = format!("{}@Recorded", source.method);
+        let new = format!("{}@recorded", source.method);
         keys.insert(old, new.clone());
         sources.insert(new, source);
     }

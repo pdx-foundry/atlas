@@ -1,0 +1,138 @@
+{
+  "Ok": {
+    "completeness": "Partial",
+    "gaps": [
+      {
+        "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification.",
+        "kind": "OutsideMethod",
+        "subject": "common/star_classes"
+      },
+      {
+        "detail": "The shared reader is identified, but its broad value form is not established.",
+        "kind": "ReaderSemantics",
+        "subject": "icon_scale"
+      },
+      {
+        "detail": "The field's alternatives do not establish one shared reader.",
+        "kind": "UnresolvedReader",
+        "subject": "planet"
+      },
+      {
+        "detail": "The field's alternatives do not establish one shared reader.",
+        "kind": "UnresolvedReader",
+        "subject": "num_planets"
+      },
+      {
+        "detail": "The field's reader could not be established on at least one path.",
+        "kind": "UnresolvedReader",
+        "subject": "common/star_classes"
+      },
+      {
+        "detail": "A path through the registry's reader could not be followed to its end.",
+        "kind": "UnresolvedPath",
+        "subject": "common/star_classes"
+      },
+      {
+        "detail": "12 reader paths have no recovered field name.",
+        "kind": "UnnamedField",
+        "subject": "common/star_classes"
+      }
+    ],
+    "source": {
+      "basis": "StaticAnalysis",
+      "build": "3d4c8a7046d87175ce7e3b513b1a2ce589050d654d332744518a49d13ac82216",
+      "method": "registry-fields/v3",
+      "native_version": "0.1.0"
+    },
+    "value": [
+      {
+        "conditional": false,
+        "name": "icon",
+        "reader": {
+          "id": "325efaa17499c32d",
+          "kind": "String"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "icon_scale",
+        "reader": {
+          "id": "87b0c16089f35350",
+          "kind": "Unknown"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "planet",
+        "reader": {
+          "id": null,
+          "kind": "Unknown"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "spawn_odds",
+        "reader": {
+          "id": "a9818fec780f8313",
+          "kind": "FixedPoint"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "num_planets",
+        "reader": {
+          "id": null,
+          "kind": "Unknown"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "arkship_picture",
+        "reader": {
+          "id": "325efaa17499c32d",
+          "kind": "String"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "is_environmental_hazard",
+        "reader": {
+          "id": "b894933b2b2853a5",
+          "kind": "Boolean"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "draw_orbit_line",
+        "reader": {
+          "id": "b894933b2b2853a5",
+          "kind": "Boolean"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "modifier",
+        "reader": {
+          "id": "97942c9a3d3c9c1b",
+          "kind": "Block"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "crisis_star_class",
+        "reader": {
+          "id": "325efaa17499c32d",
+          "kind": "String"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "can_be_crisis_terraformed",
+        "reader": {
+          "id": "b894933b2b2853a5",
+          "kind": "Boolean"
+        }
+      }
+    ]
+  }
+}

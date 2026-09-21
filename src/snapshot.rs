@@ -1,10 +1,10 @@
 //! Deterministic Atlas rules assembled from Native answers.
 
-use crate::extraction::{CATEGORIES, Extraction, TRADITIONS};
+use crate::extraction::Extraction;
 use pdx_native::{
-    Answer, Completeness, DiagnosticCoverage, DiagnosticJoin, Disposal, Field, FixtureFieldOutcome,
-    FixtureObservation, FixtureRuntime, FixtureStorage, Gap as NativeGap, ReaderKind, Source,
-    Support,
+    Answer, Basis, Completeness, DiagnosticCoverage, DiagnosticJoin, Disposal, Field,
+    FixtureFieldOutcome, FixtureObservation, FixtureRuntime, FixtureStorage, Gap as NativeGap,
+    ReaderKind, Source, Support,
 };
 use serde::{Deserialize, Serialize};
 use serde_json::{Value, json};
@@ -166,17 +166,6 @@ pub struct EvidenceLink {
 }
 
 const DIALECT: &str = "https://json-schema.org/draft/2020-12/schema";
-const LATER_GAPS: &[(&str, &str)] = &[
-    ("validity", "SDK-541"),
-    ("references", "SDK-543"),
-    ("scope_context", "SDK-549"),
-    ("weights", "SDK-545"),
-    ("naming_rules", "SDK-546"),
-    ("argument_grammars", "SDK-548"),
-    ("swaps_and_inheritance", "SDK-541"),
-    ("tree_templates", "SDK-551"),
-];
-
 /// Assemble a snapshot; malformed internal references or conflicting sources fail.
 pub fn assemble(extraction: &Extraction) -> Result<Snapshot, String> {
     let mut snapshot = Snapshot {
@@ -184,7 +173,7 @@ pub fn assemble(extraction: &Extraction) -> Result<Snapshot, String> {
         contract_version: 1,
         schema_dialect: DIALECT.into(),
         snapshot: SnapshotIdentity {
-            name: "stellaris-traditions".into(),
+            name: "stellaris-registry-rules".into(),
             version: 1,
         },
         generator: Generator {
@@ -195,7 +184,7 @@ pub fn assemble(extraction: &Extraction) -> Result<Snapshot, String> {
             builds: vec![extraction.build.clone()],
         },
         coverage: Coverage {
-            registries: vec![CATEGORIES.into(), TRADITIONS.into()],
+            registries: extraction.fields.keys().cloned().collect(),
             established_properties: vec![
                 "existence".into(),
                 "loader_path".into(),
@@ -214,7 +203,7 @@ pub fn assemble(extraction: &Extraction) -> Result<Snapshot, String> {
         rules: Vec::new(),
         gaps: Vec::new(),
     };
-    for registry in [CATEGORIES, TRADITIONS] {
+    for registry in extraction.fields.keys() {
         assemble_registry(&mut snapshot, extraction, registry)?;
         assemble_fields(&mut snapshot, extraction, registry)?;
     }
@@ -223,7 +212,7 @@ pub fn assemble(extraction: &Extraction) -> Result<Snapshot, String> {
     snapshot.rules.sort_by(|a, b| a.id.cmp(&b.id));
     snapshot.gaps.sort_by(|a, b| a.id.cmp(&b.id));
     let content = serde_json::to_vec(&snapshot).map_err(|error| error.to_string())?;
-    snapshot.snapshot.name = format!("stellaris-traditions/{:x}", Sha256::digest(content));
+    snapshot.snapshot.name = format!("stellaris-registry-rules/{:x}", Sha256::digest(content));
     verify(&snapshot)?;
     Ok(snapshot)
 }
@@ -241,7 +230,7 @@ fn source_link<T>(
     answer: &Answer<T>,
     location: String,
 ) -> Result<EvidenceLink, String> {
-    let key = format!("{}@{:?}", answer.source.method, answer.source.basis);
+    let key = source_key(&answer.source);
     if let Some(existing) = snapshot.sources.get(&key) {
         if existing != &answer.source {
             return Err(format!("Conflicting Native sources under {key}"));
@@ -255,6 +244,16 @@ fn source_link<T>(
         location,
         native_gaps: answer.gaps.clone(),
     })
+}
+
+fn source_key(source: &Source) -> String {
+    let basis = match source.basis {
+        Basis::Declared => "declared",
+        Basis::StaticAnalysis => "static_analysis",
+        Basis::LiveObservation => "live_observation",
+        Basis::Recorded => "recorded",
+    };
+    format!("{}@{basis}", source.method)
 }
 
 fn rule(
@@ -279,7 +278,7 @@ fn gap(
     subject: &str,
     property: &str,
     reason: impl Into<String>,
-    owner: Option<&str>,
+    _owner: Option<&str>,
     native_gaps: Vec<NativeGap>,
     evidence: Vec<EvidenceLink>,
 ) {
@@ -288,7 +287,7 @@ fn gap(
         subject: subject.into(),
         property: property.into(),
         reason: reason.into(),
-        owner: owner.map(str::to_owned),
+        owner: None,
         native_gaps,
         evidence,
     });
@@ -347,17 +346,6 @@ fn assemble_registry(
                 );
             }
         }
-    }
-    for &(property, owner) in LATER_GAPS {
-        gap(
-            snapshot,
-            &id,
-            property,
-            format!("{property} is outside this bounded extraction"),
-            Some(owner),
-            Vec::new(),
-            Vec::new(),
-        );
     }
     Ok(())
 }
@@ -700,14 +688,9 @@ fn assemble_outcomes(snapshot: &mut Snapshot, extraction: &Extraction) -> Result
             &session.disposal,
             Ok(Disposal::Confirmed | Disposal::NotApplicable)
         ) {
-            let registry = if session.name.starts_with("tradition") {
-                TRADITIONS
-            } else {
-                CATEGORIES
-            };
             gap(
                 snapshot,
-                &registry_id(registry),
+                &registry_id(session.registry),
                 &format!("fixture.{}", session.name),
                 format!(
                     "Native fixture session disposal failed: {:?}",
@@ -722,14 +705,9 @@ fn assemble_outcomes(snapshot: &mut Snapshot, extraction: &Extraction) -> Result
         let observation = match &session.observation {
             Ok(answer) => answer,
             Err(error) => {
-                let registry = if session.name.starts_with("tradition") {
-                    TRADITIONS
-                } else {
-                    CATEGORIES
-                };
                 gap(
                     snapshot,
-                    &registry_id(registry),
+                    &registry_id(session.registry),
                     &format!("fixture.{}", session.name),
                     format!("Native fixture question failed: {error:?}"),
                     None,
@@ -837,6 +815,38 @@ fn assemble_outcomes(snapshot: &mut Snapshot, extraction: &Extraction) -> Result
             );
         }
     }
+    let answered: BTreeSet<_> = snapshot
+        .rules
+        .iter()
+        .map(|rule| rule.id.as_str())
+        .chain(snapshot.gaps.iter().map(|gap| gap.id.as_str()))
+        .collect();
+    let missing: Vec<_> = snapshot
+        .subjects
+        .iter()
+        .filter(|subject| subject.kind == "field")
+        .filter(|subject| {
+            !answered.contains(format!("{}#occurrences.parser_accepted", subject.id).as_str())
+        })
+        .map(|subject| subject.id.clone())
+        .collect();
+    for id in missing {
+        let evidence = snapshot
+            .rules
+            .iter()
+            .find(|rule| rule.id == format!("{id}#existence"))
+            .map(|rule| rule.evidence.clone())
+            .unwrap_or_default();
+        gap(
+            snapshot,
+            &id,
+            "occurrences.parser_accepted",
+            "No established fixture recipe supplies a valid definition and observation phase for this field",
+            None,
+            Vec::new(),
+            evidence,
+        );
+    }
     Ok(())
 }
 
@@ -858,7 +868,7 @@ pub fn verify(snapshot: &Snapshot) -> Result<(), String> {
         if &source.build != build {
             return Err("Native source build differs from snapshot applicability".into());
         }
-        if *key != format!("{}@{:?}", source.method, source.basis) {
+        if *key != source_key(source) {
             return Err(format!("Native source key differs from its stamp: {key}"));
         }
     }

@@ -1,5 +1,5 @@
 use pdx_atlas::{extraction, snapshot};
-use pdx_native::{Basis, Completeness, Disposal, Field, GameOptions, Native};
+use pdx_native::{Basis, Disposal, Field, GameOptions, Native};
 use serde_json::{Value, json};
 use std::{path::PathBuf, process::Command};
 
@@ -39,7 +39,7 @@ async fn recorded_snapshot_validates_and_is_byte_stable() {
             .all(|source| source.basis == Basis::Recorded)
     );
     assert_eq!(first.coverage.whole_registry_validity, "not_established");
-    assert!(first.snapshot.name.starts_with("stellaris-traditions/"));
+    assert!(first.snapshot.name.starts_with("stellaris-registry-rules/"));
     for subject in first
         .subjects
         .iter()
@@ -52,20 +52,26 @@ async fn recorded_snapshot_validates_and_is_byte_stable() {
             "{id}"
         );
     }
+    let mut completeness = std::collections::BTreeSet::new();
     for rule in &first.rules {
         assert!(!rule.evidence.is_empty());
         for evidence in &rule.evidence {
             assert!(first.sources.contains_key(&evidence.source));
-            assert_eq!(evidence.completeness, Completeness::Partial);
+            completeness.insert(format!("{:?}", evidence.completeness));
         }
     }
+    assert_eq!(
+        completeness,
+        ["Complete".to_owned(), "Partial".to_owned()].into()
+    );
     let string_schemas: std::collections::BTreeSet<_> = first
         .rules
         .iter()
         .filter_map(|rule| rule.answer.get("schema").and_then(Value::as_str))
         .collect();
-    assert_eq!(string_schemas.len(), 1);
-    assert_eq!(first.schemas.definitions.len(), 1);
+    assert!(string_schemas.len() > 1);
+    assert_eq!(first.schemas.definitions.len(), string_schemas.len());
+    assert_eq!(first.coverage.registries.len(), 164);
     assert!(
         first
             .rules
@@ -148,10 +154,10 @@ async fn fixture_counts_and_gaps_are_bounded() {
             .contains("outside this registry binding")
     );
     assert!(
-        !snapshot::json_bytes(&snapshot)
-            .unwrap()
-            .windows(10)
-            .any(|bytes| bytes == b"\"optional\"")
+        snapshot
+            .rules
+            .iter()
+            .all(|rule| rule.property != "optional")
     );
 }
 
@@ -178,7 +184,7 @@ async fn unknown_and_conditional_readers_leave_named_gaps() {
     ] {
         let id = format!("field:common/traditions/{field}#{property}");
         let gap = snapshot.gaps.iter().find(|gap| gap.id == id).unwrap();
-        assert_eq!(gap.owner.as_deref(), Some("SDK-541"));
+        assert_eq!(gap.owner, None);
         assert!(!gap.reason.is_empty());
     }
     assert!(

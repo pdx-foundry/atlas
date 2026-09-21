@@ -1,9 +1,0 @@
-atlas_category = {
-    tree_template = atlas_tree
-    desc = { trigger = { always = yes } text = atlas_description }
-    traditions = { atlas_valid }
-    adoption_bonus = atlas_valid
-    finish_bonus = atlas_valid
-    potential = { always = yes }
-    ai_weight = { weight = 1 }
-}

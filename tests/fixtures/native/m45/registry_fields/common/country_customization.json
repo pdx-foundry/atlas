@@ -1,0 +1,44 @@
+{
+  "Ok": {
+    "completeness": "Complete",
+    "gaps": [
+      {
+        "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification.",
+        "kind": "OutsideMethod",
+        "subject": "common/country_customization"
+      }
+    ],
+    "source": {
+      "basis": "StaticAnalysis",
+      "build": "3d4c8a7046d87175ce7e3b513b1a2ce589050d654d332744518a49d13ac82216",
+      "method": "registry-fields/v3",
+      "native_version": "0.1.0"
+    },
+    "value": [
+      {
+        "conditional": false,
+        "name": "weight",
+        "reader": {
+          "id": "97942c9a3d3c9c1b",
+          "kind": "Block"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "colony_shelter",
+        "reader": {
+          "id": "97942c9a3d3c9c1b",
+          "kind": "Block"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "graphical_culture_for_random_empire",
+        "reader": {
+          "id": "97942c9a3d3c9c1b",
+          "kind": "Block"
+        }
+      }
+    ]
+  }
+}

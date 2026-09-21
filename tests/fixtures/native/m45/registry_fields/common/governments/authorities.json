@@ -1,0 +1,204 @@
+{
+  "Ok": {
+    "completeness": "Partial",
+    "gaps": [
+      {
+        "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification.",
+        "kind": "OutsideMethod",
+        "subject": "common/governments/authorities"
+      },
+      {
+        "detail": "The shared reader is identified, but its broad value form is not established.",
+        "kind": "ReaderSemantics",
+        "subject": "color"
+      },
+      {
+        "detail": "The field's alternatives do not establish one shared reader.",
+        "kind": "UnresolvedReader",
+        "subject": "tags"
+      },
+      {
+        "detail": "The field's alternatives do not establish one shared reader.",
+        "kind": "UnresolvedReader",
+        "subject": "advanced_authority_swap"
+      },
+      {
+        "detail": "The field's alternatives do not establish one shared reader.",
+        "kind": "UnresolvedReader",
+        "subject": "potential"
+      },
+      {
+        "detail": "The field's alternatives do not establish one shared reader.",
+        "kind": "UnresolvedReader",
+        "subject": "traits"
+      },
+      {
+        "detail": "The field's alternatives do not establish one shared reader.",
+        "kind": "UnresolvedReader",
+        "subject": "possible"
+      },
+      {
+        "detail": "The field's reader could not be established on at least one path.",
+        "kind": "UnresolvedReader",
+        "subject": "common/governments/authorities"
+      },
+      {
+        "detail": "A path through the registry's reader could not be followed to its end.",
+        "kind": "UnresolvedPath",
+        "subject": "common/governments/authorities"
+      }
+    ],
+    "source": {
+      "basis": "StaticAnalysis",
+      "build": "3d4c8a7046d87175ce7e3b513b1a2ce589050d654d332744518a49d13ac82216",
+      "method": "registry-fields/v3",
+      "native_version": "0.1.0"
+    },
+    "value": [
+      {
+        "conditional": false,
+        "name": "color",
+        "reader": {
+          "id": "a2ff84da2cff0bb5",
+          "kind": "Unknown"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "icon",
+        "reader": {
+          "id": "325efaa17499c32d",
+          "kind": "String"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "tags",
+        "reader": {
+          "id": null,
+          "kind": "Unknown"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "advanced_authority_swap",
+        "reader": {
+          "id": null,
+          "kind": "Unknown"
+        }
+      },
+      {
+        "conditional": true,
+        "name": "potential",
+        "reader": {
+          "id": null,
+          "kind": "Unknown"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "election_term_years",
+        "reader": {
+          "id": "d7a95ab8c8d44489",
+          "kind": "Integer"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "election_term_variance",
+        "reader": {
+          "id": "d7a95ab8c8d44489",
+          "kind": "Integer"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "traits",
+        "reader": {
+          "id": null,
+          "kind": "Unknown"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "re_election_allowed",
+        "reader": {
+          "id": "b894933b2b2853a5",
+          "kind": "Boolean"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "country_modifier",
+        "reader": {
+          "id": "97942c9a3d3c9c1b",
+          "kind": "Block"
+        }
+      },
+      {
+        "conditional": true,
+        "name": "possible",
+        "reader": {
+          "id": null,
+          "kind": "Unknown"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "playable",
+        "reader": {
+          "id": "e044b50825a1841d",
+          "kind": "Block"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "has_factions",
+        "reader": {
+          "id": "b894933b2b2853a5",
+          "kind": "Boolean"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "localization_postfix",
+        "reader": {
+          "id": "325efaa17499c32d",
+          "kind": "String"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "trait_localization_postfix",
+        "reader": {
+          "id": "325efaa17499c32d",
+          "kind": "String"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "can_reform",
+        "reader": {
+          "id": "b894933b2b2853a5",
+          "kind": "Boolean"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "valid_for_released_vassal",
+        "reader": {
+          "id": "b894933b2b2853a5",
+          "kind": "Boolean"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "random_weight",
+        "reader": {
+          "id": "97942c9a3d3c9c1b",
+          "kind": "Block"
+        }
+      }
+    ]
+  }
+}

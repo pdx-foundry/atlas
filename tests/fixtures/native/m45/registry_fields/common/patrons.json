@@ -1,0 +1,117 @@
+{
+  "Ok": {
+    "completeness": "Partial",
+    "gaps": [
+      {
+        "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification.",
+        "kind": "OutsideMethod",
+        "subject": "common/patrons"
+      },
+      {
+        "detail": "The shared reader is identified, but its broad value form is not established.",
+        "kind": "ReaderSemantics",
+        "subject": "position"
+      },
+      {
+        "detail": "The shared reader is identified, but its broad value form is not established.",
+        "kind": "ReaderSemantics",
+        "subject": "color"
+      },
+      {
+        "detail": "The field's alternatives do not establish one shared reader.",
+        "kind": "UnresolvedReader",
+        "subject": "text_color_code"
+      },
+      {
+        "detail": "The field's reader could not be established on at least one path.",
+        "kind": "UnresolvedReader",
+        "subject": "common/patrons"
+      },
+      {
+        "detail": "A path through the registry's reader could not be followed to its end.",
+        "kind": "UnresolvedPath",
+        "subject": "common/patrons"
+      }
+    ],
+    "source": {
+      "basis": "StaticAnalysis",
+      "build": "3d4c8a7046d87175ce7e3b513b1a2ce589050d654d332744518a49d13ac82216",
+      "method": "registry-fields/v3",
+      "native_version": "0.1.0"
+    },
+    "value": [
+      {
+        "conditional": false,
+        "name": "position",
+        "reader": {
+          "id": "784ec4ab3c469836",
+          "kind": "Unknown"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "color",
+        "reader": {
+          "id": "a2ff84da2cff0bb5",
+          "kind": "Unknown"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "text_color_code",
+        "reader": {
+          "id": null,
+          "kind": "Unknown"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "add_modifier",
+        "reader": {
+          "id": "b894933b2b2853a5",
+          "kind": "Boolean"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "potential",
+        "reader": {
+          "id": "e044b50825a1841d",
+          "kind": "Block"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "covenant",
+        "reader": {
+          "id": "97942c9a3d3c9c1b",
+          "kind": "Block"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "first_contact_event",
+        "reader": {
+          "id": "325efaa17499c32d",
+          "kind": "String"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "covenant_event",
+        "reader": {
+          "id": "325efaa17499c32d",
+          "kind": "String"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "covenant_confirmation_time",
+        "reader": {
+          "id": "d7a95ab8c8d44489",
+          "kind": "Integer"
+        }
+      }
+    ]
+  }
+}
