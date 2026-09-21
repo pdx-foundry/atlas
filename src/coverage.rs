@@ -1,4 +1,6 @@
 //! Coverage of questions, independent of whether Atlas and CWT give the same answer.
+/// Direct comparison of Atlas rule answers with config assertions.
+pub mod comparison;
 mod rules;
 use crate::ledger::{Ledger, Owner};
 use serde::{Deserialize, Serialize};

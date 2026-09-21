@@ -73,6 +73,22 @@ fn run_ledger() -> Result<bool, Box<dyn std::error::Error>> {
     Ok(ledger.diagnostics.is_empty() && source_problems == 0)
 }
 
+fn run_compare() -> Result<bool, Box<dyn std::error::Error>> {
+    let args = std::env::args().skip(2).collect::<Vec<_>>();
+    if args.len() != 3 {
+        return Err("usage: pdx-atlas compare CONFIG_DIR SNAPSHOT_FILE OUTPUT_DIR".into());
+    }
+    let output = PathBuf::from(&args[2]);
+    let report =
+        report::generate_comparison(&PathBuf::from(&args[0]), &PathBuf::from(&args[1]), &output)?;
+    println!(
+        "{} comparison entries; report: {}",
+        report.entries.len(),
+        output.join("comparison.json").display()
+    );
+    Ok(report.inventory_complete)
+}
+
 enum SnapshotMode {
     Live {
         installation: PathBuf,
@@ -163,8 +179,9 @@ fn main() -> ExitCode {
             .map(|()| true)
             .map_err(|error| Box::new(error) as Box<dyn std::error::Error>),
         Some("ledger") => run_ledger(),
+        Some("compare") => run_compare(),
         Some("snapshot") => run_snapshot(),
-        _ => Err("usage: pdx-atlas ledger --config DIR [--snapshot FILE] [--game-content DIR --engine-docs DIR] --output DIR | snapshot INSTALLATION ANSWERS OUTPUT [STARTUP_SECONDS] | snapshot --recorded ANSWERS OUTPUT".into()),
+        _ => Err("usage: pdx-atlas ledger --config DIR [--snapshot FILE] [--game-content DIR --engine-docs DIR] --output DIR | compare CONFIG_DIR SNAPSHOT_FILE OUTPUT_DIR | snapshot INSTALLATION ANSWERS OUTPUT [STARTUP_SECONDS] | snapshot --recorded ANSWERS OUTPUT".into()),
     };
     match result {
         Ok(true) => ExitCode::SUCCESS,

@@ -147,5 +147,6 @@ unknown formats, and relocated CLI inputs. The full-config gate separately pins 
 and both output digests. Baseline changes require inspecting the changed findings before updating
 the fixture; a changed digest is not a reason to rebaseline automatically.
 
-CWT emission/comparison remains SDK-524. Documentation source matching is implemented by SDK-525.
-None of these outputs promotes Native evidence or publishes a rule snapshot.
+Direct snapshot-to-claim comparison is implemented by SDK-524 as a separate test report.
+Documentation source matching is implemented by SDK-525. Neither report promotes Native evidence
+or publishes a rule snapshot.

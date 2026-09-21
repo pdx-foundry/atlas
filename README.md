@@ -31,6 +31,23 @@ and `coverage.json`. It returns 0 for a complete inventory, 2 after writing repo
 diagnostics, and 1 for invalid arguments, unreadable input, or an invalid snapshot contract.
 Output JSON contains input hashes and relative config paths, with no run timestamp.
 
+To compare a rule-bearing Atlas snapshot with config assertions, run the separate test command:
+
+```sh
+cargo run --locked -- compare \
+  /path/to/cwtools-stellaris-config/config \
+  /path/to/traditions.json \
+  /path/to/reports
+```
+
+It writes `comparison.json` with one entry per config claim plus Atlas-only questions. Entries
+contain both answers where available and report `same`, `different`, `missing_from_atlas`, or
+`atlas_only`. Gaps keep their reasons and count as missing answers. Only the directly comparable
+properties (presence, loader path, basic value form, and numeric cardinality bounds) can be marked
+the same or different; an unmapped property is reported as missing a comparable answer with its
+raw Atlas answer retained. This report does not change coverage. A difference calls for review; it
+does not establish which source is correct. The command exits 2 if config diagnostics remain.
+
 The headline is supported engine-fact plus content-derived claims divided by the total in those
 classes. Reports also give all-claims totals, every owner class, each file, and every claim's
 assessment. Consumer policy and authored text are included in the ledger but excluded from the
