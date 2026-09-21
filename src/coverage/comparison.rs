@@ -89,9 +89,12 @@ impl ComparisonKind {
                 _ => None,
             },
             Self::LoaderPath => raw
+                .trim_matches('"')
                 .strip_prefix("game/")
                 .map(|path| Value::String(path.into())),
-            Self::ValueForm => Some(Value::String(raw.into())),
+            Self::ValueForm => ["bool", "int", "float", "string", "scalar", "block"]
+                .contains(&raw)
+                .then(|| Value::String(raw.into())),
             Self::Cardinality => raw.parse::<u64>().ok().map(Value::from),
         }
     }
@@ -113,6 +116,18 @@ impl ComparisonKind {
             }),
             Self::Cardinality => answer.as_u64().map(Value::from),
         }
+    }
+
+    fn agrees(&self, config: &Value, atlas: &Value) -> bool {
+        if config == atlas {
+            return true;
+        }
+        matches!(self, Self::ValueForm)
+            && config.as_str() == Some("scalar")
+            && matches!(
+                atlas.as_str(),
+                Some("bool" | "int" | "float" | "string" | "reference")
+            )
     }
 }
 
@@ -165,7 +180,9 @@ fn comparison_outcome(
         .map(|answer| kind.atlas_value(&answer.value))
         .collect::<Option<Vec<_>>>();
     match normalized {
-        Some(values) if values.iter().all(|value| value == &config) => (Status::Same, None),
+        Some(values) if values.iter().all(|value| kind.agrees(&config, value)) => {
+            (Status::Same, None)
+        }
         Some(_) => (Status::Different, None),
         None => (
             Status::MissingFromAtlas,
@@ -214,7 +231,7 @@ fn entry(claim: &crate::ledger::Claim, projection: &Snapshot) -> Entry {
 pub fn evaluate(ledger: &Ledger, input: &[u8]) -> Result<Report, String> {
     let rules: snapshot::Snapshot =
         serde_json::from_slice(input).map_err(|error| format!("Invalid rule snapshot: {error}"))?;
-    let projection = rules::project(ledger, &rules)?;
+    let projection = rules::project_for_comparison(ledger, &rules)?;
     let mut entries = ledger
         .claims
         .iter()

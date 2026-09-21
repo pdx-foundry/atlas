@@ -281,3 +281,79 @@ tradition = { unlocks_agenda = int }
     assert_eq!(entry.status, coverage::comparison::Status::MissingFromAtlas);
     assert_eq!(entry.gaps, vec!["reader evidence incomplete"]);
 }
+
+#[tokio::test]
+async fn comparison_accepts_scalar_and_block_forms_without_unrelated_facet_gaps() {
+    let source = r#"
+types = { type[tradition] = { path = "game/common/traditions" } }
+tradition = { unlocks_agenda = scalar on_enabled = {} }
+"#;
+    let ledger = ledger::inventory(&BTreeMap::from([("traditions.cwt".into(), source.into())]));
+    let snapshot = recorded_snapshot().await;
+    let bytes = snapshot::json_bytes(&snapshot).unwrap();
+    let comparison = coverage::comparison::evaluate(&ledger, &bytes).unwrap();
+    for (property, subject) in [
+        ("loader_path", vec!["types", "type[tradition]", "path"]),
+        ("value_form", vec!["tradition", "unlocks_agenda"]),
+        ("value_form", vec!["tradition", "on_enabled"]),
+    ] {
+        let claim = ledger
+            .claims
+            .iter()
+            .find(|claim| claim.property == property && claim.subject == subject)
+            .unwrap();
+        let entry = comparison
+            .entries
+            .iter()
+            .find(|entry| entry.claim.as_deref() == Some(&claim.id))
+            .unwrap();
+        assert_eq!(
+            entry.status,
+            coverage::comparison::Status::Same,
+            "{}",
+            claim.id
+        );
+        assert!(entry.gaps.is_empty());
+    }
+    let coverage = coverage::evaluate(&ledger, Some(&bytes)).unwrap();
+    let block = ledger
+        .claims
+        .iter()
+        .find(|claim| {
+            claim.property == "value_form" && claim.subject == ["tradition", "on_enabled"]
+        })
+        .unwrap();
+    assert!(
+        !coverage
+            .claims
+            .iter()
+            .find(|assessment| assessment.claim == block.id)
+            .unwrap()
+            .covered
+    );
+
+    let alias_source = source.replace(
+        "on_enabled = {}",
+        "on_enabled = single_alias_right[effect_clause]",
+    );
+    let alias_ledger =
+        ledger::inventory(&BTreeMap::from([("traditions.cwt".into(), alias_source)]));
+    let alias_report = coverage::comparison::evaluate(&alias_ledger, &bytes).unwrap();
+    let alias_claim = alias_ledger
+        .claims
+        .iter()
+        .find(|claim| {
+            claim.property == "value_form" && claim.subject == ["tradition", "on_enabled"]
+        })
+        .unwrap();
+    let alias_entry = alias_report
+        .entries
+        .iter()
+        .find(|entry| entry.claim.as_deref() == Some(&alias_claim.id))
+        .unwrap();
+    assert_eq!(
+        alias_entry.status,
+        coverage::comparison::Status::MissingFromAtlas
+    );
+    assert!(!alias_entry.atlas_answers.is_empty());
+}

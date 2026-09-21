@@ -47,6 +47,8 @@ properties (presence, loader path, basic value form, and numeric cardinality bou
 the same or different; an unmapped property is reported as missing a comparable answer with its
 raw Atlas answer retained. This report does not change coverage. A difference calls for review; it
 does not establish which source is correct. The command exits 2 if config diagnostics remain.
+Generic CWT `scalar` is compatible with a concrete scalar reader; CWT aliases and other modeled
+forms remain unclassified until a semantic mapping exists.
 
 The headline is supported engine-fact plus content-derived claims divided by the total in those
 classes. Reports also give all-claims totals, every owner class, each file, and every claim's

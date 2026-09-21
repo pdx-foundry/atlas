@@ -6,6 +6,21 @@ use pdx_native::Basis;
 use std::collections::{BTreeMap, BTreeSet};
 
 pub(super) fn project(ledger: &Ledger, rules: &snapshot::Snapshot) -> Result<Snapshot, String> {
+    project_with_gap_facets(ledger, rules, true)
+}
+
+pub(super) fn project_for_comparison(
+    ledger: &Ledger,
+    rules: &snapshot::Snapshot,
+) -> Result<Snapshot, String> {
+    project_with_gap_facets(ledger, rules, false)
+}
+
+fn project_with_gap_facets(
+    ledger: &Ledger,
+    rules: &snapshot::Snapshot,
+    project_related_gap_facets: bool,
+) -> Result<Snapshot, String> {
     snapshot::verify(rules)?;
     let [build] = rules.applicability.builds.as_slice() else {
         return Err("Rule snapshot requires one exact Native build".into());
@@ -75,7 +90,7 @@ pub(super) fn project(ledger: &Ledger, rules: &snapshot::Snapshot) -> Result<Sna
             &gap.subject,
             &gap.property,
             &[],
-            true,
+            project_related_gap_facets,
         );
         let questions = if questions.is_empty() {
             vec![format!("atlas:{}", gap.id)]
