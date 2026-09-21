@@ -1,0 +1,31 @@
+{
+  "contract": "atlas/native-category-observations/v2",
+  "registryQueriesInOrder": [
+    "common/traditions",
+    "common/tradition_categories"
+  ],
+  "fixture": "fixtures/category.txt",
+  "fixtureKey": "atlas_early_category",
+  "installationQuery": "Native::registries",
+  "liveFlow": [
+    "Native::open",
+    "GameOptions::new(supervisor_command)",
+    "start_game(options)",
+    "readiness",
+    "registry_items per registry",
+    "close"
+  ],
+  "recordedFlow": "Native::from_recorded_answers, then the same collect flow; no process",
+  "recording": "Native::record_answers_to writes Result<Answer<T>, Error> JSON",
+  "provenance": "retain Source, completeness and typed gaps; no capture references",
+  "failureBehavior": "independent query errors; always close; startup Error carries disposal when known",
+  "excludedClaims": [
+    "fixture execution",
+    "fixture validation",
+    "stored fields",
+    "category relationships",
+    "schema completeness",
+    "rule coverage",
+    "gameplay readiness"
+  ]
+}

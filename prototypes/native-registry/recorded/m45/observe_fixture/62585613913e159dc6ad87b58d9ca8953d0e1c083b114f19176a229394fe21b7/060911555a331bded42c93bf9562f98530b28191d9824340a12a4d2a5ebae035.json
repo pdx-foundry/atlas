@@ -1,0 +1,485 @@
+{
+  "Ok": {
+    "value": {
+      "registration_entries": [],
+      "field_reads": [],
+      "field_outcomes": [
+        {
+          "question": {
+            "registry": "common/traditions",
+            "definition": "atlas_malformed",
+            "field": "unlocks_agenda",
+            "diagnostics": true,
+            "runtime": false
+          },
+          "file": "common/traditions/atlas_frozen.txt",
+          "owner": 4,
+          "definition_line": 19,
+          "reader": {
+            "id": "325efaa17499c32d",
+            "kind": "String"
+          },
+          "storage": {
+            "String": {
+              "occurrences": [
+                {
+                  "line": 21,
+                  "occurrence": 1,
+                  "value": "Unreadable String"
+                }
+              ],
+              "final_value": "Unreadable String",
+              "completeness": "Complete"
+            }
+          },
+          "diagnostics": [
+            0
+          ],
+          "runtime": "NotRequested"
+        },
+        {
+          "question": {
+            "registry": "common/traditions",
+            "definition": "atlas_omitted",
+            "field": "unlocks_agenda",
+            "diagnostics": true,
+            "runtime": false
+          },
+          "file": "common/traditions/atlas_frozen.txt",
+          "owner": 2,
+          "definition_line": 14,
+          "reader": {
+            "id": "325efaa17499c32d",
+            "kind": "String"
+          },
+          "storage": {
+            "String": {
+              "occurrences": [],
+              "final_value": "",
+              "completeness": "Complete"
+            }
+          },
+          "diagnostics": [],
+          "runtime": "NotRequested"
+        },
+        {
+          "question": {
+            "registry": "common/traditions",
+            "definition": "atlas_repeated",
+            "field": "unlocks_agenda",
+            "diagnostics": true,
+            "runtime": false
+          },
+          "file": "common/traditions/atlas_frozen.txt",
+          "owner": 3,
+          "definition_line": 15,
+          "reader": {
+            "id": "325efaa17499c32d",
+            "kind": "String"
+          },
+          "storage": {
+            "String": {
+              "occurrences": [
+                {
+                  "line": 16,
+                  "occurrence": 1,
+                  "value": "atlas_first"
+                },
+                {
+                  "line": 17,
+                  "occurrence": 2,
+                  "value": "atlas_second"
+                }
+              ],
+              "final_value": "atlas_second",
+              "completeness": "Complete"
+            }
+          },
+          "diagnostics": [],
+          "runtime": "NotRequested"
+        },
+        {
+          "question": {
+            "registry": "common/traditions",
+            "definition": "atlas_unknown",
+            "field": "unlocks_agenda",
+            "diagnostics": true,
+            "runtime": false
+          },
+          "file": "common/traditions/atlas_frozen.txt",
+          "owner": 5,
+          "definition_line": 23,
+          "reader": {
+            "id": "325efaa17499c32d",
+            "kind": "String"
+          },
+          "storage": {
+            "String": {
+              "occurrences": [
+                {
+                  "line": 24,
+                  "occurrence": 1,
+                  "value": "atlas_agenda"
+                }
+              ],
+              "final_value": "atlas_agenda",
+              "completeness": "Complete"
+            }
+          },
+          "diagnostics": [],
+          "runtime": "NotRequested"
+        },
+        {
+          "question": {
+            "registry": "common/traditions",
+            "definition": "atlas_valid",
+            "field": "ai_weight",
+            "diagnostics": true,
+            "runtime": false
+          },
+          "file": "common/traditions/atlas_frozen.txt",
+          "owner": 1,
+          "definition_line": 1,
+          "reader": {
+            "id": "97942c9a3d3c9c1b",
+            "kind": "Block"
+          },
+          "storage": {
+            "Unavailable": "The Block reader has no storage decoder in this method"
+          },
+          "diagnostics": [],
+          "runtime": "NotRequested"
+        },
+        {
+          "question": {
+            "registry": "common/traditions",
+            "definition": "atlas_valid",
+            "field": "custom_tooltip",
+            "diagnostics": true,
+            "runtime": false
+          },
+          "file": "common/traditions/atlas_frozen.txt",
+          "owner": 1,
+          "definition_line": 1,
+          "reader": {
+            "id": "325efaa17499c32d",
+            "kind": "String"
+          },
+          "storage": {
+            "String": {
+              "occurrences": [
+                {
+                  "line": 3,
+                  "occurrence": 1,
+                  "value": "atlas_tooltip"
+                }
+              ],
+              "final_value": "atlas_tooltip",
+              "completeness": "Complete"
+            }
+          },
+          "diagnostics": [],
+          "runtime": "NotRequested"
+        },
+        {
+          "question": {
+            "registry": "common/traditions",
+            "definition": "atlas_valid",
+            "field": "custom_tooltip_with_modifiers",
+            "diagnostics": true,
+            "runtime": false
+          },
+          "file": "common/traditions/atlas_frozen.txt",
+          "owner": 1,
+          "definition_line": 1,
+          "reader": {
+            "id": "325efaa17499c32d",
+            "kind": "String"
+          },
+          "storage": {
+            "String": {
+              "occurrences": [
+                {
+                  "line": 4,
+                  "occurrence": 1,
+                  "value": "atlas_tooltip_with_modifiers"
+                }
+              ],
+              "final_value": "atlas_tooltip_with_modifiers",
+              "completeness": "Complete"
+            }
+          },
+          "diagnostics": [],
+          "runtime": "NotRequested"
+        },
+        {
+          "question": {
+            "registry": "common/traditions",
+            "definition": "atlas_valid",
+            "field": "modifier",
+            "diagnostics": true,
+            "runtime": false
+          },
+          "file": "common/traditions/atlas_frozen.txt",
+          "owner": 1,
+          "definition_line": 1,
+          "reader": {
+            "id": "97942c9a3d3c9c1b",
+            "kind": "Block"
+          },
+          "storage": {
+            "Unavailable": "The Block reader has no storage decoder in this method"
+          },
+          "diagnostics": [],
+          "runtime": "NotRequested"
+        },
+        {
+          "question": {
+            "registry": "common/traditions",
+            "definition": "atlas_valid",
+            "field": "on_disabled",
+            "diagnostics": true,
+            "runtime": false
+          },
+          "file": "common/traditions/atlas_frozen.txt",
+          "owner": 1,
+          "definition_line": 1,
+          "reader": {
+            "id": "6e28a363faf61c52",
+            "kind": "Block"
+          },
+          "storage": {
+            "Unavailable": "The Block reader has no storage decoder in this method"
+          },
+          "diagnostics": [],
+          "runtime": "NotRequested"
+        },
+        {
+          "question": {
+            "registry": "common/traditions",
+            "definition": "atlas_valid",
+            "field": "on_enabled",
+            "diagnostics": true,
+            "runtime": false
+          },
+          "file": "common/traditions/atlas_frozen.txt",
+          "owner": 1,
+          "definition_line": 1,
+          "reader": {
+            "id": "6e28a363faf61c52",
+            "kind": "Block"
+          },
+          "storage": {
+            "Unavailable": "The Block reader has no storage decoder in this method"
+          },
+          "diagnostics": [],
+          "runtime": "NotRequested"
+        },
+        {
+          "question": {
+            "registry": "common/traditions",
+            "definition": "atlas_valid",
+            "field": "possible",
+            "diagnostics": true,
+            "runtime": false
+          },
+          "file": "common/traditions/atlas_frozen.txt",
+          "owner": 1,
+          "definition_line": 1,
+          "reader": {
+            "id": "e044b50825a1841d",
+            "kind": "Block"
+          },
+          "storage": {
+            "Unavailable": "The Block reader has no storage decoder in this method"
+          },
+          "diagnostics": [],
+          "runtime": "NotRequested"
+        },
+        {
+          "question": {
+            "registry": "common/traditions",
+            "definition": "atlas_valid",
+            "field": "potential",
+            "diagnostics": true,
+            "runtime": false
+          },
+          "file": "common/traditions/atlas_frozen.txt",
+          "owner": 1,
+          "definition_line": 1,
+          "reader": {
+            "id": "e044b50825a1841d",
+            "kind": "Block"
+          },
+          "storage": {
+            "Unavailable": "The Block reader has no storage decoder in this method"
+          },
+          "diagnostics": [],
+          "runtime": "NotRequested"
+        },
+        {
+          "question": {
+            "registry": "common/traditions",
+            "definition": "atlas_valid",
+            "field": "tradition_swap",
+            "diagnostics": true,
+            "runtime": false
+          },
+          "file": "common/traditions/atlas_frozen.txt",
+          "owner": 1,
+          "definition_line": 1,
+          "reader": {
+            "id": null,
+            "kind": "Unknown"
+          },
+          "storage": {
+            "Unavailable": "The Unknown reader has no storage decoder in this method"
+          },
+          "diagnostics": [],
+          "runtime": "NotRequested"
+        },
+        {
+          "question": {
+            "registry": "common/traditions",
+            "definition": "atlas_valid",
+            "field": "triggered_modifier",
+            "diagnostics": true,
+            "runtime": false
+          },
+          "file": "common/traditions/atlas_frozen.txt",
+          "owner": 1,
+          "definition_line": 1,
+          "reader": {
+            "id": null,
+            "kind": "Unknown"
+          },
+          "storage": {
+            "Unavailable": "The Unknown reader has no storage decoder in this method"
+          },
+          "diagnostics": [],
+          "runtime": "NotRequested"
+        },
+        {
+          "question": {
+            "registry": "common/traditions",
+            "definition": "atlas_valid",
+            "field": "unlocks_agenda",
+            "diagnostics": true,
+            "runtime": true
+          },
+          "file": "common/traditions/atlas_frozen.txt",
+          "owner": 1,
+          "definition_line": 1,
+          "reader": {
+            "id": "325efaa17499c32d",
+            "kind": "String"
+          },
+          "storage": {
+            "String": {
+              "occurrences": [
+                {
+                  "line": 2,
+                  "occurrence": 1,
+                  "value": "atlas_agenda"
+                }
+              ],
+              "final_value": "atlas_agenda",
+              "completeness": "Complete"
+            }
+          },
+          "diagnostics": [],
+          "runtime": {
+            "Unavailable": "Runtime is outside the initial file-load method"
+          }
+        }
+      ],
+      "diagnostics": [
+        {
+          "text": "Malformed token",
+          "stage": "reader-malformed-report",
+          "join": {
+            "Source": {
+              "file": "common/traditions/atlas_frozen.txt",
+              "line": 21,
+              "definition": "atlas_malformed",
+              "field": "unlocks_agenda",
+              "occurrence": 1
+            }
+          }
+        },
+        {
+          "text": "Unexpected token",
+          "stage": "reader-unexpected-report",
+          "join": {
+            "Source": {
+              "file": "common/traditions/atlas_frozen.txt",
+              "line": 25,
+              "definition": null,
+              "field": null,
+              "occurrence": null
+            }
+          }
+        }
+      ],
+      "diagnostic_coverage": {
+        "Complete": {
+          "window": "FixtureFileLoad"
+        }
+      }
+    },
+    "completeness": "Partial",
+    "gaps": [
+      {
+        "kind": "OutsideMethod",
+        "subject": "ai_weight",
+        "detail": "The Block reader has no storage decoder in this method"
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": "modifier",
+        "detail": "The Block reader has no storage decoder in this method"
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": "on_disabled",
+        "detail": "The Block reader has no storage decoder in this method"
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": "on_enabled",
+        "detail": "The Block reader has no storage decoder in this method"
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": "possible",
+        "detail": "The Block reader has no storage decoder in this method"
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": "potential",
+        "detail": "The Block reader has no storage decoder in this method"
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": "tradition_swap",
+        "detail": "The Unknown reader has no storage decoder in this method"
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": "triggered_modifier",
+        "detail": "The Unknown reader has no storage decoder in this method"
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": "unlocks_agenda",
+        "detail": "Runtime is outside the initial file-load method"
+      }
+    ],
+    "source": {
+      "build": "3d4c8a7046d87175ce7e3b513b1a2ce589050d654d332744518a49d13ac82216",
+      "native_version": "0.1.0",
+      "method": "observe-fixture/v1",
+      "basis": "LiveObservation"
+    }
+  }
+}

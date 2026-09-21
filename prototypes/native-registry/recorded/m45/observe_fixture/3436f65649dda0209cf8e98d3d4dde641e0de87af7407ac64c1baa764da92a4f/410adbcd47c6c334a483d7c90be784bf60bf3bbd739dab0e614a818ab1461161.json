@@ -1,0 +1,47 @@
+{
+  "Ok": {
+    "value": {
+      "registration_entries": [
+        {
+          "ordinal": 1,
+          "stage": "RegistrationEntry"
+        },
+        {
+          "ordinal": 2,
+          "stage": "RegistrationEntry"
+        },
+        {
+          "ordinal": 3,
+          "stage": "RegistrationEntry"
+        }
+      ],
+      "field_reads": [
+        {
+          "file": "common/tradition_categories/atlas_category.txt",
+          "line": 2,
+          "field": "tree_template",
+          "owner": 1,
+          "stage": "FieldReadEntry"
+        },
+        {
+          "file": "common/tradition_categories/atlas_category.txt",
+          "line": 3,
+          "field": "traditions",
+          "owner": 1,
+          "stage": "FieldReadEntry"
+        }
+      ],
+      "field_outcomes": [],
+      "diagnostics": [],
+      "diagnostic_coverage": "NotRequested"
+    },
+    "completeness": "Complete",
+    "gaps": [],
+    "source": {
+      "build": "3d4c8a7046d87175ce7e3b513b1a2ce589050d654d332744518a49d13ac82216",
+      "native_version": "0.1.0",
+      "method": "observe-fixture/v1",
+      "basis": "LiveObservation"
+    }
+  }
+}

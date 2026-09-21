@@ -1,0 +1,118 @@
+{
+  "Ok": {
+    "value": [
+      {
+        "name": "custom_tooltip",
+        "reader": {
+          "id": "325efaa17499c32d",
+          "kind": "String"
+        },
+        "conditional": false
+      },
+      {
+        "name": "custom_tooltip_with_modifiers",
+        "reader": {
+          "id": "325efaa17499c32d",
+          "kind": "String"
+        },
+        "conditional": false
+      },
+      {
+        "name": "potential",
+        "reader": {
+          "id": "e044b50825a1841d",
+          "kind": "Block"
+        },
+        "conditional": false
+      },
+      {
+        "name": "possible",
+        "reader": {
+          "id": "e044b50825a1841d",
+          "kind": "Block"
+        },
+        "conditional": false
+      },
+      {
+        "name": "on_enabled",
+        "reader": {
+          "id": "6e28a363faf61c52",
+          "kind": "Block"
+        },
+        "conditional": false
+      },
+      {
+        "name": "on_disabled",
+        "reader": {
+          "id": "6e28a363faf61c52",
+          "kind": "Block"
+        },
+        "conditional": false
+      },
+      {
+        "name": "triggered_modifier",
+        "reader": {
+          "id": null,
+          "kind": "Unknown"
+        },
+        "conditional": false
+      },
+      {
+        "name": "ai_weight",
+        "reader": {
+          "id": "97942c9a3d3c9c1b",
+          "kind": "Block"
+        },
+        "conditional": false
+      },
+      {
+        "name": "unlocks_agenda",
+        "reader": {
+          "id": "325efaa17499c32d",
+          "kind": "String"
+        },
+        "conditional": false
+      },
+      {
+        "name": "tradition_swap",
+        "reader": {
+          "id": null,
+          "kind": "Unknown"
+        },
+        "conditional": false
+      },
+      {
+        "name": "modifier",
+        "reader": {
+          "id": "97942c9a3d3c9c1b",
+          "kind": "Block"
+        },
+        "conditional": false
+      }
+    ],
+    "completeness": "Partial",
+    "gaps": [
+      {
+        "kind": "OutsideMethod",
+        "subject": "common/traditions",
+        "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": "triggered_modifier",
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": "tradition_swap",
+        "detail": "The field's alternatives do not establish one shared reader."
+      }
+    ],
+    "source": {
+      "build": "3d4c8a7046d87175ce7e3b513b1a2ce589050d654d332744518a49d13ac82216",
+      "native_version": "0.1.0",
+      "method": "registry-fields/v2",
+      "basis": "StaticAnalysis"
+    }
+  }
+}

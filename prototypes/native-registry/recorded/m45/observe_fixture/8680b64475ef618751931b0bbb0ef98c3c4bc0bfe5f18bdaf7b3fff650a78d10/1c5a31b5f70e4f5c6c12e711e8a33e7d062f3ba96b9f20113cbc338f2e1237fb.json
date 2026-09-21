@@ -1,0 +1,210 @@
+{
+  "Ok": {
+    "value": {
+      "registration_entries": [],
+      "field_reads": [],
+      "field_outcomes": [
+        {
+          "question": {
+            "registry": "common/tradition_categories",
+            "definition": "atlas_category",
+            "field": "adoption_bonus",
+            "diagnostics": true,
+            "runtime": false
+          },
+          "file": "common/tradition_categories/atlas_frozen.txt",
+          "owner": null,
+          "definition_line": null,
+          "reader": {
+            "id": null,
+            "kind": "Unknown"
+          },
+          "storage": {
+            "Unavailable": "The Unknown reader has no storage decoder in this method"
+          },
+          "diagnostics": [],
+          "runtime": "NotRequested"
+        },
+        {
+          "question": {
+            "registry": "common/tradition_categories",
+            "definition": "atlas_category",
+            "field": "ai_weight",
+            "diagnostics": true,
+            "runtime": false
+          },
+          "file": "common/tradition_categories/atlas_frozen.txt",
+          "owner": null,
+          "definition_line": null,
+          "reader": {
+            "id": "97942c9a3d3c9c1b",
+            "kind": "Block"
+          },
+          "storage": {
+            "Unavailable": "The Block reader has no storage decoder in this method"
+          },
+          "diagnostics": [],
+          "runtime": "NotRequested"
+        },
+        {
+          "question": {
+            "registry": "common/tradition_categories",
+            "definition": "atlas_category",
+            "field": "desc",
+            "diagnostics": true,
+            "runtime": false
+          },
+          "file": "common/tradition_categories/atlas_frozen.txt",
+          "owner": null,
+          "definition_line": null,
+          "reader": {
+            "id": null,
+            "kind": "Unknown"
+          },
+          "storage": {
+            "Unavailable": "The Unknown reader has no storage decoder in this method"
+          },
+          "diagnostics": [],
+          "runtime": "NotRequested"
+        },
+        {
+          "question": {
+            "registry": "common/tradition_categories",
+            "definition": "atlas_category",
+            "field": "finish_bonus",
+            "diagnostics": true,
+            "runtime": false
+          },
+          "file": "common/tradition_categories/atlas_frozen.txt",
+          "owner": null,
+          "definition_line": null,
+          "reader": {
+            "id": null,
+            "kind": "Unknown"
+          },
+          "storage": {
+            "Unavailable": "The Unknown reader has no storage decoder in this method"
+          },
+          "diagnostics": [],
+          "runtime": "NotRequested"
+        },
+        {
+          "question": {
+            "registry": "common/tradition_categories",
+            "definition": "atlas_category",
+            "field": "potential",
+            "diagnostics": true,
+            "runtime": false
+          },
+          "file": "common/tradition_categories/atlas_frozen.txt",
+          "owner": null,
+          "definition_line": null,
+          "reader": {
+            "id": "e044b50825a1841d",
+            "kind": "Block"
+          },
+          "storage": {
+            "Unavailable": "The Block reader has no storage decoder in this method"
+          },
+          "diagnostics": [],
+          "runtime": "NotRequested"
+        },
+        {
+          "question": {
+            "registry": "common/tradition_categories",
+            "definition": "atlas_category",
+            "field": "traditions",
+            "diagnostics": true,
+            "runtime": false
+          },
+          "file": "common/tradition_categories/atlas_frozen.txt",
+          "owner": null,
+          "definition_line": null,
+          "reader": {
+            "id": null,
+            "kind": "Unknown"
+          },
+          "storage": {
+            "Unavailable": "The Unknown reader has no storage decoder in this method"
+          },
+          "diagnostics": [],
+          "runtime": "NotRequested"
+        },
+        {
+          "question": {
+            "registry": "common/tradition_categories",
+            "definition": "atlas_category",
+            "field": "tree_template",
+            "diagnostics": true,
+            "runtime": false
+          },
+          "file": "common/tradition_categories/atlas_frozen.txt",
+          "owner": null,
+          "definition_line": null,
+          "reader": {
+            "id": "325efaa17499c32d",
+            "kind": "String"
+          },
+          "storage": {
+            "Unavailable": "No exact-build storage binding for this field"
+          },
+          "diagnostics": [],
+          "runtime": "NotRequested"
+        }
+      ],
+      "diagnostics": [],
+      "diagnostic_coverage": {
+        "Unavailable": "Parser diagnostics are outside this registry binding"
+      }
+    },
+    "completeness": "Partial",
+    "gaps": [
+      {
+        "kind": "OutsideMethod",
+        "subject": "common/tradition_categories",
+        "detail": "Parser diagnostics are outside this registry binding"
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": "adoption_bonus",
+        "detail": "The Unknown reader has no storage decoder in this method"
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": "ai_weight",
+        "detail": "The Block reader has no storage decoder in this method"
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": "desc",
+        "detail": "The Unknown reader has no storage decoder in this method"
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": "finish_bonus",
+        "detail": "The Unknown reader has no storage decoder in this method"
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": "potential",
+        "detail": "The Block reader has no storage decoder in this method"
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": "traditions",
+        "detail": "The Unknown reader has no storage decoder in this method"
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": "tree_template",
+        "detail": "No exact-build storage binding for this field"
+      }
+    ],
+    "source": {
+      "build": "3d4c8a7046d87175ce7e3b513b1a2ce589050d654d332744518a49d13ac82216",
+      "native_version": "0.1.0",
+      "method": "observe-fixture/v1",
+      "basis": "LiveObservation"
+    }
+  }
+}

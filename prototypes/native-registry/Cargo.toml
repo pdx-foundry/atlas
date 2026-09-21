@@ -1,0 +1,16 @@
+[package]
+name = "atlas-native-consumer"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[workspace]
+
+[dependencies]
+pdx-native = { git = "https://github.com/pdx-foundry/native.git", rev = "483f57db1d3b8965bf0af4a903ddfc74e30cbefb" }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tokio = { version = "1", features = ["rt", "time", "macros"] }
+
+[dev-dependencies]
+tempfile = "3"
