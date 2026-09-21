@@ -1,4 +1,45 @@
 use std::{fs, process::Command};
+
+#[test]
+fn compare_command_writes_separate_report_from_recorded_rule_snapshot() {
+    let root = tempfile::tempdir().unwrap();
+    let config = root.path().join("config");
+    fs::create_dir(&config).unwrap();
+    fs::write(
+        config.join("traditions.cwt"),
+        "types = { type[tradition] = { path = \"game/common/traditions\" } }\ntradition = { unlocks_agenda = int }\n",
+    )
+    .unwrap();
+    let snapshot = root.path().join("snapshot.json");
+    let fixture =
+        std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/native/m45");
+    let produced = Command::new(env!("CARGO_BIN_EXE_pdx-atlas"))
+        .args(["snapshot", "--recorded"])
+        .arg(fixture)
+        .arg(&snapshot)
+        .output()
+        .unwrap();
+    assert!(produced.status.success(), "{produced:?}");
+    let output = root.path().join("comparison");
+    let compared = Command::new(env!("CARGO_BIN_EXE_pdx-atlas"))
+        .arg("compare")
+        .arg(&config)
+        .arg(&snapshot)
+        .arg(&output)
+        .output()
+        .unwrap();
+    assert!(compared.status.success(), "{compared:?}");
+    let report: serde_json::Value =
+        serde_json::from_slice(&fs::read(output.join("comparison.json")).unwrap()).unwrap();
+    assert!(
+        report["entries"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .any(|entry| entry["status"] == "same")
+    );
+    assert!(!output.join("coverage.json").exists());
+}
 #[test]
 fn relocated_inputs_produce_identical_bytes_and_diagnostics_fail_visibly() {
     let root = tempfile::tempdir().unwrap();

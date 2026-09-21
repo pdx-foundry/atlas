@@ -1,6 +1,6 @@
 //! Filesystem boundary for reproducible config inventories and coverage reports.
 use crate::{
-    coverage,
+    coverage::{self, comparison},
     ledger::{self, Ledger, Sources},
 };
 use std::{fs, io, path::Path};
@@ -36,6 +36,18 @@ fn visit(root: &Path, dir: &Path, sources: &mut Sources) -> io::Result<()> {
         }
     }
     Ok(())
+}
+/// Writes a comparison report from a rule snapshot, without changing coverage output.
+pub fn generate_comparison(
+    config: &Path,
+    snapshot: &Path,
+    output: &Path,
+) -> Result<comparison::Report, Box<dyn std::error::Error>> {
+    let ledger = ledger::inventory(&read_sources(config)?);
+    let report = comparison::evaluate(&ledger, &fs::read(snapshot)?).map_err(io::Error::other)?;
+    fs::create_dir_all(output)?;
+    fs::write(output.join("comparison.json"), json_bytes(&report)?)?;
+    Ok(report)
 }
 /// Reads all CWT files below an explicit root. Rejects symlinks and empty inputs rather than skipping them.
 pub fn read_sources(root: &Path) -> io::Result<Sources> {
