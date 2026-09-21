@@ -134,6 +134,13 @@ Historical artifacts remain unchanged. Ordinary game updates supersede snapshots
 
 ## Verification and handoff
 
+The 2026-09-21 SDK-558 implementation defines the first producer envelope in
+[`rule-snapshot-v1.schema.json`](../contract/rule-snapshot-v1.schema.json). A rule's evidence
+references Native's complete `Source` stamp plus the answer's completeness and typed gaps.
+The payload digest is stored beside the JSON, outside the bytes it covers. No capture hash is
+required inside a rule record. This bounded tradition snapshot declares whole-registry validity
+unestablished; later record families remain explicit gaps.
+
 Producer checks cover unique stable identities, valid JSON/schema syntax, complete internal reference closure, required evidence links, consistent conditions, correction references, and explicit coverage/gaps. Schema validity is not proof of a game claim. Conflicting applicable conclusions need corrected/narrowed evidence or a gap, never implicit load-order precedence.
 
 The illustrative fixture at `fixtures/offline-snapshot-contract.example.json` is fictional and contains no qualified game facts. It checks standard schema reuse and a discriminated union, plus the separation between value shape and occurrence rules. It is not a production envelope schema or a prototype implementation.

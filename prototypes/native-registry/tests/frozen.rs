@@ -68,7 +68,7 @@ fn authored_answers(root: &Path) {
 }
 
 fn recording() -> std::path::PathBuf {
-    Path::new(env!("CARGO_MANIFEST_DIR")).join("recorded/m45")
+    Path::new(env!("CARGO_MANIFEST_DIR")).join("../../tests/fixtures/native/m45")
 }
 
 fn copy_recording(from: &Path, to: &Path) {

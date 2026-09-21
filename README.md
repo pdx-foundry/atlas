@@ -4,8 +4,20 @@ Atlas inventories the questions in CWTools config and measures which ones an Atl
 answer. **Coverage is not agreement with CWT.** An evidence-backed contradictory answer earns the
 same coverage as an agreeing answer. The config is a migration/discovery input, not the game oracle.
 
-The current implementation is the game-free SDK-523 scoreboard and SDK-525 documentation attribution. Native extraction and the full
-published rule-snapshot system remain separate work.
+Atlas also asks its pinned Native dependency for tradition and tradition-category observations and
+assembles the first offline rule snapshot. Native handles the game and platform details. The ledger
+and coverage commands still run without a game installation.
+
+```sh
+cargo run --release --locked -- snapshot /path/to/Stellaris /path/to/recorded-answers /path/to/traditions.json
+cargo run --release --locked -- snapshot --recorded tests/fixtures/native/m45 /path/to/traditions.json
+```
+
+Both modes write deterministic JSON and a `.sha256` sidecar. The snapshot name includes a digest
+of its contents, so different builds and incomplete extractions have distinct identities.
+Recorded answers keep their recorded basis and earn no current-engine coverage credit. The [version-1 schema](docs/contract/rule-snapshot-v1.schema.json)
+describes the snapshot. The historical `prototypes/native-registry` caller is retained for its
+experiment and tests; production extraction does not invoke it.
 
 ```sh
 cargo run --locked -- ledger \
@@ -28,7 +40,7 @@ visible. They are not quietly treated as covered.
 
 The standalone Rust parser lives in [pdxscript-rs](https://github.com/pdx-foundry/pdxscript-rs).
 Atlas pins its Git revision and uses its `cwt` module. Atlas owns classification and scoring;
-the parser crate owns syntax. The retained Native caller under `prototypes/` remains unchanged.
+the parser crate owns syntax.
 
 See [the ledger contract](docs/coverage/ledger.md) for identities, source accounting, ownership,
 snapshot input, and reproduction of the [initial measurement](docs/coverage/baseline.md).
