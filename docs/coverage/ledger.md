@@ -71,13 +71,23 @@ to SDK-554–556. These are expected methods, not qualifications or hardcoded ga
 
 ## Snapshot input
 
+The production `pdx-atlas snapshot` command writes `atlas_rule_snapshot` contract version 1.
+The ledger accepts that file directly and projects its registry and field rules onto matching
+config questions. The join comes from the ledger's own `loader_path` claims; the rule producer
+does not read CWT. Each rule keeps Native's source stamp, completeness and typed gaps. Recorded
+sources are unqualified for current-engine coverage. A matching gap blocks credit for its
+question. Unknown contract versions or broken subject, source or schema references are errors.
+The full format is [rule-snapshot-v1.schema.json](../contract/rule-snapshot-v1.schema.json).
+
+The older scoreboard input below remains accepted for authored or qualified answers outside
+the first tradition snapshot.
+
 The tool reads the retained Atlas caller's live JSON (`queries`) or replay JSON (`startup` and
 `final_snapshots`). It retains observed item names/identities and reports registry counts, activation/completion, limits
 and gaps.
 Item enumeration establishes no config-rule answers, even when a registry name matches a CWT type.
 
-Future qualified answers use this deliberately bounded scoreboard input, not the full publication
-contract from the planning documents:
+The deliberately bounded scoreboard input has this form:
 
 ```json
 {

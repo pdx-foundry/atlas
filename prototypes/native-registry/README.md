@@ -8,15 +8,15 @@ the bounded SDK-519 item-list experiment.
 
 Native is pinned to merged commit
 `483f57db1d3b8965bf0af4a903ddfc74e30cbefb` in `Cargo.toml` and `Cargo.lock`.
-The M45 answers in `recorded/m45` were captured from the exact supported installation on
+The M45 answers in `../../tests/fixtures/native/m45` were captured from the exact supported installation on
 2026-09-21. The previous prototype and synthetic captures are preserved in
 `~/Documents/PDX/evidence/native-2026-09-18/atlas-native-consumer-before-simplification.tar.gz`.
 
 ## Frozen flow
 
 ```sh
-cargo run --release --locked -- frozen /path/to/Stellaris recorded/m45
-cargo run --release --locked -- frozen-recorded recorded/m45
+cargo run --release --locked -- frozen /path/to/Stellaris ../../tests/fixtures/native/m45
+cargo run --release --locked -- frozen-recorded ../../tests/fixtures/native/m45
 ```
 
 `frozen` records every Native answer and prints a JSON report after closing four independent

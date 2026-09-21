@@ -4,10 +4,13 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
+pdx-native = { git = "https://github.com/pdx-foundry/native.git", rev = "483f57db1d3b8965bf0af4a903ddfc74e30cbefb" }
 pdxscript = { git = "https://github.com/pdx-foundry/pdxscript-rs.git", rev = "7cf9f1516ebc10d5114af78bb4cd46614e4357ce" }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 sha2 = "0.10"
+tokio = { version = "1", features = ["rt", "time", "macros"] }
 
 [dev-dependencies]
+jsonschema = { version = "0.56", default-features = false }
 tempfile = "3"

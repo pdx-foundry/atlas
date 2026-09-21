@@ -1,4 +1,5 @@
 //! Coverage of questions, independent of whether Atlas and CWT give the same answer.
+mod rules;
 use crate::ledger::{Ledger, Owner};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
@@ -365,6 +366,12 @@ pub fn evaluate(ledger: &Ledger, input: Option<&[u8]>) -> Result<Report, String>
         if value.get("kind").and_then(Value::as_str) == Some("atlas_coverage") {
             let snapshot: Snapshot = serde_json::from_value(value)
                 .map_err(|e| format!("Invalid coverage input: {e}"))?;
+            validate(&snapshot)?;
+            Some(snapshot)
+        } else if value.get("kind").and_then(Value::as_str) == Some("atlas_rule_snapshot") {
+            let rule_snapshot: crate::snapshot::Snapshot = serde_json::from_value(value)
+                .map_err(|e| format!("Invalid rule snapshot input: {e}"))?;
+            let snapshot = rules::project(ledger, &rule_snapshot)?;
             validate(&snapshot)?;
             Some(snapshot)
         } else {
