@@ -1,0 +1,80 @@
+{
+  "Ok": {
+    "completeness": "Partial",
+    "gaps": [
+      {
+        "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification.",
+        "kind": "OutsideMethod",
+        "subject": "common/country_limits/ship_of_size_limits"
+      },
+      {
+        "detail": "The shared reader is identified, but its broad value form is not established.",
+        "kind": "ReaderSemantics",
+        "subject": "max"
+      },
+      {
+        "detail": "The shared reader is identified, but its broad value form is not established.",
+        "kind": "ReaderSemantics",
+        "subject": "base"
+      },
+      {
+        "detail": "The field's alternatives do not establish one shared reader.",
+        "kind": "UnresolvedReader",
+        "subject": "ship_types"
+      },
+      {
+        "detail": "The shared reader is identified, but its broad value form is not established.",
+        "kind": "ReaderSemantics",
+        "subject": "naval_cap_fraction"
+      }
+    ],
+    "source": {
+      "basis": "StaticAnalysis",
+      "build": "3d4c8a7046d87175ce7e3b513b1a2ce589050d654d332744518a49d13ac82216",
+      "method": "registry-fields/v3",
+      "native_version": "0.1.0"
+    },
+    "value": [
+      {
+        "conditional": false,
+        "name": "max",
+        "reader": {
+          "id": "c61abc171edc30aa",
+          "kind": "Unknown"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "show",
+        "reader": {
+          "id": "e044b50825a1841d",
+          "kind": "Block"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "base",
+        "reader": {
+          "id": "c61abc171edc30aa",
+          "kind": "Unknown"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "ship_types",
+        "reader": {
+          "id": null,
+          "kind": "Unknown"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "naval_cap_fraction",
+        "reader": {
+          "id": "c61abc171edc30aa",
+          "kind": "Unknown"
+        }
+      }
+    ]
+  }
+}

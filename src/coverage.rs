@@ -1,7 +1,10 @@
 //! Coverage of questions, independent of whether Atlas and CWT give the same answer.
 /// Direct comparison of Atlas rule answers with config assertions.
 pub mod comparison;
-mod rules;
+mod projection;
+#[cfg(test)]
+#[path = "coverage/tests.rs"]
+mod tests;
 use crate::ledger::{Ledger, Owner};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
@@ -82,11 +85,7 @@ pub struct Gap {
 /// Bounded input contract for the scoreboard, not the full Atlas publication envelope.
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
-pub struct Snapshot {
-    /// Must be `atlas_coverage`.
-    pub kind: String,
-    /// Supported contract version, currently 1.
-    pub format_version: u32,
+pub(crate) struct Projection {
     /// Immutable snapshot identity.
     pub snapshot_id: String,
     /// Exact target for all credited evidence in this report.
@@ -193,15 +192,10 @@ pub struct Report {
     pub by_file: BTreeMap<String, Totals>,
     /// Each source claim's support assessment.
     pub claims: Vec<Assessment>,
-    /// Registry observations retained as observations, with no rule credit.
-    pub registry_observations: Vec<Value>,
     /// Snapshot questions without a matching config question; excluded from the denominator.
     pub atlas_only_questions: Vec<String>,
 }
-fn validate(snapshot: &Snapshot) -> Result<(), String> {
-    if snapshot.kind != "atlas_coverage" || snapshot.format_version != 1 {
-        return Err("Unsupported coverage input contract".into());
-    }
+fn validate(snapshot: &Projection) -> Result<(), String> {
     if snapshot.snapshot_id.trim().is_empty() || snapshot.target.trim().is_empty() {
         return Err("Snapshot identity and exact target must be nonempty".into());
     }
@@ -231,13 +225,13 @@ fn suitable(owner: Owner, e: &Evidence, target: &str) -> bool {
             Owner::ConsumerPolicy | Owner::AuthoredText => e.origin == Origin::Authored,
         }
 }
-struct SnapshotIndex<'a> {
+struct ProjectionIndex<'a> {
     target: &'a str,
     answers: BTreeMap<&'a str, Vec<&'a Answer>>,
     gaps: BTreeMap<&'a str, Vec<&'a Gap>>,
 }
-impl<'a> SnapshotIndex<'a> {
-    fn new(snapshot: &'a Snapshot) -> Self {
+impl<'a> ProjectionIndex<'a> {
+    fn new(snapshot: &'a Projection) -> Self {
         let mut index = Self {
             target: &snapshot.target,
             answers: BTreeMap::new(),
@@ -257,7 +251,7 @@ impl<'a> SnapshotIndex<'a> {
     }
 }
 
-fn assessment(claim: &crate::ledger::Claim, snapshot: Option<&SnapshotIndex<'_>>) -> Assessment {
+fn assessment(claim: &crate::ledger::Claim, snapshot: Option<&ProjectionIndex<'_>>) -> Assessment {
     let mut result = Assessment {
         claim: claim.id.clone(),
         covered: false,
@@ -327,62 +321,28 @@ fn assessment(claim: &crate::ledger::Claim, snapshot: Option<&SnapshotIndex<'_>>
     result.evidence.dedup();
     result
 }
-fn registry_observations(value: &Value) -> Result<Vec<Value>, String> {
-    let live = value.get("queries").and_then(Value::as_object);
-    let replay = value
-        .get("startup")
-        .and_then(Value::as_object)
-        .filter(|_| value.get("final_snapshots").is_some());
-    let queries = live
-        .or(replay)
-        .ok_or("Input is neither an Atlas coverage snapshot nor a registry caller result")?;
-    let mut observations = Vec::new();
-    for (name, answer) in queries {
-        if let Some(ok) = answer.get("Ok") {
-            let native = ok
-                .get("native")
-                .and_then(Value::as_object)
-                .ok_or("Invalid registry observation: native result missing")?;
-            let items = native
-                .get("registeredItems")
-                .and_then(Value::as_array)
-                .ok_or("Invalid registry observation: items missing")?;
-            observations.push(serde_json::json!({"registry":name,"observed_items":items.len(),"items":items,"activation":native.get("activation"),"completion":native.get("completion"),"origin":native.get("origin"),"limits":native.get("limits"),"gaps":ok.get("gaps"),"rule_credit":false}));
-        } else if answer.get("Err").is_some() {
-            observations
-                .push(serde_json::json!({"registry":name,"unavailable":true,"rule_credit":false}));
-        } else {
-            return Err("Invalid registry result variant".into());
-        }
-    }
-    Ok(observations)
-}
-/// Scores exact questions under the supplied evidence contract. Config answer equality is never tested.
+/// Scores exact questions from the published Atlas rule snapshot.
 /// Invalid snapshot formats return an error rather than a successful zero-coverage report.
 pub fn evaluate(ledger: &Ledger, input: Option<&[u8]>) -> Result<Report, String> {
-    let snapshot_sha256 = input.map(|b| format!("{:x}", Sha256::digest(b)));
-    let mut observations = Vec::new();
-    let snapshot = if let Some(bytes) = input {
-        let value: Value =
-            serde_json::from_slice(bytes).map_err(|e| format!("Invalid snapshot JSON: {e}"))?;
-        if value.get("kind").and_then(Value::as_str) == Some("atlas_coverage") {
-            let snapshot: Snapshot = serde_json::from_value(value)
-                .map_err(|e| format!("Invalid coverage input: {e}"))?;
-            validate(&snapshot)?;
-            Some(snapshot)
-        } else if value.get("kind").and_then(Value::as_str) == Some("atlas_rule_snapshot") {
-            let rule_snapshot: crate::snapshot::Snapshot = serde_json::from_value(value)
-                .map_err(|e| format!("Invalid rule snapshot input: {e}"))?;
-            let snapshot = rules::project(ledger, &rule_snapshot)?;
-            validate(&snapshot)?;
-            Some(snapshot)
-        } else {
-            observations = registry_observations(&value)?;
-            None
-        }
-    } else {
-        None
-    };
+    let snapshot_sha256 = input.map(|bytes| format!("{:x}", Sha256::digest(bytes)));
+    let projection = input
+        .map(|bytes| {
+            let rules: crate::snapshot::Snapshot = serde_json::from_slice(bytes)
+                .map_err(|error| format!("Invalid rule snapshot input: {error}"))?;
+            projection::project(ledger, &rules)
+        })
+        .transpose()?;
+    evaluate_projection(ledger, projection.as_ref(), snapshot_sha256)
+}
+
+fn evaluate_projection(
+    ledger: &Ledger,
+    snapshot: Option<&Projection>,
+    snapshot_sha256: Option<String>,
+) -> Result<Report, String> {
+    if let Some(snapshot) = snapshot {
+        validate(snapshot)?;
+    }
     let mut totals = Totals::new();
     let mut by_file: BTreeMap<_, _> = ledger
         .files
@@ -390,7 +350,7 @@ pub fn evaluate(ledger: &Ledger, input: Option<&[u8]>) -> Result<Report, String>
         .map(|f| (f.path.clone(), Totals::new()))
         .collect();
     let mut claims = Vec::new();
-    let index = snapshot.as_ref().map(SnapshotIndex::new);
+    let index = snapshot.map(ProjectionIndex::new);
     for claim in &ledger.claims {
         let answer = assessment(claim, index.as_ref());
         totals.add(claim.owner, answer.covered);
@@ -406,7 +366,6 @@ pub fn evaluate(ledger: &Ledger, input: Option<&[u8]>) -> Result<Report, String>
     }
     let questions: BTreeSet<_> = ledger.claims.iter().map(|c| c.question.as_str()).collect();
     let atlas_only_questions = snapshot
-        .as_ref()
         .map(|s| {
             s.answers
                 .iter()
@@ -423,13 +382,12 @@ pub fn evaluate(ledger: &Ledger, input: Option<&[u8]>) -> Result<Report, String>
         format_version: 1,
         config_sha256: ledger.config_sha256.clone(),
         snapshot_sha256,
-        snapshot_id: snapshot.as_ref().map(|s| s.snapshot_id.clone()),
-        target: snapshot.as_ref().map(|s| s.target.clone()),
+        snapshot_id: snapshot.map(|s| s.snapshot_id.clone()),
+        target: snapshot.map(|s| s.target.clone()),
         inventory_complete: ledger.diagnostics.is_empty(),
         totals,
         by_file,
         claims,
-        registry_observations: observations,
         atlas_only_questions,
     })
 }

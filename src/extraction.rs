@@ -43,6 +43,8 @@ impl Extraction {
 pub struct FixtureSession {
     /// Stable name for the bounded request.
     pub name: &'static str,
+    /// Registry containing the authored fixture.
+    pub registry: &'static str,
     /// Native's complete or failed fixture answer.
     pub observation: Result<Answer<FixtureObservation>, Error>,
     /// Confirmation that the game process is gone.
@@ -59,19 +61,38 @@ pub async fn collect(native: &Native, options: impl Fn() -> GameOptions) -> Extr
         Operation::ObserveFixture,
     ]
     .into_iter()
-    .map(|operation| (format!("{operation:?}"), native.supports(operation)))
+    .map(|operation| {
+        let name = match operation {
+            Operation::Registries => "registries",
+            Operation::RegistryFields => "registry_fields",
+            Operation::RegistryItems => "registry_items",
+            Operation::ObserveFixture => "observe_fixture",
+        };
+        (name.into(), native.supports(operation))
+    })
     .collect();
     let registries = native.registries();
-    let fields = [TRADITIONS, CATEGORIES]
-        .into_iter()
-        .map(|registry| (registry.into(), native.registry_fields(registry)))
-        .collect();
+    let fields = match &registries {
+        Ok(answer) => answer
+            .value
+            .iter()
+            .map(|registry| {
+                (
+                    registry.name.clone(),
+                    native.registry_fields(&registry.name),
+                )
+            })
+            .collect(),
+        Err(_) => BTreeMap::new(),
+    };
+    let discovered: std::collections::BTreeSet<_> = fields.keys().map(String::as_str).collect();
 
     let requests = [
-        ("tradition_outcomes", tradition_fixture()),
-        ("category_outcomes", category_fixture()),
+        ("tradition_outcomes", TRADITIONS, tradition_fixture()),
+        ("category_outcomes", CATEGORIES, category_fixture()),
         (
             "category_reads",
+            CATEGORIES,
             FixtureRequest::new(
                 "common/tradition_categories/atlas_category.txt",
                 include_str!("../fixtures/category-reads.txt"),
@@ -80,14 +101,18 @@ pub async fn collect(native: &Native, options: impl Fn() -> GameOptions) -> Extr
     ];
     let mut sessions = Vec::with_capacity(requests.len());
     let mut blocker: Option<Error> = None;
-    for (name, request) in requests {
+    for (name, registry, request) in requests
+        .into_iter()
+        .filter(|(_, registry, _)| discovered.contains(registry))
+    {
         let session = match &blocker {
             Some(error) => FixtureSession {
                 name,
+                registry,
                 observation: Err(error.clone()),
                 disposal: Err(error.clone()),
             },
-            None => run_fixture(native, options(), name, request).await,
+            None => run_fixture(native, options(), name, registry, request).await,
         };
         blocker = blocker.or_else(|| disposal_blocker(&session));
         sessions.push(session);
@@ -105,6 +130,7 @@ async fn run_fixture(
     native: &Native,
     options: GameOptions,
     name: &'static str,
+    registry: &'static str,
     request: FixtureRequest,
 ) -> FixtureSession {
     let mut game = match native.start_game(options.fixture(request)).await {
@@ -112,6 +138,7 @@ async fn run_fixture(
         Err(error) => {
             return FixtureSession {
                 name,
+                registry,
                 observation: Err(error.clone()),
                 disposal: Err(error),
             };
@@ -121,6 +148,7 @@ async fn run_fixture(
     let disposal = game.close().await;
     FixtureSession {
         name,
+        registry,
         observation,
         disposal,
     }

@@ -1,0 +1,46 @@
+{
+  "Ok": {
+    "completeness": "Partial",
+    "gaps": [
+      {
+        "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification.",
+        "kind": "OutsideMethod",
+        "subject": "common/sector_types"
+      },
+      {
+        "detail": "The field's reader could not be established on at least one path.",
+        "kind": "UnresolvedReader",
+        "subject": "common/sector_types"
+      },
+      {
+        "detail": "A path through the registry's reader could not be followed to its end.",
+        "kind": "UnresolvedPath",
+        "subject": "common/sector_types"
+      }
+    ],
+    "source": {
+      "basis": "StaticAnalysis",
+      "build": "3d4c8a7046d87175ce7e3b513b1a2ce589050d654d332744518a49d13ac82216",
+      "method": "registry-fields/v3",
+      "native_version": "0.1.0"
+    },
+    "value": [
+      {
+        "conditional": false,
+        "name": "max_systems",
+        "reader": {
+          "id": "5d6a4255a3ebd82d",
+          "kind": "Integer"
+        }
+      },
+      {
+        "conditional": false,
+        "name": "min_systems",
+        "reader": {
+          "id": "5d6a4255a3ebd82d",
+          "kind": "Integer"
+        }
+      }
+    ]
+  }
+}

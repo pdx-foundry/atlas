@@ -17,6 +17,46 @@ tradition = {
     ledger::inventory(&BTreeMap::from([("traditions.cwt".into(), source.into())]))
 }
 
+#[tokio::test]
+async fn shared_config_directory_does_not_assign_registry_evidence_to_either_type() {
+    let source = r#"
+types = {
+    type[technology] = { path = "game/common/technology" }
+    type[swapped_technology] = {
+        path = "game/common/technology"
+        base_type = technology
+    }
+}
+"#;
+    let ledger = ledger::inventory(&BTreeMap::from([("technology.cwt".into(), source.into())]));
+    let snapshot = recorded_snapshot().await;
+    let comparison =
+        coverage::comparison::evaluate(&ledger, &snapshot::json_bytes(&snapshot).unwrap()).unwrap();
+    for name in ["type[technology]", "type[swapped_technology]"] {
+        let claim = ledger
+            .claims
+            .iter()
+            .find(|claim| claim.property == "type_existence" && claim.subject == ["types", name])
+            .unwrap();
+        let entry = comparison
+            .entries
+            .iter()
+            .find(|entry| entry.claim.as_deref() == Some(claim.id.as_str()))
+            .unwrap();
+        assert_eq!(
+            entry.status,
+            coverage::comparison::Status::MissingFromAtlas,
+            "{name}"
+        );
+    }
+    assert!(comparison.entries.iter().any(|entry| {
+        entry
+            .question
+            .contains("registry:common/technology#existence")
+            && entry.status == coverage::comparison::Status::AtlasOnly
+    }));
+}
+
 async fn recorded_snapshot() -> snapshot::Snapshot {
     let path = Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/native/m45");
     let native = Native::from_recorded_answers(path).unwrap();
@@ -30,7 +70,7 @@ fn qualify_as_live(snapshot: &mut snapshot::Snapshot) {
     let sources = std::mem::take(&mut snapshot.sources);
     for (old, mut source) in sources {
         source.basis = Basis::LiveObservation;
-        let new = format!("{}@LiveObservation", source.method);
+        let new = format!("{}@live_observation", source.method);
         keys.insert(old, new.clone());
         snapshot.sources.insert(new, source);
     }
@@ -230,7 +270,7 @@ tradition = { unlocks_agenda = int }
         comparison
             .entries
             .iter()
-            .find(|entry| entry.claim.as_deref() == Some(&claim.id))
+            .find(|entry| entry.claim.as_deref() == Some(claim.id.as_str()))
             .unwrap()
     };
     assert_eq!(
@@ -276,7 +316,7 @@ tradition = { unlocks_agenda = int }
     let entry = report
         .entries
         .iter()
-        .find(|entry| entry.claim.as_deref() == Some(&claim.id))
+        .find(|entry| entry.claim.as_deref() == Some(claim.id.as_str()))
         .unwrap();
     assert_eq!(entry.status, coverage::comparison::Status::MissingFromAtlas);
     assert_eq!(entry.gaps, vec!["reader evidence incomplete"]);
@@ -305,7 +345,7 @@ tradition = { unlocks_agenda = scalar on_enabled = {} }
         let entry = comparison
             .entries
             .iter()
-            .find(|entry| entry.claim.as_deref() == Some(&claim.id))
+            .find(|entry| entry.claim.as_deref() == Some(claim.id.as_str()))
             .unwrap();
         assert_eq!(
             entry.status,

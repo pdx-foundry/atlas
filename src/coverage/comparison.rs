@@ -1,11 +1,11 @@
 //! Test-only comparison of projected Atlas answers with CWT claims.
 
-use super::{Answer, Gap, Snapshot, rules};
+use super::{Answer, Gap, projection};
 use crate::{ledger::Ledger, snapshot};
 use serde::Serialize;
 use serde_json::Value;
 use sha2::{Digest, Sha256};
-use std::collections::BTreeSet;
+use std::collections::{BTreeMap, BTreeSet};
 
 /// Relationship between one config claim and an Atlas answer.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize)]
@@ -131,19 +131,17 @@ impl ComparisonKind {
     }
 }
 
-fn applicable<'a, T>(
+type QuestionIndex<'a, T> = BTreeMap<(&'a str, &'a [String]), Vec<&'a T>>;
+
+fn question_index<'a, T>(
     items: &'a [T],
-    question: &str,
-    conditions: &[String],
     key: impl Fn(&'a T) -> (&'a str, &'a [String]),
-) -> Vec<&'a T> {
-    items
-        .iter()
-        .filter(|item| {
-            let (item_question, item_conditions) = key(item);
-            item_question == question && item_conditions == conditions
-        })
-        .collect()
+) -> QuestionIndex<'a, T> {
+    let mut index = QuestionIndex::new();
+    for item in items {
+        index.entry(key(item)).or_default().push(item);
+    }
+    index
 }
 
 fn comparison_outcome(
@@ -191,27 +189,28 @@ fn comparison_outcome(
     }
 }
 
-fn entry(claim: &crate::ledger::Claim, projection: &Snapshot) -> Entry {
-    let answers = applicable(
-        &projection.answers,
-        &claim.question,
-        &claim.conditions,
-        |answer: &Answer| (&answer.question, &answer.conditions),
-    );
-    let gaps = applicable(
-        &projection.gaps,
-        &claim.question,
-        &claim.conditions,
-        |gap: &Gap| (&gap.question, &gap.conditions),
-    )
-    .into_iter()
-    .map(|gap| gap.reason.clone())
-    .collect::<Vec<_>>();
+fn entry(
+    claim: &crate::ledger::Claim,
+    answers_by_question: &QuestionIndex<'_, Answer>,
+    gaps_by_question: &QuestionIndex<'_, Gap>,
+) -> Entry {
+    let key = (claim.question.as_str(), claim.conditions.as_slice());
+    let answers = answers_by_question
+        .get(&key)
+        .map(Vec::as_slice)
+        .unwrap_or(&[]);
+    let gaps = gaps_by_question
+        .get(&key)
+        .map(Vec::as_slice)
+        .unwrap_or(&[])
+        .iter()
+        .map(|gap| gap.reason.clone())
+        .collect::<Vec<_>>();
     let atlas_answers = answers
         .iter()
         .map(|answer| answer.value.clone())
         .collect::<Vec<_>>();
-    let (status, reason) = comparison_outcome(claim, &answers, &gaps);
+    let (status, reason) = comparison_outcome(claim, answers, &gaps);
     Entry {
         claim: Some(claim.id.clone()),
         question: claim.question.clone(),
@@ -231,11 +230,17 @@ fn entry(claim: &crate::ledger::Claim, projection: &Snapshot) -> Entry {
 pub fn evaluate(ledger: &Ledger, input: &[u8]) -> Result<Report, String> {
     let rules: snapshot::Snapshot =
         serde_json::from_slice(input).map_err(|error| format!("Invalid rule snapshot: {error}"))?;
-    let projection = rules::project_for_comparison(ledger, &rules)?;
+    let projection = projection::project_for_comparison(ledger, &rules)?;
+    let answers_by_question = question_index(&projection.answers, |answer: &Answer| {
+        (&answer.question, &answer.conditions)
+    });
+    let gaps_by_question = question_index(&projection.gaps, |gap: &Gap| {
+        (&gap.question, &gap.conditions)
+    });
     let mut entries = ledger
         .claims
         .iter()
-        .map(|claim| entry(claim, &projection))
+        .map(|claim| entry(claim, &answers_by_question, &gaps_by_question))
         .collect::<Vec<_>>();
     let config_questions = ledger
         .claims
@@ -263,21 +268,18 @@ pub fn evaluate(ledger: &Ledger, input: &[u8]) -> Result<Report, String> {
             property: None,
             status: Status::AtlasOnly,
             config_answer: None,
-            atlas_answers: applicable(
-                &projection.answers,
-                question,
-                conditions,
-                |answer: &Answer| (&answer.question, &answer.conditions),
-            )
-            .into_iter()
-            .map(|answer| answer.value.clone())
-            .collect(),
-            gaps: applicable(&projection.gaps, question, conditions, |gap: &Gap| {
-                (&gap.question, &gap.conditions)
-            })
-            .into_iter()
-            .map(|gap| gap.reason.clone())
-            .collect(),
+            atlas_answers: answers_by_question
+                .get(&(question.as_str(), conditions.as_slice()))
+                .into_iter()
+                .flatten()
+                .map(|answer| answer.value.clone())
+                .collect(),
+            gaps: gaps_by_question
+                .get(&(question.as_str(), conditions.as_slice()))
+                .into_iter()
+                .flatten()
+                .map(|gap| gap.reason.clone())
+                .collect(),
             reason: None,
         });
     }

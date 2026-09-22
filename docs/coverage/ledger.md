@@ -55,84 +55,46 @@ this does not qualify the underlying game condition.
 | Consumer policy | Severity, soft bounds, subtype naming, aliases, scope groups | Consumer modeling choices |
 | Authored text | Unattributed documentation outside expected engine/content families | Its author |
 
-Documentation assignments are provisional until the optional [provenance pass](documentation.md)
-compares every entry against explicit engine dumps and installed comments. The pass tags all
-entries, records matching source locations, separates rewritten candidates, and lists the authored
-remainder. Without source inputs, the original expected-owner assignments remain provisional.
+Documentation assignments are provisional; the historical [provenance measurement](documentation.md)
+compared every entry against explicit engine dumps and installed comments. It tagged all
+entries, recorded matching source locations, separated rewritten candidates, and listed the authored
+remainder. Current ledger output keeps the expected-owner assignments provisional.
 Neither expected ownership nor a text match supplies qualified rule coverage.
 Unknown metadata has a provisional policy assignment plus a diagnostic; it is not declared
 inherently manual.
 
-Classification and roadmap routes are centralized in `src/ledger/classify.rs`. Registry discovery,
-field discovery, and reader binding route to SDK-528/530/531. Language declarations route to
-SDK-535–540. Shapes, nested grammar, references, numerics, weights, names, modifiers, argument grammar,
-and scope context route to SDK-541–550. Loader selection routes to SDK-552; the separate formats route
-to SDK-554–556. These are expected methods, not qualifications or hardcoded game-rule answers.
+Classification and expected method families are centralized in `src/ledger/classify.rs`.
+Registry discovery, field discovery, reader binding, language declarations, shapes,
+nested grammar, references, numerics, weights, names, loader selection, and separate
+formats each have a route. A route is not a qualification or a game-rule answer.
 
 ## Snapshot input
 
 The production `pdx-atlas snapshot` command writes `atlas_rule_snapshot` contract version 1.
 The ledger accepts that file directly and projects its registry and field rules onto matching
 config questions. The join comes from the ledger's own `loader_path` claims; the rule producer
-does not read CWT. Each rule keeps Native's source stamp, completeness and typed gaps. Recorded
-sources are unqualified for current-engine coverage. A matching gap blocks credit for its
+does not read CWT. Each rule keeps Native's source stamp, completeness and typed gaps. Directories
+with more than one config type remain unmapped: a registry fact cannot establish which type it
+describes. The comparison reports those type claims without an Atlas answer. Recorded sources
+are unqualified for current-engine coverage. A matching gap blocks credit for its
 question. Unknown contract versions or broken subject, source or schema references are errors.
 The full format is [rule-snapshot-v1.schema.json](../contract/rule-snapshot-v1.schema.json).
+Snapshot assembly refuses a failed registry-discovery answer. It runs authored fixture recipes
+only for registries in the discovery answer, so an unrelated static listing does not require
+tradition fixture recordings.
 
-The older scoreboard input below remains accepted for authored or qualified answers outside
-the first tradition snapshot.
+The ledger accepts only the published `atlas_rule_snapshot` input. Its private scoring
+projection joins rule subjects to ledger questions and preserves exact Native source stamps,
+conditions and gaps. There is no second published coverage snapshot contract and no replay-era
+registry observation input.
 
-The tool reads the retained Atlas caller's live JSON (`queries`) or replay JSON (`startup` and
-`final_snapshots`). It retains observed item names/identities and reports registry counts, activation/completion, limits
-and gaps.
-Item enumeration establishes no config-rule answers, even when a registry name matches a CWT type.
-
-The deliberately bounded scoreboard input has this form:
-
-```json
-{
-  "kind": "atlas_coverage",
-  "format_version": 1,
-  "snapshot_id": "immutable-snapshot-id",
-  "target": "exact-target-identity",
-  "answers": [
-    {
-      "question": "question:<ID from the ledger>",
-      "conditions": [],
-      "value": { "accepted_forms": ["integer"] },
-      "status": "supported",
-      "evidence": [
-        {
-          "id": "durable-evidence-id",
-          "method": "qualified-method-revision",
-          "target": "exact-target-identity",
-          "qualified": true,
-          "origin": "engine"
-        }
-      ]
-    }
-  ],
-  "gaps": []
-}
-```
-
-This example is a shape illustration, not qualified evidence. The producer is responsible for
-truthful evidence/qualification records. The scoreboard validates their required fields and applies
-the contract; it does not replay experiments or independently qualify methods.
-
-Credit requires `supported`, matching question and conditions, a non-null answer, and applicable
-qualified evidence. Engine questions require engine evidence, content questions require content
-observations, and policy/authored questions require authored authority. `synthetic` evidence never
-grants coverage. An empty evidence list, another target, narrower conditions, an applicable gap,
-`conflicted`, or incompatible qualified answers prevents full credit. The other states are
-`partial`, `untested`, `unknown`, and `unsupported`; these remain distinct input states.
-Assessments retain applicable states in `answer_states`, including when none earns complete credit.
-
-An explicit gap has `question`, `conditions`, and a nonempty `reason`. Gap-only questions absent
-from the ledger also appear in `atlas_only_questions`. Conflicts are between applicable Atlas
-answers, not between Atlas and CWT. Source answer equality is never used. Conditions currently match
-exactly; there is no inferred implication or nearest-target fallback. Snapshot answers are indexed
-by question so scoring does not scan every answer for every source claim.
+Credit requires a matching question and conditions, a supported answer, and applicable qualified
+engine evidence. Recorded sources cannot give current-engine credit. Another target, narrower
+conditions, an applicable gap, or incompatible qualified answers prevents full credit. Assessments
+retain incomplete states in `answer_states`, including when none earns credit. Gap-only questions
+absent from the ledger appear in `atlas_only_questions`. Conflicts are between applicable Atlas
+answers, not between Atlas and CWT. Source answer equality is never used. Conditions match exactly;
+there is no inferred implication or nearest-target fallback.
 
 ## Determinism and checks
 

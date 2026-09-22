@@ -24,9 +24,7 @@ impl Owner {
 /// Planned extraction route; assignment alone establishes no support.
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub struct Method {
-    /// Roadmap issue identifier.
-    pub ticket: String,
-    /// Method name from the roadmap.
+    /// Expected method family.
     pub name: String,
 }
 /// Source assertion and the independent question Atlas needs to answer.
@@ -58,9 +56,6 @@ pub struct Claim {
     pub provisional_owner: bool,
     /// Required for engine-fact questions; expected, not demonstrated.
     pub expected_method: Option<Method>,
-    /// Documentation attribution, absent until measured against explicit source inputs.
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub provenance: Option<crate::provenance::Attribution>,
 }
 /// A diagnostic that prevents claiming a complete inventory.
 #[derive(Clone, Debug, Serialize, Deserialize)]

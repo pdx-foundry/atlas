@@ -1,7 +1,7 @@
 {
   "config_revision": "76be5782683d09a9dbe304a512690eed6a2fa425",
   "config_sha256": "ad0637833d99e28c8f8eb1a4cd5f835d6b92d65d1183b1a16a062ce76f98b8df",
-  "snapshot_sha256": "b87a98b809620b0fa1ec1b532f540ed1824d0967c4c30393fb55f7fbbb233b93",
+  "snapshot_sha256": "f3aa3e281e519f8d699eb081ffc83c8f82205ca63296289840713624e9105247",
   "files": 172,
   "physical_lines": 49201,
   "meaningful_lines": 42973,
@@ -82,44 +82,6 @@
       "kind": "unknown-annotation"
     }
   ],
-  "registry_observations": [
-    {
-      "activation": "demonstrated",
-      "completion": "complete",
-      "gaps": [
-        "Fixture execution is not requested by registry enumeration",
-        "Fixture tree_template storage and traditions relationships are unknown",
-        "Engine validation and runtime behavior are unknown",
-        "Field discovery, schema completeness, and rule coverage are unknown"
-      ],
-      "limits": [
-        "Collection keys at the initial loader return, before post-load validation; no field values, rules, or gameplay availability established",
-        "Private copies of pinned installed tradition files replace the two registry directories; DLC additions, user mods, and later registry changes are outside this answer"
-      ],
-      "observed_items": 33,
-      "origin": "live",
-      "registry": "tradition_categories",
-      "rule_credit": false
-    },
-    {
-      "activation": "demonstrated",
-      "completion": "complete",
-      "gaps": [
-        "Fixture execution is not requested by registry enumeration",
-        "Fixture tree_template storage and traditions relationships are unknown",
-        "Engine validation and runtime behavior are unknown",
-        "Field discovery, schema completeness, and rule coverage are unknown"
-      ],
-      "limits": [
-        "Collection keys at the initial loader return, before post-load validation; no field values, rules, or gameplay availability established",
-        "Private copies of pinned installed tradition files replace the two registry directories; DLC additions, user mods, and later registry changes are outside this answer"
-      ],
-      "observed_items": 234,
-      "origin": "live",
-      "registry": "traditions",
-      "rule_credit": false
-    }
-  ],
-  "ledger_sha256": "b17ab1da853cae63fb6efeb8093a54b16696ed0e8dec86cc3c67757b9a61dda8",
-  "coverage_sha256": "a54dc3d5ece6be42b1db5c0f4d11be8c3d9be90c5dc0cdaebf14d22e6cbc7686"
+  "ledger_sha256": "894270f493090ad55ab2ff73b013e5d3d6b32ffd59be73acbf642d2064a93695",
+  "coverage_sha256": "628f782aba30b69929f6d558de248466180f2dfd841ee7fb603b2cdaa49ea0c3"
 }

@@ -1,96 +1,96 @@
 {
   "Ok": {
+    "completeness": "Partial",
+    "gaps": [
+      {
+        "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification.",
+        "kind": "OutsideMethod",
+        "subject": "common/tradition_categories"
+      },
+      {
+        "detail": "The field's alternatives do not establish one shared reader.",
+        "kind": "UnresolvedReader",
+        "subject": "desc"
+      },
+      {
+        "detail": "The field's alternatives do not establish one shared reader.",
+        "kind": "UnresolvedReader",
+        "subject": "traditions"
+      },
+      {
+        "detail": "The field's alternatives do not establish one shared reader.",
+        "kind": "UnresolvedReader",
+        "subject": "adoption_bonus"
+      },
+      {
+        "detail": "The field's alternatives do not establish one shared reader.",
+        "kind": "UnresolvedReader",
+        "subject": "finish_bonus"
+      }
+    ],
+    "source": {
+      "basis": "StaticAnalysis",
+      "build": "3d4c8a7046d87175ce7e3b513b1a2ce589050d654d332744518a49d13ac82216",
+      "method": "registry-fields/v3",
+      "native_version": "0.1.0"
+    },
     "value": [
       {
+        "conditional": false,
         "name": "desc",
         "reader": {
           "id": null,
           "kind": "Unknown"
-        },
-        "conditional": false
+        }
       },
       {
+        "conditional": false,
         "name": "potential",
         "reader": {
           "id": "e044b50825a1841d",
           "kind": "Block"
-        },
-        "conditional": false
+        }
       },
       {
+        "conditional": false,
         "name": "ai_weight",
         "reader": {
           "id": "97942c9a3d3c9c1b",
           "kind": "Block"
-        },
-        "conditional": false
+        }
       },
       {
+        "conditional": false,
         "name": "traditions",
         "reader": {
           "id": null,
           "kind": "Unknown"
-        },
-        "conditional": false
+        }
       },
       {
+        "conditional": false,
         "name": "adoption_bonus",
         "reader": {
           "id": null,
           "kind": "Unknown"
-        },
-        "conditional": false
+        }
       },
       {
+        "conditional": false,
         "name": "finish_bonus",
         "reader": {
           "id": null,
           "kind": "Unknown"
-        },
-        "conditional": false
+        }
       },
       {
+        "conditional": false,
         "name": "tree_template",
         "reader": {
           "id": "325efaa17499c32d",
           "kind": "String"
-        },
-        "conditional": false
+        }
       }
-    ],
-    "completeness": "Partial",
-    "gaps": [
-      {
-        "kind": "OutsideMethod",
-        "subject": "common/tradition_categories",
-        "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": "desc",
-        "detail": "The field's alternatives do not establish one shared reader."
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": "traditions",
-        "detail": "The field's alternatives do not establish one shared reader."
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": "adoption_bonus",
-        "detail": "The field's alternatives do not establish one shared reader."
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": "finish_bonus",
-        "detail": "The field's alternatives do not establish one shared reader."
-      }
-    ],
-    "source": {
-      "build": "3d4c8a7046d87175ce7e3b513b1a2ce589050d654d332744518a49d13ac82216",
-      "native_version": "0.1.0",
-      "method": "registry-fields/v2",
-      "basis": "StaticAnalysis"
-    }
+    ]
   }
 }

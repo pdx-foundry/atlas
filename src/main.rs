@@ -4,7 +4,7 @@ use sha2::{Digest, Sha256};
 use std::{
     collections::BTreeMap,
     ffi::OsString,
-    io,
+    io::{self, ErrorKind},
     path::PathBuf,
     process::{Command, ExitCode},
 };
@@ -14,15 +14,7 @@ fn run_ledger() -> Result<bool, Box<dyn std::error::Error>> {
     args.next();
     let mut options = BTreeMap::new();
     while let Some(key) = args.next() {
-        if ![
-            "--config",
-            "--snapshot",
-            "--output",
-            "--game-content",
-            "--engine-docs",
-        ]
-        .contains(&key.as_str())
-        {
+        if !["--config", "--snapshot", "--output"].contains(&key.as_str()) {
             return Err(format!("Unknown argument: {key}").into());
         }
         let value = args.next().ok_or("Missing argument value")?;
@@ -35,16 +27,10 @@ fn run_ledger() -> Result<bool, Box<dyn std::error::Error>> {
     }
     let config = options.get("--config").ok_or("--config is required")?;
     let output = options.get("--output").ok_or("--output is required")?;
-    let corpus = match (options.get("--game-content"), options.get("--engine-docs")) {
-        (Some(game), Some(engine)) => Some(pdx_atlas::provenance::read_corpus(game, engine)?),
-        (None, None) => None,
-        _ => return Err("--game-content and --engine-docs must be supplied together".into()),
-    };
     let (ledger, coverage) = report::generate(
         config,
         options.get("--snapshot").map(PathBuf::as_path),
         output,
-        corpus.as_ref(),
     )?;
     let headline = &coverage.totals.atlas_owned;
     let percentage = headline
@@ -64,13 +50,7 @@ fn run_ledger() -> Result<bool, Box<dyn std::error::Error>> {
             ledger.diagnostics.len()
         );
     }
-    let source_problems = corpus.as_ref().map_or(0, |corpus| corpus.diagnostics.len());
-    if source_problems > 0 {
-        eprintln!(
-            "{source_problems} documentation source parsing diagnostics remain. See documentation.json."
-        );
-    }
-    Ok(ledger.diagnostics.is_empty() && source_problems == 0)
+    Ok(ledger.diagnostics.is_empty())
 }
 
 fn run_compare() -> Result<bool, Box<dyn std::error::Error>> {
@@ -135,6 +115,16 @@ fn parse_snapshot_args(
 
 fn run_snapshot() -> Result<bool, Box<dyn std::error::Error>> {
     let (mode, output) = parse_snapshot_args(&std::env::args_os().skip(2).collect::<Vec<_>>())?;
+    let mut checksum_path = output.clone().into_os_string();
+    checksum_path.push(".sha256");
+    let checksum_path = PathBuf::from(checksum_path);
+    for path in [&checksum_path, &output] {
+        match std::fs::remove_file(path) {
+            Ok(()) => {}
+            Err(error) if error.kind() == ErrorKind::NotFound => {}
+            Err(error) => return Err(error.into()),
+        }
+    }
     let (native, seconds) = match mode {
         SnapshotMode::Live {
             installation,
@@ -162,8 +152,6 @@ fn run_snapshot() -> Result<bool, Box<dyn std::error::Error>> {
     let snapshot = snapshot::assemble(&extraction)?;
     let bytes = snapshot::json_bytes(&snapshot)?;
     std::fs::write(&output, &bytes)?;
-    let mut checksum_path = output.into_os_string();
-    checksum_path.push(".sha256");
     std::fs::write(checksum_path, format!("{:x}\n", Sha256::digest(&bytes)))?;
     println!(
         "{} rules; {} gaps",
@@ -181,7 +169,7 @@ fn main() -> ExitCode {
         Some("ledger") => run_ledger(),
         Some("compare") => run_compare(),
         Some("snapshot") => run_snapshot(),
-        _ => Err("usage: pdx-atlas ledger --config DIR [--snapshot FILE] [--game-content DIR --engine-docs DIR] --output DIR | compare CONFIG_DIR SNAPSHOT_FILE OUTPUT_DIR | snapshot INSTALLATION ANSWERS OUTPUT [STARTUP_SECONDS] | snapshot --recorded ANSWERS OUTPUT".into()),
+        _ => Err("usage: pdx-atlas ledger --config DIR [--snapshot FILE] --output DIR | compare CONFIG_DIR SNAPSHOT_FILE OUTPUT_DIR | snapshot INSTALLATION ANSWERS OUTPUT [STARTUP_SECONDS] | snapshot --recorded ANSWERS OUTPUT".into()),
     };
     match result {
         Ok(true) => ExitCode::SUCCESS,
