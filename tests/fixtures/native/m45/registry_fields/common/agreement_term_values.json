@@ -1,146 +1,146 @@
 {
   "Ok": {
-    "completeness": "Partial",
-    "gaps": [
-      {
-        "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification.",
-        "kind": "OutsideMethod",
-        "subject": "common/agreement_term_values"
-      },
-      {
-        "detail": "The field's alternatives do not establish one shared reader.",
-        "kind": "UnresolvedReader",
-        "subject": "ai_acceptance"
-      },
-      {
-        "detail": "The field's alternatives do not establish one shared reader.",
-        "kind": "UnresolvedReader",
-        "subject": "overlord_resources"
-      },
-      {
-        "detail": "The field's alternatives do not establish one shared reader.",
-        "kind": "UnresolvedReader",
-        "subject": "subject_resources"
-      },
-      {
-        "detail": "The field's alternatives do not establish one shared reader.",
-        "kind": "UnresolvedReader",
-        "subject": "resources"
-      },
-      {
-        "detail": "The field's reader could not be established on at least one path.",
-        "kind": "UnresolvedReader",
-        "subject": "common/agreement_term_values"
-      },
-      {
-        "detail": "A path through the registry's reader could not be followed to its end.",
-        "kind": "UnresolvedPath",
-        "subject": "common/agreement_term_values"
-      }
-    ],
-    "source": {
-      "basis": "StaticAnalysis",
-      "build": "3d4c8a7046d87175ce7e3b513b1a2ce589050d654d332744518a49d13ac82216",
-      "method": "registry-fields/v3",
-      "native_version": "0.1.0"
-    },
     "value": [
       {
-        "conditional": false,
         "name": "potential",
         "reader": {
           "id": "e044b50825a1841d",
           "kind": "Block"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "possible",
         "reader": {
           "id": "e044b50825a1841d",
           "kind": "Block"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "subsidy_monthly_multiplier",
         "reader": {
           "id": "a9818fec780f8313",
           "kind": "FixedPoint"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "ai_acceptance",
         "reader": {
           "id": null,
           "kind": "Unknown"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "activate_effect",
         "reader": {
           "id": "6e28a363faf61c52",
           "kind": "Block"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "subject_tech_cost_mult",
         "reader": {
           "id": "a9818fec780f8313",
           "kind": "FixedPoint"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "overlord_resources",
         "reader": {
           "id": null,
           "kind": "Unknown"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "subject_resources",
         "reader": {
           "id": null,
           "kind": "Unknown"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "resource_min",
         "reader": {
           "id": "97942c9a3d3c9c1b",
           "kind": "Block"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "resource_max",
         "reader": {
           "id": "97942c9a3d3c9c1b",
           "kind": "Block"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "resources",
         "reader": {
           "id": null,
           "kind": "Unknown"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "subsidy_multiplier",
         "reader": {
           "id": "a9818fec780f8313",
           "kind": "FixedPoint"
-        }
+        },
+        "conditional": false
       }
-    ]
+    ],
+    "completeness": "Partial",
+    "gaps": [
+      {
+        "kind": "OutsideMethod",
+        "subject": "common/agreement_term_values",
+        "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": "ai_acceptance",
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": "overlord_resources",
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": "subject_resources",
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": "resources",
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": "common/agreement_term_values",
+        "detail": "The field's reader could not be established on at least one path."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "common/agreement_term_values",
+        "detail": "A path through the registry's reader could not be followed to its end."
+      }
+    ],
+    "source": {
+      "build": "07988b4f1b865623becd7a61af1cae92e111be6515d341754af70f02107822cd",
+      "native_version": "0.1.0",
+      "method": "registry-fields/v3",
+      "basis": "StaticAnalysis"
+    }
   }
 }

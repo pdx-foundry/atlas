@@ -1,46 +1,46 @@
 {
   "Ok": {
-    "completeness": "Partial",
-    "gaps": [
-      {
-        "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification.",
-        "kind": "OutsideMethod",
-        "subject": "common/federation_perks"
-      },
-      {
-        "detail": "The field's reader could not be established on at least one path.",
-        "kind": "UnresolvedReader",
-        "subject": "common/federation_perks"
-      },
-      {
-        "detail": "A path through the registry's reader could not be followed to its end.",
-        "kind": "UnresolvedPath",
-        "subject": "common/federation_perks"
-      }
-    ],
-    "source": {
-      "basis": "StaticAnalysis",
-      "build": "3d4c8a7046d87175ce7e3b513b1a2ce589050d654d332744518a49d13ac82216",
-      "method": "registry-fields/v3",
-      "native_version": "0.1.0"
-    },
     "value": [
       {
-        "conditional": false,
         "name": "icon",
         "reader": {
           "id": "325efaa17499c32d",
           "kind": "String"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "custom_tooltip",
         "reader": {
           "id": "325efaa17499c32d",
           "kind": "String"
-        }
+        },
+        "conditional": false
       }
-    ]
+    ],
+    "completeness": "Partial",
+    "gaps": [
+      {
+        "kind": "OutsideMethod",
+        "subject": "common/federation_perks",
+        "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": "common/federation_perks",
+        "detail": "The field's reader could not be established on at least one path."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "common/federation_perks",
+        "detail": "A path through the registry's reader could not be followed to its end."
+      }
+    ],
+    "source": {
+      "build": "07988b4f1b865623becd7a61af1cae92e111be6515d341754af70f02107822cd",
+      "native_version": "0.1.0",
+      "method": "registry-fields/v3",
+      "basis": "StaticAnalysis"
+    }
   }
 }

@@ -143,16 +143,19 @@ async fn fixture_counts_and_gaps_are_bounded() {
             .iter()
             .any(|gap| gap.id == "field:common/traditions/unlocks_agenda#occurrences.maximum")
     );
-    let category_validation = snapshot
+    // Category diagnostics are complete, so the first missing dimension is storage.
+    assert!(
+        snapshot
+            .gaps
+            .iter()
+            .all(|gap| gap.id != "field:common/tradition_categories/desc#validation")
+    );
+    let category_storage = snapshot
         .gaps
         .iter()
-        .find(|gap| gap.id == "field:common/tradition_categories/desc#validation")
+        .find(|gap| gap.id == "field:common/tradition_categories/desc#storage")
         .unwrap();
-    assert!(
-        category_validation
-            .reason
-            .contains("outside this registry binding")
-    );
+    assert!(category_storage.reason.contains("no storage decoder"));
     assert!(
         snapshot
             .rules

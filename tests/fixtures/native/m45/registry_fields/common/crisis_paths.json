@@ -1,54 +1,54 @@
 {
   "Ok": {
-    "completeness": "Partial",
-    "gaps": [
-      {
-        "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification.",
-        "kind": "OutsideMethod",
-        "subject": "common/crisis_paths"
-      },
-      {
-        "detail": "The field's alternatives do not establish one shared reader.",
-        "kind": "UnresolvedReader",
-        "subject": "levels"
-      },
-      {
-        "detail": "The field's alternatives do not establish one shared reader.",
-        "kind": "UnresolvedReader",
-        "subject": "objectives"
-      }
-    ],
-    "source": {
-      "basis": "StaticAnalysis",
-      "build": "3d4c8a7046d87175ce7e3b513b1a2ce589050d654d332744518a49d13ac82216",
-      "method": "registry-fields/v3",
-      "native_version": "0.1.0"
-    },
     "value": [
       {
-        "conditional": false,
         "name": "levels",
         "reader": {
           "id": null,
           "kind": "Unknown"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "crisis_currency",
         "reader": {
           "id": "325efaa17499c32d",
           "kind": "String"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "objectives",
         "reader": {
           "id": null,
           "kind": "Unknown"
-        }
+        },
+        "conditional": false
       }
-    ]
+    ],
+    "completeness": "Partial",
+    "gaps": [
+      {
+        "kind": "OutsideMethod",
+        "subject": "common/crisis_paths",
+        "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": "levels",
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": "objectives",
+        "detail": "The field's alternatives do not establish one shared reader."
+      }
+    ],
+    "source": {
+      "build": "07988b4f1b865623becd7a61af1cae92e111be6515d341754af70f02107822cd",
+      "native_version": "0.1.0",
+      "method": "registry-fields/v3",
+      "basis": "StaticAnalysis"
+    }
   }
 }

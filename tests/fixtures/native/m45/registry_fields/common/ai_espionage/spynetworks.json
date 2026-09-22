@@ -1,62 +1,62 @@
 {
   "Ok": {
-    "completeness": "Partial",
-    "gaps": [
-      {
-        "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification.",
-        "kind": "OutsideMethod",
-        "subject": "common/ai_espionage/spynetworks"
-      },
-      {
-        "detail": "The field's alternatives do not establish one shared reader.",
-        "kind": "UnresolvedReader",
-        "subject": "operations"
-      },
-      {
-        "detail": "The field's alternatives do not establish one shared reader.",
-        "kind": "UnresolvedReader",
-        "subject": "operation_selector"
-      }
-    ],
-    "source": {
-      "basis": "StaticAnalysis",
-      "build": "3d4c8a7046d87175ce7e3b513b1a2ce589050d654d332744518a49d13ac82216",
-      "method": "registry-fields/v3",
-      "native_version": "0.1.0"
-    },
     "value": [
       {
-        "conditional": false,
         "name": "operations",
         "reader": {
           "id": null,
           "kind": "Unknown"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "strategy_weight",
         "reader": {
           "id": "97942c9a3d3c9c1b",
           "kind": "Block"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "network_weight",
         "reader": {
           "id": "97942c9a3d3c9c1b",
           "kind": "Block"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "operation_selector",
         "reader": {
           "id": null,
           "kind": "Unknown"
-        }
+        },
+        "conditional": false
       }
-    ]
+    ],
+    "completeness": "Partial",
+    "gaps": [
+      {
+        "kind": "OutsideMethod",
+        "subject": "common/ai_espionage/spynetworks",
+        "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": "operations",
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": "operation_selector",
+        "detail": "The field's alternatives do not establish one shared reader."
+      }
+    ],
+    "source": {
+      "build": "07988b4f1b865623becd7a61af1cae92e111be6515d341754af70f02107822cd",
+      "native_version": "0.1.0",
+      "method": "registry-fields/v3",
+      "basis": "StaticAnalysis"
+    }
   }
 }

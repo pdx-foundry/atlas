@@ -1,19 +1,5 @@
 {
   "Ok": {
-    "completeness": "Complete",
-    "gaps": [
-      {
-        "detail": "Registries with custom, nested, or late loaders are not listed.",
-        "kind": "OutsideMethod",
-        "subject": null
-      }
-    ],
-    "source": {
-      "basis": "StaticAnalysis",
-      "build": "3d4c8a7046d87175ce7e3b513b1a2ce589050d654d332744518a49d13ac82216",
-      "method": "registry-directories/v3",
-      "native_version": "0.1.0"
-    },
     "value": [
       {
         "name": "common/agreement_presets"
@@ -507,6 +493,20 @@
       {
         "name": "sound/advisor_voice_types"
       }
-    ]
+    ],
+    "completeness": "Complete",
+    "gaps": [
+      {
+        "kind": "OutsideMethod",
+        "subject": null,
+        "detail": "Registries with custom, nested, or late loaders are not listed."
+      }
+    ],
+    "source": {
+      "build": "07988b4f1b865623becd7a61af1cae92e111be6515d341754af70f02107822cd",
+      "native_version": "0.1.0",
+      "method": "registry-directories/v3",
+      "basis": "StaticAnalysis"
+    }
   }
 }
