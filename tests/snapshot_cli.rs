@@ -64,3 +64,66 @@ fn missing_recorded_answer_writes_an_explicit_gap_and_exits_nonzero() {
             .any(|gap| gap["id"] == "registry:common/traditions#fields")
     );
 }
+
+#[test]
+fn failed_registry_discovery_publishes_no_snapshot() {
+    let root = tempfile::tempdir().unwrap();
+    let answers = root.path().join("answers");
+    copy_tree(&recording(), &answers);
+    fs::write(
+        answers.join("registries.json"),
+        br#"{"Err":{"Method":"review: registry discovery failed"}}"#,
+    )
+    .unwrap();
+    let output = root.path().join("snapshot.json");
+    let result = run(&answers, &output);
+    assert!(!result.status.success());
+    assert!(String::from_utf8_lossy(&result.stderr).contains("Native registry discovery failed"));
+    assert!(!output.exists());
+    assert!(!root.path().join("snapshot.json.sha256").exists());
+}
+
+#[test]
+fn partial_unrelated_registry_listing_keeps_only_applicable_subjects() {
+    let root = tempfile::tempdir().unwrap();
+    let answers = root.path().join("answers");
+    fs::create_dir_all(answers.join("registry_fields/common")).unwrap();
+    for file in [
+        "build.json",
+        "registries.json",
+        "registry_fields/common/relics.json",
+    ] {
+        fs::copy(recording().join(file), answers.join(file)).unwrap();
+    }
+    let path = answers.join("registries.json");
+    let mut registries: serde_json::Value =
+        serde_json::from_slice(&fs::read(&path).unwrap()).unwrap();
+    registries["Ok"]["completeness"] = "Partial".into();
+    registries["Ok"]["value"] = serde_json::json!([{"name":"common/relics"}]);
+    fs::write(&path, serde_json::to_vec(&registries).unwrap()).unwrap();
+    let output = root.path().join("snapshot.json");
+    let result = run(&answers, &output);
+    assert!(
+        result.status.success(),
+        "{}",
+        String::from_utf8_lossy(&result.stderr)
+    );
+    let snapshot: serde_json::Value = serde_json::from_slice(&fs::read(output).unwrap()).unwrap();
+    assert_eq!(
+        snapshot["coverage"]["registries"],
+        serde_json::json!(["common/relics"])
+    );
+    assert!(
+        snapshot["subjects"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .all(|subject| { subject["registry"] == "common/relics" })
+    );
+    assert!(snapshot["gaps"].as_array().unwrap().iter().all(|gap| {
+        !gap["subject"]
+            .as_str()
+            .unwrap()
+            .contains("common/tradition")
+    }));
+}

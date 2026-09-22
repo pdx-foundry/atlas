@@ -73,10 +73,15 @@ formats each have a route. A route is not a qualification or a game-rule answer.
 The production `pdx-atlas snapshot` command writes `atlas_rule_snapshot` contract version 1.
 The ledger accepts that file directly and projects its registry and field rules onto matching
 config questions. The join comes from the ledger's own `loader_path` claims; the rule producer
-does not read CWT. Each rule keeps Native's source stamp, completeness and typed gaps. Recorded
-sources are unqualified for current-engine coverage. A matching gap blocks credit for its
+does not read CWT. Each rule keeps Native's source stamp, completeness and typed gaps. Directories
+with more than one config type remain unmapped: a registry fact cannot establish which type it
+describes. The comparison reports those type claims without an Atlas answer. Recorded sources
+are unqualified for current-engine coverage. A matching gap blocks credit for its
 question. Unknown contract versions or broken subject, source or schema references are errors.
 The full format is [rule-snapshot-v1.schema.json](../contract/rule-snapshot-v1.schema.json).
+Snapshot assembly refuses a failed registry-discovery answer. It runs authored fixture recipes
+only for registries in the discovery answer, so an unrelated static listing does not require
+tradition fixture recordings.
 
 The ledger accepts only the published `atlas_rule_snapshot` input. Its private scoring
 projection joins rule subjects to ledger questions and preserves exact Native source stamps,

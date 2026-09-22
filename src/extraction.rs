@@ -85,6 +85,7 @@ pub async fn collect(native: &Native, options: impl Fn() -> GameOptions) -> Extr
             .collect(),
         Err(_) => BTreeMap::new(),
     };
+    let discovered: std::collections::BTreeSet<_> = fields.keys().map(String::as_str).collect();
 
     let requests = [
         ("tradition_outcomes", TRADITIONS, tradition_fixture()),
@@ -100,7 +101,10 @@ pub async fn collect(native: &Native, options: impl Fn() -> GameOptions) -> Extr
     ];
     let mut sessions = Vec::with_capacity(requests.len());
     let mut blocker: Option<Error> = None;
-    for (name, registry, request) in requests {
+    for (name, registry, request) in requests
+        .into_iter()
+        .filter(|(_, registry, _)| discovered.contains(registry))
+    {
         let session = match &blocker {
             Some(error) => FixtureSession {
                 name,

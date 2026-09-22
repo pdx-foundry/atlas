@@ -168,6 +168,9 @@ pub struct EvidenceLink {
 const DIALECT: &str = "https://json-schema.org/draft/2020-12/schema";
 /// Assemble a snapshot; malformed internal references or conflicting sources fail.
 pub fn assemble(extraction: &Extraction) -> Result<Snapshot, String> {
+    if let Err(error) = &extraction.registries {
+        return Err(format!("Native registry discovery failed: {error:?}"));
+    }
     let mut snapshot = Snapshot {
         kind: "atlas_rule_snapshot".into(),
         contract_version: 1,
@@ -278,7 +281,6 @@ fn gap(
     subject: &str,
     property: &str,
     reason: impl Into<String>,
-    _owner: Option<&str>,
     native_gaps: Vec<NativeGap>,
     evidence: Vec<EvidenceLink>,
 ) {
@@ -319,7 +321,6 @@ fn assemble_registry(
                 &id,
                 "existence",
                 "Native did not name this registry in the bounded answer",
-                Some("SDK-529"),
                 answer.gaps.clone(),
                 vec![evidence.clone()],
             );
@@ -328,7 +329,6 @@ fn assemble_registry(
                 &id,
                 "loader_path",
                 "Native did not establish this registry's content directory",
-                Some("SDK-529"),
                 answer.gaps.clone(),
                 vec![evidence],
             );
@@ -340,7 +340,6 @@ fn assemble_registry(
                     &id,
                     property,
                     format!("Native registry question failed: {error:?}"),
-                    None,
                     Vec::new(),
                     Vec::new(),
                 );
@@ -362,7 +361,6 @@ fn assemble_fields(
             &registry_subject,
             "fields",
             "Native field answer is missing",
-            None,
             Vec::new(),
             Vec::new(),
         );
@@ -376,7 +374,6 @@ fn assemble_fields(
                 &registry_subject,
                 "fields",
                 format!("Native field question failed: {error:?}"),
-                None,
                 Vec::new(),
                 Vec::new(),
             );
@@ -390,7 +387,6 @@ fn assemble_fields(
             &registry_subject,
             "fields_complete",
             "Native's root-field search is partial; undiscovered fields remain unknown",
-            Some("SDK-530"),
             answer.gaps.clone(),
             vec![evidence],
         );
@@ -439,7 +435,6 @@ fn assemble_field_value_form(
             id,
             "conditions",
             "The reader depends on state not established by this field key",
-            Some("SDK-541"),
             answer.gaps.clone(),
             vec![evidence.clone()],
         );
@@ -448,7 +443,6 @@ fn assemble_field_value_form(
             id,
             "value_form",
             "The reader's conditions are not established",
-            Some("SDK-541"),
             answer.gaps.clone(),
             vec![evidence.clone()],
         );
@@ -477,7 +471,6 @@ fn assemble_field_value_form(
                     id,
                     "nested_grammar",
                     "A block reader does not establish its nested grammar",
-                    Some("SDK-542"),
                     Vec::new(),
                     vec![evidence.clone()],
                 );
@@ -486,7 +479,6 @@ fn assemble_field_value_form(
                     id,
                     "scope_context",
                     "A block reader does not establish scope context",
-                    Some("SDK-549"),
                     Vec::new(),
                     vec![evidence.clone()],
                 );
@@ -521,7 +513,6 @@ fn assemble_field_value_form(
                 id,
                 "value_form",
                 "Native did not establish this reader's value form",
-                Some("SDK-541"),
                 answer
                     .gaps
                     .iter()
@@ -537,7 +528,6 @@ fn assemble_field_value_form(
             id,
             "value_form",
             "Native did not establish a reader identity",
-            Some("SDK-541"),
             answer
                 .gaps
                 .iter()
@@ -560,7 +550,6 @@ fn assemble_field_gaps(snapshot: &mut Snapshot, id: &str, field: &Field, evidenc
             id,
             "reference",
             "A string-like reader does not establish a lookup category",
-            Some("SDK-543"),
             Vec::new(),
             vec![evidence.clone()],
         );
@@ -571,7 +560,6 @@ fn assemble_field_gaps(snapshot: &mut Snapshot, id: &str, field: &Field, evidenc
             id,
             property,
             "Finite fixture observations do not establish an occurrence bound",
-            Some("SDK-541"),
             Vec::new(),
             vec![evidence.clone()],
         );
@@ -696,7 +684,6 @@ fn assemble_outcomes(snapshot: &mut Snapshot, extraction: &Extraction) -> Result
                     "Native fixture session disposal failed: {:?}",
                     session.disposal
                 ),
-                None,
                 Vec::new(),
                 Vec::new(),
             );
@@ -710,7 +697,6 @@ fn assemble_outcomes(snapshot: &mut Snapshot, extraction: &Extraction) -> Result
                     &registry_id(session.registry),
                     &format!("fixture.{}", session.name),
                     format!("Native fixture question failed: {error:?}"),
-                    None,
                     Vec::new(),
                     Vec::new(),
                 );
@@ -759,7 +745,6 @@ fn assemble_outcomes(snapshot: &mut Snapshot, extraction: &Extraction) -> Result
                     &id,
                     "runtime",
                     reason.clone(),
-                    Some("SDK-547"),
                     observation.gaps.clone(),
                     vec![runtime_evidence],
                 );
@@ -798,7 +783,6 @@ fn assemble_outcomes(snapshot: &mut Snapshot, extraction: &Extraction) -> Result
                         .collect::<Vec<_>>()
                         .join("; ")
                 },
-                Some("SDK-541"),
                 Vec::new(),
                 entry.gap_evidence.clone(),
             );
@@ -809,7 +793,6 @@ fn assemble_outcomes(snapshot: &mut Snapshot, extraction: &Extraction) -> Result
                 &id,
                 property,
                 reasons.join("; "),
-                Some("SDK-541"),
                 Vec::new(),
                 entry.gap_evidence.clone(),
             );
@@ -842,7 +825,6 @@ fn assemble_outcomes(snapshot: &mut Snapshot, extraction: &Extraction) -> Result
             &id,
             "occurrences.parser_accepted",
             "No established fixture recipe supplies a valid definition and observation phase for this field",
-            None,
             Vec::new(),
             evidence,
         );

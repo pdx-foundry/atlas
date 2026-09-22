@@ -107,7 +107,7 @@ fn project_with_gap_facets(
 }
 
 fn registry_types(ledger: &Ledger) -> BTreeMap<String, (String, String)> {
-    let mut types = BTreeMap::new();
+    let mut candidates: BTreeMap<String, BTreeSet<(String, String)>> = BTreeMap::new();
     for claim in &ledger.claims {
         if claim.property != "loader_path"
             || claim.subject.len() != 3
@@ -117,9 +117,6 @@ fn registry_types(ledger: &Ledger) -> BTreeMap<String, (String, String)> {
             continue;
         }
         let type_name = &claim.subject[1];
-        if type_name == "type[swapped_tradition]" {
-            continue;
-        }
         let Some(registry) = claim.config_answer.trim_matches('"').strip_prefix("game/") else {
             continue;
         };
@@ -129,10 +126,18 @@ fn registry_types(ledger: &Ledger) -> BTreeMap<String, (String, String)> {
                 && candidate.subject == ["types", type_name]
         });
         if has_type {
-            types.insert(registry.into(), (type_name.clone(), claim.file.clone()));
+            candidates
+                .entry(registry.into())
+                .or_default()
+                .insert((type_name.clone(), claim.file.clone()));
         }
     }
-    types
+    candidates
+        .into_iter()
+        .filter_map(|(registry, types)| {
+            (types.len() == 1).then(|| (registry, types.into_iter().next().unwrap()))
+        })
+        .collect()
 }
 
 fn questions(
