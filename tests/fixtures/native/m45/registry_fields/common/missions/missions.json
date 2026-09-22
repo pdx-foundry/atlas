@@ -1,176 +1,176 @@
 {
   "Ok": {
-    "completeness": "Partial",
-    "gaps": [
-      {
-        "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification.",
-        "kind": "OutsideMethod",
-        "subject": "common/missions/missions"
-      },
-      {
-        "detail": "The field's alternatives do not establish one shared reader.",
-        "kind": "UnresolvedReader",
-        "subject": "event_chain"
-      },
-      {
-        "detail": "The field's alternatives do not establish one shared reader.",
-        "kind": "UnresolvedReader",
-        "subject": "counter"
-      },
-      {
-        "detail": "The field's reader could not be established on at least one path.",
-        "kind": "UnresolvedReader",
-        "subject": "common/missions/missions"
-      },
-      {
-        "detail": "A path through the registry's reader could not be followed to its end.",
-        "kind": "UnresolvedPath",
-        "subject": "common/missions/missions"
-      }
-    ],
-    "source": {
-      "basis": "StaticAnalysis",
-      "build": "3d4c8a7046d87175ce7e3b513b1a2ce589050d654d332744518a49d13ac82216",
-      "method": "registry-fields/v3",
-      "native_version": "0.1.0"
-    },
     "value": [
       {
-        "conditional": false,
         "name": "icon",
         "reader": {
           "id": "325efaa17499c32d",
           "kind": "String"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "picture",
         "reader": {
           "id": "325efaa17499c32d",
           "kind": "String"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "category",
         "reader": {
           "id": "325efaa17499c32d",
           "kind": "String"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "event_chain",
         "reader": {
           "id": null,
           "kind": "Unknown"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "possible",
         "reader": {
           "id": "e044b50825a1841d",
           "kind": "Block"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "counter",
         "reader": {
           "id": null,
           "kind": "Unknown"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "abort_trigger",
         "reader": {
           "id": "e044b50825a1841d",
           "kind": "Block"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "issued_abort_trigger",
         "reader": {
           "id": "e044b50825a1841d",
           "kind": "Block"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "ai_weight",
         "reader": {
           "id": "97942c9a3d3c9c1b",
           "kind": "Block"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "on_start",
         "reader": {
           "id": "6e28a363faf61c52",
           "kind": "Block"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "on_accept",
         "reader": {
           "id": "6e28a363faf61c52",
           "kind": "Block"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "on_issue",
         "reader": {
           "id": "6e28a363faf61c52",
           "kind": "Block"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "cost",
         "reader": {
           "id": "a9818fec780f8313",
           "kind": "FixedPoint"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "on_daily",
         "reader": {
           "id": "6e28a363faf61c52",
           "kind": "Block"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "on_stop",
         "reader": {
           "id": "6e28a363faf61c52",
           "kind": "Block"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "lore_issued",
         "reader": {
           "id": "325efaa17499c32d",
           "kind": "String"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "lore_completed",
         "reader": {
           "id": "325efaa17499c32d",
           "kind": "String"
-        }
+        },
+        "conditional": false
       }
-    ]
+    ],
+    "completeness": "Partial",
+    "gaps": [
+      {
+        "kind": "OutsideMethod",
+        "subject": "common/missions/missions",
+        "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": "event_chain",
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": "counter",
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": "common/missions/missions",
+        "detail": "The field's reader could not be established on at least one path."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "common/missions/missions",
+        "detail": "A path through the registry's reader could not be followed to its end."
+      }
+    ],
+    "source": {
+      "build": "07988b4f1b865623becd7a61af1cae92e111be6515d341754af70f02107822cd",
+      "native_version": "0.1.0",
+      "method": "registry-fields/v3",
+      "basis": "StaticAnalysis"
+    }
   }
 }

@@ -1,393 +1,393 @@
 {
   "Ok": {
-    "completeness": "Partial",
-    "gaps": [
-      {
-        "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification.",
-        "kind": "OutsideMethod",
-        "subject": "common/buildings"
-      },
-      {
-        "detail": "The field's alternatives do not establish one shared reader.",
-        "kind": "UnresolvedReader",
-        "subject": "category"
-      },
-      {
-        "detail": "The field's alternatives do not establish one shared reader.",
-        "kind": "UnresolvedReader",
-        "subject": "convert_to"
-      },
-      {
-        "detail": "The field's alternatives do not establish one shared reader.",
-        "kind": "UnresolvedReader",
-        "subject": "triggered_desc"
-      },
-      {
-        "detail": "The field's alternatives do not establish one shared reader.",
-        "kind": "UnresolvedReader",
-        "subject": "desc"
-      },
-      {
-        "detail": "The field's alternatives do not establish one shared reader.",
-        "kind": "UnresolvedReader",
-        "subject": "prerequisites"
-      },
-      {
-        "detail": "The field's alternatives do not establish one shared reader.",
-        "kind": "UnresolvedReader",
-        "subject": "country_modifier"
-      },
-      {
-        "detail": "The field's alternatives do not establish one shared reader.",
-        "kind": "UnresolvedReader",
-        "subject": "planet_modifier"
-      },
-      {
-        "detail": "The field's alternatives do not establish one shared reader.",
-        "kind": "UnresolvedReader",
-        "subject": "ruined_icon"
-      },
-      {
-        "detail": "The field's alternatives do not establish one shared reader.",
-        "kind": "UnresolvedReader",
-        "subject": "army_modifier"
-      },
-      {
-        "detail": "The field's alternatives do not establish one shared reader.",
-        "kind": "UnresolvedReader",
-        "subject": "ai_resource_production"
-      },
-      {
-        "detail": "The field's alternatives do not establish one shared reader.",
-        "kind": "UnresolvedReader",
-        "subject": "system_modifier"
-      },
-      {
-        "detail": "The field's alternatives do not establish one shared reader.",
-        "kind": "UnresolvedReader",
-        "subject": "owner_type"
-      },
-      {
-        "detail": "The field's alternatives do not establish one shared reader.",
-        "kind": "UnresolvedReader",
-        "subject": "triggered_country_modifier"
-      },
-      {
-        "detail": "The field's alternatives do not establish one shared reader.",
-        "kind": "UnresolvedReader",
-        "subject": "building_sets"
-      },
-      {
-        "detail": "The field's alternatives do not establish one shared reader.",
-        "kind": "UnresolvedReader",
-        "subject": "resources"
-      },
-      {
-        "detail": "The field's reader could not be established on at least one path.",
-        "kind": "UnresolvedReader",
-        "subject": "common/buildings"
-      },
-      {
-        "detail": "A path through the registry's reader could not be followed to its end.",
-        "kind": "UnresolvedPath",
-        "subject": "common/buildings"
-      }
-    ],
-    "source": {
-      "basis": "StaticAnalysis",
-      "build": "3d4c8a7046d87175ce7e3b513b1a2ce589050d654d332744518a49d13ac82216",
-      "method": "registry-fields/v3",
-      "native_version": "0.1.0"
-    },
     "value": [
       {
-        "conditional": false,
         "name": "icon",
         "reader": {
           "id": "325efaa17499c32d",
           "kind": "String"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "category",
         "reader": {
           "id": null,
           "kind": "Unknown"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "custom_tooltip",
         "reader": {
           "id": "325efaa17499c32d",
           "kind": "String"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "on_destroy",
         "reader": {
           "id": "6e28a363faf61c52",
           "kind": "Block"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "on_repaired",
         "reader": {
           "id": "6e28a363faf61c52",
           "kind": "Block"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "convert_to",
         "reader": {
           "id": null,
           "kind": "Unknown"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "triggered_desc",
         "reader": {
           "id": null,
           "kind": "Unknown"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "capital_tier",
         "reader": {
           "id": "d7a95ab8c8d44489",
           "kind": "Integer"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "desc",
         "reader": {
           "id": null,
           "kind": "Unknown"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "icon_frame",
         "reader": {
           "id": "d7a95ab8c8d44489",
           "kind": "Integer"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "prerequisites",
         "reader": {
           "id": null,
           "kind": "Unknown"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "potential",
         "reader": {
           "id": "e044b50825a1841d",
           "kind": "Block"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "allow",
         "reader": {
           "id": "e044b50825a1841d",
           "kind": "Block"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "country_modifier",
         "reader": {
           "id": null,
           "kind": "Unknown"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "planet_modifier",
         "reader": {
           "id": null,
           "kind": "Unknown"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "on_queued",
         "reader": {
           "id": "6e28a363faf61c52",
           "kind": "Block"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "on_unqueued",
         "reader": {
           "id": "6e28a363faf61c52",
           "kind": "Block"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "on_enabled",
         "reader": {
           "id": "6e28a363faf61c52",
           "kind": "Block"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "ruined_icon",
         "reader": {
           "id": null,
           "kind": "Unknown"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "army_modifier",
         "reader": {
           "id": null,
           "kind": "Unknown"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "ai_weight",
         "reader": {
           "id": "97942c9a3d3c9c1b",
           "kind": "Block"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "ai_resource_production",
         "reader": {
           "id": null,
           "kind": "Unknown"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "show_tech_unlock_if",
         "reader": {
           "id": "e044b50825a1841d",
           "kind": "Block"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "planet_limit",
         "reader": {
           "id": "97942c9a3d3c9c1b",
           "kind": "Block"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "district_limit",
         "reader": {
           "id": "97942c9a3d3c9c1b",
           "kind": "Block"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "system_modifier",
         "reader": {
           "id": null,
           "kind": "Unknown"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "owner_type",
         "reader": {
           "id": null,
           "kind": "Unknown"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "base_cap_amount",
         "reader": {
           "id": "97942c9a3d3c9c1b",
           "kind": "Block"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "triggered_country_modifier",
         "reader": {
           "id": null,
           "kind": "Unknown"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "empire_limit",
         "reader": {
           "id": "97942c9a3d3c9c1b",
           "kind": "Block"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "ruined_trigger",
         "reader": {
           "id": "e044b50825a1841d",
           "kind": "Block"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "destroy_trigger",
         "reader": {
           "id": "e044b50825a1841d",
           "kind": "Block"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "building_sets",
         "reader": {
           "id": null,
           "kind": "Unknown"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "position_priority",
         "reader": {
           "id": "d7a95ab8c8d44489",
           "kind": "Integer"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "resources",
         "reader": {
           "id": null,
           "kind": "Unknown"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "custom_storm_ai_weight",
         "reader": {
           "id": "97942c9a3d3c9c1b",
           "kind": "Block"
-        }
+        },
+        "conditional": false
       }
-    ]
+    ],
+    "completeness": "Partial",
+    "gaps": [
+      {
+        "kind": "OutsideMethod",
+        "subject": "common/buildings",
+        "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": "category",
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": "convert_to",
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": "triggered_desc",
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": "desc",
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": "prerequisites",
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": "country_modifier",
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": "planet_modifier",
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": "ruined_icon",
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": "army_modifier",
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": "ai_resource_production",
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": "system_modifier",
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": "owner_type",
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": "triggered_country_modifier",
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": "building_sets",
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": "resources",
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": "common/buildings",
+        "detail": "The field's reader could not be established on at least one path."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "common/buildings",
+        "detail": "A path through the registry's reader could not be followed to its end."
+      }
+    ],
+    "source": {
+      "build": "07988b4f1b865623becd7a61af1cae92e111be6515d341754af70f02107822cd",
+      "native_version": "0.1.0",
+      "method": "registry-fields/v3",
+      "basis": "StaticAnalysis"
+    }
   }
 }

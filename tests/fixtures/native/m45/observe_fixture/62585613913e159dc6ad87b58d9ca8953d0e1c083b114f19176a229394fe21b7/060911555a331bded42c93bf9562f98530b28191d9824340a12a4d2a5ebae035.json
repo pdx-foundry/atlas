@@ -476,7 +476,7 @@
       }
     ],
     "source": {
-      "build": "3d4c8a7046d87175ce7e3b513b1a2ce589050d654d332744518a49d13ac82216",
+      "build": "07988b4f1b865623becd7a61af1cae92e111be6515d341754af70f02107822cd",
       "native_version": "0.1.0",
       "method": "observe-fixture/v1",
       "basis": "LiveObservation"

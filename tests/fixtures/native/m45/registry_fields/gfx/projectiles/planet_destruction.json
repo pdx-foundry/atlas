@@ -1,172 +1,172 @@
 {
   "Ok": {
-    "completeness": "Partial",
-    "gaps": [
-      {
-        "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification.",
-        "kind": "OutsideMethod",
-        "subject": "gfx/projectiles/planet_destruction"
-      },
-      {
-        "detail": "The field's alternatives do not establish one shared reader.",
-        "kind": "UnresolvedReader",
-        "subject": "color"
-      },
-      {
-        "detail": "The field's alternatives do not establish one shared reader.",
-        "kind": "UnresolvedReader",
-        "subject": "start"
-      },
-      {
-        "detail": "The field's alternatives do not establish one shared reader.",
-        "kind": "UnresolvedReader",
-        "subject": "end"
-      },
-      {
-        "detail": "The field's alternatives do not establish one shared reader.",
-        "kind": "UnresolvedReader",
-        "subject": "windup"
-      },
-      {
-        "detail": "The field's alternatives do not establish one shared reader.",
-        "kind": "UnresolvedReader",
-        "subject": "in_progress"
-      },
-      {
-        "detail": "The field's alternatives do not establish one shared reader.",
-        "kind": "UnresolvedReader",
-        "subject": "planet_dissolve_color_mult"
-      },
-      {
-        "detail": "The field's reader could not be established on at least one path.",
-        "kind": "UnresolvedReader",
-        "subject": "gfx/projectiles/planet_destruction"
-      },
-      {
-        "detail": "A path through the registry's reader could not be followed to its end.",
-        "kind": "UnresolvedPath",
-        "subject": "gfx/projectiles/planet_destruction"
-      }
-    ],
-    "source": {
-      "basis": "StaticAnalysis",
-      "build": "3d4c8a7046d87175ce7e3b513b1a2ce589050d654d332744518a49d13ac82216",
-      "method": "registry-fields/v3",
-      "native_version": "0.1.0"
-    },
     "value": [
       {
-        "conditional": false,
         "name": "color",
         "reader": {
           "id": null,
           "kind": "Unknown"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "start",
         "reader": {
           "id": null,
           "kind": "Unknown"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "texture",
         "reader": {
           "id": "325efaa17499c32d",
           "kind": "String"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "end",
         "reader": {
           "id": null,
           "kind": "Unknown"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "windup",
         "reader": {
           "id": null,
           "kind": "Unknown"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "in_progress",
         "reader": {
           "id": null,
           "kind": "Unknown"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "windup_entity",
         "reader": {
           "id": "325efaa17499c32d",
           "kind": "String"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "fade",
         "reader": {
           "id": "97942c9a3d3c9c1b",
           "kind": "Block"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "planet_hit_entity",
         "reader": {
           "id": "325efaa17499c32d",
           "kind": "String"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "ship_fire_entity",
         "reader": {
           "id": "325efaa17499c32d",
           "kind": "String"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "planet_dissolve_color_mult",
         "reader": {
           "id": null,
           "kind": "Unknown"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "planet_overlay_entity",
         "reader": {
           "id": "325efaa17499c32d",
           "kind": "String"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "megastructure_hit_entity",
         "reader": {
           "id": "325efaa17499c32d",
           "kind": "String"
-        }
+        },
+        "conditional": false
       },
       {
-        "conditional": false,
         "name": "star_hit_entity",
         "reader": {
           "id": "325efaa17499c32d",
           "kind": "String"
-        }
+        },
+        "conditional": false
       }
-    ]
+    ],
+    "completeness": "Partial",
+    "gaps": [
+      {
+        "kind": "OutsideMethod",
+        "subject": "gfx/projectiles/planet_destruction",
+        "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": "color",
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": "start",
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": "end",
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": "windup",
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": "in_progress",
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": "planet_dissolve_color_mult",
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": "gfx/projectiles/planet_destruction",
+        "detail": "The field's reader could not be established on at least one path."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "gfx/projectiles/planet_destruction",
+        "detail": "A path through the registry's reader could not be followed to its end."
+      }
+    ],
+    "source": {
+      "build": "07988b4f1b865623becd7a61af1cae92e111be6515d341754af70f02107822cd",
+      "native_version": "0.1.0",
+      "method": "registry-fields/v3",
+      "basis": "StaticAnalysis"
+    }
   }
 }

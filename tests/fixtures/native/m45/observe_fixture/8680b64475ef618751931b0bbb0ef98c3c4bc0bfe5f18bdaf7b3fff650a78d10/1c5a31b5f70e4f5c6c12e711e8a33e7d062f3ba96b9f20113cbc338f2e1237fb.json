@@ -13,8 +13,8 @@
             "runtime": false
           },
           "file": "common/tradition_categories/atlas_frozen.txt",
-          "owner": null,
-          "definition_line": null,
+          "owner": 1,
+          "definition_line": 1,
           "reader": {
             "id": null,
             "kind": "Unknown"
@@ -34,8 +34,8 @@
             "runtime": false
           },
           "file": "common/tradition_categories/atlas_frozen.txt",
-          "owner": null,
-          "definition_line": null,
+          "owner": 1,
+          "definition_line": 1,
           "reader": {
             "id": "97942c9a3d3c9c1b",
             "kind": "Block"
@@ -55,8 +55,8 @@
             "runtime": false
           },
           "file": "common/tradition_categories/atlas_frozen.txt",
-          "owner": null,
-          "definition_line": null,
+          "owner": 1,
+          "definition_line": 1,
           "reader": {
             "id": null,
             "kind": "Unknown"
@@ -76,8 +76,8 @@
             "runtime": false
           },
           "file": "common/tradition_categories/atlas_frozen.txt",
-          "owner": null,
-          "definition_line": null,
+          "owner": 1,
+          "definition_line": 1,
           "reader": {
             "id": null,
             "kind": "Unknown"
@@ -97,8 +97,8 @@
             "runtime": false
           },
           "file": "common/tradition_categories/atlas_frozen.txt",
-          "owner": null,
-          "definition_line": null,
+          "owner": 1,
+          "definition_line": 1,
           "reader": {
             "id": "e044b50825a1841d",
             "kind": "Block"
@@ -118,8 +118,8 @@
             "runtime": false
           },
           "file": "common/tradition_categories/atlas_frozen.txt",
-          "owner": null,
-          "definition_line": null,
+          "owner": 1,
+          "definition_line": 1,
           "reader": {
             "id": null,
             "kind": "Unknown"
@@ -139,8 +139,8 @@
             "runtime": false
           },
           "file": "common/tradition_categories/atlas_frozen.txt",
-          "owner": null,
-          "definition_line": null,
+          "owner": 1,
+          "definition_line": 1,
           "reader": {
             "id": "325efaa17499c32d",
             "kind": "String"
@@ -154,16 +154,13 @@
       ],
       "diagnostics": [],
       "diagnostic_coverage": {
-        "Unavailable": "Parser diagnostics are outside this registry binding"
+        "Complete": {
+          "window": "FixtureFileLoad"
+        }
       }
     },
     "completeness": "Partial",
     "gaps": [
-      {
-        "kind": "OutsideMethod",
-        "subject": "common/tradition_categories",
-        "detail": "Parser diagnostics are outside this registry binding"
-      },
       {
         "kind": "UnresolvedReader",
         "subject": "adoption_bonus",
@@ -201,7 +198,7 @@
       }
     ],
     "source": {
-      "build": "3d4c8a7046d87175ce7e3b513b1a2ce589050d654d332744518a49d13ac82216",
+      "build": "07988b4f1b865623becd7a61af1cae92e111be6515d341754af70f02107822cd",
       "native_version": "0.1.0",
       "method": "observe-fixture/v1",
       "basis": "LiveObservation"
