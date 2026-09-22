@@ -4,7 +4,7 @@ use sha2::{Digest, Sha256};
 use std::{
     collections::BTreeMap,
     ffi::OsString,
-    io,
+    io::{self, ErrorKind},
     path::PathBuf,
     process::{Command, ExitCode},
 };
@@ -115,6 +115,16 @@ fn parse_snapshot_args(
 
 fn run_snapshot() -> Result<bool, Box<dyn std::error::Error>> {
     let (mode, output) = parse_snapshot_args(&std::env::args_os().skip(2).collect::<Vec<_>>())?;
+    let mut checksum_path = output.clone().into_os_string();
+    checksum_path.push(".sha256");
+    let checksum_path = PathBuf::from(checksum_path);
+    for path in [&checksum_path, &output] {
+        match std::fs::remove_file(path) {
+            Ok(()) => {}
+            Err(error) if error.kind() == ErrorKind::NotFound => {}
+            Err(error) => return Err(error.into()),
+        }
+    }
     let (native, seconds) = match mode {
         SnapshotMode::Live {
             installation,
@@ -142,8 +152,6 @@ fn run_snapshot() -> Result<bool, Box<dyn std::error::Error>> {
     let snapshot = snapshot::assemble(&extraction)?;
     let bytes = snapshot::json_bytes(&snapshot)?;
     std::fs::write(&output, &bytes)?;
-    let mut checksum_path = output.into_os_string();
-    checksum_path.push(".sha256");
     std::fs::write(checksum_path, format!("{:x}\n", Sha256::digest(&bytes)))?;
     println!(
         "{} rules; {} gaps",

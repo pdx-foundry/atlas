@@ -76,6 +76,8 @@ fn failed_registry_discovery_publishes_no_snapshot() {
     )
     .unwrap();
     let output = root.path().join("snapshot.json");
+    fs::write(&output, b"stale snapshot").unwrap();
+    fs::write(root.path().join("snapshot.json.sha256"), b"stale checksum").unwrap();
     let result = run(&answers, &output);
     assert!(!result.status.success());
     assert!(String::from_utf8_lossy(&result.stderr).contains("Native registry discovery failed"));

@@ -5,6 +5,24 @@ use crate::{ledger::Ledger, snapshot};
 use pdx_native::Basis;
 use std::collections::{BTreeMap, BTreeSet};
 
+type ClaimIndex<'a> = BTreeMap<(&'a str, &'a str, Vec<&'a str>, Vec<&'a str>), BTreeSet<&'a str>>;
+
+fn claim_index(ledger: &Ledger) -> ClaimIndex<'_> {
+    let mut index = ClaimIndex::new();
+    for claim in &ledger.claims {
+        index
+            .entry((
+                &claim.file,
+                &claim.property,
+                claim.subject.iter().map(String::as_str).collect(),
+                claim.conditions.iter().map(String::as_str).collect(),
+            ))
+            .or_default()
+            .insert(&claim.question);
+    }
+    index
+}
+
 pub(super) fn project(ledger: &Ledger, rules: &snapshot::Snapshot) -> Result<Projection, String> {
     project_with_gap_facets(ledger, rules, true)
 }
@@ -31,6 +49,7 @@ fn project_with_gap_facets(
         .ok_or("Native build id is not a string")?
         .to_owned();
     let registry_types = registry_types(ledger);
+    let claims = claim_index(ledger);
     let mut projection = Projection {
         snapshot_id: format!("{}@{}", rules.snapshot.name, rules.snapshot.version),
         target: target.clone(),
@@ -39,7 +58,7 @@ fn project_with_gap_facets(
     };
     for rule in &rules.rules {
         let questions = questions(
-            ledger,
+            &claims,
             &registry_types,
             &rule.subject,
             &rule.property,
@@ -83,7 +102,7 @@ fn project_with_gap_facets(
     }
     for gap in &rules.gaps {
         let questions = questions(
-            ledger,
+            &claims,
             &registry_types,
             &gap.subject,
             &gap.property,
@@ -108,6 +127,16 @@ fn project_with_gap_facets(
 
 fn registry_types(ledger: &Ledger) -> BTreeMap<String, (String, String)> {
     let mut candidates: BTreeMap<String, BTreeSet<(String, String)>> = BTreeMap::new();
+    let existing_types = ledger
+        .claims
+        .iter()
+        .filter(|claim| {
+            claim.property == "type_existence"
+                && claim.subject.len() == 2
+                && claim.subject[0] == "types"
+        })
+        .map(|claim| (claim.file.as_str(), claim.subject[1].as_str()))
+        .collect::<BTreeSet<_>>();
     for claim in &ledger.claims {
         if claim.property != "loader_path"
             || claim.subject.len() != 3
@@ -120,11 +149,7 @@ fn registry_types(ledger: &Ledger) -> BTreeMap<String, (String, String)> {
         let Some(registry) = claim.config_answer.trim_matches('"').strip_prefix("game/") else {
             continue;
         };
-        let has_type = ledger.claims.iter().any(|candidate| {
-            candidate.file == claim.file
-                && candidate.property == "type_existence"
-                && candidate.subject == ["types", type_name]
-        });
+        let has_type = existing_types.contains(&(claim.file.as_str(), type_name.as_str()));
         if has_type {
             candidates
                 .entry(registry.into())
@@ -141,7 +166,7 @@ fn registry_types(ledger: &Ledger) -> BTreeMap<String, (String, String)> {
 }
 
 fn questions(
-    ledger: &Ledger,
+    claims: &ClaimIndex<'_>,
     registry_types: &BTreeMap<String, (String, String)>,
     subject: &str,
     property: &str,
@@ -225,21 +250,18 @@ fn questions(
     } else {
         path
     };
-    ledger
-        .claims
-        .iter()
-        .filter(|claim| {
-            claim.file == *file
-                && claim.property == ledger_property
-                && claim
-                    .subject
-                    .iter()
-                    .map(String::as_str)
-                    .eq(path.iter().copied())
-                && claim.conditions == conditions
+    claims
+        .get(&(
+            file.as_str(),
+            ledger_property,
+            path,
+            conditions.iter().map(String::as_str).collect(),
+        ))
+        .map(|questions| {
+            questions
+                .iter()
+                .map(|question| (*question).to_owned())
+                .collect()
         })
-        .map(|claim| claim.question.clone())
-        .collect::<BTreeSet<_>>()
-        .into_iter()
-        .collect()
+        .unwrap_or_default()
 }
