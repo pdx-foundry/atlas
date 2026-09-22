@@ -67,6 +67,7 @@ pub async fn collect(native: &Native, options: impl Fn() -> GameOptions) -> Extr
             Operation::RegistryFields => "registry_fields",
             Operation::RegistryItems => "registry_items",
             Operation::ObserveFixture => "observe_fixture",
+            Operation::Declarations => "declarations",
         };
         (name.into(), native.supports(operation))
     })
