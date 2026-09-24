@@ -5,3 +5,4 @@ docs/research
 docs/prototypes/
 prototypes/*
 !prototypes/native-registry/
+.cargo/config.toml

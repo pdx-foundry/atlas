@@ -97,3 +97,16 @@ The finished documentation-source measurement and its input identities remain in
 Ordinary CI uses self-contained fixtures. The explicit full-config gate checks the pinned fork and
 retained current registry capture, including exact deterministic report digests; it never launches
 a game and fails if the required inputs are absent.
+
+`Cargo.toml` pins Native by Git revision, and the checks above validate that revision. To try a
+Native change before you push it, create `.cargo/config.toml` in this directory. Git ignores it.
+
+```toml
+[patch."https://github.com/pdx-foundry/native.git"]
+pdx-native = { path = "../native" }
+```
+
+With the override, `cargo tree -p pdx-native` shows the local path. The override also changes the
+`pdx-native` entry in `Cargo.lock`, so `--locked` commands fail. Build and test without
+`--locked`, and run `git checkout Cargo.lock` before you commit. To check the pinned revision
+again, move the override away, restore `Cargo.lock` and run the checks.
