@@ -1,0 +1,3254 @@
+{
+  "Ok": {
+    "value": {
+      "contexts": [
+        {
+          "id": "5e031d639dc5781c",
+          "name": "Agreement",
+          "scopes": {
+            "Joined": [
+              {
+                "id": "d3b52243a924d8c9",
+                "name": "agreement"
+              }
+            ]
+          }
+        },
+        {
+          "id": "21ba3120e150e1ae",
+          "name": "Ambient Object",
+          "scopes": {
+            "Joined": [
+              {
+                "id": "35699745346d01d5",
+                "name": "ambient_object"
+              }
+            ]
+          }
+        },
+        {
+          "id": "1057b0b556c6afe7",
+          "name": "Archaeological Site",
+          "scopes": {
+            "Joined": [
+              {
+                "id": "11dc2d9d9d7a92a5",
+                "name": "archaeological_site"
+              }
+            ]
+          }
+        },
+        {
+          "id": "b15d05f4af3a33fc",
+          "name": "Army",
+          "scopes": {
+            "Joined": [
+              {
+                "id": "b99e91b88a72f0c9",
+                "name": "army"
+              }
+            ]
+          }
+        },
+        {
+          "id": "049e6a86df3744b9",
+          "name": "Astral Rift",
+          "scopes": {
+            "Joined": [
+              {
+                "id": "25453ebe741bae53",
+                "name": "astral_rift"
+              }
+            ]
+          }
+        },
+        {
+          "id": "87d30af8580460e9",
+          "name": "Base Scope",
+          "scopes": "Missing"
+        },
+        {
+          "id": "dbbe8a12bcb29e1a",
+          "name": "Building",
+          "scopes": "Missing"
+        },
+        {
+          "id": "0b6bdd8d9527e045",
+          "name": "Bypass",
+          "scopes": {
+            "Joined": [
+              {
+                "id": "9ee8b41b5ee073ea",
+                "name": "bypass"
+              }
+            ]
+          }
+        },
+        {
+          "id": "5f3cd1b06defb7ed",
+          "name": "Colony",
+          "scopes": {
+            "Joined": [
+              {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            ]
+          }
+        },
+        {
+          "id": "19eb74e2a2ba5a51",
+          "name": "Cosmic Storm",
+          "scopes": {
+            "Joined": [
+              {
+                "id": "dfcaad2394c11f8f",
+                "name": "cosmic_storm"
+              }
+            ]
+          }
+        },
+        {
+          "id": "50e293199a841502",
+          "name": "Country",
+          "scopes": {
+            "Joined": [
+              {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            ]
+          }
+        },
+        {
+          "id": "1b48374c9d7e6a4f",
+          "name": "Dead Arc Site",
+          "scopes": "Missing"
+        },
+        {
+          "id": "cb9cac0701431f17",
+          "name": "Dead Astral Rift",
+          "scopes": "Missing"
+        },
+        {
+          "id": "c02029e154f9c415",
+          "name": "Dead Cosmic Storm",
+          "scopes": "Missing"
+        },
+        {
+          "id": "203266dca9563469",
+          "name": "Dead Country",
+          "scopes": "Missing"
+        },
+        {
+          "id": "33e0c9bd1fe2f7d2",
+          "name": "Dead Federation",
+          "scopes": "Missing"
+        },
+        {
+          "id": "b7270eb33ecc4fe8",
+          "name": "Dead Fleet",
+          "scopes": "Missing"
+        },
+        {
+          "id": "8d1c7a74667787e6",
+          "name": "Dead Leader",
+          "scopes": "Missing"
+        },
+        {
+          "id": "f1480ac2c6a5ae8c",
+          "name": "Dead Megastructure",
+          "scopes": "Missing"
+        },
+        {
+          "id": "d67a8e10131f1128",
+          "name": "Dead Planet",
+          "scopes": "Missing"
+        },
+        {
+          "id": "da7e6390fb0156ba",
+          "name": "Dead Ship",
+          "scopes": "Missing"
+        },
+        {
+          "id": "8820cae06c510873",
+          "name": "Dead Situation",
+          "scopes": "Missing"
+        },
+        {
+          "id": "46ee91bcf7063fe6",
+          "name": "Dead War",
+          "scopes": "Missing"
+        },
+        {
+          "id": "72f184690a6b7487",
+          "name": "Debris",
+          "scopes": {
+            "Joined": [
+              {
+                "id": "d3c8f1e8c2dbd149",
+                "name": "debris"
+              }
+            ]
+          }
+        },
+        {
+          "id": "4d611dd0180b2b4c",
+          "name": "Deposit",
+          "scopes": {
+            "Joined": [
+              {
+                "id": "0011157fe12955bd",
+                "name": "deposit"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d8304936ecfa7522",
+          "name": "Diplomacy",
+          "scopes": "Missing"
+        },
+        {
+          "id": "009575875c4df650",
+          "name": "Espionage Asset",
+          "scopes": {
+            "Joined": [
+              {
+                "id": "c298950389c3efcf",
+                "name": "espionage_asset"
+              }
+            ]
+          }
+        },
+        {
+          "id": "4ada1377d53fe341",
+          "name": "Espionage Operation",
+          "scopes": {
+            "Joined": [
+              {
+                "id": "8dbe31e3bea11d4c",
+                "name": "espionage_operation"
+              }
+            ]
+          }
+        },
+        {
+          "id": "cfe0972851463c1e",
+          "name": "Federation",
+          "scopes": {
+            "Joined": [
+              {
+                "id": "ca28f39ce7bd8f99",
+                "name": "federation"
+              }
+            ]
+          }
+        },
+        {
+          "id": "368b7977d48fe3b7",
+          "name": "First Contact",
+          "scopes": {
+            "Joined": [
+              {
+                "id": "824da242282a19c5",
+                "name": "first_contact"
+              }
+            ]
+          }
+        },
+        {
+          "id": "28544e62c0d48e9c",
+          "name": "Fleet",
+          "scopes": {
+            "Joined": [
+              {
+                "id": "6dafeb9bcf25b500",
+                "name": "fleet"
+              }
+            ]
+          }
+        },
+        {
+          "id": "8e0f5c2dac6ccdec",
+          "name": "Job Swap Data",
+          "scopes": "Missing"
+        },
+        {
+          "id": "648d64e6935c55a9",
+          "name": "Leader",
+          "scopes": {
+            "Joined": [
+              {
+                "id": "b09e3ce96bcb18ba",
+                "name": "leader"
+              }
+            ]
+          }
+        },
+        {
+          "id": "11412b4c7e434609",
+          "name": "Megastructure",
+          "scopes": {
+            "Joined": [
+              {
+                "id": "8bb6b317643be13a",
+                "name": "megastructure"
+              }
+            ]
+          }
+        },
+        {
+          "id": "389c724607daffd6",
+          "name": "Patron Relation",
+          "scopes": "Missing"
+        },
+        {
+          "id": "5620922355758cc1",
+          "name": "Planet",
+          "scopes": {
+            "Joined": [
+              {
+                "id": "37c52c03d3012e74",
+                "name": "planet"
+              }
+            ]
+          }
+        },
+        {
+          "id": "6eb121f0934a1a47",
+          "name": "Pop Category Swap Data",
+          "scopes": "Missing"
+        },
+        {
+          "id": "b29c7354651a501b",
+          "name": "Pop Faction",
+          "scopes": {
+            "Joined": [
+              {
+                "id": "87fbe101af3061e9",
+                "name": "pop_faction"
+              }
+            ]
+          }
+        },
+        {
+          "id": "5b2da87965c368ed",
+          "name": "Pop Group",
+          "scopes": {
+            "Joined": [
+              {
+                "id": "1a26ff288266684f",
+                "name": "pop_group"
+              }
+            ]
+          }
+        },
+        {
+          "id": "bd7b01714ddcc2b9",
+          "name": "Sector",
+          "scopes": {
+            "Joined": [
+              {
+                "id": "a88e1da49bb109c5",
+                "name": "sector"
+              }
+            ]
+          }
+        },
+        {
+          "id": "9deae00506fb86ad",
+          "name": "Ship (and Starbase)",
+          "scopes": {
+            "Joined": [
+              {
+                "id": "69ead02b278522d1",
+                "name": "ship"
+              },
+              {
+                "id": "a28a4564ee636659",
+                "name": "starbase"
+              }
+            ]
+          }
+        },
+        {
+          "id": "c9e0b05bb1b55553",
+          "name": "Situation",
+          "scopes": {
+            "Joined": [
+              {
+                "id": "6746d8af11c99b62",
+                "name": "situation"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d5fc6e8b0c8658c6",
+          "name": "Species",
+          "scopes": {
+            "Joined": [
+              {
+                "id": "43c74897fb1c97c8",
+                "name": "species"
+              }
+            ]
+          }
+        },
+        {
+          "id": "f61c61595a0229c9",
+          "name": "Specimen",
+          "scopes": "Missing"
+        },
+        {
+          "id": "7e7de830e9285018",
+          "name": "Spy Network",
+          "scopes": {
+            "Joined": [
+              {
+                "id": "e018d51ead1b8110",
+                "name": "spy_network"
+              }
+            ]
+          }
+        },
+        {
+          "id": "2e4442a60c237979",
+          "name": "System",
+          "scopes": {
+            "Joined": [
+              {
+                "id": "5ab5fc854e81e429",
+                "name": "galactic_object"
+              }
+            ]
+          }
+        },
+        {
+          "id": "ba5d17e7271e4e12",
+          "name": "Timeline Event",
+          "scopes": "Missing"
+        },
+        {
+          "id": "bc6292c6f1b4249b",
+          "name": "War",
+          "scopes": {
+            "Joined": [
+              {
+                "id": "87aef3284d14374e",
+                "name": "war"
+              }
+            ]
+          }
+        }
+      ],
+      "commands": [
+        {
+          "name": "GetAdj",
+          "contexts": [
+            {
+              "id": "5f3cd1b06defb7ed",
+              "name": "Colony"
+            },
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            },
+            {
+              "id": "28544e62c0d48e9c",
+              "name": "Fleet"
+            },
+            {
+              "id": "5620922355758cc1",
+              "name": "Planet"
+            },
+            {
+              "id": "d5fc6e8b0c8658c6",
+              "name": "Species"
+            },
+            {
+              "id": "2e4442a60c237979",
+              "name": "System"
+            }
+          ]
+        },
+        {
+          "name": "GetAdjPersistent",
+          "contexts": [
+            {
+              "id": "5f3cd1b06defb7ed",
+              "name": "Colony"
+            },
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            },
+            {
+              "id": "28544e62c0d48e9c",
+              "name": "Fleet"
+            },
+            {
+              "id": "5620922355758cc1",
+              "name": "Planet"
+            },
+            {
+              "id": "d5fc6e8b0c8658c6",
+              "name": "Species"
+            },
+            {
+              "id": "2e4442a60c237979",
+              "name": "System"
+            }
+          ]
+        },
+        {
+          "name": "GetAdjective",
+          "contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            }
+          ]
+        },
+        {
+          "name": "GetAdjectivePersistent",
+          "contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            }
+          ]
+        },
+        {
+          "name": "GetAge",
+          "contexts": [
+            {
+              "id": "648d64e6935c55a9",
+              "name": "Leader"
+            }
+          ]
+        },
+        {
+          "name": "GetAgendaProgress",
+          "contexts": [
+            {
+              "id": "648d64e6935c55a9",
+              "name": "Leader"
+            }
+          ]
+        },
+        {
+          "name": "GetAllianceName",
+          "contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            }
+          ]
+        },
+        {
+          "name": "GetAllianceNamePersistent",
+          "contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            }
+          ]
+        },
+        {
+          "name": "GetBackgroundEthic",
+          "contexts": [
+            {
+              "id": "648d64e6935c55a9",
+              "name": "Leader"
+            }
+          ]
+        },
+        {
+          "name": "GetBackgroundJob",
+          "contexts": [
+            {
+              "id": "648d64e6935c55a9",
+              "name": "Leader"
+            }
+          ]
+        },
+        {
+          "name": "GetBackgroundPlanet",
+          "contexts": [
+            {
+              "id": "648d64e6935c55a9",
+              "name": "Leader"
+            }
+          ]
+        },
+        {
+          "name": "GetCapitalPlanetNameOrRandom",
+          "contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            }
+          ]
+        },
+        {
+          "name": "GetCapitalPlanetNameOrRandomPersistent",
+          "contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            }
+          ]
+        },
+        {
+          "name": "GetCapitalSystemNameOrRandom",
+          "contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            }
+          ]
+        },
+        {
+          "name": "GetCapitalSystemNameOrRandomPersistent",
+          "contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            }
+          ]
+        },
+        {
+          "name": "GetClass",
+          "contexts": [
+            {
+              "id": "648d64e6935c55a9",
+              "name": "Leader"
+            },
+            {
+              "id": "d5fc6e8b0c8658c6",
+              "name": "Species"
+            }
+          ]
+        },
+        {
+          "name": "GetClassAdj",
+          "contexts": [
+            {
+              "id": "5f3cd1b06defb7ed",
+              "name": "Colony"
+            },
+            {
+              "id": "5620922355758cc1",
+              "name": "Planet"
+            }
+          ]
+        },
+        {
+          "name": "GetClassName",
+          "contexts": [
+            {
+              "id": "5f3cd1b06defb7ed",
+              "name": "Colony"
+            },
+            {
+              "id": "5620922355758cc1",
+              "name": "Planet"
+            },
+            {
+              "id": "2e4442a60c237979",
+              "name": "System"
+            }
+          ]
+        },
+        {
+          "name": "GetClassPlural",
+          "contexts": [
+            {
+              "id": "d5fc6e8b0c8658c6",
+              "name": "Species"
+            }
+          ]
+        },
+        {
+          "name": "GetControllerName",
+          "contexts": [
+            {
+              "id": "5f3cd1b06defb7ed",
+              "name": "Colony"
+            },
+            {
+              "id": "5620922355758cc1",
+              "name": "Planet"
+            }
+          ]
+        },
+        {
+          "name": "GetCost",
+          "contexts": [
+            {
+              "id": "648d64e6935c55a9",
+              "name": "Leader"
+            }
+          ]
+        },
+        {
+          "name": "GetCouncilorPerSkillModifierDesc",
+          "contexts": [
+            {
+              "id": "648d64e6935c55a9",
+              "name": "Leader"
+            }
+          ]
+        },
+        {
+          "name": "GetCountryType",
+          "contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            }
+          ]
+        },
+        {
+          "name": "GetDate",
+          "contexts": [
+            {
+              "id": "ba5d17e7271e4e12",
+              "name": "Timeline Event"
+            }
+          ]
+        },
+        {
+          "name": "GetDescription",
+          "contexts": [
+            {
+              "id": "72f184690a6b7487",
+              "name": "Debris"
+            }
+          ]
+        },
+        {
+          "name": "GetDesignName",
+          "contexts": [
+            {
+              "id": "9deae00506fb86ad",
+              "name": "Ship (and Starbase)"
+            }
+          ]
+        },
+        {
+          "name": "GetDesignNamePersistent",
+          "contexts": [
+            {
+              "id": "9deae00506fb86ad",
+              "name": "Ship (and Starbase)"
+            }
+          ]
+        },
+        {
+          "name": "GetEarName",
+          "contexts": [
+            {
+              "id": "d5fc6e8b0c8658c6",
+              "name": "Species"
+            }
+          ]
+        },
+        {
+          "name": "GetEarNamePlural",
+          "contexts": [
+            {
+              "id": "d5fc6e8b0c8658c6",
+              "name": "Species"
+            }
+          ]
+        },
+        {
+          "name": "GetFirstName",
+          "contexts": [
+            {
+              "id": "648d64e6935c55a9",
+              "name": "Leader"
+            }
+          ]
+        },
+        {
+          "name": "GetFirstNameFull",
+          "contexts": [
+            {
+              "id": "648d64e6935c55a9",
+              "name": "Leader"
+            }
+          ]
+        },
+        {
+          "name": "GetFirstNamePersistent",
+          "contexts": [
+            {
+              "id": "648d64e6935c55a9",
+              "name": "Leader"
+            }
+          ]
+        },
+        {
+          "name": "GetFleetName",
+          "contexts": [
+            {
+              "id": "28544e62c0d48e9c",
+              "name": "Fleet"
+            },
+            {
+              "id": "9deae00506fb86ad",
+              "name": "Ship (and Starbase)"
+            }
+          ]
+        },
+        {
+          "name": "GetFleetNamePersistent",
+          "contexts": [
+            {
+              "id": "28544e62c0d48e9c",
+              "name": "Fleet"
+            },
+            {
+              "id": "9deae00506fb86ad",
+              "name": "Ship (and Starbase)"
+            }
+          ]
+        },
+        {
+          "name": "GetFossilName",
+          "contexts": [
+            {
+              "id": "d5fc6e8b0c8658c6",
+              "name": "Species"
+            }
+          ]
+        },
+        {
+          "name": "GetFossilNamePlural",
+          "contexts": [
+            {
+              "id": "d5fc6e8b0c8658c6",
+              "name": "Species"
+            }
+          ]
+        },
+        {
+          "name": "GetGovernmentName",
+          "contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            }
+          ]
+        },
+        {
+          "name": "GetHandName",
+          "contexts": [
+            {
+              "id": "d5fc6e8b0c8658c6",
+              "name": "Species"
+            }
+          ]
+        },
+        {
+          "name": "GetHandNamePlural",
+          "contexts": [
+            {
+              "id": "d5fc6e8b0c8658c6",
+              "name": "Species"
+            }
+          ]
+        },
+        {
+          "name": "GetHeShe",
+          "contexts": [
+            {
+              "id": "648d64e6935c55a9",
+              "name": "Leader"
+            }
+          ]
+        },
+        {
+          "name": "GetHeSheCap",
+          "contexts": [
+            {
+              "id": "648d64e6935c55a9",
+              "name": "Leader"
+            }
+          ]
+        },
+        {
+          "name": "GetHeirName",
+          "contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            }
+          ]
+        },
+        {
+          "name": "GetHeirTitle",
+          "contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            }
+          ]
+        },
+        {
+          "name": "GetHerHim",
+          "contexts": [
+            {
+              "id": "648d64e6935c55a9",
+              "name": "Leader"
+            }
+          ]
+        },
+        {
+          "name": "GetHerHis",
+          "contexts": [
+            {
+              "id": "648d64e6935c55a9",
+              "name": "Leader"
+            }
+          ]
+        },
+        {
+          "name": "GetHerHisCap",
+          "contexts": [
+            {
+              "id": "648d64e6935c55a9",
+              "name": "Leader"
+            }
+          ]
+        },
+        {
+          "name": "GetHerselfHimself",
+          "contexts": [
+            {
+              "id": "648d64e6935c55a9",
+              "name": "Leader"
+            }
+          ]
+        },
+        {
+          "name": "GetHimHer",
+          "contexts": [
+            {
+              "id": "648d64e6935c55a9",
+              "name": "Leader"
+            }
+          ]
+        },
+        {
+          "name": "GetHimselfHerself",
+          "contexts": [
+            {
+              "id": "648d64e6935c55a9",
+              "name": "Leader"
+            }
+          ]
+        },
+        {
+          "name": "GetHisHer",
+          "contexts": [
+            {
+              "id": "648d64e6935c55a9",
+              "name": "Leader"
+            }
+          ]
+        },
+        {
+          "name": "GetHisHerCap",
+          "contexts": [
+            {
+              "id": "648d64e6935c55a9",
+              "name": "Leader"
+            }
+          ]
+        },
+        {
+          "name": "GetHomeWorldBiome",
+          "contexts": [
+            {
+              "id": "648d64e6935c55a9",
+              "name": "Leader"
+            }
+          ]
+        },
+        {
+          "name": "GetHomeWorldName",
+          "contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            }
+          ]
+        },
+        {
+          "name": "GetHomeWorldNamePersistent",
+          "contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            }
+          ]
+        },
+        {
+          "name": "GetIcon",
+          "contexts": [
+            {
+              "id": "8e0f5c2dac6ccdec",
+              "name": "Job Swap Data"
+            },
+            {
+              "id": "6eb121f0934a1a47",
+              "name": "Pop Category Swap Data"
+            }
+          ]
+        },
+        {
+          "name": "GetIsValidDesc",
+          "contexts": [
+            {
+              "id": "d8304936ecfa7522",
+              "name": "Diplomacy"
+            }
+          ]
+        },
+        {
+          "name": "GetLastAcquiredSpecimenName",
+          "contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            }
+          ]
+        },
+        {
+          "name": "GetLastLostRelic",
+          "contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            }
+          ]
+        },
+        {
+          "name": "GetLastReceivedRelic",
+          "contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            }
+          ]
+        },
+        {
+          "name": "GetLawCategory",
+          "contexts": [
+            {
+              "id": "d8304936ecfa7522",
+              "name": "Diplomacy"
+            }
+          ]
+        },
+        {
+          "name": "GetLawName",
+          "contexts": [
+            {
+              "id": "d8304936ecfa7522",
+              "name": "Diplomacy"
+            }
+          ]
+        },
+        {
+          "name": "GetLeaderName",
+          "contexts": [
+            {
+              "id": "28544e62c0d48e9c",
+              "name": "Fleet"
+            },
+            {
+              "id": "9deae00506fb86ad",
+              "name": "Ship (and Starbase)"
+            }
+          ]
+        },
+        {
+          "name": "GetLeaderNamePersistent",
+          "contexts": [
+            {
+              "id": "28544e62c0d48e9c",
+              "name": "Fleet"
+            },
+            {
+              "id": "9deae00506fb86ad",
+              "name": "Ship (and Starbase)"
+            }
+          ]
+        },
+        {
+          "name": "GetMouthName",
+          "contexts": [
+            {
+              "id": "d5fc6e8b0c8658c6",
+              "name": "Species"
+            }
+          ]
+        },
+        {
+          "name": "GetName",
+          "contexts": [
+            {
+              "id": "21ba3120e150e1ae",
+              "name": "Ambient Object"
+            },
+            {
+              "id": "b15d05f4af3a33fc",
+              "name": "Army"
+            },
+            {
+              "id": "049e6a86df3744b9",
+              "name": "Astral Rift"
+            },
+            {
+              "id": "dbbe8a12bcb29e1a",
+              "name": "Building"
+            },
+            {
+              "id": "5f3cd1b06defb7ed",
+              "name": "Colony"
+            },
+            {
+              "id": "19eb74e2a2ba5a51",
+              "name": "Cosmic Storm"
+            },
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            },
+            {
+              "id": "1b48374c9d7e6a4f",
+              "name": "Dead Arc Site"
+            },
+            {
+              "id": "cb9cac0701431f17",
+              "name": "Dead Astral Rift"
+            },
+            {
+              "id": "c02029e154f9c415",
+              "name": "Dead Cosmic Storm"
+            },
+            {
+              "id": "203266dca9563469",
+              "name": "Dead Country"
+            },
+            {
+              "id": "33e0c9bd1fe2f7d2",
+              "name": "Dead Federation"
+            },
+            {
+              "id": "b7270eb33ecc4fe8",
+              "name": "Dead Fleet"
+            },
+            {
+              "id": "8d1c7a74667787e6",
+              "name": "Dead Leader"
+            },
+            {
+              "id": "f1480ac2c6a5ae8c",
+              "name": "Dead Megastructure"
+            },
+            {
+              "id": "d67a8e10131f1128",
+              "name": "Dead Planet"
+            },
+            {
+              "id": "da7e6390fb0156ba",
+              "name": "Dead Ship"
+            },
+            {
+              "id": "8820cae06c510873",
+              "name": "Dead Situation"
+            },
+            {
+              "id": "46ee91bcf7063fe6",
+              "name": "Dead War"
+            },
+            {
+              "id": "4d611dd0180b2b4c",
+              "name": "Deposit"
+            },
+            {
+              "id": "d8304936ecfa7522",
+              "name": "Diplomacy"
+            },
+            {
+              "id": "009575875c4df650",
+              "name": "Espionage Asset"
+            },
+            {
+              "id": "4ada1377d53fe341",
+              "name": "Espionage Operation"
+            },
+            {
+              "id": "cfe0972851463c1e",
+              "name": "Federation"
+            },
+            {
+              "id": "368b7977d48fe3b7",
+              "name": "First Contact"
+            },
+            {
+              "id": "28544e62c0d48e9c",
+              "name": "Fleet"
+            },
+            {
+              "id": "8e0f5c2dac6ccdec",
+              "name": "Job Swap Data"
+            },
+            {
+              "id": "648d64e6935c55a9",
+              "name": "Leader"
+            },
+            {
+              "id": "11412b4c7e434609",
+              "name": "Megastructure"
+            },
+            {
+              "id": "5620922355758cc1",
+              "name": "Planet"
+            },
+            {
+              "id": "6eb121f0934a1a47",
+              "name": "Pop Category Swap Data"
+            },
+            {
+              "id": "b29c7354651a501b",
+              "name": "Pop Faction"
+            },
+            {
+              "id": "5b2da87965c368ed",
+              "name": "Pop Group"
+            },
+            {
+              "id": "bd7b01714ddcc2b9",
+              "name": "Sector"
+            },
+            {
+              "id": "9deae00506fb86ad",
+              "name": "Ship (and Starbase)"
+            },
+            {
+              "id": "c9e0b05bb1b55553",
+              "name": "Situation"
+            },
+            {
+              "id": "d5fc6e8b0c8658c6",
+              "name": "Species"
+            },
+            {
+              "id": "2e4442a60c237979",
+              "name": "System"
+            },
+            {
+              "id": "bc6292c6f1b4249b",
+              "name": "War"
+            }
+          ]
+        },
+        {
+          "name": "GetNameCompliment",
+          "contexts": [
+            {
+              "id": "d5fc6e8b0c8658c6",
+              "name": "Species"
+            }
+          ]
+        },
+        {
+          "name": "GetNameInsult",
+          "contexts": [
+            {
+              "id": "d5fc6e8b0c8658c6",
+              "name": "Species"
+            }
+          ]
+        },
+        {
+          "name": "GetNamePersistent",
+          "contexts": [
+            {
+              "id": "b15d05f4af3a33fc",
+              "name": "Army"
+            },
+            {
+              "id": "5f3cd1b06defb7ed",
+              "name": "Colony"
+            },
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            },
+            {
+              "id": "28544e62c0d48e9c",
+              "name": "Fleet"
+            },
+            {
+              "id": "648d64e6935c55a9",
+              "name": "Leader"
+            },
+            {
+              "id": "5620922355758cc1",
+              "name": "Planet"
+            },
+            {
+              "id": "b29c7354651a501b",
+              "name": "Pop Faction"
+            },
+            {
+              "id": "bd7b01714ddcc2b9",
+              "name": "Sector"
+            },
+            {
+              "id": "9deae00506fb86ad",
+              "name": "Ship (and Starbase)"
+            },
+            {
+              "id": "d5fc6e8b0c8658c6",
+              "name": "Species"
+            },
+            {
+              "id": "2e4442a60c237979",
+              "name": "System"
+            }
+          ]
+        },
+        {
+          "name": "GetNamePlural",
+          "contexts": [
+            {
+              "id": "8e0f5c2dac6ccdec",
+              "name": "Job Swap Data"
+            },
+            {
+              "id": "6eb121f0934a1a47",
+              "name": "Pop Category Swap Data"
+            },
+            {
+              "id": "d5fc6e8b0c8658c6",
+              "name": "Species"
+            }
+          ]
+        },
+        {
+          "name": "GetNamePluralCompliment",
+          "contexts": [
+            {
+              "id": "d5fc6e8b0c8658c6",
+              "name": "Species"
+            }
+          ]
+        },
+        {
+          "name": "GetNamePluralInsult",
+          "contexts": [
+            {
+              "id": "d5fc6e8b0c8658c6",
+              "name": "Species"
+            }
+          ]
+        },
+        {
+          "name": "GetNamePluralPersistent",
+          "contexts": [
+            {
+              "id": "d5fc6e8b0c8658c6",
+              "name": "Species"
+            }
+          ]
+        },
+        {
+          "name": "GetNebula",
+          "contexts": [
+            {
+              "id": "21ba3120e150e1ae",
+              "name": "Ambient Object"
+            },
+            {
+              "id": "5f3cd1b06defb7ed",
+              "name": "Colony"
+            },
+            {
+              "id": "5620922355758cc1",
+              "name": "Planet"
+            },
+            {
+              "id": "9deae00506fb86ad",
+              "name": "Ship (and Starbase)"
+            },
+            {
+              "id": "2e4442a60c237979",
+              "name": "System"
+            }
+          ]
+        },
+        {
+          "name": "GetNumPlayerFleetsGoneMIA",
+          "contexts": [
+            {
+              "id": "bc6292c6f1b4249b",
+              "name": "War"
+            }
+          ]
+        },
+        {
+          "name": "GetObjectPronoun",
+          "contexts": [
+            {
+              "id": "648d64e6935c55a9",
+              "name": "Leader"
+            }
+          ]
+        },
+        {
+          "name": "GetOrganName",
+          "contexts": [
+            {
+              "id": "d5fc6e8b0c8658c6",
+              "name": "Species"
+            }
+          ]
+        },
+        {
+          "name": "GetOrganNamePlural",
+          "contexts": [
+            {
+              "id": "d5fc6e8b0c8658c6",
+              "name": "Species"
+            }
+          ]
+        },
+        {
+          "name": "GetOrigin",
+          "contexts": [
+            {
+              "id": "f61c61595a0229c9",
+              "name": "Specimen"
+            }
+          ]
+        },
+        {
+          "name": "GetOriginName",
+          "contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            }
+          ]
+        },
+        {
+          "name": "GetOriginalOwner",
+          "contexts": [
+            {
+              "id": "f61c61595a0229c9",
+              "name": "Specimen"
+            }
+          ]
+        },
+        {
+          "name": "GetOwnerName",
+          "contexts": [
+            {
+              "id": "5f3cd1b06defb7ed",
+              "name": "Colony"
+            },
+            {
+              "id": "5620922355758cc1",
+              "name": "Planet"
+            }
+          ]
+        },
+        {
+          "name": "GetPersonalityName",
+          "contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            }
+          ]
+        },
+        {
+          "name": "GetPopFactionName",
+          "contexts": [
+            {
+              "id": "648d64e6935c55a9",
+              "name": "Leader"
+            }
+          ]
+        },
+        {
+          "name": "GetPopFactionSupport",
+          "contexts": [
+            {
+              "id": "648d64e6935c55a9",
+              "name": "Leader"
+            }
+          ]
+        },
+        {
+          "name": "GetPopsGuidingEthic",
+          "contexts": [
+            {
+              "id": "b29c7354651a501b",
+              "name": "Pop Faction"
+            }
+          ]
+        },
+        {
+          "name": "GetPossPronoun",
+          "contexts": [
+            {
+              "id": "648d64e6935c55a9",
+              "name": "Leader"
+            }
+          ]
+        },
+        {
+          "name": "GetPossPronounCap",
+          "contexts": [
+            {
+              "id": "648d64e6935c55a9",
+              "name": "Leader"
+            }
+          ]
+        },
+        {
+          "name": "GetPreCommunicationName",
+          "contexts": [
+            {
+              "id": "389c724607daffd6",
+              "name": "Patron Relation"
+            }
+          ]
+        },
+        {
+          "name": "GetProgress",
+          "contexts": [
+            {
+              "id": "c9e0b05bb1b55553",
+              "name": "Situation"
+            }
+          ]
+        },
+        {
+          "name": "GetRandomSpeciesSound",
+          "contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            },
+            {
+              "id": "d5fc6e8b0c8658c6",
+              "name": "Species"
+            }
+          ]
+        },
+        {
+          "name": "GetRealName",
+          "contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            }
+          ]
+        },
+        {
+          "name": "GetReflexivePronoun",
+          "contexts": [
+            {
+              "id": "648d64e6935c55a9",
+              "name": "Leader"
+            }
+          ]
+        },
+        {
+          "name": "GetRegnalName",
+          "contexts": [
+            {
+              "id": "648d64e6935c55a9",
+              "name": "Leader"
+            }
+          ]
+        },
+        {
+          "name": "GetRegnalNamePersistent",
+          "contexts": [
+            {
+              "id": "648d64e6935c55a9",
+              "name": "Leader"
+            }
+          ]
+        },
+        {
+          "name": "GetRemnantName",
+          "contexts": [
+            {
+              "id": "d5fc6e8b0c8658c6",
+              "name": "Species"
+            }
+          ]
+        },
+        {
+          "name": "GetRemnantNamePlural",
+          "contexts": [
+            {
+              "id": "d5fc6e8b0c8658c6",
+              "name": "Species"
+            }
+          ]
+        },
+        {
+          "name": "GetRulerName",
+          "contexts": [
+            {
+              "id": "b15d05f4af3a33fc",
+              "name": "Army"
+            },
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            },
+            {
+              "id": "28544e62c0d48e9c",
+              "name": "Fleet"
+            },
+            {
+              "id": "648d64e6935c55a9",
+              "name": "Leader"
+            }
+          ]
+        },
+        {
+          "name": "GetRulerNamePersistent",
+          "contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            },
+            {
+              "id": "28544e62c0d48e9c",
+              "name": "Fleet"
+            },
+            {
+              "id": "648d64e6935c55a9",
+              "name": "Leader"
+            }
+          ]
+        },
+        {
+          "name": "GetRulerTitle",
+          "contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            },
+            {
+              "id": "648d64e6935c55a9",
+              "name": "Leader"
+            }
+          ]
+        },
+        {
+          "name": "GetRulerTitlePersistent",
+          "contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            },
+            {
+              "id": "648d64e6935c55a9",
+              "name": "Leader"
+            }
+          ]
+        },
+        {
+          "name": "GetSecondName",
+          "contexts": [
+            {
+              "id": "648d64e6935c55a9",
+              "name": "Leader"
+            }
+          ]
+        },
+        {
+          "name": "GetSecondNamePersistent",
+          "contexts": [
+            {
+              "id": "648d64e6935c55a9",
+              "name": "Leader"
+            }
+          ]
+        },
+        {
+          "name": "GetSheHe",
+          "contexts": [
+            {
+              "id": "648d64e6935c55a9",
+              "name": "Leader"
+            }
+          ]
+        },
+        {
+          "name": "GetSheHeCap",
+          "contexts": [
+            {
+              "id": "648d64e6935c55a9",
+              "name": "Leader"
+            }
+          ]
+        },
+        {
+          "name": "GetShipCategoryName",
+          "contexts": [
+            {
+              "id": "9deae00506fb86ad",
+              "name": "Ship (and Starbase)"
+            }
+          ]
+        },
+        {
+          "name": "GetShipSizeName",
+          "contexts": [
+            {
+              "id": "9deae00506fb86ad",
+              "name": "Ship (and Starbase)"
+            }
+          ]
+        },
+        {
+          "name": "GetShipSizeNamePlural",
+          "contexts": [
+            {
+              "id": "9deae00506fb86ad",
+              "name": "Ship (and Starbase)"
+            }
+          ]
+        },
+        {
+          "name": "GetSkill",
+          "contexts": [
+            {
+              "id": "648d64e6935c55a9",
+              "name": "Leader"
+            }
+          ]
+        },
+        {
+          "name": "GetSpawnName",
+          "contexts": [
+            {
+              "id": "d5fc6e8b0c8658c6",
+              "name": "Species"
+            }
+          ]
+        },
+        {
+          "name": "GetSpawnNamePlural",
+          "contexts": [
+            {
+              "id": "d5fc6e8b0c8658c6",
+              "name": "Species"
+            }
+          ]
+        },
+        {
+          "name": "GetSpeciesAdj",
+          "contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            },
+            {
+              "id": "5b2da87965c368ed",
+              "name": "Pop Group"
+            }
+          ]
+        },
+        {
+          "name": "GetSpeciesAdjPersistent",
+          "contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            }
+          ]
+        },
+        {
+          "name": "GetSpeciesClass",
+          "contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            }
+          ]
+        },
+        {
+          "name": "GetSpeciesClassPlural",
+          "contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            }
+          ]
+        },
+        {
+          "name": "GetSpeciesEarName",
+          "contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            }
+          ]
+        },
+        {
+          "name": "GetSpeciesEarNamePlural",
+          "contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            }
+          ]
+        },
+        {
+          "name": "GetSpeciesFossilName",
+          "contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            }
+          ]
+        },
+        {
+          "name": "GetSpeciesFossilNamePlural",
+          "contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            }
+          ]
+        },
+        {
+          "name": "GetSpeciesHandName",
+          "contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            }
+          ]
+        },
+        {
+          "name": "GetSpeciesHandNamePlural",
+          "contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            }
+          ]
+        },
+        {
+          "name": "GetSpeciesMouthName",
+          "contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            }
+          ]
+        },
+        {
+          "name": "GetSpeciesName",
+          "contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            },
+            {
+              "id": "5b2da87965c368ed",
+              "name": "Pop Group"
+            }
+          ]
+        },
+        {
+          "name": "GetSpeciesNameCompliment",
+          "contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            }
+          ]
+        },
+        {
+          "name": "GetSpeciesNameInsult",
+          "contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            }
+          ]
+        },
+        {
+          "name": "GetSpeciesNamePersistent",
+          "contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            },
+            {
+              "id": "5b2da87965c368ed",
+              "name": "Pop Group"
+            }
+          ]
+        },
+        {
+          "name": "GetSpeciesNamePlural",
+          "contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            },
+            {
+              "id": "5b2da87965c368ed",
+              "name": "Pop Group"
+            }
+          ]
+        },
+        {
+          "name": "GetSpeciesNamePluralCompliment",
+          "contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            }
+          ]
+        },
+        {
+          "name": "GetSpeciesNamePluralInsult",
+          "contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            }
+          ]
+        },
+        {
+          "name": "GetSpeciesNamePluralPersistent",
+          "contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            }
+          ]
+        },
+        {
+          "name": "GetSpeciesOrganName",
+          "contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            }
+          ]
+        },
+        {
+          "name": "GetSpeciesOrganNamePlural",
+          "contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            }
+          ]
+        },
+        {
+          "name": "GetSpeciesRemnantName",
+          "contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            }
+          ]
+        },
+        {
+          "name": "GetSpeciesRemnantNamePlural",
+          "contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            }
+          ]
+        },
+        {
+          "name": "GetSpeciesSpawnName",
+          "contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            }
+          ]
+        },
+        {
+          "name": "GetSpeciesSpawnNamePlural",
+          "contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            }
+          ]
+        },
+        {
+          "name": "GetSpeciesToothName",
+          "contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            }
+          ]
+        },
+        {
+          "name": "GetSpeciesToothNamePlural",
+          "contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            }
+          ]
+        },
+        {
+          "name": "GetStarName",
+          "contexts": [
+            {
+              "id": "21ba3120e150e1ae",
+              "name": "Ambient Object"
+            },
+            {
+              "id": "5f3cd1b06defb7ed",
+              "name": "Colony"
+            },
+            {
+              "id": "28544e62c0d48e9c",
+              "name": "Fleet"
+            },
+            {
+              "id": "5620922355758cc1",
+              "name": "Planet"
+            },
+            {
+              "id": "9deae00506fb86ad",
+              "name": "Ship (and Starbase)"
+            }
+          ]
+        },
+        {
+          "name": "GetStarNamePersistent",
+          "contexts": [
+            {
+              "id": "28544e62c0d48e9c",
+              "name": "Fleet"
+            },
+            {
+              "id": "9deae00506fb86ad",
+              "name": "Ship (and Starbase)"
+            }
+          ]
+        },
+        {
+          "name": "GetSubclass",
+          "contexts": [
+            {
+              "id": "648d64e6935c55a9",
+              "name": "Leader"
+            }
+          ]
+        },
+        {
+          "name": "GetSubjectPronoun",
+          "contexts": [
+            {
+              "id": "648d64e6935c55a9",
+              "name": "Leader"
+            }
+          ]
+        },
+        {
+          "name": "GetSubjectPronounCap",
+          "contexts": [
+            {
+              "id": "648d64e6935c55a9",
+              "name": "Leader"
+            }
+          ]
+        },
+        {
+          "name": "GetTitle",
+          "contexts": [
+            {
+              "id": "648d64e6935c55a9",
+              "name": "Leader"
+            }
+          ]
+        },
+        {
+          "name": "GetTitledName",
+          "contexts": [
+            {
+              "id": "648d64e6935c55a9",
+              "name": "Leader"
+            }
+          ]
+        },
+        {
+          "name": "GetToothName",
+          "contexts": [
+            {
+              "id": "d5fc6e8b0c8658c6",
+              "name": "Species"
+            }
+          ]
+        },
+        {
+          "name": "GetToothNamePlural",
+          "contexts": [
+            {
+              "id": "d5fc6e8b0c8658c6",
+              "name": "Species"
+            }
+          ]
+        },
+        {
+          "name": "GetType",
+          "contexts": [
+            {
+              "id": "c02029e154f9c415",
+              "name": "Dead Cosmic Storm"
+            },
+            {
+              "id": "bd7b01714ddcc2b9",
+              "name": "Sector"
+            }
+          ]
+        },
+        {
+          "name": "GetUpkeep",
+          "contexts": [
+            {
+              "id": "648d64e6935c55a9",
+              "name": "Leader"
+            }
+          ]
+        },
+        {
+          "name": "GetYear",
+          "contexts": [
+            {
+              "id": "87d30af8580460e9",
+              "name": "Base Scope"
+            },
+            {
+              "id": "ba5d17e7271e4e12",
+              "name": "Timeline Event"
+            }
+          ]
+        },
+        {
+          "name": "GetYearsOfService",
+          "contexts": [
+            {
+              "id": "648d64e6935c55a9",
+              "name": "Leader"
+            }
+          ]
+        },
+        {
+          "name": "LastKilledCountryName",
+          "contexts": [
+            {
+              "id": "87d30af8580460e9",
+              "name": "Base Scope"
+            }
+          ]
+        }
+      ],
+      "links": [
+        {
+          "name": "Actor",
+          "input_contexts": [
+            {
+              "id": "d8304936ecfa7522",
+              "name": "Diplomacy"
+            }
+          ],
+          "output": {
+            "Listed": [
+              {
+                "id": "50e293199a841502",
+                "name": "Country"
+              }
+            ]
+          }
+        },
+        {
+          "name": "AmbientObject",
+          "input_contexts": [
+            {
+              "id": "1057b0b556c6afe7",
+              "name": "Archaeological Site"
+            }
+          ],
+          "output": {
+            "Listed": [
+              {
+                "id": "21ba3120e150e1ae",
+                "name": "Ambient Object"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Capital",
+          "input_contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            },
+            {
+              "id": "bd7b01714ddcc2b9",
+              "name": "Sector"
+            }
+          ],
+          "output": {
+            "Listed": [
+              {
+                "id": "5f3cd1b06defb7ed",
+                "name": "Colony"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Colony",
+          "input_contexts": [
+            {
+              "id": "b15d05f4af3a33fc",
+              "name": "Army"
+            },
+            {
+              "id": "5b2da87965c368ed",
+              "name": "Pop Group"
+            }
+          ],
+          "output": {
+            "Listed": [
+              {
+                "id": "5f3cd1b06defb7ed",
+                "name": "Colony"
+              }
+            ]
+          }
+        },
+        {
+          "name": "ContactCountry",
+          "input_contexts": [
+            {
+              "id": "368b7977d48fe3b7",
+              "name": "First Contact"
+            }
+          ],
+          "output": {
+            "Listed": [
+              {
+                "id": "50e293199a841502",
+                "name": "Country"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Country",
+          "input_contexts": [
+            {
+              "id": "389c724607daffd6",
+              "name": "Patron Relation"
+            }
+          ],
+          "output": {
+            "Listed": [
+              {
+                "id": "50e293199a841502",
+                "name": "Country"
+              }
+            ]
+          }
+        },
+        {
+          "name": "EVENT_TARGET_0",
+          "input_contexts": [
+            {
+              "id": "f61c61595a0229c9",
+              "name": "Specimen"
+            },
+            {
+              "id": "ba5d17e7271e4e12",
+              "name": "Timeline Event"
+            }
+          ],
+          "output": "Unresolved"
+        },
+        {
+          "name": "EVENT_TARGET_1",
+          "input_contexts": [
+            {
+              "id": "f61c61595a0229c9",
+              "name": "Specimen"
+            },
+            {
+              "id": "ba5d17e7271e4e12",
+              "name": "Timeline Event"
+            }
+          ],
+          "output": "Unresolved"
+        },
+        {
+          "name": "EVENT_TARGET_2",
+          "input_contexts": [
+            {
+              "id": "f61c61595a0229c9",
+              "name": "Specimen"
+            },
+            {
+              "id": "ba5d17e7271e4e12",
+              "name": "Timeline Event"
+            }
+          ],
+          "output": "Unresolved"
+        },
+        {
+          "name": "EVENT_TARGET_3",
+          "input_contexts": [
+            {
+              "id": "f61c61595a0229c9",
+              "name": "Specimen"
+            },
+            {
+              "id": "ba5d17e7271e4e12",
+              "name": "Timeline Event"
+            }
+          ],
+          "output": "Unresolved"
+        },
+        {
+          "name": "EVENT_TARGET_4",
+          "input_contexts": [
+            {
+              "id": "f61c61595a0229c9",
+              "name": "Specimen"
+            },
+            {
+              "id": "ba5d17e7271e4e12",
+              "name": "Timeline Event"
+            }
+          ],
+          "output": "Unresolved"
+        },
+        {
+          "name": "EVENT_TARGET_5",
+          "input_contexts": [
+            {
+              "id": "f61c61595a0229c9",
+              "name": "Specimen"
+            },
+            {
+              "id": "ba5d17e7271e4e12",
+              "name": "Timeline Event"
+            }
+          ],
+          "output": "Unresolved"
+        },
+        {
+          "name": "EVENT_TARGET_6",
+          "input_contexts": [
+            {
+              "id": "f61c61595a0229c9",
+              "name": "Specimen"
+            },
+            {
+              "id": "ba5d17e7271e4e12",
+              "name": "Timeline Event"
+            }
+          ],
+          "output": "Unresolved"
+        },
+        {
+          "name": "EVENT_TARGET_7",
+          "input_contexts": [
+            {
+              "id": "f61c61595a0229c9",
+              "name": "Specimen"
+            },
+            {
+              "id": "ba5d17e7271e4e12",
+              "name": "Timeline Event"
+            }
+          ],
+          "output": "Unresolved"
+        },
+        {
+          "name": "EVENT_TARGET_8",
+          "input_contexts": [
+            {
+              "id": "f61c61595a0229c9",
+              "name": "Specimen"
+            },
+            {
+              "id": "ba5d17e7271e4e12",
+              "name": "Timeline Event"
+            }
+          ],
+          "output": "Unresolved"
+        },
+        {
+          "name": "EVENT_TARGET_9",
+          "input_contexts": [
+            {
+              "id": "f61c61595a0229c9",
+              "name": "Specimen"
+            },
+            {
+              "id": "ba5d17e7271e4e12",
+              "name": "Timeline Event"
+            }
+          ],
+          "output": "Unresolved"
+        },
+        {
+          "name": "FROM",
+          "input_contexts": [
+            {
+              "id": "87d30af8580460e9",
+              "name": "Base Scope"
+            }
+          ],
+          "output": "Various"
+        },
+        {
+          "name": "Federation",
+          "input_contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            }
+          ],
+          "output": {
+            "Listed": [
+              {
+                "id": "cfe0972851463c1e",
+                "name": "Federation"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Fleet",
+          "input_contexts": [
+            {
+              "id": "1057b0b556c6afe7",
+              "name": "Archaeological Site"
+            },
+            {
+              "id": "9deae00506fb86ad",
+              "name": "Ship (and Starbase)"
+            }
+          ],
+          "output": {
+            "Listed": [
+              {
+                "id": "28544e62c0d48e9c",
+                "name": "Fleet"
+              }
+            ]
+          }
+        },
+        {
+          "name": "From",
+          "input_contexts": [
+            {
+              "id": "87d30af8580460e9",
+              "name": "Base Scope"
+            }
+          ],
+          "output": "Various"
+        },
+        {
+          "name": "GalacticObject",
+          "input_contexts": [
+            {
+              "id": "1057b0b556c6afe7",
+              "name": "Archaeological Site"
+            }
+          ],
+          "output": {
+            "Listed": [
+              {
+                "id": "2e4442a60c237979",
+                "name": "System"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Heir",
+          "input_contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            }
+          ],
+          "output": {
+            "Listed": [
+              {
+                "id": "648d64e6935c55a9",
+                "name": "Leader"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Leader",
+          "input_contexts": [
+            {
+              "id": "cfe0972851463c1e",
+              "name": "Federation"
+            }
+          ],
+          "output": {
+            "Listed": [
+              {
+                "id": "50e293199a841502",
+                "name": "Country"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Leader",
+          "input_contexts": [
+            {
+              "id": "b15d05f4af3a33fc",
+              "name": "Army"
+            },
+            {
+              "id": "4ada1377d53fe341",
+              "name": "Espionage Operation"
+            },
+            {
+              "id": "368b7977d48fe3b7",
+              "name": "First Contact"
+            },
+            {
+              "id": "28544e62c0d48e9c",
+              "name": "Fleet"
+            },
+            {
+              "id": "7e7de830e9285018",
+              "name": "Spy Network"
+            }
+          ],
+          "output": {
+            "Listed": [
+              {
+                "id": "648d64e6935c55a9",
+                "name": "Leader"
+              }
+            ]
+          }
+        },
+        {
+          "name": "MainAttacker",
+          "input_contexts": [
+            {
+              "id": "bc6292c6f1b4249b",
+              "name": "War"
+            }
+          ],
+          "output": {
+            "Listed": [
+              {
+                "id": "50e293199a841502",
+                "name": "Country"
+              }
+            ]
+          }
+        },
+        {
+          "name": "MainAttacker",
+          "input_contexts": [
+            {
+              "id": "46ee91bcf7063fe6",
+              "name": "Dead War"
+            }
+          ],
+          "output": "Unresolved"
+        },
+        {
+          "name": "MainDefender",
+          "input_contexts": [
+            {
+              "id": "bc6292c6f1b4249b",
+              "name": "War"
+            }
+          ],
+          "output": {
+            "Listed": [
+              {
+                "id": "50e293199a841502",
+                "name": "Country"
+              }
+            ]
+          }
+        },
+        {
+          "name": "MainDefender",
+          "input_contexts": [
+            {
+              "id": "46ee91bcf7063fe6",
+              "name": "Dead War"
+            }
+          ],
+          "output": "Unresolved"
+        },
+        {
+          "name": "MoonOf",
+          "input_contexts": [
+            {
+              "id": "5620922355758cc1",
+              "name": "Planet"
+            }
+          ],
+          "output": {
+            "Listed": [
+              {
+                "id": "5620922355758cc1",
+                "name": "Planet"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Owner",
+          "input_contexts": [
+            {
+              "id": "5e031d639dc5781c",
+              "name": "Agreement"
+            },
+            {
+              "id": "b15d05f4af3a33fc",
+              "name": "Army"
+            },
+            {
+              "id": "5f3cd1b06defb7ed",
+              "name": "Colony"
+            },
+            {
+              "id": "4ada1377d53fe341",
+              "name": "Espionage Operation"
+            },
+            {
+              "id": "368b7977d48fe3b7",
+              "name": "First Contact"
+            },
+            {
+              "id": "28544e62c0d48e9c",
+              "name": "Fleet"
+            },
+            {
+              "id": "648d64e6935c55a9",
+              "name": "Leader"
+            },
+            {
+              "id": "11412b4c7e434609",
+              "name": "Megastructure"
+            },
+            {
+              "id": "5620922355758cc1",
+              "name": "Planet"
+            },
+            {
+              "id": "b29c7354651a501b",
+              "name": "Pop Faction"
+            },
+            {
+              "id": "bd7b01714ddcc2b9",
+              "name": "Sector"
+            },
+            {
+              "id": "9deae00506fb86ad",
+              "name": "Ship (and Starbase)"
+            },
+            {
+              "id": "c9e0b05bb1b55553",
+              "name": "Situation"
+            },
+            {
+              "id": "7e7de830e9285018",
+              "name": "Spy Network"
+            },
+            {
+              "id": "2e4442a60c237979",
+              "name": "System"
+            }
+          ],
+          "output": {
+            "Listed": [
+              {
+                "id": "50e293199a841502",
+                "name": "Country"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Owner",
+          "input_contexts": [
+            {
+              "id": "8820cae06c510873",
+              "name": "Dead Situation"
+            }
+          ],
+          "output": "Unresolved"
+        },
+        {
+          "name": "PREV",
+          "input_contexts": [
+            {
+              "id": "87d30af8580460e9",
+              "name": "Base Scope"
+            }
+          ],
+          "output": "Various"
+        },
+        {
+          "name": "Planet",
+          "input_contexts": [
+            {
+              "id": "1057b0b556c6afe7",
+              "name": "Archaeological Site"
+            },
+            {
+              "id": "11412b4c7e434609",
+              "name": "Megastructure"
+            }
+          ],
+          "output": {
+            "Listed": [
+              {
+                "id": "5620922355758cc1",
+                "name": "Planet"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Planet",
+          "input_contexts": [
+            {
+              "id": "5f3cd1b06defb7ed",
+              "name": "Colony"
+            },
+            {
+              "id": "4d611dd0180b2b4c",
+              "name": "Deposit"
+            }
+          ],
+          "output": "Unresolved"
+        },
+        {
+          "name": "Prev",
+          "input_contexts": [
+            {
+              "id": "87d30af8580460e9",
+              "name": "Base Scope"
+            }
+          ],
+          "output": "Various"
+        },
+        {
+          "name": "ROOT",
+          "input_contexts": [
+            {
+              "id": "87d30af8580460e9",
+              "name": "Base Scope"
+            }
+          ],
+          "output": "Various"
+        },
+        {
+          "name": "Recipient",
+          "input_contexts": [
+            {
+              "id": "d8304936ecfa7522",
+              "name": "Diplomacy"
+            }
+          ],
+          "output": {
+            "Listed": [
+              {
+                "id": "50e293199a841502",
+                "name": "Country"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Root",
+          "input_contexts": [
+            {
+              "id": "87d30af8580460e9",
+              "name": "Base Scope"
+            }
+          ],
+          "output": "Various"
+        },
+        {
+          "name": "Ruler",
+          "input_contexts": [
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            }
+          ],
+          "output": {
+            "Listed": [
+              {
+                "id": "648d64e6935c55a9",
+                "name": "Leader"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Sector",
+          "input_contexts": [
+            {
+              "id": "5f3cd1b06defb7ed",
+              "name": "Colony"
+            },
+            {
+              "id": "5620922355758cc1",
+              "name": "Planet"
+            },
+            {
+              "id": "2e4442a60c237979",
+              "name": "System"
+            }
+          ],
+          "output": {
+            "Listed": [
+              {
+                "id": "bd7b01714ddcc2b9",
+                "name": "Sector"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Ship",
+          "input_contexts": [
+            {
+              "id": "1057b0b556c6afe7",
+              "name": "Archaeological Site"
+            }
+          ],
+          "output": {
+            "Listed": [
+              {
+                "id": "9deae00506fb86ad",
+                "name": "Ship (and Starbase)"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Ship",
+          "input_contexts": [
+            {
+              "id": "5f3cd1b06defb7ed",
+              "name": "Colony"
+            }
+          ],
+          "output": "Unresolved"
+        },
+        {
+          "name": "Species",
+          "input_contexts": [
+            {
+              "id": "b15d05f4af3a33fc",
+              "name": "Army"
+            },
+            {
+              "id": "50e293199a841502",
+              "name": "Country"
+            },
+            {
+              "id": "648d64e6935c55a9",
+              "name": "Leader"
+            },
+            {
+              "id": "5b2da87965c368ed",
+              "name": "Pop Group"
+            }
+          ],
+          "output": {
+            "Listed": [
+              {
+                "id": "d5fc6e8b0c8658c6",
+                "name": "Species"
+              }
+            ]
+          }
+        },
+        {
+          "name": "SpyNetwork",
+          "input_contexts": [
+            {
+              "id": "4ada1377d53fe341",
+              "name": "Espionage Operation"
+            }
+          ],
+          "output": {
+            "Listed": [
+              {
+                "id": "7e7de830e9285018",
+                "name": "Spy Network"
+              }
+            ]
+          }
+        },
+        {
+          "name": "System",
+          "input_contexts": [
+            {
+              "id": "049e6a86df3744b9",
+              "name": "Astral Rift"
+            },
+            {
+              "id": "0b6bdd8d9527e045",
+              "name": "Bypass"
+            },
+            {
+              "id": "5f3cd1b06defb7ed",
+              "name": "Colony"
+            },
+            {
+              "id": "f1480ac2c6a5ae8c",
+              "name": "Dead Megastructure"
+            },
+            {
+              "id": "368b7977d48fe3b7",
+              "name": "First Contact"
+            },
+            {
+              "id": "28544e62c0d48e9c",
+              "name": "Fleet"
+            },
+            {
+              "id": "11412b4c7e434609",
+              "name": "Megastructure"
+            },
+            {
+              "id": "5620922355758cc1",
+              "name": "Planet"
+            }
+          ],
+          "output": {
+            "Listed": [
+              {
+                "id": "2e4442a60c237979",
+                "name": "System"
+              }
+            ]
+          }
+        },
+        {
+          "name": "THIS",
+          "input_contexts": [
+            {
+              "id": "87d30af8580460e9",
+              "name": "Base Scope"
+            }
+          ],
+          "output": "Various"
+        },
+        {
+          "name": "Target",
+          "input_contexts": [
+            {
+              "id": "5e031d639dc5781c",
+              "name": "Agreement"
+            },
+            {
+              "id": "7e7de830e9285018",
+              "name": "Spy Network"
+            }
+          ],
+          "output": {
+            "Listed": [
+              {
+                "id": "50e293199a841502",
+                "name": "Country"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Target",
+          "input_contexts": [
+            {
+              "id": "4ada1377d53fe341",
+              "name": "Espionage Operation"
+            },
+            {
+              "id": "c9e0b05bb1b55553",
+              "name": "Situation"
+            }
+          ],
+          "output": "Various"
+        },
+        {
+          "name": "Target",
+          "input_contexts": [
+            {
+              "id": "8820cae06c510873",
+              "name": "Dead Situation"
+            }
+          ],
+          "output": "Unresolved"
+        },
+        {
+          "name": "Third_party",
+          "input_contexts": [
+            {
+              "id": "d8304936ecfa7522",
+              "name": "Diplomacy"
+            }
+          ],
+          "output": "Unchanged"
+        },
+        {
+          "name": "This",
+          "input_contexts": [
+            {
+              "id": "87d30af8580460e9",
+              "name": "Base Scope"
+            }
+          ],
+          "output": "Various"
+        },
+        {
+          "name": "from",
+          "input_contexts": [
+            {
+              "id": "87d30af8580460e9",
+              "name": "Base Scope"
+            }
+          ],
+          "output": "Various"
+        },
+        {
+          "name": "prev",
+          "input_contexts": [
+            {
+              "id": "87d30af8580460e9",
+              "name": "Base Scope"
+            }
+          ],
+          "output": "Various"
+        },
+        {
+          "name": "root",
+          "input_contexts": [
+            {
+              "id": "87d30af8580460e9",
+              "name": "Base Scope"
+            }
+          ],
+          "output": "Various"
+        },
+        {
+          "name": "this",
+          "input_contexts": [
+            {
+              "id": "87d30af8580460e9",
+              "name": "Base Scope"
+            }
+          ],
+          "output": "Various"
+        }
+      ]
+    },
+    "completeness": "Partial",
+    "gaps": [
+      {
+        "kind": "UnresolvedPath",
+        "subject": "Planet",
+        "detail": "from context Deposit: the link function could not be followed (some-paths-leave-the-context-unchanged)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "EVENT_TARGET_0",
+        "detail": "from context Timeline Event: the link function could not be followed (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "EVENT_TARGET_1",
+        "detail": "from context Timeline Event: the link function could not be followed (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "EVENT_TARGET_2",
+        "detail": "from context Timeline Event: the link function could not be followed (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "EVENT_TARGET_3",
+        "detail": "from context Timeline Event: the link function could not be followed (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "EVENT_TARGET_4",
+        "detail": "from context Timeline Event: the link function could not be followed (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "EVENT_TARGET_5",
+        "detail": "from context Timeline Event: the link function could not be followed (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "EVENT_TARGET_6",
+        "detail": "from context Timeline Event: the link function could not be followed (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "EVENT_TARGET_7",
+        "detail": "from context Timeline Event: the link function could not be followed (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "EVENT_TARGET_8",
+        "detail": "from context Timeline Event: the link function could not be followed (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "EVENT_TARGET_9",
+        "detail": "from context Timeline Event: the link function could not be followed (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "Target",
+        "detail": "from context Dead Situation: the link function could not be followed (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "Owner",
+        "detail": "from context Dead Situation: the link function could not be followed (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "MainAttacker",
+        "detail": "from context Dead War: the link function could not be followed (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "MainDefender",
+        "detail": "from context Dead War: the link function could not be followed (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "Planet",
+        "detail": "from context Colony: the link function could not be followed (context-unknown)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "Ship",
+        "detail": "from context Colony: the link function could not be followed (context-unknown)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "EVENT_TARGET_0",
+        "detail": "from context Specimen: the link function could not be followed (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "EVENT_TARGET_1",
+        "detail": "from context Specimen: the link function could not be followed (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "EVENT_TARGET_2",
+        "detail": "from context Specimen: the link function could not be followed (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "EVENT_TARGET_3",
+        "detail": "from context Specimen: the link function could not be followed (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "EVENT_TARGET_4",
+        "detail": "from context Specimen: the link function could not be followed (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "EVENT_TARGET_5",
+        "detail": "from context Specimen: the link function could not be followed (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "EVENT_TARGET_6",
+        "detail": "from context Specimen: the link function could not be followed (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "EVENT_TARGET_7",
+        "detail": "from context Specimen: the link function could not be followed (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "EVENT_TARGET_8",
+        "detail": "from context Specimen: the link function could not be followed (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "EVENT_TARGET_9",
+        "detail": "from context Specimen: the link function could not be followed (path-limit)"
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": null,
+        "detail": "Unscoped command forms such as GetDate, and variable and date-flag lookups, are resolved outside the context tables."
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": null,
+        "detail": "Scripted localization that content defines is outside this method."
+      }
+    ],
+    "source": {
+      "build": "07988b4f1b865623becd7a61af1cae92e111be6515d341754af70f02107822cd",
+      "native_version": "0.1.0",
+      "method": "localization-declarations/v1",
+      "basis": "Declared"
+    }
+  }
+}

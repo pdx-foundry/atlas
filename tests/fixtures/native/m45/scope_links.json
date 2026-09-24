@@ -1,0 +1,3060 @@
+{
+  "Ok": {
+    "value": [
+      {
+        "name": "alliance",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "44b5e21fe5e593d7",
+              "name": "country"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "ca28f39ce7bd8f99",
+              "name": "federation"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "archaeological_site",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "8bb6b317643be13a",
+              "name": "megastructure"
+            },
+            {
+              "id": "37c52c03d3012e74",
+              "name": "planet"
+            },
+            {
+              "id": "69ead02b278522d1",
+              "name": "ship"
+            },
+            {
+              "id": "6dafeb9bcf25b500",
+              "name": "fleet"
+            },
+            {
+              "id": "5ab5fc854e81e429",
+              "name": "galactic_object"
+            },
+            {
+              "id": "35699745346d01d5",
+              "name": "ambient_object"
+            },
+            {
+              "id": "a28a4564ee636659",
+              "name": "starbase"
+            },
+            {
+              "id": "11dc2d9d9d7a92a5",
+              "name": "archaeological_site"
+            },
+            {
+              "id": "d3c8f1e8c2dbd149",
+              "name": "debris"
+            },
+            {
+              "id": "df2999a8f7dba6f6",
+              "name": "colony"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "11dc2d9d9d7a92a5",
+              "name": "archaeological_site"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "army_leader",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "37c52c03d3012e74",
+              "name": "planet"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "b09e3ce96bcb18ba",
+              "name": "leader"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "assembling_species",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "37c52c03d3012e74",
+              "name": "planet"
+            },
+            {
+              "id": "69ead02b278522d1",
+              "name": "ship"
+            },
+            {
+              "id": "df2999a8f7dba6f6",
+              "name": "colony"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "43c74897fb1c97c8",
+              "name": "species"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "associated_federation",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "44b5e21fe5e593d7",
+              "name": "country"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "ca28f39ce7bd8f99",
+              "name": "federation"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "astral_rift",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "5ab5fc854e81e429",
+              "name": "galactic_object"
+            },
+            {
+              "id": "b09e3ce96bcb18ba",
+              "name": "leader"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "25453ebe741bae53",
+              "name": "astral_rift"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "attacker",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "87aef3284d14374e",
+              "name": "war"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "44b5e21fe5e593d7",
+              "name": "country"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "aura_owner",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "5ab5fc854e81e429",
+              "name": "galactic_object"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "44b5e21fe5e593d7",
+              "name": "country"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "background_colony",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "b09e3ce96bcb18ba",
+              "name": "leader"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "df2999a8f7dba6f6",
+              "name": "colony"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "background_planet",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "b09e3ce96bcb18ba",
+              "name": "leader"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "37c52c03d3012e74",
+              "name": "planet"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "branch_office_owner",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "37c52c03d3012e74",
+              "name": "planet"
+            },
+            {
+              "id": "69ead02b278522d1",
+              "name": "ship"
+            },
+            {
+              "id": "df2999a8f7dba6f6",
+              "name": "colony"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "44b5e21fe5e593d7",
+              "name": "country"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "built_species",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "44b5e21fe5e593d7",
+              "name": "country"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "43c74897fb1c97c8",
+              "name": "species"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "capital_scope",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "44b5e21fe5e593d7",
+              "name": "country"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "df2999a8f7dba6f6",
+              "name": "colony"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "capital_star",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "44b5e21fe5e593d7",
+              "name": "country"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "37c52c03d3012e74",
+              "name": "planet"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "carrier",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "37c52c03d3012e74",
+              "name": "planet"
+            },
+            {
+              "id": "69ead02b278522d1",
+              "name": "ship"
+            },
+            {
+              "id": "df2999a8f7dba6f6",
+              "name": "colony"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "37c52c03d3012e74",
+              "name": "planet"
+            },
+            {
+              "id": "69ead02b278522d1",
+              "name": "ship"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "colony",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "8bb6b317643be13a",
+              "name": "megastructure"
+            },
+            {
+              "id": "37c52c03d3012e74",
+              "name": "planet"
+            },
+            {
+              "id": "69ead02b278522d1",
+              "name": "ship"
+            },
+            {
+              "id": "1a26ff288266684f",
+              "name": "pop_group"
+            },
+            {
+              "id": "b09e3ce96bcb18ba",
+              "name": "leader"
+            },
+            {
+              "id": "b99e91b88a72f0c9",
+              "name": "army"
+            },
+            {
+              "id": "a28a4564ee636659",
+              "name": "starbase"
+            },
+            {
+              "id": "0011157fe12955bd",
+              "name": "deposit"
+            },
+            {
+              "id": "11dc2d9d9d7a92a5",
+              "name": "archaeological_site"
+            },
+            {
+              "id": "f8d05db7c8d3e2b2",
+              "name": "pop job"
+            },
+            {
+              "id": "df2999a8f7dba6f6",
+              "name": "colony"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "df2999a8f7dba6f6",
+              "name": "colony"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "contact_country",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "824da242282a19c5",
+              "name": "first_contact"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "44b5e21fe5e593d7",
+              "name": "country"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "controller",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "37c52c03d3012e74",
+              "name": "planet"
+            },
+            {
+              "id": "69ead02b278522d1",
+              "name": "ship"
+            },
+            {
+              "id": "6dafeb9bcf25b500",
+              "name": "fleet"
+            },
+            {
+              "id": "a28a4564ee636659",
+              "name": "starbase"
+            },
+            {
+              "id": "d3c8f1e8c2dbd149",
+              "name": "debris"
+            },
+            {
+              "id": "df2999a8f7dba6f6",
+              "name": "colony"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "44b5e21fe5e593d7",
+              "name": "country"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "creator",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "b09e3ce96bcb18ba",
+              "name": "leader"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "44b5e21fe5e593d7",
+              "name": "country"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "declining_species",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "37c52c03d3012e74",
+              "name": "planet"
+            },
+            {
+              "id": "69ead02b278522d1",
+              "name": "ship"
+            },
+            {
+              "id": "df2999a8f7dba6f6",
+              "name": "colony"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "43c74897fb1c97c8",
+              "name": "species"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "defender",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "87aef3284d14374e",
+              "name": "war"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "44b5e21fe5e593d7",
+              "name": "country"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "design",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "69ead02b278522d1",
+              "name": "ship"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "74623e53f7b0ff4f",
+              "name": "design"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "envoy_location_country",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "b09e3ce96bcb18ba",
+              "name": "leader"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "44b5e21fe5e593d7",
+              "name": "country"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "event_target",
+        "input_scopes": "Any",
+        "output_scope": "Various",
+        "data": {
+          "Prefix": "event_target:"
+        }
+      },
+      {
+        "name": "excavator_fleet",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "11dc2d9d9d7a92a5",
+              "name": "archaeological_site"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "6dafeb9bcf25b500",
+              "name": "fleet"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "explorer",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "25453ebe741bae53",
+              "name": "astral_rift"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "44b5e21fe5e593d7",
+              "name": "country"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "federation",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "44b5e21fe5e593d7",
+              "name": "country"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "ca28f39ce7bd8f99",
+              "name": "federation"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "federation_leader",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "ca28f39ce7bd8f99",
+              "name": "federation"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "44b5e21fe5e593d7",
+              "name": "country"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "first_damaging_country",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "6dafeb9bcf25b500",
+              "name": "fleet"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "44b5e21fe5e593d7",
+              "name": "country"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "fleet",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "69ead02b278522d1",
+              "name": "ship"
+            },
+            {
+              "id": "6dafeb9bcf25b500",
+              "name": "fleet"
+            },
+            {
+              "id": "b09e3ce96bcb18ba",
+              "name": "leader"
+            },
+            {
+              "id": "b99e91b88a72f0c9",
+              "name": "army"
+            },
+            {
+              "id": "a28a4564ee636659",
+              "name": "starbase"
+            },
+            {
+              "id": "25453ebe741bae53",
+              "name": "astral_rift"
+            },
+            {
+              "id": "df2999a8f7dba6f6",
+              "name": "colony"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "6dafeb9bcf25b500",
+              "name": "fleet"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "founder_species",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "44b5e21fe5e593d7",
+              "name": "country"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "43c74897fb1c97c8",
+              "name": "species"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "from",
+        "input_scopes": "Any",
+        "output_scope": "Various",
+        "data": "None"
+      },
+      {
+        "name": "fromfrom",
+        "input_scopes": "Any",
+        "output_scope": "Various",
+        "data": "None"
+      },
+      {
+        "name": "fromfromfrom",
+        "input_scopes": "Any",
+        "output_scope": "Various",
+        "data": "None"
+      },
+      {
+        "name": "fromfromfromfrom",
+        "input_scopes": "Any",
+        "output_scope": "Various",
+        "data": "None"
+      },
+      {
+        "name": "galactic_custodian",
+        "input_scopes": "Any",
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "44b5e21fe5e593d7",
+              "name": "country"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "galactic_emperor",
+        "input_scopes": "Any",
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "44b5e21fe5e593d7",
+              "name": "country"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "growing_species",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "37c52c03d3012e74",
+              "name": "planet"
+            },
+            {
+              "id": "69ead02b278522d1",
+              "name": "ship"
+            },
+            {
+              "id": "df2999a8f7dba6f6",
+              "name": "colony"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "43c74897fb1c97c8",
+              "name": "species"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "heir",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "8bb6b317643be13a",
+              "name": "megastructure"
+            },
+            {
+              "id": "37c52c03d3012e74",
+              "name": "planet"
+            },
+            {
+              "id": "44b5e21fe5e593d7",
+              "name": "country"
+            },
+            {
+              "id": "69ead02b278522d1",
+              "name": "ship"
+            },
+            {
+              "id": "1a26ff288266684f",
+              "name": "pop_group"
+            },
+            {
+              "id": "6dafeb9bcf25b500",
+              "name": "fleet"
+            },
+            {
+              "id": "5ab5fc854e81e429",
+              "name": "galactic_object"
+            },
+            {
+              "id": "b09e3ce96bcb18ba",
+              "name": "leader"
+            },
+            {
+              "id": "b99e91b88a72f0c9",
+              "name": "army"
+            },
+            {
+              "id": "9ee8b41b5ee073ea",
+              "name": "bypass"
+            },
+            {
+              "id": "87fbe101af3061e9",
+              "name": "pop_faction"
+            },
+            {
+              "id": "a28a4564ee636659",
+              "name": "starbase"
+            },
+            {
+              "id": "0011157fe12955bd",
+              "name": "deposit"
+            },
+            {
+              "id": "a88e1da49bb109c5",
+              "name": "sector"
+            },
+            {
+              "id": "11dc2d9d9d7a92a5",
+              "name": "archaeological_site"
+            },
+            {
+              "id": "824da242282a19c5",
+              "name": "first_contact"
+            },
+            {
+              "id": "e018d51ead1b8110",
+              "name": "spy_network"
+            },
+            {
+              "id": "8dbe31e3bea11d4c",
+              "name": "espionage_operation"
+            },
+            {
+              "id": "d3b52243a924d8c9",
+              "name": "agreement"
+            },
+            {
+              "id": "6746d8af11c99b62",
+              "name": "situation"
+            },
+            {
+              "id": "d3c8f1e8c2dbd149",
+              "name": "debris"
+            },
+            {
+              "id": "25453ebe741bae53",
+              "name": "astral_rift"
+            },
+            {
+              "id": "df2999a8f7dba6f6",
+              "name": "colony"
+            },
+            {
+              "id": "8bd99f27f3d0cfb9",
+              "name": "mission"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "b09e3ce96bcb18ba",
+              "name": "leader"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "home_colony",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "44b5e21fe5e593d7",
+              "name": "country"
+            },
+            {
+              "id": "1a26ff288266684f",
+              "name": "pop_group"
+            },
+            {
+              "id": "b09e3ce96bcb18ba",
+              "name": "leader"
+            },
+            {
+              "id": "43c74897fb1c97c8",
+              "name": "species"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "df2999a8f7dba6f6",
+              "name": "colony"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "home_planet",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "44b5e21fe5e593d7",
+              "name": "country"
+            },
+            {
+              "id": "1a26ff288266684f",
+              "name": "pop_group"
+            },
+            {
+              "id": "b09e3ce96bcb18ba",
+              "name": "leader"
+            },
+            {
+              "id": "43c74897fb1c97c8",
+              "name": "species"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "37c52c03d3012e74",
+              "name": "planet"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "instigator",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "87aef3284d14374e",
+              "name": "war"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "44b5e21fe5e593d7",
+              "name": "country"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "issuer",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "8bd99f27f3d0cfb9",
+              "name": "mission"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "44b5e21fe5e593d7",
+              "name": "country"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "last_added_deposit",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "37c52c03d3012e74",
+              "name": "planet"
+            },
+            {
+              "id": "69ead02b278522d1",
+              "name": "ship"
+            },
+            {
+              "id": "df2999a8f7dba6f6",
+              "name": "colony"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "0011157fe12955bd",
+              "name": "deposit"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "last_created_ambient_object",
+        "input_scopes": "Any",
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "35699745346d01d5",
+              "name": "ambient_object"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "last_created_army",
+        "input_scopes": "Any",
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "b99e91b88a72f0c9",
+              "name": "army"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "last_created_cosmic_storm",
+        "input_scopes": "Any",
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "dfcaad2394c11f8f",
+              "name": "cosmic_storm"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "last_created_cosmic_storm_influence_field",
+        "input_scopes": "Any",
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "66096de61014ff9a",
+              "name": "cosmic_storm_influence_field"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "last_created_country",
+        "input_scopes": "Any",
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "44b5e21fe5e593d7",
+              "name": "country"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "last_created_design",
+        "input_scopes": "Any",
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "74623e53f7b0ff4f",
+              "name": "design"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "last_created_fleet",
+        "input_scopes": "Any",
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "6dafeb9bcf25b500",
+              "name": "fleet"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "last_created_leader",
+        "input_scopes": "Any",
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "b09e3ce96bcb18ba",
+              "name": "leader"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "last_created_pop_faction",
+        "input_scopes": "Any",
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "87fbe101af3061e9",
+              "name": "pop_faction"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "last_created_ship",
+        "input_scopes": "Any",
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "69ead02b278522d1",
+              "name": "ship"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "last_created_species",
+        "input_scopes": "Any",
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "43c74897fb1c97c8",
+              "name": "species"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "last_created_system",
+        "input_scopes": "Any",
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "5ab5fc854e81e429",
+              "name": "galactic_object"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "leader",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "37c52c03d3012e74",
+              "name": "planet"
+            },
+            {
+              "id": "44b5e21fe5e593d7",
+              "name": "country"
+            },
+            {
+              "id": "69ead02b278522d1",
+              "name": "ship"
+            },
+            {
+              "id": "6dafeb9bcf25b500",
+              "name": "fleet"
+            },
+            {
+              "id": "b09e3ce96bcb18ba",
+              "name": "leader"
+            },
+            {
+              "id": "b99e91b88a72f0c9",
+              "name": "army"
+            },
+            {
+              "id": "87fbe101af3061e9",
+              "name": "pop_faction"
+            },
+            {
+              "id": "ca28f39ce7bd8f99",
+              "name": "federation"
+            },
+            {
+              "id": "11dc2d9d9d7a92a5",
+              "name": "archaeological_site"
+            },
+            {
+              "id": "824da242282a19c5",
+              "name": "first_contact"
+            },
+            {
+              "id": "e018d51ead1b8110",
+              "name": "spy_network"
+            },
+            {
+              "id": "8dbe31e3bea11d4c",
+              "name": "espionage_operation"
+            },
+            {
+              "id": "25453ebe741bae53",
+              "name": "astral_rift"
+            },
+            {
+              "id": "df2999a8f7dba6f6",
+              "name": "colony"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "b09e3ce96bcb18ba",
+              "name": "leader"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "lock_country",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "9ee8b41b5ee073ea",
+              "name": "bypass"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "44b5e21fe5e593d7",
+              "name": "country"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "mining_station",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "37c52c03d3012e74",
+              "name": "planet"
+            },
+            {
+              "id": "69ead02b278522d1",
+              "name": "ship"
+            },
+            {
+              "id": "df2999a8f7dba6f6",
+              "name": "colony"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "6dafeb9bcf25b500",
+              "name": "fleet"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "no_scope",
+        "input_scopes": "Any",
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "f9f8e203aa587efa",
+              "name": "no_scope"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "observation_outpost",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "37c52c03d3012e74",
+              "name": "planet"
+            },
+            {
+              "id": "69ead02b278522d1",
+              "name": "ship"
+            },
+            {
+              "id": "df2999a8f7dba6f6",
+              "name": "colony"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "6dafeb9bcf25b500",
+              "name": "fleet"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "observation_outpost_owner",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "37c52c03d3012e74",
+              "name": "planet"
+            },
+            {
+              "id": "69ead02b278522d1",
+              "name": "ship"
+            },
+            {
+              "id": "df2999a8f7dba6f6",
+              "name": "colony"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "44b5e21fe5e593d7",
+              "name": "country"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "orbit",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "37c52c03d3012e74",
+              "name": "planet"
+            },
+            {
+              "id": "69ead02b278522d1",
+              "name": "ship"
+            },
+            {
+              "id": "6dafeb9bcf25b500",
+              "name": "fleet"
+            },
+            {
+              "id": "b99e91b88a72f0c9",
+              "name": "army"
+            },
+            {
+              "id": "a28a4564ee636659",
+              "name": "starbase"
+            },
+            {
+              "id": "df2999a8f7dba6f6",
+              "name": "colony"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "37c52c03d3012e74",
+              "name": "planet"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "orbital_defence",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "37c52c03d3012e74",
+              "name": "planet"
+            },
+            {
+              "id": "69ead02b278522d1",
+              "name": "ship"
+            },
+            {
+              "id": "df2999a8f7dba6f6",
+              "name": "colony"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "6dafeb9bcf25b500",
+              "name": "fleet"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "orbital_station",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "37c52c03d3012e74",
+              "name": "planet"
+            },
+            {
+              "id": "69ead02b278522d1",
+              "name": "ship"
+            },
+            {
+              "id": "df2999a8f7dba6f6",
+              "name": "colony"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "6dafeb9bcf25b500",
+              "name": "fleet"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "overlord",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "44b5e21fe5e593d7",
+              "name": "country"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "44b5e21fe5e593d7",
+              "name": "country"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "owner",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "8bb6b317643be13a",
+              "name": "megastructure"
+            },
+            {
+              "id": "37c52c03d3012e74",
+              "name": "planet"
+            },
+            {
+              "id": "44b5e21fe5e593d7",
+              "name": "country"
+            },
+            {
+              "id": "69ead02b278522d1",
+              "name": "ship"
+            },
+            {
+              "id": "1a26ff288266684f",
+              "name": "pop_group"
+            },
+            {
+              "id": "6dafeb9bcf25b500",
+              "name": "fleet"
+            },
+            {
+              "id": "5ab5fc854e81e429",
+              "name": "galactic_object"
+            },
+            {
+              "id": "b09e3ce96bcb18ba",
+              "name": "leader"
+            },
+            {
+              "id": "b99e91b88a72f0c9",
+              "name": "army"
+            },
+            {
+              "id": "9ee8b41b5ee073ea",
+              "name": "bypass"
+            },
+            {
+              "id": "87fbe101af3061e9",
+              "name": "pop_faction"
+            },
+            {
+              "id": "a28a4564ee636659",
+              "name": "starbase"
+            },
+            {
+              "id": "0011157fe12955bd",
+              "name": "deposit"
+            },
+            {
+              "id": "a88e1da49bb109c5",
+              "name": "sector"
+            },
+            {
+              "id": "11dc2d9d9d7a92a5",
+              "name": "archaeological_site"
+            },
+            {
+              "id": "824da242282a19c5",
+              "name": "first_contact"
+            },
+            {
+              "id": "e018d51ead1b8110",
+              "name": "spy_network"
+            },
+            {
+              "id": "8dbe31e3bea11d4c",
+              "name": "espionage_operation"
+            },
+            {
+              "id": "d3b52243a924d8c9",
+              "name": "agreement"
+            },
+            {
+              "id": "6746d8af11c99b62",
+              "name": "situation"
+            },
+            {
+              "id": "d3c8f1e8c2dbd149",
+              "name": "debris"
+            },
+            {
+              "id": "25453ebe741bae53",
+              "name": "astral_rift"
+            },
+            {
+              "id": "df2999a8f7dba6f6",
+              "name": "colony"
+            },
+            {
+              "id": "8bd99f27f3d0cfb9",
+              "name": "mission"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "44b5e21fe5e593d7",
+              "name": "country"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "owner_main_species",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "8bb6b317643be13a",
+              "name": "megastructure"
+            },
+            {
+              "id": "37c52c03d3012e74",
+              "name": "planet"
+            },
+            {
+              "id": "44b5e21fe5e593d7",
+              "name": "country"
+            },
+            {
+              "id": "69ead02b278522d1",
+              "name": "ship"
+            },
+            {
+              "id": "1a26ff288266684f",
+              "name": "pop_group"
+            },
+            {
+              "id": "6dafeb9bcf25b500",
+              "name": "fleet"
+            },
+            {
+              "id": "5ab5fc854e81e429",
+              "name": "galactic_object"
+            },
+            {
+              "id": "b09e3ce96bcb18ba",
+              "name": "leader"
+            },
+            {
+              "id": "b99e91b88a72f0c9",
+              "name": "army"
+            },
+            {
+              "id": "43c74897fb1c97c8",
+              "name": "species"
+            },
+            {
+              "id": "9ee8b41b5ee073ea",
+              "name": "bypass"
+            },
+            {
+              "id": "87fbe101af3061e9",
+              "name": "pop_faction"
+            },
+            {
+              "id": "a28a4564ee636659",
+              "name": "starbase"
+            },
+            {
+              "id": "0011157fe12955bd",
+              "name": "deposit"
+            },
+            {
+              "id": "a88e1da49bb109c5",
+              "name": "sector"
+            },
+            {
+              "id": "11dc2d9d9d7a92a5",
+              "name": "archaeological_site"
+            },
+            {
+              "id": "824da242282a19c5",
+              "name": "first_contact"
+            },
+            {
+              "id": "e018d51ead1b8110",
+              "name": "spy_network"
+            },
+            {
+              "id": "8dbe31e3bea11d4c",
+              "name": "espionage_operation"
+            },
+            {
+              "id": "d3b52243a924d8c9",
+              "name": "agreement"
+            },
+            {
+              "id": "6746d8af11c99b62",
+              "name": "situation"
+            },
+            {
+              "id": "d3c8f1e8c2dbd149",
+              "name": "debris"
+            },
+            {
+              "id": "25453ebe741bae53",
+              "name": "astral_rift"
+            },
+            {
+              "id": "df2999a8f7dba6f6",
+              "name": "colony"
+            },
+            {
+              "id": "8bd99f27f3d0cfb9",
+              "name": "mission"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "43c74897fb1c97c8",
+              "name": "species"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "owner_or_space_owner",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "8bb6b317643be13a",
+              "name": "megastructure"
+            },
+            {
+              "id": "37c52c03d3012e74",
+              "name": "planet"
+            },
+            {
+              "id": "44b5e21fe5e593d7",
+              "name": "country"
+            },
+            {
+              "id": "69ead02b278522d1",
+              "name": "ship"
+            },
+            {
+              "id": "6dafeb9bcf25b500",
+              "name": "fleet"
+            },
+            {
+              "id": "5ab5fc854e81e429",
+              "name": "galactic_object"
+            },
+            {
+              "id": "b99e91b88a72f0c9",
+              "name": "army"
+            },
+            {
+              "id": "a28a4564ee636659",
+              "name": "starbase"
+            },
+            {
+              "id": "11dc2d9d9d7a92a5",
+              "name": "archaeological_site"
+            },
+            {
+              "id": "e018d51ead1b8110",
+              "name": "spy_network"
+            },
+            {
+              "id": "d3c8f1e8c2dbd149",
+              "name": "debris"
+            },
+            {
+              "id": "df2999a8f7dba6f6",
+              "name": "colony"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "44b5e21fe5e593d7",
+              "name": "country"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "owner_species",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "8bb6b317643be13a",
+              "name": "megastructure"
+            },
+            {
+              "id": "37c52c03d3012e74",
+              "name": "planet"
+            },
+            {
+              "id": "44b5e21fe5e593d7",
+              "name": "country"
+            },
+            {
+              "id": "69ead02b278522d1",
+              "name": "ship"
+            },
+            {
+              "id": "1a26ff288266684f",
+              "name": "pop_group"
+            },
+            {
+              "id": "6dafeb9bcf25b500",
+              "name": "fleet"
+            },
+            {
+              "id": "5ab5fc854e81e429",
+              "name": "galactic_object"
+            },
+            {
+              "id": "b09e3ce96bcb18ba",
+              "name": "leader"
+            },
+            {
+              "id": "b99e91b88a72f0c9",
+              "name": "army"
+            },
+            {
+              "id": "43c74897fb1c97c8",
+              "name": "species"
+            },
+            {
+              "id": "9ee8b41b5ee073ea",
+              "name": "bypass"
+            },
+            {
+              "id": "87fbe101af3061e9",
+              "name": "pop_faction"
+            },
+            {
+              "id": "a28a4564ee636659",
+              "name": "starbase"
+            },
+            {
+              "id": "0011157fe12955bd",
+              "name": "deposit"
+            },
+            {
+              "id": "a88e1da49bb109c5",
+              "name": "sector"
+            },
+            {
+              "id": "11dc2d9d9d7a92a5",
+              "name": "archaeological_site"
+            },
+            {
+              "id": "824da242282a19c5",
+              "name": "first_contact"
+            },
+            {
+              "id": "e018d51ead1b8110",
+              "name": "spy_network"
+            },
+            {
+              "id": "8dbe31e3bea11d4c",
+              "name": "espionage_operation"
+            },
+            {
+              "id": "d3b52243a924d8c9",
+              "name": "agreement"
+            },
+            {
+              "id": "6746d8af11c99b62",
+              "name": "situation"
+            },
+            {
+              "id": "d3c8f1e8c2dbd149",
+              "name": "debris"
+            },
+            {
+              "id": "25453ebe741bae53",
+              "name": "astral_rift"
+            },
+            {
+              "id": "df2999a8f7dba6f6",
+              "name": "colony"
+            },
+            {
+              "id": "8bd99f27f3d0cfb9",
+              "name": "mission"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "43c74897fb1c97c8",
+              "name": "species"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "parameter",
+        "input_scopes": "Any",
+        "output_scope": "Various",
+        "data": {
+          "Prefix": "parameter:"
+        }
+      },
+      {
+        "name": "planet",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "8bb6b317643be13a",
+              "name": "megastructure"
+            },
+            {
+              "id": "37c52c03d3012e74",
+              "name": "planet"
+            },
+            {
+              "id": "69ead02b278522d1",
+              "name": "ship"
+            },
+            {
+              "id": "1a26ff288266684f",
+              "name": "pop_group"
+            },
+            {
+              "id": "b09e3ce96bcb18ba",
+              "name": "leader"
+            },
+            {
+              "id": "b99e91b88a72f0c9",
+              "name": "army"
+            },
+            {
+              "id": "a28a4564ee636659",
+              "name": "starbase"
+            },
+            {
+              "id": "0011157fe12955bd",
+              "name": "deposit"
+            },
+            {
+              "id": "11dc2d9d9d7a92a5",
+              "name": "archaeological_site"
+            },
+            {
+              "id": "f8d05db7c8d3e2b2",
+              "name": "pop job"
+            },
+            {
+              "id": "df2999a8f7dba6f6",
+              "name": "colony"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "37c52c03d3012e74",
+              "name": "planet"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "planet_owner",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "8bb6b317643be13a",
+              "name": "megastructure"
+            },
+            {
+              "id": "37c52c03d3012e74",
+              "name": "planet"
+            },
+            {
+              "id": "69ead02b278522d1",
+              "name": "ship"
+            },
+            {
+              "id": "1a26ff288266684f",
+              "name": "pop_group"
+            },
+            {
+              "id": "b09e3ce96bcb18ba",
+              "name": "leader"
+            },
+            {
+              "id": "b99e91b88a72f0c9",
+              "name": "army"
+            },
+            {
+              "id": "a28a4564ee636659",
+              "name": "starbase"
+            },
+            {
+              "id": "0011157fe12955bd",
+              "name": "deposit"
+            },
+            {
+              "id": "11dc2d9d9d7a92a5",
+              "name": "archaeological_site"
+            },
+            {
+              "id": "f8d05db7c8d3e2b2",
+              "name": "pop job"
+            },
+            {
+              "id": "df2999a8f7dba6f6",
+              "name": "colony"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "44b5e21fe5e593d7",
+              "name": "country"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "pop_faction",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "1a26ff288266684f",
+              "name": "pop_group"
+            },
+            {
+              "id": "b09e3ce96bcb18ba",
+              "name": "leader"
+            },
+            {
+              "id": "87fbe101af3061e9",
+              "name": "pop_faction"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "87fbe101af3061e9",
+              "name": "pop_faction"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "prev",
+        "input_scopes": "Any",
+        "output_scope": "Various",
+        "data": "None"
+      },
+      {
+        "name": "prevprev",
+        "input_scopes": "Any",
+        "output_scope": "Various",
+        "data": "None"
+      },
+      {
+        "name": "prevprevprev",
+        "input_scopes": "Any",
+        "output_scope": "Various",
+        "data": "None"
+      },
+      {
+        "name": "prevprevprevprev",
+        "input_scopes": "Any",
+        "output_scope": "Various",
+        "data": "None"
+      },
+      {
+        "name": "research_station",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "37c52c03d3012e74",
+              "name": "planet"
+            },
+            {
+              "id": "69ead02b278522d1",
+              "name": "ship"
+            },
+            {
+              "id": "df2999a8f7dba6f6",
+              "name": "colony"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "6dafeb9bcf25b500",
+              "name": "fleet"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "reverse_first_contact",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "824da242282a19c5",
+              "name": "first_contact"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "824da242282a19c5",
+              "name": "first_contact"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "root",
+        "input_scopes": "Any",
+        "output_scope": "Various",
+        "data": "None"
+      },
+      {
+        "name": "ruler",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "8bb6b317643be13a",
+              "name": "megastructure"
+            },
+            {
+              "id": "37c52c03d3012e74",
+              "name": "planet"
+            },
+            {
+              "id": "44b5e21fe5e593d7",
+              "name": "country"
+            },
+            {
+              "id": "69ead02b278522d1",
+              "name": "ship"
+            },
+            {
+              "id": "1a26ff288266684f",
+              "name": "pop_group"
+            },
+            {
+              "id": "6dafeb9bcf25b500",
+              "name": "fleet"
+            },
+            {
+              "id": "5ab5fc854e81e429",
+              "name": "galactic_object"
+            },
+            {
+              "id": "b09e3ce96bcb18ba",
+              "name": "leader"
+            },
+            {
+              "id": "b99e91b88a72f0c9",
+              "name": "army"
+            },
+            {
+              "id": "9ee8b41b5ee073ea",
+              "name": "bypass"
+            },
+            {
+              "id": "87fbe101af3061e9",
+              "name": "pop_faction"
+            },
+            {
+              "id": "a28a4564ee636659",
+              "name": "starbase"
+            },
+            {
+              "id": "0011157fe12955bd",
+              "name": "deposit"
+            },
+            {
+              "id": "a88e1da49bb109c5",
+              "name": "sector"
+            },
+            {
+              "id": "11dc2d9d9d7a92a5",
+              "name": "archaeological_site"
+            },
+            {
+              "id": "824da242282a19c5",
+              "name": "first_contact"
+            },
+            {
+              "id": "e018d51ead1b8110",
+              "name": "spy_network"
+            },
+            {
+              "id": "8dbe31e3bea11d4c",
+              "name": "espionage_operation"
+            },
+            {
+              "id": "d3b52243a924d8c9",
+              "name": "agreement"
+            },
+            {
+              "id": "6746d8af11c99b62",
+              "name": "situation"
+            },
+            {
+              "id": "d3c8f1e8c2dbd149",
+              "name": "debris"
+            },
+            {
+              "id": "25453ebe741bae53",
+              "name": "astral_rift"
+            },
+            {
+              "id": "df2999a8f7dba6f6",
+              "name": "colony"
+            },
+            {
+              "id": "8bd99f27f3d0cfb9",
+              "name": "mission"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "b09e3ce96bcb18ba",
+              "name": "leader"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "second_damaging_country",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "6dafeb9bcf25b500",
+              "name": "fleet"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "44b5e21fe5e593d7",
+              "name": "country"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "sector",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "8bb6b317643be13a",
+              "name": "megastructure"
+            },
+            {
+              "id": "37c52c03d3012e74",
+              "name": "planet"
+            },
+            {
+              "id": "69ead02b278522d1",
+              "name": "ship"
+            },
+            {
+              "id": "1a26ff288266684f",
+              "name": "pop_group"
+            },
+            {
+              "id": "6dafeb9bcf25b500",
+              "name": "fleet"
+            },
+            {
+              "id": "5ab5fc854e81e429",
+              "name": "galactic_object"
+            },
+            {
+              "id": "b09e3ce96bcb18ba",
+              "name": "leader"
+            },
+            {
+              "id": "b99e91b88a72f0c9",
+              "name": "army"
+            },
+            {
+              "id": "35699745346d01d5",
+              "name": "ambient_object"
+            },
+            {
+              "id": "9ee8b41b5ee073ea",
+              "name": "bypass"
+            },
+            {
+              "id": "a28a4564ee636659",
+              "name": "starbase"
+            },
+            {
+              "id": "0011157fe12955bd",
+              "name": "deposit"
+            },
+            {
+              "id": "a88e1da49bb109c5",
+              "name": "sector"
+            },
+            {
+              "id": "11dc2d9d9d7a92a5",
+              "name": "archaeological_site"
+            },
+            {
+              "id": "824da242282a19c5",
+              "name": "first_contact"
+            },
+            {
+              "id": "d3c8f1e8c2dbd149",
+              "name": "debris"
+            },
+            {
+              "id": "df2999a8f7dba6f6",
+              "name": "colony"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "a88e1da49bb109c5",
+              "name": "sector"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "sector_capital",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "a88e1da49bb109c5",
+              "name": "sector"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "df2999a8f7dba6f6",
+              "name": "colony"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "ship",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "37c52c03d3012e74",
+              "name": "planet"
+            },
+            {
+              "id": "69ead02b278522d1",
+              "name": "ship"
+            },
+            {
+              "id": "a28a4564ee636659",
+              "name": "starbase"
+            },
+            {
+              "id": "df2999a8f7dba6f6",
+              "name": "colony"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "69ead02b278522d1",
+              "name": "ship"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "ship_growth_stage",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "69ead02b278522d1",
+              "name": "ship"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "431d271ac195067e",
+              "name": "ship_growth_stage"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "solar_system",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "8bb6b317643be13a",
+              "name": "megastructure"
+            },
+            {
+              "id": "37c52c03d3012e74",
+              "name": "planet"
+            },
+            {
+              "id": "44b5e21fe5e593d7",
+              "name": "country"
+            },
+            {
+              "id": "69ead02b278522d1",
+              "name": "ship"
+            },
+            {
+              "id": "1a26ff288266684f",
+              "name": "pop_group"
+            },
+            {
+              "id": "6dafeb9bcf25b500",
+              "name": "fleet"
+            },
+            {
+              "id": "5ab5fc854e81e429",
+              "name": "galactic_object"
+            },
+            {
+              "id": "b09e3ce96bcb18ba",
+              "name": "leader"
+            },
+            {
+              "id": "b99e91b88a72f0c9",
+              "name": "army"
+            },
+            {
+              "id": "35699745346d01d5",
+              "name": "ambient_object"
+            },
+            {
+              "id": "9ee8b41b5ee073ea",
+              "name": "bypass"
+            },
+            {
+              "id": "a28a4564ee636659",
+              "name": "starbase"
+            },
+            {
+              "id": "0011157fe12955bd",
+              "name": "deposit"
+            },
+            {
+              "id": "11dc2d9d9d7a92a5",
+              "name": "archaeological_site"
+            },
+            {
+              "id": "824da242282a19c5",
+              "name": "first_contact"
+            },
+            {
+              "id": "d3c8f1e8c2dbd149",
+              "name": "debris"
+            },
+            {
+              "id": "25453ebe741bae53",
+              "name": "astral_rift"
+            },
+            {
+              "id": "df2999a8f7dba6f6",
+              "name": "colony"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "5ab5fc854e81e429",
+              "name": "galactic_object"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "space_owner",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "8bb6b317643be13a",
+              "name": "megastructure"
+            },
+            {
+              "id": "37c52c03d3012e74",
+              "name": "planet"
+            },
+            {
+              "id": "44b5e21fe5e593d7",
+              "name": "country"
+            },
+            {
+              "id": "69ead02b278522d1",
+              "name": "ship"
+            },
+            {
+              "id": "6dafeb9bcf25b500",
+              "name": "fleet"
+            },
+            {
+              "id": "5ab5fc854e81e429",
+              "name": "galactic_object"
+            },
+            {
+              "id": "b99e91b88a72f0c9",
+              "name": "army"
+            },
+            {
+              "id": "35699745346d01d5",
+              "name": "ambient_object"
+            },
+            {
+              "id": "a28a4564ee636659",
+              "name": "starbase"
+            },
+            {
+              "id": "11dc2d9d9d7a92a5",
+              "name": "archaeological_site"
+            },
+            {
+              "id": "e018d51ead1b8110",
+              "name": "spy_network"
+            },
+            {
+              "id": "d3c8f1e8c2dbd149",
+              "name": "debris"
+            },
+            {
+              "id": "df2999a8f7dba6f6",
+              "name": "colony"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "44b5e21fe5e593d7",
+              "name": "country"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "spawner_planet",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "b99e91b88a72f0c9",
+              "name": "army"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "37c52c03d3012e74",
+              "name": "planet"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "species",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "44b5e21fe5e593d7",
+              "name": "country"
+            },
+            {
+              "id": "69ead02b278522d1",
+              "name": "ship"
+            },
+            {
+              "id": "1a26ff288266684f",
+              "name": "pop_group"
+            },
+            {
+              "id": "b09e3ce96bcb18ba",
+              "name": "leader"
+            },
+            {
+              "id": "b99e91b88a72f0c9",
+              "name": "army"
+            },
+            {
+              "id": "43c74897fb1c97c8",
+              "name": "species"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "43c74897fb1c97c8",
+              "name": "species"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "spynetwork",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "b09e3ce96bcb18ba",
+              "name": "leader"
+            },
+            {
+              "id": "8dbe31e3bea11d4c",
+              "name": "espionage_operation"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "e018d51ead1b8110",
+              "name": "spy_network"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "star",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "8bb6b317643be13a",
+              "name": "megastructure"
+            },
+            {
+              "id": "37c52c03d3012e74",
+              "name": "planet"
+            },
+            {
+              "id": "69ead02b278522d1",
+              "name": "ship"
+            },
+            {
+              "id": "6dafeb9bcf25b500",
+              "name": "fleet"
+            },
+            {
+              "id": "5ab5fc854e81e429",
+              "name": "galactic_object"
+            },
+            {
+              "id": "35699745346d01d5",
+              "name": "ambient_object"
+            },
+            {
+              "id": "9ee8b41b5ee073ea",
+              "name": "bypass"
+            },
+            {
+              "id": "a28a4564ee636659",
+              "name": "starbase"
+            },
+            {
+              "id": "11dc2d9d9d7a92a5",
+              "name": "archaeological_site"
+            },
+            {
+              "id": "824da242282a19c5",
+              "name": "first_contact"
+            },
+            {
+              "id": "d3c8f1e8c2dbd149",
+              "name": "debris"
+            },
+            {
+              "id": "25453ebe741bae53",
+              "name": "astral_rift"
+            },
+            {
+              "id": "df2999a8f7dba6f6",
+              "name": "colony"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "37c52c03d3012e74",
+              "name": "planet"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "starbase",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "37c52c03d3012e74",
+              "name": "planet"
+            },
+            {
+              "id": "69ead02b278522d1",
+              "name": "ship"
+            },
+            {
+              "id": "6dafeb9bcf25b500",
+              "name": "fleet"
+            },
+            {
+              "id": "5ab5fc854e81e429",
+              "name": "galactic_object"
+            },
+            {
+              "id": "a28a4564ee636659",
+              "name": "starbase"
+            },
+            {
+              "id": "df2999a8f7dba6f6",
+              "name": "colony"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "a28a4564ee636659",
+              "name": "starbase"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "storm_influence_field",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "5ab5fc854e81e429",
+              "name": "galactic_object"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "66096de61014ff9a",
+              "name": "cosmic_storm_influence_field"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "system_star",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "8bb6b317643be13a",
+              "name": "megastructure"
+            },
+            {
+              "id": "37c52c03d3012e74",
+              "name": "planet"
+            },
+            {
+              "id": "44b5e21fe5e593d7",
+              "name": "country"
+            },
+            {
+              "id": "69ead02b278522d1",
+              "name": "ship"
+            },
+            {
+              "id": "1a26ff288266684f",
+              "name": "pop_group"
+            },
+            {
+              "id": "6dafeb9bcf25b500",
+              "name": "fleet"
+            },
+            {
+              "id": "5ab5fc854e81e429",
+              "name": "galactic_object"
+            },
+            {
+              "id": "b09e3ce96bcb18ba",
+              "name": "leader"
+            },
+            {
+              "id": "b99e91b88a72f0c9",
+              "name": "army"
+            },
+            {
+              "id": "35699745346d01d5",
+              "name": "ambient_object"
+            },
+            {
+              "id": "9ee8b41b5ee073ea",
+              "name": "bypass"
+            },
+            {
+              "id": "a28a4564ee636659",
+              "name": "starbase"
+            },
+            {
+              "id": "0011157fe12955bd",
+              "name": "deposit"
+            },
+            {
+              "id": "11dc2d9d9d7a92a5",
+              "name": "archaeological_site"
+            },
+            {
+              "id": "824da242282a19c5",
+              "name": "first_contact"
+            },
+            {
+              "id": "d3c8f1e8c2dbd149",
+              "name": "debris"
+            },
+            {
+              "id": "25453ebe741bae53",
+              "name": "astral_rift"
+            },
+            {
+              "id": "df2999a8f7dba6f6",
+              "name": "colony"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "37c52c03d3012e74",
+              "name": "planet"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "target",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "e018d51ead1b8110",
+              "name": "spy_network"
+            },
+            {
+              "id": "8dbe31e3bea11d4c",
+              "name": "espionage_operation"
+            },
+            {
+              "id": "d3b52243a924d8c9",
+              "name": "agreement"
+            },
+            {
+              "id": "6746d8af11c99b62",
+              "name": "situation"
+            }
+          ]
+        },
+        "output_scope": "Various",
+        "data": "None"
+      },
+      {
+        "name": "target_system",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "dfcaad2394c11f8f",
+              "name": "cosmic_storm"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "5ab5fc854e81e429",
+              "name": "galactic_object"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "third_damaging_country",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "6dafeb9bcf25b500",
+              "name": "fleet"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "44b5e21fe5e593d7",
+              "name": "country"
+            }
+          ]
+        },
+        "data": "None"
+      },
+      {
+        "name": "this",
+        "input_scopes": "Any",
+        "output_scope": "Various",
+        "data": "None"
+      },
+      {
+        "name": "unhappiest_pop",
+        "input_scopes": {
+          "Listed": [
+            {
+              "id": "37c52c03d3012e74",
+              "name": "planet"
+            },
+            {
+              "id": "44b5e21fe5e593d7",
+              "name": "country"
+            },
+            {
+              "id": "69ead02b278522d1",
+              "name": "ship"
+            },
+            {
+              "id": "df2999a8f7dba6f6",
+              "name": "colony"
+            }
+          ]
+        },
+        "output_scope": {
+          "Listed": [
+            {
+              "id": "1a26ff288266684f",
+              "name": "pop_group"
+            }
+          ]
+        },
+        "data": "None"
+      }
+    ],
+    "completeness": "Complete",
+    "gaps": [
+      {
+        "kind": "OutsideMethod",
+        "subject": null,
+        "detail": "The search covers every literal token that the engine's link documentation prints, and the data prefixes of its special-value parser. The parser's other forms are not links: `.` joins links into a chain, a trailing `?` sets a run-time option, and `@` in an event_target value names a dynamic flag. Which target or parameter a value names, value prefixes such as `value:`, and actual scope availability are outside it."
+      }
+    ],
+    "source": {
+      "build": "07988b4f1b865623becd7a61af1cae92e111be6515d341754af70f02107822cd",
+      "native_version": "0.1.0",
+      "method": "scope-links/v2",
+      "basis": "Declared"
+    }
+  }
+}

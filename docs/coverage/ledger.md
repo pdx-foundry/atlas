@@ -70,15 +70,29 @@ formats each have a route. A route is not a qualification or a game-rule answer.
 
 ## Snapshot input
 
-The production `pdx-atlas snapshot` command writes `atlas_rule_snapshot` contract version 1.
-The ledger accepts that file directly and projects its registry and field rules onto matching
+The production `pdx-atlas snapshot` command writes `atlas_rule_snapshot` contract version 2.
+Version 2 adds language subjects (`effect:`, `trigger:`, `modifier:`, `scope:`, `define:` and
+the others in the schema) and states each Native answer once in `answers`, with its source,
+completeness and typed gaps; an evidence link names its answer and keeps only the gaps that name
+its item. Version 1 had registry and field subjects only, was never published, and is no longer
+read. The ledger accepts the file directly and projects its registry and field rules onto matching
 config questions. The join comes from the ledger's own `loader_path` claims; the rule producer
 does not read CWT. Each rule keeps Native's source stamp, completeness and typed gaps. Directories
 with more than one config type remain unmapped: a registry fact cannot establish which type it
 describes. The comparison reports those type claims without an Atlas answer. Recorded sources
 are unqualified for current-engine coverage. A matching gap blocks credit for its
 question. Unknown contract versions or broken subject, source or schema references are errors.
-The full format is [rule-snapshot-v1.schema.json](../contract/rule-snapshot-v1.schema.json).
+The full format is [rule-snapshot-v2.schema.json](../contract/rule-snapshot-v2.schema.json).
+
+Language rules join by the config's structure: `alias[effect:NAME]` command, scope and
+documentation claims; `modifiers.cwt` names and categories; `links.cwt` names, input and output
+scopes and data prefixes; localisation commands and links; `game_rules.cwt` names and
+`replace_scopes`; and `common/defines` names and value forms. Argument claims under a command
+receive its `arguments` gap. Where CWT identifies a subject only by a value, that value selects the
+question and never decides credit: an `on_actions.cwt` item's name, and a `scopes.cwt` scope's
+aliases, which must match the keywords of exactly one Native scope type or group. A game rule's
+evaluation kind does not answer its authored value form. The loaded modifier count summary is a
+content observation under a `content:` condition and credits no unconditional question.
 Snapshot assembly refuses a failed registry-discovery answer. It runs authored fixture recipes
 only for registries in the discovery answer, so an unrelated static listing does not require
 tradition fixture recordings.
@@ -109,6 +123,8 @@ unknown formats, and relocated CLI inputs. The full-config gate separately pins 
 and both output digests. Baseline changes require inspecting the changed findings before updating
 the fixture; a changed digest is not a reason to rebaseline automatically.
 
-Direct snapshot-to-claim comparison is implemented by SDK-524 as a separate test report.
+Direct snapshot-to-claim comparison is implemented by SDK-524 as a separate test report; SDK-570
+added the language name lists, the `script-docs` logs, the define files and the loaded modifier
+tags to it.
 Documentation source matching is implemented by SDK-525. Neither report promotes Native evidence
 or publishes a rule snapshot.

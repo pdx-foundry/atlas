@@ -1,0 +1,4750 @@
+{
+  "Ok": {
+    "value": [
+      {
+        "name": "ai_should_not_restrict_system",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "5ab5fc854e81e429",
+                "name": "galactic_object"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "ai_should_restrict_system",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "5ab5fc854e81e429",
+                "name": "galactic_object"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "ai_will_accept_ally",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "ai_will_accept_enemy",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "ai_will_join_offensive_wars",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "ai_will_join_wars",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "ai_will_leave_wars",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "are_all_leaders_forced_immortal",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "are_pre_ftls_unaware",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "NotSet"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "are_rebels_hostile",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "benefits_from_waystation_network",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "building_automation_civilians_threshold",
+        "kind": "Weighted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "building_automation_unemployment_threshold",
+        "kind": "Weighted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "calc_planet_specific_war_attack_priority",
+        "kind": "Weighted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "37c52c03d3012e74",
+                "name": "planet"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "calc_system_specific_war_attack_priority",
+        "kind": "Weighted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "5ab5fc854e81e429",
+                "name": "galactic_object"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_accept_contracts",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_access_decisions",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_access_vivarium",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_add_advanced_traits",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_add_claim",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "5ab5fc854e81e429",
+                "name": "galactic_object"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_add_negative_traits_organic",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_ai_assign_governor",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_be_part_of_galactic_community",
+        "kind": "Scripted",
+        "entries": []
+      },
+      {
+        "name": "can_be_part_of_galactic_council",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_be_part_of_galactic_empire",
+        "kind": "Scripted",
+        "entries": []
+      },
+      {
+        "name": "can_be_renamed_by",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              {
+                "Scope": {
+                  "id": "df2999a8f7dba6f6",
+                  "name": "colony"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_be_sent_to_war",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_be_sold_on_slave_market",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "1a26ff288266684f",
+                "name": "pop_group"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_build_branch_office_on_colony",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_build_branch_offices",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_build_mining_station_around",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_build_observation_station_around",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_build_research_station_around",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_build_starbase_around",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_build_station_around",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_capture_ship",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "69ead02b278522d1",
+                "name": "ship"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "69ead02b278522d1",
+                  "name": "ship"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_colonize_outside_borders",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "37c52c03d3012e74",
+                "name": "planet"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_colonize_planet",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "37c52c03d3012e74",
+                "name": "planet"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_colonize_with_species",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "43c74897fb1c97c8",
+                "name": "species"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_colony_auto_migrate",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_colony_receive_auto_migration",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_country_change_councilors",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_country_connect_to_relay_network",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_country_initiate_storm",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_country_resettle",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_create_espionage_asset_from_species",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "43c74897fb1c97c8",
+                "name": "species"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_crossbreed_species",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "43c74897fb1c97c8",
+                "name": "species"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_crossbreed_species_on_colony",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_declare_war",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_delve",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_dismiss_leader",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "b09e3ce96bcb18ba",
+                "name": "leader"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_enter_system_by_jump",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "5ab5fc854e81e429",
+                "name": "galactic_object"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_excavate_outside_borders",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "5ab5fc854e81e429",
+                  "name": "galactic_object"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_explore_astral_rift",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              {
+                "Scope": {
+                  "id": "25453ebe741bae53",
+                  "name": "astral_rift"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_explore_rifts_outside_borders",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "5ab5fc854e81e429",
+                  "name": "galactic_object"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_fauna_grow",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_fill_drone_job",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_fill_precursor_job",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_fill_ruler_job",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_fill_specialist_job",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_fill_worker_job",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_fleet_be_captured_by_snares",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "6dafeb9bcf25b500",
+                "name": "fleet"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_force_see_fleets_in_system",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "5ab5fc854e81e429",
+                "name": "galactic_object"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "5ab5fc854e81e429",
+                "name": "galactic_object"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_gene_mod_habitability",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_generate_army_from_colony",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "43c74897fb1c97c8",
+                "name": "species"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_generate_army_from_species",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "43c74897fb1c97c8",
+                "name": "species"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_generate_leader_from_pop_group",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "1a26ff288266684f",
+                "name": "pop_group"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_generate_leader_from_species",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "43c74897fb1c97c8",
+                "name": "species"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_generate_military_leader_from_pop_group",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "1a26ff288266684f",
+                "name": "pop_group"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_get_claim_from_lost_system",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_get_colony_events",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_get_external_leader_pool_candidate",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_have_contact",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_have_first_contact",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_have_robot_pops",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_initiate_storm_on_planet",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "37c52c03d3012e74",
+                "name": "planet"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "37c52c03d3012e74",
+                "name": "planet"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_interact_with_astral_rift",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              {
+                "Scope": {
+                  "id": "25453ebe741bae53",
+                  "name": "astral_rift"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_issue_contracts",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_jump_drive",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "6dafeb9bcf25b500",
+                "name": "fleet"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_leader_be_councilor",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "b09e3ce96bcb18ba",
+                "name": "leader"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "b09e3ce96bcb18ba",
+                "name": "leader"
+              }
+            },
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_leader_be_ruler",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "b09e3ce96bcb18ba",
+                "name": "leader"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "b09e3ce96bcb18ba",
+                "name": "leader"
+              }
+            },
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_leader_explore_astral_rift",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "b09e3ce96bcb18ba",
+                "name": "leader"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "b09e3ce96bcb18ba",
+                "name": "leader"
+              }
+            },
+            "from": [
+              {
+                "Scope": {
+                  "id": "25453ebe741bae53",
+                  "name": "astral_rift"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_leader_get_council_trait",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "b09e3ce96bcb18ba",
+                "name": "leader"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_leader_get_destiny_trait",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "b09e3ce96bcb18ba",
+                "name": "leader"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_leader_get_normal_trait",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "b09e3ce96bcb18ba",
+                "name": "leader"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_leader_get_subclass_trait",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "b09e3ce96bcb18ba",
+                "name": "leader"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_lock_bypass",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "5ab5fc854e81e429",
+                  "name": "galactic_object"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_modify_organic_portraits",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_modify_species",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "43c74897fb1c97c8",
+                "name": "species"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_nomad_settle",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "37c52c03d3012e74",
+                "name": "planet"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_open_shroud_tab",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_orbitable_repair_ships",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_orbital_bombard",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "6dafeb9bcf25b500",
+                "name": "fleet"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "37c52c03d3012e74",
+                  "name": "planet"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_planet_support_orbital_station",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "37c52c03d3012e74",
+                "name": "planet"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_pop_group_auto_migrate",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "1a26ff288266684f",
+                "name": "pop_group"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_pop_group_auto_migrate_abroad",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "1a26ff288266684f",
+                "name": "pop_group"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_pops_assemble_on_colony",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_pops_decline_on_colony",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_pops_grow_on_colony",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_reform_government_for_free",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_release_vassal",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "37c52c03d3012e74",
+                "name": "planet"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_release_vassal_from_species",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "43c74897fb1c97c8",
+                "name": "species"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_remove_positive_traits_organic",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_resettle_colony",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_resettle_pop_group",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "1a26ff288266684f",
+                "name": "pop_group"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_scavenge_and_research_debris",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "d3c8f1e8c2dbd149",
+                "name": "debris"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_scavenge_debris",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "d3c8f1e8c2dbd149",
+                "name": "debris"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_see_aura_intensity",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "5ab5fc854e81e429",
+                  "name": "galactic_object"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_see_galactic_community",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_spawn_debris",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "69ead02b278522d1",
+                "name": "ship"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_spawn_occupation_armies",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_species_be_assembled",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "43c74897fb1c97c8",
+                "name": "species"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_species_procreate",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "43c74897fb1c97c8",
+                "name": "species"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_subjugate_empires",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_support_branch_offices",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_take_hostile_actions",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_terraform_planet",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "37c52c03d3012e74",
+                "name": "planet"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_toggle_encampment",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_trade_favor",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_trade_fleet",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "6dafeb9bcf25b500",
+                "name": "fleet"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_trade_leader",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "b09e3ce96bcb18ba",
+                "name": "leader"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_trade_sensor",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_trade_specimens",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_unlock_accords",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_uplift_species",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "43c74897fb1c97c8",
+                "name": "species"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_use_artificial_breeding",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_use_envoys_to_lower_imperial_authority",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_use_envoys_to_raise_imperial_authority",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_use_exhibits",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_use_galactic_market",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_use_mutations",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_voidworms_bombard_country",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_vote_in_democratic_election",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "1a26ff288266684f",
+                "name": "pop_group"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "can_win_timed_victory",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": "NotSet",
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "chance_for_external_leader_pool",
+        "kind": "Weighted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "council_agenda_early_activation_cost",
+        "kind": "Weighted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "count_as_split_fallen_empire",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "count_shroud_worlds_to_display",
+        "kind": "Weighted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "5ab5fc854e81e429",
+                "name": "galactic_object"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "crisis_flag_is_shown",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "crisis_name_is_shown",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "crisis_opinion_is_shown",
+        "kind": "Scripted",
+        "entries": []
+      },
+      {
+        "name": "dismiss_leader_cost",
+        "kind": "Weighted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "b09e3ce96bcb18ba",
+                "name": "leader"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "doom_clock_is_shown",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "emergency_election_cost_rule",
+        "kind": "Weighted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "empire_diplomacy_leads_to_shroud",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "fleet_uses_templates",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "6dafeb9bcf25b500",
+                "name": "fleet"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "force_create_default_ship_design",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "74623e53f7b0ff4f",
+                "name": "design"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "founder_species_uses_assembly",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "43c74897fb1c97c8",
+                  "name": "species"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "founder_species_uses_bonus_growth_mult",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "43c74897fb1c97c8",
+                  "name": "species"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "founder_species_uses_logistic_growth_mult",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "43c74897fb1c97c8",
+                  "name": "species"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "has_ascension_for_terraforming_candidate",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "37c52c03d3012e74",
+                "name": "planet"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "has_borders",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "has_breached_shroud_storm",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              {
+                "Scope": {
+                  "id": "dfcaad2394c11f8f",
+                  "name": "cosmic_storm"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "has_custom_diplomacy",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "has_enough_pops_for_necrophage_on_colony",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "has_extra_council_position",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "has_full_sensor_range",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "has_inworld_capital",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "has_planet_specific_war_attack_priority",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "has_relative_economy_power",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "has_shroud_insights",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "is_allowed_to_be_advanced_empire",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "is_country_psionic",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "is_criminal_syndicate_rule",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "is_delve_blocked",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "is_ending_cycle",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "is_expelled_from",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "is_extradimensional_anchor",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "6dafeb9bcf25b500",
+                "name": "fleet"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "is_extradimensional_portal",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "6dafeb9bcf25b500",
+                "name": "fleet"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "is_hostile_to_aura_owner",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "is_mercenary",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "is_mindwarden_exiled_first_contact",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "is_new_colony",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "is_organic_leader",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "b09e3ce96bcb18ba",
+                "name": "leader"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "is_organic_pop_group",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "1a26ff288266684f",
+                "name": "pop_group"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "is_planetary_ascension_free",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "is_psionic_species",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "43c74897fb1c97c8",
+                "name": "species"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "is_science_fleet_gravity_snare_on_cooldown",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "6dafeb9bcf25b500",
+                "name": "fleet"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "is_seeded",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "6dafeb9bcf25b500",
+                "name": "fleet"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "is_star_seeker_empire",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "is_terraforming_candidate",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "37c52c03d3012e74",
+                "name": "planet"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "is_valid_rival",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "leader_election_elect_cost",
+        "kind": "Weighted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "b09e3ce96bcb18ba",
+                "name": "leader"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "leader_election_support_cost",
+        "kind": "Weighted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "b09e3ce96bcb18ba",
+                "name": "leader"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "leader_election_weight",
+        "kind": "Weighted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "b09e3ce96bcb18ba",
+                "name": "leader"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "must_be_advanced_empire",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "needs_psionic_aura_insights",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "pop_group_can_join_factions",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "1a26ff288266684f",
+                "name": "pop_group"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "pop_group_generates_crime",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "1a26ff288266684f",
+                "name": "pop_group"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "pop_group_has_random_ethics",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "43c74897fb1c97c8",
+                "name": "species"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "1a26ff288266684f",
+                "name": "pop_group"
+              }
+            },
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "should_abduct_pop_group",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "1a26ff288266684f",
+                "name": "pop_group"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "should_ai_build_stronghold_on_vulnerable_colony",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "should_ai_support_galactic_empire",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "should_ai_undermine_galactic_empire",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "should_apply_neighbor_rival_modifier",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "should_colonize_use_terraform",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "37c52c03d3012e74",
+                  "name": "planet"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "should_colony_automate",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "should_colony_be_destroyed_on_pc_change",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "should_count_towards_leader_cap",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "b09e3ce96bcb18ba",
+                "name": "leader"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "should_force_decline_species",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "43c74897fb1c97c8",
+                "name": "species"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "df2999a8f7dba6f6",
+                  "name": "colony"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "should_hide_planet_sector_pop_amount",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "should_hide_pop_group_size",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "1a26ff288266684f",
+                "name": "pop_group"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "should_hide_resources_for_planet",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "37c52c03d3012e74",
+                "name": "planet"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "should_leader_gain_trait_every_level",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "b09e3ce96bcb18ba",
+                "name": "leader"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "should_pay_for_leader_upkeep",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "b09e3ce96bcb18ba",
+                "name": "leader"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "should_reduce_aura_hostile_effect",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "should_spawn_deposits",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "should_surrender_planets_to",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "show_notification_for_ground_combat",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "shroud_delve_cooldown_days",
+        "kind": "Weighted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "species_can_live_on_planet",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "43c74897fb1c97c8",
+                "name": "species"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "37c52c03d3012e74",
+                "name": "planet"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "species_can_live_on_ship",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "43c74897fb1c97c8",
+                "name": "species"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "69ead02b278522d1",
+                "name": "ship"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "species_has_citizenship",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "43c74897fb1c97c8",
+                "name": "species"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "species_has_happiness",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "43c74897fb1c97c8",
+                "name": "species"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "1a26ff288266684f",
+                "name": "pop_group"
+              }
+            },
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "species_has_uncapped_habitability_on_planet",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "43c74897fb1c97c8",
+                "name": "species"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "37c52c03d3012e74",
+                "name": "planet"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "species_has_uncapped_habitability_on_ship",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "43c74897fb1c97c8",
+                "name": "species"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "69ead02b278522d1",
+                "name": "ship"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "species_uses_bonus_growth",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "43c74897fb1c97c8",
+                "name": "species"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "subject_can_expand",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              {
+                "Scope": {
+                  "id": "5ab5fc854e81e429",
+                  "name": "galactic_object"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "system_blocks_sensors",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "unbidden_additional_conquer_desire",
+        "kind": "Weighted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "will_anger_fallen_empire",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "37c52c03d3012e74",
+                "name": "planet"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "will_leader_retire",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "b09e3ce96bcb18ba",
+                "name": "leader"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "will_leader_survive",
+        "kind": "Scripted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "b09e3ce96bcb18ba",
+                "name": "leader"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      }
+    ],
+    "completeness": "Partial",
+    "gaps": [
+      {
+        "kind": "UnresolvedPath",
+        "subject": "can_access_decisions",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "can_be_part_of_galactic_community",
+        "detail": "the engine declares this rule, but no followed call site evaluates it (no-site)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "can_be_part_of_galactic_empire",
+        "detail": "the engine declares this rule, but no followed call site evaluates it (no-site)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "can_build_mining_station_around",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "can_build_observation_station_around",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "can_build_research_station_around",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "can_build_starbase_around",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "can_build_station_around",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "can_fill_drone_job",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "can_fill_precursor_job",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "can_fill_ruler_job",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "can_fill_specialist_job",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "can_fill_worker_job",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "can_orbitable_repair_ships",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "can_toggle_encampment",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "can_vote_in_democratic_election",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "crisis_opinion_is_shown",
+        "detail": "the engine declares this rule, but no followed call site evaluates it (no-site)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "pop_group_can_join_factions",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "should_colony_be_destroyed_on_pc_change",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "should_spawn_deposits",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "species_uses_bonus_growth",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "system_blocks_sensors",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "2 call sites could not be named: the rule object is not known (rule-not-constant)"
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": null,
+        "detail": "The search covers every direct call that evaluates a rule, and the checked forwarders. How the rule's result is used is outside it."
+      }
+    ],
+    "source": {
+      "build": "07988b4f1b865623becd7a61af1cae92e111be6515d341754af70f02107822cd",
+      "native_version": "0.1.0",
+      "method": "callbacks/v1",
+      "basis": "StaticAnalysis"
+    }
+  }
+}

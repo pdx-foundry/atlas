@@ -1,5 +1,7 @@
 //! Project Atlas rule records onto config questions without comparing answers.
 
+mod language;
+
 use super::{Answer, Evidence, Gap, Origin, Projection, Status};
 use crate::{ledger::Ledger, snapshot};
 use pdx_native::Basis;
@@ -50,6 +52,7 @@ fn project_with_gap_facets(
         .to_owned();
     let registry_types = registry_types(ledger);
     let claims = claim_index(ledger);
+    let language = language::index(ledger, rules);
     let mut projection = Projection {
         snapshot_id: format!("{}@{}", rules.snapshot.name, rules.snapshot.version),
         target: target.clone(),
@@ -57,7 +60,7 @@ fn project_with_gap_facets(
         gaps: Vec::new(),
     };
     for rule in &rules.rules {
-        let questions = questions(
+        let mut questions = questions(
             &claims,
             &registry_types,
             &rule.subject,
@@ -65,6 +68,9 @@ fn project_with_gap_facets(
             &rule.conditions,
             false,
         );
+        if rule.conditions.is_empty() {
+            questions.extend(language.get(&rule.id).into_iter().flatten().cloned());
+        }
         let questions = if questions.is_empty() {
             vec![format!("atlas:{}", rule.id)]
         } else {
@@ -72,18 +78,17 @@ fn project_with_gap_facets(
         };
         let mut evidence = Vec::new();
         for link in &rule.evidence {
-            let source = rules
-                .sources
-                .get(&link.source)
-                .ok_or("Missing Native source")?;
+            let key = &rules
+                .answers
+                .get(&link.answer)
+                .ok_or("Missing Native answer")?
+                .source;
+            let source = rules.sources.get(key).ok_or("Missing Native source")?;
             if source.build != *build {
-                return Err(format!(
-                    "Source build differs from snapshot target: {}",
-                    link.source
-                ));
+                return Err(format!("Source build differs from snapshot target: {key}"));
             }
             evidence.push(Evidence {
-                id: format!("{}@{}", rule.id, link.source),
+                id: format!("{}@{key}", rule.id),
                 method: source.method.clone(),
                 target: target.clone(),
                 qualified: source.basis != Basis::Recorded,
@@ -101,7 +106,7 @@ fn project_with_gap_facets(
         }
     }
     for gap in &rules.gaps {
-        let questions = questions(
+        let mut questions = questions(
             &claims,
             &registry_types,
             &gap.subject,
@@ -109,6 +114,7 @@ fn project_with_gap_facets(
             &[],
             project_related_gap_facets,
         );
+        questions.extend(language.get(&gap.id).into_iter().flatten().cloned());
         let questions = if questions.is_empty() {
             vec![format!("atlas:{}", gap.id)]
         } else {

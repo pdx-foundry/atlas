@@ -1,0 +1,7646 @@
+{
+  "Ok": {
+    "value": [
+      {
+        "name": "anomaly_success",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "empire_init_add_technologies",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "empire_init_capital_colony",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "empire_init_create_ships",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_active_accord_unlocked",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_add_community_member",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          },
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_add_to_council",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          },
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_add_to_imperial_council",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_added_to_leader_pool",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "b09e3ce96bcb18ba",
+                  "name": "leader"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_agenda_finished",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          },
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_agenda_finished_early",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_agreement_change_accepted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "d3b52243a924d8c9",
+                "name": "agreement"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_arch_site_finished",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_arkship_encamped",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_arkship_mobile",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_army_disbanded",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "b99e91b88a72f0c9",
+                  "name": "army"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_army_killed_in_combat",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "b99e91b88a72f0c9",
+                  "name": "army"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "df2999a8f7dba6f6",
+                  "name": "colony"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_army_killed_no_combat",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "b99e91b88a72f0c9",
+                  "name": "army"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_ascension_perk_picked",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          },
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_ask_to_leave_federation_declined",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_astral_rift_exploration_complete",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_astral_rift_exploration_start",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_astral_rift_pre_event_fire",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_astral_rift_spawned",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_astral_rift_surveyed",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_attunement_gained",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_auto_colony_type_changed",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_awareness_level_decrease",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_awareness_level_increase",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_become_advanced_empire",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_becoming_subject",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_bi_yearly_pulse",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_bi_yearly_pulse_country",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_biomass_monthly",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_blocker_cleared",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "0011157fe12955bd",
+                  "name": "deposit"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_branch_office_closed",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_branch_office_established",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_building_complete",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_building_demolished",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_building_downgraded",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_building_queued",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_building_repaired",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_building_replaced",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_building_ruined",
+        "entries": []
+      },
+      {
+        "name": "on_building_unqueued",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_building_upgraded",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_bypass_explored",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "9ee8b41b5ee073ea",
+                "name": "bypass"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "6dafeb9bcf25b500",
+                  "name": "fleet"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_bypass_locked",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "9ee8b41b5ee073ea",
+                "name": "bypass"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "6dafeb9bcf25b500",
+                  "name": "fleet"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_capital_changed",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "df2999a8f7dba6f6",
+                  "name": "colony"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_capitals_connected",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_claim_system",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_cloaking_activated",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "6dafeb9bcf25b500",
+                "name": "fleet"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "5ab5fc854e81e429",
+                  "name": "galactic_object"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_cloaking_deactivated",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "6dafeb9bcf25b500",
+                "name": "fleet"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "5ab5fc854e81e429",
+                  "name": "galactic_object"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_colonization_started",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "37c52c03d3012e74",
+                "name": "planet"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "69ead02b278522d1",
+                  "name": "ship"
+                }
+              },
+              "SelfLink"
+            ]
+          },
+          {
+            "this": {
+              "Scope": {
+                "id": "37c52c03d3012e74",
+                "name": "planet"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_colonized",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "37c52c03d3012e74",
+                "name": "planet"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          },
+          {
+            "this": "Unresolved",
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_colony_ascension_tier_increased",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_colony_attackers_lose",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "df2999a8f7dba6f6",
+                  "name": "colony"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_colony_attackers_win",
+        "entries": []
+      },
+      {
+        "name": "on_colony_conquer",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_colony_defenders_lose",
+        "entries": []
+      },
+      {
+        "name": "on_colony_defenders_win",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "df2999a8f7dba6f6",
+                  "name": "colony"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_colony_destroyed",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "37c52c03d3012e74",
+                "name": "planet"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          },
+          {
+            "this": "Unresolved",
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_colony_destroyed_by_bombardment",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_colony_monthly_pulse",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_colony_ownerless",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_colony_transfer",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_colony_yearly_pulse",
+        "entries": []
+      },
+      {
+        "name": "on_colony_zero_pops",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_colony_zero_pops_ground_combat",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_commercial_pact_broken",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_country_attacked",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          },
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_country_created",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_country_destroyed",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          },
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_country_released_in_war",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "87aef3284d14374e",
+                  "name": "war"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_country_type_changed",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_covenant_formed",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_crossing_border",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "6dafeb9bcf25b500",
+                "name": "fleet"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "5ab5fc854e81e429",
+                  "name": "galactic_object"
+                }
+              },
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_custodian_term_ends",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_custom_diplomacy",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          },
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_daily_pop_ethics_divergence",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_damage_taken",
+        "entries": []
+      },
+      {
+        "name": "on_debris_reanimated",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_debris_researched",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_debris_scavenged",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_debris_scavenged_and_researched",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_decade_pulse",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_decade_pulse_country",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_decision_enacted",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_destroying_station",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "69ead02b278522d1",
+                "name": "ship"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "37c52c03d3012e74",
+                  "name": "planet"
+                }
+              },
+              "SelfLink"
+            ]
+          },
+          {
+            "this": {
+              "Scope": {
+                "id": "69ead02b278522d1",
+                "name": "ship"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "25453ebe741bae53",
+                  "name": "astral_rift"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_dimensional_lock_expired",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "9ee8b41b5ee073ea",
+                "name": "bypass"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_district_complete",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_district_demolished",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_district_queued",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_district_unqueued",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_edict_activated",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_election_ended",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_election_started",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_emergency_ftl",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "6dafeb9bcf25b500",
+                "name": "fleet"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "5ab5fc854e81e429",
+                  "name": "galactic_object"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_enforce_borders",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "6dafeb9bcf25b500",
+                  "name": "fleet"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "5ab5fc854e81e429",
+                  "name": "galactic_object"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_entering_battle",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "6dafeb9bcf25b500",
+                  "name": "fleet"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "6dafeb9bcf25b500",
+                  "name": "fleet"
+                }
+              },
+              "SelfLink"
+            ]
+          },
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_entering_system",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "69ead02b278522d1",
+                "name": "ship"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "5ab5fc854e81e429",
+                  "name": "galactic_object"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_entering_system_first_time",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "69ead02b278522d1",
+                "name": "ship"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "5ab5fc854e81e429",
+                  "name": "galactic_object"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_entering_system_fleet",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "6dafeb9bcf25b500",
+                "name": "fleet"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "5ab5fc854e81e429",
+                  "name": "galactic_object"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_entering_war",
+        "entries": []
+      },
+      {
+        "name": "on_exhibit_unlocked",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_fauna_capture_ended",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "6dafeb9bcf25b500",
+                "name": "fleet"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_fauna_captured",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "69ead02b278522d1",
+                "name": "ship"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "6dafeb9bcf25b500",
+                  "name": "fleet"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_favor_gained",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_federation_new_leader",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          },
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_federation_new_level_unlocked",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_first_contact",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "5ab5fc854e81e429",
+                  "name": "galactic_object"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_first_contact_finished",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "824da242282a19c5",
+                "name": "first_contact"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "824da242282a19c5",
+                "name": "first_contact"
+              }
+            },
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_five_year_pulse",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_five_year_pulse_country",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_fleet_auto_move_arrival",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "6dafeb9bcf25b500",
+                  "name": "fleet"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "37c52c03d3012e74",
+                  "name": "planet"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_fleet_contract_started",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "6dafeb9bcf25b500",
+                "name": "fleet"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          },
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_fleet_destroyed_perp",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_fleet_destroyed_victim",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "6dafeb9bcf25b500",
+                  "name": "fleet"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "6dafeb9bcf25b500",
+                  "name": "fleet"
+                }
+              },
+              "SelfLink"
+            ]
+          },
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_fleet_detected",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "6dafeb9bcf25b500",
+                  "name": "fleet"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_fleet_disbanded",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "6dafeb9bcf25b500",
+                  "name": "fleet"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_fleet_enter_orbit",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "6dafeb9bcf25b500",
+                "name": "fleet"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "8bb6b317643be13a",
+                  "name": "megastructure"
+                }
+              },
+              "SelfLink"
+            ]
+          },
+          {
+            "this": {
+              "Scope": {
+                "id": "6dafeb9bcf25b500",
+                "name": "fleet"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "37c52c03d3012e74",
+                  "name": "planet"
+                }
+              },
+              "SelfLink"
+            ]
+          },
+          {
+            "this": {
+              "Scope": {
+                "id": "6dafeb9bcf25b500",
+                "name": "fleet"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "a28a4564ee636659",
+                  "name": "starbase"
+                }
+              },
+              "SelfLink"
+            ]
+          },
+          {
+            "this": {
+              "Scope": {
+                "id": "6dafeb9bcf25b500",
+                "name": "fleet"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "25453ebe741bae53",
+                  "name": "astral_rift"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_fleet_exit_battle",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "6dafeb9bcf25b500",
+                "name": "fleet"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_fleet_leave_orbit",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "6dafeb9bcf25b500",
+                "name": "fleet"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "8bb6b317643be13a",
+                  "name": "megastructure"
+                }
+              },
+              "SelfLink"
+            ]
+          },
+          {
+            "this": {
+              "Scope": {
+                "id": "6dafeb9bcf25b500",
+                "name": "fleet"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "37c52c03d3012e74",
+                  "name": "planet"
+                }
+              },
+              "SelfLink"
+            ]
+          },
+          {
+            "this": {
+              "Scope": {
+                "id": "6dafeb9bcf25b500",
+                "name": "fleet"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "a28a4564ee636659",
+                  "name": "starbase"
+                }
+              },
+              "SelfLink"
+            ]
+          },
+          {
+            "this": {
+              "Scope": {
+                "id": "6dafeb9bcf25b500",
+                "name": "fleet"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "25453ebe741bae53",
+                  "name": "astral_rift"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_fleet_quantum_catapult",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "6dafeb9bcf25b500",
+                "name": "fleet"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "5ab5fc854e81e429",
+                  "name": "galactic_object"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "5ab5fc854e81e429",
+                  "name": "galactic_object"
+                }
+              },
+              "SelfLink"
+            ]
+          },
+          {
+            "this": {
+              "Scope": {
+                "id": "6dafeb9bcf25b500",
+                "name": "fleet"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "5ab5fc854e81e429",
+                  "name": "galactic_object"
+                }
+              },
+              "NotSet"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_fleet_went_mia",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "6dafeb9bcf25b500",
+                "name": "fleet"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_gaining_station_control",
+        "entries": []
+      },
+      {
+        "name": "on_galactic_community_formed",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_galactic_council_established",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_galaxy_map_during_tutorial",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_game_start",
+        "entries": [
+          {
+            "this": "NotSet",
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_game_start_country",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_ground_combat_devastation",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "37c52c03d3012e74",
+                "name": "planet"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_ground_combat_started",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_heir_promoted_to_ruler",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_host_new_species",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "43c74897fb1c97c8",
+                  "name": "species"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_initialize_advanced_colony",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_join_alliance",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_join_federation",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_jump_drive",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "69ead02b278522d1",
+                "name": "ship"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_late_game_pulse",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_late_game_pulse_country",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_leader_assigned",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "b09e3ce96bcb18ba",
+                "name": "leader"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_leader_captured",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "b09e3ce96bcb18ba",
+                "name": "leader"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "5ab5fc854e81e429",
+                  "name": "galactic_object"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_leader_death",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_leader_death_no_notify",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "b09e3ce96bcb18ba",
+                  "name": "leader"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_leader_death_notify",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "b09e3ce96bcb18ba",
+                  "name": "leader"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_leader_fired",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "b09e3ce96bcb18ba",
+                  "name": "leader"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_leader_hired",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "b09e3ce96bcb18ba",
+                "name": "leader"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_leader_level_up",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "b09e3ce96bcb18ba",
+                  "name": "leader"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_leader_spawned",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "b09e3ce96bcb18ba",
+                  "name": "leader"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_leader_unassigned",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "b09e3ce96bcb18ba",
+                "name": "leader"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_leave_alliance",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_leave_federation",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_leaving_system_fleet",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "6dafeb9bcf25b500",
+                "name": "fleet"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "5ab5fc854e81e429",
+                  "name": "galactic_object"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_losing_station_control",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "69ead02b278522d1",
+                "name": "ship"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "37c52c03d3012e74",
+                  "name": "planet"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_megastructure_build_start",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "5ab5fc854e81e429",
+                  "name": "galactic_object"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "6dafeb9bcf25b500",
+                  "name": "fleet"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_megastructure_built",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "8bb6b317643be13a",
+                  "name": "megastructure"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "5ab5fc854e81e429",
+                  "name": "galactic_object"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "6dafeb9bcf25b500",
+                  "name": "fleet"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_megastructure_change_owner",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "8bb6b317643be13a",
+                  "name": "megastructure"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          },
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "8bb6b317643be13a",
+                  "name": "megastructure"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_megastructure_ownerless",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "5ab5fc854e81e429",
+                "name": "galactic_object"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "8bb6b317643be13a",
+                  "name": "megastructure"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          },
+          {
+            "this": {
+              "Scope": {
+                "id": "5ab5fc854e81e429",
+                "name": "galactic_object"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "8bb6b317643be13a",
+                  "name": "megastructure"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_megastructure_upgrade_begin",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "8bb6b317643be13a",
+                  "name": "megastructure"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "5ab5fc854e81e429",
+                  "name": "galactic_object"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_megastructure_upgraded",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "8bb6b317643be13a",
+                  "name": "megastructure"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "5ab5fc854e81e429",
+                  "name": "galactic_object"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_mid_game_pulse",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_mid_game_pulse_country",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_modification_complete",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "43c74897fb1c97c8",
+                  "name": "species"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "43c74897fb1c97c8",
+                  "name": "species"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_modification_completion",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "43c74897fb1c97c8",
+                  "name": "species"
+                }
+              },
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_monthly_pulse",
+        "entries": [
+          {
+            "this": "NotSet",
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_monthly_pulse_country",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_new_country_selected",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_new_heir",
+        "entries": []
+      },
+      {
+        "name": "on_operation_cancelled",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "8dbe31e3bea11d4c",
+                "name": "espionage_operation"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_operation_chapter_finished",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_operation_finished",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_orbital_defense_planet_ownerless",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "a28a4564ee636659",
+                "name": "starbase"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "37c52c03d3012e74",
+                  "name": "planet"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_patron_contact_completed",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_patron_delve_failed",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_planet_bombarded",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "37c52c03d3012e74",
+                "name": "planet"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_planet_class_changed",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "37c52c03d3012e74",
+                "name": "planet"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_planet_occupied",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "37c52c03d3012e74",
+                "name": "planet"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_planet_returned",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "37c52c03d3012e74",
+                "name": "planet"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_planet_surveyed",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_policy_changed",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_pop_assembly",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_pop_bombed_to_death",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_pop_collateral_casualty",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_pop_displaced",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_pop_group_abducted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "1a26ff288266684f",
+                "name": "pop_group"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "df2999a8f7dba6f6",
+                  "name": "colony"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_pop_group_added",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "1a26ff288266684f",
+                "name": "pop_group"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_pop_group_resettled",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_pop_group_rights_change",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "1a26ff288266684f",
+                "name": "pop_group"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_pop_growth",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_pop_purged",
+        "entries": []
+      },
+      {
+        "name": "on_pop_sacrificed",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "1a26ff288266684f",
+                "name": "pop_group"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "df2999a8f7dba6f6",
+                  "name": "colony"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_post_communications_established",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_post_communications_established_always_fire",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_post_government_changed",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_pre_communications_established",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_pre_government_changed",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_press_begin",
+        "entries": []
+      },
+      {
+        "name": "on_proxy_war_started",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_rebels_take_colony_owner_switched",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_rebels_take_planet",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "df2999a8f7dba6f6",
+                  "name": "colony"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_released_as_vassal",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_relic_activated",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_relic_lost",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_relic_received",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_remove_community_member",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_remove_from_council",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_remove_from_imperial_council",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_research_option_added",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_resolution_failed",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          },
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_resolution_passed",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_resolution_put_to_vote",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          },
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_resolution_vetoed",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_ruler_created",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "b09e3ce96bcb18ba",
+                  "name": "leader"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_ruler_removed",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "b09e3ce96bcb18ba",
+                  "name": "leader"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_ruler_set",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_ship_built",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "69ead02b278522d1",
+                "name": "ship"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "a28a4564ee636659",
+                  "name": "starbase"
+                }
+              },
+              "SelfLink"
+            ]
+          },
+          {
+            "this": {
+              "Scope": {
+                "id": "69ead02b278522d1",
+                "name": "ship"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_ship_designed",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_ship_destroyed_perp",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "69ead02b278522d1",
+                  "name": "ship"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "69ead02b278522d1",
+                  "name": "ship"
+                }
+              },
+              "SelfLink"
+            ]
+          },
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_ship_destroyed_victim",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "69ead02b278522d1",
+                  "name": "ship"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "69ead02b278522d1",
+                  "name": "ship"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_ship_disabled",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "69ead02b278522d1",
+                "name": "ship"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "69ead02b278522d1",
+                  "name": "ship"
+                }
+              },
+              "SelfLink"
+            ]
+          },
+          {
+            "this": {
+              "Scope": {
+                "id": "69ead02b278522d1",
+                "name": "ship"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_ship_disbanded",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "69ead02b278522d1",
+                  "name": "ship"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_ship_disengaged_perp",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "69ead02b278522d1",
+                  "name": "ship"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "69ead02b278522d1",
+                  "name": "ship"
+                }
+              },
+              "SelfLink"
+            ]
+          },
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_ship_disengaged_victim",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "69ead02b278522d1",
+                  "name": "ship"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "69ead02b278522d1",
+                  "name": "ship"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_ship_enabled",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "69ead02b278522d1",
+                "name": "ship"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "69ead02b278522d1",
+                  "name": "ship"
+                }
+              },
+              "SelfLink"
+            ]
+          },
+          {
+            "this": {
+              "Scope": {
+                "id": "69ead02b278522d1",
+                "name": "ship"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_ship_engulfed",
+        "entries": []
+      },
+      {
+        "name": "on_ship_enter_fleet",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "6dafeb9bcf25b500",
+                "name": "fleet"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "69ead02b278522d1",
+                  "name": "ship"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_ship_leave_fleet",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "6dafeb9bcf25b500",
+                "name": "fleet"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "69ead02b278522d1",
+                  "name": "ship"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_ship_order",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "69ead02b278522d1",
+                "name": "ship"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_ship_quantum_catapult",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "69ead02b278522d1",
+                "name": "ship"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "5ab5fc854e81e429",
+                  "name": "galactic_object"
+                }
+              },
+              "NotSet"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_ship_surveyed",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_ship_upgraded",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "69ead02b278522d1",
+                "name": "ship"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_shroud_delve",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_sign_commercial_pact",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_sign_defensive_pact",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_sign_migration_pact",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_sign_non_aggression_pact",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_sign_research_pact",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_single_player_save_game_load",
+        "entries": [
+          {
+            "this": "NotSet",
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_slave_sold_on_market",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "1a26ff288266684f",
+                "name": "pop_group"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_snare_sent",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "6dafeb9bcf25b500",
+                "name": "fleet"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "6dafeb9bcf25b500",
+                  "name": "fleet"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_space_battle_lost",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_space_battle_over",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_space_battle_won",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_space_fauna_culled",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "74623e53f7b0ff4f",
+                  "name": "design"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_specialist_subject_conversion_aborted",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_specialist_subject_conversion_finished",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_specialist_subject_conversion_started",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "d3b52243a924d8c9",
+                "name": "agreement"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_specimen_acquired",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_specimen_sold",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_spynetwork_formed",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "e018d51ead1b8110",
+                  "name": "spy_network"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_starbase_destroyed",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "a28a4564ee636659",
+                "name": "starbase"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "6dafeb9bcf25b500",
+                  "name": "fleet"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_starbase_disabled",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "a28a4564ee636659",
+                "name": "starbase"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "6dafeb9bcf25b500",
+                  "name": "fleet"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_starbase_occupied",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "a28a4564ee636659",
+                  "name": "starbase"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_starbase_transfer",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "69ead02b278522d1",
+                "name": "ship"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_status_quo",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "87aef3284d14374e",
+                  "name": "war"
+                }
+              },
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_status_quo_forced",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "87aef3284d14374e",
+                  "name": "war"
+                }
+              },
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_storm_encountered",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "dfcaad2394c11f8f",
+                  "name": "cosmic_storm"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_storm_entered_system",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_storm_finished",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_storm_left_system",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_subject_integrated",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_subspecies_integration_complete",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "43c74897fb1c97c8",
+                  "name": "species"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "43c74897fb1c97c8",
+                  "name": "species"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_subspecies_integration_step",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "43c74897fb1c97c8",
+                  "name": "species"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "43c74897fb1c97c8",
+                  "name": "species"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_survey_astral_rift",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "69ead02b278522d1",
+                "name": "ship"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_survey_planet",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "69ead02b278522d1",
+                "name": "ship"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_system_controller_changed",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "5ab5fc854e81e429",
+                "name": "galactic_object"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_system_first_visited",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "5ab5fc854e81e429",
+                  "name": "galactic_object"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_system_gained",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "5ab5fc854e81e429",
+                  "name": "galactic_object"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_system_locked_ship_killed",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "5ab5fc854e81e429",
+                "name": "galactic_object"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_system_lost",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "5ab5fc854e81e429",
+                  "name": "galactic_object"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_system_occupied",
+        "entries": []
+      },
+      {
+        "name": "on_system_returned",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "5ab5fc854e81e429",
+                "name": "galactic_object"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_system_survey",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "5ab5fc854e81e429",
+                  "name": "galactic_object"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "69ead02b278522d1",
+                  "name": "ship"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_system_survey_ship",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "69ead02b278522d1",
+                "name": "ship"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "5ab5fc854e81e429",
+                  "name": "galactic_object"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_tech_increased",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_terraforming_begun",
+        "entries": [
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_terraforming_complete",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "37c52c03d3012e74",
+                "name": "planet"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_terraforming_progress_25",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "37c52c03d3012e74",
+                "name": "planet"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_tradition_picked",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          },
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_truce_end",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_tutorial_level_changed",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_uplift_completion",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "43c74897fb1c97c8",
+                  "name": "species"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_vivarium_populated",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "74623e53f7b0ff4f",
+                  "name": "design"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_war_beginning",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "87aef3284d14374e",
+                  "name": "war"
+                }
+              },
+              "SelfLink"
+            ]
+          },
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_war_ended",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_war_lost",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "87aef3284d14374e",
+                  "name": "war"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_war_participant_leaves_early",
+        "entries": []
+      },
+      {
+        "name": "on_war_won",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "87aef3284d14374e",
+                  "name": "war"
+                }
+              },
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_waystation_lost",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "a28a4564ee636659",
+                "name": "starbase"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ]
+          },
+          {
+            "this": {
+              "Scope": {
+                "id": "a28a4564ee636659",
+                "name": "starbase"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_yearly_pulse",
+        "entries": [
+          {
+            "this": "NotSet",
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_yearly_pulse_country",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "on_zone_complete",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "special_project_success",
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "Unresolved"
+            ]
+          }
+        ]
+      }
+    ],
+    "completeness": "Partial",
+    "gaps": [
+      {
+        "kind": "UnresolvedPath",
+        "subject": "anomaly_success",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "empire_init_add_technologies",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "empire_init_capital_colony",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "empire_init_capital_colony",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "empire_init_create_ships",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "empire_init_create_ships",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_add_community_member",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_add_community_member",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_add_to_council",
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_add_to_council",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_add_to_imperial_council",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_agenda_finished",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_agenda_finished",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_agenda_finished_early",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_agreement_change_accepted",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_arch_site_finished",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_arch_site_finished",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_arkship_encamped",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_arkship_mobile",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_army_disbanded",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_army_killed_in_combat",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_army_killed_no_combat",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_ascension_perk_picked",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_ascension_perk_picked",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_astral_rift_exploration_complete",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_astral_rift_exploration_start",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_astral_rift_exploration_start",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_astral_rift_pre_event_fire",
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_astral_rift_pre_event_fire",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_astral_rift_spawned",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_astral_rift_surveyed",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_astral_rift_surveyed",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_attunement_gained",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_awareness_level_decrease",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_awareness_level_increase",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_become_advanced_empire",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_becoming_subject",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_bi_yearly_pulse",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_bi_yearly_pulse_country",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_bi_yearly_pulse_country",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_biomass_monthly",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_biomass_monthly",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_branch_office_closed",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_branch_office_established",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_building_complete",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_building_demolished",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_building_downgraded",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_building_queued",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_building_replaced",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_building_ruined",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_building_unqueued",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_building_upgraded",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_bypass_explored",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_bypass_locked",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_capital_changed",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_claim_system",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_colonization_started",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_colonized",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_colonized",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_colony_attackers_lose",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_colony_attackers_win",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_colony_conquer",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_colony_conquer",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_colony_defenders_lose",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_colony_defenders_win",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_colony_destroyed",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_colony_destroyed_by_bombardment",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_colony_destroyed_by_bombardment",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_colony_ownerless",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_colony_transfer",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_colony_yearly_pulse",
+        "detail": "a path to a call site could not be followed (instruction)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_colony_zero_pops",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_colony_zero_pops",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_colony_zero_pops_ground_combat",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_colony_zero_pops_ground_combat",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_commercial_pact_broken",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_country_attacked",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_country_created",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_country_created",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_country_released_in_war",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_crossing_border",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_crossing_border",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_custodian_term_ends",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_custom_diplomacy",
+        "detail": "the engine looks up this list, but no followed call site fires it (looked-up-only)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_custom_diplomacy",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_custom_diplomacy",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_daily_pop_ethics_divergence",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_damage_taken",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_debris_reanimated",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_debris_reanimated",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_debris_researched",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_debris_researched",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_debris_scavenged",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_debris_scavenged",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_debris_scavenged_and_researched",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_debris_scavenged_and_researched",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_decade_pulse",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_decade_pulse_country",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_decade_pulse_country",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_decision_enacted",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_decision_enacted",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_dimensional_lock_expired",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_edict_activated",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_edict_activated",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_election_ended",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_emergency_ftl",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_entering_battle",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_entering_battle",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_entering_system",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_entering_system_first_time",
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_entering_system_fleet",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_entering_war",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_fauna_captured",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_federation_new_leader",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_federation_new_level_unlocked",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_first_contact",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_first_contact_finished",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_five_year_pulse",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_five_year_pulse_country",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_five_year_pulse_country",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_fleet_auto_move_arrival",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_fleet_contract_started",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_fleet_contract_started",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_fleet_destroyed_perp",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_fleet_destroyed_perp",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_fleet_destroyed_victim",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_fleet_destroyed_victim",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_fleet_detected",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_fleet_disbanded",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_fleet_quantum_catapult",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_fleet_went_mia",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_gaining_station_control",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_galactic_community_formed",
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_galactic_council_established",
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_galaxy_map_during_tutorial",
+        "detail": "a path to a call site could not be followed (instruction)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_game_start_country",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_ground_combat_devastation",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_ground_combat_started",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_heir_promoted_to_ruler",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_heir_promoted_to_ruler",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_initialize_advanced_colony",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_join_alliance",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_jump_drive",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_late_game_pulse",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_late_game_pulse",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_late_game_pulse_country",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_late_game_pulse_country",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_leader_assigned",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_leader_captured",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_leader_death",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_leader_death",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_leader_death_no_notify",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_leader_death_notify",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_leader_fired",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_leader_level_up",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_leader_unassigned",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_leave_alliance",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_losing_station_control",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_megastructure_build_start",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_megastructure_built",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_megastructure_change_owner",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_megastructure_ownerless",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_megastructure_upgraded",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_mid_game_pulse",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_mid_game_pulse",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_mid_game_pulse_country",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_mid_game_pulse_country",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_modification_complete",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_modification_completion",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_modification_completion",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_monthly_pulse",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_monthly_pulse_country",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_new_country_selected",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_new_heir",
+        "detail": "no path from the function entry reaches a call site (site-not-reached)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_operation_chapter_finished",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_operation_finished",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_orbital_defense_planet_ownerless",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_patron_delve_failed",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_planet_bombarded",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_planet_class_changed",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_planet_occupied",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_planet_returned",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_planet_surveyed",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_planet_surveyed",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_policy_changed",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_pop_assembly",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_pop_bombed_to_death",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_pop_displaced",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_pop_displaced",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_pop_group_abducted",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_pop_group_added",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_pop_group_resettled",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_pop_group_resettled",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_pop_group_rights_change",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_pop_growth",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_pop_growth",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_pop_purged",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_post_government_changed",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_post_government_changed",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_pre_government_changed",
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_press_begin",
+        "detail": "a call site passes a command that builds its own scope (scope-built-by-callee)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_proxy_war_started",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_proxy_war_started",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_rebels_take_colony_owner_switched",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_rebels_take_colony_owner_switched",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_rebels_take_planet",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_released_as_vassal",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_relic_activated",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_relic_lost",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_remove_community_member",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_remove_from_council",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_remove_from_imperial_council",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_research_option_added",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_resolution_failed",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_resolution_failed",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_resolution_passed",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_resolution_passed",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_resolution_put_to_vote",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_resolution_vetoed",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_ruler_created",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_ruler_created",
+        "detail": "no path from the function entry reaches a call site (site-not-reached)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_ruler_removed",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_ruler_set",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_ship_built",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_ship_built",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_ship_designed",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_ship_destroyed_perp",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_ship_destroyed_perp",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_ship_disabled",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_ship_disbanded",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_ship_disengaged_perp",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_ship_disengaged_perp",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_ship_enabled",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_ship_engulfed",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_ship_quantum_catapult",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_ship_surveyed",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_ship_surveyed",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_ship_upgraded",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_sign_non_aggression_pact",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_slave_sold_on_market",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_snare_sent",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_space_battle_lost",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_space_battle_lost",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_space_battle_over",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_space_battle_over",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_space_battle_won",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_space_battle_won",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_space_fauna_culled",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_specialist_subject_conversion_finished",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_starbase_disabled",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_starbase_transfer",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_status_quo",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_status_quo",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_status_quo_forced",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_status_quo_forced",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_storm_encountered",
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_storm_entered_system",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_storm_finished",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_storm_left_system",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_subject_integrated",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_subspecies_integration_complete",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_subspecies_integration_step",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_survey_astral_rift",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_survey_astral_rift",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_survey_planet",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_survey_planet",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_system_controller_changed",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_system_controller_changed",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_system_gained",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_system_locked_ship_killed",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_system_lost",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_system_occupied",
+        "detail": "no path from the function entry reaches a call site (site-not-reached)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_system_returned",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_system_returned",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_system_survey",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_tech_increased",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_terraforming_begun",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_terraforming_complete",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_terraforming_progress_25",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_tradition_picked",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_tradition_picked",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_truce_end",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_tutorial_level_changed",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_uplift_completion",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_war_beginning",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_war_beginning",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_war_ended",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_war_lost",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_war_participant_leaves_early",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_war_won",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_waystation_lost",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_waystation_lost",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "on_yearly_pulse_country",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "special_project_success",
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": "special_project_success",
+        "detail": "some entry scopes of a call site could not be established"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "1 call sites could not be named: the list that a call site fires is not known (list-unknown)"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "31 call sites could not be named: the name is not a text literal, such as a name built at run time (name-not-a-literal)"
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": null,
+        "detail": "On_actions that script content defines and fires with fire_on_action are outside this answer."
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": null,
+        "detail": "The search covers every direct call that fires an on_action, and the checked forwarders. What the event system does with the scope after the call is outside it."
+      }
+    ],
+    "source": {
+      "build": "07988b4f1b865623becd7a61af1cae92e111be6515d341754af70f02107822cd",
+      "native_version": "0.1.0",
+      "method": "callbacks/v1",
+      "basis": "StaticAnalysis"
+    }
+  }
+}

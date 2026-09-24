@@ -105,8 +105,10 @@ fn partial_unrelated_registry_listing_keeps_only_applicable_subjects() {
     fs::write(&path, serde_json::to_vec(&registries).unwrap()).unwrap();
     let output = root.path().join("snapshot.json");
     let result = run(&answers, &output);
-    assert!(
-        result.status.success(),
+    // The language answers are not recorded, so the snapshot is written but incomplete.
+    assert_eq!(
+        result.status.code(),
+        Some(2),
         "{}",
         String::from_utf8_lossy(&result.stderr)
     );
@@ -115,13 +117,20 @@ fn partial_unrelated_registry_listing_keeps_only_applicable_subjects() {
         snapshot["coverage"]["registries"],
         serde_json::json!(["common/relics"])
     );
+    let subjects = snapshot["subjects"].as_array().unwrap();
     assert!(
-        snapshot["subjects"]
-            .as_array()
-            .unwrap()
+        subjects
             .iter()
-            .all(|subject| { subject["registry"] == "common/relics" })
+            .filter(|subject| ["registry", "field"].contains(&subject["kind"].as_str().unwrap()))
+            .all(|subject| subject["registry"] == "common/relics")
     );
+    assert!(snapshot["gaps"].as_array().unwrap().iter().any(|gap| {
+        gap["id"] == "inventory:effects#answer"
+            && gap["reason"]
+                .as_str()
+                .unwrap()
+                .contains("no answer is recorded")
+    }));
     assert!(snapshot["gaps"].as_array().unwrap().iter().all(|gap| {
         !gap["subject"]
             .as_str()

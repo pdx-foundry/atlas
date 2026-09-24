@@ -12,15 +12,8 @@ fn recorded_basis(mut snapshot: snapshot::Snapshot) -> snapshot::Snapshot {
         sources.insert(new, source);
     }
     snapshot.sources = sources;
-    for rule in &mut snapshot.rules {
-        for evidence in &mut rule.evidence {
-            evidence.source = keys[&evidence.source].clone();
-        }
-    }
-    for gap in &mut snapshot.gaps {
-        for evidence in &mut gap.evidence {
-            evidence.source = keys[&evidence.source].clone();
-        }
+    for answer in snapshot.answers.values_mut() {
+        answer.source = keys[&answer.source].clone();
     }
     snapshot
 }
@@ -47,6 +40,13 @@ async fn live_and_recorded_snapshots_match_after_basis_normalization() {
         "{:#?}",
         live_answers.sessions
     );
+    assert_eq!(
+        live_answers.loaded_modifiers.disposal,
+        Ok(Disposal::Confirmed),
+        "{:#?}",
+        live_answers.loaded_modifiers.observation.as_ref().err()
+    );
+    assert!(live_answers.complete());
     let live_snapshot = snapshot::assemble(&live_answers).unwrap();
 
     let replay = Native::from_recorded_answers(recording.path()).unwrap();
@@ -57,6 +57,10 @@ async fn live_and_recorded_snapshots_match_after_basis_normalization() {
             .sessions
             .iter()
             .all(|session| session.disposal == Ok(Disposal::NotApplicable))
+    );
+    assert_eq!(
+        replay_answers.loaded_modifiers.disposal,
+        Ok(Disposal::NotApplicable)
     );
     let replay_snapshot = snapshot::assemble(&replay_answers).unwrap();
     let mut normalized_live = recorded_basis(live_snapshot);

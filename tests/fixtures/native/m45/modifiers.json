@@ -1,0 +1,5354 @@
+{
+  "Ok": {
+    "value": [
+      {
+        "name": "add_base_country_intel",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "all_technology_research_speed",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "army_attack_damage_mult",
+        "category_tags": {
+          "Listed": [
+            "Armies"
+          ]
+        }
+      },
+      {
+        "name": "army_attack_health_mult",
+        "category_tags": {
+          "Listed": [
+            "Armies"
+          ]
+        }
+      },
+      {
+        "name": "army_attack_morale_mult",
+        "category_tags": {
+          "Listed": [
+            "Armies"
+          ]
+        }
+      },
+      {
+        "name": "army_collateral_damage_mult",
+        "category_tags": {
+          "Listed": [
+            "Armies"
+          ]
+        }
+      },
+      {
+        "name": "army_damage_against_psionic_mult",
+        "category_tags": {
+          "Listed": [
+            "Armies"
+          ]
+        }
+      },
+      {
+        "name": "army_damage_empire_sprawl_penalty_mult",
+        "category_tags": {
+          "Listed": [
+            "Armies"
+          ]
+        }
+      },
+      {
+        "name": "army_damage_mult",
+        "category_tags": {
+          "Listed": [
+            "Armies"
+          ]
+        }
+      },
+      {
+        "name": "army_damage_taken_mult",
+        "category_tags": {
+          "Listed": [
+            "Armies"
+          ]
+        }
+      },
+      {
+        "name": "army_defense_damage_mult",
+        "category_tags": {
+          "Listed": [
+            "Armies"
+          ]
+        }
+      },
+      {
+        "name": "army_defense_health_mult",
+        "category_tags": {
+          "Listed": [
+            "Armies"
+          ]
+        }
+      },
+      {
+        "name": "army_defense_morale_mult",
+        "category_tags": {
+          "Listed": [
+            "Armies"
+          ]
+        }
+      },
+      {
+        "name": "army_disengage_chance_mult",
+        "category_tags": {
+          "Listed": [
+            "Armies"
+          ]
+        }
+      },
+      {
+        "name": "army_experience_gain_mult",
+        "category_tags": {
+          "Listed": [
+            "Armies"
+          ]
+        }
+      },
+      {
+        "name": "army_health",
+        "category_tags": {
+          "Listed": [
+            "Armies"
+          ]
+        }
+      },
+      {
+        "name": "army_morale",
+        "category_tags": {
+          "Listed": [
+            "Armies"
+          ]
+        }
+      },
+      {
+        "name": "army_morale_damage_mult",
+        "category_tags": {
+          "Listed": [
+            "Armies"
+          ]
+        }
+      },
+      {
+        "name": "army_morale_damage_taken_mult",
+        "category_tags": {
+          "Listed": [
+            "Armies"
+          ]
+        }
+      },
+      {
+        "name": "army_starting_experience_add",
+        "category_tags": {
+          "Listed": [
+            "Armies"
+          ]
+        }
+      },
+      {
+        "name": "artificial_ship_naval_cap_usage_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ascension_perks_add",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "astral_rift_difficulty_add",
+        "category_tags": {
+          "Listed": [
+            "Astral Rift"
+          ]
+        }
+      },
+      {
+        "name": "attached_space_fauna_component_damage_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "attached_space_fauna_component_fire_rate_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "attunement_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "auto_mod_monthly_add",
+        "category_tags": {
+          "Listed": [
+            "Countries",
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "auto_mod_monthly_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries",
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "bioship_growth_progress_add",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "bioship_growth_progress_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "blank_modifier",
+        "category_tags": {
+          "Listed": [
+            "Pops"
+          ]
+        }
+      },
+      {
+        "name": "bonus_automated_workforce_mult",
+        "category_tags": {
+          "Listed": [
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "bonus_pop_growth",
+        "category_tags": {
+          "Listed": [
+            "Pops"
+          ]
+        }
+      },
+      {
+        "name": "bonus_pop_growth_mult",
+        "category_tags": {
+          "Listed": [
+            "Pops"
+          ]
+        }
+      },
+      {
+        "name": "branch_office_criminal_syndicate_value_add",
+        "category_tags": {
+          "Listed": [
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "branch_office_owner_max_buildings_add",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "branch_office_target_max_buildings_add",
+        "category_tags": {
+          "Listed": [
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "branch_office_value_mult",
+        "category_tags": {
+          "Listed": [
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "building_time_mult",
+        "category_tags": {
+          "Listed": [
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "catapult_range_base",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Megastructures"
+          ]
+        }
+      },
+      {
+        "name": "catapult_range_mult",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Megastructures"
+          ]
+        }
+      },
+      {
+        "name": "catapult_spread_base",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Megastructures"
+          ]
+        }
+      },
+      {
+        "name": "catapult_spread_mult",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Megastructures"
+          ]
+        }
+      },
+      {
+        "name": "cohesion_add",
+        "category_tags": {
+          "Listed": [
+            "Countries",
+            "Federations"
+          ]
+        }
+      },
+      {
+        "name": "cohesion_ethics_penalty_mult",
+        "category_tags": {
+          "Listed": [
+            "Federations"
+          ]
+        }
+      },
+      {
+        "name": "command_limit_add",
+        "category_tags": {
+          "Listed": [
+            "Fleets",
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "command_limit_mult",
+        "category_tags": {
+          "Listed": [
+            "Fleets",
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "commercial_pact_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "component_lifesteal_add",
+        "category_tags": {
+          "Listed": [
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships"
+          ]
+        }
+      },
+      {
+        "name": "council_agenda_cooldown_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "council_agenda_finishing_effect_duration_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "council_agenda_progress_speed",
+        "category_tags": {
+          "Listed": [
+            "Countries",
+            "Leaders"
+          ]
+        }
+      },
+      {
+        "name": "councilor_exp_gain",
+        "category_tags": {
+          "Listed": [
+            "Countries",
+            "Leaders"
+          ]
+        }
+      },
+      {
+        "name": "councilor_skill_add",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "counter_intel_gain_speed",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_admin_cap_add",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_admin_cap_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_astral_rift_fail_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_astral_rift_speed_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_border_friction_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_branch_office_influence_cost_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_capture_amount_add",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_capture_amount_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_capture_chance_add",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_claim_influence_cost_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_community_gdf_naval_capacity",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_counter_espionage_add",
+        "category_tags": {
+          "Listed": [
+            "Espionage"
+          ]
+        }
+      },
+      {
+        "name": "country_counter_espionage_mult",
+        "category_tags": {
+          "Listed": [
+            "Espionage"
+          ]
+        }
+      },
+      {
+        "name": "country_edict_fund_add",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_edict_fund_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_election_cost_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_enclave_capacity_add",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_enclave_capacity_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_enclave_usage_add",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_engineering_tech_research_speed",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_exhibit_unlocking_cost_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_federation_fleet_contribution_discount",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_federation_fleet_contribution_naval_cap_reduction_discount",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_government_civic_points_add",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_hostile_claim_influence_cost_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_insult_efficiency",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_integration_cooldown_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_leader_cap_add",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_leader_pool_size",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_megastructure_build_cap_add",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_naval_cap_add",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_naval_cap_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_naval_capacity_contribution_from_subjects_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_naval_capacity_contribution_to_overlord_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_naval_coverage_add",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_naval_coverage_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_occupation_armies_add",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_organic_trust_cap_add",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_physics_tech_research_speed",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_pop_enslaved_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_resettlement_cost_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_resource_max_add",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_ship_upgrade_cost_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_society_tech_research_speed",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_specimen_selling_cost_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_specimen_storage_cooldown_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_starbase_capacity_add",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_starbase_capacity_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_starbase_influence_cost_distance_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_starbase_influence_cost_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_storm_attraction_influence_add",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_storm_influence_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_storm_location_intel_add",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_storm_movement_intel_add",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_storm_protection_tech_level_add",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_storm_repulsion_influence_add",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_subject_acceptance_add",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_subject_integration_speed_add",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_subject_power_penalty_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_subject_technology_sharing_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_subject_trust_cap_add",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_synthetic_trust_cap_add",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_trade_attractiveness",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_trade_fee",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_trust_cap_add",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_trust_growth",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_vassal_naval_capacity_contribution_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_vivarium_max_capacity_add",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_vivarium_max_capacity_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "country_war_exhaustion_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "create_debris_chance",
+        "category_tags": {
+          "Listed": [
+            "Fleets"
+          ]
+        }
+      },
+      {
+        "name": "custom_tech_1_draw_chance_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "custom_tech_1_research_speed_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "custom_tech_2_draw_chance_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "custom_tech_2_research_speed_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "custom_tech_3_draw_chance_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "custom_tech_3_research_speed_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "daily_terraform_progress_add",
+        "category_tags": {
+          "Listed": [
+            "Planets"
+          ]
+        }
+      },
+      {
+        "name": "damage_vs_player_crisis_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "damage_vs_psionic_empires_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "damage_vs_rival_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "damage_vs_superior_empires_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "dangerous_tech_draw_chance_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "dangerous_tech_research_speed_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "defensive_war_influence_gain_add",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "delegate_cohesion_effect_mult",
+        "category_tags": {
+          "Listed": [
+            "Federations"
+          ]
+        }
+      },
+      {
+        "name": "difficulty_modifier_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "dimensional_lock_duration_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "diplo_action_acceptance_add",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "diplo_weight_council_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "diplo_weight_delegate_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "diplo_weight_economy_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "diplo_weight_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "diplo_weight_naval_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "diplo_weight_opposing_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "diplo_weight_pops_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "diplo_weight_rivals_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "diplo_weight_ship_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "diplo_weight_space_fauna_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "diplo_weight_sprawl_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "diplo_weight_stance_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "diplo_weight_supporting_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "diplo_weight_technology_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "district_automated_workforce",
+        "category_tags": {
+          "Listed": [
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "edict_length_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "election_term_variance_add",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "election_term_variance_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "election_term_years_add",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "election_term_years_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "emergency_measures_cooldown_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "empire_size_add",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "empire_size_branch_office_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "empire_size_colonies_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "empire_size_districts_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries",
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "empire_size_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "empire_size_penalty_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "empire_size_pops_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "empire_size_psionic_pops_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "empire_size_systems_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "encampment_progress_add",
+        "category_tags": {
+          "Listed": [
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "encampment_progress_mult",
+        "category_tags": {
+          "Listed": [
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "encampment_required_progress_add",
+        "category_tags": {
+          "Listed": [
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "encampment_required_progress_mult",
+        "category_tags": {
+          "Listed": [
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "engineering_tech_cost_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "envoy_attunement_mult",
+        "category_tags": {
+          "Listed": [
+            "Leaders"
+          ]
+        }
+      },
+      {
+        "name": "envoy_harm_relations_mult",
+        "category_tags": {
+          "Listed": [
+            "Leaders"
+          ]
+        }
+      },
+      {
+        "name": "envoy_improve_relations_mult",
+        "category_tags": {
+          "Listed": [
+            "Leaders"
+          ]
+        }
+      },
+      {
+        "name": "envoys_add",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "espionage_hostile_operation_cost_add",
+        "category_tags": {
+          "Listed": [
+            "Espionage"
+          ]
+        }
+      },
+      {
+        "name": "espionage_hostile_operation_cost_mult",
+        "category_tags": {
+          "Listed": [
+            "Espionage"
+          ]
+        }
+      },
+      {
+        "name": "espionage_hostile_operation_difficulty_add",
+        "category_tags": {
+          "Listed": [
+            "Espionage"
+          ]
+        }
+      },
+      {
+        "name": "espionage_hostile_operation_difficulty_mult",
+        "category_tags": {
+          "Listed": [
+            "Espionage"
+          ]
+        }
+      },
+      {
+        "name": "espionage_operation_cost_add",
+        "category_tags": {
+          "Listed": [
+            "Espionage"
+          ]
+        }
+      },
+      {
+        "name": "espionage_operation_cost_mult",
+        "category_tags": {
+          "Listed": [
+            "Espionage"
+          ]
+        }
+      },
+      {
+        "name": "espionage_operation_difficulty_add",
+        "category_tags": {
+          "Listed": [
+            "Espionage"
+          ]
+        }
+      },
+      {
+        "name": "espionage_operation_difficulty_mult",
+        "category_tags": {
+          "Listed": [
+            "Espionage"
+          ]
+        }
+      },
+      {
+        "name": "espionage_operation_skill_add",
+        "category_tags": {
+          "Listed": [
+            "Espionage"
+          ]
+        }
+      },
+      {
+        "name": "espionage_operation_skill_mult",
+        "category_tags": {
+          "Listed": [
+            "Espionage"
+          ]
+        }
+      },
+      {
+        "name": "espionage_operation_speed_mult",
+        "category_tags": {
+          "Listed": [
+            "Espionage"
+          ]
+        }
+      },
+      {
+        "name": "evasion_vs_psionic_empires_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "external_leader_pool_add",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "extra_large_space_fauna_build_speed_mult",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Ship Design Stats"
+          ]
+        }
+      },
+      {
+        "name": "extra_large_space_fauna_ship_cost_mult",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Ship Design Stats"
+          ]
+        }
+      },
+      {
+        "name": "extra_large_space_fauna_ship_hull_mult",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Ship Design Stats"
+          ]
+        }
+      },
+      {
+        "name": "faction_approval",
+        "category_tags": {
+          "Listed": [
+            "Countries",
+            "Pop Factions"
+          ]
+        }
+      },
+      {
+        "name": "faction_demands_met_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries",
+            "Pop Factions"
+          ]
+        }
+      },
+      {
+        "name": "faction_demands_unmet_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries",
+            "Pop Factions"
+          ]
+        }
+      },
+      {
+        "name": "federation_experience_add",
+        "category_tags": {
+          "Listed": [
+            "Countries",
+            "Federations"
+          ]
+        }
+      },
+      {
+        "name": "federation_fleet_cap_add",
+        "category_tags": {
+          "Listed": [
+            "Federations"
+          ]
+        }
+      },
+      {
+        "name": "federation_fleet_contribution_factor",
+        "category_tags": {
+          "Listed": [
+            "Federations"
+          ]
+        }
+      },
+      {
+        "name": "federation_join_malus_mult",
+        "category_tags": {
+          "Listed": [
+            "Federations"
+          ]
+        }
+      },
+      {
+        "name": "federation_leader_diplo_weight_contribution_add",
+        "category_tags": {
+          "Listed": [
+            "Federations"
+          ]
+        }
+      },
+      {
+        "name": "federation_leader_diplo_weight_from_members_mult",
+        "category_tags": {
+          "Listed": [
+            "Federations"
+          ]
+        }
+      },
+      {
+        "name": "federation_leader_fleet_scale_mult",
+        "category_tags": {
+          "Listed": [
+            "Federations"
+          ]
+        }
+      },
+      {
+        "name": "federation_leave_malus_mult",
+        "category_tags": {
+          "Listed": [
+            "Federations"
+          ]
+        }
+      },
+      {
+        "name": "federation_naval_cap_contribution_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "federation_research_sharing_mult",
+        "category_tags": {
+          "Listed": [
+            "Federations"
+          ]
+        }
+      },
+      {
+        "name": "first_contact_clues_add",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "first_contact_defense_add",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "first_contact_speed_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "fleet_capture_defeated_leader_chance",
+        "category_tags": {
+          "Listed": [
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships"
+          ]
+        }
+      },
+      {
+        "name": "fleet_mia_time_mult",
+        "category_tags": {
+          "Listed": [
+            "Fleets"
+          ]
+        }
+      },
+      {
+        "name": "force_disparity_fire_rate_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "founder_species_growth_mult",
+        "category_tags": {
+          "Listed": [
+            "Pops"
+          ]
+        }
+      },
+      {
+        "name": "gdf_ship_alloys_cost_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "gravity_snare_cost_mult",
+        "category_tags": {
+          "Listed": [
+            "Fleets",
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "habitability_ceil_add",
+        "category_tags": {
+          "Listed": [
+            "Habitability"
+          ]
+        }
+      },
+      {
+        "name": "habitability_ceil_mult",
+        "category_tags": {
+          "Listed": [
+            "Habitability"
+          ]
+        }
+      },
+      {
+        "name": "habitability_ceil_uncapped_add",
+        "category_tags": {
+          "Listed": [
+            "Habitability"
+          ]
+        }
+      },
+      {
+        "name": "habitability_floor_add",
+        "category_tags": {
+          "Listed": [
+            "Habitability"
+          ]
+        }
+      },
+      {
+        "name": "habitability_floor_mult",
+        "category_tags": {
+          "Listed": [
+            "Habitability"
+          ]
+        }
+      },
+      {
+        "name": "heir_starting_age_add",
+        "category_tags": {
+          "Listed": [
+            "Leaders"
+          ]
+        }
+      },
+      {
+        "name": "heir_starting_age_mult",
+        "category_tags": {
+          "Listed": [
+            "Leaders"
+          ]
+        }
+      },
+      {
+        "name": "horizontal_attunement_add",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "insight_tech_draw_chance_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "insight_tech_research_speed_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "intel_decryption_add",
+        "category_tags": {
+          "Listed": [
+            "Espionage"
+          ]
+        }
+      },
+      {
+        "name": "intel_decryption_mult",
+        "category_tags": {
+          "Listed": [
+            "Espionage"
+          ]
+        }
+      },
+      {
+        "name": "intel_encryption_add",
+        "category_tags": {
+          "Listed": [
+            "Espionage"
+          ]
+        }
+      },
+      {
+        "name": "intel_encryption_mult",
+        "category_tags": {
+          "Listed": [
+            "Espionage"
+          ]
+        }
+      },
+      {
+        "name": "intel_gain_speed",
+        "category_tags": {
+          "Listed": [
+            "Espionage"
+          ]
+        }
+      },
+      {
+        "name": "intel_reconnaissance_level_add",
+        "category_tags": {
+          "Listed": [
+            "Espionage"
+          ]
+        }
+      },
+      {
+        "name": "job_max_workforce_add",
+        "category_tags": {
+          "Listed": [
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "job_max_workforce_mult",
+        "category_tags": {
+          "Listed": [
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "large_space_fauna_build_speed_mult",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Ship Design Stats"
+          ]
+        }
+      },
+      {
+        "name": "large_space_fauna_ship_cost_mult",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Ship Design Stats"
+          ]
+        }
+      },
+      {
+        "name": "large_space_fauna_ship_hull_mult",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Ship Design Stats"
+          ]
+        }
+      },
+      {
+        "name": "leader_cost_empire_size_mult",
+        "category_tags": {
+          "Listed": [
+            "Economic Units"
+          ]
+        }
+      },
+      {
+        "name": "leader_initial_skill",
+        "category_tags": {
+          "Listed": [
+            "Leaders"
+          ]
+        }
+      },
+      {
+        "name": "leader_lifespan_add",
+        "category_tags": {
+          "Listed": [
+            "Leaders"
+          ]
+        }
+      },
+      {
+        "name": "leader_lifespan_mult",
+        "category_tags": {
+          "Listed": [
+            "Leaders"
+          ]
+        }
+      },
+      {
+        "name": "leader_organic_lifespan_mult",
+        "category_tags": {
+          "Listed": [
+            "Leaders"
+          ]
+        }
+      },
+      {
+        "name": "leader_skill_add",
+        "category_tags": {
+          "Listed": [
+            "Leaders"
+          ]
+        }
+      },
+      {
+        "name": "leader_skill_levels",
+        "category_tags": {
+          "Listed": [
+            "Leaders"
+          ]
+        }
+      },
+      {
+        "name": "leader_starting_age_add",
+        "category_tags": {
+          "Listed": [
+            "Leaders"
+          ]
+        }
+      },
+      {
+        "name": "leader_starting_age_mult",
+        "category_tags": {
+          "Listed": [
+            "Leaders"
+          ]
+        }
+      },
+      {
+        "name": "leader_trait_selection_options_add",
+        "category_tags": {
+          "Listed": [
+            "Countries",
+            "Leaders"
+          ]
+        }
+      },
+      {
+        "name": "leader_upkeep_empire_size_mult",
+        "category_tags": {
+          "Listed": [
+            "Economic Units"
+          ]
+        }
+      },
+      {
+        "name": "logistic_growth_mult",
+        "category_tags": {
+          "Listed": [
+            "Pops"
+          ]
+        }
+      },
+      {
+        "name": "max_embassies",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "max_rivalries",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "medium_space_fauna_build_speed_mult",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Ship Design Stats"
+          ]
+        }
+      },
+      {
+        "name": "medium_space_fauna_ship_cost_mult",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Ship Design Stats"
+          ]
+        }
+      },
+      {
+        "name": "medium_space_fauna_ship_hull_mult",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Ship Design Stats"
+          ]
+        }
+      },
+      {
+        "name": "megastructure_build_speed_add",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Megastructures"
+          ]
+        }
+      },
+      {
+        "name": "megastructure_build_speed_mult",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Megastructures"
+          ]
+        }
+      },
+      {
+        "name": "missile_armor_add",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "missile_armor_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "missile_health_add",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "missile_health_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "missile_shield_add",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "missile_shield_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "mod_ship_naval_cap_usage_add",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "mod_ship_naval_cap_usage_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "modify_species_cost_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "monthly_loyalty",
+        "category_tags": {
+          "Listed": [
+            "Countries",
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "monthly_loyalty_from_organic_subjects",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "monthly_loyalty_from_subjects",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "monthly_loyalty_from_synthetic_subjects",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "mutation_slots_add",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "num_tech_alternatives_add",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "owned_ship_accuracy_mult",
+        "category_tags": {
+          "Listed": [
+            "Owned Ships"
+          ]
+        }
+      },
+      {
+        "name": "owned_ship_evasion_mult",
+        "category_tags": {
+          "Listed": [
+            "Owned Ships"
+          ]
+        }
+      },
+      {
+        "name": "owned_ship_fire_rate_mult",
+        "category_tags": {
+          "Listed": [
+            "Owned Ships"
+          ]
+        }
+      },
+      {
+        "name": "owned_ship_speed_mult",
+        "category_tags": {
+          "Listed": [
+            "Owned Ships"
+          ]
+        }
+      },
+      {
+        "name": "physics_tech_cost_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "planet_amenities_add",
+        "category_tags": {
+          "Listed": [
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "planet_amenities_mult",
+        "category_tags": {
+          "Listed": [
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "planet_amenities_no_happiness_add",
+        "category_tags": {
+          "Listed": [
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "planet_amenities_no_happiness_mult",
+        "category_tags": {
+          "Listed": [
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "planet_army_build_speed_mult",
+        "category_tags": {
+          "Listed": [
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "planet_army_build_time_mult",
+        "category_tags": {
+          "Listed": [
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "planet_artificial_max_districts_add",
+        "category_tags": {
+          "Listed": [
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "planet_building_build_speed_mult",
+        "category_tags": {
+          "Listed": [
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "planet_building_capacity_add",
+        "category_tags": {
+          "Listed": [
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "planet_building_refund_mult",
+        "category_tags": {
+          "Listed": [
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "planet_carry_cap_add",
+        "category_tags": {
+          "Listed": [
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "planet_clear_blocker_speed_mult",
+        "category_tags": {
+          "Listed": [
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "planet_clear_blocker_time_mult",
+        "category_tags": {
+          "Listed": [
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "planet_colony_development_speed_mult",
+        "category_tags": {
+          "Listed": [
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "planet_combat_width_add",
+        "category_tags": {
+          "Listed": [
+            "Leaders"
+          ]
+        }
+      },
+      {
+        "name": "planet_crime_add",
+        "category_tags": {
+          "Listed": [
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "planet_crime_floor_add",
+        "category_tags": {
+          "Listed": [
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "planet_crime_mult",
+        "category_tags": {
+          "Listed": [
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "planet_crime_no_happiness_add",
+        "category_tags": {
+          "Listed": [
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "planet_crime_no_happiness_mult",
+        "category_tags": {
+          "Listed": [
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "planet_decision_enact_speed_mult",
+        "category_tags": {
+          "Listed": [
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "planet_defense_armies_add",
+        "category_tags": {
+          "Listed": [
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "planet_housing_add",
+        "category_tags": {
+          "Listed": [
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "planet_housing_mult",
+        "category_tags": {
+          "Listed": [
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "planet_hyperlane_range_add",
+        "category_tags": {
+          "Listed": [
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "planet_max_districts_add",
+        "category_tags": {
+          "Listed": [
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "planet_max_districts_mult",
+        "category_tags": {
+          "Listed": [
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "planet_non_artificial_max_districts_add",
+        "category_tags": {
+          "Listed": [
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "planet_orbital_bombardment_damage",
+        "category_tags": {
+          "Listed": [
+            "Planets"
+          ]
+        }
+      },
+      {
+        "name": "planet_pop_assembly_add",
+        "category_tags": {
+          "Listed": [
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "planet_pop_assembly_mult",
+        "category_tags": {
+          "Listed": [
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "planet_pop_assembly_reduction",
+        "category_tags": {
+          "Listed": [
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "planet_resettlement_unemployed_destination_mult",
+        "category_tags": {
+          "Listed": [
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "planet_resettlement_unemployed_mult",
+        "category_tags": {
+          "Listed": [
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "planet_sensor_range_add",
+        "category_tags": {
+          "Listed": [
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "planet_stability_add",
+        "category_tags": {
+          "Listed": [
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "planet_stability_add_with_limit",
+        "category_tags": {
+          "Listed": [
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "planet_stability_mult",
+        "category_tags": {
+          "Listed": [
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "planet_storm_devastation_mult",
+        "category_tags": {
+          "Listed": [
+            "Planets"
+          ]
+        }
+      },
+      {
+        "name": "planet_storm_influence_timed",
+        "category_tags": {
+          "Listed": [
+            "Planets"
+          ]
+        }
+      },
+      {
+        "name": "planetary_ascension_cost_mult",
+        "category_tags": {
+          "Listed": [
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "planetary_ascension_effect_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "pop_amenities_usage_add",
+        "category_tags": {
+          "Listed": [
+            "Pops"
+          ]
+        }
+      },
+      {
+        "name": "pop_amenities_usage_base",
+        "category_tags": {
+          "Listed": [
+            "Pops"
+          ]
+        }
+      },
+      {
+        "name": "pop_amenities_usage_mult",
+        "category_tags": {
+          "Listed": [
+            "Pops"
+          ]
+        }
+      },
+      {
+        "name": "pop_amenities_usage_no_happiness_add",
+        "category_tags": {
+          "Listed": [
+            "Pops"
+          ]
+        }
+      },
+      {
+        "name": "pop_amenities_usage_no_happiness_base",
+        "category_tags": {
+          "Listed": [
+            "Pops"
+          ]
+        }
+      },
+      {
+        "name": "pop_amenities_usage_no_happiness_mult",
+        "category_tags": {
+          "Listed": [
+            "Pops"
+          ]
+        }
+      },
+      {
+        "name": "pop_amenities_usage_organic_mult",
+        "category_tags": {
+          "Listed": [
+            "Pops"
+          ]
+        }
+      },
+      {
+        "name": "pop_amenities_usage_psionic_mult",
+        "category_tags": {
+          "Listed": [
+            "Pops"
+          ]
+        }
+      },
+      {
+        "name": "pop_amenities_usage_robotic_mult",
+        "category_tags": {
+          "Listed": [
+            "Pops"
+          ]
+        }
+      },
+      {
+        "name": "pop_bonus_workforce_mult",
+        "category_tags": {
+          "Listed": [
+            "Pops"
+          ]
+        }
+      },
+      {
+        "name": "pop_citizen_happiness",
+        "category_tags": {
+          "Listed": [
+            "Pops"
+          ]
+        }
+      },
+      {
+        "name": "pop_decline_speed",
+        "category_tags": {
+          "Listed": [
+            "Pops"
+          ]
+        }
+      },
+      {
+        "name": "pop_environment_tolerance",
+        "category_tags": {
+          "Listed": [
+            "Habitability"
+          ]
+        }
+      },
+      {
+        "name": "pop_ethics_shift_speed_mult",
+        "category_tags": {
+          "Listed": [
+            "Pops"
+          ]
+        }
+      },
+      {
+        "name": "pop_government_ethic_attraction",
+        "category_tags": {
+          "Listed": [
+            "Pops"
+          ]
+        }
+      },
+      {
+        "name": "pop_happiness",
+        "category_tags": {
+          "Listed": [
+            "Pops"
+          ]
+        }
+      },
+      {
+        "name": "pop_housing_usage_add",
+        "category_tags": {
+          "Listed": [
+            "Pops"
+          ]
+        }
+      },
+      {
+        "name": "pop_housing_usage_base",
+        "category_tags": {
+          "Listed": [
+            "Pops"
+          ]
+        }
+      },
+      {
+        "name": "pop_housing_usage_mult",
+        "category_tags": {
+          "Listed": [
+            "Pops"
+          ]
+        }
+      },
+      {
+        "name": "pop_organic_resettlement_cost_mult",
+        "category_tags": {
+          "Listed": [
+            "Pops"
+          ]
+        }
+      },
+      {
+        "name": "pop_political_power",
+        "category_tags": {
+          "Listed": [
+            "Pops"
+          ]
+        }
+      },
+      {
+        "name": "pop_purge_mult",
+        "category_tags": {
+          "Listed": [
+            "Pops"
+          ]
+        }
+      },
+      {
+        "name": "pop_purge_speed",
+        "category_tags": {
+          "Listed": [
+            "Pops"
+          ]
+        }
+      },
+      {
+        "name": "pop_resettlement_cost_mult",
+        "category_tags": {
+          "Listed": [
+            "Pops"
+          ]
+        }
+      },
+      {
+        "name": "pop_workforce_mult",
+        "category_tags": {
+          "Listed": [
+            "Pops"
+          ]
+        }
+      },
+      {
+        "name": "psionic_aura_effectiveness_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "psionic_aura_intensity_add",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "psionic_aura_intensity_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "psionic_aura_resistance_mult",
+        "category_tags": {
+          "Listed": [
+            "Fleets",
+            "Countries",
+            "Star Systems"
+          ]
+        }
+      },
+      {
+        "name": "rare_tech_draw_chance_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "rare_tech_research_speed_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "reanimated_ship_damage_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "reanimated_ship_fire_rate_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "research_sharing_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "ruler_skill_add",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "ruler_skill_levels",
+        "category_tags": {
+          "Listed": [
+            "Leaders"
+          ]
+        }
+      },
+      {
+        "name": "ruler_starting_age_add",
+        "category_tags": {
+          "Listed": [
+            "Leaders"
+          ]
+        }
+      },
+      {
+        "name": "ruler_starting_age_mult",
+        "category_tags": {
+          "Listed": [
+            "Leaders"
+          ]
+        }
+      },
+      {
+        "name": "scavenge_debris_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "science_ship_survey_speed",
+        "category_tags": {
+          "Listed": [
+            "Science Ships"
+          ]
+        }
+      },
+      {
+        "name": "science_ship_survey_speed_uninhabitable",
+        "category_tags": {
+          "Listed": [
+            "Science Ships"
+          ]
+        }
+      },
+      {
+        "name": "sector_max_jumps_add",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "senate_recess_council_member_speed_mult",
+        "category_tags": {
+          "Listed": [
+            "Galactic Community"
+          ]
+        }
+      },
+      {
+        "name": "senate_vote_council_member_speed_mult",
+        "category_tags": {
+          "Listed": [
+            "Galactic Community"
+          ]
+        }
+      },
+      {
+        "name": "ship_accuracy_add",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_accuracy_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_anomaly_fail_risk",
+        "category_tags": {
+          "Listed": [
+            "Science Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_anomaly_generation_chance_mult",
+        "category_tags": {
+          "Listed": [
+            "Science Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_anomaly_generation_chance_mult_uninhabitable",
+        "category_tags": {
+          "Listed": [
+            "Science Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_anomaly_research_speed_mult",
+        "category_tags": {
+          "Listed": [
+            "Science Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_anomaly_research_speed_mult_uninhabitable",
+        "category_tags": {
+          "Listed": [
+            "Science Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_archaeological_site_clues_add",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_archaeological_site_excavation_speed_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_armor_add",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Ship Design Stats"
+          ]
+        }
+      },
+      {
+        "name": "ship_armor_damage_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_armor_hardening_add",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_armor_mult",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Ship Design Stats"
+          ]
+        }
+      },
+      {
+        "name": "ship_armor_penetration_add",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_armor_penetration_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_armor_reduction",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_armor_regen_add_perc",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Ship Design Stats"
+          ]
+        }
+      },
+      {
+        "name": "ship_armor_regen_add_static",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Ship Design Stats"
+          ]
+        }
+      },
+      {
+        "name": "ship_armor_regen_mult",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Ship Design Stats"
+          ]
+        }
+      },
+      {
+        "name": "ship_astral_rift_clues_add",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_astral_rift_speed_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_base_speed_mult",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Ship Design Stats"
+          ]
+        }
+      },
+      {
+        "name": "ship_capture_amount_add",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Ship Design Stats"
+          ]
+        }
+      },
+      {
+        "name": "ship_capture_chance_add",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Ship Design Stats"
+          ]
+        }
+      },
+      {
+        "name": "ship_cloaking_detection_add",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Ship Design Stats"
+          ]
+        }
+      },
+      {
+        "name": "ship_cloaking_strength_add",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Ship Design Stats"
+          ]
+        }
+      },
+      {
+        "name": "ship_community_territory_speed_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_damage_against_boss_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_damage_against_reckoning_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_damage_against_space_fauna_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_damage_against_starbases_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_damage_reduction_add",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_damage_reduction_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_disengage_chance_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_disengage_chance_reduction",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_disengage_opportunities_add",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_emergency_ftl_min_days_add",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_emergency_ftl_min_days_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_emergency_ftl_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_engagement_range_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_evasion_add",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Ship Design Stats"
+          ]
+        }
+      },
+      {
+        "name": "ship_evasion_mult",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Ship Design Stats"
+          ]
+        }
+      },
+      {
+        "name": "ship_experience_gain_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_federation_territory_fire_rate_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_federation_territory_speed_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_fire_rate_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_friendly_territory_accuracy_add",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_friendly_territory_accuracy_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_friendly_territory_armor_add",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_friendly_territory_armor_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_friendly_territory_evasion_add",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_friendly_territory_evasion_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_friendly_territory_fire_rate_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_friendly_territory_hull_add",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_friendly_territory_hull_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_friendly_territory_shield_add",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_friendly_territory_shield_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_friendly_territory_tracking_add",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_friendly_territory_tracking_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_ftl_jumpdrive_range_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_home_territory_fire_rate_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_hull_add",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Ship Design Stats"
+          ]
+        }
+      },
+      {
+        "name": "ship_hull_damage_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_hull_mult",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Ship Design Stats"
+          ]
+        }
+      },
+      {
+        "name": "ship_hull_regen_add_perc",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Ship Design Stats"
+          ]
+        }
+      },
+      {
+        "name": "ship_hull_regen_add_static",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Ship Design Stats"
+          ]
+        }
+      },
+      {
+        "name": "ship_hull_regen_mult",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Ship Design Stats"
+          ]
+        }
+      },
+      {
+        "name": "ship_hyperlane_range_add",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_interstellar_speed_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_jumpdrive_cooldown_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_landing_time_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_military_speed_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_monthly_hull_damage",
+        "category_tags": {
+          "Listed": [
+            "Fleets"
+          ]
+        }
+      },
+      {
+        "name": "ship_orbit_upkeep_mult",
+        "category_tags": {
+          "Listed": [
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_orbital_bombardment_army_damage_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_orbital_bombardment_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_orbital_bombardment_pop_damage_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_outside_friendly_territory_fire_rate_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_psionic_aura_fire_rate_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_psionic_aura_speed_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_reactor_power_add",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Ship Design Stats"
+          ]
+        }
+      },
+      {
+        "name": "ship_reactor_power_mult",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Ship Design Stats"
+          ]
+        }
+      },
+      {
+        "name": "ship_repair_armor_mult",
+        "category_tags": {
+          "Listed": [
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_repair_hull_mult",
+        "category_tags": {
+          "Listed": [
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_science_speed_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_sensor_range_add",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_shield_add",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Ship Design Stats"
+          ]
+        }
+      },
+      {
+        "name": "ship_shield_damage_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_shield_hardening_add",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_shield_mult",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Ship Design Stats"
+          ]
+        }
+      },
+      {
+        "name": "ship_shield_penetration_add",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_shield_penetration_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_shield_reduction",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_shield_regen_add_perc",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Ship Design Stats"
+          ]
+        }
+      },
+      {
+        "name": "ship_shield_regen_add_static",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Ship Design Stats"
+          ]
+        }
+      },
+      {
+        "name": "ship_shield_regen_mult",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Ship Design Stats"
+          ]
+        }
+      },
+      {
+        "name": "ship_size_damage_factor",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_speed_mult",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Ship Design Stats"
+          ]
+        }
+      },
+      {
+        "name": "ship_speed_reduction",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_starbase_stockpile_collection_rate_add",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_starbase_stockpile_collection_rate_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_starting_experience_add",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_steal_defeated_ship_chance",
+        "category_tags": {
+          "Listed": [
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_stockpile_capacity_add",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_stockpile_capacity_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_target_weight_mult",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Ship Design Stats"
+          ]
+        }
+      },
+      {
+        "name": "ship_tracking_add",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_tracking_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_weapon_damage",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Ship Design Stats"
+          ]
+        }
+      },
+      {
+        "name": "ship_weapon_range_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_winddown_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "ship_windup_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "slave_market_cost_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "small_space_fauna_build_speed_mult",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Ship Design Stats"
+          ]
+        }
+      },
+      {
+        "name": "small_space_fauna_ship_cost_mult",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Ship Design Stats"
+          ]
+        }
+      },
+      {
+        "name": "small_space_fauna_ship_hull_mult",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Ship Design Stats"
+          ]
+        }
+      },
+      {
+        "name": "society_tech_cost_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "space_fauna_culling_reward_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "space_fauna_experience_gain_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "space_fauna_growth_rate_mult",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Countries",
+            "Transport Ships"
+          ]
+        }
+      },
+      {
+        "name": "space_fauna_monthly_increased_breeding_chance_add",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "space_fauna_naval_cap_usage_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "space_fauna_reanimation_cost_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "space_fauna_ship_armor_add",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Ship Design Stats"
+          ]
+        }
+      },
+      {
+        "name": "space_fauna_ship_armor_mult",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Ship Design Stats"
+          ]
+        }
+      },
+      {
+        "name": "space_fauna_ship_cost_mult",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Ship Design Stats"
+          ]
+        }
+      },
+      {
+        "name": "space_fauna_ship_damage_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "space_fauna_ship_fire_rate_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "space_fauna_ship_hull_add",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Ship Design Stats"
+          ]
+        }
+      },
+      {
+        "name": "space_fauna_ship_hull_mult",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Ship Design Stats"
+          ]
+        }
+      },
+      {
+        "name": "space_fauna_ship_shield_add",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Ship Design Stats"
+          ]
+        }
+      },
+      {
+        "name": "space_fauna_ship_shield_mult",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Ship Design Stats"
+          ]
+        }
+      },
+      {
+        "name": "space_fauna_ship_size_shield_add",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Ship Design Stats"
+          ]
+        }
+      },
+      {
+        "name": "space_fauna_ship_size_shield_regen_add",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Ship Design Stats"
+          ]
+        }
+      },
+      {
+        "name": "space_fauna_ship_speed_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "space_fauna_ship_upkeep_mult",
+        "category_tags": {
+          "Listed": [
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships"
+          ]
+        }
+      },
+      {
+        "name": "specialist_subject_conversion_time_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "species_empire_size_mult",
+        "category_tags": {
+          "Listed": [
+            "Pops"
+          ]
+        }
+      },
+      {
+        "name": "species_leader_exp_gain",
+        "category_tags": {
+          "Listed": [
+            "Leaders"
+          ]
+        }
+      },
+      {
+        "name": "spy_network_daily_value_add",
+        "category_tags": {
+          "Listed": [
+            "Espionage"
+          ]
+        }
+      },
+      {
+        "name": "spy_network_daily_value_mult",
+        "category_tags": {
+          "Listed": [
+            "Espionage"
+          ]
+        }
+      },
+      {
+        "name": "spy_network_decay_add",
+        "category_tags": {
+          "Listed": [
+            "Espionage"
+          ]
+        }
+      },
+      {
+        "name": "spy_network_decay_mult",
+        "category_tags": {
+          "Listed": [
+            "Espionage"
+          ]
+        }
+      },
+      {
+        "name": "spy_network_levels_add",
+        "category_tags": {
+          "Listed": [
+            "Espionage"
+          ]
+        }
+      },
+      {
+        "name": "spy_network_value_add",
+        "category_tags": {
+          "Listed": [
+            "Espionage"
+          ]
+        }
+      },
+      {
+        "name": "spy_network_value_mult",
+        "category_tags": {
+          "Listed": [
+            "Espionage"
+          ]
+        }
+      },
+      {
+        "name": "spy_power_cost_add",
+        "category_tags": {
+          "Listed": [
+            "Espionage"
+          ]
+        }
+      },
+      {
+        "name": "spy_power_cost_mult",
+        "category_tags": {
+          "Listed": [
+            "Espionage"
+          ]
+        }
+      },
+      {
+        "name": "starbase_building_build_speed_mult",
+        "category_tags": {
+          "Listed": [
+            "Starbases"
+          ]
+        }
+      },
+      {
+        "name": "starbase_building_build_time_mult",
+        "category_tags": {
+          "Listed": [
+            "Starbases"
+          ]
+        }
+      },
+      {
+        "name": "starbase_building_capacity_add",
+        "category_tags": {
+          "Listed": [
+            "Starbases"
+          ]
+        }
+      },
+      {
+        "name": "starbase_collected_colony_resources_add",
+        "category_tags": {
+          "Listed": [
+            "Waystations"
+          ]
+        }
+      },
+      {
+        "name": "starbase_collected_system_resources_mult",
+        "category_tags": {
+          "Listed": [
+            "Starbases",
+            "Waystations"
+          ]
+        }
+      },
+      {
+        "name": "starbase_defense_platform_capacity_add",
+        "category_tags": {
+          "Listed": [
+            "Starbases"
+          ]
+        }
+      },
+      {
+        "name": "starbase_defense_platform_capacity_mult",
+        "category_tags": {
+          "Listed": [
+            "Starbases"
+          ]
+        }
+      },
+      {
+        "name": "starbase_defensive_war_ship_build_speed_mult",
+        "category_tags": {
+          "Listed": [
+            "Megastructures",
+            "Starbases"
+          ]
+        }
+      },
+      {
+        "name": "starbase_module_build_speed_mult",
+        "category_tags": {
+          "Listed": [
+            "Starbases"
+          ]
+        }
+      },
+      {
+        "name": "starbase_module_build_time_mult",
+        "category_tags": {
+          "Listed": [
+            "Starbases"
+          ]
+        }
+      },
+      {
+        "name": "starbase_module_capacity_add",
+        "category_tags": {
+          "Listed": [
+            "Starbases"
+          ]
+        }
+      },
+      {
+        "name": "starbase_shipyard_artificial_build_cost_mult",
+        "category_tags": {
+          "Listed": [
+            "Megastructures",
+            "Starbases"
+          ]
+        }
+      },
+      {
+        "name": "starbase_shipyard_artificial_build_speed_mult",
+        "category_tags": {
+          "Listed": [
+            "Megastructures",
+            "Starbases"
+          ]
+        }
+      },
+      {
+        "name": "starbase_shipyard_artificial_build_time_mult",
+        "category_tags": {
+          "Listed": [
+            "Megastructures",
+            "Starbases"
+          ]
+        }
+      },
+      {
+        "name": "starbase_shipyard_build_cost_mult",
+        "category_tags": {
+          "Listed": [
+            "Megastructures",
+            "Starbases"
+          ]
+        }
+      },
+      {
+        "name": "starbase_shipyard_build_speed_mult",
+        "category_tags": {
+          "Listed": [
+            "Megastructures",
+            "Starbases"
+          ]
+        }
+      },
+      {
+        "name": "starbase_shipyard_build_time_mult",
+        "category_tags": {
+          "Listed": [
+            "Megastructures",
+            "Starbases"
+          ]
+        }
+      },
+      {
+        "name": "starbase_shipyard_capacity_add",
+        "category_tags": {
+          "Listed": [
+            "Megastructures",
+            "Starbases"
+          ]
+        }
+      },
+      {
+        "name": "starbase_shipyard_space_fauna_build_cost_mult",
+        "category_tags": {
+          "Listed": [
+            "Megastructures",
+            "Starbases"
+          ]
+        }
+      },
+      {
+        "name": "starbase_shipyard_space_fauna_build_speed_mult",
+        "category_tags": {
+          "Listed": [
+            "Megastructures",
+            "Starbases"
+          ]
+        }
+      },
+      {
+        "name": "starbase_shipyard_space_fauna_build_time_mult",
+        "category_tags": {
+          "Listed": [
+            "Megastructures",
+            "Starbases"
+          ]
+        }
+      },
+      {
+        "name": "starbase_stockpile_capacity_add",
+        "category_tags": {
+          "Listed": [
+            "Waystations"
+          ]
+        }
+      },
+      {
+        "name": "starbase_stockpile_capacity_mult",
+        "category_tags": {
+          "Listed": [
+            "Waystations"
+          ]
+        }
+      },
+      {
+        "name": "starbase_upgrade_cost_mult",
+        "category_tags": {
+          "Listed": [
+            "Starbases"
+          ]
+        }
+      },
+      {
+        "name": "starbase_upgrade_speed_mult",
+        "category_tags": {
+          "Listed": [
+            "Starbases"
+          ]
+        }
+      },
+      {
+        "name": "starbase_upgrade_time_mult",
+        "category_tags": {
+          "Listed": [
+            "Starbases"
+          ]
+        }
+      },
+      {
+        "name": "storm_ship_hull_breaker_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "strike_craft_armor_add",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "strike_craft_armor_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "strike_craft_cooldown_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "strike_craft_count_add",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "strike_craft_count_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "strike_craft_hull_add",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "strike_craft_hull_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "strike_craft_regeneration_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "strike_craft_shield_add",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "strike_craft_shield_mult",
+        "category_tags": {
+          "Listed": [
+            "Ships"
+          ]
+        }
+      },
+      {
+        "name": "subject_holding_owner_max_buildings_add",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "subject_holding_target_max_buildings_add",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "subject_integration_influence_cost_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "subject_tech_cost_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "subject_tribute_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "subspecies_integration_add",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "subspecies_integration_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "system_storm_influence_add",
+        "category_tags": {
+          "Listed": [
+            "Planets",
+            "Starbases"
+          ]
+        }
+      },
+      {
+        "name": "tech_cost_empire_size_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "terraform_speed_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries",
+            "Colony"
+          ]
+        }
+      },
+      {
+        "name": "terraforming_cost_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries",
+            "Planets"
+          ]
+        }
+      },
+      {
+        "name": "titanic_space_fauna_build_speed_mult",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Ship Design Stats"
+          ]
+        }
+      },
+      {
+        "name": "titanic_space_fauna_ship_cost_mult",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Ship Design Stats"
+          ]
+        }
+      },
+      {
+        "name": "titanic_space_fauna_ship_hull_mult",
+        "category_tags": {
+          "Listed": [
+            "Orbital Stations",
+            "Space Stations",
+            "Military Ships",
+            "Civilian Ships",
+            "Science Ships",
+            "Transport Ships",
+            "Ship Design Stats"
+          ]
+        }
+      },
+      {
+        "name": "tradition_cost_empire_size_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "tradition_cost_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "vertical_attunement_add",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "veto_cooldown_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      },
+      {
+        "name": "veto_cost_mult",
+        "category_tags": {
+          "Listed": [
+            "Countries"
+          ]
+        }
+      }
+    ],
+    "completeness": "Partial",
+    "gaps": [
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a direct modifier definition passes a name that is composed at run time"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a direct modifier definition passes a name that is composed at run time"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a direct modifier definition passes a name that is composed at run time"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a direct modifier definition passes a name that is composed at run time"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a direct modifier definition passes a name that is composed at run time"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a direct modifier definition passes a name that is composed at run time"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a direct modifier definition passes a name that is composed at run time"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a direct modifier definition passes a name that is composed at run time"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a direct modifier definition passes a name that is composed at run time"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a direct modifier definition passes a name that is composed at run time"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a direct modifier definition passes a name that is composed at run time"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "a generated modifier family composes its names at run time from content"
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": null,
+        "detail": "The search covers every direct modifier definition call in executable text. Generated modifier families, whose templates modifier_families gives for each registry, and where a modifier takes effect are outside it."
+      }
+    ],
+    "source": {
+      "build": "07988b4f1b865623becd7a61af1cae92e111be6515d341754af70f02107822cd",
+      "native_version": "0.1.0",
+      "method": "modifier-declarations/v1",
+      "basis": "Declared"
+    }
+  }
+}

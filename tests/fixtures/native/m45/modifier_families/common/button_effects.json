@@ -1,0 +1,24 @@
+{
+  "Ok": {
+    "value": [],
+    "completeness": "Partial",
+    "gaps": [
+      {
+        "kind": "UnnamedDeclaration",
+        "subject": null,
+        "detail": "20 sites that compose modifier names at run time are not joined to a registry (1 inside the registration function; 1 combine a registry's keys with the keys of content that Native does not name as a registry; 5 reached from the post-read code of content objects that are not items of a named registry; 13 reached by no chain of calls from a registry's code); some may generate this registry's modifiers"
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": "common/button_effects",
+        "detail": "The search covers the registry's database generator and post-read code. Where a modifier takes effect, the tags that a later registration of the same name gives, the tags of a declared modifier after content registers it again, and names longer than a fixed-size buffer keeps are outside it."
+      }
+    ],
+    "source": {
+      "build": "07988b4f1b865623becd7a61af1cae92e111be6515d341754af70f02107822cd",
+      "native_version": "0.1.0",
+      "method": "modifier-families/v2",
+      "basis": "StaticAnalysis"
+    }
+  }
+}

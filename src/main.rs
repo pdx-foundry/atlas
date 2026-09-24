@@ -1,4 +1,4 @@
-use pdx_atlas::{extraction, report, snapshot};
+use pdx_atlas::{coverage::comparison, extraction, report, snapshot};
 use pdx_native::{GameOptions, Native, supervisor};
 use sha2::{Digest, Sha256};
 use std::{
@@ -53,14 +53,50 @@ fn run_ledger() -> Result<bool, Box<dyn std::error::Error>> {
     Ok(ledger.diagnostics.is_empty())
 }
 
+const COMPARE_USAGE: &str = "usage: pdx-atlas compare CONFIG_DIR SNAPSHOT_FILE OUTPUT_DIR [--script-docs DIR] [--defines FILE]... [--answers DIR]";
+
 fn run_compare() -> Result<bool, Box<dyn std::error::Error>> {
-    let args = std::env::args().skip(2).collect::<Vec<_>>();
-    if args.len() != 3 {
-        return Err("usage: pdx-atlas compare CONFIG_DIR SNAPSHOT_FILE OUTPUT_DIR".into());
+    let mut positional = Vec::new();
+    let mut script_docs = None;
+    let mut defines = Vec::new();
+    let mut answers = None;
+    let mut args = std::env::args_os().skip(2);
+    while let Some(arg) = args.next() {
+        let mut value = || args.next().map(PathBuf::from).ok_or(COMPARE_USAGE);
+        match arg.to_str() {
+            Some("--script-docs") if script_docs.is_none() => script_docs = Some(value()?),
+            Some("--defines") => defines.push(value()?),
+            Some("--answers") if answers.is_none() => answers = Some(value()?),
+            Some(flag) if flag.starts_with("--") => return Err(COMPARE_USAGE.into()),
+            _ => positional.push(PathBuf::from(arg)),
+        }
     }
-    let output = PathBuf::from(&args[2]);
-    let report =
-        report::generate_comparison(&PathBuf::from(&args[0]), &PathBuf::from(&args[1]), &output)?;
+    let [config, snapshot, output] = positional.as_slice() else {
+        return Err(COMPARE_USAGE.into());
+    };
+    let loaded = match answers {
+        Some(answers) => {
+            let native = Native::from_recorded_answers(answers)?;
+            let runtime = tokio::runtime::Builder::new_current_thread()
+                .enable_time()
+                .build()?;
+            let session = runtime.block_on(extraction::read_loaded_modifiers(
+                &native,
+                GameOptions::new(Command::new("unused")),
+            ));
+            Some(session.observation?)
+        }
+        None => None,
+    };
+    let inputs = comparison::Inputs {
+        script_docs: script_docs
+            .map(|directory| report::read_script_docs(&directory))
+            .transpose()?
+            .unwrap_or_default(),
+        define_files: report::read_define_files(&defines)?,
+        loaded_modifiers: loaded.as_ref(),
+    };
+    let report = report::generate_comparison(config, snapshot, output, &inputs)?;
     println!(
         "{} comparison entries; report: {}",
         report.entries.len(),
@@ -169,7 +205,7 @@ fn main() -> ExitCode {
         Some("ledger") => run_ledger(),
         Some("compare") => run_compare(),
         Some("snapshot") => run_snapshot(),
-        _ => Err("usage: pdx-atlas ledger --config DIR [--snapshot FILE] --output DIR | compare CONFIG_DIR SNAPSHOT_FILE OUTPUT_DIR | snapshot INSTALLATION ANSWERS OUTPUT [STARTUP_SECONDS] | snapshot --recorded ANSWERS OUTPUT".into()),
+        _ => Err("usage: pdx-atlas ledger --config DIR [--snapshot FILE] --output DIR | compare CONFIG_DIR SNAPSHOT_FILE OUTPUT_DIR [--script-docs DIR] [--defines FILE]... [--answers DIR] | snapshot INSTALLATION ANSWERS OUTPUT [STARTUP_SECONDS] | snapshot --recorded ANSWERS OUTPUT".into()),
     };
     match result {
         Ok(true) => ExitCode::SUCCESS,

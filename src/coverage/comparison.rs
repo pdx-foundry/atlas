@@ -1,7 +1,11 @@
 //! Test-only comparison of projected Atlas answers with CWT claims.
 
+mod name_lists;
+pub mod script_docs;
+
 use super::{Answer, Gap, projection};
 use crate::{ledger::Ledger, snapshot};
+use pdx_native::LoadedModifiers;
 use serde::Serialize;
 use serde_json::Value;
 use sha2::{Digest, Sha256};
@@ -46,6 +50,59 @@ pub struct Entry {
     pub reason: Option<String>,
 }
 
+/// Names or entries that the engine and a config source agree on, and those only one gives.
+#[derive(Clone, Debug, Serialize)]
+pub struct NameList {
+    /// What the list holds, such as `effects` or `descriptions`.
+    pub list: String,
+    /// Entries that both give.
+    pub agree: Vec<String>,
+    /// Entries that only the snapshot or its Native answer gives.
+    pub engine_only: Vec<String>,
+    /// Entries that only the config source gives.
+    pub config_only: Vec<String>,
+}
+
+/// One `script-docs` log compared with the snapshot.
+#[derive(Clone, Debug, Serialize)]
+pub struct LogComparison {
+    /// Log file name, such as `effects.log`.
+    pub log: String,
+    /// Names, then each property as `name: value` entries over the names that both answer.
+    pub lists: Vec<NameList>,
+}
+
+/// Static category tags of declared modifiers against their tags in the loaded table.
+#[derive(Clone, Debug, Serialize)]
+pub struct TagComparison {
+    /// Number of declared modifiers whose loaded tags equal their static tags.
+    pub agree: usize,
+    /// Declared modifiers whose loaded tags differ or are not established.
+    pub different: Vec<TagDifference>,
+}
+
+/// One declared modifier whose loaded tags differ from its static tags.
+#[derive(Clone, Debug, Serialize)]
+pub struct TagDifference {
+    /// Modifier name.
+    pub name: String,
+    /// Tags that the executable declares, or `None` when they are not established.
+    pub declared: Option<Vec<String>>,
+    /// Tags in the loaded table, or `None` when they are not established or the name is absent.
+    pub loaded: Option<Vec<String>>,
+}
+
+/// Evidence besides the snapshot that the comparison reads. Each part is optional.
+#[derive(Default)]
+pub struct Inputs<'a> {
+    /// `script-docs` logs by file name; see [`script_docs::LOGS`].
+    pub script_docs: BTreeMap<String, String>,
+    /// The installation's define files, keyed by path.
+    pub define_files: BTreeMap<String, String>,
+    /// Native's loaded modifier answer, recorded with the snapshot for the same build.
+    pub loaded_modifiers: Option<&'a pdx_native::Answer<LoadedModifiers>>,
+}
+
 /// Deterministic comparison report, separate from the coverage score.
 #[derive(Clone, Debug, Serialize)]
 pub struct Report {
@@ -61,6 +118,16 @@ pub struct Report {
     pub inventory_complete: bool,
     /// Config claims followed by Atlas-only questions, in stable order.
     pub entries: Vec<Entry>,
+    /// Each config name list against the snapshot. Modifiers include loaded names when read.
+    pub name_lists: Vec<NameList>,
+    /// Each supplied `script-docs` log against the snapshot.
+    pub script_docs: Vec<LogComparison>,
+    /// Define names of the supplied define files against the snapshot, when supplied.
+    pub define_files: Option<NameList>,
+    /// Whether Native's loaded modifier answer was read.
+    pub loaded_modifiers_read: bool,
+    /// Loaded against static modifier tags, when the loaded answer was read.
+    pub modifier_tags: Option<TagComparison>,
 }
 
 enum ComparisonKind {
@@ -73,7 +140,10 @@ enum ComparisonKind {
 impl ComparisonKind {
     fn for_property(property: &str) -> Option<Self> {
         match property {
-            "type_existence" | "field_existence" => Some(Self::Presence),
+            "type_existence"
+            | "field_existence"
+            | "command_existence"
+            | "declaration_existence" => Some(Self::Presence),
             "loader_path" => Some(Self::LoaderPath),
             "value_form" => Some(Self::ValueForm),
             "cardinality_minimum" | "cardinality_maximum" => Some(Self::Cardinality),
@@ -225,11 +295,16 @@ fn entry(
     }
 }
 
-/// Compares an Atlas rule snapshot directly with the config ledger.
+/// Compares an Atlas rule snapshot directly with the config ledger and the supplied inputs.
 /// Recorded answers remain comparable, but this report grants no coverage credit.
-pub fn evaluate(ledger: &Ledger, input: &[u8]) -> Result<Report, String> {
+pub fn evaluate(ledger: &Ledger, input: &[u8], inputs: &Inputs) -> Result<Report, String> {
     let rules: snapshot::Snapshot =
         serde_json::from_slice(input).map_err(|error| format!("Invalid rule snapshot: {error}"))?;
+    if let Some(loaded) = inputs.loaded_modifiers
+        && rules.applicability.builds != [loaded.source.build.clone()]
+    {
+        return Err("The loaded modifier answer is for another build than the snapshot".into());
+    }
     let projection = projection::project_for_comparison(ledger, &rules)?;
     let answers_by_question = question_index(&projection.answers, |answer: &Answer| {
         (&answer.question, &answer.conditions)
@@ -283,12 +358,19 @@ pub fn evaluate(ledger: &Ledger, input: &[u8]) -> Result<Report, String> {
             reason: None,
         });
     }
+    let engine = name_lists::Engine::new(&rules);
+
     Ok(Report {
-        format_version: 1,
+        format_version: 2,
         config_sha256: ledger.config_sha256.clone(),
         snapshot_sha256: format!("{:x}", Sha256::digest(input)),
         snapshot_id: projection.snapshot_id,
         inventory_complete: ledger.diagnostics.is_empty(),
         entries,
+        name_lists: name_lists::config_lists(ledger, &engine, inputs),
+        script_docs: script_docs::compare_logs(&engine, inputs),
+        define_files: name_lists::define_files(&engine, inputs)?,
+        loaded_modifiers_read: inputs.loaded_modifiers.is_some(),
+        modifier_tags: name_lists::modifier_tags(&engine, inputs),
     })
 }
