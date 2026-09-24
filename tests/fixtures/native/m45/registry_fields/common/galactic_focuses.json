@@ -30,17 +30,17 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/galactic_focuses",
+        "subject": {"kind": "registry", "name": "common/galactic_focuses"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "common/galactic_focuses",
+        "subject": {"kind": "registry", "name": "common/galactic_focuses"},
         "detail": "The field's reader could not be established on at least one path."
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/galactic_focuses",
+        "subject": {"kind": "registry", "name": "common/galactic_focuses"},
         "detail": "A path through the registry's reader could not be followed to its end."
       }
     ],

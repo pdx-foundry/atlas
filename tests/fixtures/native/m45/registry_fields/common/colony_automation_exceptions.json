@@ -30,22 +30,22 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/colony_automation_exceptions",
+        "subject": {"kind": "registry", "name": "common/colony_automation_exceptions"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "common/colony_automation_exceptions",
+        "subject": {"kind": "registry", "name": "common/colony_automation_exceptions"},
         "detail": "The field's reader could not be established on at least one path."
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/colony_automation_exceptions",
+        "subject": {"kind": "registry", "name": "common/colony_automation_exceptions"},
         "detail": "A path through the registry's reader could not be followed to its end."
       },
       {
         "kind": "UnnamedField",
-        "subject": "common/colony_automation_exceptions",
+        "subject": {"kind": "registry", "name": "common/colony_automation_exceptions"},
         "detail": "3 reader paths have no recovered field name."
       }
     ],

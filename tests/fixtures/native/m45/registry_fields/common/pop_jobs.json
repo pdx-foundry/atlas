@@ -158,82 +158,82 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/pop_jobs",
+        "subject": {"kind": "registry", "name": "common/pop_jobs"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "tags",
+        "subject": {"kind": "field", "name": "tags"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "category",
+        "subject": {"kind": "field", "name": "category"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "purge",
+        "subject": {"kind": "field", "name": "purge"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "country_modifier",
+        "subject": {"kind": "field", "name": "country_modifier"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "planet_modifier",
+        "subject": {"kind": "field", "name": "planet_modifier"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "triggered_country_modifier",
+        "subject": {"kind": "field", "name": "triggered_country_modifier"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "triggered_system_modifier",
+        "subject": {"kind": "field", "name": "triggered_system_modifier"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "overlord_resources",
+        "subject": {"kind": "field", "name": "overlord_resources"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "auto_trait_prio",
+        "subject": {"kind": "field", "name": "auto_trait_prio"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "possible_precalc",
+        "subject": {"kind": "field", "name": "possible_precalc"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "resources",
+        "subject": {"kind": "field", "name": "resources"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "swappable_data",
+        "subject": {"kind": "field", "name": "swappable_data"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "triggered_tags",
+        "subject": {"kind": "field", "name": "triggered_tags"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "common/pop_jobs",
+        "subject": {"kind": "registry", "name": "common/pop_jobs"},
         "detail": "The field's reader could not be established on at least one path."
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/pop_jobs",
+        "subject": {"kind": "registry", "name": "common/pop_jobs"},
         "detail": "A path through the registry's reader could not be followed to its end."
       }
     ],

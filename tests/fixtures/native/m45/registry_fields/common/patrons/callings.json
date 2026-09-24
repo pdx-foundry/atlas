@@ -46,12 +46,12 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/patrons/callings",
+        "subject": {"kind": "registry", "name": "common/patrons/callings"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "tier",
+        "subject": {"kind": "field", "name": "tier"},
         "detail": "The field's alternatives do not establish one shared reader."
       }
     ],

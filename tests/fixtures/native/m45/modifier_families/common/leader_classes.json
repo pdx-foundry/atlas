@@ -5,7 +5,7 @@
     "gaps": [
       {
         "kind": "UnresolvedPath",
-        "subject": "common/leader_classes",
+        "subject": {"kind": "registry", "name": "common/leader_classes"},
         "detail": "8 names or generation calls of the registry's code could not be followed at name"
       },
       {
@@ -15,7 +15,7 @@
       },
       {
         "kind": "OutsideMethod",
-        "subject": "common/leader_classes",
+        "subject": {"kind": "registry", "name": "common/leader_classes"},
         "detail": "The search covers the registry's database generator and post-read code. Where a modifier takes effect, the tags that a later registration of the same name gives, the tags of a declared modifier after content registers it again, and names longer than a fixed-size buffer keeps are outside it."
       }
     ],

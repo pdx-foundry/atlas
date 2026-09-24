@@ -5,7 +5,7 @@ use pdx_atlas::{
     snapshot::{self, Snapshot, SubjectKind},
 };
 use pdx_native::{
-    Basis, Disposal, GameOptions, Gap, GapKind, LocalizationOutput, Native, OnAction,
+    Basis, Disposal, GameOptions, Gap, GapKind, GapSubject, LocalizationOutput, Native, OnAction,
     ScopeDeclaration,
 };
 use serde_json::{Value, json};
@@ -261,6 +261,18 @@ async fn unreadable_localization_rows_leave_context_lists_open() {
     assert!(rule(&complete, "localization_command:GetName#contexts").is_some());
     assert!(rule(&complete, "localization_command:GetName#scopes").is_some());
 
+    let country_id = extraction
+        .language
+        .localization
+        .as_ref()
+        .unwrap()
+        .value
+        .contexts
+        .iter()
+        .find(|context| context.name == "Country")
+        .unwrap()
+        .id
+        .clone();
     extraction
         .language
         .localization
@@ -269,7 +281,10 @@ async fn unreadable_localization_rows_leave_context_lists_open() {
         .gaps
         .push(Gap {
             kind: GapKind::UnreadableInput,
-            subject: Some("Country".into()),
+            subject: Some(GapSubject::LocalizationContext {
+                id: country_id,
+                name: "Country".into(),
+            }),
             detail: "the command rows of this context could not be read (test)".into(),
         });
     let snapshot = snapshot::assemble(&extraction).unwrap();
@@ -837,13 +852,84 @@ async fn localization_gaps_stay_on_the_link_they_name() {
     .unwrap();
 
     assert_eq!(
-        gap.native_gaps[0].subject.as_deref(),
-        Some("EVENT_TARGET_0")
+        gap.native_gaps[0].subject.as_ref(),
+        Some(&GapSubject::LocalizationLink {
+            name: "EVENT_TARGET_0".into()
+        })
     );
+    assert!(gap.native_gaps.iter().all(|native| native.subject.as_ref()
+        == Some(&GapSubject::LocalizationLink {
+            name: "EVENT_TARGET_0".into()
+        })));
+}
+
+#[tokio::test]
+async fn typed_localization_gaps_attach_when_names_overlap() {
+    let mut extraction = recorded().await;
+    let context = extraction
+        .language
+        .localization
+        .as_ref()
+        .unwrap()
+        .value
+        .contexts
+        .iter()
+        .find(|context| context.name == "Planet")
+        .unwrap()
+        .clone();
+    let scope = extraction.language.scopes.as_ref().unwrap().value.types[0].clone();
+    let scope_subject =
+        SubjectKind::Scope.id(&format!("{}/{}", scope.name, scope.keywords.join(",")));
+    let answer = extraction.language.localization.as_mut().unwrap();
+    answer.gaps.push(Gap {
+        kind: GapKind::UnresolvedPath,
+        subject: Some(GapSubject::LocalizationContext {
+            id: context.id,
+            name: "Planet".into(),
+        }),
+        detail: "context example".into(),
+    });
+    answer.gaps.push(Gap {
+        kind: GapKind::UnresolvedPath,
+        subject: Some(GapSubject::ScopeType {
+            id: scope.id,
+            name: scope.name,
+        }),
+        detail: "scope example".into(),
+    });
+
+    let snapshot = snapshot::assemble(&extraction).unwrap();
+    let context_gap = gap(
+        &snapshot,
+        "localization_context:Planet#native.localization.unresolved_path",
+    )
+    .unwrap();
+    let link_gap = gap(
+        &snapshot,
+        "localization_link:Planet#native.localization.unresolved_path",
+    )
+    .unwrap();
+    let scope_gap = gap(
+        &snapshot,
+        &format!("{scope_subject}#native.localization.unresolved_path"),
+    )
+    .unwrap();
+
     assert!(
-        gap.native_gaps
+        context_gap
+            .native_gaps
             .iter()
-            .all(|native| native.subject.as_deref() == Some("EVENT_TARGET_0"))
+            .any(|gap| gap.detail == "context example")
+    );
+    assert!(link_gap.native_gaps.iter().any(|gap| gap.subject.as_ref()
+        == Some(&GapSubject::LocalizationLink {
+            name: "Planet".into()
+        })));
+    assert!(
+        scope_gap
+            .native_gaps
+            .iter()
+            .any(|gap| gap.detail == "scope example")
     );
 }
 

@@ -294,92 +294,92 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/buildings",
+        "subject": {"kind": "registry", "name": "common/buildings"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "category",
+        "subject": {"kind": "field", "name": "category"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "convert_to",
+        "subject": {"kind": "field", "name": "convert_to"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "triggered_desc",
+        "subject": {"kind": "field", "name": "triggered_desc"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "desc",
+        "subject": {"kind": "field", "name": "desc"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "prerequisites",
+        "subject": {"kind": "field", "name": "prerequisites"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "country_modifier",
+        "subject": {"kind": "field", "name": "country_modifier"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "planet_modifier",
+        "subject": {"kind": "field", "name": "planet_modifier"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "ruined_icon",
+        "subject": {"kind": "field", "name": "ruined_icon"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "army_modifier",
+        "subject": {"kind": "field", "name": "army_modifier"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "ai_resource_production",
+        "subject": {"kind": "field", "name": "ai_resource_production"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "system_modifier",
+        "subject": {"kind": "field", "name": "system_modifier"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "owner_type",
+        "subject": {"kind": "field", "name": "owner_type"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "triggered_country_modifier",
+        "subject": {"kind": "field", "name": "triggered_country_modifier"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "building_sets",
+        "subject": {"kind": "field", "name": "building_sets"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "resources",
+        "subject": {"kind": "field", "name": "resources"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "common/buildings",
+        "subject": {"kind": "registry", "name": "common/buildings"},
         "detail": "The field's reader could not be established on at least one path."
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/buildings",
+        "subject": {"kind": "registry", "name": "common/buildings"},
         "detail": "A path through the registry's reader could not be followed to its end."
       }
     ],

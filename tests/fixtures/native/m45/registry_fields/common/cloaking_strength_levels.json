@@ -38,7 +38,7 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/cloaking_strength_levels",
+        "subject": {"kind": "registry", "name": "common/cloaking_strength_levels"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       }
     ],

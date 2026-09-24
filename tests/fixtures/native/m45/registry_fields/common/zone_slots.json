@@ -5,22 +5,22 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/zone_slots",
+        "subject": {"kind": "registry", "name": "common/zone_slots"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnreadableInput",
-        "subject": "common/zone_slots",
+        "subject": {"kind": "registry", "name": "common/zone_slots"},
         "detail": "A function or name table that the method needs could not be read."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "common/zone_slots",
+        "subject": {"kind": "registry", "name": "common/zone_slots"},
         "detail": "The field's reader could not be established on at least one path."
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/zone_slots",
+        "subject": {"kind": "registry", "name": "common/zone_slots"},
         "detail": "A path through the registry's reader could not be followed to its end."
       }
     ],

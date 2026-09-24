@@ -38,32 +38,32 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/starbase_buildings",
+        "subject": {"kind": "registry", "name": "common/starbase_buildings"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "equipped_component",
+        "subject": {"kind": "field", "name": "equipped_component"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "triggered_equipped_component",
+        "subject": {"kind": "field", "name": "triggered_equipped_component"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "common/starbase_buildings",
+        "subject": {"kind": "registry", "name": "common/starbase_buildings"},
         "detail": "The field's reader could not be established on at least one path."
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/starbase_buildings",
+        "subject": {"kind": "registry", "name": "common/starbase_buildings"},
         "detail": "A path through the registry's reader could not be followed to its end."
       },
       {
         "kind": "UnnamedField",
-        "subject": "common/starbase_buildings",
+        "subject": {"kind": "registry", "name": "common/starbase_buildings"},
         "detail": "5 reader paths have no recovered field name."
       }
     ],

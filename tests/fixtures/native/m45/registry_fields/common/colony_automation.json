@@ -46,32 +46,32 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/colony_automation",
+        "subject": {"kind": "registry", "name": "common/colony_automation"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "category",
+        "subject": {"kind": "field", "name": "category"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "prio_districts",
+        "subject": {"kind": "field", "name": "prio_districts"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "prio_zones",
+        "subject": {"kind": "field", "name": "prio_zones"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "common/colony_automation",
+        "subject": {"kind": "registry", "name": "common/colony_automation"},
         "detail": "The field's reader could not be established on at least one path."
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/colony_automation",
+        "subject": {"kind": "registry", "name": "common/colony_automation"},
         "detail": "A path through the registry's reader could not be followed to its end."
       }
     ],

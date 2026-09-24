@@ -78,32 +78,32 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/patrons",
+        "subject": {"kind": "registry", "name": "common/patrons"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "ReaderSemantics",
-        "subject": "position",
+        "subject": {"kind": "field", "name": "position"},
         "detail": "The shared reader is identified, but its broad value form is not established."
       },
       {
         "kind": "ReaderSemantics",
-        "subject": "color",
+        "subject": {"kind": "field", "name": "color"},
         "detail": "The shared reader is identified, but its broad value form is not established."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "text_color_code",
+        "subject": {"kind": "field", "name": "text_color_code"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "common/patrons",
+        "subject": {"kind": "registry", "name": "common/patrons"},
         "detail": "The field's reader could not be established on at least one path."
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/patrons",
+        "subject": {"kind": "registry", "name": "common/patrons"},
         "detail": "A path through the registry's reader could not be followed to its end."
       }
     ],

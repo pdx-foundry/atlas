@@ -30,17 +30,17 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/crisis_paths",
+        "subject": {"kind": "registry", "name": "common/crisis_paths"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "levels",
+        "subject": {"kind": "field", "name": "levels"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "objectives",
+        "subject": {"kind": "field", "name": "objectives"},
         "detail": "The field's alternatives do not establish one shared reader."
       }
     ],

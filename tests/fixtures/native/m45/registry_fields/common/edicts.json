@@ -142,52 +142,52 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/edicts",
+        "subject": {"kind": "registry", "name": "common/edicts"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "effect",
+        "subject": {"kind": "field", "name": "effect"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "prerequisites",
+        "subject": {"kind": "field", "name": "prerequisites"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "potential",
+        "subject": {"kind": "field", "name": "potential"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "allow",
+        "subject": {"kind": "field", "name": "allow"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "on_disabled",
+        "subject": {"kind": "field", "name": "on_disabled"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "triggered_country_modifier",
+        "subject": {"kind": "field", "name": "triggered_country_modifier"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "resources",
+        "subject": {"kind": "field", "name": "resources"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "common/edicts",
+        "subject": {"kind": "registry", "name": "common/edicts"},
         "detail": "The field's reader could not be established on at least one path."
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/edicts",
+        "subject": {"kind": "registry", "name": "common/edicts"},
         "detail": "A path through the registry's reader could not be followed to its end."
       }
     ],

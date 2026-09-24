@@ -13,7 +13,7 @@ use super::{
 use crate::extraction::{Extraction, LoadedModifierSession};
 use pdx_native::{
     Answer, ContextScopes, Declaration, DeclaredScopes, DeclaredTags, Define, DefineValueType,
-    Disposal, EntryContext, EntryScope, Error, GameRule, Gap as NativeGap, GapKind,
+    Disposal, EntryContext, EntryScope, Error, GameRule, Gap as NativeGap, GapKind, GapSubject,
     GenerationCondition, LinkData, LoadedContent, LoadedModifiers, LocalizationContextId,
     LocalizationContextReference, LocalizationDeclarations, LocalizationOutput, ModifierCategory,
     ModifierDeclaration, ModifierFamily, NamePart, OnAction, OutputScope, RuleKind, ScopeId,
@@ -88,6 +88,13 @@ enum Target {
     Existing(String),
 }
 
+fn item_target(subject: &GapSubject, kind: SubjectKind) -> Option<Target> {
+    match subject {
+        GapSubject::AnswerItem { name } => Some(Target::Language(kind, name.clone())),
+        _ => None,
+    }
+}
+
 struct Builder<'a> {
     snapshot: &'a mut Snapshot,
     subjects: BTreeSet<String>,
@@ -143,14 +150,15 @@ impl Builder<'_> {
         &mut self,
         key: &str,
         answer: &Answer<T>,
-        item: &str,
+        location_suffix: &str,
+        subject: Option<GapSubject>,
     ) -> Result<EvidenceLink, String> {
         evidence(
             self.snapshot,
             key,
             answer,
-            format!("{key}:{item}"),
-            Some(item),
+            format!("{key}:{location_suffix}"),
+            subject,
         )
     }
 
@@ -185,12 +193,12 @@ impl Builder<'_> {
         key: &str,
         answer: &Answer<T>,
         fallback: &str,
-        target: impl Fn(&str) -> Option<Target>,
+        target: impl Fn(&GapSubject) -> Option<Target>,
     ) -> Result<(), String> {
         let mut grouped: BTreeMap<(String, &str), Vec<NativeGap>> = BTreeMap::new();
 
         for native_gap in &answer.gaps {
-            let subject = match native_gap.subject.as_deref().and_then(&target) {
+            let subject = match native_gap.subject.as_ref().and_then(&target) {
                 Some(Target::Language(kind, name)) => self.subject(kind, &name),
                 Some(Target::Existing(id)) => id,
                 None => fallback.to_owned(),
@@ -299,7 +307,14 @@ impl Builder<'_> {
 
         for declaration in &answer.value {
             let id = self.subject(kind, &declaration.name);
-            let link = self.evidence(&key, answer, &declaration.name)?;
+            let link = self.evidence(
+                &key,
+                answer,
+                &declaration.name,
+                Some(GapSubject::AnswerItem {
+                    name: declaration.name.clone(),
+                }),
+            )?;
 
             self.rule(&id, "existence", json!(true), &link);
             self.scope_set(&id, "declared_scopes", &declaration.scopes, &link);
@@ -338,8 +353,8 @@ impl Builder<'_> {
             );
         }
 
-        self.native_gaps(question, &key, answer, &inventory, |name| {
-            Some(Target::Language(kind, name.into()))
+        self.native_gaps(question, &key, answer, &inventory, |subject| {
+            item_target(subject, kind)
         })
     }
 
@@ -354,7 +369,14 @@ impl Builder<'_> {
 
         for modifier in &answer.value {
             let id = self.subject(SubjectKind::Modifier, &modifier.name);
-            let link = self.evidence("modifiers", answer, &modifier.name)?;
+            let link = self.evidence(
+                "modifiers",
+                answer,
+                &modifier.name,
+                Some(GapSubject::AnswerItem {
+                    name: modifier.name.clone(),
+                }),
+            )?;
 
             self.rule(&id, "existence", json!(true), &link);
             self.category_tags(&id, &modifier.category_tags, &link);
@@ -367,8 +389,8 @@ impl Builder<'_> {
             );
         }
 
-        self.native_gaps("modifiers", "modifiers", answer, &inventory, |name| {
-            Some(Target::Language(SubjectKind::Modifier, name.into()))
+        self.native_gaps("modifiers", "modifiers", answer, &inventory, |subject| {
+            item_target(subject, SubjectKind::Modifier)
         })
     }
 
@@ -383,7 +405,14 @@ impl Builder<'_> {
 
         for category in &answer.value {
             let id = self.subject(SubjectKind::ModifierCategory, &category.name);
-            let link = self.evidence("modifier_categories", answer, &category.name)?;
+            let link = self.evidence(
+                "modifier_categories",
+                answer,
+                &category.name,
+                Some(GapSubject::AnswerItem {
+                    name: category.name.clone(),
+                }),
+            )?;
 
             self.rule(&id, "existence", json!(true), &link);
             self.gap(
@@ -400,7 +429,7 @@ impl Builder<'_> {
             "modifier_categories",
             answer,
             &inventory,
-            |name| Some(Target::Language(SubjectKind::ModifierCategory, name.into())),
+            |subject| item_target(subject, SubjectKind::ModifierCategory),
         )
     }
 
@@ -419,7 +448,7 @@ impl Builder<'_> {
             let template = name_template(&family.name);
             let name = format!("{registry}/{}", template.text);
             let id = self.subject(SubjectKind::ModifierFamily, &name);
-            let link = self.evidence(&key, answer, &template.text)?;
+            let link = self.evidence(&key, answer, &template.text, None)?;
 
             self.rule(&id, "registry", json!(registry), &link);
 
@@ -454,9 +483,16 @@ impl Builder<'_> {
             }
         }
 
-        self.native_gaps("modifier_families", &key, answer, &registry_subject, |_| {
-            Some(Target::Existing(registry_id(registry)))
-        })
+        self.native_gaps(
+            "modifier_families",
+            &key,
+            answer,
+            &registry_subject,
+            |subject| match subject {
+                GapSubject::Registry { name } => Some(Target::Existing(registry_id(name))),
+                _ => None,
+            },
+        )
     }
 
     fn scope_inventory(
@@ -471,7 +507,15 @@ impl Builder<'_> {
         for scope in &answer.value.types {
             let name = self.scopes[&scope.id].clone();
             let id = self.subject(SubjectKind::Scope, &name);
-            let link = self.evidence("scopes", answer, &name)?;
+            let link = self.evidence(
+                "scopes",
+                answer,
+                &name,
+                Some(GapSubject::ScopeType {
+                    id: scope.id.clone(),
+                    name: scope.name.clone(),
+                }),
+            )?;
             let groups: Vec<_> = answer
                 .value
                 .groups
@@ -487,7 +531,14 @@ impl Builder<'_> {
 
         for group in &answer.value.groups {
             let id = self.subject(SubjectKind::ScopeGroup, &group.keyword);
-            let link = self.evidence("scopes", answer, &group.keyword)?;
+            let link = self.evidence(
+                "scopes",
+                answer,
+                &group.keyword,
+                Some(GapSubject::AnswerItem {
+                    name: group.keyword.clone(),
+                }),
+            )?;
 
             self.rule(&id, "existence", json!(true), &link);
 
@@ -497,7 +548,9 @@ impl Builder<'_> {
             }
         }
 
-        self.native_gaps("scopes", "scopes", answer, &inventory, |_| None)
+        self.native_gaps("scopes", "scopes", answer, &inventory, |subject| {
+            item_target(subject, SubjectKind::ScopeGroup)
+        })
     }
 
     fn scope_links(
@@ -511,7 +564,14 @@ impl Builder<'_> {
 
         for link_declaration in &answer.value {
             let id = self.subject(SubjectKind::ScopeLink, &link_declaration.name);
-            let link = self.evidence("scope_links", answer, &link_declaration.name)?;
+            let link = self.evidence(
+                "scope_links",
+                answer,
+                &link_declaration.name,
+                Some(GapSubject::AnswerItem {
+                    name: link_declaration.name.clone(),
+                }),
+            )?;
 
             self.rule(&id, "existence", json!(true), &link);
             self.scope_set(&id, "input_scopes", &link_declaration.input_scopes, &link);
@@ -558,9 +618,13 @@ impl Builder<'_> {
             }
         }
 
-        self.native_gaps("scope_links", "scope_links", answer, &inventory, |name| {
-            Some(Target::Language(SubjectKind::ScopeLink, name.into()))
-        })
+        self.native_gaps(
+            "scope_links",
+            "scope_links",
+            answer,
+            &inventory,
+            |subject| item_target(subject, SubjectKind::ScopeLink),
+        )
     }
 
     fn localization(
@@ -585,7 +649,15 @@ impl Builder<'_> {
         for context in &declarations.contexts {
             let name = &contexts[&context.id];
             let id = self.subject(SubjectKind::LocalizationContext, name);
-            let link = self.evidence(key, answer, name)?;
+            let link = self.evidence(
+                key,
+                answer,
+                name,
+                Some(GapSubject::LocalizationContext {
+                    id: context.id.clone(),
+                    name: context.name.clone(),
+                }),
+            )?;
             let scopes = match &context.scopes {
                 ContextScopes::Joined(references) => self.scope_ids(references),
                 ContextScopes::Missing => Some(Vec::new()),
@@ -622,7 +694,7 @@ impl Builder<'_> {
 
         for command in &declarations.commands {
             let id = self.subject(SubjectKind::LocalizationCommand, &command.name);
-            let link = self.evidence(key, answer, &command.name)?;
+            let link = self.evidence(key, answer, &command.name, None)?;
             let references: Vec<_> = command.contexts.iter().collect();
 
             self.rule(&id, "existence", json!(true), &link);
@@ -663,7 +735,12 @@ impl Builder<'_> {
 
         for (name, rows) in links {
             let id = self.subject(SubjectKind::LocalizationLink, name);
-            let link = self.evidence(key, answer, name)?;
+            let link = self.evidence(
+                key,
+                answer,
+                name,
+                Some(GapSubject::LocalizationLink { name: name.into() }),
+            )?;
 
             self.rule(&id, "existence", json!(true), &link);
 
@@ -728,44 +805,28 @@ impl Builder<'_> {
             }
         }
 
-        // A localization gap can name a link, a context or a scope type. It goes on the link or
-        // context only when its name is no other kind of subject.
-        let link_names: BTreeSet<_> = declarations
-            .links
-            .iter()
-            .map(|link| link.name.as_str())
-            .collect();
-        let context_names: BTreeMap<_, _> = declarations
-            .contexts
-            .iter()
-            .map(|context| (context.name.as_str(), contexts[&context.id].clone()))
-            .collect();
-        let scope_names: BTreeSet<_> = self
-            .scopes
-            .values()
-            .map(|name| {
-                name.split_once('/')
-                    .map_or(name.as_str(), |(name, _)| name)
-                    .to_owned()
-            })
-            .collect();
-
-        self.native_gaps("localization", key, answer, &inventory, |name| {
-            match (
-                link_names.contains(name),
-                context_names.get(name),
-                scope_names.contains(name),
-            ) {
-                (true, None, false) => {
-                    Some(Target::Language(SubjectKind::LocalizationLink, name.into()))
-                }
-                (false, Some(context), false) => Some(Target::Language(
-                    SubjectKind::LocalizationContext,
-                    context.clone(),
+        let scope_subjects_by_id = self.scopes.clone();
+        self.native_gaps(
+            "localization",
+            key,
+            answer,
+            &inventory,
+            |subject| match subject {
+                GapSubject::LocalizationLink { name } => Some(Target::Language(
+                    SubjectKind::LocalizationLink,
+                    name.clone(),
                 )),
+                GapSubject::LocalizationContext { id, .. } => contexts
+                    .get(id)
+                    .cloned()
+                    .map(|name| Target::Language(SubjectKind::LocalizationContext, name)),
+                GapSubject::ScopeType { id, .. } => scope_subjects_by_id
+                    .get(id)
+                    .cloned()
+                    .map(|name| Target::Language(SubjectKind::Scope, name)),
                 _ => None,
-            }
-        })
+            },
+        )
     }
 
     fn on_actions(&mut self, result: &Result<Answer<Vec<OnAction>>, Error>) -> Result<(), String> {
@@ -784,8 +845,8 @@ impl Builder<'_> {
             )?;
         }
 
-        self.native_gaps("on_actions", "on_actions", answer, &inventory, |name| {
-            Some(Target::Language(SubjectKind::OnAction, name.into()))
+        self.native_gaps("on_actions", "on_actions", answer, &inventory, |subject| {
+            item_target(subject, SubjectKind::OnAction)
         })
     }
 
@@ -811,8 +872,8 @@ impl Builder<'_> {
             self.rule(&id, "kind", json!(kind), &link);
         }
 
-        self.native_gaps("game_rules", "game_rules", answer, &inventory, |name| {
-            Some(Target::Language(SubjectKind::GameRule, name.into()))
+        self.native_gaps("game_rules", "game_rules", answer, &inventory, |subject| {
+            item_target(subject, SubjectKind::GameRule)
         })
     }
 
@@ -826,7 +887,12 @@ impl Builder<'_> {
         entries: &[EntryContext],
     ) -> Result<(String, EvidenceLink), String> {
         let id = self.subject(kind, name);
-        let link = self.evidence(key, answer, name)?;
+        let link = self.evidence(
+            key,
+            answer,
+            name,
+            Some(GapSubject::AnswerItem { name: name.into() }),
+        )?;
 
         self.rule(&id, "existence", json!(true), &link);
 
@@ -892,7 +958,12 @@ impl Builder<'_> {
         for define in &answer.value {
             let name = format!("{}.{}", define.namespace, define.name);
             let id = self.subject(SubjectKind::Define, &name);
-            let link = self.evidence("defines", answer, &name)?;
+            let link = self.evidence(
+                "defines",
+                answer,
+                &name,
+                Some(GapSubject::AnswerItem { name: name.clone() }),
+            )?;
 
             self.rule(&id, "existence", json!(true), &link);
 
@@ -908,8 +979,8 @@ impl Builder<'_> {
             }
         }
 
-        self.native_gaps("defines", "defines", answer, &inventory, |name| {
-            Some(Target::Language(SubjectKind::Define, name.into()))
+        self.native_gaps("defines", "defines", answer, &inventory, |subject| {
+            item_target(subject, SubjectKind::Define)
         })
     }
 
@@ -942,7 +1013,7 @@ impl Builder<'_> {
         let Some(answer) = self.answered(&inventory, "answer", &session.observation) else {
             return Ok(());
         };
-        let link = self.evidence("loaded_modifiers", answer, "summary")?;
+        let link = self.evidence("loaded_modifiers", answer, "summary", None)?;
 
         match loaded_summary(&answer.value) {
             Some((condition, summary)) => conditional_rule(
@@ -967,10 +1038,11 @@ impl Builder<'_> {
             "loaded_modifiers",
             answer,
             &inventory,
-            |name| {
-                registries
-                    .contains_key(name)
-                    .then(|| Target::Existing(registry_id(name)))
+            |subject| match subject {
+                GapSubject::Registry { name } if registries.contains_key(name) => {
+                    Some(Target::Existing(registry_id(name)))
+                }
+                _ => None,
             },
         )
     }

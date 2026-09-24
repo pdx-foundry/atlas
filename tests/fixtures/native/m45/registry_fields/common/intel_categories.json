@@ -14,12 +14,12 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/intel_categories",
+        "subject": {"kind": "registry", "name": "common/intel_categories"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "intel_level",
+        "subject": {"kind": "field", "name": "intel_level"},
         "detail": "The field's alternatives do not establish one shared reader."
       }
     ],

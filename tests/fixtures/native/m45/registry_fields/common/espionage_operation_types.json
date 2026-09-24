@@ -94,47 +94,47 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/espionage_operation_types",
+        "subject": {"kind": "registry", "name": "common/espionage_operation_types"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "categories",
+        "subject": {"kind": "field", "name": "categories"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "desc",
+        "subject": {"kind": "field", "name": "desc"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "stage",
+        "subject": {"kind": "field", "name": "stage"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "target_potential",
+        "subject": {"kind": "field", "name": "target_potential"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "target_allow",
+        "subject": {"kind": "field", "name": "target_allow"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "resources",
+        "subject": {"kind": "field", "name": "resources"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "common/espionage_operation_types",
+        "subject": {"kind": "registry", "name": "common/espionage_operation_types"},
         "detail": "The field's reader could not be established on at least one path."
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/espionage_operation_types",
+        "subject": {"kind": "registry", "name": "common/espionage_operation_types"},
         "detail": "A path through the registry's reader could not be followed to its end."
       }
     ],

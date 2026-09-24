@@ -5,22 +5,22 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/country_container",
+        "subject": {"kind": "registry", "name": "common/country_container"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "common/country_container",
+        "subject": {"kind": "registry", "name": "common/country_container"},
         "detail": "The field's reader could not be established on at least one path."
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/country_container",
+        "subject": {"kind": "registry", "name": "common/country_container"},
         "detail": "A path through the registry's reader could not be followed to its end."
       },
       {
         "kind": "UnnamedField",
-        "subject": "common/country_container",
+        "subject": {"kind": "registry", "name": "common/country_container"},
         "detail": "1 reader paths have no recovered field name."
       }
     ],

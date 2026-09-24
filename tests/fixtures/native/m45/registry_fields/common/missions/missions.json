@@ -142,27 +142,27 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/missions/missions",
+        "subject": {"kind": "registry", "name": "common/missions/missions"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "event_chain",
+        "subject": {"kind": "field", "name": "event_chain"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "counter",
+        "subject": {"kind": "field", "name": "counter"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "common/missions/missions",
+        "subject": {"kind": "registry", "name": "common/missions/missions"},
         "detail": "The field's reader could not be established on at least one path."
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/missions/missions",
+        "subject": {"kind": "registry", "name": "common/missions/missions"},
         "detail": "A path through the registry's reader could not be followed to its end."
       }
     ],

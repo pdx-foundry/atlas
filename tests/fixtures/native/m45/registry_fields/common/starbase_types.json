@@ -46,7 +46,7 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/starbase_types",
+        "subject": {"kind": "registry", "name": "common/starbase_types"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       }
     ],

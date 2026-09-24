@@ -38,22 +38,22 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/situation_log/categories",
+        "subject": {"kind": "registry", "name": "common/situation_log/categories"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "target_tab",
+        "subject": {"kind": "field", "name": "target_tab"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "common/situation_log/categories",
+        "subject": {"kind": "registry", "name": "common/situation_log/categories"},
         "detail": "The field's reader could not be established on at least one path."
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/situation_log/categories",
+        "subject": {"kind": "registry", "name": "common/situation_log/categories"},
         "detail": "A path through the registry's reader could not be followed to its end."
       }
     ],

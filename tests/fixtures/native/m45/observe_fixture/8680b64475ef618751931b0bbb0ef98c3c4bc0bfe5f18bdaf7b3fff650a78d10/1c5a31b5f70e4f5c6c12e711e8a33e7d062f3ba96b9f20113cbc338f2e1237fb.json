@@ -163,37 +163,37 @@
     "gaps": [
       {
         "kind": "UnresolvedReader",
-        "subject": "adoption_bonus",
+        "subject": {"kind": "field", "name": "adoption_bonus"},
         "detail": "The Unknown reader has no storage decoder in this method"
       },
       {
         "kind": "OutsideMethod",
-        "subject": "ai_weight",
+        "subject": {"kind": "field", "name": "ai_weight"},
         "detail": "The Block reader has no storage decoder in this method"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "desc",
+        "subject": {"kind": "field", "name": "desc"},
         "detail": "The Unknown reader has no storage decoder in this method"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "finish_bonus",
+        "subject": {"kind": "field", "name": "finish_bonus"},
         "detail": "The Unknown reader has no storage decoder in this method"
       },
       {
         "kind": "OutsideMethod",
-        "subject": "potential",
+        "subject": {"kind": "field", "name": "potential"},
         "detail": "The Block reader has no storage decoder in this method"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "traditions",
+        "subject": {"kind": "field", "name": "traditions"},
         "detail": "The Unknown reader has no storage decoder in this method"
       },
       {
         "kind": "OutsideMethod",
-        "subject": "tree_template",
+        "subject": {"kind": "field", "name": "tree_template"},
         "detail": "No exact-build storage binding for this field"
       }
     ],

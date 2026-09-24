@@ -30,7 +30,7 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/technology/category",
+        "subject": {"kind": "registry", "name": "common/technology/category"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       }
     ],

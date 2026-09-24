@@ -22,22 +22,22 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/frontend_backgrounds",
+        "subject": {"kind": "registry", "name": "common/frontend_backgrounds"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "common/frontend_backgrounds",
+        "subject": {"kind": "registry", "name": "common/frontend_backgrounds"},
         "detail": "The field's reader could not be established on at least one path."
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/frontend_backgrounds",
+        "subject": {"kind": "registry", "name": "common/frontend_backgrounds"},
         "detail": "A path through the registry's reader could not be followed to its end."
       },
       {
         "kind": "UnnamedField",
-        "subject": "common/frontend_backgrounds",
+        "subject": {"kind": "registry", "name": "common/frontend_backgrounds"},
         "detail": "3 reader paths have no recovered field name."
       }
     ],

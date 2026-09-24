@@ -14,12 +14,12 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/ascension_perk_categories",
+        "subject": {"kind": "registry", "name": "common/ascension_perk_categories"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "ascension_perks",
+        "subject": {"kind": "field", "name": "ascension_perks"},
         "detail": "The field's alternatives do not establish one shared reader."
       }
     ],

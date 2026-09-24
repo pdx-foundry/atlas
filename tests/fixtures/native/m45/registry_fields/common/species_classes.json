@@ -94,42 +94,42 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/species_classes",
+        "subject": {"kind": "registry", "name": "common/species_classes"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "possible",
+        "subject": {"kind": "field", "name": "possible"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "graphical_culture",
+        "subject": {"kind": "field", "name": "graphical_culture"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "move_pop_sound_effect",
+        "subject": {"kind": "field", "name": "move_pop_sound_effect"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "possible_secondary",
+        "subject": {"kind": "field", "name": "possible_secondary"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "resources",
+        "subject": {"kind": "field", "name": "resources"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "common/species_classes",
+        "subject": {"kind": "registry", "name": "common/species_classes"},
         "detail": "The field's reader could not be established on at least one path."
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/species_classes",
+        "subject": {"kind": "registry", "name": "common/species_classes"},
         "detail": "A path through the registry's reader could not be followed to its end."
       }
     ],

@@ -46,27 +46,27 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/policies",
+        "subject": {"kind": "registry", "name": "common/policies"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "prerequisites",
+        "subject": {"kind": "field", "name": "prerequisites"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "option",
+        "subject": {"kind": "field", "name": "option"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "common/policies",
+        "subject": {"kind": "registry", "name": "common/policies"},
         "detail": "The field's reader could not be established on at least one path."
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/policies",
+        "subject": {"kind": "registry", "name": "common/policies"},
         "detail": "A path through the registry's reader could not be followed to its end."
       }
     ],

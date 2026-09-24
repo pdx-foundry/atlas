@@ -14,7 +14,7 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/resource_regions",
+        "subject": {"kind": "registry", "name": "common/resource_regions"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       }
     ],

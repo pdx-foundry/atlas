@@ -5,7 +5,7 @@
     "gaps": [
       {
         "kind": "UnresolvedPath",
-        "subject": "common/espionage_operation_categories",
+        "subject": {"kind": "registry", "name": "common/espionage_operation_categories"},
         "detail": "the place of the item key could not be established at constructor; no name of the registry's code was followed"
       },
       {
@@ -15,7 +15,7 @@
       },
       {
         "kind": "OutsideMethod",
-        "subject": "common/espionage_operation_categories",
+        "subject": {"kind": "registry", "name": "common/espionage_operation_categories"},
         "detail": "The search covers the registry's database generator and post-read code. Where a modifier takes effect, the tags that a later registration of the same name gives, the tags of a declared modifier after content registers it again, and names longer than a fixed-size buffer keeps are outside it."
       }
     ],

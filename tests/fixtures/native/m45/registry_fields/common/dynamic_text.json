@@ -30,27 +30,27 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/dynamic_text",
+        "subject": {"kind": "registry", "name": "common/dynamic_text"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "text",
+        "subject": {"kind": "field", "name": "text"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "add",
+        "subject": {"kind": "field", "name": "add"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "common/dynamic_text",
+        "subject": {"kind": "registry", "name": "common/dynamic_text"},
         "detail": "The field's reader could not be established on at least one path."
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/dynamic_text",
+        "subject": {"kind": "registry", "name": "common/dynamic_text"},
         "detail": "A path through the registry's reader could not be followed to its end."
       }
     ],

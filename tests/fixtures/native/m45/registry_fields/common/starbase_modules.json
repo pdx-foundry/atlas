@@ -46,37 +46,37 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/starbase_modules",
+        "subject": {"kind": "registry", "name": "common/starbase_modules"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "section",
+        "subject": {"kind": "field", "name": "section"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "component_set",
+        "subject": {"kind": "field", "name": "component_set"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "triggered_component_set",
+        "subject": {"kind": "field", "name": "triggered_component_set"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "common/starbase_modules",
+        "subject": {"kind": "registry", "name": "common/starbase_modules"},
         "detail": "The field's reader could not be established on at least one path."
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/starbase_modules",
+        "subject": {"kind": "registry", "name": "common/starbase_modules"},
         "detail": "A path through the registry's reader could not be followed to its end."
       },
       {
         "kind": "UnnamedField",
-        "subject": "common/starbase_modules",
+        "subject": {"kind": "registry", "name": "common/starbase_modules"},
         "detail": "7 reader paths have no recovered field name."
       }
     ],

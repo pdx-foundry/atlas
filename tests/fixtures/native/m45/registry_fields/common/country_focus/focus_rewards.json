@@ -46,27 +46,27 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/country_focus/focus_rewards",
+        "subject": {"kind": "registry", "name": "common/country_focus/focus_rewards"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "category",
+        "subject": {"kind": "field", "name": "category"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "on_success",
+        "subject": {"kind": "field", "name": "on_success"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "common/country_focus/focus_rewards",
+        "subject": {"kind": "registry", "name": "common/country_focus/focus_rewards"},
         "detail": "The field's reader could not be established on at least one path."
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/country_focus/focus_rewards",
+        "subject": {"kind": "registry", "name": "common/country_focus/focus_rewards"},
         "detail": "A path through the registry's reader could not be followed to its end."
       }
     ],

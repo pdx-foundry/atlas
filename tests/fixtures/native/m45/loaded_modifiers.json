@@ -76,37 +76,37 @@
     "gaps": [
       {
         "kind": "UnresolvedPath",
-        "subject": "common/districts",
+        "subject": {"kind": "registry", "name": "common/districts"},
         "detail": "2 names or generation calls of the registry's code could not be followed at name; they explain no name"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/espionage_operation_categories",
+        "subject": {"kind": "registry", "name": "common/espionage_operation_categories"},
         "detail": "the place of the item key could not be established at constructor; no family of this registry explains a name"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/governments/councilors",
+        "subject": {"kind": "registry", "name": "common/governments/councilors"},
         "detail": "1 names or generation calls of the registry's code could not be followed at name; they explain no name"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/leader_classes",
+        "subject": {"kind": "registry", "name": "common/leader_classes"},
         "detail": "8 names or generation calls of the registry's code could not be followed at name; they explain no name"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/ship_sizes",
+        "subject": {"kind": "registry", "name": "common/ship_sizes"},
         "detail": "1 names or generation calls of the registry's code could not be followed at name; they explain no name"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/ship_sizes",
+        "subject": {"kind": "registry", "name": "common/ship_sizes"},
         "detail": "1 names or generation calls of the registry's code could not be followed at unreached; they explain no name"
       },
       {
         "kind": "UnnamedDeclaration",
-        "subject": "common/economic_categories",
+        "subject": {"kind": "registry", "name": "common/economic_categories"},
         "detail": "names that combine this registry's keys with the keys of content that Native does not name as a registry are unexplained"
       },
       {

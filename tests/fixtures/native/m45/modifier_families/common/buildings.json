@@ -39,7 +39,7 @@
     "gaps": [
       {
         "kind": "UnresolvedPath",
-        "subject": "common/buildings",
+        "subject": {"kind": "registry", "name": "common/buildings"},
         "detail": "only an item's post-read code registers {key}_max; that the engine runs it for every item is not established"
       },
       {
@@ -49,7 +49,7 @@
       },
       {
         "kind": "OutsideMethod",
-        "subject": "common/buildings",
+        "subject": {"kind": "registry", "name": "common/buildings"},
         "detail": "The search covers the registry's database generator and post-read code. Where a modifier takes effect, the tags that a later registration of the same name gives, the tags of a declared modifier after content registers it again, and names longer than a fixed-size buffer keeps are outside it."
       }
     ],

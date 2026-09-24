@@ -14801,137 +14801,137 @@
     "gaps": [
       {
         "kind": "UnresolvedPath",
-        "subject": "set_saved_date",
+        "subject": {"kind": "answer_item", "name": "set_saved_date"},
         "detail": "scope declaration not followed at scope-mask"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "add_stage_clues",
+        "subject": {"kind": "answer_item", "name": "add_stage_clues"},
         "detail": "scope declaration not followed at scope-name"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "astral_rift_event",
+        "subject": {"kind": "answer_item", "name": "astral_rift_event"},
         "detail": "scope declaration not followed at scope-name"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "finish_astral_rift",
+        "subject": {"kind": "answer_item", "name": "finish_astral_rift"},
         "detail": "scope declaration not followed at scope-name"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "set_next_astral_rift_event",
+        "subject": {"kind": "answer_item", "name": "set_next_astral_rift_event"},
         "detail": "scope declaration not followed at scope-name"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "set_astral_rift_flag",
+        "subject": {"kind": "answer_item", "name": "set_astral_rift_flag"},
         "detail": "scope declaration not followed at scope-name"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "remove_astral_rift_flag",
+        "subject": {"kind": "answer_item", "name": "remove_astral_rift_flag"},
         "detail": "scope declaration not followed at scope-name"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "add_stage_modifier",
+        "subject": {"kind": "answer_item", "name": "add_stage_modifier"},
         "detail": "scope declaration not followed at scope-name"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "remove_stage_modifier",
+        "subject": {"kind": "answer_item", "name": "remove_stage_modifier"},
         "detail": "scope declaration not followed at scope-name"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "pop_force_add_ethic",
+        "subject": {"kind": "answer_item", "name": "pop_force_add_ethic"},
         "detail": "scope declaration not followed at command-vtable"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "pop_change_ethic",
+        "subject": {"kind": "answer_item", "name": "pop_change_ethic"},
         "detail": "scope declaration not followed at command-vtable"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "remove_random_starbase_module",
+        "subject": {"kind": "answer_item", "name": "remove_random_starbase_module"},
         "detail": "scope declaration not followed at command-vtable"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "remove_random_starbase_building",
+        "subject": {"kind": "answer_item", "name": "remove_random_starbase_building"},
         "detail": "scope declaration not followed at command-vtable"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "set_variable",
+        "subject": {"kind": "answer_item", "name": "set_variable"},
         "detail": "scope declaration not followed at scope-mask"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "change_variable",
+        "subject": {"kind": "answer_item", "name": "change_variable"},
         "detail": "scope declaration not followed at scope-mask"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "add_variable",
+        "subject": {"kind": "answer_item", "name": "add_variable"},
         "detail": "scope declaration not followed at scope-mask"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "subtract_variable",
+        "subject": {"kind": "answer_item", "name": "subtract_variable"},
         "detail": "scope declaration not followed at scope-mask"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "multiply_variable",
+        "subject": {"kind": "answer_item", "name": "multiply_variable"},
         "detail": "scope declaration not followed at scope-mask"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "divide_variable",
+        "subject": {"kind": "answer_item", "name": "divide_variable"},
         "detail": "scope declaration not followed at scope-mask"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "modulo_variable",
+        "subject": {"kind": "answer_item", "name": "modulo_variable"},
         "detail": "scope declaration not followed at scope-mask"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "round_variable_to_closest",
+        "subject": {"kind": "answer_item", "name": "round_variable_to_closest"},
         "detail": "scope declaration not followed at scope-mask"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "round_variable",
+        "subject": {"kind": "answer_item", "name": "round_variable"},
         "detail": "scope declaration not followed at scope-mask"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "floor_variable",
+        "subject": {"kind": "answer_item", "name": "floor_variable"},
         "detail": "scope declaration not followed at scope-mask"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "ceiling_variable",
+        "subject": {"kind": "answer_item", "name": "ceiling_variable"},
         "detail": "scope declaration not followed at scope-mask"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "clear_variable",
+        "subject": {"kind": "answer_item", "name": "clear_variable"},
         "detail": "scope declaration not followed at scope-mask"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "export_trigger_value_to_variable",
+        "subject": {"kind": "answer_item", "name": "export_trigger_value_to_variable"},
         "detail": "scope declaration not followed at scope-mask"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "set_variable_to_random_value",
+        "subject": {"kind": "answer_item", "name": "set_variable_to_random_value"},
         "detail": "scope declaration not followed at scope-mask"
       },
       {

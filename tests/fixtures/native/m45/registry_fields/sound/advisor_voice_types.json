@@ -38,7 +38,7 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "sound/advisor_voice_types",
+        "subject": {"kind": "registry", "name": "sound/advisor_voice_types"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       }
     ],

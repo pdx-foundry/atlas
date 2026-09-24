@@ -30,12 +30,12 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/lawsuits",
+        "subject": {"kind": "registry", "name": "common/lawsuits"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "cost",
+        "subject": {"kind": "field", "name": "cost"},
         "detail": "The field's alternatives do not establish one shared reader."
       }
     ],

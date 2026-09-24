@@ -30,7 +30,7 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/button_effects",
+        "subject": {"kind": "registry", "name": "common/button_effects"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       }
     ],

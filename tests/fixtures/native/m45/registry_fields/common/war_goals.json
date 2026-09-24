@@ -126,22 +126,22 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/war_goals",
+        "subject": {"kind": "registry", "name": "common/war_goals"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "casus_belli",
+        "subject": {"kind": "field", "name": "casus_belli"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "common/war_goals",
+        "subject": {"kind": "registry", "name": "common/war_goals"},
         "detail": "The field's reader could not be established on at least one path."
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/war_goals",
+        "subject": {"kind": "registry", "name": "common/war_goals"},
         "detail": "A path through the registry's reader could not be followed to its end."
       }
     ],

@@ -22,22 +22,22 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/patrons/deeds",
+        "subject": {"kind": "registry", "name": "common/patrons/deeds"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "common/patrons/deeds",
+        "subject": {"kind": "registry", "name": "common/patrons/deeds"},
         "detail": "The field's reader could not be established on at least one path."
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/patrons/deeds",
+        "subject": {"kind": "registry", "name": "common/patrons/deeds"},
         "detail": "A path through the registry's reader could not be followed to its end."
       },
       {
         "kind": "UnnamedField",
-        "subject": "common/patrons/deeds",
+        "subject": {"kind": "registry", "name": "common/patrons/deeds"},
         "detail": "3 reader paths have no recovered field name."
       }
     ],

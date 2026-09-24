@@ -38,7 +38,7 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/missions/mission_categories",
+        "subject": {"kind": "registry", "name": "common/missions/mission_categories"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       }
     ],

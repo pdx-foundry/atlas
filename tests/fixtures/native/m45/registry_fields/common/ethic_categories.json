@@ -5,7 +5,7 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/ethic_categories",
+        "subject": {"kind": "registry", "name": "common/ethic_categories"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       }
     ],

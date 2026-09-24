@@ -62,17 +62,17 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/species_archetypes",
+        "subject": {"kind": "registry", "name": "common/species_archetypes"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "inherit_traits_from",
+        "subject": {"kind": "field", "name": "inherit_traits_from"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "resources",
+        "subject": {"kind": "field", "name": "resources"},
         "detail": "The field's alternatives do not establish one shared reader."
       }
     ],

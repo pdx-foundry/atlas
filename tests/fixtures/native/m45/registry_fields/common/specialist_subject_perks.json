@@ -70,12 +70,12 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/specialist_subject_perks",
+        "subject": {"kind": "registry", "name": "common/specialist_subject_perks"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "desc",
+        "subject": {"kind": "field", "name": "desc"},
         "detail": "The field's alternatives do not establish one shared reader."
       }
     ],

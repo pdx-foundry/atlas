@@ -14,12 +14,12 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/country_limits/ownership_limits",
+        "subject": {"kind": "registry", "name": "common/country_limits/ownership_limits"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "ship_of_size_limits",
+        "subject": {"kind": "field", "name": "ship_of_size_limits"},
         "detail": "The field's alternatives do not establish one shared reader."
       }
     ],
