@@ -1,6 +1,7 @@
 //! Coverage of questions, independent of whether Atlas and CWT give the same answer.
 /// Direct comparison of Atlas rule answers with config assertions.
 pub mod comparison;
+mod language_subject;
 mod projection;
 #[cfg(test)]
 #[path = "coverage/tests.rs"]

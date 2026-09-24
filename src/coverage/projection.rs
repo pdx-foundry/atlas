@@ -1,7 +1,5 @@
 //! Project Atlas rule records onto config questions without comparing answers.
 
-mod language;
-
 use super::{Answer, Evidence, Gap, Origin, Projection, Status};
 use crate::{ledger::Ledger, snapshot};
 use pdx_native::Basis;
@@ -52,7 +50,7 @@ fn project_with_gap_facets(
         .to_owned();
     let registry_types = registry_types(ledger);
     let claims = claim_index(ledger);
-    let language = language::index(ledger, rules);
+    let language = super::language_subject::index(ledger, rules);
     let mut projection = Projection {
         snapshot_id: format!("{}@{}", rules.snapshot.name, rules.snapshot.version),
         target: target.clone(),
