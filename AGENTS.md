@@ -2,7 +2,11 @@
 
 Atlas implements a game-free config claim ledger and coverage CLI. For ledger changes, read
 [the contract](docs/coverage/ledger.md) and run the checks in [README.md](README.md).
+
+The project's architecture is located [here](/Users/jackson/Developer/pdx-foundry/native/docs/design/architecture.md).
+
 Coverage measures established answers to config questions; agreement with CWT is not a requirement.
+
 Use paired `<module>.rs` and `<module>/` files instead of `mod.rs`.
 
 ## Useful References
@@ -18,15 +22,9 @@ Path: `/Users/jackson/Developer/cwtools-stellaris-config`
 This repository contains the current `.cwt` files used by the SDK for code generation. This is what Atlas aims to replace.
 
 ### SDK Testing Prototypes
-Path: `/Users/jackson/Developer/pdx-sdk/packages/sdk-testing/prototype`
-Path: `/Users/jackson/Developer/pdx-sdk/.scratch/sdk-testing`
+Path: `/Users/jackson/Developer/pdx-foundry/native/.local`
 
-This package within `pdx-sdk` contains prototyping tools for a "Playwright for Stellaris" project. The prototyping tools should be useful for native operations, like launching the game, memory access, and calling game engine functions.
-
-### Typed PDXScript Prototype
-Path: `/Users/jackson/Developer/typed-pdxscript-prototype`
-
-This folder is a prototype for a "TypeScript, but for Paradox Language" project. It aims to extend the modding language with actual typing and a few other features. The compiler will be the first production consumer for Atlas.
+This repository contains `.local`, an untracked folder containing prototypes created during the planning phase. If a Linear ticket mentions a prototype ticket, the outcome may be in this folder.
 
 ## Wayfinder Guidelines
 
