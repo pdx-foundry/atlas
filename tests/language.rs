@@ -340,7 +340,10 @@ async fn loaded_modifier_names_stay_out_of_the_snapshot() {
     let summary = rule(&snapshot, "inventory:loaded_modifiers#loaded_summary").unwrap();
 
     assert_eq!(summary.conditions, ["content:installation"]);
-    assert_eq!(summary.answer["total"], 45_578);
+    assert_eq!(
+        summary.answer,
+        json!({"total": 4, "declared": 2, "generated": 1, "unexplained": 1})
+    );
     assert!(
         snapshot
             .subjects
@@ -667,6 +670,7 @@ async fn language_claims_join_their_snapshot_answers() {
     }
 }
 
+/// The recorded loaded table, trimmed to the entries these tests use (see the fixture README).
 async fn loaded() -> pdx_native::Answer<pdx_native::LoadedModifiers> {
     let native = Native::from_recorded_answers(recording()).unwrap();
     extraction::read_loaded_modifiers(&native, GameOptions::new(Command::new("unused")))
@@ -777,12 +781,19 @@ async fn comparison_reports_logs_lists_defines_and_tags() {
     assert_eq!(defines.config_only, ["NGameplay.ATLAS_FAKE"]);
 
     let tags = report.modifier_tags.as_ref().unwrap();
-    assert!(tags.agree > 500);
-    assert!(
+    let difference = |name: &str| {
         tags.different
             .iter()
-            .any(|difference| difference.name == "gdf_ship_alloys_cost_mult")
+            .find(|difference| difference.name == name)
+            .unwrap()
+    };
+    assert_eq!(tags.agree, 1);
+    assert_eq!(
+        difference("gdf_ship_alloys_cost_mult").declared,
+        Some(vec!["Countries".to_owned()])
     );
+    assert!(difference("gdf_ship_alloys_cost_mult").loaded.is_some());
+    assert_eq!(difference("blank_modifier").loaded, None);
     assert!(report.loaded_modifiers_read);
 }
 

@@ -5,7 +5,8 @@ declarations, modifiers, modifier categories, generated modifier families, the l
 table, scopes and scope links, localization, on_actions, game rules and defines. The live command
 asked Native every question, ran the tradition fixture sessions and one loaded-modifier session,
 and confirmed disposal of each game. It exited 0. A second live run recorded byte-identical
-answers; the recorded answers are the test fixtures in `tests/fixtures/native/m45`.
+answers. They are the test fixtures in `tests/fixtures/native/m45`, except that the fixture's
+loaded modifier table keeps only the four entries that the tests use.
 
 | Input or result | Identity |
 | --- | --- |
@@ -14,7 +15,7 @@ answers; the recorded answers are the test fixtures in `tests/fixtures/native/m4
 | Config revision | `85747602a614ad7daa8cc66453777ecb023463a8` |
 | Config content SHA-256 | `5c79cabb8d1b25e40994c0d134f5623bc2aef2a6b964059aabfc4834e6d039cc` |
 | Live rule snapshot SHA-256 | `0fd3ac4f07a09ae4deacce77aca4ca7838c45e9bf1c7a313d8d14a717dba9de0` |
-| Recorded rule snapshot SHA-256 | `0b5416f1bef7c0162ddd7d67490b3e686c4d97f77ff8c544f7c32ab07f759986` |
+| Rule snapshot from the run's full recorded answers, SHA-256 | `0b5416f1bef7c0162ddd7d67490b3e686c4d97f77ff8c544f7c32ab07f759986` |
 | `ledger.json` / `coverage.json` | `ba2bb263…f67947` / `58881bf5…ff50ff` (pinned in full in the gate fixture) |
 | `comparison.json` | `4440e189579016fa8fee27c081cd547a36d9e266371107fee619335280ff50ff` |
 
