@@ -4,25 +4,30 @@ Atlas inventories the questions in CWTools config and measures which ones an Atl
 answer. **Coverage is not agreement with CWT.** An evidence-backed contradictory answer earns the
 same coverage as an agreeing answer. The config is a migration/discovery input, not the game oracle.
 
-Atlas also asks its pinned Native dependency for tradition and tradition-category observations and
-assembles the first offline rule snapshot. Native handles the game and platform details. The ledger
-and coverage commands still run without a game installation.
+Atlas also asks its pinned Native dependency for registry and tradition observations and for the
+script language declarations: effects, triggers, modifiers and their categories and generated
+families, scopes and scope links, localization, on_actions, game rules and defines. It assembles
+them into one offline rule snapshot. Native handles the game and platform details. The ledger and
+coverage commands still run without a game installation.
 
 ```sh
-cargo run --release --locked -- snapshot /path/to/Stellaris /path/to/recorded-answers /path/to/traditions.json
-cargo run --release --locked -- snapshot --recorded tests/fixtures/native/m45 /path/to/traditions.json
+cargo run --release --locked -- snapshot /path/to/Stellaris /path/to/recorded-answers /path/to/rules.json
+cargo run --release --locked -- snapshot --recorded tests/fixtures/native/m45 /path/to/rules.json
 ```
 
 Both modes write deterministic JSON and a `.sha256` sidecar. The snapshot name includes a digest
-of its contents, so different builds and incomplete extractions have distinct identities.
-Recorded answers keep their recorded basis and earn no current-engine coverage credit. The [version-1 schema](docs/contract/rule-snapshot-v1.schema.json)
-describes the snapshot. The historical caller's findings and original source remain in the
+of its contents, so different builds and incomplete extractions have distinct identities. The live
+mode starts the game for the tradition fixtures and once more to read the loaded modifier table;
+it exits 2 if an answer is missing or a game session did not confirm disposal.
+Recorded answers keep their recorded basis and earn no current-engine coverage credit. The [version-2 schema](docs/contract/rule-snapshot-v2.schema.json)
+describes the snapshot; [the language snapshot measurement](docs/coverage/language-snapshot.md)
+states what it establishes and what stays a gap. The historical caller's findings and original source remain in the
 preserved Native evidence bundle; the production tests cover its recorded-answer and fixture cases.
 
 ```sh
 cargo run --locked -- ledger \
   --config /path/to/cwtools-stellaris-config/config \
-  --snapshot /path/to/atlas-registry-result.json \
+  --snapshot /path/to/rules.json \
   --output /path/to/reports
 ```
 
@@ -36,8 +41,11 @@ To compare a rule-bearing Atlas snapshot with config assertions, run the separat
 ```sh
 cargo run --locked -- compare \
   /path/to/cwtools-stellaris-config/config \
-  /path/to/traditions.json \
-  /path/to/reports
+  /path/to/rules.json \
+  /path/to/reports \
+  --script-docs /path/to/cwtools-stellaris-config/script-docs/v4.5.0 \
+  --defines /path/to/Stellaris/common/defines/00_defines.txt \
+  --answers /path/to/recorded-answers
 ```
 
 It writes `comparison.json` with one entry per config claim plus Atlas-only questions. Entries
@@ -49,6 +57,14 @@ raw Atlas answer retained. This report does not change coverage. A difference ca
 does not establish which source is correct. The command exits 2 if config diagnostics remain.
 Generic CWT `scalar` is compatible with a concrete scalar reader; CWT aliases and other modeled
 forms remain unclassified until a semantic mapping exists.
+
+The report also lists, for each config name list (effects, triggers, modifiers, modifier
+categories, scope keywords, scope links, localisation commands and links, on_actions, game rules,
+defines), the names that agree, the engine-only names and the config-only names. The options add
+the same three lists for each `script-docs` log (names and, where both sides answer, descriptions,
+usage, scopes and categories), for the installation's define files, and, from the recorded loaded
+modifier answer, the loaded names and the declared modifiers whose loaded tags differ from their
+static tags. The loaded table is a content observation, so the snapshot keeps only its counts.
 
 The headline is supported engine-fact plus content-derived claims divided by the total in those
 classes. Reports also give all-claims totals, every owner class, each file, and every claim's
@@ -71,7 +87,7 @@ cargo clippy --all-targets --locked -- -D warnings
 
 # Required local acceptance gate; the inputs must exist and match the recorded identities.
 PDX_CONFIG_PATH=/path/to/cwtools-stellaris-config/config \
-ATLAS_REGISTRY_SNAPSHOT=/path/to/normal-serial.json \
+ATLAS_RULE_SNAPSHOT=/path/to/live-rules.json \
 cargo test --locked --test full_config -- --ignored
 ```
 

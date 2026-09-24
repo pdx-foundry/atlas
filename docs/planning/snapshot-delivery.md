@@ -2,7 +2,7 @@
 
 This page retains the parts of the 2026-09-16 offline contract and repository packaging decisions
 that still govern Atlas. The original decisions are in Git history and Linear SDK-477 and SDK-479.
-The implemented payload is defined by `docs/contract/rule-snapshot-v1.schema.json` and checked by
+The implemented payload is defined by `docs/contract/rule-snapshot-v2.schema.json` and checked by
 `src/snapshot.rs`.
 
 - Atlas publishes immutable, versioned JSON for exact supported game targets. A complete

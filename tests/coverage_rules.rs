@@ -30,8 +30,12 @@ types = {
 "#;
     let ledger = ledger::inventory(&BTreeMap::from([("technology.cwt".into(), source.into())]));
     let snapshot = recorded_snapshot().await;
-    let comparison =
-        coverage::comparison::evaluate(&ledger, &snapshot::json_bytes(&snapshot).unwrap()).unwrap();
+    let comparison = coverage::comparison::evaluate(
+        &ledger,
+        &snapshot::json_bytes(&snapshot).unwrap(),
+        &Default::default(),
+    )
+    .unwrap();
     for name in ["type[technology]", "type[swapped_technology]"] {
         let claim = ledger
             .claims
@@ -74,15 +78,8 @@ fn qualify_as_live(snapshot: &mut snapshot::Snapshot) {
         keys.insert(old, new.clone());
         snapshot.sources.insert(new, source);
     }
-    for rule in &mut snapshot.rules {
-        for evidence in &mut rule.evidence {
-            evidence.source = keys[&evidence.source].clone();
-        }
-    }
-    for gap in &mut snapshot.gaps {
-        for evidence in &mut gap.evidence {
-            evidence.source = keys[&evidence.source].clone();
-        }
+    for answer in snapshot.answers.values_mut() {
+        answer.source = keys[&answer.source].clone();
     }
 }
 
@@ -139,11 +136,13 @@ async fn rule_snapshot_credit_requires_live_basis_and_no_applicable_gap() {
 #[tokio::test]
 async fn invalid_rule_snapshot_is_rejected() {
     let mut snapshot = recorded_snapshot().await;
-    snapshot.contract_version = 2;
-    assert!(
-        coverage::evaluate(&ledger(), Some(&snapshot::json_bytes(&snapshot).unwrap())).is_err()
-    );
-    snapshot.contract_version = 1;
+    for version in [1, 3] {
+        snapshot.contract_version = version;
+        assert!(
+            coverage::evaluate(&ledger(), Some(&snapshot::json_bytes(&snapshot).unwrap())).is_err()
+        );
+    }
+    snapshot.contract_version = snapshot::CONTRACT_VERSION;
     snapshot.schema_dialect = "https://json-schema.org/draft-07/schema".into();
     assert!(
         coverage::evaluate(&ledger(), Some(&snapshot::json_bytes(&snapshot).unwrap())).is_err()
@@ -249,7 +248,7 @@ tradition = { unlocks_agenda = int }
         .unwrap();
     form.answer = json!({"form":"boolean"});
     let bytes = snapshot::json_bytes(&rules).unwrap();
-    let comparison = coverage::comparison::evaluate(&ledger, &bytes).unwrap();
+    let comparison = coverage::comparison::evaluate(&ledger, &bytes, &Default::default()).unwrap();
     let coverage = coverage::evaluate(&ledger, Some(&bytes)).unwrap();
     assert_eq!(
         coverage.totals.atlas_owned.covered, 0,
@@ -300,8 +299,12 @@ tradition = { unlocks_agenda = int }
         native_gaps: Vec::new(),
         evidence: Vec::new(),
     });
-    let report =
-        coverage::comparison::evaluate(&ledger, &snapshot::json_bytes(&rules).unwrap()).unwrap();
+    let report = coverage::comparison::evaluate(
+        &ledger,
+        &snapshot::json_bytes(&rules).unwrap(),
+        &Default::default(),
+    )
+    .unwrap();
     let claim = ledger
         .claims
         .iter()
@@ -331,7 +334,7 @@ tradition = { unlocks_agenda = scalar on_enabled = {} }
     let ledger = ledger::inventory(&BTreeMap::from([("traditions.cwt".into(), source.into())]));
     let snapshot = recorded_snapshot().await;
     let bytes = snapshot::json_bytes(&snapshot).unwrap();
-    let comparison = coverage::comparison::evaluate(&ledger, &bytes).unwrap();
+    let comparison = coverage::comparison::evaluate(&ledger, &bytes, &Default::default()).unwrap();
     for (property, subject) in [
         ("loader_path", vec!["types", "type[tradition]", "path"]),
         ("value_form", vec!["tradition", "unlocks_agenda"]),
@@ -378,7 +381,8 @@ tradition = { unlocks_agenda = scalar on_enabled = {} }
     );
     let alias_ledger =
         ledger::inventory(&BTreeMap::from([("traditions.cwt".into(), alias_source)]));
-    let alias_report = coverage::comparison::evaluate(&alias_ledger, &bytes).unwrap();
+    let alias_report =
+        coverage::comparison::evaluate(&alias_ledger, &bytes, &Default::default()).unwrap();
     let alias_claim = alias_ledger
         .claims
         .iter()

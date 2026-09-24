@@ -1,46 +1,81 @@
 {
-  "config_revision": "76be5782683d09a9dbe304a512690eed6a2fa425",
-  "config_sha256": "ad0637833d99e28c8f8eb1a4cd5f835d6b92d65d1183b1a16a062ce76f98b8df",
-  "snapshot_sha256": "f3aa3e281e519f8d699eb081ffc83c8f82205ca63296289840713624e9105247",
-  "files": 172,
-  "physical_lines": 49201,
-  "meaningful_lines": 42973,
-  "claims": 60146,
+  "config_revision": "85747602a614ad7daa8cc66453777ecb023463a8",
+  "config_sha256": "5c79cabb8d1b25e40994c0d134f5623bc2aef2a6b964059aabfc4834e6d039cc",
+  "snapshot_sha256": "0fd3ac4f07a09ae4deacce77aca4ca7838c45e9bf1c7a313d8d14a717dba9de0",
+  "files": 175,
+  "physical_lines": 50201,
+  "meaningful_lines": 43842,
+  "claims": 61146,
   "totals": {
     "atlas_owned": {
-      "covered": 0,
-      "total": 57282,
-      "percent": 0.0
+      "covered": 15278,
+      "total": 58032,
+      "percent": 26.326854
     },
     "all_claims": {
-      "covered": 0,
-      "total": 60146,
-      "percent": 0.0
+      "covered": 15278,
+      "total": 61146,
+      "percent": 24.986099
     },
     "by_owner": {
       "engine_fact": {
-        "covered": 0,
-        "total": 54196,
-        "percent": 0.0
+        "covered": 15278,
+        "total": 54914,
+        "percent": 27.821685
       },
       "content_derived": {
         "covered": 0,
-        "total": 3086,
+        "total": 3118,
         "percent": 0.0
       },
       "consumer_policy": {
         "covered": 0,
-        "total": 2672,
+        "total": 2908,
         "percent": 0.0
       },
       "authored_text": {
         "covered": 0,
-        "total": 192,
+        "total": 206,
         "percent": 0.0
       }
     }
   },
   "diagnostics": [
+    {
+      "file": "aliases.cwt",
+      "line": 72,
+      "kind": "unknown-annotation"
+    },
+    {
+      "file": "aliases.cwt",
+      "line": 78,
+      "kind": "unknown-annotation"
+    },
+    {
+      "file": "aliases.cwt",
+      "line": 89,
+      "kind": "unknown-annotation"
+    },
+    {
+      "file": "aliases.cwt",
+      "line": 96,
+      "kind": "unknown-annotation"
+    },
+    {
+      "file": "aliases.cwt",
+      "line": 103,
+      "kind": "unknown-annotation"
+    },
+    {
+      "file": "aliases.cwt",
+      "line": 110,
+      "kind": "unknown-annotation"
+    },
+    {
+      "file": "aliases.cwt",
+      "line": 117,
+      "kind": "unknown-annotation"
+    },
     {
       "file": "common/country_types.cwt",
       "line": 323,
@@ -52,13 +87,23 @@
       "kind": "unknown-annotation"
     },
     {
-      "file": "game_rules.cwt",
-      "line": 14,
+      "file": "common/solar_system_initializers.cwt",
+      "line": 223,
+      "kind": "unknown-annotation"
+    },
+    {
+      "file": "common/solar_system_initializers.cwt",
+      "line": 232,
       "kind": "unknown-annotation"
     },
     {
       "file": "game_rules.cwt",
-      "line": 15,
+      "line": 16,
+      "kind": "unknown-annotation"
+    },
+    {
+      "file": "game_rules.cwt",
+      "line": 17,
       "kind": "unknown-annotation"
     },
     {
@@ -77,11 +122,21 @@
       "kind": "malformed-annotation"
     },
     {
+      "file": "map/map.cwt",
+      "line": 148,
+      "kind": "unknown-annotation"
+    },
+    {
+      "file": "map/map.cwt",
+      "line": 244,
+      "kind": "unknown-annotation"
+    },
+    {
       "file": "triggers.cwt",
-      "line": 5160,
+      "line": 5225,
       "kind": "unknown-annotation"
     }
   ],
-  "ledger_sha256": "894270f493090ad55ab2ff73b013e5d3d6b32ffd59be73acbf642d2064a93695",
-  "coverage_sha256": "628f782aba30b69929f6d558de248466180f2dfd841ee7fb603b2cdaa49ea0c3"
+  "ledger_sha256": "ba2bb263812b54f4f3b6d28a7b47f56b92a0be5f3f7f8da41aa6c375f2f67947",
+  "coverage_sha256": "58881bf5530af1f0e301d1354f0fe13c5ac08f306fcdc27c4d570f908e1fba0b"
 }

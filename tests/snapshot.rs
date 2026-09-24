@@ -18,7 +18,7 @@ async fn recorded_snapshot_validates_and_is_byte_stable() {
     let first = snapshot::assemble(&extraction).unwrap();
     snapshot::verify(&first).unwrap();
     let schema: Value = serde_json::from_str(include_str!(
-        "../docs/contract/rule-snapshot-v1.schema.json"
+        "../docs/contract/rule-snapshot-v2.schema.json"
     ))
     .unwrap();
     let validator = jsonschema::validator_for(&schema).unwrap();
@@ -39,11 +39,11 @@ async fn recorded_snapshot_validates_and_is_byte_stable() {
             .all(|source| source.basis == Basis::Recorded)
     );
     assert_eq!(first.coverage.whole_registry_validity, "not_established");
-    assert!(first.snapshot.name.starts_with("stellaris-registry-rules/"));
+    assert!(first.snapshot.name.starts_with("stellaris-rules/"));
     for subject in first
         .subjects
         .iter()
-        .filter(|subject| subject.kind == "field")
+        .filter(|subject| subject.kind == snapshot::SubjectKind::Field)
     {
         let id = format!("{}#value_form", subject.id);
         assert!(
@@ -56,8 +56,9 @@ async fn recorded_snapshot_validates_and_is_byte_stable() {
     for rule in &first.rules {
         assert!(!rule.evidence.is_empty());
         for evidence in &rule.evidence {
-            assert!(first.sources.contains_key(&evidence.source));
-            completeness.insert(format!("{:?}", evidence.completeness));
+            let answer = &first.answers[&evidence.answer];
+            assert!(first.sources.contains_key(&answer.source));
+            completeness.insert(format!("{:?}", answer.completeness));
         }
     }
     assert_eq!(

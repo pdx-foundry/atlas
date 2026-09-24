@@ -1,0 +1,116 @@
+{
+  "Ok": {
+    "value": [
+      {
+        "name": "AI Economy"
+      },
+      {
+        "name": "All"
+      },
+      {
+        "name": "Armies"
+      },
+      {
+        "name": "Astral Rift"
+      },
+      {
+        "name": "Civilian Ships"
+      },
+      {
+        "name": "Colony"
+      },
+      {
+        "name": "Cosmic Storm Influence Field"
+      },
+      {
+        "name": "Countries"
+      },
+      {
+        "name": "Deposits"
+      },
+      {
+        "name": "Economic Units"
+      },
+      {
+        "name": "Espionage"
+      },
+      {
+        "name": "Federations"
+      },
+      {
+        "name": "Fleets"
+      },
+      {
+        "name": "Galactic Community"
+      },
+      {
+        "name": "Habitability"
+      },
+      {
+        "name": "Leaders"
+      },
+      {
+        "name": "Megastructures"
+      },
+      {
+        "name": "Military Ships"
+      },
+      {
+        "name": "Orbital Stations"
+      },
+      {
+        "name": "Owned Ships"
+      },
+      {
+        "name": "Planets"
+      },
+      {
+        "name": "Pop Factions"
+      },
+      {
+        "name": "Pops"
+      },
+      {
+        "name": "Science Ships"
+      },
+      {
+        "name": "Ship Components"
+      },
+      {
+        "name": "Ship Design Stats"
+      },
+      {
+        "name": "Ships"
+      },
+      {
+        "name": "Space Stations"
+      },
+      {
+        "name": "Star Systems"
+      },
+      {
+        "name": "Starbases"
+      },
+      {
+        "name": "Transport Ships"
+      },
+      {
+        "name": "Waystations"
+      }
+    ],
+    "completeness": "Complete",
+    "gaps": [
+      {
+        "kind": "OutsideMethod",
+        "subject": null,
+        "detail": "The search covers each single category and each whole mask that a built-in modifier uses. Categories are intended-use tags; where a modifier takes effect is outside it."
+      }
+    ],
+    "source": {
+      "build": "07988b4f1b865623becd7a61af1cae92e111be6515d341754af70f02107822cd",
+      "native_version": "0.1.0",
+      "method": "modifier-categories/v1",
+      "basis": "Declared"
+    }
+  }
+}
