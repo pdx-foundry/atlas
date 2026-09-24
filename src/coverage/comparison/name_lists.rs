@@ -2,7 +2,8 @@
 
 use super::{Inputs, NameList, TagComparison, TagDifference};
 use crate::{
-    ledger::{Claim, Ledger},
+    coverage::language_subject,
+    ledger::Ledger,
     snapshot::{Snapshot, SubjectKind},
 };
 use pdx_native::DeclaredTags;
@@ -81,6 +82,14 @@ pub(super) fn compare(list: &str, engine: BTreeSet<String>, config: BTreeSet<Str
 /// Each config name list against the snapshot's names.
 pub(super) fn config_lists(ledger: &Ledger, engine: &Engine, inputs: &Inputs) -> Vec<NameList> {
     let mut modifiers = engine.names(SubjectKind::Modifier);
+    let classified = language_subject::classify(ledger, engine.snapshot);
+    let config_names = |kind| {
+        classified
+            .iter()
+            .filter(|(_, subject)| subject.kind == kind && subject.question == "existence")
+            .map(|(_, subject)| subject.name.clone())
+            .collect()
+    };
 
     if let Some(loaded) = inputs.loaded_modifiers {
         modifiers.extend(
@@ -96,151 +105,60 @@ pub(super) fn config_lists(ledger: &Ledger, engine: &Engine, inputs: &Inputs) ->
         compare(
             "effects",
             engine.names(SubjectKind::Effect),
-            config_names(ledger, |claim| command_name(claim, "effect")),
+            config_names(SubjectKind::Effect),
         ),
         compare(
             "triggers",
             engine.names(SubjectKind::Trigger),
-            config_names(ledger, |claim| command_name(claim, "trigger")),
+            config_names(SubjectKind::Trigger),
         ),
-        compare(
-            "modifiers",
-            modifiers,
-            config_names(ledger, |claim| {
-                keyed(claim, "modifiers.cwt", "modifiers", "declaration_existence")
-            }),
-        ),
+        compare("modifiers", modifiers, config_names(SubjectKind::Modifier)),
         compare(
             "modifier_categories",
             engine.names(SubjectKind::ModifierCategory),
-            config_names(ledger, |claim| {
-                keyed(
-                    claim,
-                    "modifier_categories.cwt",
-                    "modifier_categories",
-                    "declaration_existence",
-                )
-            }),
+            config_names(SubjectKind::ModifierCategory),
         ),
         compare(
             "scope_keywords",
             engine.scope_keywords(),
-            config_names(ledger, |claim| match claim.subject.as_slice() {
-                [root, _, aliases, _]
-                    if claim.file == "scopes.cwt"
-                        && root == "scopes"
-                        && aliases == "aliases"
-                        && claim.property == "scope_alias" =>
-                {
-                    Some(claim.config_answer.trim_matches('"').to_owned())
-                }
-                _ => None,
-            }),
+            ledger
+                .claims
+                .iter()
+                .filter(|claim| claim.conditions.is_empty())
+                .filter_map(language_subject::scope_keyword)
+                .collect(),
         ),
         compare(
             "scope_links",
             engine.names(SubjectKind::ScopeLink),
-            config_names(ledger, |claim| {
-                keyed(claim, "links.cwt", "links", "declaration_existence")
-            }),
+            config_names(SubjectKind::ScopeLink),
         ),
         compare(
             "localisation_commands",
             engine.names(SubjectKind::LocalizationCommand),
-            config_names(ledger, |claim| {
-                keyed(
-                    claim,
-                    "localisation.cwt",
-                    "localisation_commands",
-                    "field_existence",
-                )
-            }),
+            config_names(SubjectKind::LocalizationCommand),
         ),
         compare(
             "localisation_links",
             engine.names(SubjectKind::LocalizationLink),
-            config_names(ledger, |claim| {
-                keyed(
-                    claim,
-                    "localisation.cwt",
-                    "localisation_promotions",
-                    "field_existence",
-                )
-                .or_else(|| {
-                    keyed(
-                        claim,
-                        "localisation_links.cwt",
-                        "localisation_links",
-                        "declaration_existence",
-                    )
-                })
-            }),
+            config_names(SubjectKind::LocalizationLink),
         ),
         compare(
             "on_actions",
             engine.names(SubjectKind::OnAction),
-            config_names(ledger, |claim| match claim.subject.as_slice() {
-                [root, _]
-                    if claim.file == "on_actions.cwt"
-                        && root == "on_actions"
-                        && claim.property == "value_form" =>
-                {
-                    Some(claim.config_answer.trim_matches('"').to_owned())
-                }
-                _ => None,
-            }),
+            config_names(SubjectKind::OnAction),
         ),
         compare(
             "game_rules",
             engine.names(SubjectKind::GameRule),
-            config_names(ledger, |claim| {
-                keyed(claim, "game_rules.cwt", "game_rules", "field_existence")
-            }),
+            config_names(SubjectKind::GameRule),
         ),
         compare(
             "defines",
             engine.names(SubjectKind::Define),
-            config_names(ledger, |claim| match claim.subject.as_slice() {
-                [root, namespace, name]
-                    if claim.file.starts_with("common/defines/")
-                        && root == "defines"
-                        && claim.property == "field_existence" =>
-                {
-                    Some(format!("{namespace}.{name}"))
-                }
-                _ => None,
-            }),
+            config_names(SubjectKind::Define),
         ),
     ]
-}
-
-fn config_names(ledger: &Ledger, name: impl Fn(&Claim) -> Option<String>) -> BTreeSet<String> {
-    ledger
-        .claims
-        .iter()
-        .filter(|claim| claim.conditions.is_empty())
-        .filter_map(name)
-        .collect()
-}
-
-fn keyed(claim: &Claim, file: &str, root: &str, property: &str) -> Option<String> {
-    match claim.subject.as_slice() {
-        [first, name] if claim.file == file && first == root && claim.property == property => {
-            Some(name.clone())
-        }
-        _ => None,
-    }
-}
-
-fn command_name(claim: &Claim, kind: &str) -> Option<String> {
-    let [segment] = claim.subject.as_slice() else {
-        return None;
-    };
-    let name = segment
-        .strip_prefix(&format!("alias[{kind}:"))?
-        .strip_suffix(']')?;
-
-    (claim.property == "command_existence" && !name.contains('<')).then(|| name.to_owned())
 }
 
 /// The define names of the shipped define files against the snapshot's defines.
