@@ -4621,112 +4621,112 @@
     "gaps": [
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "can_access_decisions"},
+        "subject": {"kind": "answer_item", "name": "can_access_decisions"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "can_be_part_of_galactic_community"},
+        "subject": {"kind": "answer_item", "name": "can_be_part_of_galactic_community"},
         "detail": "the engine declares this rule, but no followed call site evaluates it (no-site)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "can_be_part_of_galactic_empire"},
+        "subject": {"kind": "answer_item", "name": "can_be_part_of_galactic_empire"},
         "detail": "the engine declares this rule, but no followed call site evaluates it (no-site)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "can_build_mining_station_around"},
+        "subject": {"kind": "answer_item", "name": "can_build_mining_station_around"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "can_build_observation_station_around"},
+        "subject": {"kind": "answer_item", "name": "can_build_observation_station_around"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "can_build_research_station_around"},
+        "subject": {"kind": "answer_item", "name": "can_build_research_station_around"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "can_build_starbase_around"},
+        "subject": {"kind": "answer_item", "name": "can_build_starbase_around"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "can_build_station_around"},
+        "subject": {"kind": "answer_item", "name": "can_build_station_around"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "can_fill_drone_job"},
+        "subject": {"kind": "answer_item", "name": "can_fill_drone_job"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "can_fill_precursor_job"},
+        "subject": {"kind": "answer_item", "name": "can_fill_precursor_job"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "can_fill_ruler_job"},
+        "subject": {"kind": "answer_item", "name": "can_fill_ruler_job"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "can_fill_specialist_job"},
+        "subject": {"kind": "answer_item", "name": "can_fill_specialist_job"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "can_fill_worker_job"},
+        "subject": {"kind": "answer_item", "name": "can_fill_worker_job"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "can_orbitable_repair_ships"},
+        "subject": {"kind": "answer_item", "name": "can_orbitable_repair_ships"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "can_toggle_encampment"},
+        "subject": {"kind": "answer_item", "name": "can_toggle_encampment"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "can_vote_in_democratic_election"},
+        "subject": {"kind": "answer_item", "name": "can_vote_in_democratic_election"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "crisis_opinion_is_shown"},
+        "subject": {"kind": "answer_item", "name": "crisis_opinion_is_shown"},
         "detail": "the engine declares this rule, but no followed call site evaluates it (no-site)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "pop_group_can_join_factions"},
+        "subject": {"kind": "answer_item", "name": "pop_group_can_join_factions"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "should_colony_be_destroyed_on_pc_change"},
+        "subject": {"kind": "answer_item", "name": "should_colony_be_destroyed_on_pc_change"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "should_spawn_deposits"},
+        "subject": {"kind": "answer_item", "name": "should_spawn_deposits"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "species_uses_bonus_growth"},
+        "subject": {"kind": "answer_item", "name": "species_uses_bonus_growth"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "system_blocks_sensors"},
+        "subject": {"kind": "answer_item", "name": "system_blocks_sensors"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {

@@ -6142,1477 +6142,1477 @@
     "gaps": [
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "anomaly_success"},
+        "subject": {"kind": "answer_item", "name": "anomaly_success"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "empire_init_add_technologies"},
+        "subject": {"kind": "answer_item", "name": "empire_init_add_technologies"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "empire_init_capital_colony"},
+        "subject": {"kind": "answer_item", "name": "empire_init_capital_colony"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "empire_init_capital_colony"},
+        "subject": {"kind": "answer_item", "name": "empire_init_capital_colony"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "empire_init_create_ships"},
+        "subject": {"kind": "answer_item", "name": "empire_init_create_ships"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "empire_init_create_ships"},
+        "subject": {"kind": "answer_item", "name": "empire_init_create_ships"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_add_community_member"},
+        "subject": {"kind": "answer_item", "name": "on_add_community_member"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_add_community_member"},
+        "subject": {"kind": "answer_item", "name": "on_add_community_member"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_add_to_council"},
+        "subject": {"kind": "answer_item", "name": "on_add_to_council"},
         "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_add_to_council"},
+        "subject": {"kind": "answer_item", "name": "on_add_to_council"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_add_to_imperial_council"},
+        "subject": {"kind": "answer_item", "name": "on_add_to_imperial_council"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_agenda_finished"},
+        "subject": {"kind": "answer_item", "name": "on_agenda_finished"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_agenda_finished"},
+        "subject": {"kind": "answer_item", "name": "on_agenda_finished"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_agenda_finished_early"},
+        "subject": {"kind": "answer_item", "name": "on_agenda_finished_early"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_agreement_change_accepted"},
+        "subject": {"kind": "answer_item", "name": "on_agreement_change_accepted"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_arch_site_finished"},
+        "subject": {"kind": "answer_item", "name": "on_arch_site_finished"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_arch_site_finished"},
+        "subject": {"kind": "answer_item", "name": "on_arch_site_finished"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_arkship_encamped"},
+        "subject": {"kind": "answer_item", "name": "on_arkship_encamped"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_arkship_mobile"},
+        "subject": {"kind": "answer_item", "name": "on_arkship_mobile"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_army_disbanded"},
+        "subject": {"kind": "answer_item", "name": "on_army_disbanded"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_army_killed_in_combat"},
+        "subject": {"kind": "answer_item", "name": "on_army_killed_in_combat"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_army_killed_no_combat"},
+        "subject": {"kind": "answer_item", "name": "on_army_killed_no_combat"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_ascension_perk_picked"},
+        "subject": {"kind": "answer_item", "name": "on_ascension_perk_picked"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_ascension_perk_picked"},
+        "subject": {"kind": "answer_item", "name": "on_ascension_perk_picked"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_astral_rift_exploration_complete"},
+        "subject": {"kind": "answer_item", "name": "on_astral_rift_exploration_complete"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_astral_rift_exploration_start"},
+        "subject": {"kind": "answer_item", "name": "on_astral_rift_exploration_start"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_astral_rift_exploration_start"},
+        "subject": {"kind": "answer_item", "name": "on_astral_rift_exploration_start"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_astral_rift_pre_event_fire"},
+        "subject": {"kind": "answer_item", "name": "on_astral_rift_pre_event_fire"},
         "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_astral_rift_pre_event_fire"},
+        "subject": {"kind": "answer_item", "name": "on_astral_rift_pre_event_fire"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_astral_rift_spawned"},
+        "subject": {"kind": "answer_item", "name": "on_astral_rift_spawned"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_astral_rift_surveyed"},
+        "subject": {"kind": "answer_item", "name": "on_astral_rift_surveyed"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_astral_rift_surveyed"},
+        "subject": {"kind": "answer_item", "name": "on_astral_rift_surveyed"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_attunement_gained"},
+        "subject": {"kind": "answer_item", "name": "on_attunement_gained"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_awareness_level_decrease"},
+        "subject": {"kind": "answer_item", "name": "on_awareness_level_decrease"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_awareness_level_increase"},
+        "subject": {"kind": "answer_item", "name": "on_awareness_level_increase"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_become_advanced_empire"},
+        "subject": {"kind": "answer_item", "name": "on_become_advanced_empire"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_becoming_subject"},
+        "subject": {"kind": "answer_item", "name": "on_becoming_subject"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_bi_yearly_pulse"},
+        "subject": {"kind": "answer_item", "name": "on_bi_yearly_pulse"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_bi_yearly_pulse_country"},
+        "subject": {"kind": "answer_item", "name": "on_bi_yearly_pulse_country"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_bi_yearly_pulse_country"},
+        "subject": {"kind": "answer_item", "name": "on_bi_yearly_pulse_country"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_biomass_monthly"},
+        "subject": {"kind": "answer_item", "name": "on_biomass_monthly"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_biomass_monthly"},
+        "subject": {"kind": "answer_item", "name": "on_biomass_monthly"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_branch_office_closed"},
+        "subject": {"kind": "answer_item", "name": "on_branch_office_closed"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_branch_office_established"},
+        "subject": {"kind": "answer_item", "name": "on_branch_office_established"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_building_complete"},
+        "subject": {"kind": "answer_item", "name": "on_building_complete"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_building_demolished"},
+        "subject": {"kind": "answer_item", "name": "on_building_demolished"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_building_downgraded"},
+        "subject": {"kind": "answer_item", "name": "on_building_downgraded"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_building_queued"},
+        "subject": {"kind": "answer_item", "name": "on_building_queued"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_building_replaced"},
+        "subject": {"kind": "answer_item", "name": "on_building_replaced"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_building_ruined"},
+        "subject": {"kind": "answer_item", "name": "on_building_ruined"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_building_unqueued"},
+        "subject": {"kind": "answer_item", "name": "on_building_unqueued"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_building_upgraded"},
+        "subject": {"kind": "answer_item", "name": "on_building_upgraded"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_bypass_explored"},
+        "subject": {"kind": "answer_item", "name": "on_bypass_explored"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_bypass_locked"},
+        "subject": {"kind": "answer_item", "name": "on_bypass_locked"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_capital_changed"},
+        "subject": {"kind": "answer_item", "name": "on_capital_changed"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_claim_system"},
+        "subject": {"kind": "answer_item", "name": "on_claim_system"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_colonization_started"},
+        "subject": {"kind": "answer_item", "name": "on_colonization_started"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_colonized"},
+        "subject": {"kind": "answer_item", "name": "on_colonized"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_colonized"},
+        "subject": {"kind": "answer_item", "name": "on_colonized"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_colony_attackers_lose"},
+        "subject": {"kind": "answer_item", "name": "on_colony_attackers_lose"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_colony_attackers_win"},
+        "subject": {"kind": "answer_item", "name": "on_colony_attackers_win"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_colony_conquer"},
+        "subject": {"kind": "answer_item", "name": "on_colony_conquer"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_colony_conquer"},
+        "subject": {"kind": "answer_item", "name": "on_colony_conquer"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_colony_defenders_lose"},
+        "subject": {"kind": "answer_item", "name": "on_colony_defenders_lose"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_colony_defenders_win"},
+        "subject": {"kind": "answer_item", "name": "on_colony_defenders_win"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_colony_destroyed"},
+        "subject": {"kind": "answer_item", "name": "on_colony_destroyed"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_colony_destroyed_by_bombardment"},
+        "subject": {"kind": "answer_item", "name": "on_colony_destroyed_by_bombardment"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_colony_destroyed_by_bombardment"},
+        "subject": {"kind": "answer_item", "name": "on_colony_destroyed_by_bombardment"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_colony_ownerless"},
+        "subject": {"kind": "answer_item", "name": "on_colony_ownerless"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_colony_transfer"},
+        "subject": {"kind": "answer_item", "name": "on_colony_transfer"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_colony_yearly_pulse"},
+        "subject": {"kind": "answer_item", "name": "on_colony_yearly_pulse"},
         "detail": "a path to a call site could not be followed (instruction)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_colony_zero_pops"},
+        "subject": {"kind": "answer_item", "name": "on_colony_zero_pops"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_colony_zero_pops"},
+        "subject": {"kind": "answer_item", "name": "on_colony_zero_pops"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_colony_zero_pops_ground_combat"},
+        "subject": {"kind": "answer_item", "name": "on_colony_zero_pops_ground_combat"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_colony_zero_pops_ground_combat"},
+        "subject": {"kind": "answer_item", "name": "on_colony_zero_pops_ground_combat"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_commercial_pact_broken"},
+        "subject": {"kind": "answer_item", "name": "on_commercial_pact_broken"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_country_attacked"},
+        "subject": {"kind": "answer_item", "name": "on_country_attacked"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_country_created"},
+        "subject": {"kind": "answer_item", "name": "on_country_created"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_country_created"},
+        "subject": {"kind": "answer_item", "name": "on_country_created"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_country_released_in_war"},
+        "subject": {"kind": "answer_item", "name": "on_country_released_in_war"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_crossing_border"},
+        "subject": {"kind": "answer_item", "name": "on_crossing_border"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_crossing_border"},
+        "subject": {"kind": "answer_item", "name": "on_crossing_border"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_custodian_term_ends"},
+        "subject": {"kind": "answer_item", "name": "on_custodian_term_ends"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_custom_diplomacy"},
+        "subject": {"kind": "answer_item", "name": "on_custom_diplomacy"},
         "detail": "the engine looks up this list, but no followed call site fires it (looked-up-only)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_custom_diplomacy"},
+        "subject": {"kind": "answer_item", "name": "on_custom_diplomacy"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_custom_diplomacy"},
+        "subject": {"kind": "answer_item", "name": "on_custom_diplomacy"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_daily_pop_ethics_divergence"},
+        "subject": {"kind": "answer_item", "name": "on_daily_pop_ethics_divergence"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_damage_taken"},
+        "subject": {"kind": "answer_item", "name": "on_damage_taken"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_debris_reanimated"},
+        "subject": {"kind": "answer_item", "name": "on_debris_reanimated"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_debris_reanimated"},
+        "subject": {"kind": "answer_item", "name": "on_debris_reanimated"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_debris_researched"},
+        "subject": {"kind": "answer_item", "name": "on_debris_researched"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_debris_researched"},
+        "subject": {"kind": "answer_item", "name": "on_debris_researched"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_debris_scavenged"},
+        "subject": {"kind": "answer_item", "name": "on_debris_scavenged"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_debris_scavenged"},
+        "subject": {"kind": "answer_item", "name": "on_debris_scavenged"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_debris_scavenged_and_researched"},
+        "subject": {"kind": "answer_item", "name": "on_debris_scavenged_and_researched"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_debris_scavenged_and_researched"},
+        "subject": {"kind": "answer_item", "name": "on_debris_scavenged_and_researched"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_decade_pulse"},
+        "subject": {"kind": "answer_item", "name": "on_decade_pulse"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_decade_pulse_country"},
+        "subject": {"kind": "answer_item", "name": "on_decade_pulse_country"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_decade_pulse_country"},
+        "subject": {"kind": "answer_item", "name": "on_decade_pulse_country"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_decision_enacted"},
+        "subject": {"kind": "answer_item", "name": "on_decision_enacted"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_decision_enacted"},
+        "subject": {"kind": "answer_item", "name": "on_decision_enacted"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_dimensional_lock_expired"},
+        "subject": {"kind": "answer_item", "name": "on_dimensional_lock_expired"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_edict_activated"},
+        "subject": {"kind": "answer_item", "name": "on_edict_activated"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_edict_activated"},
+        "subject": {"kind": "answer_item", "name": "on_edict_activated"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_election_ended"},
+        "subject": {"kind": "answer_item", "name": "on_election_ended"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_emergency_ftl"},
+        "subject": {"kind": "answer_item", "name": "on_emergency_ftl"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_entering_battle"},
+        "subject": {"kind": "answer_item", "name": "on_entering_battle"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_entering_battle"},
+        "subject": {"kind": "answer_item", "name": "on_entering_battle"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_entering_system"},
+        "subject": {"kind": "answer_item", "name": "on_entering_system"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_entering_system_first_time"},
+        "subject": {"kind": "answer_item", "name": "on_entering_system_first_time"},
         "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_entering_system_fleet"},
+        "subject": {"kind": "answer_item", "name": "on_entering_system_fleet"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_entering_war"},
+        "subject": {"kind": "answer_item", "name": "on_entering_war"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_fauna_captured"},
+        "subject": {"kind": "answer_item", "name": "on_fauna_captured"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_federation_new_leader"},
+        "subject": {"kind": "answer_item", "name": "on_federation_new_leader"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_federation_new_level_unlocked"},
+        "subject": {"kind": "answer_item", "name": "on_federation_new_level_unlocked"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_first_contact"},
+        "subject": {"kind": "answer_item", "name": "on_first_contact"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_first_contact_finished"},
+        "subject": {"kind": "answer_item", "name": "on_first_contact_finished"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_five_year_pulse"},
+        "subject": {"kind": "answer_item", "name": "on_five_year_pulse"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_five_year_pulse_country"},
+        "subject": {"kind": "answer_item", "name": "on_five_year_pulse_country"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_five_year_pulse_country"},
+        "subject": {"kind": "answer_item", "name": "on_five_year_pulse_country"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_fleet_auto_move_arrival"},
+        "subject": {"kind": "answer_item", "name": "on_fleet_auto_move_arrival"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_fleet_contract_started"},
+        "subject": {"kind": "answer_item", "name": "on_fleet_contract_started"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_fleet_contract_started"},
+        "subject": {"kind": "answer_item", "name": "on_fleet_contract_started"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_fleet_destroyed_perp"},
+        "subject": {"kind": "answer_item", "name": "on_fleet_destroyed_perp"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_fleet_destroyed_perp"},
+        "subject": {"kind": "answer_item", "name": "on_fleet_destroyed_perp"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_fleet_destroyed_victim"},
+        "subject": {"kind": "answer_item", "name": "on_fleet_destroyed_victim"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_fleet_destroyed_victim"},
+        "subject": {"kind": "answer_item", "name": "on_fleet_destroyed_victim"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_fleet_detected"},
+        "subject": {"kind": "answer_item", "name": "on_fleet_detected"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_fleet_disbanded"},
+        "subject": {"kind": "answer_item", "name": "on_fleet_disbanded"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_fleet_quantum_catapult"},
+        "subject": {"kind": "answer_item", "name": "on_fleet_quantum_catapult"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_fleet_went_mia"},
+        "subject": {"kind": "answer_item", "name": "on_fleet_went_mia"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_gaining_station_control"},
+        "subject": {"kind": "answer_item", "name": "on_gaining_station_control"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_galactic_community_formed"},
+        "subject": {"kind": "answer_item", "name": "on_galactic_community_formed"},
         "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_galactic_council_established"},
+        "subject": {"kind": "answer_item", "name": "on_galactic_council_established"},
         "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_galaxy_map_during_tutorial"},
+        "subject": {"kind": "answer_item", "name": "on_galaxy_map_during_tutorial"},
         "detail": "a path to a call site could not be followed (instruction)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_game_start_country"},
+        "subject": {"kind": "answer_item", "name": "on_game_start_country"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_ground_combat_devastation"},
+        "subject": {"kind": "answer_item", "name": "on_ground_combat_devastation"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_ground_combat_started"},
+        "subject": {"kind": "answer_item", "name": "on_ground_combat_started"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_heir_promoted_to_ruler"},
+        "subject": {"kind": "answer_item", "name": "on_heir_promoted_to_ruler"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_heir_promoted_to_ruler"},
+        "subject": {"kind": "answer_item", "name": "on_heir_promoted_to_ruler"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_initialize_advanced_colony"},
+        "subject": {"kind": "answer_item", "name": "on_initialize_advanced_colony"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_join_alliance"},
+        "subject": {"kind": "answer_item", "name": "on_join_alliance"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_jump_drive"},
+        "subject": {"kind": "answer_item", "name": "on_jump_drive"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_late_game_pulse"},
+        "subject": {"kind": "answer_item", "name": "on_late_game_pulse"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_late_game_pulse"},
+        "subject": {"kind": "answer_item", "name": "on_late_game_pulse"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_late_game_pulse_country"},
+        "subject": {"kind": "answer_item", "name": "on_late_game_pulse_country"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_late_game_pulse_country"},
+        "subject": {"kind": "answer_item", "name": "on_late_game_pulse_country"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_leader_assigned"},
+        "subject": {"kind": "answer_item", "name": "on_leader_assigned"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_leader_captured"},
+        "subject": {"kind": "answer_item", "name": "on_leader_captured"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_leader_death"},
+        "subject": {"kind": "answer_item", "name": "on_leader_death"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_leader_death"},
+        "subject": {"kind": "answer_item", "name": "on_leader_death"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_leader_death_no_notify"},
+        "subject": {"kind": "answer_item", "name": "on_leader_death_no_notify"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_leader_death_notify"},
+        "subject": {"kind": "answer_item", "name": "on_leader_death_notify"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_leader_fired"},
+        "subject": {"kind": "answer_item", "name": "on_leader_fired"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_leader_level_up"},
+        "subject": {"kind": "answer_item", "name": "on_leader_level_up"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_leader_unassigned"},
+        "subject": {"kind": "answer_item", "name": "on_leader_unassigned"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_leave_alliance"},
+        "subject": {"kind": "answer_item", "name": "on_leave_alliance"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_losing_station_control"},
+        "subject": {"kind": "answer_item", "name": "on_losing_station_control"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_megastructure_build_start"},
+        "subject": {"kind": "answer_item", "name": "on_megastructure_build_start"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_megastructure_built"},
+        "subject": {"kind": "answer_item", "name": "on_megastructure_built"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_megastructure_change_owner"},
+        "subject": {"kind": "answer_item", "name": "on_megastructure_change_owner"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_megastructure_ownerless"},
+        "subject": {"kind": "answer_item", "name": "on_megastructure_ownerless"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_megastructure_upgraded"},
+        "subject": {"kind": "answer_item", "name": "on_megastructure_upgraded"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_mid_game_pulse"},
+        "subject": {"kind": "answer_item", "name": "on_mid_game_pulse"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_mid_game_pulse"},
+        "subject": {"kind": "answer_item", "name": "on_mid_game_pulse"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_mid_game_pulse_country"},
+        "subject": {"kind": "answer_item", "name": "on_mid_game_pulse_country"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_mid_game_pulse_country"},
+        "subject": {"kind": "answer_item", "name": "on_mid_game_pulse_country"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_modification_complete"},
+        "subject": {"kind": "answer_item", "name": "on_modification_complete"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_modification_completion"},
+        "subject": {"kind": "answer_item", "name": "on_modification_completion"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_modification_completion"},
+        "subject": {"kind": "answer_item", "name": "on_modification_completion"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_monthly_pulse"},
+        "subject": {"kind": "answer_item", "name": "on_monthly_pulse"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_monthly_pulse_country"},
+        "subject": {"kind": "answer_item", "name": "on_monthly_pulse_country"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_new_country_selected"},
+        "subject": {"kind": "answer_item", "name": "on_new_country_selected"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_new_heir"},
+        "subject": {"kind": "answer_item", "name": "on_new_heir"},
         "detail": "no path from the function entry reaches a call site (site-not-reached)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_operation_chapter_finished"},
+        "subject": {"kind": "answer_item", "name": "on_operation_chapter_finished"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_operation_finished"},
+        "subject": {"kind": "answer_item", "name": "on_operation_finished"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_orbital_defense_planet_ownerless"},
+        "subject": {"kind": "answer_item", "name": "on_orbital_defense_planet_ownerless"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_patron_delve_failed"},
+        "subject": {"kind": "answer_item", "name": "on_patron_delve_failed"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_planet_bombarded"},
+        "subject": {"kind": "answer_item", "name": "on_planet_bombarded"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_planet_class_changed"},
+        "subject": {"kind": "answer_item", "name": "on_planet_class_changed"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_planet_occupied"},
+        "subject": {"kind": "answer_item", "name": "on_planet_occupied"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_planet_returned"},
+        "subject": {"kind": "answer_item", "name": "on_planet_returned"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_planet_surveyed"},
+        "subject": {"kind": "answer_item", "name": "on_planet_surveyed"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_planet_surveyed"},
+        "subject": {"kind": "answer_item", "name": "on_planet_surveyed"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_policy_changed"},
+        "subject": {"kind": "answer_item", "name": "on_policy_changed"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_pop_assembly"},
+        "subject": {"kind": "answer_item", "name": "on_pop_assembly"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_pop_bombed_to_death"},
+        "subject": {"kind": "answer_item", "name": "on_pop_bombed_to_death"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_pop_displaced"},
+        "subject": {"kind": "answer_item", "name": "on_pop_displaced"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_pop_displaced"},
+        "subject": {"kind": "answer_item", "name": "on_pop_displaced"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_pop_group_abducted"},
+        "subject": {"kind": "answer_item", "name": "on_pop_group_abducted"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_pop_group_added"},
+        "subject": {"kind": "answer_item", "name": "on_pop_group_added"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_pop_group_resettled"},
+        "subject": {"kind": "answer_item", "name": "on_pop_group_resettled"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_pop_group_resettled"},
+        "subject": {"kind": "answer_item", "name": "on_pop_group_resettled"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_pop_group_rights_change"},
+        "subject": {"kind": "answer_item", "name": "on_pop_group_rights_change"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_pop_growth"},
+        "subject": {"kind": "answer_item", "name": "on_pop_growth"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_pop_growth"},
+        "subject": {"kind": "answer_item", "name": "on_pop_growth"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_pop_purged"},
+        "subject": {"kind": "answer_item", "name": "on_pop_purged"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_post_government_changed"},
+        "subject": {"kind": "answer_item", "name": "on_post_government_changed"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_post_government_changed"},
+        "subject": {"kind": "answer_item", "name": "on_post_government_changed"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_pre_government_changed"},
+        "subject": {"kind": "answer_item", "name": "on_pre_government_changed"},
         "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_press_begin"},
+        "subject": {"kind": "answer_item", "name": "on_press_begin"},
         "detail": "a call site passes a command that builds its own scope (scope-built-by-callee)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_proxy_war_started"},
+        "subject": {"kind": "answer_item", "name": "on_proxy_war_started"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_proxy_war_started"},
+        "subject": {"kind": "answer_item", "name": "on_proxy_war_started"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_rebels_take_colony_owner_switched"},
+        "subject": {"kind": "answer_item", "name": "on_rebels_take_colony_owner_switched"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_rebels_take_colony_owner_switched"},
+        "subject": {"kind": "answer_item", "name": "on_rebels_take_colony_owner_switched"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_rebels_take_planet"},
+        "subject": {"kind": "answer_item", "name": "on_rebels_take_planet"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_released_as_vassal"},
+        "subject": {"kind": "answer_item", "name": "on_released_as_vassal"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_relic_activated"},
+        "subject": {"kind": "answer_item", "name": "on_relic_activated"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_relic_lost"},
+        "subject": {"kind": "answer_item", "name": "on_relic_lost"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_remove_community_member"},
+        "subject": {"kind": "answer_item", "name": "on_remove_community_member"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_remove_from_council"},
+        "subject": {"kind": "answer_item", "name": "on_remove_from_council"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_remove_from_imperial_council"},
+        "subject": {"kind": "answer_item", "name": "on_remove_from_imperial_council"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_research_option_added"},
+        "subject": {"kind": "answer_item", "name": "on_research_option_added"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_resolution_failed"},
+        "subject": {"kind": "answer_item", "name": "on_resolution_failed"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_resolution_failed"},
+        "subject": {"kind": "answer_item", "name": "on_resolution_failed"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_resolution_passed"},
+        "subject": {"kind": "answer_item", "name": "on_resolution_passed"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_resolution_passed"},
+        "subject": {"kind": "answer_item", "name": "on_resolution_passed"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_resolution_put_to_vote"},
+        "subject": {"kind": "answer_item", "name": "on_resolution_put_to_vote"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_resolution_vetoed"},
+        "subject": {"kind": "answer_item", "name": "on_resolution_vetoed"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_ruler_created"},
+        "subject": {"kind": "answer_item", "name": "on_ruler_created"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_ruler_created"},
+        "subject": {"kind": "answer_item", "name": "on_ruler_created"},
         "detail": "no path from the function entry reaches a call site (site-not-reached)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_ruler_removed"},
+        "subject": {"kind": "answer_item", "name": "on_ruler_removed"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_ruler_set"},
+        "subject": {"kind": "answer_item", "name": "on_ruler_set"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_ship_built"},
+        "subject": {"kind": "answer_item", "name": "on_ship_built"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_ship_built"},
+        "subject": {"kind": "answer_item", "name": "on_ship_built"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_ship_designed"},
+        "subject": {"kind": "answer_item", "name": "on_ship_designed"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_ship_destroyed_perp"},
+        "subject": {"kind": "answer_item", "name": "on_ship_destroyed_perp"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_ship_destroyed_perp"},
+        "subject": {"kind": "answer_item", "name": "on_ship_destroyed_perp"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_ship_disabled"},
+        "subject": {"kind": "answer_item", "name": "on_ship_disabled"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_ship_disbanded"},
+        "subject": {"kind": "answer_item", "name": "on_ship_disbanded"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_ship_disengaged_perp"},
+        "subject": {"kind": "answer_item", "name": "on_ship_disengaged_perp"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_ship_disengaged_perp"},
+        "subject": {"kind": "answer_item", "name": "on_ship_disengaged_perp"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_ship_enabled"},
+        "subject": {"kind": "answer_item", "name": "on_ship_enabled"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_ship_engulfed"},
+        "subject": {"kind": "answer_item", "name": "on_ship_engulfed"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_ship_quantum_catapult"},
+        "subject": {"kind": "answer_item", "name": "on_ship_quantum_catapult"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_ship_surveyed"},
+        "subject": {"kind": "answer_item", "name": "on_ship_surveyed"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_ship_surveyed"},
+        "subject": {"kind": "answer_item", "name": "on_ship_surveyed"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_ship_upgraded"},
+        "subject": {"kind": "answer_item", "name": "on_ship_upgraded"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_sign_non_aggression_pact"},
+        "subject": {"kind": "answer_item", "name": "on_sign_non_aggression_pact"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_slave_sold_on_market"},
+        "subject": {"kind": "answer_item", "name": "on_slave_sold_on_market"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_snare_sent"},
+        "subject": {"kind": "answer_item", "name": "on_snare_sent"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_space_battle_lost"},
+        "subject": {"kind": "answer_item", "name": "on_space_battle_lost"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_space_battle_lost"},
+        "subject": {"kind": "answer_item", "name": "on_space_battle_lost"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_space_battle_over"},
+        "subject": {"kind": "answer_item", "name": "on_space_battle_over"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_space_battle_over"},
+        "subject": {"kind": "answer_item", "name": "on_space_battle_over"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_space_battle_won"},
+        "subject": {"kind": "answer_item", "name": "on_space_battle_won"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_space_battle_won"},
+        "subject": {"kind": "answer_item", "name": "on_space_battle_won"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_space_fauna_culled"},
+        "subject": {"kind": "answer_item", "name": "on_space_fauna_culled"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_specialist_subject_conversion_finished"},
+        "subject": {"kind": "answer_item", "name": "on_specialist_subject_conversion_finished"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_starbase_disabled"},
+        "subject": {"kind": "answer_item", "name": "on_starbase_disabled"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_starbase_transfer"},
+        "subject": {"kind": "answer_item", "name": "on_starbase_transfer"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_status_quo"},
+        "subject": {"kind": "answer_item", "name": "on_status_quo"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_status_quo"},
+        "subject": {"kind": "answer_item", "name": "on_status_quo"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_status_quo_forced"},
+        "subject": {"kind": "answer_item", "name": "on_status_quo_forced"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_status_quo_forced"},
+        "subject": {"kind": "answer_item", "name": "on_status_quo_forced"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_storm_encountered"},
+        "subject": {"kind": "answer_item", "name": "on_storm_encountered"},
         "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_storm_entered_system"},
+        "subject": {"kind": "answer_item", "name": "on_storm_entered_system"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_storm_finished"},
+        "subject": {"kind": "answer_item", "name": "on_storm_finished"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_storm_left_system"},
+        "subject": {"kind": "answer_item", "name": "on_storm_left_system"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_subject_integrated"},
+        "subject": {"kind": "answer_item", "name": "on_subject_integrated"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_subspecies_integration_complete"},
+        "subject": {"kind": "answer_item", "name": "on_subspecies_integration_complete"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_subspecies_integration_step"},
+        "subject": {"kind": "answer_item", "name": "on_subspecies_integration_step"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_survey_astral_rift"},
+        "subject": {"kind": "answer_item", "name": "on_survey_astral_rift"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_survey_astral_rift"},
+        "subject": {"kind": "answer_item", "name": "on_survey_astral_rift"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_survey_planet"},
+        "subject": {"kind": "answer_item", "name": "on_survey_planet"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_survey_planet"},
+        "subject": {"kind": "answer_item", "name": "on_survey_planet"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_system_controller_changed"},
+        "subject": {"kind": "answer_item", "name": "on_system_controller_changed"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_system_controller_changed"},
+        "subject": {"kind": "answer_item", "name": "on_system_controller_changed"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_system_gained"},
+        "subject": {"kind": "answer_item", "name": "on_system_gained"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_system_locked_ship_killed"},
+        "subject": {"kind": "answer_item", "name": "on_system_locked_ship_killed"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_system_lost"},
+        "subject": {"kind": "answer_item", "name": "on_system_lost"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_system_occupied"},
+        "subject": {"kind": "answer_item", "name": "on_system_occupied"},
         "detail": "no path from the function entry reaches a call site (site-not-reached)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_system_returned"},
+        "subject": {"kind": "answer_item", "name": "on_system_returned"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_system_returned"},
+        "subject": {"kind": "answer_item", "name": "on_system_returned"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_system_survey"},
+        "subject": {"kind": "answer_item", "name": "on_system_survey"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_tech_increased"},
+        "subject": {"kind": "answer_item", "name": "on_tech_increased"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_terraforming_begun"},
+        "subject": {"kind": "answer_item", "name": "on_terraforming_begun"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_terraforming_complete"},
+        "subject": {"kind": "answer_item", "name": "on_terraforming_complete"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_terraforming_progress_25"},
+        "subject": {"kind": "answer_item", "name": "on_terraforming_progress_25"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_tradition_picked"},
+        "subject": {"kind": "answer_item", "name": "on_tradition_picked"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_tradition_picked"},
+        "subject": {"kind": "answer_item", "name": "on_tradition_picked"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_truce_end"},
+        "subject": {"kind": "answer_item", "name": "on_truce_end"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_tutorial_level_changed"},
+        "subject": {"kind": "answer_item", "name": "on_tutorial_level_changed"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_uplift_completion"},
+        "subject": {"kind": "answer_item", "name": "on_uplift_completion"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_war_beginning"},
+        "subject": {"kind": "answer_item", "name": "on_war_beginning"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_war_beginning"},
+        "subject": {"kind": "answer_item", "name": "on_war_beginning"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_war_ended"},
+        "subject": {"kind": "answer_item", "name": "on_war_ended"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_war_lost"},
+        "subject": {"kind": "answer_item", "name": "on_war_lost"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_war_participant_leaves_early"},
+        "subject": {"kind": "answer_item", "name": "on_war_participant_leaves_early"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_war_won"},
+        "subject": {"kind": "answer_item", "name": "on_war_won"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_waystation_lost"},
+        "subject": {"kind": "answer_item", "name": "on_waystation_lost"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_waystation_lost"},
+        "subject": {"kind": "answer_item", "name": "on_waystation_lost"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "on_yearly_pulse_country"},
+        "subject": {"kind": "answer_item", "name": "on_yearly_pulse_country"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "special_project_success"},
+        "subject": {"kind": "answer_item", "name": "special_project_success"},
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "special_project_success"},
+        "subject": {"kind": "answer_item", "name": "special_project_success"},
         "detail": "some entry scopes of a call site could not be established"
       },
       {

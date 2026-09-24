@@ -90,7 +90,7 @@ enum Target {
 
 fn item_target(subject: &GapSubject, kind: SubjectKind) -> Option<Target> {
     match subject {
-        GapSubject::Item { name } => Some(Target::Language(kind, name.clone())),
+        GapSubject::AnswerItem { name } => Some(Target::Language(kind, name.clone())),
         _ => None,
     }
 }
@@ -311,7 +311,7 @@ impl Builder<'_> {
                 &key,
                 answer,
                 &declaration.name,
-                Some(GapSubject::Item {
+                Some(GapSubject::AnswerItem {
                     name: declaration.name.clone(),
                 }),
             )?;
@@ -373,7 +373,7 @@ impl Builder<'_> {
                 "modifiers",
                 answer,
                 &modifier.name,
-                Some(GapSubject::Item {
+                Some(GapSubject::AnswerItem {
                     name: modifier.name.clone(),
                 }),
             )?;
@@ -409,7 +409,7 @@ impl Builder<'_> {
                 "modifier_categories",
                 answer,
                 &category.name,
-                Some(GapSubject::Item {
+                Some(GapSubject::AnswerItem {
                     name: category.name.clone(),
                 }),
             )?;
@@ -535,7 +535,7 @@ impl Builder<'_> {
                 "scopes",
                 answer,
                 &group.keyword,
-                Some(GapSubject::Item {
+                Some(GapSubject::AnswerItem {
                     name: group.keyword.clone(),
                 }),
             )?;
@@ -568,7 +568,7 @@ impl Builder<'_> {
                 "scope_links",
                 answer,
                 &link_declaration.name,
-                Some(GapSubject::Item {
+                Some(GapSubject::AnswerItem {
                     name: link_declaration.name.clone(),
                 }),
             )?;
@@ -891,7 +891,7 @@ impl Builder<'_> {
             key,
             answer,
             name,
-            Some(GapSubject::Item { name: name.into() }),
+            Some(GapSubject::AnswerItem { name: name.into() }),
         )?;
 
         self.rule(&id, "existence", json!(true), &link);
@@ -962,7 +962,7 @@ impl Builder<'_> {
                 "defines",
                 answer,
                 &name,
-                Some(GapSubject::Item { name: name.clone() }),
+                Some(GapSubject::AnswerItem { name: name.clone() }),
             )?;
 
             self.rule(&id, "existence", json!(true), &link);

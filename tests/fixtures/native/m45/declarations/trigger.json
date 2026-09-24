@@ -16205,72 +16205,72 @@
     "gaps": [
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "has_stage_modifier"},
+        "subject": {"kind": "answer_item", "name": "has_stage_modifier"},
         "detail": "scope declaration not followed at scope-name"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "check_variable"},
+        "subject": {"kind": "answer_item", "name": "check_variable"},
         "detail": "scope declaration not followed at scope-mask"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "check_variable_arithmetic"},
+        "subject": {"kind": "answer_item", "name": "check_variable_arithmetic"},
         "detail": "scope declaration not followed at scope-mask"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "is_variable_set"},
+        "subject": {"kind": "answer_item", "name": "is_variable_set"},
         "detail": "scope declaration not followed at scope-mask"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "has_relation_flag"},
+        "subject": {"kind": "answer_item", "name": "has_relation_flag"},
         "detail": "scope declaration not followed at command-vtable"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "reverse_has_relation_flag"},
+        "subject": {"kind": "answer_item", "name": "reverse_has_relation_flag"},
         "detail": "scope declaration not followed at command-vtable"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "is_war_participant"},
+        "subject": {"kind": "answer_item", "name": "is_war_participant"},
         "detail": "scope declaration not followed at command-vtable"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "is_site_last_die_result"},
+        "subject": {"kind": "answer_item", "name": "is_site_last_die_result"},
         "detail": "scope declaration not followed at scope-name"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "is_site_current_stage_score"},
+        "subject": {"kind": "answer_item", "name": "is_site_current_stage_score"},
         "detail": "scope declaration not followed at scope-name"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "is_site_current_stage_score_no_die"},
+        "subject": {"kind": "answer_item", "name": "is_site_current_stage_score_no_die"},
         "detail": "scope declaration not followed at scope-name"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "is_current_stage_difficulty"},
+        "subject": {"kind": "answer_item", "name": "is_current_stage_difficulty"},
         "detail": "scope declaration not followed at scope-name"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "has_astral_rift_flag"},
+        "subject": {"kind": "answer_item", "name": "has_astral_rift_flag"},
         "detail": "scope declaration not followed at scope-name"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "astral_rift_relative_difficulty"},
+        "subject": {"kind": "answer_item", "name": "astral_rift_relative_difficulty"},
         "detail": "scope declaration not followed at scope-name"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "item", "name": "pop_ethic_amount"},
+        "subject": {"kind": "answer_item", "name": "pop_ethic_amount"},
         "detail": "scope declaration not followed at command-vtable"
       },
       {
