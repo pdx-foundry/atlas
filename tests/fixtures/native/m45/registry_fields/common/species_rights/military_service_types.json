@@ -5,22 +5,22 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/species_rights/military_service_types",
+        "subject": {"kind": "registry", "name": "common/species_rights/military_service_types"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnreadableInput",
-        "subject": "common/species_rights/military_service_types",
+        "subject": {"kind": "registry", "name": "common/species_rights/military_service_types"},
         "detail": "A function or name table that the method needs could not be read."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "common/species_rights/military_service_types",
+        "subject": {"kind": "registry", "name": "common/species_rights/military_service_types"},
         "detail": "The field's reader could not be established on at least one path."
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/species_rights/military_service_types",
+        "subject": {"kind": "registry", "name": "common/species_rights/military_service_types"},
         "detail": "A path through the registry's reader could not be followed to its end."
       }
     ],

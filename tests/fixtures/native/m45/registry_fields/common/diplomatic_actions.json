@@ -86,22 +86,22 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/diplomatic_actions",
+        "subject": {"kind": "registry", "name": "common/diplomatic_actions"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "prerequisites",
+        "subject": {"kind": "field", "name": "prerequisites"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "common/diplomatic_actions",
+        "subject": {"kind": "registry", "name": "common/diplomatic_actions"},
         "detail": "The field's reader could not be established on at least one path."
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/diplomatic_actions",
+        "subject": {"kind": "registry", "name": "common/diplomatic_actions"},
         "detail": "A path through the registry's reader could not be followed to its end."
       }
     ],

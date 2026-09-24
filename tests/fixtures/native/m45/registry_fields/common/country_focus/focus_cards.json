@@ -5,17 +5,17 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/country_focus/focus_cards",
+        "subject": {"kind": "registry", "name": "common/country_focus/focus_cards"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "common/country_focus/focus_cards",
+        "subject": {"kind": "registry", "name": "common/country_focus/focus_cards"},
         "detail": "The field's reader could not be established on at least one path."
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/country_focus/focus_cards",
+        "subject": {"kind": "registry", "name": "common/country_focus/focus_cards"},
         "detail": "A path through the registry's reader could not be followed to its end."
       }
     ],

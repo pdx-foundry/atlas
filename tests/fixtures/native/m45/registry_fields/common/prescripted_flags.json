@@ -14,12 +14,12 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/prescripted_flags",
+        "subject": {"kind": "registry", "name": "common/prescripted_flags"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "flags",
+        "subject": {"kind": "field", "name": "flags"},
         "detail": "The field's alternatives do not establish one shared reader."
       }
     ],

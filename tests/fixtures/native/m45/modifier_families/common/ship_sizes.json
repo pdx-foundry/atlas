@@ -5,12 +5,12 @@
     "gaps": [
       {
         "kind": "UnresolvedPath",
-        "subject": "common/ship_sizes",
+        "subject": {"kind": "registry", "name": "common/ship_sizes"},
         "detail": "1 names or generation calls of the registry's code could not be followed at name"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/ship_sizes",
+        "subject": {"kind": "registry", "name": "common/ship_sizes"},
         "detail": "1 names or generation calls of the registry's code could not be followed at unreached"
       },
       {
@@ -20,7 +20,7 @@
       },
       {
         "kind": "OutsideMethod",
-        "subject": "common/ship_sizes",
+        "subject": {"kind": "registry", "name": "common/ship_sizes"},
         "detail": "The search covers the registry's database generator and post-read code. Where a modifier takes effect, the tags that a later registration of the same name gives, the tags of a declared modifier after content registers it again, and names longer than a fixed-size buffer keeps are outside it."
       }
     ],

@@ -54,7 +54,7 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/dust_clouds",
+        "subject": {"kind": "registry", "name": "common/dust_clouds"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       }
     ],

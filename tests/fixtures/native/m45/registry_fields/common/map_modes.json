@@ -46,22 +46,22 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/map_modes",
+        "subject": {"kind": "registry", "name": "common/map_modes"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "color",
+        "subject": {"kind": "field", "name": "color"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "common/map_modes",
+        "subject": {"kind": "registry", "name": "common/map_modes"},
         "detail": "The field's reader could not be established on at least one path."
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/map_modes",
+        "subject": {"kind": "registry", "name": "common/map_modes"},
         "detail": "A path through the registry's reader could not be followed to its end."
       }
     ],

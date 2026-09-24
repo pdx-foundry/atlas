@@ -38,17 +38,17 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/ai_espionage/spynetworks",
+        "subject": {"kind": "registry", "name": "common/ai_espionage/spynetworks"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "operations",
+        "subject": {"kind": "field", "name": "operations"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "operation_selector",
+        "subject": {"kind": "field", "name": "operation_selector"},
         "detail": "The field's alternatives do not establish one shared reader."
       }
     ],

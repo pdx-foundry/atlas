@@ -238,9 +238,27 @@
           ]
         },
         "subject": {
-          "type": [
-            "string",
-            "null"
+          "anyOf": [
+            { "type": "null" },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "kind": { "enum": ["registry", "field", "item", "localization_link", "fixture_file"] },
+                "name": { "type": "string" }
+              },
+              "required": ["kind", "name"]
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "kind": { "enum": ["localization_context", "scope_type"] },
+                "id": { "type": "string", "minLength": 1 },
+                "name": { "type": "string" }
+              },
+              "required": ["kind", "id", "name"]
+            }
           ]
         },
         "detail": {

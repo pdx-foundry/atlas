@@ -5,17 +5,17 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/astral_rifts",
+        "subject": {"kind": "registry", "name": "common/astral_rifts"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "common/astral_rifts",
+        "subject": {"kind": "registry", "name": "common/astral_rifts"},
         "detail": "The field's reader could not be established on at least one path."
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/astral_rifts",
+        "subject": {"kind": "registry", "name": "common/astral_rifts"},
         "detail": "A path through the registry's reader could not be followed to its end."
       }
     ],

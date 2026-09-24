@@ -30,7 +30,7 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/greeting_overlay_sounds",
+        "subject": {"kind": "registry", "name": "common/greeting_overlay_sounds"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       }
     ],

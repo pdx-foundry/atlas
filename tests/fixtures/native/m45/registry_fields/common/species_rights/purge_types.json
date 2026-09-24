@@ -38,27 +38,27 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/species_rights/purge_types",
+        "subject": {"kind": "registry", "name": "common/species_rights/purge_types"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "ReaderSemantics",
-        "subject": "pop_decline_rate",
+        "subject": {"kind": "field", "name": "pop_decline_rate"},
         "detail": "The shared reader is identified, but its broad value form is not established."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "common/species_rights/purge_types",
+        "subject": {"kind": "registry", "name": "common/species_rights/purge_types"},
         "detail": "The field's reader could not be established on at least one path."
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/species_rights/purge_types",
+        "subject": {"kind": "registry", "name": "common/species_rights/purge_types"},
         "detail": "A path through the registry's reader could not be followed to its end."
       },
       {
         "kind": "UnnamedField",
-        "subject": "common/species_rights/purge_types",
+        "subject": {"kind": "registry", "name": "common/species_rights/purge_types"},
         "detail": "4 reader paths have no recovered field name."
       }
     ],

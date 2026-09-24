@@ -6,7 +6,7 @@ use super::{
 use crate::extraction::Extraction;
 use pdx_native::{
     Answer, Completeness, DiagnosticCoverage, DiagnosticJoin, Disposal, Field, FixtureFieldOutcome,
-    FixtureObservation, FixtureRuntime, FixtureStorage, ReaderKind,
+    FixtureObservation, FixtureRuntime, FixtureStorage, GapSubject, ReaderKind,
 };
 use serde_json::{Value, json};
 use std::collections::{BTreeMap, BTreeSet};
@@ -48,7 +48,9 @@ fn assemble_registry(
                 "registries",
                 answer,
                 format!("answers.registries:{registry}"),
-                Some(registry),
+                Some(GapSubject::Registry {
+                    name: registry.into(),
+                }),
             )?;
             rule(snapshot, &id, "existence", json!(true), evidence.clone());
             rule(snapshot, &id, "loader_path", json!(registry), evidence);
@@ -59,7 +61,9 @@ fn assemble_registry(
                 "registries",
                 answer,
                 format!("answers.registries:{registry}"),
-                Some(registry),
+                Some(GapSubject::Registry {
+                    name: registry.into(),
+                }),
             )?;
             gap(
                 snapshot,
@@ -174,7 +178,9 @@ fn assemble_field(
         &format!("registry_fields/{registry}"),
         answer,
         format!("answers.fields.{registry}:{}", field.name),
-        Some(&field.name),
+        Some(GapSubject::Field {
+            name: field.name.clone(),
+        }),
     )?;
     rule(snapshot, &id, "existence", json!(true), evidence.clone());
     assemble_field_value_form(snapshot, &id, field, answer, &evidence)?;
@@ -278,12 +284,7 @@ fn assemble_field_value_form(
                 "value_form",
                 "Native did not establish this reader's value form",
                 None,
-                answer
-                    .gaps
-                    .iter()
-                    .filter(|native_gap| native_gap.subject.as_deref() == Some(field.name.as_str()))
-                    .cloned()
-                    .collect(),
+                evidence.native_gaps.clone(),
                 vec![evidence.clone()],
             );
         }
@@ -294,12 +295,7 @@ fn assemble_field_value_form(
             "value_form",
             "Native did not establish a reader identity",
             None,
-            answer
-                .gaps
-                .iter()
-                .filter(|native_gap| native_gap.subject.as_deref() == Some(field.name.as_str()))
-                .cloned()
-                .collect(),
+            evidence.native_gaps.clone(),
             vec![evidence.clone()],
         );
     }

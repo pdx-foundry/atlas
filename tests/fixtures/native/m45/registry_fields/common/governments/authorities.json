@@ -150,47 +150,47 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/governments/authorities",
+        "subject": {"kind": "registry", "name": "common/governments/authorities"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "ReaderSemantics",
-        "subject": "color",
+        "subject": {"kind": "field", "name": "color"},
         "detail": "The shared reader is identified, but its broad value form is not established."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "tags",
+        "subject": {"kind": "field", "name": "tags"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "advanced_authority_swap",
+        "subject": {"kind": "field", "name": "advanced_authority_swap"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "potential",
+        "subject": {"kind": "field", "name": "potential"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "traits",
+        "subject": {"kind": "field", "name": "traits"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "possible",
+        "subject": {"kind": "field", "name": "possible"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "common/governments/authorities",
+        "subject": {"kind": "registry", "name": "common/governments/authorities"},
         "detail": "The field's reader could not be established on at least one path."
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/governments/authorities",
+        "subject": {"kind": "registry", "name": "common/governments/authorities"},
         "detail": "A path through the registry's reader could not be followed to its end."
       }
     ],

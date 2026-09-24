@@ -22,7 +22,7 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/system_types",
+        "subject": {"kind": "registry", "name": "common/system_types"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       }
     ],

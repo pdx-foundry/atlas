@@ -30,7 +30,7 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "gfx/portraits/sprite_configurations",
+        "subject": {"kind": "registry", "name": "gfx/portraits/sprite_configurations"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       }
     ],

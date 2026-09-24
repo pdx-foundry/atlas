@@ -14,12 +14,12 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/named_colors",
+        "subject": {"kind": "registry", "name": "common/named_colors"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "ReaderSemantics",
-        "subject": "color",
+        "subject": {"kind": "field", "name": "color"},
         "detail": "The shared reader is identified, but its broad value form is not established."
       }
     ],

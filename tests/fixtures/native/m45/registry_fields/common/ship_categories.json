@@ -78,12 +78,12 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/ship_categories",
+        "subject": {"kind": "registry", "name": "common/ship_categories"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "preferred_planet_class",
+        "subject": {"kind": "field", "name": "preferred_planet_class"},
         "detail": "The field's alternatives do not establish one shared reader."
       }
     ],

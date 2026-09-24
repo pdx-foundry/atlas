@@ -46,27 +46,27 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/country_limits/ship_of_size_limits",
+        "subject": {"kind": "registry", "name": "common/country_limits/ship_of_size_limits"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "ReaderSemantics",
-        "subject": "max",
+        "subject": {"kind": "field", "name": "max"},
         "detail": "The shared reader is identified, but its broad value form is not established."
       },
       {
         "kind": "ReaderSemantics",
-        "subject": "base",
+        "subject": {"kind": "field", "name": "base"},
         "detail": "The shared reader is identified, but its broad value form is not established."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "ship_types",
+        "subject": {"kind": "field", "name": "ship_types"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "ReaderSemantics",
-        "subject": "naval_cap_fraction",
+        "subject": {"kind": "field", "name": "naval_cap_fraction"},
         "detail": "The shared reader is identified, but its broad value form is not established."
       }
     ],

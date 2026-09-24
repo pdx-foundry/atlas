@@ -70,12 +70,12 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/casus_belli",
+        "subject": {"kind": "registry", "name": "common/casus_belli"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "proxy_war_resources",
+        "subject": {"kind": "field", "name": "proxy_war_resources"},
         "detail": "The field's alternatives do not establish one shared reader."
       }
     ],

@@ -3100,137 +3100,137 @@
     "gaps": [
       {
         "kind": "UnresolvedPath",
-        "subject": "Planet",
+        "subject": {"kind": "localization_link", "name": "Planet"},
         "detail": "from context Deposit: the link function could not be followed (some-paths-leave-the-context-unchanged)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "EVENT_TARGET_0",
+        "subject": {"kind": "localization_link", "name": "EVENT_TARGET_0"},
         "detail": "from context Timeline Event: the link function could not be followed (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "EVENT_TARGET_1",
+        "subject": {"kind": "localization_link", "name": "EVENT_TARGET_1"},
         "detail": "from context Timeline Event: the link function could not be followed (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "EVENT_TARGET_2",
+        "subject": {"kind": "localization_link", "name": "EVENT_TARGET_2"},
         "detail": "from context Timeline Event: the link function could not be followed (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "EVENT_TARGET_3",
+        "subject": {"kind": "localization_link", "name": "EVENT_TARGET_3"},
         "detail": "from context Timeline Event: the link function could not be followed (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "EVENT_TARGET_4",
+        "subject": {"kind": "localization_link", "name": "EVENT_TARGET_4"},
         "detail": "from context Timeline Event: the link function could not be followed (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "EVENT_TARGET_5",
+        "subject": {"kind": "localization_link", "name": "EVENT_TARGET_5"},
         "detail": "from context Timeline Event: the link function could not be followed (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "EVENT_TARGET_6",
+        "subject": {"kind": "localization_link", "name": "EVENT_TARGET_6"},
         "detail": "from context Timeline Event: the link function could not be followed (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "EVENT_TARGET_7",
+        "subject": {"kind": "localization_link", "name": "EVENT_TARGET_7"},
         "detail": "from context Timeline Event: the link function could not be followed (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "EVENT_TARGET_8",
+        "subject": {"kind": "localization_link", "name": "EVENT_TARGET_8"},
         "detail": "from context Timeline Event: the link function could not be followed (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "EVENT_TARGET_9",
+        "subject": {"kind": "localization_link", "name": "EVENT_TARGET_9"},
         "detail": "from context Timeline Event: the link function could not be followed (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "Target",
+        "subject": {"kind": "localization_link", "name": "Target"},
         "detail": "from context Dead Situation: the link function could not be followed (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "Owner",
+        "subject": {"kind": "localization_link", "name": "Owner"},
         "detail": "from context Dead Situation: the link function could not be followed (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "MainAttacker",
+        "subject": {"kind": "localization_link", "name": "MainAttacker"},
         "detail": "from context Dead War: the link function could not be followed (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "MainDefender",
+        "subject": {"kind": "localization_link", "name": "MainDefender"},
         "detail": "from context Dead War: the link function could not be followed (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "Planet",
+        "subject": {"kind": "localization_link", "name": "Planet"},
         "detail": "from context Colony: the link function could not be followed (context-unknown)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "Ship",
+        "subject": {"kind": "localization_link", "name": "Ship"},
         "detail": "from context Colony: the link function could not be followed (context-unknown)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "EVENT_TARGET_0",
+        "subject": {"kind": "localization_link", "name": "EVENT_TARGET_0"},
         "detail": "from context Specimen: the link function could not be followed (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "EVENT_TARGET_1",
+        "subject": {"kind": "localization_link", "name": "EVENT_TARGET_1"},
         "detail": "from context Specimen: the link function could not be followed (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "EVENT_TARGET_2",
+        "subject": {"kind": "localization_link", "name": "EVENT_TARGET_2"},
         "detail": "from context Specimen: the link function could not be followed (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "EVENT_TARGET_3",
+        "subject": {"kind": "localization_link", "name": "EVENT_TARGET_3"},
         "detail": "from context Specimen: the link function could not be followed (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "EVENT_TARGET_4",
+        "subject": {"kind": "localization_link", "name": "EVENT_TARGET_4"},
         "detail": "from context Specimen: the link function could not be followed (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "EVENT_TARGET_5",
+        "subject": {"kind": "localization_link", "name": "EVENT_TARGET_5"},
         "detail": "from context Specimen: the link function could not be followed (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "EVENT_TARGET_6",
+        "subject": {"kind": "localization_link", "name": "EVENT_TARGET_6"},
         "detail": "from context Specimen: the link function could not be followed (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "EVENT_TARGET_7",
+        "subject": {"kind": "localization_link", "name": "EVENT_TARGET_7"},
         "detail": "from context Specimen: the link function could not be followed (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "EVENT_TARGET_8",
+        "subject": {"kind": "localization_link", "name": "EVENT_TARGET_8"},
         "detail": "from context Specimen: the link function could not be followed (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "EVENT_TARGET_9",
+        "subject": {"kind": "localization_link", "name": "EVENT_TARGET_9"},
         "detail": "from context Specimen: the link function could not be followed (path-limit)"
       },
       {

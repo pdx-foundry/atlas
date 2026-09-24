@@ -62,22 +62,22 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/mutations",
+        "subject": {"kind": "registry", "name": "common/mutations"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "component_slot_size_to_disable",
+        "subject": {"kind": "field", "name": "component_slot_size_to_disable"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "common/mutations",
+        "subject": {"kind": "registry", "name": "common/mutations"},
         "detail": "The field's reader could not be established on at least one path."
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/mutations",
+        "subject": {"kind": "registry", "name": "common/mutations"},
         "detail": "A path through the registry's reader could not be followed to its end."
       }
     ],

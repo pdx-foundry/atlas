@@ -86,22 +86,22 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/megastructure_overclock_types",
+        "subject": {"kind": "registry", "name": "common/megastructure_overclock_types"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "resources",
+        "subject": {"kind": "field", "name": "resources"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "common/megastructure_overclock_types",
+        "subject": {"kind": "registry", "name": "common/megastructure_overclock_types"},
         "detail": "The field's reader could not be established on at least one path."
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/megastructure_overclock_types",
+        "subject": {"kind": "registry", "name": "common/megastructure_overclock_types"},
         "detail": "A path through the registry's reader could not be followed to its end."
       }
     ],

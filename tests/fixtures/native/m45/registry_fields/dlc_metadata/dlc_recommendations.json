@@ -5,17 +5,17 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "dlc_metadata/dlc_recommendations",
+        "subject": {"kind": "registry", "name": "dlc_metadata/dlc_recommendations"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "dlc_metadata/dlc_recommendations",
+        "subject": {"kind": "registry", "name": "dlc_metadata/dlc_recommendations"},
         "detail": "The field's reader could not be established on at least one path."
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "dlc_metadata/dlc_recommendations",
+        "subject": {"kind": "registry", "name": "dlc_metadata/dlc_recommendations"},
         "detail": "A path through the registry's reader could not be followed to its end."
       }
     ],

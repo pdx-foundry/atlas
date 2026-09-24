@@ -54,32 +54,32 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/economic_categories",
+        "subject": {"kind": "registry", "name": "common/economic_categories"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "parent",
+        "subject": {"kind": "field", "name": "parent"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "generate_add_modifiers",
+        "subject": {"kind": "field", "name": "generate_add_modifiers"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "generate_mult_modifiers",
+        "subject": {"kind": "field", "name": "generate_mult_modifiers"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "common/economic_categories",
+        "subject": {"kind": "registry", "name": "common/economic_categories"},
         "detail": "The field's reader could not be established on at least one path."
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/economic_categories",
+        "subject": {"kind": "registry", "name": "common/economic_categories"},
         "detail": "A path through the registry's reader could not be followed to its end."
       }
     ],

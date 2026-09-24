@@ -86,12 +86,12 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/council_agendas",
+        "subject": {"kind": "registry", "name": "common/council_agendas"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "ReaderSemantics",
-        "subject": "agenda_cost",
+        "subject": {"kind": "field", "name": "agenda_cost"},
         "detail": "The shared reader is identified, but its broad value form is not established."
       }
     ],

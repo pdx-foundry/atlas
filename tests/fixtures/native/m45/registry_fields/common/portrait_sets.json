@@ -54,37 +54,37 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/portrait_sets",
+        "subject": {"kind": "registry", "name": "common/portrait_sets"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "portraits",
+        "subject": {"kind": "field", "name": "portraits"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "conditional_portraits",
+        "subject": {"kind": "field", "name": "conditional_portraits"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "species_class",
+        "subject": {"kind": "field", "name": "species_class"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "uplifted_portraits",
+        "subject": {"kind": "field", "name": "uplifted_portraits"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "non_randomized_portraits",
+        "subject": {"kind": "field", "name": "non_randomized_portraits"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "non_pre_ftl_portraits",
+        "subject": {"kind": "field", "name": "non_pre_ftl_portraits"},
         "detail": "The field's alternatives do not establish one shared reader."
       }
     ],

@@ -22,17 +22,17 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "map/galaxy",
+        "subject": {"kind": "registry", "name": "map/galaxy"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "map/galaxy",
+        "subject": {"kind": "registry", "name": "map/galaxy"},
         "detail": "The field's reader could not be established on at least one path."
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "map/galaxy",
+        "subject": {"kind": "registry", "name": "map/galaxy"},
         "detail": "A path through the registry's reader could not be followed to its end."
       }
     ],

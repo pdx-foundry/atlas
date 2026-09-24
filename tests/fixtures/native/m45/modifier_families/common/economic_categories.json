@@ -50,47 +50,47 @@
     "gaps": [
       {
         "kind": "UnresolvedPath",
-        "subject": "common/economic_categories",
+        "subject": {"kind": "registry", "name": "common/economic_categories"},
         "detail": "category tags of {key}_cost_mult could not be followed"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/economic_categories",
+        "subject": {"kind": "registry", "name": "common/economic_categories"},
         "detail": "only an item's post-read code registers {key}_cost_mult; that the engine runs it for every item is not established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/economic_categories",
+        "subject": {"kind": "registry", "name": "common/economic_categories"},
         "detail": "category tags of {key}_logistics_mult could not be followed"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/economic_categories",
+        "subject": {"kind": "registry", "name": "common/economic_categories"},
         "detail": "only an item's post-read code registers {key}_logistics_mult; that the engine runs it for every item is not established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/economic_categories",
+        "subject": {"kind": "registry", "name": "common/economic_categories"},
         "detail": "category tags of {key}_produces_mult could not be followed"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/economic_categories",
+        "subject": {"kind": "registry", "name": "common/economic_categories"},
         "detail": "only an item's post-read code registers {key}_produces_mult; that the engine runs it for every item is not established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/economic_categories",
+        "subject": {"kind": "registry", "name": "common/economic_categories"},
         "detail": "category tags of {key}_upkeep_mult could not be followed"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/economic_categories",
+        "subject": {"kind": "registry", "name": "common/economic_categories"},
         "detail": "only an item's post-read code registers {key}_upkeep_mult; that the engine runs it for every item is not established"
       },
       {
         "kind": "UnnamedDeclaration",
-        "subject": "common/economic_categories",
+        "subject": {"kind": "registry", "name": "common/economic_categories"},
         "detail": "names that combine this registry's keys with the keys of content that Native does not name as a registry are not returned"
       },
       {
@@ -100,7 +100,7 @@
       },
       {
         "kind": "OutsideMethod",
-        "subject": "common/economic_categories",
+        "subject": {"kind": "registry", "name": "common/economic_categories"},
         "detail": "The search covers the registry's database generator and post-read code. Where a modifier takes effect, the tags that a later registration of the same name gives, the tags of a declared modifier after content registers it again, and names longer than a fixed-size buffer keeps are outside it."
       }
     ],

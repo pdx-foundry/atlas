@@ -134,22 +134,22 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/pop_faction_types",
+        "subject": {"kind": "registry", "name": "common/pop_faction_types"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "demand",
+        "subject": {"kind": "field", "name": "demand"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "common/pop_faction_types",
+        "subject": {"kind": "registry", "name": "common/pop_faction_types"},
         "detail": "The field's reader could not be established on at least one path."
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/pop_faction_types",
+        "subject": {"kind": "registry", "name": "common/pop_faction_types"},
         "detail": "A path through the registry's reader could not be followed to its end."
       }
     ],

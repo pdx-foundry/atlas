@@ -14,12 +14,12 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/star_classes/randomizers",
+        "subject": {"kind": "registry", "name": "common/star_classes/randomizers"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "stars",
+        "subject": {"kind": "field", "name": "stars"},
         "detail": "The field's alternatives do not establish one shared reader."
       }
     ],

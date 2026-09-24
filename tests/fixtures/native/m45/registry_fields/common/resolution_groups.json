@@ -22,12 +22,12 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/resolution_groups",
+        "subject": {"kind": "registry", "name": "common/resolution_groups"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "text_color_code",
+        "subject": {"kind": "field", "name": "text_color_code"},
         "detail": "The field's alternatives do not establish one shared reader."
       }
     ],

@@ -11531,402 +11531,402 @@
     "gaps": [
       {
         "kind": "UnresolvedReader",
-        "subject": "NAdditionalContent.ADDITIONAL_CONTENT_ITEM_LABEL_OWNED_TEXT_COLOR",
+        "subject": {"kind": "item", "name": "NAdditionalContent.ADDITIONAL_CONTENT_ITEM_LABEL_OWNED_TEXT_COLOR"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NAdditionalContent.ADDITIONAL_CONTENT_ITEM_LABEL_DEFAULT_TEXT_COLOR",
+        "subject": {"kind": "item", "name": "NAdditionalContent.ADDITIONAL_CONTENT_ITEM_LABEL_DEFAULT_TEXT_COLOR"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NAI.VOIDWORMS_NAVAL_CAP_PER_FLEET",
+        "subject": {"kind": "item", "name": "NAI.VOIDWORMS_NAVAL_CAP_PER_FLEET"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NAI.CREATURE_DESIGNER_MUTATION_TYPE_PREFERENCES",
+        "subject": {"kind": "item", "name": "NAI.CREATURE_DESIGNER_MUTATION_TYPE_PREFERENCES"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NCamera.ENTITY_SPRITE_DESIGN_ENTRY_CAM_DIR",
+        "subject": {"kind": "item", "name": "NCamera.ENTITY_SPRITE_DESIGN_ENTRY_CAM_DIR"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NCamera.ENTITY_SPRITE_DESIGN_ENTRY_CAM_LOOK_AT",
+        "subject": {"kind": "item", "name": "NCamera.ENTITY_SPRITE_DESIGN_ENTRY_CAM_LOOK_AT"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NCamera.ENTITY_SPRITE_SHIP_SECTION_CAM_DIR",
+        "subject": {"kind": "item", "name": "NCamera.ENTITY_SPRITE_SHIP_SECTION_CAM_DIR"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NCamera.ENTITY_SPRITE_SHIP_SECTION_CAM_LOOK_AT",
+        "subject": {"kind": "item", "name": "NCamera.ENTITY_SPRITE_SHIP_SECTION_CAM_LOOK_AT"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NCamera.ENTITY_SPRITE_SYSTEM_VIEW_CAM_DIR",
+        "subject": {"kind": "item", "name": "NCamera.ENTITY_SPRITE_SYSTEM_VIEW_CAM_DIR"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NCamera.ENTITY_SPRITE_SYSTEM_VIEW_CAM_LOOK_AT",
+        "subject": {"kind": "item", "name": "NCamera.ENTITY_SPRITE_SYSTEM_VIEW_CAM_LOOK_AT"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NCamera.ENTITY_SPRITE_CUSTOMIZE_SPECIES_VIEW_CAM_DIR",
+        "subject": {"kind": "item", "name": "NCamera.ENTITY_SPRITE_CUSTOMIZE_SPECIES_VIEW_CAM_DIR"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NCamera.ENTITY_SPRITE_CUSTOMIZE_SPECIES_VIEW_CAM_LOOK_AT",
+        "subject": {"kind": "item", "name": "NCamera.ENTITY_SPRITE_CUSTOMIZE_SPECIES_VIEW_CAM_LOOK_AT"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NCamera.ENTITY_SPRITE_CUSTOMIZE_RINGWORLD_CAM_DIR",
+        "subject": {"kind": "item", "name": "NCamera.ENTITY_SPRITE_CUSTOMIZE_RINGWORLD_CAM_DIR"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NCamera.ENTITY_SPRITE_CUSTOMIZE_RINGWORLD_CAM_LOOK_AT",
+        "subject": {"kind": "item", "name": "NCamera.ENTITY_SPRITE_CUSTOMIZE_RINGWORLD_CAM_LOOK_AT"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NCamera.ENTITY_SPRITE_FRONTEND_BG_CAM_DIR",
+        "subject": {"kind": "item", "name": "NCamera.ENTITY_SPRITE_FRONTEND_BG_CAM_DIR"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NCamera.ENTITY_SPRITE_FRONTEND_BG_CAM_LOOK_AT",
+        "subject": {"kind": "item", "name": "NCamera.ENTITY_SPRITE_FRONTEND_BG_CAM_LOOK_AT"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NCamera.ZOOM_STEPS_SYSTEM_PERCENTAGES",
+        "subject": {"kind": "item", "name": "NCamera.ZOOM_STEPS_SYSTEM_PERCENTAGES"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NCamera.ZOOM_STEPS_GALAXY",
+        "subject": {"kind": "item", "name": "NCamera.ZOOM_STEPS_GALAXY"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NCamera.ZOOM_STEPS_SHOW_FLEET_HEALTH_BARS",
+        "subject": {"kind": "item", "name": "NCamera.ZOOM_STEPS_SHOW_FLEET_HEALTH_BARS"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NEconomy.TRADITION_COST_AMOUNTS",
+        "subject": {"kind": "item", "name": "NEconomy.TRADITION_COST_AMOUNTS"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NEconomy.TRADE_AMOUNT_MULTIPLIER",
+        "subject": {"kind": "item", "name": "NEconomy.TRADE_AMOUNT_MULTIPLIER"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NEconomy.SLAVE_MARKET_SLAVE_BASE_COST_AMOUNT",
+        "subject": {"kind": "item", "name": "NEconomy.SLAVE_MARKET_SLAVE_BASE_COST_AMOUNT"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NEconomy.BORROW_DIPLO_WEIGHT_FAVOR_COST",
+        "subject": {"kind": "item", "name": "NEconomy.BORROW_DIPLO_WEIGHT_FAVOR_COST"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NGameplay.VIVARIUM_BREEDING_RARITY_COMMON",
+        "subject": {"kind": "item", "name": "NGameplay.VIVARIUM_BREEDING_RARITY_COMMON"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NGameplay.VIVARIUM_BREEDING_RARITY_RARE",
+        "subject": {"kind": "item", "name": "NGameplay.VIVARIUM_BREEDING_RARITY_RARE"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NGameplay.VIVARIUM_BREEDING_RARITY_EPIC",
+        "subject": {"kind": "item", "name": "NGameplay.VIVARIUM_BREEDING_RARITY_EPIC"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NGameplay.VIVARIUM_BREEDING_RARITY_LEGENDARY",
+        "subject": {"kind": "item", "name": "NGameplay.VIVARIUM_BREEDING_RARITY_LEGENDARY"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NGameplay.LEADER_JOB_BACKGROUND_STRATA_WEIGHTS",
+        "subject": {"kind": "item", "name": "NGameplay.LEADER_JOB_BACKGROUND_STRATA_WEIGHTS"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NGameplay.SCIENCE_SHIP_ANOMALY_RESEARCH_DAYS",
+        "subject": {"kind": "item", "name": "NGameplay.SCIENCE_SHIP_ANOMALY_RESEARCH_DAYS"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NGameplay.LEADER_TRAIT_SELECTION_LEVELS",
+        "subject": {"kind": "item", "name": "NGameplay.LEADER_TRAIT_SELECTION_LEVELS"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NGameplay.SELL_SPECIMEN_ENERGY_VALUES",
+        "subject": {"kind": "item", "name": "NGameplay.SELL_SPECIMEN_ENERGY_VALUES"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NGameplay.EXHIBIT_UNLOCK_COSTS",
+        "subject": {"kind": "item", "name": "NGameplay.EXHIBIT_UNLOCK_COSTS"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NGameplay.WILD_CRITTERS_RARITY_TABLE",
+        "subject": {"kind": "item", "name": "NGameplay.WILD_CRITTERS_RARITY_TABLE"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NGameplay.CONTAINMENT_PROTOCOLS_WILD_CRITTERS_RARITY_TABLE",
+        "subject": {"kind": "item", "name": "NGameplay.CONTAINMENT_PROTOCOLS_WILD_CRITTERS_RARITY_TABLE"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NGameplay.CARDINAL_PATRON_PASSIVE_ACCORD_DISTANCES",
+        "subject": {"kind": "item", "name": "NGameplay.CARDINAL_PATRON_PASSIVE_ACCORD_DISTANCES"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NGraphics.SYSTEM_INNER_BORDER_HSV",
+        "subject": {"kind": "item", "name": "NGraphics.SYSTEM_INNER_BORDER_HSV"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NGraphics.SYSTEM_OUTER_BORDER_HSV",
+        "subject": {"kind": "item", "name": "NGraphics.SYSTEM_OUTER_BORDER_HSV"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NGraphics.ORBIT_HSV",
+        "subject": {"kind": "item", "name": "NGraphics.ORBIT_HSV"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NGraphics.SYSTEM_LINE_ALPHA_FADE_STEP",
+        "subject": {"kind": "item", "name": "NGraphics.SYSTEM_LINE_ALPHA_FADE_STEP"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NGraphics.SYSTEM_LINE_ALPHA_FADE_VALUE",
+        "subject": {"kind": "item", "name": "NGraphics.SYSTEM_LINE_ALPHA_FADE_VALUE"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NGraphics.PLANET_SCALE_SYSTEM",
+        "subject": {"kind": "item", "name": "NGraphics.PLANET_SCALE_SYSTEM"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NGraphics.RELATION_COLOR_PLAYER_HSV",
+        "subject": {"kind": "item", "name": "NGraphics.RELATION_COLOR_PLAYER_HSV"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NGraphics.RELATION_COLOR_ALLIED_HSV",
+        "subject": {"kind": "item", "name": "NGraphics.RELATION_COLOR_ALLIED_HSV"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NGraphics.RELATION_COLOR_NEUTRAL_HSV",
+        "subject": {"kind": "item", "name": "NGraphics.RELATION_COLOR_NEUTRAL_HSV"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NGraphics.RELATION_COLOR_HOSTILE_HSV",
+        "subject": {"kind": "item", "name": "NGraphics.RELATION_COLOR_HOSTILE_HSV"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NGraphics.RELATION_COLOR_SELECTED_RGB",
+        "subject": {"kind": "item", "name": "NGraphics.RELATION_COLOR_SELECTED_RGB"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NGraphics.MAP_ICON_COLOR_INACTIVE_HSV",
+        "subject": {"kind": "item", "name": "NGraphics.MAP_ICON_COLOR_INACTIVE_HSV"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NGraphics.MAP_ICON_COLOR_INACCESSIBLE",
+        "subject": {"kind": "item", "name": "NGraphics.MAP_ICON_COLOR_INACCESSIBLE"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NGraphics.MAP_ICON_COLOR_ACCESSIBLE",
+        "subject": {"kind": "item", "name": "NGraphics.MAP_ICON_COLOR_ACCESSIBLE"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NGraphics.MAP_ICON_COLOR_EXPLORING",
+        "subject": {"kind": "item", "name": "NGraphics.MAP_ICON_COLOR_EXPLORING"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NGraphics.MAP_ICON_COLOR_PENDING_EVENT",
+        "subject": {"kind": "item", "name": "NGraphics.MAP_ICON_COLOR_PENDING_EVENT"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NGraphics.STAR_PIN_NEUTRAL_COLOR",
+        "subject": {"kind": "item", "name": "NGraphics.STAR_PIN_NEUTRAL_COLOR"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NGraphics.SHIELD_DISTANCE_FROM_SHIP",
+        "subject": {"kind": "item", "name": "NGraphics.SHIELD_DISTANCE_FROM_SHIP"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NGraphics.SHIELD_DISTANCE_FROM_SHIP_MULT",
+        "subject": {"kind": "item", "name": "NGraphics.SHIELD_DISTANCE_FROM_SHIP_MULT"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NGraphics.FLEET_EFFECT_ENTITIES_BILLBOARD",
+        "subject": {"kind": "item", "name": "NGraphics.FLEET_EFFECT_ENTITIES_BILLBOARD"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NGraphics.FLEET_EFFECT_ENTITIES_SCALE",
+        "subject": {"kind": "item", "name": "NGraphics.FLEET_EFFECT_ENTITIES_SCALE"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NGraphics.GUI_PLANET_RING_DIR",
+        "subject": {"kind": "item", "name": "NGraphics.GUI_PLANET_RING_DIR"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NGraphics.ALIENFX_DEFAULT_COLOR",
+        "subject": {"kind": "item", "name": "NGraphics.ALIENFX_DEFAULT_COLOR"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NGraphics.MAP_MODE_NEUTRAL_COLOR",
+        "subject": {"kind": "item", "name": "NGraphics.MAP_MODE_NEUTRAL_COLOR"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NGraphics.COUNTRY_BORDER_COLOR_RANDOM_SATURATION_OFFSETS",
+        "subject": {"kind": "item", "name": "NGraphics.COUNTRY_BORDER_COLOR_RANDOM_SATURATION_OFFSETS"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NGraphics.COUNTRY_BORDER_COLOR_RANDOM_VALUE_OFFSETS",
+        "subject": {"kind": "item", "name": "NGraphics.COUNTRY_BORDER_COLOR_RANDOM_VALUE_OFFSETS"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NGraphics.SENSOR_RANGE_COLOR_MEDIUM",
+        "subject": {"kind": "item", "name": "NGraphics.SENSOR_RANGE_COLOR_MEDIUM"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NGraphics.SENSOR_RANGE_COLOR_LOW",
+        "subject": {"kind": "item", "name": "NGraphics.SENSOR_RANGE_COLOR_LOW"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NGraphics.CATAPULT_RANGE_COLOR",
+        "subject": {"kind": "item", "name": "NGraphics.CATAPULT_RANGE_COLOR"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NGraphics.CATAPULT_POTENTIAL_TARGET_INDICATOR_COLOR",
+        "subject": {"kind": "item", "name": "NGraphics.CATAPULT_POTENTIAL_TARGET_INDICATOR_COLOR"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NGraphics.CATAPULT_INDICATOR_COLOR_DEFAULT",
+        "subject": {"kind": "item", "name": "NGraphics.CATAPULT_INDICATOR_COLOR_DEFAULT"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NGraphics.CATAPULT_INDICATOR_COLOR_NO_RANGE",
+        "subject": {"kind": "item", "name": "NGraphics.CATAPULT_INDICATOR_COLOR_NO_RANGE"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NGraphics.CATAPULT_INDICATOR_COLOR_CLICKABLE",
+        "subject": {"kind": "item", "name": "NGraphics.CATAPULT_INDICATOR_COLOR_CLICKABLE"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NGraphics.CONSTRUCTION_COLOR_INVALID",
+        "subject": {"kind": "item", "name": "NGraphics.CONSTRUCTION_COLOR_INVALID"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NGraphics.CONSTRUCTION_COLOR_VALID",
+        "subject": {"kind": "item", "name": "NGraphics.CONSTRUCTION_COLOR_VALID"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NGraphics.CONSTRUCTION_COLOR_IN_PROGRESS",
+        "subject": {"kind": "item", "name": "NGraphics.CONSTRUCTION_COLOR_IN_PROGRESS"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NGraphics.STORM_AREA_PLACER_INDICATOR_VALID_PLACEMENT_COLOR",
+        "subject": {"kind": "item", "name": "NGraphics.STORM_AREA_PLACER_INDICATOR_VALID_PLACEMENT_COLOR"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NGraphics.STORM_AREA_PLACER_INDICATOR_INVALID_PLACEMENT_COLOR",
+        "subject": {"kind": "item", "name": "NGraphics.STORM_AREA_PLACER_INDICATOR_INVALID_PLACEMENT_COLOR"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NGraphics.CARDINAL_PATRON_PASSIVE_ACCORD_DISTANCES_VIEW",
+        "subject": {"kind": "item", "name": "NGraphics.CARDINAL_PATRON_PASSIVE_ACCORD_DISTANCES_VIEW"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NInterface.FLEET_ICON_POWER_TIERS",
+        "subject": {"kind": "item", "name": "NInterface.FLEET_ICON_POWER_TIERS"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NInterface.TOOLTIP_POSITION_OFFSET",
+        "subject": {"kind": "item", "name": "NInterface.TOOLTIP_POSITION_OFFSET"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NInterface.TOOLTIP_POSITION_NESTED_OFFSET",
+        "subject": {"kind": "item", "name": "NInterface.TOOLTIP_POSITION_NESTED_OFFSET"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NInterface.TOOLTIP_POSITION_OFFSET_STAR",
+        "subject": {"kind": "item", "name": "NInterface.TOOLTIP_POSITION_OFFSET_STAR"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NInterface.POPS_TO_SHOW_CITY_LEVEL",
+        "subject": {"kind": "item", "name": "NInterface.POPS_TO_SHOW_CITY_LEVEL"},
         "detail": "reader path exceeds the table-search limit"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "NInterface.AUTHORITY_DEFAULT_COLOR",
+        "subject": {"kind": "item", "name": "NInterface.AUTHORITY_DEFAULT_COLOR"},
         "detail": "reader path exceeds the table-search limit"
       },
       {

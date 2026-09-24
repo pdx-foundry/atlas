@@ -538,7 +538,7 @@ dependencies = [
 [[package]]
 name = "pdx-native"
 version = "0.1.0"
-source = "git+https://github.com/pdx-foundry/native.git?rev=2166dbfdaf70629dfa0b1596b8d25276ae7716b0#2166dbfdaf70629dfa0b1596b8d25276ae7716b0"
+source = "git+https://github.com/pdx-foundry/native.git?rev=92488cc73ccda8de16dd12cbd2ab585df065055d#92488cc73ccda8de16dd12cbd2ab585df065055d"
 dependencies = [
  "capstone",
  "cpp_demangle",

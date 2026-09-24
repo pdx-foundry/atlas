@@ -62,27 +62,27 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/timeline_events",
+        "subject": {"kind": "registry", "name": "common/timeline_events"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "gui",
+        "subject": {"kind": "field", "name": "gui"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "types",
+        "subject": {"kind": "field", "name": "types"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "override_text",
+        "subject": {"kind": "field", "name": "override_text"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "override_texture",
+        "subject": {"kind": "field", "name": "override_texture"},
         "detail": "The field's alternatives do not establish one shared reader."
       }
     ],

@@ -174,67 +174,67 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/pop_categories",
+        "subject": {"kind": "registry", "name": "common/pop_categories"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "icon",
+        "subject": {"kind": "field", "name": "icon"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "triggered_pop_group_modifier",
+        "subject": {"kind": "field", "name": "triggered_pop_group_modifier"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "triggered_planet_modifier",
+        "subject": {"kind": "field", "name": "triggered_planet_modifier"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "triggered_planet_pop_group_modifier_for_all",
+        "subject": {"kind": "field", "name": "triggered_planet_pop_group_modifier_for_all"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "triggered_planet_pop_group_modifier_for_species",
+        "subject": {"kind": "field", "name": "triggered_planet_pop_group_modifier_for_species"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "triggered_country_modifier",
+        "subject": {"kind": "field", "name": "triggered_country_modifier"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "resettlement_cost",
+        "subject": {"kind": "field", "name": "resettlement_cost"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "resources",
+        "subject": {"kind": "field", "name": "resources"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "automation_resources",
+        "subject": {"kind": "field", "name": "automation_resources"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "swappable_data",
+        "subject": {"kind": "field", "name": "swappable_data"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "common/pop_categories",
+        "subject": {"kind": "registry", "name": "common/pop_categories"},
         "detail": "The field's reader could not be established on at least one path."
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/pop_categories",
+        "subject": {"kind": "registry", "name": "common/pop_categories"},
         "detail": "A path through the registry's reader could not be followed to its end."
       }
     ],

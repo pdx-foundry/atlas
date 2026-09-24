@@ -62,27 +62,27 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/tradition_categories",
+        "subject": {"kind": "registry", "name": "common/tradition_categories"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "desc",
+        "subject": {"kind": "field", "name": "desc"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "traditions",
+        "subject": {"kind": "field", "name": "traditions"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "adoption_bonus",
+        "subject": {"kind": "field", "name": "adoption_bonus"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "finish_bonus",
+        "subject": {"kind": "field", "name": "finish_bonus"},
         "detail": "The field's alternatives do not establish one shared reader."
       }
     ],

@@ -14,7 +14,7 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/colony_automation_categories",
+        "subject": {"kind": "registry", "name": "common/colony_automation_categories"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       }
     ],

@@ -74,7 +74,8 @@ The production `pdx-atlas snapshot` command writes `atlas_rule_snapshot` contrac
 Version 2 adds language subjects (`effect:`, `trigger:`, `modifier:`, `scope:`, `define:` and
 the others in the schema) and states each Native answer once in `answers`, with its source,
 completeness and typed gaps; an evidence link names its answer and keeps only the gaps that name
-its item. Version 1 had registry and field subjects only, was never published, and is no longer
+its typed subject. A named Native gap has a subject kind; localization contexts and scope types
+also carry stable IDs, so equal display names do not merge. Version 1 had registry and field subjects only, was never published, and is no longer
 read. The ledger accepts the file directly and projects its registry and field rules onto matching
 config questions. The join comes from the ledger's own `loader_path` claims; the rule producer
 does not read CWT. Each rule keeps Native's source stamp, completeness and typed gaps. Directories

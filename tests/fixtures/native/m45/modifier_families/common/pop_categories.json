@@ -60,17 +60,17 @@
     "gaps": [
       {
         "kind": "UnresolvedPath",
-        "subject": "common/pop_categories",
+        "subject": {"kind": "registry", "name": "common/pop_categories"},
         "detail": "only an item's post-read code registers pop_cat_{key}_bonus_workforce_mult; that the engine runs it for every item is not established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/pop_categories",
+        "subject": {"kind": "registry", "name": "common/pop_categories"},
         "detail": "only an item's post-read code registers pop_cat_{key}_happiness; that the engine runs it for every item is not established"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/pop_categories",
+        "subject": {"kind": "registry", "name": "common/pop_categories"},
         "detail": "only an item's post-read code registers pop_cat_{key}_political_power; that the engine runs it for every item is not established"
       },
       {
@@ -80,7 +80,7 @@
       },
       {
         "kind": "OutsideMethod",
-        "subject": "common/pop_categories",
+        "subject": {"kind": "registry", "name": "common/pop_categories"},
         "detail": "The search covers the registry's database generator and post-read code. Where a modifier takes effect, the tags that a later registration of the same name gives, the tags of a declared modifier after content registers it again, and names longer than a fixed-size buffer keeps are outside it."
       }
     ],

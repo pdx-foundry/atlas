@@ -206,72 +206,72 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/governments/civics",
+        "subject": {"kind": "registry", "name": "common/governments/civics"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "swap_type",
+        "subject": {"kind": "field", "name": "swap_type"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "potential",
+        "subject": {"kind": "field", "name": "potential"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "pickable_at_start",
+        "subject": {"kind": "field", "name": "pickable_at_start"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "traits",
+        "subject": {"kind": "field", "name": "traits"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "flags",
+        "subject": {"kind": "field", "name": "flags"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "homeworld",
+        "subject": {"kind": "field", "name": "homeworld"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "habitability_preference",
+        "subject": {"kind": "field", "name": "habitability_preference"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "starting_colony",
+        "subject": {"kind": "field", "name": "starting_colony"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "possible",
+        "subject": {"kind": "field", "name": "possible"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "has_secondary_species",
+        "subject": {"kind": "field", "name": "has_secondary_species"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "initializers",
+        "subject": {"kind": "field", "name": "initializers"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "common/governments/civics",
+        "subject": {"kind": "registry", "name": "common/governments/civics"},
         "detail": "The field's reader could not be established on at least one path."
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/governments/civics",
+        "subject": {"kind": "registry", "name": "common/governments/civics"},
         "detail": "A path through the registry's reader could not be followed to its end."
       }
     ],

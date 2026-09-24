@@ -102,37 +102,37 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/agreement_term_values",
+        "subject": {"kind": "registry", "name": "common/agreement_term_values"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "ai_acceptance",
+        "subject": {"kind": "field", "name": "ai_acceptance"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "overlord_resources",
+        "subject": {"kind": "field", "name": "overlord_resources"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "subject_resources",
+        "subject": {"kind": "field", "name": "subject_resources"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "resources",
+        "subject": {"kind": "field", "name": "resources"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "common/agreement_term_values",
+        "subject": {"kind": "registry", "name": "common/agreement_term_values"},
         "detail": "The field's reader could not be established on at least one path."
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/agreement_term_values",
+        "subject": {"kind": "registry", "name": "common/agreement_term_values"},
         "detail": "A path through the registry's reader could not be followed to its end."
       }
     ],

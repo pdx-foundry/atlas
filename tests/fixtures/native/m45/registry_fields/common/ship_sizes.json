@@ -5,17 +5,17 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/ship_sizes",
+        "subject": {"kind": "registry", "name": "common/ship_sizes"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "common/ship_sizes",
+        "subject": {"kind": "registry", "name": "common/ship_sizes"},
         "detail": "The field's reader could not be established on at least one path."
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/ship_sizes",
+        "subject": {"kind": "registry", "name": "common/ship_sizes"},
         "detail": "A path through the registry's reader could not be followed to its end."
       }
     ],

@@ -78,7 +78,7 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/governments",
+        "subject": {"kind": "registry", "name": "common/governments"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       }
     ],

@@ -118,47 +118,47 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "gfx/projectiles/planet_destruction",
+        "subject": {"kind": "registry", "name": "gfx/projectiles/planet_destruction"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "color",
+        "subject": {"kind": "field", "name": "color"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "start",
+        "subject": {"kind": "field", "name": "start"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "end",
+        "subject": {"kind": "field", "name": "end"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "windup",
+        "subject": {"kind": "field", "name": "windup"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "in_progress",
+        "subject": {"kind": "field", "name": "in_progress"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "planet_dissolve_color_mult",
+        "subject": {"kind": "field", "name": "planet_dissolve_color_mult"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "gfx/projectiles/planet_destruction",
+        "subject": {"kind": "registry", "name": "gfx/projectiles/planet_destruction"},
         "detail": "The field's reader could not be established on at least one path."
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "gfx/projectiles/planet_destruction",
+        "subject": {"kind": "registry", "name": "gfx/projectiles/planet_destruction"},
         "detail": "A path through the registry's reader could not be followed to its end."
       }
     ],

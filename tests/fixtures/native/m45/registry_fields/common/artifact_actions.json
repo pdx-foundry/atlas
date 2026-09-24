@@ -54,12 +54,12 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/artifact_actions",
+        "subject": {"kind": "registry", "name": "common/artifact_actions"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "resources",
+        "subject": {"kind": "field", "name": "resources"},
         "detail": "The field's alternatives do not establish one shared reader."
       }
     ],

@@ -110,52 +110,52 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/country_types",
+        "subject": {"kind": "registry", "name": "common/country_types"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "branch_office_resources",
+        "subject": {"kind": "field", "name": "branch_office_resources"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "faction",
+        "subject": {"kind": "field", "name": "faction"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "home_system",
+        "subject": {"kind": "field", "name": "home_system"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "targets",
+        "subject": {"kind": "field", "name": "targets"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "hub_system",
+        "subject": {"kind": "field", "name": "hub_system"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "resources",
+        "subject": {"kind": "field", "name": "resources"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "ownership_limits",
+        "subject": {"kind": "field", "name": "ownership_limits"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "common/country_types",
+        "subject": {"kind": "registry", "name": "common/country_types"},
         "detail": "The field's reader could not be established on at least one path."
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/country_types",
+        "subject": {"kind": "registry", "name": "common/country_types"},
         "detail": "A path through the registry's reader could not be followed to its end."
       }
     ],

@@ -5,22 +5,22 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/job_tags",
+        "subject": {"kind": "registry", "name": "common/job_tags"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnreadableInput",
-        "subject": "common/job_tags",
+        "subject": {"kind": "registry", "name": "common/job_tags"},
         "detail": "A function or name table that the method needs could not be read."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "common/job_tags",
+        "subject": {"kind": "registry", "name": "common/job_tags"},
         "detail": "The field's reader could not be established on at least one path."
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/job_tags",
+        "subject": {"kind": "registry", "name": "common/job_tags"},
         "detail": "A path through the registry's reader could not be followed to its end."
       }
     ],

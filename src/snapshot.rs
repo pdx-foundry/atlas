@@ -6,7 +6,7 @@ mod registry;
 pub(crate) use language::loaded_summary;
 
 use crate::extraction::Extraction;
-use pdx_native::{Answer, Basis, Completeness, Gap as NativeGap, Source, Support};
+use pdx_native::{Answer, Basis, Completeness, Gap as NativeGap, GapSubject, Source, Support};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use sha2::{Digest, Sha256};
@@ -305,14 +305,13 @@ fn field_id(registry: &str, field: &str) -> String {
     format!("field:{registry}/{field}")
 }
 
-/// Record `answer` under `key` and link to one location in it. `item` selects the answer's gaps
-/// whose subject is that item.
+/// Record `answer` under `key` and link to one location in it. `subject` selects its gaps.
 fn evidence<T>(
     snapshot: &mut Snapshot,
     key: &str,
     answer: &Answer<T>,
     location: String,
-    item: Option<&str>,
+    subject: Option<GapSubject>,
 ) -> Result<EvidenceLink, String> {
     let source = source_key(&answer.source);
     match snapshot.sources.get(&source) {
@@ -342,11 +341,11 @@ fn evidence<T>(
         }
     }
 
-    let native_gaps = match item {
+    let native_gaps = match subject {
         Some(item) => answer
             .gaps
             .iter()
-            .filter(|gap| gap.subject.as_deref() == Some(item))
+            .filter(|gap| gap.subject.as_ref() == Some(&item))
             .cloned()
             .collect(),
         None => Vec::new(),

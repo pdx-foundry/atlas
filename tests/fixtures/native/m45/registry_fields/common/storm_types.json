@@ -54,17 +54,17 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/storm_types",
+        "subject": {"kind": "registry", "name": "common/storm_types"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "common/storm_types",
+        "subject": {"kind": "registry", "name": "common/storm_types"},
         "detail": "The field's reader could not be established on at least one path."
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/storm_types",
+        "subject": {"kind": "registry", "name": "common/storm_types"},
         "detail": "A path through the registry's reader could not be followed to its end."
       }
     ],

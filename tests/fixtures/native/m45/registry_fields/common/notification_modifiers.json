@@ -14,7 +14,7 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/notification_modifiers",
+        "subject": {"kind": "registry", "name": "common/notification_modifiers"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       }
     ],

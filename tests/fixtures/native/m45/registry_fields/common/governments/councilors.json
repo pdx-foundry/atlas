@@ -118,22 +118,22 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/governments/councilors",
+        "subject": {"kind": "registry", "name": "common/governments/councilors"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "leader_class",
+        "subject": {"kind": "field", "name": "leader_class"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "civic",
+        "subject": {"kind": "field", "name": "civic"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "triggered_country_modifier",
+        "subject": {"kind": "field", "name": "triggered_country_modifier"},
         "detail": "The field's alternatives do not establish one shared reader."
       }
     ],

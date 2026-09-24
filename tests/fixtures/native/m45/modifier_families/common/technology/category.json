@@ -42,12 +42,12 @@
     "gaps": [
       {
         "kind": "UnresolvedPath",
-        "subject": "common/technology/category",
+        "subject": {"kind": "registry", "name": "common/technology/category"},
         "detail": "the method could not establish that every item generates category_{key}_draw_chance_mult"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/technology/category",
+        "subject": {"kind": "registry", "name": "common/technology/category"},
         "detail": "the method could not establish that every item generates category_{key}_research_speed_mult"
       },
       {
@@ -57,7 +57,7 @@
       },
       {
         "kind": "OutsideMethod",
-        "subject": "common/technology/category",
+        "subject": {"kind": "registry", "name": "common/technology/category"},
         "detail": "The search covers the registry's database generator and post-read code. Where a modifier takes effect, the tags that a later registration of the same name gives, the tags of a declared modifier after content registers it again, and names longer than a fixed-size buffer keeps are outside it."
       }
     ],

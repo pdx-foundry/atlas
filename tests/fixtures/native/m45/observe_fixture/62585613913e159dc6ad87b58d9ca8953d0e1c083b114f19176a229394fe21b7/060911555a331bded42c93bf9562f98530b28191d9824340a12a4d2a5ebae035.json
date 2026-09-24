@@ -431,47 +431,47 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "ai_weight",
+        "subject": {"kind": "field", "name": "ai_weight"},
         "detail": "The Block reader has no storage decoder in this method"
       },
       {
         "kind": "OutsideMethod",
-        "subject": "modifier",
+        "subject": {"kind": "field", "name": "modifier"},
         "detail": "The Block reader has no storage decoder in this method"
       },
       {
         "kind": "OutsideMethod",
-        "subject": "on_disabled",
+        "subject": {"kind": "field", "name": "on_disabled"},
         "detail": "The Block reader has no storage decoder in this method"
       },
       {
         "kind": "OutsideMethod",
-        "subject": "on_enabled",
+        "subject": {"kind": "field", "name": "on_enabled"},
         "detail": "The Block reader has no storage decoder in this method"
       },
       {
         "kind": "OutsideMethod",
-        "subject": "possible",
+        "subject": {"kind": "field", "name": "possible"},
         "detail": "The Block reader has no storage decoder in this method"
       },
       {
         "kind": "OutsideMethod",
-        "subject": "potential",
+        "subject": {"kind": "field", "name": "potential"},
         "detail": "The Block reader has no storage decoder in this method"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "tradition_swap",
+        "subject": {"kind": "field", "name": "tradition_swap"},
         "detail": "The Unknown reader has no storage decoder in this method"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "triggered_modifier",
+        "subject": {"kind": "field", "name": "triggered_modifier"},
         "detail": "The Unknown reader has no storage decoder in this method"
       },
       {
         "kind": "OutsideMethod",
-        "subject": "unlocks_agenda",
+        "subject": {"kind": "field", "name": "unlocks_agenda"},
         "detail": "Runtime is outside the initial file-load method"
       }
     ],

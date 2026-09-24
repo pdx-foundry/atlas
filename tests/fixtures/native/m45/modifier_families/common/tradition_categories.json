@@ -10,7 +10,7 @@
       },
       {
         "kind": "OutsideMethod",
-        "subject": "common/tradition_categories",
+        "subject": {"kind": "registry", "name": "common/tradition_categories"},
         "detail": "The search covers the registry's database generator and post-read code. Where a modifier takes effect, the tags that a later registration of the same name gives, the tags of a declared modifier after content registers it again, and names longer than a fixed-size buffer keeps are outside it."
       }
     ],

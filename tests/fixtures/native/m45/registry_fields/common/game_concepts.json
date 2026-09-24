@@ -46,22 +46,22 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/game_concepts",
+        "subject": {"kind": "registry", "name": "common/game_concepts"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "alias",
+        "subject": {"kind": "field", "name": "alias"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "common/game_concepts",
+        "subject": {"kind": "registry", "name": "common/game_concepts"},
         "detail": "The field's reader could not be established on at least one path."
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/game_concepts",
+        "subject": {"kind": "registry", "name": "common/game_concepts"},
         "detail": "A path through the registry's reader could not be followed to its end."
       }
     ],

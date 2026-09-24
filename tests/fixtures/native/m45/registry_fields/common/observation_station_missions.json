@@ -94,27 +94,27 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": "common/observation_station_missions",
+        "subject": {"kind": "registry", "name": "common/observation_station_missions"},
         "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "country_modifier",
+        "subject": {"kind": "field", "name": "country_modifier"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "planet_modifier",
+        "subject": {"kind": "field", "name": "planet_modifier"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "completion_event",
+        "subject": {"kind": "field", "name": "completion_event"},
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": "resources",
+        "subject": {"kind": "field", "name": "resources"},
         "detail": "The field's alternatives do not establish one shared reader."
       }
     ],

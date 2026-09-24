@@ -36,12 +36,12 @@
     "gaps": [
       {
         "kind": "UnresolvedPath",
-        "subject": "common/situations",
+        "subject": {"kind": "registry", "name": "common/situations"},
         "detail": "the method could not establish that every item generates {key}_max_progress_add"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": "common/situations",
+        "subject": {"kind": "registry", "name": "common/situations"},
         "detail": "the method could not establish that every item generates {key}_max_progress_mult"
       },
       {
@@ -51,7 +51,7 @@
       },
       {
         "kind": "OutsideMethod",
-        "subject": "common/situations",
+        "subject": {"kind": "registry", "name": "common/situations"},
         "detail": "The search covers the registry's database generator and post-read code. Where a modifier takes effect, the tags that a later registration of the same name gives, the tags of a declared modifier after content registers it again, and names longer than a fixed-size buffer keeps are outside it."
       }
     ],
