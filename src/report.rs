@@ -69,23 +69,23 @@ pub fn read_script_docs(directory: &Path) -> io::Result<BTreeMap<String, String>
         .collect()
 }
 
-/// Reads define files, keyed by file name.
+/// Reads define files, keyed by their path as given. A repeated path is an error.
 pub fn read_define_files(paths: &[PathBuf]) -> io::Result<BTreeMap<String, String>> {
-    paths
-        .iter()
-        .map(|path| {
-            let name = path
-                .file_name()
-                .and_then(|name| name.to_str())
-                .ok_or_else(|| {
-                    io::Error::new(io::ErrorKind::InvalidInput, "Invalid define file name")
-                })?;
-            let text = fs::read_to_string(path)
-                .map_err(|e| io::Error::new(e.kind(), format!("{}: {e}", path.display())))?;
+    let mut files = BTreeMap::new();
 
-            Ok((name.to_owned(), text))
-        })
-        .collect()
+    for path in paths {
+        let text = fs::read_to_string(path)
+            .map_err(|e| io::Error::new(e.kind(), format!("{}: {e}", path.display())))?;
+
+        if files.insert(path.display().to_string(), text).is_some() {
+            return Err(io::Error::new(
+                io::ErrorKind::InvalidInput,
+                format!("Define file given twice: {}", path.display()),
+            ));
+        }
+    }
+
+    Ok(files)
 }
 
 /// Reads all CWT files below an explicit root. Rejects symlinks and empty inputs rather than skipping them.

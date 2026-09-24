@@ -295,15 +295,45 @@ fn entry(
     }
 }
 
+/// The loaded answer must be the one that the snapshot summarizes: same build, same content,
+/// same counts and same gaps. A recording of other content would otherwise mix silently into the
+/// comparison.
+fn check_loaded_modifiers(
+    rules: &snapshot::Snapshot,
+    loaded: &pdx_native::Answer<LoadedModifiers>,
+) -> Result<(), String> {
+    if rules.applicability.builds != [loaded.source.build.clone()] {
+        return Err("The loaded modifier answer is for another build than the snapshot".into());
+    }
+
+    let recorded = rules
+        .rules
+        .iter()
+        .find(|rule| rule.id == "inventory:loaded_modifiers#loaded_summary")
+        .ok_or("The snapshot has no loaded modifier summary to check the answer against")?;
+    let matches = snapshot::loaded_summary(&loaded.value).is_some_and(|(condition, summary)| {
+        recorded.conditions == [condition] && recorded.answer == summary
+    }) && rules
+        .answers
+        .get("loaded_modifiers")
+        .is_some_and(|answer| answer.native_gaps == loaded.gaps);
+
+    if !matches {
+        return Err(
+            "The loaded modifier answer is not the one that the snapshot summarizes".into(),
+        );
+    }
+
+    Ok(())
+}
+
 /// Compares an Atlas rule snapshot directly with the config ledger and the supplied inputs.
 /// Recorded answers remain comparable, but this report grants no coverage credit.
 pub fn evaluate(ledger: &Ledger, input: &[u8], inputs: &Inputs) -> Result<Report, String> {
     let rules: snapshot::Snapshot =
         serde_json::from_slice(input).map_err(|error| format!("Invalid rule snapshot: {error}"))?;
-    if let Some(loaded) = inputs.loaded_modifiers
-        && rules.applicability.builds != [loaded.source.build.clone()]
-    {
-        return Err("The loaded modifier answer is for another build than the snapshot".into());
+    if let Some(loaded) = inputs.loaded_modifiers {
+        check_loaded_modifiers(&rules, loaded)?;
     }
     let projection = projection::project_for_comparison(ledger, &rules)?;
     let answers_by_question = question_index(&projection.answers, |answer: &Answer| {
@@ -368,7 +398,7 @@ pub fn evaluate(ledger: &Ledger, input: &[u8], inputs: &Inputs) -> Result<Report
         inventory_complete: ledger.diagnostics.is_empty(),
         entries,
         name_lists: name_lists::config_lists(ledger, &engine, inputs),
-        script_docs: script_docs::compare_logs(&engine, inputs),
+        script_docs: script_docs::compare_logs(&engine, inputs)?,
         define_files: name_lists::define_files(&engine, inputs)?,
         loaded_modifiers_read: inputs.loaded_modifiers.is_some(),
         modifier_tags: name_lists::modifier_tags(&engine, inputs),

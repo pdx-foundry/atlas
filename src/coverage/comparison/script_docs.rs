@@ -22,28 +22,31 @@ pub const LOGS: [&str; 5] = [
     "modifiers.log",
 ];
 
-pub(super) fn compare_logs(engine: &Engine, inputs: &Inputs) -> Vec<LogComparison> {
+/// Compare each supplied log. A log without its documentation section, with no entries, or that
+/// ends inside an entry is an error: it would otherwise read as a snapshot full of engine-only
+/// entries.
+pub(super) fn compare_logs(engine: &Engine, inputs: &Inputs) -> Result<Vec<LogComparison>, String> {
     let scope_names = scope_names(engine);
+    let mut comparisons = Vec::new();
 
-    inputs
-        .script_docs
-        .iter()
-        .filter_map(|(log, text)| {
-            let lists = match log.as_str() {
-                "effects.log" => commands(engine, SubjectKind::Effect, text, &scope_names),
-                "triggers.log" => commands(engine, SubjectKind::Trigger, text, &scope_names),
-                "scopes.log" => links(engine, text, &scope_names),
-                "localizations.log" => localization(engine, text),
-                "modifiers.log" => modifiers(engine, inputs, text),
-                _ => return None,
-            };
+    for (log, text) in &inputs.script_docs {
+        let lists = match log.as_str() {
+            "effects.log" => commands(engine, SubjectKind::Effect, text, &scope_names),
+            "triggers.log" => commands(engine, SubjectKind::Trigger, text, &scope_names),
+            "scopes.log" => links(engine, text, &scope_names),
+            "localizations.log" => localization(engine, text),
+            "modifiers.log" => modifiers(engine, inputs, text),
+            _ => continue,
+        }
+        .map_err(|reason| format!("{log}: {reason}"))?;
 
-            Some(LogComparison {
-                log: log.clone(),
-                lists,
-            })
-        })
-        .collect()
+        comparisons.push(LogComparison {
+            log: log.clone(),
+            lists,
+        });
+    }
+
+    Ok(comparisons)
 }
 
 /// One documented entry: its header line and the lines up to its closing line.
@@ -57,7 +60,11 @@ struct Entry {
 
 /// Entries after the line that contains `start`, each closed by a line that starts with
 /// `closing`.
-fn entries(text: &str, start: &str, closing: &str, labels: &[&str]) -> Vec<Entry> {
+fn entries(text: &str, start: &str, closing: &str, labels: &[&str]) -> Result<Vec<Entry>, String> {
+    if !text.lines().any(|line| line.contains(start)) {
+        return Err(format!("no line contains \"{start}\""));
+    }
+
     let lines = text
         .lines()
         .skip_while(|line| !line.contains(start))
@@ -66,6 +73,10 @@ fn entries(text: &str, start: &str, closing: &str, labels: &[&str]) -> Vec<Entry
     let mut buffer: Vec<&str> = Vec::new();
 
     for line in lines {
+        if is_section_end(line) {
+            break;
+        }
+
         buffer.push(line);
 
         if !line.starts_with(closing) {
@@ -106,7 +117,22 @@ fn entries(text: &str, start: &str, closing: &str, labels: &[&str]) -> Vec<Entry
         entries.push(entry);
     }
 
-    entries
+    if buffer.iter().any(|line| !line.trim().is_empty()) {
+        return Err(format!("the last entry has no \"{closing}\" line"));
+    }
+
+    if entries.is_empty() {
+        return Err("no documented entries".into());
+    }
+
+    Ok(entries)
+}
+
+/// The `=================` line that closes a documentation section.
+fn is_section_end(line: &str) -> bool {
+    let line = line.trim();
+
+    !line.is_empty() && line.chars().all(|character| character == '=')
 }
 
 /// Display name of each scope subject, longest first, for splitting a log's scope list: a
@@ -204,13 +230,13 @@ fn commands(
     kind: SubjectKind,
     text: &str,
     scope_names: &[String],
-) -> Vec<super::NameList> {
+) -> Result<Vec<super::NameList>, String> {
     let entries = entries(
         text,
         "DOCUMENTATION ==",
         "Supported Scopes:",
         &["Supported Scopes"],
-    );
+    )?;
     let documentation = |name: &str, field: &str| {
         engine
             .answer(kind, name, "documentation")
@@ -237,7 +263,7 @@ fn commands(
         })
         .collect();
 
-    vec![
+    Ok(vec![
         compare(
             "names",
             engine.names(kind),
@@ -258,16 +284,20 @@ fn commands(
                 .answer(kind, name, "declared_scopes")
                 .and_then(engine_scopes)
         }),
-    ]
+    ])
 }
 
-fn links(engine: &Engine, text: &str, scope_names: &[String]) -> Vec<super::NameList> {
+fn links(
+    engine: &Engine,
+    text: &str,
+    scope_names: &[String],
+) -> Result<Vec<super::NameList>, String> {
     let entries = entries(
         text,
         "Complete list of scope changes:",
         "Output Scope:",
         &["Supported Scopes", "Output Scope"],
-    );
+    )?;
     let label = |label: &str| -> BTreeMap<String, String> {
         entries
             .iter()
@@ -286,7 +316,7 @@ fn links(engine: &Engine, text: &str, scope_names: &[String]) -> Vec<super::Name
         }
     };
 
-    vec![
+    Ok(vec![
         compare(
             "names",
             engine.names(SubjectKind::ScopeLink),
@@ -302,10 +332,10 @@ fn links(engine: &Engine, text: &str, scope_names: &[String]) -> Vec<super::Name
             &label("Output Scope"),
             scopes("output_scope"),
         ),
-    ]
+    ])
 }
 
-fn localization(engine: &Engine, text: &str) -> Vec<super::NameList> {
+fn localization(engine: &Engine, text: &str) -> Result<Vec<super::NameList>, String> {
     let mut contexts = BTreeSet::new();
     let mut logged_commands = BTreeMap::<String, BTreeSet<String>>::new();
     let mut logged_links = BTreeMap::<String, BTreeSet<String>>::new();
@@ -336,6 +366,10 @@ fn localization(engine: &Engine, text: &str) -> Vec<super::NameList> {
         }
     }
 
+    if contexts.is_empty() {
+        return Err("no \"--context--\" sections".into());
+    }
+
     let context_name = |id: &Value| {
         id.as_str()
             .and_then(|id| id.strip_prefix("localization_context:"))
@@ -364,7 +398,7 @@ fn localization(engine: &Engine, text: &str) -> Vec<super::NameList> {
         Some(contexts)
     };
 
-    vec![
+    Ok(vec![
         compare(
             "contexts",
             engine.names(SubjectKind::LocalizationContext),
@@ -372,7 +406,7 @@ fn localization(engine: &Engine, text: &str) -> Vec<super::NameList> {
         ),
         pairs("commands", &logged_commands, command_contexts),
         pairs("links", &logged_links, link_contexts),
-    ]
+    ])
 }
 
 /// `context.name` pairs for the names whose contexts both sides answer.
@@ -400,13 +434,17 @@ fn pairs(
     compare(list, engine_pairs, log_pairs)
 }
 
-fn modifiers(engine: &Engine, inputs: &Inputs, text: &str) -> Vec<super::NameList> {
+fn modifiers(engine: &Engine, inputs: &Inputs, text: &str) -> Result<Vec<super::NameList>, String> {
     let logged: BTreeMap<String, String> = text
         .lines()
         .filter_map(|line| line.strip_prefix("- "))
         .filter_map(|line| line.split_once(", Category: "))
         .map(|(name, tags)| (name.to_owned(), tags.to_owned()))
         .collect();
+
+    if logged.is_empty() {
+        return Err("no \"- name, Category: ...\" entries".into());
+    }
     let engine_tags: BTreeMap<String, Option<String>> = match inputs.loaded_modifiers {
         Some(loaded) => loaded
             .value
@@ -435,7 +473,7 @@ fn modifiers(engine: &Engine, inputs: &Inputs, text: &str) -> Vec<super::NameLis
             .collect(),
     };
 
-    vec![
+    Ok(vec![
         compare(
             "names",
             engine_tags.keys().cloned().collect(),
@@ -444,5 +482,5 @@ fn modifiers(engine: &Engine, inputs: &Inputs, text: &str) -> Vec<super::NameLis
         property("categories", &logged, |name| {
             engine_tags.get(name).cloned().flatten()
         }),
-    ]
+    ])
 }

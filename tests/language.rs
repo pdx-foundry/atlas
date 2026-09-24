@@ -835,3 +835,85 @@ async fn localization_gaps_stay_on_the_link_they_name() {
             .all(|native| native.subject.as_deref() == Some("EVENT_TARGET_0"))
     );
 }
+
+#[tokio::test]
+async fn loaded_answer_with_other_content_is_refused() {
+    let ledger = language_ledger();
+    let bytes = snapshot::json_bytes(&snapshot::assemble(&recorded().await).unwrap()).unwrap();
+    let mut loaded = loaded().await;
+    loaded.value.modifiers.pop();
+    let inputs = comparison::Inputs {
+        loaded_modifiers: Some(&loaded),
+        ..Default::default()
+    };
+
+    let error = comparison::evaluate(&ledger, &bytes, &inputs).unwrap_err();
+
+    assert!(
+        error.contains("not the one that the snapshot summarizes"),
+        "{error}"
+    );
+}
+
+#[tokio::test]
+async fn unreadable_script_docs_logs_are_errors() {
+    let ledger = language_ledger();
+    let bytes = snapshot::json_bytes(&snapshot::assemble(&recorded().await).unwrap()).unwrap();
+    let cases = [
+        ("effects.log", ""),
+        ("effects.log", "== EFFECT DOCUMENTATION ==\n"),
+        (
+            "effects.log",
+            "== EFFECT DOCUMENTATION ==\nadd_age - Adds age\nSupported Scopes: leader\n\ntruncated - No end\n",
+        ),
+        ("scopes.log", "== SCOPE DOCUMENTATION ==\nowner - Owner\n"),
+        ("localizations.log", "Properties\n GetName\n"),
+        ("modifiers.log", "Printing Modifier Definitions:\n"),
+    ];
+
+    for (log, text) in cases {
+        let inputs = comparison::Inputs {
+            script_docs: BTreeMap::from([(log.to_owned(), text.to_owned())]),
+            ..Default::default()
+        };
+        let error = comparison::evaluate(&ledger, &bytes, &inputs).unwrap_err();
+
+        assert!(error.starts_with(log), "{log}: {error}");
+    }
+}
+
+#[test]
+fn define_files_keep_each_path_and_refuse_repeats() {
+    let root = tempfile::tempdir().unwrap();
+    let base = root.path().join("base/00_defines.txt");
+    let dlc = root.path().join("dlc/00_defines.txt");
+
+    for path in [&base, &dlc] {
+        std::fs::create_dir_all(path.parent().unwrap()).unwrap();
+        std::fs::write(path, "NGameplay = { A = 1 }\n").unwrap();
+    }
+
+    let files = pdx_atlas::report::read_define_files(&[base.clone(), dlc]).unwrap();
+
+    assert_eq!(files.len(), 2);
+    assert!(pdx_atlas::report::read_define_files(&[base.clone(), base]).is_err());
+}
+
+#[tokio::test]
+async fn a_closing_separator_ends_the_log_section() {
+    let ledger = language_ledger();
+    let bytes = snapshot::json_bytes(&snapshot::assemble(&recorded().await).unwrap()).unwrap();
+    let inputs = comparison::Inputs {
+        script_docs: BTreeMap::from([(
+            "effects.log".to_owned(),
+            "== EFFECT DOCUMENTATION ==\nadd_age - Adds the age of the scoped leader\nSupported Scopes: leader\n\n\n=================\n".to_owned(),
+        )]),
+        ..Default::default()
+    };
+    let report = comparison::evaluate(&ledger, &bytes, &inputs).unwrap();
+
+    assert_eq!(
+        list(&report.script_docs[0].lists, "names").agree,
+        ["add_age"]
+    );
+}

@@ -14,7 +14,7 @@ use crate::extraction::{Extraction, LoadedModifierSession};
 use pdx_native::{
     Answer, ContextScopes, Declaration, DeclaredScopes, DeclaredTags, Define, DefineValueType,
     Disposal, EntryContext, EntryScope, Error, GameRule, Gap as NativeGap, GapKind,
-    GenerationCondition, LinkData, LoadedContent, LocalizationContextId,
+    GenerationCondition, LinkData, LoadedContent, LoadedModifiers, LocalizationContextId,
     LocalizationContextReference, LocalizationDeclarations, LocalizationOutput, ModifierCategory,
     ModifierDeclaration, ModifierFamily, NamePart, OnAction, OutputScope, RuleKind, ScopeId,
     ScopeInventory, ScopeLink, ScopeReference,
@@ -943,32 +943,14 @@ impl Builder<'_> {
             return Ok(());
         };
         let link = self.evidence("loaded_modifiers", answer, "summary")?;
-        let modifiers = &answer.value.modifiers;
-        let declared = modifiers
-            .iter()
-            .filter(|modifier| modifier.declared)
-            .count();
-        let generated = modifiers
-            .iter()
-            .filter(|modifier| !modifier.generated_by.is_empty())
-            .count();
-        let unexplained = modifiers
-            .iter()
-            .filter(|modifier| !modifier.declared && modifier.generated_by.is_empty())
-            .count();
 
-        match content_condition(&answer.value.content) {
-            Some(condition) => conditional_rule(
+        match loaded_summary(&answer.value) {
+            Some((condition, summary)) => conditional_rule(
                 self.snapshot,
                 &inventory,
                 "loaded_summary",
                 vec![condition],
-                json!({
-                    "total": modifiers.len(),
-                    "declared": declared,
-                    "generated": generated,
-                    "unexplained": unexplained,
-                }),
+                summary,
                 link,
             ),
             None => self.gap(
@@ -1122,6 +1104,32 @@ fn value_type(value_type: DefineValueType) -> Option<&'static str> {
         DefineValueType::Date => "date",
         _ => return None,
     })
+}
+
+/// The content condition and counts that the snapshot records for a loaded modifier table, or
+/// `None` for a content form that Atlas does not interpret.
+pub(crate) fn loaded_summary(loaded: &LoadedModifiers) -> Option<(String, Value)> {
+    let modifiers = &loaded.modifiers;
+    let declared = modifiers
+        .iter()
+        .filter(|modifier| modifier.declared)
+        .count();
+    let generated = modifiers
+        .iter()
+        .filter(|modifier| !modifier.generated_by.is_empty())
+        .count();
+    let unexplained = modifiers
+        .iter()
+        .filter(|modifier| !modifier.declared && modifier.generated_by.is_empty())
+        .count();
+    let summary = json!({
+        "total": modifiers.len(),
+        "declared": declared,
+        "generated": generated,
+        "unexplained": unexplained,
+    });
+
+    Some((content_condition(&loaded.content)?, summary))
 }
 
 fn content_condition(content: &LoadedContent) -> Option<String> {

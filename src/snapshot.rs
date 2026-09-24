@@ -3,6 +3,8 @@
 mod language;
 mod registry;
 
+pub(crate) use language::loaded_summary;
+
 use crate::extraction::Extraction;
 use pdx_native::{Answer, Basis, Completeness, Gap as NativeGap, Source, Support};
 use serde::{Deserialize, Serialize};
