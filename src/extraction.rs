@@ -137,44 +137,12 @@ pub struct FixtureSession {
 pub async fn collect(native: &Native, options: impl Fn() -> GameOptions) -> Extraction {
     use pdx_native::Operation;
 
-    let native_support = [
-        Operation::Registries,
-        Operation::RegistryFields,
-        Operation::ObserveFixture,
-        Operation::Declarations,
-        Operation::Modifiers,
-        Operation::ModifierCategories,
-        Operation::ModifierFamilies,
-        Operation::Scopes,
-        Operation::ScopeLinks,
-        Operation::LocalizationDeclarations,
-        Operation::OnActions,
-        Operation::GameRules,
-        Operation::Defines,
-        Operation::LoadedModifiers,
-    ]
-    .into_iter()
-    .map(|operation| {
-        let name = match operation {
-            Operation::Registries => "registries",
-            Operation::RegistryFields => "registry_fields",
-            Operation::RegistryItems => "registry_items",
-            Operation::ObserveFixture => "observe_fixture",
-            Operation::Declarations => "declarations",
-            Operation::Modifiers => "modifiers",
-            Operation::ModifierCategories => "modifier_categories",
-            Operation::ModifierFamilies => "modifier_families",
-            Operation::Scopes => "scopes",
-            Operation::ScopeLinks => "scope_links",
-            Operation::LocalizationDeclarations => "localization_declarations",
-            Operation::OnActions => "on_actions",
-            Operation::GameRules => "game_rules",
-            Operation::Defines => "defines",
-            Operation::LoadedModifiers => "loaded_modifiers",
-        };
-        (name.into(), native.supports(operation))
-    })
-    .collect();
+    let native_support = Operation::ALL
+        .iter()
+        // Registry items are a per-session `Game` question, not a static support question.
+        .filter(|&&operation| operation != Operation::RegistryItems)
+        .map(|&operation| (operation.name().into(), native.supports(operation)))
+        .collect();
     let registries = native.registries();
     let fields = match &registries {
         Ok(answer) => answer
