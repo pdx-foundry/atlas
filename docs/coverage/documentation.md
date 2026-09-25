@@ -110,7 +110,7 @@ the retained registry snapshot still supports **0 / 55,999**, because it supplie
 
 ## Verification
 
-The measurement's tests exist only at revision `1521c2a`. Its game-free `provenance` suite tests
+The measurement's tests are kept at revision `1521c2a`. Its game-free `provenance` suite tests
 source associations, quoted hashes, namespace/family separation, repeated locations,
 exact/rewritten/authored separation, source identities, relocation, failure reporting, and zero
 evidence credit. Its full gate pins all source hashes through the manifest and all three complete

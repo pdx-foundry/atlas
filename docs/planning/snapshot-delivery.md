@@ -16,8 +16,9 @@ The implemented payload is defined by `docs/contract/rule-snapshot-v2.schema.jso
   JSON Schema Draft 2020-12 describes logical value shapes; Atlas records carry properties that
   schema alone does not express. Local references must resolve without network access.
 - A field's value schema describes one occurrence. Occurrence limits are a separate property, and
-  an unknown maximum is distinct from an established unbounded one. Repeated scalar entries and one
-  list-valued entry are different structures.
+  an unknown maximum is distinct from an established unbounded one. An unknown limit is never
+  encoded as zero, infinity, an empty schema or an omitted constraint. Repeated scalar entries and
+  one list-valued entry are different structures.
 - Rule identity is stable for a subject and property across revisions. Snapshot version,
   contract version, game applicability and payload digest are separate identities. The digest
   covers deterministic JSON bytes and is stored beside the payload.
