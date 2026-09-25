@@ -110,19 +110,18 @@ the retained registry snapshot still supports **0 / 55,999**, because it supplie
 
 ## Verification
 
-The game-free suite tests source associations, quoted hashes, namespace/family separation, repeated
-locations, exact/rewritten/authored separation, source identities, relocation, failure reporting,
-and zero evidence credit. The full gate pins all source hashes through the manifest and all three
-complete output digests. It also verifies exact parser text and source locations for a define,
-an on_action, a game rule, and a type-schema field.
+The measurement's tests are kept at revision `1521c2a`. Its game-free `provenance` suite tests
+source associations, quoted hashes, namespace/family separation, repeated locations,
+exact/rewritten/authored separation, source identities, relocation, failure reporting, and zero
+evidence credit. Its full gate pins all source hashes through the manifest and all three complete
+output digests. It also verifies exact parser text and source locations for a define, an
+on_action, a game rule, and a type-schema field. At that revision, run:
 
 ```sh
-cargo test --locked
-cargo clippy --all-targets --locked -- -D warnings
-cargo test --locked --test full_config -- --ignored
+cargo test --locked --test provenance
 cargo test --locked --test full_provenance -- --ignored
 ```
 
-The full gates require the four environment variables above. They fail if an input is absent or
-changes. Inspect changed findings before updating the fixture. Raw installed content and complete
-local reports stay outside Git; the tracked fixture retains reproducible identities and results.
+The full gate requires the four environment variables above. It fails if an input is absent or
+changes. Raw installed content and complete local reports stay outside Git; the tracked fixture
+retains reproducible identities and results.

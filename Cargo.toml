@@ -5,7 +5,7 @@ edition = "2024"
 
 [dependencies]
 pdx-native = { git = "https://github.com/pdx-foundry/native.git", rev = "866e2ea34b7b976b5cd91c5e2306af3fef3bdd12" }
-pdxscript = { git = "https://github.com/pdx-foundry/pdxscript-rs.git", rev = "7cf9f1516ebc10d5114af78bb4cd46614e4357ce" }
+pdxscript = { git = "https://github.com/pdx-foundry/pdxscript-rs.git", rev = "ccb681ac10af4a4efb21ec42450b1a04d2d8500a" }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 sha2 = "0.10"
