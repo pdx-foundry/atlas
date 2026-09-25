@@ -554,7 +554,7 @@ dependencies = [
 [[package]]
 name = "pdxscript"
 version = "0.1.0"
-source = "git+https://github.com/pdx-foundry/pdxscript-rs.git?rev=7cf9f1516ebc10d5114af78bb4cd46614e4357ce#7cf9f1516ebc10d5114af78bb4cd46614e4357ce"
+source = "git+https://github.com/pdx-foundry/pdxscript-rs.git?rev=ccb681ac10af4a4efb21ec42450b1a04d2d8500a#ccb681ac10af4a4efb21ec42450b1a04d2d8500a"
 dependencies = [
  "serde",
 ]
