@@ -161,3 +161,9 @@ Published gap owners are capability categories, with these ticket mappings maint
 A null owner remains unassigned; SDK-626 owns the later triage. Owner categories do not change
 the reason or evidence of a gap. Failed questions use deliberate stable text, retaining error
 details and disposal uncertainty without depending on Native Debug formatting.
+
+Version-2 readers also accept historical `SDK-<number>` owner strings; new snapshots emit only
+categories. Native v6 field-gap subjects name leaf keys. Atlas resolves each leaf against all
+discovered registry-relative paths. A unique leaf can attach to a nested field. Ambiguous or
+missing paths stay in a registry `field_gap_subjects` gap with the original Native gaps; Atlas
+never chooses a root field merely because its leaf name matches.

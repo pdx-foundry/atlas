@@ -584,15 +584,24 @@
           "minLength": 1
         },
         "owner": {
-          "enum": [
-            null,
-            "argument_grammar",
-            "scope_context",
-            "modifier_application",
-            "references",
-            "callback_context",
-            "field_semantics",
-            "field_conditions"
+          "description": "Producers use capability categories. Legacy SDK ticket owners remain readable in version 2.",
+          "anyOf": [
+            {
+              "enum": [
+                null,
+                "argument_grammar",
+                "scope_context",
+                "modifier_application",
+                "references",
+                "callback_context",
+                "field_semantics",
+                "field_conditions"
+              ]
+            },
+            {
+              "type": "string",
+              "pattern": "^SDK-[0-9]+$"
+            }
           ]
         },
         "native_gaps": {

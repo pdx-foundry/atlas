@@ -165,10 +165,82 @@ fn assemble_fields(
             vec![evidence],
         );
     }
+    let mut paths = BTreeMap::new();
+    field_paths(&answer.value, "", &mut paths);
+    let unjoined: Vec<_> = answer
+        .gaps
+        .iter()
+        .filter(|gap| match &gap.subject {
+            Some(GapSubject::Field { name }) => {
+                paths.get(name).is_none_or(|paths| paths.len() != 1)
+            }
+            _ => false,
+        })
+        .cloned()
+        .collect();
+    if !unjoined.is_empty() {
+        let names: BTreeSet<_> = unjoined
+            .iter()
+            .filter_map(|gap| match &gap.subject {
+                Some(GapSubject::Field { name }) => Some(format!(
+                    "{name}: {}",
+                    paths
+                        .get(name)
+                        .map(|paths| paths.join(", "))
+                        .unwrap_or_else(|| "no discovered field".into())
+                )),
+                _ => None,
+            })
+            .collect();
+        let link = evidence(
+            snapshot,
+            &format!("registry_fields/{registry}"),
+            answer,
+            format!("answers.fields.{registry}"),
+            None,
+        )?;
+        gap(
+            snapshot,
+            &registry_subject,
+            "field_gap_subjects",
+            format!(
+                "Native field-gap names do not identify one field path: {}",
+                names.into_iter().collect::<Vec<_>>().join("; ")
+            ),
+            None,
+            unjoined,
+            vec![link],
+        );
+    }
     for field in &answer.value {
-        assemble_field(snapshot, registry, &field.name, field, answer, false)?;
+        assemble_field(
+            snapshot,
+            registry,
+            &field.name,
+            field,
+            answer,
+            false,
+            &paths,
+        )?;
     }
     Ok(())
+}
+
+fn field_paths(fields: &[Field], parent: &str, paths: &mut BTreeMap<String, Vec<String>>) {
+    for field in fields {
+        let path = if parent.is_empty() {
+            field.name.clone()
+        } else {
+            format!("{parent}/{}", field.name)
+        };
+        paths
+            .entry(field.name.clone())
+            .or_default()
+            .push(path.clone());
+        if let FieldMembers::Fields(children) = &field.members {
+            field_paths(children, &path, paths);
+        }
+    }
 }
 
 fn assemble_field(
@@ -178,6 +250,7 @@ fn assemble_field(
     field: &Field,
     answer: &Answer<Vec<Field>>,
     parent_conditional: bool,
+    paths: &BTreeMap<String, Vec<String>>,
 ) -> Result<(), String> {
     let unconditional_outcome = match field.read.as_slice() {
         [alternative] if !parent_conditional && alternative.condition == FieldCondition::Always => {
@@ -186,10 +259,6 @@ fn assemble_field(
         _ => None,
     };
     let conditional = unconditional_outcome.is_none();
-    let unconditional_reader = match unconditional_outcome {
-        Some(FieldReadOutcome::Read { reader, .. }) => Some(reader),
-        _ => None,
-    };
     let id = field_id(registry, path);
     snapshot.subjects.push(Subject {
         id: id.clone(),
@@ -204,7 +273,12 @@ fn assemble_field(
         &format!("registry_fields/{registry}"),
         answer,
         format!("answers.fields.{registry}:{path}"),
-        Some(GapSubject::Field { name: path.into() }),
+        paths
+            .get(&field.name)
+            .filter(|paths| paths.as_slice() == [path])
+            .map(|_| GapSubject::Field {
+                name: field.name.clone(),
+            }),
     )?;
     rule(snapshot, &id, "existence", json!(true), evidence.clone());
     if field.read.is_empty() {
@@ -278,17 +352,11 @@ fn assemble_field(
                 child,
                 answer,
                 conditional,
+                paths,
             )?;
         }
     }
-    assemble_field_value_form(
-        snapshot,
-        &id,
-        field,
-        answer,
-        &evidence,
-        unconditional_reader,
-    )?;
+    assemble_field_value_form(snapshot, &id, field, &evidence, unconditional_outcome)?;
     assemble_field_gaps(snapshot, &id, field, &evidence);
     Ok(())
 }
@@ -297,10 +365,27 @@ fn assemble_field_value_form(
     snapshot: &mut Snapshot,
     id: &str,
     field: &Field,
-    answer: &Answer<Vec<Field>>,
     evidence: &EvidenceLink,
-    reader: Option<&pdx_native::Reader>,
+    outcome: Option<&FieldReadOutcome>,
 ) -> Result<(), String> {
+    let (reader, reason, owner) = match outcome {
+        Some(FieldReadOutcome::Read { reader, .. }) => (Some(reader), "", None),
+        Some(FieldReadOutcome::Rejected) => (
+            None,
+            "Native rejects this field on the unconditional loader path",
+            None,
+        ),
+        Some(_) => (
+            None,
+            "Native did not establish the unconditional reader's value form",
+            None,
+        ),
+        None => (
+            None,
+            "Conditional alternatives do not establish an unconditional value form; unresolved branches remain unknown",
+            Some("field_conditions"),
+        ),
+    };
     let Some(reader) = reader else {
         rule(
             snapshot,
@@ -313,9 +398,9 @@ fn assemble_field_value_form(
             snapshot,
             id,
             "value_form.unresolved",
-            "Conditional alternatives do not establish an unconditional value form; unresolved branches remain unknown",
-            Some("field_conditions"),
-            answer.gaps.clone(),
+            reason,
+            owner,
+            evidence.native_gaps.clone(),
             vec![evidence.clone()],
         );
         return Ok(());

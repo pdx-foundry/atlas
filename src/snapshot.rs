@@ -488,22 +488,29 @@ pub fn verify(snapshot: &Snapshot) -> Result<(), String> {
             ));
         }
         if gap.owner.as_deref().is_some_and(|owner| {
-            !matches!(
-                owner,
-                "argument_grammar"
-                    | "scope_context"
-                    | "modifier_application"
-                    | "references"
-                    | "callback_context"
-                    | "field_semantics"
-                    | "field_conditions"
-            )
+            !legacy_ticket_owner(owner)
+                && !matches!(
+                    owner,
+                    "argument_grammar"
+                        | "scope_context"
+                        | "modifier_application"
+                        | "references"
+                        | "callback_context"
+                        | "field_semantics"
+                        | "field_conditions"
+                )
         }) {
             return Err(format!("Unknown gap owner category: {}", gap.id));
         }
         verify_evidence(snapshot, &gap.evidence)?;
     }
     Ok(())
+}
+
+fn legacy_ticket_owner(owner: &str) -> bool {
+    owner.strip_prefix("SDK-").is_some_and(|digits| {
+        !digits.is_empty() && digits.bytes().all(|byte| byte.is_ascii_digit())
+    })
 }
 
 fn subject_identity(subject: &Subject) -> Result<String, String> {

@@ -415,3 +415,116 @@ async fn nested_paths_and_use_conditions_keep_their_stage_and_parent_limit() {
             .any(|g| g.id == format!("{id}#value_form.unresolved"))
     );
 }
+
+#[tokio::test]
+async fn unresolved_value_forms_keep_only_their_field_gaps_and_correct_reason() {
+    let snapshot = snapshot::assemble(&recorded().await).unwrap();
+    let ring = snapshot
+        .gaps
+        .iter()
+        .find(|gap| gap.id == "field:map/galaxy/ring#value_form.unresolved")
+        .unwrap();
+    assert_eq!(ring.native_gaps, ring.evidence[0].native_gaps);
+    assert!(ring.native_gaps.iter().all(|gap| gap.subject
+        == Some(pdx_native::GapSubject::Field {
+            name: "ring".into()
+        })));
+    let unresolved = snapshot
+        .gaps
+        .iter()
+        .find(|gap| gap.id == "field:interface/resource_groups/localization#value_form.unresolved")
+        .unwrap();
+    assert_eq!(
+        unresolved.reason,
+        "Native did not establish the unconditional reader's value form"
+    );
+    assert_eq!(unresolved.owner, None);
+}
+
+#[tokio::test]
+async fn leaf_gap_names_attach_only_when_the_field_path_is_unique() {
+    use pdx_native::{FieldMembers, Gap, GapKind, GapSubject};
+    let mut extraction = recorded().await;
+    let answer = extraction
+        .fields
+        .get_mut(extraction::TRADITIONS)
+        .unwrap()
+        .as_mut()
+        .unwrap();
+    let mut child = answer
+        .value
+        .iter()
+        .find(|field| field.name == "unlocks_agenda")
+        .unwrap()
+        .clone();
+    child.name = "child".into();
+    let mut parent = answer
+        .value
+        .iter()
+        .find(|field| field.name == "on_enabled")
+        .unwrap()
+        .clone();
+    parent.name = "parent".into();
+    parent.members = FieldMembers::Fields(vec![child.clone()]);
+    let native_gap = Gap {
+        kind: GapKind::UnresolvedStorage,
+        subject: Some(GapSubject::Field {
+            name: "child".into(),
+        }),
+        detail: "test storage boundary".into(),
+    };
+    answer.value = vec![parent];
+    answer.gaps = vec![native_gap.clone()];
+    let unique = snapshot::assemble(&extraction).unwrap();
+    let rule = unique
+        .rules
+        .iter()
+        .find(|rule| rule.id == "field:common/traditions/parent/child#read")
+        .unwrap();
+    assert_eq!(
+        rule.evidence[0].native_gaps.as_slice(),
+        std::slice::from_ref(&native_gap)
+    );
+    extraction
+        .fields
+        .get_mut(extraction::TRADITIONS)
+        .unwrap()
+        .as_mut()
+        .unwrap()
+        .value
+        .push(child);
+    let ambiguous = snapshot::assemble(&extraction).unwrap();
+    for path in ["child", "parent/child"] {
+        let rule = ambiguous
+            .rules
+            .iter()
+            .find(|rule| rule.id == format!("field:common/traditions/{path}#read"))
+            .unwrap();
+        assert!(rule.evidence[0].native_gaps.is_empty());
+    }
+    let gap = ambiguous
+        .gaps
+        .iter()
+        .find(|gap| gap.id == "registry:common/traditions#field_gap_subjects")
+        .unwrap();
+    assert_eq!(gap.native_gaps, [native_gap]);
+    assert!(gap.reason.contains("parent/child"));
+    assert!(gap.reason.contains("child"));
+}
+
+#[tokio::test]
+async fn version_two_still_accepts_legacy_ticket_owners() {
+    let mut snapshot = snapshot::assemble(&recorded().await).unwrap();
+    snapshot.gaps[0].owner = Some("SDK-548".into());
+    snapshot::verify(&snapshot).unwrap();
+    let schema: Value = serde_json::from_str(include_str!(
+        "../docs/contract/rule-snapshot-v2.schema.json"
+    ))
+    .unwrap();
+    jsonschema::validator_for(&schema)
+        .unwrap()
+        .validate(&json!(snapshot))
+        .unwrap();
+    snapshot.gaps[0].owner = Some("SDK-invalid".into());
+    assert!(snapshot::verify(&snapshot).is_err());
+}

@@ -99,14 +99,13 @@ fn project_with_gap_facets(
             });
         }
         for question in questions {
-            let subject = subjects[rule.subject.as_str()];
-            let ambiguous = subject
-                .registry
-                .as_ref()
-                .and_then(|registry| registry_types.get(registry))
-                .is_some_and(|types| types.len() > 1);
-            if ambiguous && !question.starts_with("atlas:") {
-                projection.gaps.push(Gap { question, conditions: rule.conditions.clone(), reason: "The registry directory maps to several config types; the applicable type is unresolved".into() });
+            if let Some(gap) = mapping_gap(
+                subjects[rule.subject.as_str()],
+                &registry_types,
+                &question,
+                &rule.conditions,
+            ) {
+                projection.gaps.push(gap);
                 continue;
             }
             projection.answers.push(Answer {
@@ -140,6 +139,14 @@ fn project_with_gap_facets(
             questions
         };
         for question in questions {
+            if let Some(mapping) = mapping_gap(
+                subjects[gap.subject.as_str()],
+                &registry_types,
+                &question,
+                &[],
+            ) {
+                projection.gaps.push(mapping);
+            }
             projection.gaps.push(Gap {
                 question,
                 conditions: Vec::new(),
@@ -147,7 +154,42 @@ fn project_with_gap_facets(
             });
         }
     }
+    projection.gaps.sort_by(|left, right| {
+        (&left.question, &left.conditions, &left.reason).cmp(&(
+            &right.question,
+            &right.conditions,
+            &right.reason,
+        ))
+    });
+    projection.gaps.dedup_by(|left, right| {
+        left.question == right.question
+            && left.conditions == right.conditions
+            && left.reason == right.reason
+    });
     Ok(projection)
+}
+
+fn mapping_gap(
+    subject: &snapshot::Subject,
+    registry_types: &BTreeMap<String, BTreeSet<(String, String)>>,
+    question: &str,
+    conditions: &[String],
+) -> Option<Gap> {
+    let ambiguous = subject
+        .registry
+        .as_ref()
+        .and_then(|registry| registry_types.get(registry))
+        .is_some_and(|types| types.len() > 1);
+    if !ambiguous || question.starts_with("atlas:") {
+        return None;
+    }
+    Some(Gap {
+        question: question.into(),
+        conditions: conditions.to_vec(),
+        reason:
+            "The registry directory maps to several config types; the applicable type is unresolved"
+                .into(),
+    })
 }
 
 fn registry_types(ledger: &Ledger) -> BTreeMap<String, BTreeSet<(String, String)>> {
