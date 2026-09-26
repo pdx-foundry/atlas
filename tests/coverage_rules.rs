@@ -18,7 +18,7 @@ tradition = {
 }
 
 #[tokio::test]
-async fn shared_config_directory_does_not_assign_registry_evidence_to_either_type() {
+async fn shared_config_directory_counts_an_explicit_gap_for_each_type() {
     let source = r#"
 types = {
     type[technology] = { path = "game/common/technology" }
@@ -52,13 +52,13 @@ types = {
             coverage::comparison::Status::MissingFromAtlas,
             "{name}"
         );
+        assert!(
+            entry
+                .gaps
+                .iter()
+                .any(|reason| reason.contains("several config types"))
+        );
     }
-    assert!(comparison.entries.iter().any(|entry| {
-        entry
-            .question
-            .contains("registry:common/technology#existence")
-            && entry.status == coverage::comparison::Status::AtlasOnly
-    }));
 }
 
 async fn recorded_snapshot() -> snapshot::Snapshot {

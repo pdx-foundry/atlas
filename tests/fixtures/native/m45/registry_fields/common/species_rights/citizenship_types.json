@@ -1,28 +1,284 @@
 {
   "Ok": {
-    "value": [],
+    "value": [
+      {
+        "name": "is_assimilation",
+        "reader": {
+          "id": "b894933b2b2853a5",
+          "kind": "Boolean",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "id": "b894933b2b2853a5",
+                  "kind": "Boolean",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
+      },
+      {
+        "name": "is_full_citizenship",
+        "reader": {
+          "id": "b894933b2b2853a5",
+          "kind": "Boolean",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "id": "b894933b2b2853a5",
+                  "kind": "Boolean",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
+      },
+      {
+        "name": "is_slavery",
+        "reader": {
+          "id": "b894933b2b2853a5",
+          "kind": "Boolean",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "id": "b894933b2b2853a5",
+                  "kind": "Boolean",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
+      },
+      {
+        "name": "is_purge",
+        "reader": {
+          "id": "b894933b2b2853a5",
+          "kind": "Boolean",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "id": "b894933b2b2853a5",
+                  "kind": "Boolean",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
+      },
+      {
+        "name": "is_robot_servant",
+        "reader": {
+          "id": "b894933b2b2853a5",
+          "kind": "Boolean",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "id": "b894933b2b2853a5",
+                  "kind": "Boolean",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
+      },
+      {
+        "name": "new_pop_weight",
+        "reader": {
+          "id": "a9818fec780f8313",
+          "kind": "FixedPoint",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "id": "a9818fec780f8313",
+                  "kind": "FixedPoint",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
+      },
+      {
+        "name": "alternate_assembly",
+        "reader": {
+          "id": "b894933b2b2853a5",
+          "kind": "Boolean",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "id": "b894933b2b2853a5",
+                  "kind": "Boolean",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
+      }
+    ],
     "completeness": "Partial",
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": {"kind": "registry", "name": "common/species_rights/citizenship_types"},
-        "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
+        "subject": {
+          "kind": "registry",
+          "name": "common/species_rights/citizenship_types"
+        },
+        "detail": "Defaults, exhaustive enum domains, occurrence limits, deeper nested grammars, and non-owner runtime callers are not established by this method."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": {"kind": "registry", "name": "common/species_rights/citizenship_types"},
+        "subject": {
+          "kind": "registry",
+          "name": "common/species_rights/citizenship_types"
+        },
         "detail": "The field's reader could not be established on at least one path."
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "registry", "name": "common/species_rights/citizenship_types"},
+        "subject": {
+          "kind": "registry",
+          "name": "common/species_rights/citizenship_types"
+        },
         "detail": "A path through the registry's reader could not be followed to its end."
+      },
+      {
+        "kind": "UnnamedField",
+        "subject": {
+          "kind": "registry",
+          "name": "common/species_rights/citizenship_types"
+        },
+        "detail": "4 reader paths have no recovered literal field name; anonymous or dynamic keys remain unresolved."
       }
     ],
     "source": {
       "build": "07988b4f1b865623becd7a61af1cae92e111be6515d341754af70f02107822cd",
       "native_version": "0.1.0",
-      "method": "registry-fields/v3",
+      "method": "registry-fields/v6",
       "basis": "StaticAnalysis"
     }
   }

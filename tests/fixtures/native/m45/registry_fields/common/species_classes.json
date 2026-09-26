@@ -5,138 +5,894 @@
         "name": "trait",
         "reader": {
           "id": "325efaa17499c32d",
-          "kind": "String"
+          "kind": "String",
+          "family": "NotApplicable"
         },
-        "conditional": false
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "id": "325efaa17499c32d",
+                  "kind": "String",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
+      },
+      {
+        "name": "gender",
+        "reader": {
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
       },
       {
         "name": "possible",
         "reader": {
           "id": null,
-          "kind": "Unknown"
+          "kind": "Unknown",
+          "family": "Unknown"
         },
-        "conditional": true
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Unresolved",
+            "outcome": "Unresolved"
+          },
+          {
+            "condition": "Unresolved",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
       },
       {
         "name": "graphical_culture",
         "reader": {
           "id": null,
-          "kind": "Unknown"
+          "kind": "Unknown",
+          "family": "Unknown"
         },
-        "conditional": false
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
+      },
+      {
+        "name": "randomized",
+        "reader": {
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Unresolved",
+            "outcome": "Unresolved"
+          },
+          {
+            "condition": "Unresolved",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
       },
       {
         "name": "move_pop_sound_effect",
         "reader": {
           "id": null,
-          "kind": "Unknown"
+          "kind": "Unknown",
+          "family": "Unknown"
         },
-        "conditional": false
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
       },
       {
         "name": "uplifted_into",
         "reader": {
           "id": "325efaa17499c32d",
-          "kind": "String"
+          "kind": "String",
+          "family": "NotApplicable"
         },
-        "conditional": false
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "id": "325efaa17499c32d",
+                  "kind": "String",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
+      },
+      {
+        "name": "use_climate_preference",
+        "reader": {
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
       },
       {
         "name": "leader_age_min",
         "reader": {
           "id": "d7a95ab8c8d44489",
-          "kind": "Integer"
+          "kind": "Integer",
+          "family": "NotApplicable"
         },
-        "conditional": false
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "id": "d7a95ab8c8d44489",
+                  "kind": "Integer",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
       },
       {
         "name": "leader_age_max",
         "reader": {
           "id": "d7a95ab8c8d44489",
-          "kind": "Integer"
+          "kind": "Integer",
+          "family": "NotApplicable"
         },
-        "conditional": false
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "id": "d7a95ab8c8d44489",
+                  "kind": "Integer",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
+      },
+      {
+        "name": "portrait_modding",
+        "reader": {
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
       },
       {
         "name": "possible_secondary",
         "reader": {
           "id": null,
-          "kind": "Unknown"
+          "kind": "Unknown",
+          "family": "Unknown"
         },
-        "conditional": true
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Unresolved",
+            "outcome": "Unresolved"
+          },
+          {
+            "condition": "Unresolved",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
       },
       {
         "name": "archetype",
         "reader": {
           "id": "325efaa17499c32d",
-          "kind": "String"
+          "kind": "String",
+          "family": "NotApplicable"
         },
-        "conditional": false
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "id": "325efaa17499c32d",
+                  "kind": "String",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
       },
       {
         "name": "resources",
         "reader": {
           "id": null,
-          "kind": "Unknown"
+          "kind": "Unknown",
+          "family": "Unknown"
         },
-        "conditional": false
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
       },
       {
         "name": "random_weight",
         "reader": {
-          "id": "97942c9a3d3c9c1b",
-          "kind": "Block"
+          "id": "f08cb83d92484a89",
+          "kind": "Block",
+          "family": "Unknown"
         },
-        "conditional": false
+        "shape": {
+          "value": "Block",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "id": "f08cb83d92484a89",
+                  "kind": "Block",
+                  "family": "Unknown"
+                },
+                "shape": {
+                  "value": "Block",
+                  "repeat": "Unknown"
+                }
+              }
+            }
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
+      },
+      {
+        "name": "ethics_to_prefer",
+        "reader": {
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
+      },
+      {
+        "name": "preferred_ethics_weight",
+        "reader": {
+          "id": "f08cb83d92484a89",
+          "kind": "Block",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Block",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "id": "f08cb83d92484a89",
+                  "kind": "Block",
+                  "family": "Unknown"
+                },
+                "shape": {
+                  "value": "Block",
+                  "repeat": "Unknown"
+                }
+              }
+            }
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
+      },
+      {
+        "name": "generate_shipset",
+        "reader": {
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
+      },
+      {
+        "name": "removed_planet_types",
+        "reader": {
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
+      },
+      {
+        "name": "added_planet_types",
+        "reader": {
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
+      },
+      {
+        "name": "removed_climate_labels",
+        "reader": {
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
+      },
+      {
+        "name": "added_climate_labels",
+        "reader": {
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
       }
     ],
     "completeness": "Partial",
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": {"kind": "registry", "name": "common/species_classes"},
-        "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
+        "subject": {
+          "kind": "registry",
+          "name": "common/species_classes"
+        },
+        "detail": "Defaults, exhaustive enum domains, occurrence limits, deeper nested grammars, and non-owner runtime callers are not established by this method."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": {"kind": "field", "name": "possible"},
+        "subject": {
+          "kind": "field",
+          "name": "gender"
+        },
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": {"kind": "field", "name": "graphical_culture"},
+        "subject": {
+          "kind": "field",
+          "name": "possible"
+        },
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": {"kind": "field", "name": "move_pop_sound_effect"},
+        "subject": {
+          "kind": "field",
+          "name": "graphical_culture"
+        },
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": {"kind": "field", "name": "possible_secondary"},
+        "subject": {
+          "kind": "field",
+          "name": "randomized"
+        },
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": {"kind": "field", "name": "resources"},
+        "subject": {
+          "kind": "field",
+          "name": "move_pop_sound_effect"
+        },
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": {"kind": "registry", "name": "common/species_classes"},
+        "subject": {
+          "kind": "field",
+          "name": "use_climate_preference"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "portrait_modding"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "possible_secondary"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "resources"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "ethics_to_prefer"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "generate_shipset"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "removed_planet_types"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "added_planet_types"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "removed_climate_labels"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "added_climate_labels"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "registry",
+          "name": "common/species_classes"
+        },
         "detail": "The field's reader could not be established on at least one path."
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "registry", "name": "common/species_classes"},
+        "subject": {
+          "kind": "registry",
+          "name": "common/species_classes"
+        },
         "detail": "A path through the registry's reader could not be followed to its end."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "gender"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "possible"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedCondition",
+        "subject": {
+          "kind": "field",
+          "name": "possible"
+        },
+        "detail": "A loader condition remains unresolved; its outcome is retained separately."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "graphical_culture"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "randomized"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedCondition",
+        "subject": {
+          "kind": "field",
+          "name": "randomized"
+        },
+        "detail": "A loader condition remains unresolved; its outcome is retained separately."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "move_pop_sound_effect"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "use_climate_preference"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "portrait_modding"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "possible_secondary"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedCondition",
+        "subject": {
+          "kind": "field",
+          "name": "possible_secondary"
+        },
+        "detail": "A loader condition remains unresolved; its outcome is retained separately."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "resources"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "random_weight"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "ethics_to_prefer"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "preferred_ethics_weight"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "generate_shipset"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "removed_planet_types"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "added_planet_types"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "removed_climate_labels"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "added_climate_labels"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
       }
     ],
     "source": {
       "build": "07988b4f1b865623becd7a61af1cae92e111be6515d341754af70f02107822cd",
       "native_version": "0.1.0",
-      "method": "registry-fields/v3",
+      "method": "registry-fields/v6",
       "basis": "StaticAnalysis"
     }
   }

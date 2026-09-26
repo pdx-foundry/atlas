@@ -5,100 +5,430 @@
         "name": "effect",
         "reader": {
           "id": "a430a4b92eb2c8f6",
-          "kind": "Block"
+          "kind": "Block",
+          "family": "Effect"
         },
-        "conditional": false
+        "shape": {
+          "value": "Block",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "id": "a430a4b92eb2c8f6",
+                  "kind": "Block",
+                  "family": "Effect"
+                },
+                "shape": {
+                  "value": "Block",
+                  "repeat": "Unknown"
+                }
+              }
+            }
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
       },
       {
         "name": "agenda_cost",
         "reader": {
           "id": "c61abc171edc30aa",
-          "kind": "Unknown"
+          "kind": "Unknown",
+          "family": "Unknown"
         },
-        "conditional": false
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "id": "c61abc171edc30aa",
+                  "kind": "Unknown",
+                  "family": "Unknown"
+                },
+                "shape": {
+                  "value": "Unknown",
+                  "repeat": "Unknown"
+                }
+              }
+            }
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
       },
       {
         "name": "agenda_cooldown",
         "reader": {
           "id": "d7a95ab8c8d44489",
-          "kind": "Integer"
+          "kind": "Integer",
+          "family": "NotApplicable"
         },
-        "conditional": true
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "id": "d7a95ab8c8d44489",
+                  "kind": "Integer",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
       },
       {
         "name": "agenda_finish_modifier_duration",
         "reader": {
           "id": "d7a95ab8c8d44489",
-          "kind": "Integer"
+          "kind": "Integer",
+          "family": "NotApplicable"
         },
-        "conditional": true
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "id": "d7a95ab8c8d44489",
+                  "kind": "Integer",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
       },
       {
         "name": "potential",
         "reader": {
           "id": "e044b50825a1841d",
-          "kind": "Block"
+          "kind": "Block",
+          "family": "Trigger"
         },
-        "conditional": false
+        "shape": {
+          "value": "Block",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "id": "e044b50825a1841d",
+                  "kind": "Block",
+                  "family": "Trigger"
+                },
+                "shape": {
+                  "value": "Block",
+                  "repeat": "Unknown"
+                }
+              }
+            }
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
       },
       {
         "name": "allow",
         "reader": {
           "id": "e044b50825a1841d",
-          "kind": "Block"
+          "kind": "Block",
+          "family": "Trigger"
         },
-        "conditional": false
+        "shape": {
+          "value": "Block",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "id": "e044b50825a1841d",
+                  "kind": "Block",
+                  "family": "Trigger"
+                },
+                "shape": {
+                  "value": "Block",
+                  "repeat": "Unknown"
+                }
+              }
+            }
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
       },
       {
         "name": "init_effect",
         "reader": {
           "id": "a430a4b92eb2c8f6",
-          "kind": "Block"
+          "kind": "Block",
+          "family": "Effect"
         },
-        "conditional": false
+        "shape": {
+          "value": "Block",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "id": "a430a4b92eb2c8f6",
+                  "kind": "Block",
+                  "family": "Effect"
+                },
+                "shape": {
+                  "value": "Block",
+                  "repeat": "Unknown"
+                }
+              }
+            }
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
       },
       {
         "name": "ai_weight",
         "reader": {
-          "id": "97942c9a3d3c9c1b",
-          "kind": "Block"
+          "id": "f08cb83d92484a89",
+          "kind": "Block",
+          "family": "Unknown"
         },
-        "conditional": false
+        "shape": {
+          "value": "Block",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "id": "f08cb83d92484a89",
+                  "kind": "Block",
+                  "family": "Unknown"
+                },
+                "shape": {
+                  "value": "Block",
+                  "repeat": "Unknown"
+                }
+              }
+            }
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
       },
       {
         "name": "finish_modifier",
         "reader": {
           "id": "ae2bd2a2d5591e04",
-          "kind": "Reference"
+          "kind": "Reference",
+          "family": "NotApplicable"
         },
-        "conditional": false
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "id": "ae2bd2a2d5591e04",
+                  "kind": "Reference",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Unknown"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
       },
       {
         "name": "modifier",
         "reader": {
-          "id": "97942c9a3d3c9c1b",
-          "kind": "Block"
+          "id": "5a74c67fe5a4adf9",
+          "kind": "Block",
+          "family": "Modifier"
         },
-        "conditional": false
+        "shape": {
+          "value": "Block",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "id": "5a74c67fe5a4adf9",
+                  "kind": "Block",
+                  "family": "Modifier"
+                },
+                "shape": {
+                  "value": "Block",
+                  "repeat": "Unknown"
+                }
+              }
+            }
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
       }
     ],
     "completeness": "Partial",
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": {"kind": "registry", "name": "common/council_agendas"},
-        "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
+        "subject": {
+          "kind": "registry",
+          "name": "common/council_agendas"
+        },
+        "detail": "Defaults, exhaustive enum domains, occurrence limits, deeper nested grammars, and non-owner runtime callers are not established by this method."
       },
       {
         "kind": "ReaderSemantics",
-        "subject": {"kind": "field", "name": "agenda_cost"},
+        "subject": {
+          "kind": "field",
+          "name": "agenda_cost"
+        },
         "detail": "The shared reader is identified, but its broad value form is not established."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "effect"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "agenda_cost"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "potential"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "allow"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "init_effect"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "ai_weight"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "finish_modifier"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "modifier"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
       }
     ],
     "source": {
       "build": "07988b4f1b865623becd7a61af1cae92e111be6515d341754af70f02107822cd",
       "native_version": "0.1.0",
-      "method": "registry-fields/v3",
+      "method": "registry-fields/v6",
       "basis": "StaticAnalysis"
     }
   }

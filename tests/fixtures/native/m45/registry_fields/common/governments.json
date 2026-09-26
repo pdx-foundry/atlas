@@ -4,88 +4,341 @@
       {
         "name": "weight",
         "reader": {
-          "id": "97942c9a3d3c9c1b",
-          "kind": "Block"
+          "id": "f08cb83d92484a89",
+          "kind": "Block",
+          "family": "Unknown"
         },
-        "conditional": false
+        "shape": {
+          "value": "Block",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "id": "f08cb83d92484a89",
+                  "kind": "Block",
+                  "family": "Unknown"
+                },
+                "shape": {
+                  "value": "Block",
+                  "repeat": "Unknown"
+                }
+              }
+            }
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
       },
       {
         "name": "ruler_title",
         "reader": {
           "id": "325efaa17499c32d",
-          "kind": "String"
+          "kind": "String",
+          "family": "NotApplicable"
         },
-        "conditional": false
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "id": "325efaa17499c32d",
+                  "kind": "String",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
       },
       {
         "name": "ruler_title_female",
         "reader": {
           "id": "325efaa17499c32d",
-          "kind": "String"
+          "kind": "String",
+          "family": "NotApplicable"
         },
-        "conditional": false
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "id": "325efaa17499c32d",
+                  "kind": "String",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
       },
       {
         "name": "possible",
         "reader": {
           "id": "e044b50825a1841d",
-          "kind": "Block"
+          "kind": "Block",
+          "family": "Trigger"
         },
-        "conditional": false
+        "shape": {
+          "value": "Block",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "id": "e044b50825a1841d",
+                  "kind": "Block",
+                  "family": "Trigger"
+                },
+                "shape": {
+                  "value": "Block",
+                  "repeat": "Unknown"
+                }
+              }
+            }
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
       },
       {
         "name": "use_regnal_names",
         "reader": {
           "id": "b894933b2b2853a5",
-          "kind": "Boolean"
+          "kind": "Boolean",
+          "family": "NotApplicable"
         },
-        "conditional": false
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "id": "b894933b2b2853a5",
+                  "kind": "Boolean",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
       },
       {
         "name": "heir_title",
         "reader": {
           "id": "325efaa17499c32d",
-          "kind": "String"
+          "kind": "String",
+          "family": "NotApplicable"
         },
-        "conditional": false
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "id": "325efaa17499c32d",
+                  "kind": "String",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
       },
       {
         "name": "heir_title_female",
         "reader": {
           "id": "325efaa17499c32d",
-          "kind": "String"
+          "kind": "String",
+          "family": "NotApplicable"
         },
-        "conditional": false
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "id": "325efaa17499c32d",
+                  "kind": "String",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
       },
       {
         "name": "dynastic_last_names",
         "reader": {
           "id": "b894933b2b2853a5",
-          "kind": "Boolean"
+          "kind": "Boolean",
+          "family": "NotApplicable"
         },
-        "conditional": false
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "id": "b894933b2b2853a5",
+                  "kind": "Boolean",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
       },
       {
         "name": "should_force_rename",
         "reader": {
           "id": "b894933b2b2853a5",
-          "kind": "Boolean"
+          "kind": "Boolean",
+          "family": "NotApplicable"
         },
-        "conditional": false
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "id": "b894933b2b2853a5",
+                  "kind": "Boolean",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
       }
     ],
-    "completeness": "Complete",
+    "completeness": "Partial",
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": {"kind": "registry", "name": "common/governments"},
-        "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
+        "subject": {
+          "kind": "registry",
+          "name": "common/governments"
+        },
+        "detail": "Defaults, exhaustive enum domains, occurrence limits, deeper nested grammars, and non-owner runtime callers are not established by this method."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "weight"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "possible"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
       }
     ],
     "source": {
       "build": "07988b4f1b865623becd7a61af1cae92e111be6515d341754af70f02107822cd",
       "native_version": "0.1.0",
-      "method": "registry-fields/v3",
+      "method": "registry-fields/v6",
       "basis": "StaticAnalysis"
     }
   }

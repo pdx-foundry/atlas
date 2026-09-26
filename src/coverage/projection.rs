@@ -57,11 +57,16 @@ fn project_with_gap_facets(
         answers: Vec::new(),
         gaps: Vec::new(),
     };
+    let subjects: BTreeMap<_, _> = rules
+        .subjects
+        .iter()
+        .map(|subject| (subject.id.as_str(), subject))
+        .collect();
     for rule in &rules.rules {
         let mut questions = questions(
             &claims,
             &registry_types,
-            &rule.subject,
+            subjects[rule.subject.as_str()],
             &rule.property,
             &rule.conditions,
             false,
@@ -94,11 +99,27 @@ fn project_with_gap_facets(
             });
         }
         for question in questions {
+            let subject = subjects[rule.subject.as_str()];
+            let ambiguous = subject
+                .registry
+                .as_ref()
+                .and_then(|registry| registry_types.get(registry))
+                .is_some_and(|types| types.len() > 1);
+            if ambiguous && !question.starts_with("atlas:") {
+                projection.gaps.push(Gap { question, conditions: rule.conditions.clone(), reason: "The registry directory maps to several config types; the applicable type is unresolved".into() });
+                continue;
+            }
             projection.answers.push(Answer {
                 question,
                 conditions: rule.conditions.clone(),
                 value: rule.answer.clone(),
-                status: Status::Supported,
+                status: if rule.property == "value_form"
+                    && rule.answer.get("alternatives").is_some()
+                {
+                    Status::Partial
+                } else {
+                    Status::Supported
+                },
                 evidence: evidence.clone(),
             });
         }
@@ -107,7 +128,7 @@ fn project_with_gap_facets(
         let mut questions = questions(
             &claims,
             &registry_types,
-            &gap.subject,
+            subjects[gap.subject.as_str()],
             &gap.property,
             &[],
             project_related_gap_facets,
@@ -129,7 +150,7 @@ fn project_with_gap_facets(
     Ok(projection)
 }
 
-fn registry_types(ledger: &Ledger) -> BTreeMap<String, (String, String)> {
+fn registry_types(ledger: &Ledger) -> BTreeMap<String, BTreeSet<(String, String)>> {
     let mut candidates: BTreeMap<String, BTreeSet<(String, String)>> = BTreeMap::new();
     let existing_types = ledger
         .claims
@@ -162,34 +183,54 @@ fn registry_types(ledger: &Ledger) -> BTreeMap<String, (String, String)> {
         }
     }
     candidates
-        .into_iter()
-        .filter_map(|(registry, types)| {
-            (types.len() == 1).then(|| (registry, types.into_iter().next().unwrap()))
-        })
-        .collect()
 }
 
 fn questions(
     claims: &ClaimIndex<'_>,
-    registry_types: &BTreeMap<String, (String, String)>,
-    subject: &str,
+    registry_types: &BTreeMap<String, BTreeSet<(String, String)>>,
+    subject: &snapshot::Subject,
     property: &str,
     conditions: &[String],
     gap_facet: bool,
 ) -> Vec<String> {
-    let (registry, field) = if let Some(registry) = subject.strip_prefix("registry:") {
-        (registry, None)
-    } else if let Some(path) = subject.strip_prefix("field:") {
-        let Some((registry, field)) = path.rsplit_once('/') else {
-            return Vec::new();
-        };
-        (registry, Some(field))
-    } else {
+    if !matches!(
+        subject.kind,
+        snapshot::SubjectKind::Registry | snapshot::SubjectKind::Field
+    ) {
+        return Vec::new();
+    }
+    let Some(types) = subject
+        .registry
+        .as_ref()
+        .and_then(|registry| registry_types.get(registry))
+    else {
         return Vec::new();
     };
-    let Some((type_name, file)) = registry_types.get(registry) else {
-        return Vec::new();
-    };
+    types
+        .iter()
+        .flat_map(|(type_name, file)| {
+            type_questions(
+                claims,
+                type_name,
+                file,
+                subject.field.as_deref(),
+                property,
+                conditions,
+                gap_facet,
+            )
+        })
+        .collect()
+}
+
+fn type_questions(
+    claims: &ClaimIndex<'_>,
+    type_name: &str,
+    file: &str,
+    field: Option<&str>,
+    property: &str,
+    conditions: &[String],
+    gap_facet: bool,
+) -> Vec<String> {
     let (path, ledger_property): (Vec<&str>, &str) = match (field, property) {
         (None, "existence") => (vec!["types", type_name], "type_existence"),
         (None, "loader_path") => (vec!["types", type_name, "path"], "loader_path"),
@@ -200,7 +241,7 @@ fn questions(
             ],
             "field_existence",
         ),
-        (Some(field), "value_form") => (
+        (Some(field), "value_form" | "value_form.unresolved") => (
             vec![
                 type_name.trim_start_matches("type[").trim_end_matches(']'),
                 field,
@@ -249,14 +290,16 @@ fn questions(
                 .filter(|condition| condition.starts_with("subtype["))
                 .map(String::as_str),
         );
-        expanded.extend_from_slice(&path[1..]);
+        for segment in &path[1..] {
+            expanded.extend(segment.split('/'));
+        }
         expanded
     } else {
         path
     };
     claims
         .get(&(
-            file.as_str(),
+            file,
             ledger_property,
             path,
             conditions.iter().map(String::as_str).collect(),

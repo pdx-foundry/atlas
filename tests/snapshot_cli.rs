@@ -129,7 +129,7 @@ fn partial_unrelated_registry_listing_keeps_only_applicable_subjects() {
             && gap["reason"]
                 .as_str()
                 .unwrap()
-                .contains("no answer is recorded")
+                .contains("No answer is recorded")
     }));
     assert!(snapshot["gaps"].as_array().unwrap().iter().all(|gap| {
         !gap["subject"]

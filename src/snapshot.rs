@@ -1,5 +1,6 @@
 //! Deterministic Atlas rules assembled from Native answers.
 
+mod failure;
 mod language;
 mod registry;
 
@@ -222,7 +223,7 @@ pub struct Gap {
     pub property: String,
     /// Why evidence is insufficient.
     pub reason: String,
-    /// Ticket that owns the missing capability, when known.
+    /// Capability category that owns the gap, when known; ticket mappings live in docs.
     pub owner: Option<String>,
     /// Native's typed gaps behind this gap, retained whole.
     pub native_gaps: Vec<NativeGap>,
@@ -247,7 +248,10 @@ const DIALECT: &str = "https://json-schema.org/draft/2020-12/schema";
 /// Assemble a snapshot; malformed internal references or conflicting sources fail.
 pub fn assemble(extraction: &Extraction) -> Result<Snapshot, String> {
     if let Err(error) = &extraction.registries {
-        return Err(format!("Native registry discovery failed: {error:?}"));
+        return Err(format!(
+            "Native registry discovery failed: {}",
+            failure::error_reason(error)
+        ));
     }
     let mut snapshot = Snapshot {
         kind: "atlas_rule_snapshot".into(),
@@ -482,6 +486,20 @@ pub fn verify(snapshot: &Snapshot) -> Result<(), String> {
                 "Invalid gap identity, subject, or reason: {}",
                 gap.id
             ));
+        }
+        if gap.owner.as_deref().is_some_and(|owner| {
+            !matches!(
+                owner,
+                "argument_grammar"
+                    | "scope_context"
+                    | "modifier_application"
+                    | "references"
+                    | "callback_context"
+                    | "field_semantics"
+                    | "field_conditions"
+            )
+        }) {
+            return Err(format!("Unknown gap owner category: {}", gap.id));
         }
         verify_evidence(snapshot, &gap.evidence)?;
     }

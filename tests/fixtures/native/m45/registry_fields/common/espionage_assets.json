@@ -5,68 +5,266 @@
         "name": "categories",
         "reader": {
           "id": null,
-          "kind": "Unknown"
+          "kind": "Unknown",
+          "family": "Unknown"
         },
-        "conditional": false
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
       },
       {
         "name": "potential",
         "reader": {
           "id": "e044b50825a1841d",
-          "kind": "Block"
+          "kind": "Block",
+          "family": "Trigger"
         },
-        "conditional": false
+        "shape": {
+          "value": "Block",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "id": "e044b50825a1841d",
+                  "kind": "Block",
+                  "family": "Trigger"
+                },
+                "shape": {
+                  "value": "Block",
+                  "repeat": "Unknown"
+                }
+              }
+            }
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
       },
       {
         "name": "active",
         "reader": {
-          "id": "97942c9a3d3c9c1b",
-          "kind": "Block"
+          "id": "ba5f8cddeba0d833",
+          "kind": "Block",
+          "family": "Modifier"
         },
-        "conditional": false
+        "shape": {
+          "value": "Block",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "id": "ba5f8cddeba0d833",
+                  "kind": "Block",
+                  "family": "Modifier"
+                },
+                "shape": {
+                  "value": "Block",
+                  "repeat": "Unknown"
+                }
+              }
+            }
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
       },
       {
         "name": "possible",
         "reader": {
           "id": "e044b50825a1841d",
-          "kind": "Block"
+          "kind": "Block",
+          "family": "Trigger"
         },
-        "conditional": false
+        "shape": {
+          "value": "Block",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "id": "e044b50825a1841d",
+                  "kind": "Block",
+                  "family": "Trigger"
+                },
+                "shape": {
+                  "value": "Block",
+                  "repeat": "Unknown"
+                }
+              }
+            }
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
       },
       {
         "name": "passive",
         "reader": {
-          "id": "97942c9a3d3c9c1b",
-          "kind": "Block"
+          "id": "ba5f8cddeba0d833",
+          "kind": "Block",
+          "family": "Modifier"
         },
-        "conditional": false
+        "shape": {
+          "value": "Block",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "id": "ba5f8cddeba0d833",
+                  "kind": "Block",
+                  "family": "Modifier"
+                },
+                "shape": {
+                  "value": "Block",
+                  "repeat": "Unknown"
+                }
+              }
+            }
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
       },
       {
         "name": "appearance",
         "reader": {
-          "id": "97942c9a3d3c9c1b",
-          "kind": "Block"
+          "id": "faa4fe90d7f075fc",
+          "kind": "Block",
+          "family": "Unknown"
         },
-        "conditional": false
+        "shape": {
+          "value": "Block",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "id": "faa4fe90d7f075fc",
+                  "kind": "Block",
+                  "family": "Unknown"
+                },
+                "shape": {
+                  "value": "Block",
+                  "repeat": "Unknown"
+                }
+              }
+            }
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "default": "Unknown",
+        "uses": []
       }
     ],
     "completeness": "Partial",
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": {"kind": "registry", "name": "common/espionage_assets"},
-        "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
+        "subject": {
+          "kind": "registry",
+          "name": "common/espionage_assets"
+        },
+        "detail": "Defaults, exhaustive enum domains, occurrence limits, deeper nested grammars, and non-owner runtime callers are not established by this method."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": {"kind": "field", "name": "categories"},
+        "subject": {
+          "kind": "field",
+          "name": "categories"
+        },
         "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "categories"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "potential"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "active"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "possible"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "passive"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "appearance"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
       }
     ],
     "source": {
       "build": "07988b4f1b865623becd7a61af1cae92e111be6515d341754af70f02107822cd",
       "native_version": "0.1.0",
-      "method": "registry-fields/v3",
+      "method": "registry-fields/v6",
       "basis": "StaticAnalysis"
     }
   }

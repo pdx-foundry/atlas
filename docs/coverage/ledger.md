@@ -79,8 +79,7 @@ also carry stable IDs, so equal display names do not merge. Version 1 had regist
 read. The ledger accepts the file directly and projects its registry and field rules onto matching
 config questions. The join comes from the ledger's own `loader_path` claims; the rule producer
 does not read CWT. Each rule keeps Native's source stamp, completeness and typed gaps. Directories
-with more than one config type remain unmapped: a registry fact cannot establish which type it
-describes. The comparison reports those type claims without an Atlas answer. Recorded sources
+with more than one config type produce an explicit mapping gap for each matching type question: a registry fact cannot establish which type it describes. These unresolved joins are counted as gaps in both comparison and coverage. Field joins use typed subject fields, including registry-relative nested paths. Recorded sources
 are unqualified for current-engine coverage. A matching gap blocks credit for its
 question. Unknown contract versions or broken subject, source or schema references are errors.
 The full format is [rule-snapshot-v2.schema.json](../contract/rule-snapshot-v2.schema.json).
@@ -129,3 +128,36 @@ added the language name lists, the `script-docs` logs, the define files and the 
 tags to it.
 Documentation source matching is implemented by SDK-525. Neither report promotes Native evidence
 or publishes a rule snapshot.
+
+## Shared-reader answers
+
+Field subjects retain paired Native `read` alternatives, summary `shape`, `conditions`,
+`block_family`, `members`, and separate `uses`. Each read keeps its condition with its outcome;
+Unknown and Unresolved values remain explicit. The `uses` stage is `stored_value_selection`,
+not parser acceptance. Empty selections do not establish unconditional use. Domain and default
+Unknown values are published as gaps; repeat storage behavior never supplies occurrence bounds.
+
+Conditional value forms keep all alternatives in one answer. A separate `value_form.unresolved`
+gap blocks unconditional credit, including nested children of conditional parents. Comparison
+retains the structured answer and gap. A CWT subtype name is not inferred from a Native predicate.
+Duplicate subject and record identities remain invalid. A missing reader ID does not erase an
+established broad value form; an opaque reader ID alone does not establish one.
+
+Scope and localization context display names are explicit `display_name` rules. Subject IDs
+remain opaque to consumers; an empty display name is retained but cannot name a comparison row.
+
+Published gap owners are capability categories, with these ticket mappings maintained here:
+
+| Category | Current owner |
+| --- | --- |
+| `argument_grammar` | SDK-548 |
+| `scope_context` | SDK-549 |
+| `modifier_application` | SDK-547 |
+| `references` | SDK-543 |
+| `callback_context` | SDK-496 |
+| `field_semantics` | SDK-627 |
+| `field_conditions` | SDK-628 |
+
+A null owner remains unassigned; SDK-626 owns the later triage. Owner categories do not change
+the reason or evidence of a gap. Failed questions use deliberate stable text, retaining error
+details and disposal uncertainty without depending on Native Debug formatting.

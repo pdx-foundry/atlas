@@ -5,8 +5,9 @@ use super::{
 };
 use crate::extraction::Extraction;
 use pdx_native::{
-    Answer, Completeness, DiagnosticCoverage, DiagnosticJoin, Disposal, Field, FixtureFieldOutcome,
-    FixtureObservation, FixtureRuntime, FixtureStorage, GapSubject, ReaderKind,
+    Answer, BlockFamily, Completeness, DiagnosticCoverage, DiagnosticJoin, Disposal, Field,
+    FieldCondition, FieldMembers, FieldReadOutcome, FixtureFieldOutcome, FixtureObservation,
+    FixtureRuntime, FixtureStorage, GapSubject, ReaderKind,
 };
 use serde_json::{Value, json};
 use std::collections::{BTreeMap, BTreeSet};
@@ -17,6 +18,12 @@ pub(super) const PROPERTIES: &[&str] = &[
     "loader_path",
     "occurrences.parser_accepted",
     "value_form",
+    "read",
+    "shape",
+    "conditions",
+    "block_family",
+    "members",
+    "uses",
 ];
 
 pub(super) fn assemble(snapshot: &mut Snapshot, extraction: &Extraction) -> Result<(), String> {
@@ -90,7 +97,10 @@ fn assemble_registry(
                     snapshot,
                     &id,
                     property,
-                    format!("Native registry question failed: {error:?}"),
+                    format!(
+                        "Native registry question failed: {}",
+                        super::failure::error_reason(error)
+                    ),
                     None,
                     Vec::new(),
                     Vec::new(),
@@ -126,7 +136,10 @@ fn assemble_fields(
                 snapshot,
                 &registry_subject,
                 "fields",
-                format!("Native field question failed: {error:?}"),
+                format!(
+                    "Native field question failed: {}",
+                    super::failure::error_reason(error)
+                ),
                 None,
                 Vec::new(),
                 Vec::new(),
@@ -153,7 +166,7 @@ fn assemble_fields(
         );
     }
     for field in &answer.value {
-        assemble_field(snapshot, registry, field, answer)?;
+        assemble_field(snapshot, registry, &field.name, field, answer, false)?;
     }
     Ok(())
 }
@@ -161,29 +174,121 @@ fn assemble_fields(
 fn assemble_field(
     snapshot: &mut Snapshot,
     registry: &str,
+    path: &str,
     field: &Field,
     answer: &Answer<Vec<Field>>,
+    parent_conditional: bool,
 ) -> Result<(), String> {
-    let id = field_id(registry, &field.name);
+    let unconditional_outcome = match field.read.as_slice() {
+        [alternative] if !parent_conditional && alternative.condition == FieldCondition::Always => {
+            Some(&alternative.outcome)
+        }
+        _ => None,
+    };
+    let conditional = unconditional_outcome.is_none();
+    let unconditional_reader = match unconditional_outcome {
+        Some(FieldReadOutcome::Read { reader, .. }) => Some(reader),
+        _ => None,
+    };
+    let id = field_id(registry, path);
     snapshot.subjects.push(Subject {
         id: id.clone(),
         kind: SubjectKind::Field,
         registry: Some(registry.into()),
-        field: Some(field.name.clone()),
-        conditional: Some(field.conditional),
+        field: Some(path.into()),
+        conditional: Some(conditional),
         name: None,
     });
     let evidence = evidence(
         snapshot,
         &format!("registry_fields/{registry}"),
         answer,
-        format!("answers.fields.{registry}:{}", field.name),
-        Some(GapSubject::Field {
-            name: field.name.clone(),
-        }),
+        format!("answers.fields.{registry}:{path}"),
+        Some(GapSubject::Field { name: path.into() }),
     )?;
     rule(snapshot, &id, "existence", json!(true), evidence.clone());
-    assemble_field_value_form(snapshot, &id, field, answer, &evidence)?;
+    if field.read.is_empty() {
+        return Err(format!("Field {id} has no read alternatives"));
+    }
+    rule(snapshot, &id, "read", json!(field.read), evidence.clone());
+    rule(snapshot, &id, "shape", json!(field.shape), evidence.clone());
+    rule(
+        snapshot,
+        &id,
+        "conditions",
+        json!(
+            field
+                .read
+                .iter()
+                .map(|alternative| &alternative.condition)
+                .collect::<Vec<_>>()
+        ),
+        evidence.clone(),
+    );
+    rule(
+        snapshot,
+        &id,
+        "uses",
+        json!({"stage":"stored_value_selection", "selections":field.uses}),
+        evidence.clone(),
+    );
+    rule(
+        snapshot,
+        &id,
+        "block_family",
+        json!(
+            field
+                .read
+                .iter()
+                .map(|alternative| {
+                    let family = match &alternative.outcome {
+                        FieldReadOutcome::Read { reader, .. } => reader.family,
+                        _ => BlockFamily::Unknown,
+                    };
+                    json!({"condition":alternative.condition, "family":family})
+                })
+                .collect::<Vec<_>>()
+        ),
+        evidence.clone(),
+    );
+    for property in ["domain", "default"] {
+        gap(
+            snapshot,
+            &id,
+            property,
+            "Native reports this field property as Unknown",
+            Some("field_semantics"),
+            Vec::new(),
+            vec![evidence.clone()],
+        );
+    }
+    rule(
+        snapshot,
+        &id,
+        "members",
+        json!(field.members),
+        evidence.clone(),
+    );
+    if let FieldMembers::Fields(children) = &field.members {
+        for child in children {
+            assemble_field(
+                snapshot,
+                registry,
+                &format!("{path}/{}", child.name),
+                child,
+                answer,
+                conditional,
+            )?;
+        }
+    }
+    assemble_field_value_form(
+        snapshot,
+        &id,
+        field,
+        answer,
+        &evidence,
+        unconditional_reader,
+    )?;
     assemble_field_gaps(snapshot, &id, field, &evidence);
     Ok(())
 }
@@ -194,106 +299,99 @@ fn assemble_field_value_form(
     field: &Field,
     answer: &Answer<Vec<Field>>,
     evidence: &EvidenceLink,
+    reader: Option<&pdx_native::Reader>,
 ) -> Result<(), String> {
-    if field.conditional {
-        gap(
-            snapshot,
-            id,
-            "conditions",
-            "The reader depends on state not established by this field key",
-            None,
-            answer.gaps.clone(),
-            vec![evidence.clone()],
-        );
-        gap(
+    let Some(reader) = reader else {
+        rule(
             snapshot,
             id,
             "value_form",
-            "The reader's conditions are not established",
-            None,
+            json!({"alternatives":field.read}),
+            evidence.clone(),
+        );
+        gap(
+            snapshot,
+            id,
+            "value_form.unresolved",
+            "Conditional alternatives do not establish an unconditional value form; unresolved branches remain unknown",
+            Some("field_conditions"),
             answer.gaps.clone(),
             vec![evidence.clone()],
         );
-    } else if let Some(reader_id) = &field.reader.id {
-        let reader_id = serde_json::to_value(reader_id)
-            .map_err(|error| error.to_string())?
-            .as_str()
-            .ok_or("Native reader id is not a string")?
-            .to_owned();
-        let shape = match field.reader.kind {
-            ReaderKind::Boolean => Some(("boolean", "boolean")),
-            ReaderKind::Integer => Some(("integer", "integer")),
-            ReaderKind::FixedPoint => Some(("number", "number")),
-            ReaderKind::String => Some(("string", "string")),
-            ReaderKind::Reference => Some(("reference", "string")),
-            ReaderKind::Block => {
-                rule(
-                    snapshot,
-                    id,
-                    "value_form",
-                    json!({"form":"block","reader":reader_id}),
-                    evidence.clone(),
-                );
-                gap(
-                    snapshot,
-                    id,
-                    "nested_grammar",
-                    "A block reader does not establish its nested grammar",
-                    None,
-                    Vec::new(),
-                    vec![evidence.clone()],
-                );
-                gap(
-                    snapshot,
-                    id,
-                    "scope_context",
-                    "A block reader does not establish scope context",
-                    None,
-                    Vec::new(),
-                    vec![evidence.clone()],
-                );
-                None
-            }
-            ReaderKind::Unknown => None,
-            _ => None,
-        };
-        if let Some((form, schema_type)) = shape {
-            let schema_name = format!("reader-{reader_id}");
-            let schema = json!({"type":schema_type});
-            if let Some(existing) = snapshot.schemas.definitions.get(&schema_name) {
-                if existing != &schema {
-                    return Err(format!("Conflicting shapes for reader {reader_id}"));
-                }
-            } else {
-                snapshot
-                    .schemas
-                    .definitions
-                    .insert(schema_name.clone(), schema);
-            }
+        return Ok(());
+    };
+    let reader_id = &reader.id;
+    let reader_id = reader_id
+        .as_ref()
+        .map(serde_json::to_value)
+        .transpose()
+        .map_err(|error| error.to_string())?;
+    let shape = match reader.kind {
+        ReaderKind::Boolean => Some(("boolean", "boolean")),
+        ReaderKind::Integer => Some(("integer", "integer")),
+        ReaderKind::FixedPoint => Some(("number", "number")),
+        ReaderKind::String => Some(("string", "string")),
+        ReaderKind::Reference => Some(("reference", "string")),
+        ReaderKind::Block => {
             rule(
                 snapshot,
                 id,
                 "value_form",
-                json!({"form":form,"schema":format!("#/schemas/$defs/{schema_name}"),"reader":reader_id}),
+                json!({"form":"block","reader":reader_id}),
                 evidence.clone(),
             );
-        } else if field.reader.kind != ReaderKind::Block {
             gap(
                 snapshot,
                 id,
-                "value_form",
-                "Native did not establish this reader's value form",
+                "nested_grammar",
+                "A block reader does not establish its nested grammar",
                 None,
-                evidence.native_gaps.clone(),
+                Vec::new(),
                 vec![evidence.clone()],
             );
+            gap(
+                snapshot,
+                id,
+                "scope_context",
+                "A block reader does not establish scope context",
+                None,
+                Vec::new(),
+                vec![evidence.clone()],
+            );
+            None
         }
-    } else {
+        ReaderKind::Unknown => None,
+        _ => None,
+    };
+    if let Some((form, schema_type)) = shape {
+        let schema_name = format!(
+            "reader-{}",
+            reader_id.as_ref().and_then(Value::as_str).unwrap_or(form)
+        );
+        let schema = json!({"type":schema_type});
+        if let Some(existing) = snapshot.schemas.definitions.get(&schema_name) {
+            if existing != &schema {
+                return Err(format!("Conflicting shapes for reader {reader_id:?}"));
+            }
+        } else {
+            snapshot
+                .schemas
+                .definitions
+                .insert(schema_name.clone(), schema);
+        }
+        rule(
+            snapshot,
+            id,
+            "value_form",
+            json!({"form":form,"schema":format!("#/schemas/$defs/{schema_name}"),"reader":reader_id}),
+            evidence.clone(),
+        );
+    } else if reader.kind != ReaderKind::Block {
         gap(
             snapshot,
             id,
             "value_form",
-            "Native did not establish a reader identity",
+            "Native did not establish this reader's value form",
             None,
             evidence.native_gaps.clone(),
             vec![evidence.clone()],
@@ -445,8 +543,8 @@ fn assemble_outcomes(snapshot: &mut Snapshot, extraction: &Extraction) -> Result
                 &registry_id(session.registry),
                 &format!("fixture.{}", session.name),
                 format!(
-                    "Native fixture session disposal failed: {:?}",
-                    session.disposal
+                    "Native fixture session disposal failed: {}",
+                    super::failure::session_reason(&session.disposal)
                 ),
                 None,
                 Vec::new(),
@@ -461,7 +559,10 @@ fn assemble_outcomes(snapshot: &mut Snapshot, extraction: &Extraction) -> Result
                     snapshot,
                     &registry_id(session.registry),
                     &format!("fixture.{}", session.name),
-                    format!("Native fixture question failed: {error:?}"),
+                    format!(
+                        "Native fixture question failed: {}",
+                        super::failure::error_reason(error)
+                    ),
                     None,
                     Vec::new(),
                     Vec::new(),
