@@ -542,7 +542,25 @@
         "answer",
         "evidence"
       ],
-      "description": "Properties include display_name for scopes and localization contexts, and paired read, shape, conditions, block_family, members and uses facts for fields. Unknown alternatives are retained and do not establish unconditional acceptance."
+      "description": "Properties include display_name for scopes and localization contexts, and paired read, shape, conditions, block_family, members and uses facts for fields. Unknown alternatives are retained and do not establish unconditional acceptance.",
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "property": {
+                "const": "display_name"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "answer": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      ]
     },
     "gap": {
       "type": "object",

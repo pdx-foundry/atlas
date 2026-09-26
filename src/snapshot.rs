@@ -120,7 +120,7 @@ pub struct SchemaBundle {
 pub enum SubjectKind {
     /// A content directory.
     Registry,
-    /// A root field of a registry's definitions.
+    /// A root or nested field of a registry's definitions.
     Field,
     /// An effect command.
     Effect,
@@ -168,7 +168,7 @@ impl SubjectKind {
     }
 }
 
-/// A registry, one discovered root field, or one language declaration.
+/// A registry, one discovered field path, or one language declaration.
 ///
 /// Registry subjects are `registry:{registry}`, field subjects `field:{registry}/{field}`, and
 /// every other subject is `{kind}:{name}`.
@@ -182,7 +182,7 @@ pub struct Subject {
     /// Native content directory of a registry or field subject.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub registry: Option<String>,
-    /// Field name, if this is a field subject.
+    /// Registry-relative field path, if this is a field subject.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub field: Option<String>,
     /// Whether the reader depends on state beyond the field key.
