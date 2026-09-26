@@ -9,12 +9,12 @@ existence claims and 109 value-form claims. No formerly covered claim loses cred
 increases are in ship sizes (103), megastructures (56), country types (55), personalities (48),
 and situations (46). These are established reader facts, not agreement with CWT.
 
-Ambiguous directory joins now leave explicit gaps on **291 config claim occurrences**: 12 type
-existence, 12 loader-path, 134 field-existence and 133 value-form claims. Their directory alone
+Ambiguous directory joins now leave explicit gaps on **586 config claim occurrences**: 12 type-existence, 12 loader-path, 134 field-existence,
+134 value-form, 133 minimum-cardinality, 133 maximum-cardinality and 28 scope-context claims. Their directory alone
 cannot select the applicable CWT type. These gaps remain uncovered in the coverage report and
 retain their mapping reason in comparison. They are not silently dropped as Atlas-only facts.
 
-The snapshot has 27,606 rules and 16,210 gaps. Paired read alternatives, shapes, block families,
+The snapshot has 27,606 rules and 16,213 gaps. Paired read alternatives, shapes, block families,
 nested members, and stored-value selections remain attached to typed field subjects. Unknown
 branches remain gaps. CWT subtype selectors are not assumed equivalent to Native field predicates.
 Defaults, exhaustive domains and occurrence bounds remain unestablished. Later shared-reader
@@ -28,19 +28,19 @@ the live snapshot after normalizing source basis and snapshot identity. Recorded
 `Recorded` basis and receive no current-engine coverage credit.
 
 - Capture date: 2026-09-26 (local).
-- Atlas source revision: `7febb66` (full revision in the full-config baseline).
+- Atlas source revision: `cd40bd4` (full revision in the full-config baseline).
 - Native source revision: `c33a3fc1bc5387adf14c0d30e6d8e30de6d03cd1`.
 - Parser source revision: `ccb681ac10af4a4efb21ec42450b1a04d2d8500a`.
 - Exact game build: `07988b4f1b865623becd7a61af1cae92e111be6515d341754af70f02107822cd`.
 - Config revision: `85747602a614ad7daa8cc66453777ecb023463a8`.
 - Config SHA-256: `5c79cabb8d1b25e40994c0d134f5623bc2aef2a6b964059aabfc4834e6d039cc`.
-- Live snapshot SHA-256: `de78dd3bf6ecc0be1ccc9d9005275d4595efc71fefebc417ab6f9c6f44046ad5`.
+- Live snapshot SHA-256: `7e74dbc868c5e350a46407344872926e4b66a8ae03dbe77ab778a29162cfee23`.
 - Ledger SHA-256: `ba2bb263812b54f4f3b6d28a7b47f56b92a0be5f3f7f8da41aa6c375f2f67947` (unchanged).
-- Coverage SHA-256: `12b30728efa7db13f0f147f96e4804f83d1cf60c0dea361caed667499d8832d6`.
-- Comparison SHA-256: `57a6d29672eec1c0897598a95ea11d5790ed39d8362a2fc448229898e805fa9e`.
+- Coverage SHA-256: `d24fe4990955c603b017aa53e934b4ddeb4a1dc94ca5528e36b58b5d07f6722c`.
+- Comparison SHA-256: `90bf6e20c1a5c1017892496184c6557f8528d9b7b788bfc01652de6d2693e0a6`.
 
 The full live snapshot, raw answers and reports are retained at
-`/Users/jackson/Developer/pdx-foundry/atlas/.scratch/sdk-597`. The tracked fixtures contain the
+`/Users/jackson/Developer/pdx-foundry/atlas/.scratch/sdk-597/review`. The tracked fixtures contain the
 fresh Native recordings, with only the loaded modifier table reduced as described in their README.
 
 SDK-577 adds explicit `display_name` rules. The config name lists, all five script-doc comparisons,
@@ -67,3 +67,7 @@ ATLAS_RULE_SNAPSHOT=.scratch/sdk-597/snapshot.json \
 
 Ledger and comparison exit 2 for the 19 retained config diagnostics. Snapshot creation exits 0.
 The pinned gate checks the exact inputs, coverage count and deterministic report digests.
+
+The review correction retains three registry-level `field_gap_subjects` gaps for Native leaf
+names that cannot select one nested path. Field evidence no longer inherits unrelated registry
+gaps. Older version-2 ticket owners remain readable, while new publications use categories.
