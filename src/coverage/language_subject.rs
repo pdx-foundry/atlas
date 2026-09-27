@@ -246,7 +246,12 @@ fn scope_join<'a>(
         .iter()
         .filter(|rule| rule.property == "keywords")
     {
-        let Some(name) = rule.subject.strip_prefix("scope:") else {
+        let Some(name) = snapshot
+            .subjects
+            .iter()
+            .find(|subject| subject.id == rule.subject && subject.kind == SubjectKind::Scope)
+            .and_then(|subject| subject.name.as_deref())
+        else {
             continue;
         };
 

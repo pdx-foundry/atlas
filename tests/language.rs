@@ -108,7 +108,7 @@ async fn every_language_question_has_recorded_answers() {
             .unwrap()
             .owner
             .as_deref(),
-        Some("SDK-548")
+        Some("argument_grammar")
     );
 }
 
@@ -247,7 +247,7 @@ async fn entry_scopes_need_every_slot_established() {
         assert!(rule(&snapshot, &id).is_none(), "{id}");
         assert_eq!(
             gap(&snapshot, &id).unwrap().owner.as_deref(),
-            Some("SDK-496")
+            Some("callback_context")
         );
         assert!(rule(&snapshot, &format!("on_action:{name}#existence")).is_some());
     }
@@ -1012,5 +1012,67 @@ async fn a_closing_separator_ends_the_log_section() {
     assert_eq!(
         list(&report.script_docs[0].lists, "names").agree,
         ["add_age"]
+    );
+}
+
+#[tokio::test]
+async fn display_names_are_explicit_even_when_names_contain_spaces_or_are_unreadable() {
+    let mut extraction = recorded().await;
+    let scopes = &mut extraction.language.scopes.as_mut().unwrap().value;
+    let scope = scopes
+        .types
+        .iter_mut()
+        .find(|scope| scope.name == "leader")
+        .unwrap();
+    scope.name = "pop job/worker".into();
+    let contexts = &mut extraction
+        .language
+        .localization
+        .as_mut()
+        .unwrap()
+        .value
+        .contexts;
+    let context = contexts
+        .iter_mut()
+        .find(|context| context.name == "Country")
+        .unwrap();
+    context.name.clear();
+    let snapshot = snapshot::assemble(&extraction).unwrap();
+    assert_eq!(
+        rule(&snapshot, "scope:pop job/worker/leader#display_name")
+            .unwrap()
+            .answer,
+        "pop job/worker"
+    );
+    let unreadable = snapshot
+        .subjects
+        .iter()
+        .find(|subject| {
+            subject.kind == snapshot::SubjectKind::LocalizationContext
+                && subject
+                    .name
+                    .as_ref()
+                    .is_some_and(|name| name.starts_with('@'))
+        })
+        .unwrap();
+    assert_eq!(
+        rule(&snapshot, &format!("{}#display_name", unreadable.id))
+            .unwrap()
+            .answer,
+        ""
+    );
+    let inputs = comparison::Inputs {
+        script_docs: BTreeMap::from([("effects.log".into(), "== EFFECT DOCUMENTATION ==\nadd_age - Adds the age of the scoped leader\nadd_age = <int>\nSupported Scopes: pop job/worker\n".into())]),
+        ..Default::default()
+    };
+    let report = comparison::evaluate(
+        &language_ledger(),
+        &snapshot::json_bytes(&snapshot).unwrap(),
+        &inputs,
+    )
+    .unwrap();
+    assert_eq!(
+        list(&report.script_docs[0].lists, "supported_scopes").agree,
+        ["add_age: pop job/worker"]
     );
 }

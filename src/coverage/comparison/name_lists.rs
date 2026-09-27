@@ -49,6 +49,18 @@ impl<'a> Engine<'a> {
             .copied()
     }
 
+    /// Read a display name only from a subject of the requested kind.
+    pub(super) fn display_name(&self, kind: SubjectKind, id: &str) -> Option<&str> {
+        let subject = self
+            .snapshot
+            .subjects
+            .iter()
+            .find(|subject| subject.id == id && subject.kind == kind)?;
+        self.answer(kind, subject.name.as_deref()?, "display_name")?
+            .as_str()
+            .filter(|name| !name.is_empty())
+    }
+
     /// Script keywords of every scope type and scope group.
     fn scope_keywords(&self) -> BTreeSet<String> {
         let mut keywords = self.names(SubjectKind::ScopeGroup);

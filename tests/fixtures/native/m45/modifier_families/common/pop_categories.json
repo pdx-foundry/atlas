@@ -16,7 +16,7 @@
             "Pops"
           ]
         },
-        "condition": "Unresolved",
+        "condition": "Always",
         "name_limit": null
       },
       {
@@ -34,7 +34,7 @@
             "Pops"
           ]
         },
-        "condition": "Unresolved",
+        "condition": "Always",
         "name_limit": null
       },
       {
@@ -52,27 +52,12 @@
             "Pops"
           ]
         },
-        "condition": "Unresolved",
+        "condition": "Always",
         "name_limit": null
       }
     ],
     "completeness": "Partial",
     "gaps": [
-      {
-        "kind": "UnresolvedPath",
-        "subject": {"kind": "registry", "name": "common/pop_categories"},
-        "detail": "only an item's post-read code registers pop_cat_{key}_bonus_workforce_mult; that the engine runs it for every item is not established"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {"kind": "registry", "name": "common/pop_categories"},
-        "detail": "only an item's post-read code registers pop_cat_{key}_happiness; that the engine runs it for every item is not established"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {"kind": "registry", "name": "common/pop_categories"},
-        "detail": "only an item's post-read code registers pop_cat_{key}_political_power; that the engine runs it for every item is not established"
-      },
       {
         "kind": "UnnamedDeclaration",
         "subject": null,
@@ -80,14 +65,17 @@
       },
       {
         "kind": "OutsideMethod",
-        "subject": {"kind": "registry", "name": "common/pop_categories"},
+        "subject": {
+          "kind": "registry",
+          "name": "common/pop_categories"
+        },
         "detail": "The search covers the registry's database generator and post-read code. Where a modifier takes effect, the tags that a later registration of the same name gives, the tags of a declared modifier after content registers it again, and names longer than a fixed-size buffer keeps are outside it."
       }
     ],
     "source": {
       "build": "07988b4f1b865623becd7a61af1cae92e111be6515d341754af70f02107822cd",
       "native_version": "0.1.0",
-      "method": "modifier-families/v2",
+      "method": "modifier-families/v3",
       "basis": "StaticAnalysis"
     }
   }

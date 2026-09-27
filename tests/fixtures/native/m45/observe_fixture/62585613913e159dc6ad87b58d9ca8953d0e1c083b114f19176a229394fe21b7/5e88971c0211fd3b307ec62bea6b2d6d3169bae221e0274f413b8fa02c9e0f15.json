@@ -9,6 +9,7 @@
             "registry": "common/traditions",
             "definition": "atlas_malformed",
             "field": "unlocks_agenda",
+            "parsing": false,
             "diagnostics": true,
             "runtime": false
           },
@@ -17,8 +18,10 @@
           "definition_line": 19,
           "reader": {
             "id": "325efaa17499c32d",
-            "kind": "String"
+            "kind": "String",
+            "family": "NotApplicable"
           },
+          "parsing": "NotRequested",
           "storage": {
             "String": {
               "occurrences": [
@@ -42,6 +45,7 @@
             "registry": "common/traditions",
             "definition": "atlas_omitted",
             "field": "unlocks_agenda",
+            "parsing": false,
             "diagnostics": true,
             "runtime": false
           },
@@ -50,8 +54,10 @@
           "definition_line": 14,
           "reader": {
             "id": "325efaa17499c32d",
-            "kind": "String"
+            "kind": "String",
+            "family": "NotApplicable"
           },
+          "parsing": "NotRequested",
           "storage": {
             "String": {
               "occurrences": [],
@@ -67,6 +73,7 @@
             "registry": "common/traditions",
             "definition": "atlas_repeated",
             "field": "unlocks_agenda",
+            "parsing": false,
             "diagnostics": true,
             "runtime": false
           },
@@ -75,8 +82,10 @@
           "definition_line": 15,
           "reader": {
             "id": "325efaa17499c32d",
-            "kind": "String"
+            "kind": "String",
+            "family": "NotApplicable"
           },
+          "parsing": "NotRequested",
           "storage": {
             "String": {
               "occurrences": [
@@ -103,6 +112,7 @@
             "registry": "common/traditions",
             "definition": "atlas_unknown",
             "field": "unlocks_agenda",
+            "parsing": false,
             "diagnostics": true,
             "runtime": false
           },
@@ -111,8 +121,10 @@
           "definition_line": 23,
           "reader": {
             "id": "325efaa17499c32d",
-            "kind": "String"
+            "kind": "String",
+            "family": "NotApplicable"
           },
+          "parsing": "NotRequested",
           "storage": {
             "String": {
               "occurrences": [
@@ -134,6 +146,7 @@
             "registry": "common/traditions",
             "definition": "atlas_valid",
             "field": "ai_weight",
+            "parsing": false,
             "diagnostics": true,
             "runtime": false
           },
@@ -141,9 +154,11 @@
           "owner": 1,
           "definition_line": 1,
           "reader": {
-            "id": "97942c9a3d3c9c1b",
-            "kind": "Block"
+            "id": "f08cb83d92484a89",
+            "kind": "Block",
+            "family": "Unknown"
           },
+          "parsing": "NotRequested",
           "storage": {
             "Unavailable": "The Block reader has no storage decoder in this method"
           },
@@ -155,6 +170,7 @@
             "registry": "common/traditions",
             "definition": "atlas_valid",
             "field": "custom_tooltip",
+            "parsing": false,
             "diagnostics": true,
             "runtime": false
           },
@@ -163,8 +179,10 @@
           "definition_line": 1,
           "reader": {
             "id": "325efaa17499c32d",
-            "kind": "String"
+            "kind": "String",
+            "family": "NotApplicable"
           },
+          "parsing": "NotRequested",
           "storage": {
             "String": {
               "occurrences": [
@@ -186,6 +204,7 @@
             "registry": "common/traditions",
             "definition": "atlas_valid",
             "field": "custom_tooltip_with_modifiers",
+            "parsing": false,
             "diagnostics": true,
             "runtime": false
           },
@@ -194,8 +213,10 @@
           "definition_line": 1,
           "reader": {
             "id": "325efaa17499c32d",
-            "kind": "String"
+            "kind": "String",
+            "family": "NotApplicable"
           },
+          "parsing": "NotRequested",
           "storage": {
             "String": {
               "occurrences": [
@@ -217,6 +238,7 @@
             "registry": "common/traditions",
             "definition": "atlas_valid",
             "field": "modifier",
+            "parsing": false,
             "diagnostics": true,
             "runtime": false
           },
@@ -224,9 +246,11 @@
           "owner": 1,
           "definition_line": 1,
           "reader": {
-            "id": "97942c9a3d3c9c1b",
-            "kind": "Block"
+            "id": "1c2988588f7e8eaa",
+            "kind": "Block",
+            "family": "Modifier"
           },
+          "parsing": "NotRequested",
           "storage": {
             "Unavailable": "The Block reader has no storage decoder in this method"
           },
@@ -238,6 +262,7 @@
             "registry": "common/traditions",
             "definition": "atlas_valid",
             "field": "on_disabled",
+            "parsing": false,
             "diagnostics": true,
             "runtime": false
           },
@@ -246,8 +271,10 @@
           "definition_line": 1,
           "reader": {
             "id": "6e28a363faf61c52",
-            "kind": "Block"
+            "kind": "Block",
+            "family": "Effect"
           },
+          "parsing": "NotRequested",
           "storage": {
             "Unavailable": "The Block reader has no storage decoder in this method"
           },
@@ -259,6 +286,7 @@
             "registry": "common/traditions",
             "definition": "atlas_valid",
             "field": "on_enabled",
+            "parsing": false,
             "diagnostics": true,
             "runtime": false
           },
@@ -267,8 +295,10 @@
           "definition_line": 1,
           "reader": {
             "id": "6e28a363faf61c52",
-            "kind": "Block"
+            "kind": "Block",
+            "family": "Effect"
           },
+          "parsing": "NotRequested",
           "storage": {
             "Unavailable": "The Block reader has no storage decoder in this method"
           },
@@ -280,6 +310,7 @@
             "registry": "common/traditions",
             "definition": "atlas_valid",
             "field": "possible",
+            "parsing": false,
             "diagnostics": true,
             "runtime": false
           },
@@ -288,8 +319,10 @@
           "definition_line": 1,
           "reader": {
             "id": "e044b50825a1841d",
-            "kind": "Block"
+            "kind": "Block",
+            "family": "Trigger"
           },
+          "parsing": "NotRequested",
           "storage": {
             "Unavailable": "The Block reader has no storage decoder in this method"
           },
@@ -301,6 +334,7 @@
             "registry": "common/traditions",
             "definition": "atlas_valid",
             "field": "potential",
+            "parsing": false,
             "diagnostics": true,
             "runtime": false
           },
@@ -309,8 +343,10 @@
           "definition_line": 1,
           "reader": {
             "id": "e044b50825a1841d",
-            "kind": "Block"
+            "kind": "Block",
+            "family": "Trigger"
           },
+          "parsing": "NotRequested",
           "storage": {
             "Unavailable": "The Block reader has no storage decoder in this method"
           },
@@ -322,6 +358,7 @@
             "registry": "common/traditions",
             "definition": "atlas_valid",
             "field": "tradition_swap",
+            "parsing": false,
             "diagnostics": true,
             "runtime": false
           },
@@ -329,11 +366,13 @@
           "owner": 1,
           "definition_line": 1,
           "reader": {
-            "id": null,
-            "kind": "Unknown"
+            "id": "3e4a6b47b20070ea",
+            "kind": "Block",
+            "family": "Unknown"
           },
+          "parsing": "NotRequested",
           "storage": {
-            "Unavailable": "The Unknown reader has no storage decoder in this method"
+            "Unavailable": "The Block reader has no storage decoder in this method"
           },
           "diagnostics": [],
           "runtime": "NotRequested"
@@ -343,6 +382,7 @@
             "registry": "common/traditions",
             "definition": "atlas_valid",
             "field": "triggered_modifier",
+            "parsing": false,
             "diagnostics": true,
             "runtime": false
           },
@@ -351,8 +391,10 @@
           "definition_line": 1,
           "reader": {
             "id": null,
-            "kind": "Unknown"
+            "kind": "Unknown",
+            "family": "Unknown"
           },
+          "parsing": "NotRequested",
           "storage": {
             "Unavailable": "The Unknown reader has no storage decoder in this method"
           },
@@ -364,6 +406,7 @@
             "registry": "common/traditions",
             "definition": "atlas_valid",
             "field": "unlocks_agenda",
+            "parsing": false,
             "diagnostics": true,
             "runtime": true
           },
@@ -372,8 +415,10 @@
           "definition_line": 1,
           "reader": {
             "id": "325efaa17499c32d",
-            "kind": "String"
+            "kind": "String",
+            "family": "NotApplicable"
           },
+          "parsing": "NotRequested",
           "storage": {
             "String": {
               "occurrences": [
@@ -431,54 +476,81 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": {"kind": "field", "name": "ai_weight"},
+        "subject": {
+          "kind": "field",
+          "name": "ai_weight"
+        },
         "detail": "The Block reader has no storage decoder in this method"
       },
       {
         "kind": "OutsideMethod",
-        "subject": {"kind": "field", "name": "modifier"},
+        "subject": {
+          "kind": "field",
+          "name": "modifier"
+        },
         "detail": "The Block reader has no storage decoder in this method"
       },
       {
         "kind": "OutsideMethod",
-        "subject": {"kind": "field", "name": "on_disabled"},
+        "subject": {
+          "kind": "field",
+          "name": "on_disabled"
+        },
         "detail": "The Block reader has no storage decoder in this method"
       },
       {
         "kind": "OutsideMethod",
-        "subject": {"kind": "field", "name": "on_enabled"},
+        "subject": {
+          "kind": "field",
+          "name": "on_enabled"
+        },
         "detail": "The Block reader has no storage decoder in this method"
       },
       {
         "kind": "OutsideMethod",
-        "subject": {"kind": "field", "name": "possible"},
+        "subject": {
+          "kind": "field",
+          "name": "possible"
+        },
         "detail": "The Block reader has no storage decoder in this method"
       },
       {
         "kind": "OutsideMethod",
-        "subject": {"kind": "field", "name": "potential"},
+        "subject": {
+          "kind": "field",
+          "name": "potential"
+        },
+        "detail": "The Block reader has no storage decoder in this method"
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "field",
+          "name": "tradition_swap"
+        },
         "detail": "The Block reader has no storage decoder in this method"
       },
       {
         "kind": "UnresolvedReader",
-        "subject": {"kind": "field", "name": "tradition_swap"},
-        "detail": "The Unknown reader has no storage decoder in this method"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {"kind": "field", "name": "triggered_modifier"},
+        "subject": {
+          "kind": "field",
+          "name": "triggered_modifier"
+        },
         "detail": "The Unknown reader has no storage decoder in this method"
       },
       {
         "kind": "OutsideMethod",
-        "subject": {"kind": "field", "name": "unlocks_agenda"},
+        "subject": {
+          "kind": "field",
+          "name": "unlocks_agenda"
+        },
         "detail": "Runtime is outside the initial file-load method"
       }
     ],
     "source": {
       "build": "07988b4f1b865623becd7a61af1cae92e111be6515d341754af70f02107822cd",
       "native_version": "0.1.0",
-      "method": "observe-fixture/v1",
+      "method": "observe-fixture/v2",
       "basis": "LiveObservation"
     }
   }

@@ -234,30 +234,61 @@
             "UnresolvedPath",
             "UnresolvedReader",
             "ReaderSemantics",
-            "IncompleteObservation"
+            "IncompleteObservation",
+            "UnresolvedStorage",
+            "UnresolvedCondition"
           ]
         },
         "subject": {
           "anyOf": [
-            { "type": "null" },
             {
-              "type": "object",
-              "additionalProperties": false,
-              "properties": {
-                "kind": { "enum": ["registry", "field", "answer_item", "localization_link", "fixture_file"] },
-                "name": { "type": "string" }
-              },
-              "required": ["kind", "name"]
+              "type": "null"
             },
             {
               "type": "object",
               "additionalProperties": false,
               "properties": {
-                "kind": { "enum": ["localization_context", "scope_type"] },
-                "id": { "type": "string", "minLength": 1 },
-                "name": { "type": "string" }
+                "kind": {
+                  "enum": [
+                    "registry",
+                    "field",
+                    "answer_item",
+                    "localization_link",
+                    "fixture_file"
+                  ]
+                },
+                "name": {
+                  "type": "string"
+                }
               },
-              "required": ["kind", "id", "name"]
+              "required": [
+                "kind",
+                "name"
+              ]
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "kind": {
+                  "enum": [
+                    "localization_context",
+                    "scope_type"
+                  ]
+                },
+                "id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "name": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "kind",
+                "id",
+                "name"
+              ]
             }
           ]
         },
@@ -510,6 +541,25 @@
         "conditions",
         "answer",
         "evidence"
+      ],
+      "description": "Properties include display_name for scopes and localization contexts, and paired read, shape, conditions, block_family, members and uses facts for fields. Unknown alternatives are retained and do not establish unconditional acceptance.",
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "property": {
+                "const": "display_name"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "answer": {
+                "type": "string"
+              }
+            }
+          }
+        }
       ]
     },
     "gap": {
@@ -534,13 +584,23 @@
           "minLength": 1
         },
         "owner": {
+          "description": "Producers use capability categories. Legacy SDK ticket owners remain readable in version 2.",
           "anyOf": [
+            {
+              "enum": [
+                null,
+                "argument_grammar",
+                "scope_context",
+                "modifier_application",
+                "references",
+                "callback_context",
+                "field_semantics",
+                "field_conditions"
+              ]
+            },
             {
               "type": "string",
               "pattern": "^SDK-[0-9]+$"
-            },
-            {
-              "type": "null"
             }
           ]
         },

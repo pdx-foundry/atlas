@@ -18,7 +18,7 @@ tradition = {
 }
 
 #[tokio::test]
-async fn shared_config_directory_does_not_assign_registry_evidence_to_either_type() {
+async fn shared_config_directory_counts_an_explicit_gap_for_each_type() {
     let source = r#"
 types = {
     type[technology] = { path = "game/common/technology" }
@@ -52,13 +52,13 @@ types = {
             coverage::comparison::Status::MissingFromAtlas,
             "{name}"
         );
+        assert!(
+            entry
+                .gaps
+                .iter()
+                .any(|reason| reason.contains("several config types"))
+        );
     }
-    assert!(comparison.entries.iter().any(|entry| {
-        entry
-            .question
-            .contains("registry:common/technology#existence")
-            && entry.status == coverage::comparison::Status::AtlasOnly
-    }));
 }
 
 async fn recorded_snapshot() -> snapshot::Snapshot {
@@ -400,4 +400,63 @@ tradition = { unlocks_agenda = scalar on_enabled = {} }
         coverage::comparison::Status::MissingFromAtlas
     );
     assert!(!alias_entry.atlas_answers.is_empty());
+}
+
+#[tokio::test]
+async fn shared_directory_keeps_native_and_mapping_gaps_together() {
+    let source = r#"
+types = {
+    type[first] = { path = "game/common/traditions" }
+    type[second] = { path = "game/common/traditions" }
+}
+first = { unlocks_agenda = scalar }
+second = { unlocks_agenda = scalar }
+"#;
+    let ledger = ledger::inventory(&BTreeMap::from([("test.cwt".into(), source.into())]));
+    let mut snapshot = recorded_snapshot().await;
+    let id = "field:common/traditions/unlocks_agenda#value_form";
+    snapshot.rules.retain(|rule| rule.id != id);
+    snapshot.gaps.push(snapshot::Gap {
+        id: id.into(),
+        subject: "field:common/traditions/unlocks_agenda".into(),
+        property: "value_form".into(),
+        reason: "Native reader is unknown".into(),
+        owner: None,
+        native_gaps: vec![],
+        evidence: vec![],
+    });
+    let comparison = coverage::comparison::evaluate(
+        &ledger,
+        &snapshot::json_bytes(&snapshot).unwrap(),
+        &Default::default(),
+    )
+    .unwrap();
+    for name in ["first", "second"] {
+        let claim = ledger
+            .claims
+            .iter()
+            .find(|claim| {
+                claim.property == "value_form" && claim.subject == [name, "unlocks_agenda"]
+            })
+            .unwrap();
+        let entry = comparison
+            .entries
+            .iter()
+            .find(|entry| entry.claim.as_deref() == Some(&claim.id))
+            .unwrap();
+        assert!(
+            entry
+                .gaps
+                .iter()
+                .any(|gap| gap == "Native reader is unknown")
+        );
+        assert_eq!(
+            entry
+                .gaps
+                .iter()
+                .filter(|gap| gap.contains("several config types"))
+                .count(),
+            1
+        );
+    }
 }

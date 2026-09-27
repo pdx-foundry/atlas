@@ -5,24 +5,33 @@
     "gaps": [
       {
         "kind": "OutsideMethod",
-        "subject": {"kind": "registry", "name": "common/diplomacy_economy"},
-        "detail": "Nested grammar, accepted occurrences, and runtime behavior are outside this bounded reader classification."
+        "subject": {
+          "kind": "registry",
+          "name": "common/diplomacy_economy"
+        },
+        "detail": "Defaults, exhaustive enum domains, occurrence limits, deeper nested grammars, and non-owner runtime callers are not established by this method."
       },
       {
         "kind": "UnresolvedReader",
-        "subject": {"kind": "registry", "name": "common/diplomacy_economy"},
+        "subject": {
+          "kind": "registry",
+          "name": "common/diplomacy_economy"
+        },
         "detail": "The field's reader could not be established on at least one path."
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "registry", "name": "common/diplomacy_economy"},
+        "subject": {
+          "kind": "registry",
+          "name": "common/diplomacy_economy"
+        },
         "detail": "A path through the registry's reader could not be followed to its end."
       }
     ],
     "source": {
       "build": "07988b4f1b865623becd7a61af1cae92e111be6515d341754af70f02107822cd",
       "native_version": "0.1.0",
-      "method": "registry-fields/v3",
+      "method": "registry-fields/v6",
       "basis": "StaticAnalysis"
     }
   }

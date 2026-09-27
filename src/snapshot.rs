@@ -1,5 +1,6 @@
 //! Deterministic Atlas rules assembled from Native answers.
 
+mod failure;
 mod language;
 mod registry;
 
@@ -119,7 +120,7 @@ pub struct SchemaBundle {
 pub enum SubjectKind {
     /// A content directory.
     Registry,
-    /// A root field of a registry's definitions.
+    /// A root or nested field of a registry's definitions.
     Field,
     /// An effect command.
     Effect,
@@ -167,7 +168,7 @@ impl SubjectKind {
     }
 }
 
-/// A registry, one discovered root field, or one language declaration.
+/// A registry, one discovered field path, or one language declaration.
 ///
 /// Registry subjects are `registry:{registry}`, field subjects `field:{registry}/{field}`, and
 /// every other subject is `{kind}:{name}`.
@@ -181,7 +182,7 @@ pub struct Subject {
     /// Native content directory of a registry or field subject.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub registry: Option<String>,
-    /// Field name, if this is a field subject.
+    /// Registry-relative field path, if this is a field subject.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub field: Option<String>,
     /// Whether the reader depends on state beyond the field key.
@@ -222,7 +223,7 @@ pub struct Gap {
     pub property: String,
     /// Why evidence is insufficient.
     pub reason: String,
-    /// Ticket that owns the missing capability, when known.
+    /// Capability category that owns the gap, when known; ticket mappings live in docs.
     pub owner: Option<String>,
     /// Native's typed gaps behind this gap, retained whole.
     pub native_gaps: Vec<NativeGap>,
@@ -247,7 +248,10 @@ const DIALECT: &str = "https://json-schema.org/draft/2020-12/schema";
 /// Assemble a snapshot; malformed internal references or conflicting sources fail.
 pub fn assemble(extraction: &Extraction) -> Result<Snapshot, String> {
     if let Err(error) = &extraction.registries {
-        return Err(format!("Native registry discovery failed: {error:?}"));
+        return Err(format!(
+            "Native registry discovery failed: {}",
+            failure::error_reason(error)
+        ));
     }
     let mut snapshot = Snapshot {
         kind: "atlas_rule_snapshot".into(),
@@ -483,9 +487,30 @@ pub fn verify(snapshot: &Snapshot) -> Result<(), String> {
                 gap.id
             ));
         }
+        if gap.owner.as_deref().is_some_and(|owner| {
+            !legacy_ticket_owner(owner)
+                && !matches!(
+                    owner,
+                    "argument_grammar"
+                        | "scope_context"
+                        | "modifier_application"
+                        | "references"
+                        | "callback_context"
+                        | "field_semantics"
+                        | "field_conditions"
+                )
+        }) {
+            return Err(format!("Unknown gap owner category: {}", gap.id));
+        }
         verify_evidence(snapshot, &gap.evidence)?;
     }
     Ok(())
+}
+
+fn legacy_ticket_owner(owner: &str) -> bool {
+    owner.strip_prefix("SDK-").is_some_and(|digits| {
+        !digits.is_empty() && digits.bytes().all(|byte| byte.is_ascii_digit())
+    })
 }
 
 fn subject_identity(subject: &Subject) -> Result<String, String> {

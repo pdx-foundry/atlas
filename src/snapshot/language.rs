@@ -30,6 +30,7 @@ pub(super) const PROPERTIES: &[&str] = &[
     "data",
     "declared_scopes",
     "documentation",
+    "display_name",
     "entry_scopes",
     "existence",
     "generation",
@@ -47,11 +48,11 @@ pub(super) const PROPERTIES: &[&str] = &[
     "value_type",
 ];
 
-const ARGUMENT_GRAMMARS: &str = "SDK-548";
-const SCOPE_CONTEXT: &str = "SDK-549";
-const MODIFIER_APPLICATION: &str = "SDK-547";
-const REFERENCES: &str = "SDK-543";
-const CALLBACK_CONTEXTS: &str = "SDK-496";
+const ARGUMENT_GRAMMARS: &str = "argument_grammar";
+const SCOPE_CONTEXT: &str = "scope_context";
+const MODIFIER_APPLICATION: &str = "modifier_application";
+const REFERENCES: &str = "references";
+const CALLBACK_CONTEXTS: &str = "callback_context";
 
 pub(super) fn assemble(snapshot: &mut Snapshot, extraction: &Extraction) -> Result<(), String> {
     let language = &extraction.language;
@@ -137,7 +138,10 @@ impl Builder<'_> {
                 self.gap(
                     subject,
                     property,
-                    format!("Native question failed: {error}"),
+                    format!(
+                        "Native question failed: {}",
+                        super::failure::error_reason(error)
+                    ),
                     None,
                     Vec::new(),
                 );
@@ -525,6 +529,7 @@ impl Builder<'_> {
                 .collect();
 
             self.rule(&id, "existence", json!(true), &link);
+            self.rule(&id, "display_name", json!(scope.name), &link);
             self.rule(&id, "keywords", json!(scope.keywords), &link);
             self.rule(&id, "groups", json!(groups), &link);
         }
@@ -665,6 +670,8 @@ impl Builder<'_> {
             };
 
             self.rule(&id, "existence", json!(true), &link);
+
+            self.rule(&id, "display_name", json!(context.name), &link);
 
             match &scopes {
                 Some(scopes) => self.rule(&id, "scopes", json!(scopes), &link),
@@ -1001,8 +1008,8 @@ impl Builder<'_> {
                 &inventory,
                 "answer",
                 format!(
-                    "Native loaded-modifier session disposal failed: {:?}",
-                    session.disposal
+                    "Native loaded-modifier session disposal failed: {}",
+                    super::failure::session_reason(&session.disposal)
                 ),
                 None,
                 Vec::new(),
@@ -1059,6 +1066,8 @@ fn gap_kind(kind: GapKind) -> &'static str {
         GapKind::UnresolvedReader => "unresolved_reader",
         GapKind::ReaderSemantics => "reader_semantics",
         GapKind::IncompleteObservation => "incomplete_observation",
+        GapKind::UnresolvedStorage => "unresolved_storage",
+        GapKind::UnresolvedCondition => "unresolved_condition",
     }
 }
 

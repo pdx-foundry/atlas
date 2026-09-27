@@ -1,27 +1,27 @@
 {
   "config_revision": "85747602a614ad7daa8cc66453777ecb023463a8",
   "config_sha256": "5c79cabb8d1b25e40994c0d134f5623bc2aef2a6b964059aabfc4834e6d039cc",
-  "snapshot_sha256": "0fd3ac4f07a09ae4deacce77aca4ca7838c45e9bf1c7a313d8d14a717dba9de0",
+  "snapshot_sha256": "7e74dbc868c5e350a46407344872926e4b66a8ae03dbe77ab778a29162cfee23",
   "files": 175,
   "physical_lines": 50201,
   "meaningful_lines": 43842,
   "claims": 61146,
   "totals": {
     "atlas_owned": {
-      "covered": 15278,
+      "covered": 15979,
       "total": 58032,
-      "percent": 26.326854
+      "percent": 27.534808
     },
     "all_claims": {
-      "covered": 15278,
+      "covered": 15979,
       "total": 61146,
-      "percent": 24.986099
+      "percent": 26.132535
     },
     "by_owner": {
       "engine_fact": {
-        "covered": 15278,
+        "covered": 15979,
         "total": 54914,
-        "percent": 27.821685
+        "percent": 29.098226
       },
       "content_derived": {
         "covered": 0,
@@ -138,5 +138,8 @@
     }
   ],
   "ledger_sha256": "ba2bb263812b54f4f3b6d28a7b47f56b92a0be5f3f7f8da41aa6c375f2f67947",
-  "coverage_sha256": "58881bf5530af1f0e301d1354f0fe13c5ac08f306fcdc27c4d570f908e1fba0b"
+  "coverage_sha256": "d24fe4990955c603b017aa53e934b4ddeb4a1dc94ca5528e36b58b5d07f6722c",
+  "atlas_revision": "cd40bd440194cee0e6a9113993b971b58d1b9a5c",
+  "native_revision": "c33a3fc1bc5387adf14c0d30e6d8e30de6d03cd1",
+  "build": "07988b4f1b865623becd7a61af1cae92e111be6515d341754af70f02107822cd"
 }

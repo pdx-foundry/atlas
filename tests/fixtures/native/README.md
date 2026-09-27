@@ -1,7 +1,9 @@
 # Recorded Native answers
 
 `m45/` holds Native's recorded answers from one live `pdx-atlas snapshot` run against the
-M45-release build. Tests read them with `Native::from_recorded_answers`, so they need no game.
+M45-release build, refreshed for SDK-597 with Native revision
+`c33a3fc1bc5387adf14c0d30e6d8e30de6d03cd1` on 2026-09-26. The
+`registry-fields/v6` recordings preserve paired reads, nested fields and stored-value uses. Tests read them with `Native::from_recorded_answers`, so they need no game.
 
 Every file is the unmodified recording except `m45/loaded_modifiers.json`. The live table has
 45,578 entries; the fixture keeps only the four that the tests use, in the engine's order:

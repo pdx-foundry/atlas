@@ -150,43 +150,67 @@
     "gaps": [
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "registry", "name": "common/pop_jobs"},
-        "detail": "only an item's post-read code registers job_{key}_add; that the engine runs it for every item is not established"
+        "subject": {
+          "kind": "registry",
+          "name": "common/pop_jobs"
+        },
+        "detail": "only an item's post-read code registers job_{key}_add; that the engine runs it for every item is not established: a path of CJobTypeDatabase::CJobTypeDatabase() keeps an item that it constructed without running its post-read code"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "registry", "name": "common/pop_jobs"},
-        "detail": "only an item's post-read code registers job_{key}_automated_workforce_mult; that the engine runs it for every item is not established"
+        "subject": {
+          "kind": "registry",
+          "name": "common/pop_jobs"
+        },
+        "detail": "only an item's post-read code registers job_{key}_automated_workforce_mult; that the engine runs it for every item is not established: a path of CJobTypeDatabase::CJobTypeDatabase() keeps an item that it constructed without running its post-read code"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "registry", "name": "common/pop_jobs"},
-        "detail": "only an item's post-read code registers job_{key}_max_workforce_add; that the engine runs it for every item is not established"
+        "subject": {
+          "kind": "registry",
+          "name": "common/pop_jobs"
+        },
+        "detail": "only an item's post-read code registers job_{key}_max_workforce_add; that the engine runs it for every item is not established: a path of CJobTypeDatabase::CJobTypeDatabase() keeps an item that it constructed without running its post-read code"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "registry", "name": "common/pop_jobs"},
-        "detail": "only an item's post-read code registers job_{key}_max_workforce_mult; that the engine runs it for every item is not established"
+        "subject": {
+          "kind": "registry",
+          "name": "common/pop_jobs"
+        },
+        "detail": "only an item's post-read code registers job_{key}_max_workforce_mult; that the engine runs it for every item is not established: a path of CJobTypeDatabase::CJobTypeDatabase() keeps an item that it constructed without running its post-read code"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "registry", "name": "common/pop_jobs"},
-        "detail": "only an item's post-read code registers job_{key}_per_crime; that the engine runs it for every item is not established"
+        "subject": {
+          "kind": "registry",
+          "name": "common/pop_jobs"
+        },
+        "detail": "only an item's post-read code registers job_{key}_per_crime; that the engine runs it for every item is not established: a path of CJobTypeDatabase::CJobTypeDatabase() keeps an item that it constructed without running its post-read code"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "registry", "name": "common/pop_jobs"},
-        "detail": "only an item's post-read code registers job_{key}_per_pop; that the engine runs it for every item is not established"
+        "subject": {
+          "kind": "registry",
+          "name": "common/pop_jobs"
+        },
+        "detail": "only an item's post-read code registers job_{key}_per_pop; that the engine runs it for every item is not established: a path of CJobTypeDatabase::CJobTypeDatabase() keeps an item that it constructed without running its post-read code"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "registry", "name": "common/pop_jobs"},
-        "detail": "only an item's post-read code registers pop_{key}_bonus_workforce_mult; that the engine runs it for every item is not established"
+        "subject": {
+          "kind": "registry",
+          "name": "common/pop_jobs"
+        },
+        "detail": "only an item's post-read code registers pop_{key}_bonus_workforce_mult; that the engine runs it for every item is not established: a path of CJobTypeDatabase::CJobTypeDatabase() keeps an item that it constructed without running its post-read code"
       },
       {
         "kind": "UnresolvedPath",
-        "subject": {"kind": "registry", "name": "common/pop_jobs"},
-        "detail": "only an item's post-read code registers pop_{key}_workforce_mult; that the engine runs it for every item is not established"
+        "subject": {
+          "kind": "registry",
+          "name": "common/pop_jobs"
+        },
+        "detail": "only an item's post-read code registers pop_{key}_workforce_mult; that the engine runs it for every item is not established: a path of CJobTypeDatabase::CJobTypeDatabase() keeps an item that it constructed without running its post-read code"
       },
       {
         "kind": "UnnamedDeclaration",
@@ -195,14 +219,17 @@
       },
       {
         "kind": "OutsideMethod",
-        "subject": {"kind": "registry", "name": "common/pop_jobs"},
+        "subject": {
+          "kind": "registry",
+          "name": "common/pop_jobs"
+        },
         "detail": "The search covers the registry's database generator and post-read code. Where a modifier takes effect, the tags that a later registration of the same name gives, the tags of a declared modifier after content registers it again, and names longer than a fixed-size buffer keeps are outside it."
       }
     ],
     "source": {
       "build": "07988b4f1b865623becd7a61af1cae92e111be6515d341754af70f02107822cd",
       "native_version": "0.1.0",
-      "method": "modifier-families/v2",
+      "method": "modifier-families/v3",
       "basis": "StaticAnalysis"
     }
   }

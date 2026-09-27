@@ -141,19 +141,18 @@ fn scope_names(engine: &Engine) -> Vec<String> {
     let mut names: Vec<_> = engine
         .names(SubjectKind::Scope)
         .iter()
-        .map(|name| display_name(name).to_owned())
+        .filter_map(|name| {
+            engine
+                .answer(SubjectKind::Scope, name, "display_name")?
+                .as_str()
+                .map(str::to_owned)
+        })
         .collect::<BTreeSet<_>>()
         .into_iter()
         .collect();
 
     names.sort_by_key(|name| std::cmp::Reverse(name.split(' ').count()));
     names
-}
-
-fn display_name(subject_name: &str) -> &str {
-    subject_name
-        .split_once('/')
-        .map_or(subject_name, |(name, _)| name)
 }
 
 /// A log's space-separated scope list as sorted display names; `all` stays `all`.
@@ -179,7 +178,7 @@ fn log_scopes(text: &str, scope_names: &[String]) -> String {
 }
 
 /// A snapshot scope answer as sorted display names: `"any"` becomes `all`, `"various"` stays.
-fn engine_scopes(answer: &Value) -> Option<String> {
+fn engine_scopes(engine: &Engine, answer: &Value) -> Option<String> {
     match answer {
         Value::String(text) if text == "any" => Some("all".into()),
         Value::String(text) => Some(text.clone()),
@@ -188,8 +187,8 @@ fn engine_scopes(answer: &Value) -> Option<String> {
                 .iter()
                 .map(|id| {
                     id.as_str()
-                        .and_then(|id| id.strip_prefix("scope:"))
-                        .map(|name| display_name(name).to_owned())
+                        .and_then(|id| engine.display_name(SubjectKind::Scope, id))
+                        .map(str::to_owned)
                 })
                 .collect::<Option<_>>()?;
 
@@ -282,7 +281,7 @@ fn commands(
         property("supported_scopes", &scopes, |name| {
             engine
                 .answer(kind, name, "declared_scopes")
-                .and_then(engine_scopes)
+                .and_then(|answer| engine_scopes(engine, answer))
         }),
     ])
 }
@@ -312,7 +311,7 @@ fn links(
         move |name: &str| {
             engine
                 .answer(SubjectKind::ScopeLink, name, property)
-                .and_then(engine_scopes)
+                .and_then(|answer| engine_scopes(engine, answer))
         }
     };
 
@@ -372,7 +371,7 @@ fn localization(engine: &Engine, text: &str) -> Result<Vec<super::NameList>, Str
 
     let context_name = |id: &Value| {
         id.as_str()
-            .and_then(|id| id.strip_prefix("localization_context:"))
+            .and_then(|id| engine.display_name(SubjectKind::LocalizationContext, id))
             .map(str::to_owned)
     };
     let command_contexts = |name: &str| {
