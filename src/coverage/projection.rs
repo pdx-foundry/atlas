@@ -305,7 +305,7 @@ fn type_questions(
             ],
             "cardinality_minimum",
         ),
-        (Some(field), "occurrences.maximum") => (
+        (Some(field), "occurrences.maximum" | "repeat_behavior") => (
             vec![
                 type_name.trim_start_matches("type[").trim_end_matches(']'),
                 field,

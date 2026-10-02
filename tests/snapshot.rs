@@ -4,7 +4,7 @@ use serde_json::{Value, json};
 use std::{path::PathBuf, process::Command};
 
 fn recording() -> PathBuf {
-    PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/native/m45")
+    PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/native/m451-hotfix")
 }
 
 async fn recorded() -> extraction::Extraction {
@@ -138,12 +138,9 @@ async fn fixture_counts_and_gaps_are_bounded() {
             .iter()
             .any(|gap| gap.id == "field:common/traditions/unlocks_agenda#occurrences.minimum")
     );
-    assert!(
-        snapshot
-            .gaps
-            .iter()
-            .any(|gap| gap.id == "field:common/traditions/unlocks_agenda#occurrences.maximum")
-    );
+    assert!(snapshot.rules.iter().any(|rule| rule.id
+        == "field:common/traditions/unlocks_agenda#repeat_behavior"
+        && rule.answer == "Replace"));
     // Category diagnostics are complete, so the first missing dimension is storage.
     assert!(
         snapshot
@@ -156,7 +153,11 @@ async fn fixture_counts_and_gaps_are_bounded() {
         .iter()
         .find(|gap| gap.id == "field:common/tradition_categories/desc#storage")
         .unwrap();
-    assert!(category_storage.reason.contains("no storage decoder"));
+    assert!(
+        category_storage
+            .reason
+            .contains("No proven direct storage decoder")
+    );
     assert!(
         snapshot
             .rules
@@ -401,6 +402,18 @@ async fn nested_paths_and_use_conditions_keep_their_stage_and_parent_limit() {
     assert_eq!(subject.registry.as_deref(), Some("common/traditions"));
     assert_eq!(subject.field.as_deref(), Some("parent/child"));
     assert_eq!(subject.conditional, Some(true));
+    assert!(
+        !snapshot
+            .rules
+            .iter()
+            .any(|rule| rule.id == format!("{id}#repeat_behavior"))
+    );
+    assert!(
+        snapshot
+            .gaps
+            .iter()
+            .any(|gap| gap.id == format!("{id}#occurrences.maximum"))
+    );
     let rule = snapshot
         .rules
         .iter()
@@ -527,4 +540,104 @@ async fn version_two_still_accepts_legacy_ticket_owners() {
         .unwrap();
     snapshot.gaps[0].owner = Some("SDK-invalid".into());
     assert!(snapshot::verify(&snapshot).is_err());
+}
+
+#[tokio::test]
+async fn repeat_facts_require_an_unconditional_successful_read() {
+    use pdx_native::{FieldCondition, FieldReadAlternative, FieldReadOutcome, RepeatBehavior};
+    let mut extraction = recorded().await;
+    let fields = extraction
+        .fields
+        .get_mut(extraction::TRADITIONS)
+        .unwrap()
+        .as_mut()
+        .unwrap();
+    let base = fields
+        .value
+        .iter()
+        .find(|field| field.name == "unlocks_agenda")
+        .unwrap()
+        .clone();
+    for (name, condition, repeat) in [
+        ("replace", FieldCondition::Always, RepeatBehavior::Replace),
+        (
+            "accumulate",
+            FieldCondition::Always,
+            RepeatBehavior::Accumulate,
+        ),
+        ("unknown", FieldCondition::Always, RepeatBehavior::Unknown),
+        (
+            "conditional",
+            FieldCondition::Unresolved,
+            RepeatBehavior::Replace,
+        ),
+        (
+            "unresolved",
+            FieldCondition::Always,
+            RepeatBehavior::Replace,
+        ),
+        ("rejected", FieldCondition::Always, RepeatBehavior::Replace),
+    ] {
+        let mut field = base.clone();
+        field.name = name.into();
+        let mut shape = field.shape;
+        shape.repeat = repeat;
+        field.read = vec![FieldReadAlternative {
+            condition,
+            outcome: match name {
+                "unresolved" => FieldReadOutcome::Unresolved,
+                "rejected" => FieldReadOutcome::Rejected,
+                _ => FieldReadOutcome::Read {
+                    reader: field.reader.clone(),
+                    shape,
+                },
+            },
+        }];
+        // The summary cannot override the read alternative's actual result.
+        field.shape.repeat = RepeatBehavior::Replace;
+        fields.value.push(field);
+    }
+    let snapshot = snapshot::assemble(&extraction).unwrap();
+    for (name, expected) in [("replace", "Replace"), ("accumulate", "Accumulate")] {
+        let subject = format!("field:common/traditions/{name}");
+        let rule = snapshot
+            .rules
+            .iter()
+            .find(|rule| rule.id == format!("{subject}#repeat_behavior"))
+            .unwrap();
+        assert_eq!(rule.answer, expected);
+        assert!(
+            !snapshot
+                .gaps
+                .iter()
+                .any(|gap| gap.id == format!("{subject}#occurrences.maximum"))
+        );
+        assert!(
+            snapshot
+                .gaps
+                .iter()
+                .any(|gap| gap.id == format!("{subject}#occurrences.minimum"))
+        );
+    }
+    for name in ["unknown", "conditional", "unresolved", "rejected"] {
+        let subject = format!("field:common/traditions/{name}");
+        assert!(
+            !snapshot
+                .rules
+                .iter()
+                .any(|rule| rule.id == format!("{subject}#repeat_behavior"))
+        );
+        assert!(
+            snapshot
+                .gaps
+                .iter()
+                .any(|gap| gap.id == format!("{subject}#occurrences.maximum"))
+        );
+    }
+    assert!(
+        snapshot
+            .rules
+            .iter()
+            .all(|rule| rule.property != "occurrences.maximum")
+    );
 }

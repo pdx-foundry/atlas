@@ -62,7 +62,7 @@ types = {
 }
 
 async fn recorded_snapshot() -> snapshot::Snapshot {
-    let path = Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/native/m45");
+    let path = Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/native/m451-hotfix");
     let native = Native::from_recorded_answers(path).unwrap();
     let extraction =
         extraction::collect(&native, || GameOptions::new(Command::new("unused"))).await;
@@ -458,5 +458,95 @@ second = { unlocks_agenda = scalar }
                 .count(),
             1
         );
+    }
+}
+
+#[tokio::test]
+async fn repeat_facts_answer_maximum_questions_without_publishing_engine_limits() {
+    use coverage::comparison::Status;
+    let original = recorded_snapshot().await;
+    let subject = "field:common/traditions/unlocks_agenda";
+    for (repeat, maximum, expected) in [
+        ("Replace", "1", Status::Same),
+        ("Accumulate", "inf", Status::Same),
+        ("Replace", "inf", Status::Different),
+        ("Accumulate", "1", Status::Different),
+    ] {
+        let source = format!(
+            "types = {{ type[tradition] = {{ path = \"game/common/traditions\" }} }}\ntradition = {{\n## cardinality = 0..{maximum}\nunlocks_agenda = scalar\n}}"
+        );
+        let ledger = ledger::inventory(&BTreeMap::from([("test.cwt".into(), source)]));
+        let mut snapshot = original.clone();
+        let evidence = snapshot
+            .rules
+            .iter()
+            .find(|rule| rule.subject == subject && rule.property == "existence")
+            .unwrap()
+            .evidence
+            .clone();
+        snapshot
+            .rules
+            .retain(|rule| rule.id != format!("{subject}#repeat_behavior"));
+        snapshot
+            .gaps
+            .retain(|gap| gap.id != format!("{subject}#occurrences.maximum"));
+        snapshot.rules.push(snapshot::Rule {
+            id: format!("{subject}#repeat_behavior"),
+            subject: subject.into(),
+            property: "repeat_behavior".into(),
+            conditions: Vec::new(),
+            answer: json!(repeat),
+            evidence,
+        });
+        assert!(
+            snapshot
+                .rules
+                .iter()
+                .all(|rule| rule.property != "occurrences.maximum")
+        );
+        for qualified in [false, true] {
+            if qualified {
+                qualify_as_live(&mut snapshot);
+            }
+            let bytes = snapshot::json_bytes(&snapshot).unwrap();
+            let report = coverage::evaluate(&ledger, Some(&bytes)).unwrap();
+            let maximum = ledger
+                .claims
+                .iter()
+                .find(|claim| claim.property == "cardinality_maximum")
+                .unwrap();
+            let minimum = ledger
+                .claims
+                .iter()
+                .find(|claim| claim.property == "cardinality_minimum")
+                .unwrap();
+            assert_eq!(
+                report
+                    .claims
+                    .iter()
+                    .find(|claim| claim.claim == maximum.id)
+                    .unwrap()
+                    .covered,
+                qualified
+            );
+            assert!(
+                !report
+                    .claims
+                    .iter()
+                    .find(|claim| claim.claim == minimum.id)
+                    .unwrap()
+                    .covered
+            );
+            if qualified {
+                let comparison =
+                    coverage::comparison::evaluate(&ledger, &bytes, &Default::default()).unwrap();
+                let entry = comparison
+                    .entries
+                    .iter()
+                    .find(|entry| entry.claim.as_deref() == Some(maximum.id.as_str()))
+                    .unwrap();
+                assert_eq!(entry.status, expected, "{repeat}");
+            }
+        }
     }
 }

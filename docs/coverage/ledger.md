@@ -134,8 +134,13 @@ or publishes a rule snapshot.
 Field subjects retain paired Native `read` alternatives, summary `shape`, `conditions`,
 `block_family`, `members`, and separate `uses`. Each read keeps its condition with its outcome;
 Unknown and Unresolved values remain explicit. The `uses` stage is `stored_value_selection`,
-not parser acceptance. Empty selections do not establish unconditional use. Domain and default
-Unknown values are published as gaps; repeat storage behavior never supplies occurrence bounds.
+not parser acceptance. Empty selections do not establish unconditional use. Domain Unknown values are published as gaps. An unconditional read publishes
+`repeat_behavior` as `Replace` or `Accumulate`; Atlas publishes no engine occurrence maximum.
+For config comparison, `Replace` corresponds to a maximum of 1 and `Accumulate` to `inf`.
+These facts answer maximum questions even when the CWT assertion differs; coverage and agreement
+remain separate. Unknown or conditional repeat behavior earns no unconditional credit. A minimum
+stays unresolved unless validation reports the field's absence; finite accepted fixtures do not
+establish that a field is required or optional.
 
 Conditional value forms keep all alternatives in one answer. A separate `value_form.unresolved`
 gap blocks unconditional credit, including nested children of conditional parents. Comparison
@@ -154,9 +159,9 @@ Published gap owners are capability categories, with these ticket mappings maint
 | `scope_context` | SDK-549 |
 | `modifier_application` | SDK-547 |
 | `references` | SDK-543 |
-| `callback_context` | SDK-496 |
+| `callback_context` | SDK-608 |
 | `field_semantics` | SDK-627 |
-| `field_conditions` | SDK-628 |
+| `field_conditions` | SDK-541 inheritance relation; runtime selection is out of scope |
 
 A null owner remains unassigned; SDK-626 owns the later triage. Owner categories do not change
 the reason or evidence of a gap. Failed questions use deliberate stable text, retaining error
@@ -167,3 +172,19 @@ categories. Native v6 field-gap subjects name leaf keys. Atlas resolves each lea
 discovered registry-relative paths. A unique leaf can attach to a nested field. Ambiguous or
 missing paths stay in a registry `field_gap_subjects` gap with the original Native gaps; Atlas
 never chooses a root field merely because its leaf name matches.
+
+## Compiler scope and gap triage (2026-10-02)
+
+Atlas publishes static facts that change what a compiler accepts, rejects, types or completes.
+Fixture conclusions describe parsing, storage and validation. Evaluated values, runtime weights,
+operand selection and duration consumption are out of scope. Numeric claims use established
+conversion properties; removed clamp and default placeholders supply no claims. Scope claims
+state declared entry scopes. SDK-608 owns callback entry contexts; SDK-549 owns field `this`,
+and SDK-677 owns field `root`, `from` and `prev`.
+
+For SDK-626, give a failure shape a ticket only when closing it changes one of those compiler
+behaviors and a config claim depends on it. Record the dependent claim and compiler consequence.
+Other shapes receive the note “out of scope, vision 2026-10-02”. Measure failure shapes from fresh
+M451-hotfix recordings after the Native pin move. A count or broad capability owner alone does
+not justify new discovery work. A compiler, rather than an Atlas policy overlay, selects severity;
+subtype names and alias factoring remain emitter test mappings.

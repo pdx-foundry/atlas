@@ -165,6 +165,7 @@ impl ComparisonKind {
             Self::ValueForm => ["bool", "int", "float", "string", "scalar", "block"]
                 .contains(&raw)
                 .then(|| Value::String(raw.into())),
+            Self::Cardinality if raw == "inf" => Some(Value::String("inf".into())),
             Self::Cardinality => raw.parse::<u64>().ok().map(Value::from),
         }
     }
@@ -184,7 +185,11 @@ impl ComparisonKind {
                     .into(),
                 )
             }),
-            Self::Cardinality => answer.as_u64().map(Value::from),
+            Self::Cardinality => match answer.as_str() {
+                Some("Replace") => Some(Value::from(1)),
+                Some("Accumulate") => Some(Value::String("inf".into())),
+                _ => answer.as_u64().map(Value::from),
+            },
         }
     }
 

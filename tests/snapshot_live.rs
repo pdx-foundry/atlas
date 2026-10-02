@@ -1,5 +1,5 @@
 use pdx_atlas::{extraction, snapshot};
-use pdx_native::{Basis, Disposal, GameOptions, Native};
+use pdx_native::{Basis, Disposal, GameOptions, Native, Support};
 use std::{collections::BTreeMap, process::Command};
 
 fn recorded_basis(mut snapshot: snapshot::Snapshot) -> snapshot::Snapshot {
@@ -63,7 +63,26 @@ async fn live_and_recorded_snapshots_match_after_basis_normalization() {
         Ok(Disposal::NotApplicable)
     );
     let replay_snapshot = snapshot::assemble(&replay_answers).unwrap();
+    assert!(
+        live_snapshot
+            .coverage
+            .native_support
+            .values()
+            .all(|support| *support == Support::Supported)
+    );
+    let unsupported: Vec<_> = replay_snapshot
+        .coverage
+        .native_support
+        .iter()
+        .filter(|(_, support)| matches!(support, Support::Unsupported(_)))
+        .map(|(name, _)| name.as_str())
+        .collect();
+    assert_eq!(
+        unsupported,
+        ["check_script", "command_grammar", "dynamic_names"]
+    );
     let mut normalized_live = recorded_basis(live_snapshot);
+    normalized_live.coverage.native_support = replay_snapshot.coverage.native_support.clone();
     normalized_live.snapshot = replay_snapshot.snapshot.clone();
     assert_eq!(
         snapshot::json_bytes(&normalized_live).unwrap(),

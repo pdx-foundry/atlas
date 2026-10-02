@@ -7,7 +7,7 @@ use crate::extraction::Extraction;
 use pdx_native::{
     Answer, BlockFamily, Completeness, DiagnosticCoverage, DiagnosticJoin, Disposal, Field,
     FieldCondition, FieldMembers, FieldReadOutcome, FixtureFieldOutcome, FixtureObservation,
-    FixtureRuntime, FixtureStorage, GapSubject, ReaderKind,
+    FixtureStorage, GapSubject, ReaderKind, RepeatBehavior,
 };
 use serde_json::{Value, json};
 use std::collections::{BTreeMap, BTreeSet};
@@ -20,6 +20,7 @@ pub(super) const PROPERTIES: &[&str] = &[
     "value_form",
     "read",
     "shape",
+    "repeat_behavior",
     "conditions",
     "block_family",
     "members",
@@ -325,17 +326,15 @@ fn assemble_field(
         ),
         evidence.clone(),
     );
-    for property in ["domain", "default"] {
-        gap(
-            snapshot,
-            &id,
-            property,
-            "Native reports this field property as Unknown",
-            Some("field_semantics"),
-            Vec::new(),
-            vec![evidence.clone()],
-        );
-    }
+    gap(
+        snapshot,
+        &id,
+        "domain",
+        "Native reports this field property as Unknown",
+        Some("field_semantics"),
+        Vec::new(),
+        vec![evidence.clone()],
+    );
     rule(
         snapshot,
         &id,
@@ -357,6 +356,7 @@ fn assemble_field(
         }
     }
     assemble_field_value_form(snapshot, &id, field, &evidence, unconditional_outcome)?;
+    assemble_field_repeat(snapshot, &id, unconditional_outcome, &evidence);
     assemble_field_gaps(snapshot, &id, field, &evidence);
     Ok(())
 }
@@ -500,16 +500,47 @@ fn assemble_field_gaps(snapshot: &mut Snapshot, id: &str, field: &Field, evidenc
             vec![evidence.clone()],
         );
     }
-    for property in ["occurrences.minimum", "occurrences.maximum"] {
-        gap(
+    gap(
+        snapshot,
+        id,
+        "occurrences.minimum",
+        "No validation result establishes that this field is required",
+        None,
+        Vec::new(),
+        vec![evidence.clone()],
+    );
+}
+
+fn assemble_field_repeat(
+    snapshot: &mut Snapshot,
+    id: &str,
+    outcome: Option<&FieldReadOutcome>,
+    evidence: &EvidenceLink,
+) {
+    match outcome {
+        Some(FieldReadOutcome::Read { shape, .. })
+            if matches!(
+                shape.repeat,
+                RepeatBehavior::Replace | RepeatBehavior::Accumulate
+            ) =>
+        {
+            rule(
+                snapshot,
+                id,
+                "repeat_behavior",
+                json!(shape.repeat),
+                evidence.clone(),
+            );
+        }
+        _ => gap(
             snapshot,
             id,
-            property,
-            "Finite fixture observations do not establish an occurrence bound",
+            "occurrences.maximum",
+            "Native did not establish unconditional repeat behavior",
             None,
             Vec::new(),
             vec![evidence.clone()],
-        );
+        ),
     }
 }
 
@@ -581,7 +612,7 @@ fn classify_parser_outcome(
         }
     }
     match &outcome.storage {
-        FixtureStorage::String {
+        FixtureStorage::Observed {
             occurrences,
             final_value,
             completeness: Completeness::Complete,
@@ -602,7 +633,7 @@ fn classify_parser_outcome(
                 final_value,
             }
         }
-        FixtureStorage::String {
+        FixtureStorage::Observed {
             completeness: Completeness::Partial,
             ..
         } => ParserOutcome::Unavailable {
@@ -687,24 +718,6 @@ fn assemble_outcomes(snapshot: &mut Snapshot, extraction: &Extraction) -> Result
                 ParserOutcome::Unavailable { property, reason } => {
                     entry.reasons.entry(property).or_default().push(reason)
                 }
-            }
-            if let FixtureRuntime::Unavailable(reason) = &outcome.runtime {
-                let runtime_evidence = evidence(
-                    snapshot,
-                    &format!("observe_fixture/{}", session.name),
-                    observation,
-                    format!("answers.sessions.{}.fixture.runtime", session.name),
-                    None,
-                )?;
-                gap(
-                    snapshot,
-                    &id,
-                    "runtime",
-                    reason.clone(),
-                    None,
-                    observation.gaps.clone(),
-                    vec![runtime_evidence],
-                );
             }
         }
     }

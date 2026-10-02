@@ -12,7 +12,7 @@ use serde_json::{Value, json};
 use std::{collections::BTreeMap, path::PathBuf, process::Command};
 
 fn recording() -> PathBuf {
-    PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/native/m45")
+    PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/native/m451-hotfix")
 }
 
 async fn recorded() -> Extraction {

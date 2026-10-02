@@ -1064,6 +1064,7 @@ fn gap_kind(kind: GapKind) -> &'static str {
         GapKind::UnnamedDeclaration => "unnamed_declaration",
         GapKind::UnresolvedPath => "unresolved_path",
         GapKind::UnresolvedReader => "unresolved_reader",
+        GapKind::NumericConversion => "numeric_conversion",
         GapKind::ReaderSemantics => "reader_semantics",
         GapKind::IncompleteObservation => "incomplete_observation",
         GapKind::UnresolvedStorage => "unresolved_storage",

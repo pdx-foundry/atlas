@@ -6,6 +6,7 @@ pub(super) fn error_reason(error: &Error) -> String {
         Error::Unsupported { reason, .. } => format!("Operation unsupported: {reason}"),
         Error::BuildChanged => "The executable changed after it was opened".into(),
         Error::FixtureRequest { reason } => format!("Invalid fixture request: {reason}"),
+        Error::ScriptRequest { reason } => format!("Invalid script request: {reason}"),
         Error::UnknownRegistry { name } => format!("No registry is named {name}"),
         Error::UnknownCommand { name, .. } => format!("No command is named {name}"),
         Error::Method(reason) => format!("Method failed: {reason}"),

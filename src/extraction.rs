@@ -139,8 +139,6 @@ pub async fn collect(native: &Native, options: impl Fn() -> GameOptions) -> Extr
 
     let native_support = Operation::ALL
         .iter()
-        // Registry items are a per-session `Game` question, not a static support question.
-        .filter(|&&operation| operation != Operation::RegistryItems)
         .map(|&operation| (operation.name().into(), native.supports(operation)))
         .collect();
     let registries = native.registries();
@@ -162,14 +160,6 @@ pub async fn collect(native: &Native, options: impl Fn() -> GameOptions) -> Extr
     let requests = [
         ("tradition_outcomes", TRADITIONS, tradition_fixture()),
         ("category_outcomes", CATEGORIES, category_fixture()),
-        (
-            "category_reads",
-            CATEGORIES,
-            FixtureRequest::new(
-                "common/tradition_categories/atlas_category.txt",
-                include_str!("../fixtures/category-reads.txt"),
-            ),
-        ),
     ];
     let mut sessions = Vec::with_capacity(requests.len());
     let mut blocker: Option<Error> = None;
@@ -285,14 +275,7 @@ fn tradition_fixture() -> FixtureRequest {
         "ai_weight",
     ]
     .into_iter()
-    .map(|field| {
-        let question = FixtureFieldQuestion::new(TRADITIONS, "atlas_valid", field);
-        if field == "unlocks_agenda" {
-            question.with_runtime()
-        } else {
-            question
-        }
-    })
+    .map(|field| FixtureFieldQuestion::new(TRADITIONS, "atlas_valid", field))
     .collect();
     for definition in [
         "atlas_omitted",
