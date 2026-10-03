@@ -15,7 +15,8 @@ and one parser-outcome gap disappear. Two field-answer completeness gaps are new
 
 ## Capture and checks
 
-- Native: `92b27b3eaf2f7021ad9e8105ad9818edd0b7ec19`.
+- Native: `92b27b3eaf2f7021ad9e8105ad9818edd0b7ec19` on the review branch; squash-merged to `main` as
+  `2a23b2bacb345baab416d1c2cb5a50b0ddb569b4` with the review repairs, which Atlas pins.
 - Atlas: the simplification migration based on `3b1dc763723050b2f090327d6e61e789d6551cfb`.
 - Exact build: `29fa877366040a528098da39ec7e70b7baac76782a2a6bd161616d691f86fa38`.
 - Config: `85747602a614ad7daa8cc66453777ecb023463a8`.
