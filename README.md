@@ -12,7 +12,7 @@ coverage commands still run without a game installation.
 
 ```sh
 cargo run --release --locked -- snapshot /path/to/Stellaris /path/to/recorded-answers /path/to/rules.json
-cargo run --release --locked -- snapshot --recorded tests/fixtures/native/m45 /path/to/rules.json
+cargo run --release --locked -- snapshot --recorded tests/fixtures/native/m451-hotfix /path/to/rules.json
 ```
 
 Both modes write deterministic JSON and a `.sha256` sidecar. The snapshot name includes a digest
@@ -20,9 +20,9 @@ of its contents, so different builds and incomplete extractions have distinct id
 mode starts the game for the tradition fixtures and once more to read the loaded modifier table;
 it exits 2 if an answer is missing or a game session did not confirm disposal.
 Recorded answers keep their recorded basis and earn no current-engine coverage credit. The [version-2 schema](docs/contract/rule-snapshot-v2.schema.json)
-describes the snapshot; [the language snapshot measurement](docs/coverage/language-snapshot.md)
+describes the snapshot. The [simplification capture](docs/coverage/simplification.md) records the current pin, coverage and gap shapes; [the language snapshot measurement](docs/coverage/language-snapshot.md)
 states what it establishes and what stays a gap. The [shared-reader measurement](docs/coverage/shared-readers.md)
-records the first Milestone 4 capture and the current full-config baseline. The historical caller's findings and original source remain in the
+records the first Milestone 4 capture and its historical baseline. The historical caller's findings and original source remain in the
 preserved Native evidence bundle; the production tests cover its recorded-answer and fixture cases.
 
 ```sh

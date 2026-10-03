@@ -1,5 +1,8 @@
 # Shared-reader snapshot: SDK-597 and SDK-577
 
+Historical capture. The [2026-10-02 simplification measurement](simplification.md) supersedes
+its pin, recordings and coverage baseline.
+
 The first Milestone 4 Atlas capture establishes **15,979 / 58,032 (27.534808%)** Atlas-owned
 claims. All 175 config files and 61,146 claim occurrences were inventoried. The same 19 source
 diagnostics remain; these percentages describe inventoried claims, not a complete config model.

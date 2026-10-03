@@ -1,0 +1,455 @@
+{
+  "Ok": {
+    "value": [
+      {
+        "name": "color",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "icon",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "325efaa17499c32d",
+          "kind": "String",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "325efaa17499c32d",
+                  "kind": "String",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "shortcut",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "325efaa17499c32d",
+          "kind": "String",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "325efaa17499c32d",
+                  "kind": "String",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "visible",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "e044b50825a1841d",
+          "kind": "Block",
+          "family": "Trigger"
+        },
+        "shape": {
+          "value": "Block",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "e044b50825a1841d",
+                  "kind": "Block",
+                  "family": "Trigger"
+                },
+                "shape": {
+                  "value": "Block",
+                  "repeat": "Unknown"
+                }
+              }
+            }
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "display_claims",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "tutorial",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "325efaa17499c32d",
+          "kind": "String",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "325efaa17499c32d",
+                  "kind": "String",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "can_change_point_of_view",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "enable_terra_incognita",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "display_espionage_operations",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "display_storms",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      }
+    ],
+    "completeness": "Partial",
+    "gaps": [
+      {
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "registry",
+          "name": "common/map_modes"
+        },
+        "detail": "Defaults, exhaustive enum domains, occurrence limits, deeper nested grammars, and non-owner runtime callers are not established by this method."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "color"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "display_claims"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "can_change_point_of_view"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "enable_terra_incognita"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "display_espionage_operations"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "display_storms"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "color"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "visible"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "display_claims"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "can_change_point_of_view"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "enable_terra_incognita"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "display_espionage_operations"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "display_storms"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      }
+    ],
+    "source": {
+      "build": "29fa877366040a528098da39ec7e70b7baac76782a2a6bd161616d691f86fa38",
+      "native_version": "0.1.0",
+      "method": "registry-fields/v12",
+      "basis": "StaticAnalysis"
+    }
+  }
+}

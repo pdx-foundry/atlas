@@ -1,0 +1,243 @@
+{
+  "Ok": {
+    "value": [
+      {
+        "name": "size",
+        "reader": {
+          "numeric": {
+            "Partial": {
+              "representation": {
+                "Known": "Integer"
+              },
+              "width_bits": {
+                "Known": 32
+              },
+              "signedness": {
+                "Known": "Signed"
+              },
+              "scale": {
+                "Known": 1
+              },
+              "literal_syntax": {
+                "Partial": [
+                  "DecimalInteger",
+                  "RadixPrefixedInteger"
+                ]
+              },
+              "accepted_range": {
+                "Known": {
+                  "minimum": {
+                    "Known": {
+                      "Signed": -2147483648
+                    }
+                  },
+                  "maximum": {
+                    "Known": {
+                      "Signed": 2147483647
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "d7a95ab8c8d44489",
+          "kind": "Integer",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Partial": {
+                      "representation": {
+                        "Known": "Integer"
+                      },
+                      "width_bits": {
+                        "Known": 32
+                      },
+                      "signedness": {
+                        "Known": "Signed"
+                      },
+                      "scale": {
+                        "Known": 1
+                      },
+                      "literal_syntax": {
+                        "Partial": [
+                          "DecimalInteger",
+                          "RadixPrefixedInteger"
+                        ]
+                      },
+                      "accepted_range": {
+                        "Known": {
+                          "minimum": {
+                            "Known": {
+                              "Signed": -2147483648
+                            }
+                          },
+                          "maximum": {
+                            "Known": {
+                              "Signed": 2147483647
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "d7a95ab8c8d44489",
+                  "kind": "Integer",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "picture",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "325efaa17499c32d",
+          "kind": "String",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "325efaa17499c32d",
+                  "kind": "String",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "possible",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "e044b50825a1841d",
+          "kind": "Block",
+          "family": "Trigger"
+        },
+        "shape": {
+          "value": "Block",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "e044b50825a1841d",
+                  "kind": "Block",
+                  "family": "Trigger"
+                },
+                "shape": {
+                  "value": "Block",
+                  "repeat": "Unknown"
+                }
+              }
+            }
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      }
+    ],
+    "completeness": "Partial",
+    "gaps": [
+      {
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "registry",
+          "name": "common/precursor_civilizations"
+        },
+        "detail": "Defaults, exhaustive enum domains, occurrence limits, deeper nested grammars, and non-owner runtime callers are not established by this method."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "possible"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "NumericConversion",
+        "subject": {
+          "kind": "field",
+          "name": "size"
+        },
+        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+      }
+    ],
+    "source": {
+      "build": "29fa877366040a528098da39ec7e70b7baac76782a2a6bd161616d691f86fa38",
+      "native_version": "0.1.0",
+      "method": "registry-fields/v12",
+      "basis": "StaticAnalysis"
+    }
+  }
+}

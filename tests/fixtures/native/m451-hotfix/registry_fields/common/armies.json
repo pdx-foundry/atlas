@@ -1,0 +1,2798 @@
+{
+  "Ok": {
+    "value": [
+      {
+        "name": "icon",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "325efaa17499c32d",
+          "kind": "String",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "325efaa17499c32d",
+                  "kind": "String",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "time",
+        "reader": {
+          "numeric": {
+            "Partial": {
+              "representation": {
+                "Known": "Integer"
+              },
+              "width_bits": {
+                "Known": 64
+              },
+              "signedness": {
+                "Known": "Signed"
+              },
+              "scale": {
+                "Known": 100000
+              },
+              "literal_syntax": {
+                "Partial": [
+                  "DecimalInteger",
+                  "DecimalFraction",
+                  "RadixPrefixedInteger"
+                ]
+              },
+              "accepted_range": {
+                "Known": {
+                  "minimum": {
+                    "Known": {
+                      "Rational": {
+                        "numerator": -9223372036854775808,
+                        "denominator": 100000
+                      }
+                    }
+                  },
+                  "maximum": {
+                    "Known": {
+                      "Rational": {
+                        "numerator": 9223372036854775807,
+                        "denominator": 100000
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "a9818fec780f8313",
+          "kind": "FixedPoint",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Partial": {
+                      "representation": {
+                        "Known": "Integer"
+                      },
+                      "width_bits": {
+                        "Known": 64
+                      },
+                      "signedness": {
+                        "Known": "Signed"
+                      },
+                      "scale": {
+                        "Known": 100000
+                      },
+                      "literal_syntax": {
+                        "Partial": [
+                          "DecimalInteger",
+                          "DecimalFraction",
+                          "RadixPrefixedInteger"
+                        ]
+                      },
+                      "accepted_range": {
+                        "Known": {
+                          "minimum": {
+                            "Known": {
+                              "Rational": {
+                                "numerator": -9223372036854775808,
+                                "denominator": 100000
+                              }
+                            }
+                          },
+                          "maximum": {
+                            "Known": {
+                              "Rational": {
+                                "numerator": 9223372036854775807,
+                                "denominator": 100000
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "a9818fec780f8313",
+                  "kind": "FixedPoint",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "is_pop_spawned",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "b894933b2b2853a5",
+          "kind": "Boolean",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "b894933b2b2853a5",
+                  "kind": "Boolean",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "prerequisites",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "potential",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "e044b50825a1841d",
+          "kind": "Block",
+          "family": "Trigger"
+        },
+        "shape": {
+          "value": "Block",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "e044b50825a1841d",
+                  "kind": "Block",
+                  "family": "Trigger"
+                },
+                "shape": {
+                  "value": "Block",
+                  "repeat": "Unknown"
+                }
+              }
+            }
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "allow",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "e044b50825a1841d",
+          "kind": "Block",
+          "family": "Trigger"
+        },
+        "shape": {
+          "value": "Block",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "e044b50825a1841d",
+                  "kind": "Block",
+                  "family": "Trigger"
+                },
+                "shape": {
+                  "value": "Block",
+                  "repeat": "Unknown"
+                }
+              }
+            }
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "defensive",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "b894933b2b2853a5",
+          "kind": "Boolean",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "b894933b2b2853a5",
+                  "kind": "Boolean",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "spawn_chance",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "f08cb83d92484a89",
+          "kind": "Block",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Block",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "f08cb83d92484a89",
+                  "kind": "Block",
+                  "family": "Unknown"
+                },
+                "shape": {
+                  "value": "Block",
+                  "repeat": "Unknown"
+                }
+              }
+            }
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "rebel",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "b894933b2b2853a5",
+          "kind": "Boolean",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "b894933b2b2853a5",
+                  "kind": "Boolean",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "war_exhaustion",
+        "reader": {
+          "numeric": {
+            "Partial": {
+              "representation": {
+                "Known": "Integer"
+              },
+              "width_bits": {
+                "Known": 64
+              },
+              "signedness": {
+                "Known": "Signed"
+              },
+              "scale": {
+                "Known": 100000
+              },
+              "literal_syntax": {
+                "Partial": [
+                  "DecimalInteger",
+                  "DecimalFraction",
+                  "RadixPrefixedInteger"
+                ]
+              },
+              "accepted_range": {
+                "Known": {
+                  "minimum": {
+                    "Known": {
+                      "Rational": {
+                        "numerator": -9223372036854775808,
+                        "denominator": 100000
+                      }
+                    }
+                  },
+                  "maximum": {
+                    "Known": {
+                      "Rational": {
+                        "numerator": 9223372036854775807,
+                        "denominator": 100000
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "a9818fec780f8313",
+          "kind": "FixedPoint",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Partial": {
+                      "representation": {
+                        "Known": "Integer"
+                      },
+                      "width_bits": {
+                        "Known": 64
+                      },
+                      "signedness": {
+                        "Known": "Signed"
+                      },
+                      "scale": {
+                        "Known": 100000
+                      },
+                      "literal_syntax": {
+                        "Partial": [
+                          "DecimalInteger",
+                          "DecimalFraction",
+                          "RadixPrefixedInteger"
+                        ]
+                      },
+                      "accepted_range": {
+                        "Known": {
+                          "minimum": {
+                            "Known": {
+                              "Rational": {
+                                "numerator": -9223372036854775808,
+                                "denominator": 100000
+                              }
+                            }
+                          },
+                          "maximum": {
+                            "Known": {
+                              "Rational": {
+                                "numerator": 9223372036854775807,
+                                "denominator": 100000
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "a9818fec780f8313",
+                  "kind": "FixedPoint",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "has_species",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "b894933b2b2853a5",
+          "kind": "Boolean",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "b894933b2b2853a5",
+                  "kind": "Boolean",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "on_built",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "6e28a363faf61c52",
+          "kind": "Block",
+          "family": "Effect"
+        },
+        "shape": {
+          "value": "Block",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "6e28a363faf61c52",
+                  "kind": "Block",
+                  "family": "Effect"
+                },
+                "shape": {
+                  "value": "Block",
+                  "repeat": "Unknown"
+                }
+              }
+            }
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "on_queued",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "6e28a363faf61c52",
+          "kind": "Block",
+          "family": "Effect"
+        },
+        "shape": {
+          "value": "Block",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "6e28a363faf61c52",
+                  "kind": "Block",
+                  "family": "Effect"
+                },
+                "shape": {
+                  "value": "Block",
+                  "repeat": "Unknown"
+                }
+              }
+            }
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "on_unqueued",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "6e28a363faf61c52",
+          "kind": "Block",
+          "family": "Effect"
+        },
+        "shape": {
+          "value": "Block",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "6e28a363faf61c52",
+                  "kind": "Block",
+                  "family": "Effect"
+                },
+                "shape": {
+                  "value": "Block",
+                  "repeat": "Unknown"
+                }
+              }
+            }
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "built_for_ruler",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "b894933b2b2853a5",
+          "kind": "Boolean",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "b894933b2b2853a5",
+                  "kind": "Boolean",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "army_modifier",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "ba5f8cddeba0d833",
+          "kind": "Block",
+          "family": "Modifier"
+        },
+        "shape": {
+          "value": "Block",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "ba5f8cddeba0d833",
+                  "kind": "Block",
+                  "family": "Modifier"
+                },
+                "shape": {
+                  "value": "Block",
+                  "repeat": "Unknown"
+                }
+              }
+            }
+          }
+        ],
+        "members": {
+          "ModifierBlock": {
+            "fixed_keys": {
+              "Partial": [
+                {
+                  "name": "name",
+                  "reader": {
+                    "numeric": "Unresolved",
+                    "scoped_operand": "Unresolved",
+                    "id": null,
+                    "kind": "Unknown",
+                    "family": "Unknown"
+                  },
+                  "shape": {
+                    "value": "Unknown",
+                    "repeat": "Unknown"
+                  },
+                  "read": [
+                    {
+                      "condition": "Always",
+                      "outcome": "Unresolved"
+                    }
+                  ],
+                  "members": "Unresolved",
+                  "domain": "Unknown",
+                  "uses": [],
+                  "reference": "NotEstablished"
+                },
+                {
+                  "name": "icon",
+                  "reader": {
+                    "numeric": {
+                      "Known": null
+                    },
+                    "scoped_operand": {
+                      "Known": null
+                    },
+                    "id": "325efaa17499c32d",
+                    "kind": "String",
+                    "family": "NotApplicable"
+                  },
+                  "shape": {
+                    "value": "Scalar",
+                    "repeat": "Replace"
+                  },
+                  "read": [
+                    {
+                      "condition": "Always",
+                      "outcome": {
+                        "Read": {
+                          "reader": {
+                            "numeric": {
+                              "Known": null
+                            },
+                            "scoped_operand": {
+                              "Known": null
+                            },
+                            "id": "325efaa17499c32d",
+                            "kind": "String",
+                            "family": "NotApplicable"
+                          },
+                          "shape": {
+                            "value": "Scalar",
+                            "repeat": "Replace"
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "members": "None",
+                  "domain": "Unknown",
+                  "uses": [],
+                  "reference": "NotEstablished"
+                },
+                {
+                  "name": "key",
+                  "reader": {
+                    "numeric": "Unresolved",
+                    "scoped_operand": "Unresolved",
+                    "id": null,
+                    "kind": "Unknown",
+                    "family": "Unknown"
+                  },
+                  "shape": {
+                    "value": "Unknown",
+                    "repeat": "Unknown"
+                  },
+                  "read": [
+                    {
+                      "condition": "Always",
+                      "outcome": "Unresolved"
+                    }
+                  ],
+                  "members": "Unresolved",
+                  "domain": "Unknown",
+                  "uses": [],
+                  "reference": "NotEstablished"
+                },
+                {
+                  "name": "data",
+                  "reader": {
+                    "numeric": {
+                      "Partial": {
+                        "representation": {
+                          "Known": "Integer"
+                        },
+                        "width_bits": {
+                          "Known": 32
+                        },
+                        "signedness": {
+                          "Known": "Signed"
+                        },
+                        "scale": {
+                          "Known": 1
+                        },
+                        "literal_syntax": {
+                          "Partial": [
+                            "DecimalInteger",
+                            "RadixPrefixedInteger"
+                          ]
+                        },
+                        "accepted_range": {
+                          "Known": {
+                            "minimum": {
+                              "Known": {
+                                "Signed": -2147483648
+                              }
+                            },
+                            "maximum": {
+                              "Known": {
+                                "Signed": 2147483647
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "scoped_operand": {
+                      "Known": null
+                    },
+                    "id": "d7a95ab8c8d44489",
+                    "kind": "Integer",
+                    "family": "NotApplicable"
+                  },
+                  "shape": {
+                    "value": "Scalar",
+                    "repeat": "Unknown"
+                  },
+                  "read": [
+                    {
+                      "condition": "Always",
+                      "outcome": {
+                        "Read": {
+                          "reader": {
+                            "numeric": {
+                              "Partial": {
+                                "representation": {
+                                  "Known": "Integer"
+                                },
+                                "width_bits": {
+                                  "Known": 32
+                                },
+                                "signedness": {
+                                  "Known": "Signed"
+                                },
+                                "scale": {
+                                  "Known": 1
+                                },
+                                "literal_syntax": {
+                                  "Partial": [
+                                    "DecimalInteger",
+                                    "RadixPrefixedInteger"
+                                  ]
+                                },
+                                "accepted_range": {
+                                  "Known": {
+                                    "minimum": {
+                                      "Known": {
+                                        "Signed": -2147483648
+                                      }
+                                    },
+                                    "maximum": {
+                                      "Known": {
+                                        "Signed": 2147483647
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "scoped_operand": {
+                              "Known": null
+                            },
+                            "id": "d7a95ab8c8d44489",
+                            "kind": "Integer",
+                            "family": "NotApplicable"
+                          },
+                          "shape": {
+                            "value": "Scalar",
+                            "repeat": "Unknown"
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "members": "None",
+                  "domain": "Unknown",
+                  "uses": [],
+                  "reference": "NotEstablished"
+                },
+                {
+                  "name": "custom_tooltip",
+                  "reader": {
+                    "numeric": {
+                      "Known": null
+                    },
+                    "scoped_operand": {
+                      "Known": null
+                    },
+                    "id": "325efaa17499c32d",
+                    "kind": "String",
+                    "family": "NotApplicable"
+                  },
+                  "shape": {
+                    "value": "Scalar",
+                    "repeat": "Replace"
+                  },
+                  "read": [
+                    {
+                      "condition": "Always",
+                      "outcome": {
+                        "Read": {
+                          "reader": {
+                            "numeric": {
+                              "Known": null
+                            },
+                            "scoped_operand": {
+                              "Known": null
+                            },
+                            "id": "325efaa17499c32d",
+                            "kind": "String",
+                            "family": "NotApplicable"
+                          },
+                          "shape": {
+                            "value": "Scalar",
+                            "repeat": "Replace"
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "members": "None",
+                  "domain": "Unknown",
+                  "uses": [],
+                  "reference": "NotEstablished"
+                },
+                {
+                  "name": "apply_modifier_to_other_planets",
+                  "reader": {
+                    "numeric": {
+                      "Known": null
+                    },
+                    "scoped_operand": {
+                      "Known": null
+                    },
+                    "id": "325efaa17499c32d",
+                    "kind": "String",
+                    "family": "NotApplicable"
+                  },
+                  "shape": {
+                    "value": "Scalar",
+                    "repeat": "Replace"
+                  },
+                  "read": [
+                    {
+                      "condition": "Always",
+                      "outcome": {
+                        "Read": {
+                          "reader": {
+                            "numeric": {
+                              "Known": null
+                            },
+                            "scoped_operand": {
+                              "Known": null
+                            },
+                            "id": "325efaa17499c32d",
+                            "kind": "String",
+                            "family": "NotApplicable"
+                          },
+                          "shape": {
+                            "value": "Scalar",
+                            "repeat": "Replace"
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "members": "None",
+                  "domain": "Unknown",
+                  "uses": [],
+                  "reference": "NotEstablished"
+                },
+                {
+                  "name": "show_only_custom_tooltip",
+                  "reader": {
+                    "numeric": {
+                      "Known": null
+                    },
+                    "scoped_operand": {
+                      "Known": null
+                    },
+                    "id": "b894933b2b2853a5",
+                    "kind": "Boolean",
+                    "family": "NotApplicable"
+                  },
+                  "shape": {
+                    "value": "Scalar",
+                    "repeat": "Replace"
+                  },
+                  "read": [
+                    {
+                      "condition": "Always",
+                      "outcome": {
+                        "Read": {
+                          "reader": {
+                            "numeric": {
+                              "Known": null
+                            },
+                            "scoped_operand": {
+                              "Known": null
+                            },
+                            "id": "b894933b2b2853a5",
+                            "kind": "Boolean",
+                            "family": "NotApplicable"
+                          },
+                          "shape": {
+                            "value": "Scalar",
+                            "repeat": "Replace"
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "members": "None",
+                  "domain": "Unknown",
+                  "uses": [],
+                  "reference": "NotEstablished"
+                },
+                {
+                  "name": "icon_frame",
+                  "reader": {
+                    "numeric": {
+                      "Partial": {
+                        "representation": {
+                          "Known": "Integer"
+                        },
+                        "width_bits": {
+                          "Known": 32
+                        },
+                        "signedness": {
+                          "Known": "Signed"
+                        },
+                        "scale": {
+                          "Known": 1
+                        },
+                        "literal_syntax": {
+                          "Partial": [
+                            "DecimalInteger",
+                            "RadixPrefixedInteger"
+                          ]
+                        },
+                        "accepted_range": {
+                          "Known": {
+                            "minimum": {
+                              "Known": {
+                                "Signed": -2147483648
+                              }
+                            },
+                            "maximum": {
+                              "Known": {
+                                "Signed": 2147483647
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "scoped_operand": {
+                      "Known": null
+                    },
+                    "id": "d7a95ab8c8d44489",
+                    "kind": "Integer",
+                    "family": "NotApplicable"
+                  },
+                  "shape": {
+                    "value": "Scalar",
+                    "repeat": "Replace"
+                  },
+                  "read": [
+                    {
+                      "condition": "Always",
+                      "outcome": {
+                        "Read": {
+                          "reader": {
+                            "numeric": {
+                              "Partial": {
+                                "representation": {
+                                  "Known": "Integer"
+                                },
+                                "width_bits": {
+                                  "Known": 32
+                                },
+                                "signedness": {
+                                  "Known": "Signed"
+                                },
+                                "scale": {
+                                  "Known": 1
+                                },
+                                "literal_syntax": {
+                                  "Partial": [
+                                    "DecimalInteger",
+                                    "RadixPrefixedInteger"
+                                  ]
+                                },
+                                "accepted_range": {
+                                  "Known": {
+                                    "minimum": {
+                                      "Known": {
+                                        "Signed": -2147483648
+                                      }
+                                    },
+                                    "maximum": {
+                                      "Known": {
+                                        "Signed": 2147483647
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "scoped_operand": {
+                              "Known": null
+                            },
+                            "id": "d7a95ab8c8d44489",
+                            "kind": "Integer",
+                            "family": "NotApplicable"
+                          },
+                          "shape": {
+                            "value": "Scalar",
+                            "repeat": "Replace"
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "members": "None",
+                  "domain": "Unknown",
+                  "uses": [],
+                  "reference": "NotEstablished"
+                },
+                {
+                  "name": "important",
+                  "reader": {
+                    "numeric": {
+                      "Known": null
+                    },
+                    "scoped_operand": {
+                      "Known": null
+                    },
+                    "id": "b894933b2b2853a5",
+                    "kind": "Boolean",
+                    "family": "NotApplicable"
+                  },
+                  "shape": {
+                    "value": "Scalar",
+                    "repeat": "Replace"
+                  },
+                  "read": [
+                    {
+                      "condition": "Always",
+                      "outcome": {
+                        "Read": {
+                          "reader": {
+                            "numeric": {
+                              "Known": null
+                            },
+                            "scoped_operand": {
+                              "Known": null
+                            },
+                            "id": "b894933b2b2853a5",
+                            "kind": "Boolean",
+                            "family": "NotApplicable"
+                          },
+                          "shape": {
+                            "value": "Scalar",
+                            "repeat": "Replace"
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "members": "None",
+                  "domain": "Unknown",
+                  "uses": [],
+                  "reference": "NotEstablished"
+                },
+                {
+                  "name": "divide_over_pop_groups",
+                  "reader": {
+                    "numeric": "Unresolved",
+                    "scoped_operand": "Unresolved",
+                    "id": null,
+                    "kind": "Unknown",
+                    "family": "Unknown"
+                  },
+                  "shape": {
+                    "value": "Unknown",
+                    "repeat": "Unknown"
+                  },
+                  "read": [
+                    {
+                      "condition": "Always",
+                      "outcome": "Unresolved"
+                    }
+                  ],
+                  "members": "Unresolved",
+                  "domain": "Unknown",
+                  "uses": [],
+                  "reference": "NotEstablished"
+                },
+                {
+                  "name": "hide_from_country_list",
+                  "reader": {
+                    "numeric": {
+                      "Known": null
+                    },
+                    "scoped_operand": {
+                      "Known": null
+                    },
+                    "id": "b894933b2b2853a5",
+                    "kind": "Boolean",
+                    "family": "NotApplicable"
+                  },
+                  "shape": {
+                    "value": "Scalar",
+                    "repeat": "Replace"
+                  },
+                  "read": [
+                    {
+                      "condition": "Always",
+                      "outcome": {
+                        "Read": {
+                          "reader": {
+                            "numeric": {
+                              "Known": null
+                            },
+                            "scoped_operand": {
+                              "Known": null
+                            },
+                            "id": "b894933b2b2853a5",
+                            "kind": "Boolean",
+                            "family": "NotApplicable"
+                          },
+                          "shape": {
+                            "value": "Scalar",
+                            "repeat": "Replace"
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "members": "None",
+                  "domain": "Unknown",
+                  "uses": [],
+                  "reference": "NotEstablished"
+                }
+              ]
+            },
+            "entries": {
+              "Known": [
+                {
+                  "Reference": {
+                    "target": {
+                      "Registry": {
+                        "name": "common/static_modifiers"
+                      }
+                    },
+                    "value": "FixedPoint"
+                  }
+                },
+                {
+                  "Numeric": {
+                    "value": {
+                      "numeric": {
+                        "Partial": {
+                          "representation": {
+                            "Known": "Integer"
+                          },
+                          "width_bits": {
+                            "Known": 64
+                          },
+                          "signedness": {
+                            "Known": "Signed"
+                          },
+                          "scale": {
+                            "Known": 100000
+                          },
+                          "literal_syntax": {
+                            "Partial": [
+                              "DecimalInteger",
+                              "DecimalFraction",
+                              "RadixPrefixedInteger"
+                            ]
+                          },
+                          "accepted_range": {
+                            "Known": {
+                              "minimum": {
+                                "Known": {
+                                  "Rational": {
+                                    "numerator": -9223372036854775808,
+                                    "denominator": 100000
+                                  }
+                                }
+                              },
+                              "maximum": {
+                                "Known": {
+                                  "Rational": {
+                                    "numerator": 9223372036854775807,
+                                    "denominator": 100000
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "scoped_operand": {
+                        "Known": null
+                      },
+                      "id": "a9818fec780f8313",
+                      "kind": "FixedPoint",
+                      "family": "NotApplicable"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "ai_weight",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "f08cb83d92484a89",
+          "kind": "Block",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Block",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "f08cb83d92484a89",
+                  "kind": "Block",
+                  "family": "Unknown"
+                },
+                "shape": {
+                  "value": "Block",
+                  "repeat": "Unknown"
+                }
+              }
+            }
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "show_tech_unlock_if",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "e044b50825a1841d",
+          "kind": "Block",
+          "family": "Trigger"
+        },
+        "shape": {
+          "value": "Block",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "e044b50825a1841d",
+                  "kind": "Block",
+                  "family": "Trigger"
+                },
+                "shape": {
+                  "value": "Block",
+                  "repeat": "Unknown"
+                }
+              }
+            }
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "potential_country",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "e044b50825a1841d",
+          "kind": "Block",
+          "family": "Trigger"
+        },
+        "shape": {
+          "value": "Block",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "e044b50825a1841d",
+                  "kind": "Block",
+                  "family": "Trigger"
+                },
+                "shape": {
+                  "value": "Block",
+                  "repeat": "Unknown"
+                }
+              }
+            }
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "collateral_damage",
+        "reader": {
+          "numeric": {
+            "Partial": {
+              "representation": {
+                "Known": "Integer"
+              },
+              "width_bits": {
+                "Known": 64
+              },
+              "signedness": {
+                "Known": "Signed"
+              },
+              "scale": {
+                "Known": 100000
+              },
+              "literal_syntax": {
+                "Partial": [
+                  "DecimalInteger",
+                  "DecimalFraction",
+                  "RadixPrefixedInteger"
+                ]
+              },
+              "accepted_range": {
+                "Known": {
+                  "minimum": {
+                    "Known": {
+                      "Rational": {
+                        "numerator": -9223372036854775808,
+                        "denominator": 100000
+                      }
+                    }
+                  },
+                  "maximum": {
+                    "Known": {
+                      "Rational": {
+                        "numerator": 9223372036854775807,
+                        "denominator": 100000
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "a9818fec780f8313",
+          "kind": "FixedPoint",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Partial": {
+                      "representation": {
+                        "Known": "Integer"
+                      },
+                      "width_bits": {
+                        "Known": 64
+                      },
+                      "signedness": {
+                        "Known": "Signed"
+                      },
+                      "scale": {
+                        "Known": 100000
+                      },
+                      "literal_syntax": {
+                        "Partial": [
+                          "DecimalInteger",
+                          "DecimalFraction",
+                          "RadixPrefixedInteger"
+                        ]
+                      },
+                      "accepted_range": {
+                        "Known": {
+                          "minimum": {
+                            "Known": {
+                              "Rational": {
+                                "numerator": -9223372036854775808,
+                                "denominator": 100000
+                              }
+                            }
+                          },
+                          "maximum": {
+                            "Known": {
+                              "Rational": {
+                                "numerator": 9223372036854775807,
+                                "denominator": 100000
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "a9818fec780f8313",
+                  "kind": "FixedPoint",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "has_morale",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "b894933b2b2853a5",
+          "kind": "Boolean",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "b894933b2b2853a5",
+                  "kind": "Boolean",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "pop_limited",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "b894933b2b2853a5",
+          "kind": "Boolean",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "b894933b2b2853a5",
+                  "kind": "Boolean",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "disband_if_species_lacks_rights",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "b894933b2b2853a5",
+          "kind": "Boolean",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "b894933b2b2853a5",
+                  "kind": "Boolean",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "use_armynames_from",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "325efaa17499c32d",
+          "kind": "String",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "325efaa17499c32d",
+                  "kind": "String",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "resources",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "damage",
+        "reader": {
+          "numeric": {
+            "Partial": {
+              "representation": {
+                "Known": "Integer"
+              },
+              "width_bits": {
+                "Known": 64
+              },
+              "signedness": {
+                "Known": "Signed"
+              },
+              "scale": {
+                "Known": 100000
+              },
+              "literal_syntax": {
+                "Partial": [
+                  "DecimalInteger",
+                  "DecimalFraction",
+                  "RadixPrefixedInteger"
+                ]
+              },
+              "accepted_range": {
+                "Known": {
+                  "minimum": {
+                    "Known": {
+                      "Rational": {
+                        "numerator": -9223372036854775808,
+                        "denominator": 100000
+                      }
+                    }
+                  },
+                  "maximum": {
+                    "Known": {
+                      "Rational": {
+                        "numerator": 9223372036854775807,
+                        "denominator": 100000
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "a9818fec780f8313",
+          "kind": "FixedPoint",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Partial": {
+                      "representation": {
+                        "Known": "Integer"
+                      },
+                      "width_bits": {
+                        "Known": 64
+                      },
+                      "signedness": {
+                        "Known": "Signed"
+                      },
+                      "scale": {
+                        "Known": 100000
+                      },
+                      "literal_syntax": {
+                        "Partial": [
+                          "DecimalInteger",
+                          "DecimalFraction",
+                          "RadixPrefixedInteger"
+                        ]
+                      },
+                      "accepted_range": {
+                        "Known": {
+                          "minimum": {
+                            "Known": {
+                              "Rational": {
+                                "numerator": -9223372036854775808,
+                                "denominator": 100000
+                              }
+                            }
+                          },
+                          "maximum": {
+                            "Known": {
+                              "Rational": {
+                                "numerator": 9223372036854775807,
+                                "denominator": 100000
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "a9818fec780f8313",
+                  "kind": "FixedPoint",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "morale_damage",
+        "reader": {
+          "numeric": {
+            "Partial": {
+              "representation": {
+                "Known": "Integer"
+              },
+              "width_bits": {
+                "Known": 64
+              },
+              "signedness": {
+                "Known": "Signed"
+              },
+              "scale": {
+                "Known": 100000
+              },
+              "literal_syntax": {
+                "Partial": [
+                  "DecimalInteger",
+                  "DecimalFraction",
+                  "RadixPrefixedInteger"
+                ]
+              },
+              "accepted_range": {
+                "Known": {
+                  "minimum": {
+                    "Known": {
+                      "Rational": {
+                        "numerator": -9223372036854775808,
+                        "denominator": 100000
+                      }
+                    }
+                  },
+                  "maximum": {
+                    "Known": {
+                      "Rational": {
+                        "numerator": 9223372036854775807,
+                        "denominator": 100000
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "a9818fec780f8313",
+          "kind": "FixedPoint",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Partial": {
+                      "representation": {
+                        "Known": "Integer"
+                      },
+                      "width_bits": {
+                        "Known": 64
+                      },
+                      "signedness": {
+                        "Known": "Signed"
+                      },
+                      "scale": {
+                        "Known": 100000
+                      },
+                      "literal_syntax": {
+                        "Partial": [
+                          "DecimalInteger",
+                          "DecimalFraction",
+                          "RadixPrefixedInteger"
+                        ]
+                      },
+                      "accepted_range": {
+                        "Known": {
+                          "minimum": {
+                            "Known": {
+                              "Rational": {
+                                "numerator": -9223372036854775808,
+                                "denominator": 100000
+                              }
+                            }
+                          },
+                          "maximum": {
+                            "Known": {
+                              "Rational": {
+                                "numerator": 9223372036854775807,
+                                "denominator": 100000
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "a9818fec780f8313",
+                  "kind": "FixedPoint",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "health",
+        "reader": {
+          "numeric": {
+            "Partial": {
+              "representation": {
+                "Known": "Integer"
+              },
+              "width_bits": {
+                "Known": 64
+              },
+              "signedness": {
+                "Known": "Signed"
+              },
+              "scale": {
+                "Known": 100000
+              },
+              "literal_syntax": {
+                "Partial": [
+                  "DecimalInteger",
+                  "DecimalFraction",
+                  "RadixPrefixedInteger"
+                ]
+              },
+              "accepted_range": {
+                "Known": {
+                  "minimum": {
+                    "Known": {
+                      "Rational": {
+                        "numerator": -9223372036854775808,
+                        "denominator": 100000
+                      }
+                    }
+                  },
+                  "maximum": {
+                    "Known": {
+                      "Rational": {
+                        "numerator": 9223372036854775807,
+                        "denominator": 100000
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "a9818fec780f8313",
+          "kind": "FixedPoint",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Partial": {
+                      "representation": {
+                        "Known": "Integer"
+                      },
+                      "width_bits": {
+                        "Known": 64
+                      },
+                      "signedness": {
+                        "Known": "Signed"
+                      },
+                      "scale": {
+                        "Known": 100000
+                      },
+                      "literal_syntax": {
+                        "Partial": [
+                          "DecimalInteger",
+                          "DecimalFraction",
+                          "RadixPrefixedInteger"
+                        ]
+                      },
+                      "accepted_range": {
+                        "Known": {
+                          "minimum": {
+                            "Known": {
+                              "Rational": {
+                                "numerator": -9223372036854775808,
+                                "denominator": 100000
+                              }
+                            }
+                          },
+                          "maximum": {
+                            "Known": {
+                              "Rational": {
+                                "numerator": 9223372036854775807,
+                                "denominator": 100000
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "a9818fec780f8313",
+                  "kind": "FixedPoint",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "morale",
+        "reader": {
+          "numeric": {
+            "Partial": {
+              "representation": {
+                "Known": "Integer"
+              },
+              "width_bits": {
+                "Known": 64
+              },
+              "signedness": {
+                "Known": "Signed"
+              },
+              "scale": {
+                "Known": 100000
+              },
+              "literal_syntax": {
+                "Partial": [
+                  "DecimalInteger",
+                  "DecimalFraction",
+                  "RadixPrefixedInteger"
+                ]
+              },
+              "accepted_range": {
+                "Known": {
+                  "minimum": {
+                    "Known": {
+                      "Rational": {
+                        "numerator": -9223372036854775808,
+                        "denominator": 100000
+                      }
+                    }
+                  },
+                  "maximum": {
+                    "Known": {
+                      "Rational": {
+                        "numerator": 9223372036854775807,
+                        "denominator": 100000
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "a9818fec780f8313",
+          "kind": "FixedPoint",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Partial": {
+                      "representation": {
+                        "Known": "Integer"
+                      },
+                      "width_bits": {
+                        "Known": 64
+                      },
+                      "signedness": {
+                        "Known": "Signed"
+                      },
+                      "scale": {
+                        "Known": 100000
+                      },
+                      "literal_syntax": {
+                        "Partial": [
+                          "DecimalInteger",
+                          "DecimalFraction",
+                          "RadixPrefixedInteger"
+                        ]
+                      },
+                      "accepted_range": {
+                        "Known": {
+                          "minimum": {
+                            "Known": {
+                              "Rational": {
+                                "numerator": -9223372036854775808,
+                                "denominator": 100000
+                              }
+                            }
+                          },
+                          "maximum": {
+                            "Known": {
+                              "Rational": {
+                                "numerator": 9223372036854775807,
+                                "denominator": 100000
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "a9818fec780f8313",
+                  "kind": "FixedPoint",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "occupation",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "b894933b2b2853a5",
+          "kind": "Boolean",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "b894933b2b2853a5",
+                  "kind": "Boolean",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      }
+    ],
+    "completeness": "Partial",
+    "gaps": [
+      {
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "registry",
+          "name": "common/armies"
+        },
+        "detail": "Defaults, exhaustive enum domains, occurrence limits, deeper nested grammars, and non-owner runtime callers are not established by this method."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "prerequisites"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "resources"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "prerequisites"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "potential"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "allow"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "spawn_chance"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "on_built"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "on_queued"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "on_unqueued"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "army_modifier"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "ai_weight"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "show_tech_unlock_if"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "potential_country"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "resources"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "army_modifier",
+            "key"
+          ]
+        },
+        "detail": "The modifier block analysis stopped at reader-routing."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "army_modifier",
+            "divide_over_pop_groups"
+          ]
+        },
+        "detail": "The modifier block analysis stopped at reader-routing."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "army_modifier",
+            "name"
+          ]
+        },
+        "detail": "The modifier block analysis stopped at modifier-name-reader."
+      },
+      {
+        "kind": "NumericConversion",
+        "subject": {
+          "kind": "field",
+          "name": "time"
+        },
+        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+      },
+      {
+        "kind": "NumericConversion",
+        "subject": {
+          "kind": "field",
+          "name": "war_exhaustion"
+        },
+        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+      },
+      {
+        "kind": "NumericConversion",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "army_modifier",
+            "data"
+          ]
+        },
+        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+      },
+      {
+        "kind": "NumericConversion",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "army_modifier",
+            "icon_frame"
+          ]
+        },
+        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+      },
+      {
+        "kind": "NumericConversion",
+        "subject": {
+          "kind": "field",
+          "name": "army_modifier"
+        },
+        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+      },
+      {
+        "kind": "NumericConversion",
+        "subject": {
+          "kind": "field",
+          "name": "collateral_damage"
+        },
+        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+      },
+      {
+        "kind": "NumericConversion",
+        "subject": {
+          "kind": "field",
+          "name": "damage"
+        },
+        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+      },
+      {
+        "kind": "NumericConversion",
+        "subject": {
+          "kind": "field",
+          "name": "morale_damage"
+        },
+        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+      },
+      {
+        "kind": "NumericConversion",
+        "subject": {
+          "kind": "field",
+          "name": "health"
+        },
+        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+      },
+      {
+        "kind": "NumericConversion",
+        "subject": {
+          "kind": "field",
+          "name": "morale"
+        },
+        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+      }
+    ],
+    "source": {
+      "build": "29fa877366040a528098da39ec7e70b7baac76782a2a6bd161616d691f86fa38",
+      "native_version": "0.1.0",
+      "method": "registry-fields/v12",
+      "basis": "StaticAnalysis"
+    }
+  }
+}

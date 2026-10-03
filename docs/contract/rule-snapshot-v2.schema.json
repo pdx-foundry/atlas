@@ -236,7 +236,8 @@
             "ReaderSemantics",
             "IncompleteObservation",
             "UnresolvedStorage",
-            "UnresolvedCondition"
+            "UnresolvedCondition",
+            "NumericConversion"
           ]
         },
         "subject": {
@@ -288,6 +289,26 @@
                 "kind",
                 "id",
                 "name"
+              ]
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "kind": {
+                  "const": "key_path"
+                },
+                "path": {
+                  "type": "array",
+                  "minItems": 2,
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "kind",
+                "path"
               ]
             }
           ]

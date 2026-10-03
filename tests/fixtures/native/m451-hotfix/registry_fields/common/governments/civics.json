@@ -1,0 +1,1989 @@
+{
+  "Ok": {
+    "value": [
+      {
+        "name": "icon",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "325efaa17499c32d",
+          "kind": "String",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "325efaa17499c32d",
+                  "kind": "String",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "picture",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "325efaa17499c32d",
+          "kind": "String",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "325efaa17499c32d",
+                  "kind": "String",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "swap_type",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "custom_tooltip_with_modifiers",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "325efaa17499c32d",
+          "kind": "String",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "325efaa17499c32d",
+                  "kind": "String",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "potential",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Unresolved",
+            "outcome": "Unresolved"
+          },
+          {
+            "condition": "Unresolved",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "modification",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Unresolved",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": null,
+                  "kind": "Block",
+                  "family": "Unknown"
+                },
+                "shape": {
+                  "value": "Block",
+                  "repeat": "Unknown"
+                }
+              }
+            }
+          },
+          {
+            "condition": "Unresolved",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "pickable_at_start",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "preferred_planet_class_neighbor",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "traits",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "flags",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "homeworld",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "habitability_preference",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "starting_colony",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "possible",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Unresolved",
+            "outcome": "Unresolved"
+          },
+          {
+            "condition": "Unresolved",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "room",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "325efaa17499c32d",
+          "kind": "String",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "325efaa17499c32d",
+                  "kind": "String",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "description",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "325efaa17499c32d",
+          "kind": "String",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "325efaa17499c32d",
+                  "kind": "String",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "negative_description",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "325efaa17499c32d",
+          "kind": "String",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "325efaa17499c32d",
+                  "kind": "String",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "playable",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "e044b50825a1841d",
+          "kind": "Block",
+          "family": "Trigger"
+        },
+        "shape": {
+          "value": "Block",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "e044b50825a1841d",
+                  "kind": "Block",
+                  "family": "Trigger"
+                },
+                "shape": {
+                  "value": "Block",
+                  "repeat": "Unknown"
+                }
+              }
+            }
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "can_build_ruler_ship",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "ai_weight",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": null,
+          "kind": "Block",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Block",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": null,
+                  "kind": "Block",
+                  "family": "Unknown"
+                },
+                "shape": {
+                  "value": "Block",
+                  "repeat": "Unknown"
+                }
+              }
+            }
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "city_graphical_culture",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "325efaa17499c32d",
+          "kind": "String",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "325efaa17499c32d",
+                  "kind": "String",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "leader_background_job_weight",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": {
+              "All": [
+                "Unresolved",
+                "Unresolved"
+              ]
+            },
+            "outcome": "Unresolved"
+          },
+          {
+            "condition": {
+              "All": [
+                "Unresolved",
+                "Unresolved"
+              ]
+            },
+            "outcome": "Unresolved"
+          },
+          {
+            "condition": "Unresolved",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "has_secondary_species",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Unresolved",
+            "outcome": "Unresolved"
+          },
+          {
+            "condition": "Unresolved",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "max_once_global",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "is_origin",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "non_colonizable_planet_class_neighbor",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "initializers",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "blocks_random_machine_empire_generation",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "ai_playable",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "e044b50825a1841d",
+          "kind": "Block",
+          "family": "Trigger"
+        },
+        "shape": {
+          "value": "Block",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "e044b50825a1841d",
+                  "kind": "Block",
+                  "family": "Trigger"
+                },
+                "shape": {
+                  "value": "Block",
+                  "repeat": "Unknown"
+                }
+              }
+            }
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "modifier",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": null,
+          "kind": "Block",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Block",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": null,
+                  "kind": "Block",
+                  "family": "Unknown"
+                },
+                "shape": {
+                  "value": "Block",
+                  "repeat": "Unknown"
+                }
+              }
+            }
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "portrait",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "325efaa17499c32d",
+          "kind": "String",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "325efaa17499c32d",
+                  "kind": "String",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "cost",
+        "reader": {
+          "numeric": {
+            "Partial": {
+              "representation": {
+                "Known": "Integer"
+              },
+              "width_bits": {
+                "Known": 32
+              },
+              "signedness": {
+                "Known": "Signed"
+              },
+              "scale": {
+                "Known": 1
+              },
+              "literal_syntax": {
+                "Partial": [
+                  "DecimalInteger",
+                  "RadixPrefixedInteger"
+                ]
+              },
+              "accepted_range": {
+                "Known": {
+                  "minimum": {
+                    "Known": {
+                      "Signed": -2147483648
+                    }
+                  },
+                  "maximum": {
+                    "Known": {
+                      "Signed": 2147483647
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "d7a95ab8c8d44489",
+          "kind": "Integer",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Partial": {
+                      "representation": {
+                        "Known": "Integer"
+                      },
+                      "width_bits": {
+                        "Known": 32
+                      },
+                      "signedness": {
+                        "Known": "Signed"
+                      },
+                      "scale": {
+                        "Known": 1
+                      },
+                      "literal_syntax": {
+                        "Partial": [
+                          "DecimalInteger",
+                          "RadixPrefixedInteger"
+                        ]
+                      },
+                      "accepted_range": {
+                        "Known": {
+                          "minimum": {
+                            "Known": {
+                              "Signed": -2147483648
+                            }
+                          },
+                          "maximum": {
+                            "Known": {
+                              "Signed": 2147483647
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "d7a95ab8c8d44489",
+                  "kind": "Integer",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "random_weight",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": null,
+          "kind": "Block",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Block",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": null,
+                  "kind": "Block",
+                  "family": "Unknown"
+                },
+                "shape": {
+                  "value": "Block",
+                  "repeat": "Unknown"
+                }
+              }
+            }
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "advanced_start",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "alternate_civic_version",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "325efaa17499c32d",
+          "kind": "String",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "325efaa17499c32d",
+                  "kind": "String",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "multiply_by_habitability_effect_modifier",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": null,
+          "kind": "Block",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Block",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": null,
+                  "kind": "Block",
+                  "family": "Unknown"
+                },
+                "shape": {
+                  "value": "Block",
+                  "repeat": "Unknown"
+                }
+              }
+            }
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "removed_planet_types",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "added_planet_types",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "removed_climate_labels",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "added_climate_labels",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "soft_traits",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      }
+    ],
+    "completeness": "Partial",
+    "gaps": [
+      {
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "registry",
+          "name": "common/governments/civics"
+        },
+        "detail": "Defaults, exhaustive enum domains, occurrence limits, deeper nested grammars, and non-owner runtime callers are not established by this method."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "swap_type"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "potential"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "modification"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "pickable_at_start"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "preferred_planet_class_neighbor"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "traits"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "flags"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "homeworld"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "habitability_preference"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "starting_colony"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "possible"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "can_build_ruler_ship"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "leader_background_job_weight"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "has_secondary_species"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "max_once_global"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "is_origin"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "non_colonizable_planet_class_neighbor"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "initializers"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "blocks_random_machine_empire_generation"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "advanced_start"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "removed_planet_types"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "added_planet_types"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "removed_climate_labels"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "added_climate_labels"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "soft_traits"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "registry",
+          "name": "common/governments/civics"
+        },
+        "detail": "The field's reader could not be established on at least one path."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "registry",
+          "name": "common/governments/civics"
+        },
+        "detail": "A path through the registry's reader could not be followed to its end."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "swap_type"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "potential"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedCondition",
+        "subject": {
+          "kind": "field",
+          "name": "potential"
+        },
+        "detail": "A loader condition remains unresolved; its outcome is retained separately."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "modification"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedCondition",
+        "subject": {
+          "kind": "field",
+          "name": "modification"
+        },
+        "detail": "A loader condition remains unresolved; its outcome is retained separately."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "pickable_at_start"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "preferred_planet_class_neighbor"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "traits"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "flags"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "homeworld"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "habitability_preference"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "starting_colony"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "possible"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedCondition",
+        "subject": {
+          "kind": "field",
+          "name": "possible"
+        },
+        "detail": "A loader condition remains unresolved; its outcome is retained separately."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "playable"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "can_build_ruler_ship"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "ai_weight"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "leader_background_job_weight"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedCondition",
+        "subject": {
+          "kind": "field",
+          "name": "leader_background_job_weight"
+        },
+        "detail": "A loader condition remains unresolved; its outcome is retained separately."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "has_secondary_species"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedCondition",
+        "subject": {
+          "kind": "field",
+          "name": "has_secondary_species"
+        },
+        "detail": "A loader condition remains unresolved; its outcome is retained separately."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "max_once_global"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "is_origin"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "non_colonizable_planet_class_neighbor"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "initializers"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "blocks_random_machine_empire_generation"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "ai_playable"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "modifier"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "random_weight"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "advanced_start"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "multiply_by_habitability_effect_modifier"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "removed_planet_types"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "added_planet_types"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "removed_climate_labels"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "added_climate_labels"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "soft_traits"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "NumericConversion",
+        "subject": {
+          "kind": "field",
+          "name": "cost"
+        },
+        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+      }
+    ],
+    "source": {
+      "build": "29fa877366040a528098da39ec7e70b7baac76782a2a6bd161616d691f86fa38",
+      "native_version": "0.1.0",
+      "method": "registry-fields/v12",
+      "basis": "StaticAnalysis"
+    }
+  }
+}

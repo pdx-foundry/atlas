@@ -1,0 +1,588 @@
+{
+  "Ok": {
+    "value": {
+      "field_outcomes": [
+        {
+          "question": {
+            "registry": "common/traditions",
+            "definition": "atlas_malformed",
+            "field": "unlocks_agenda",
+            "parent_field": null,
+            "parsing": false,
+            "diagnostics": true
+          },
+          "file": "common/traditions/atlas_frozen.txt",
+          "owner": 4,
+          "definition_line": 19,
+          "reader": {
+            "numeric": "Unresolved",
+            "scoped_operand": "Unresolved",
+            "id": "325efaa17499c32d",
+            "kind": "String",
+            "family": "NotApplicable"
+          },
+          "parsing": "NotRequested",
+          "storage": {
+            "Observed": {
+              "occurrences": [
+                {
+                  "line": 21,
+                  "occurrence": 1,
+                  "value": {
+                    "String": "Unreadable String"
+                  }
+                }
+              ],
+              "final_value": {
+                "String": "Unreadable String"
+              },
+              "completeness": "Complete"
+            }
+          },
+          "diagnostics": [
+            0
+          ]
+        },
+        {
+          "question": {
+            "registry": "common/traditions",
+            "definition": "atlas_omitted",
+            "field": "unlocks_agenda",
+            "parent_field": null,
+            "parsing": false,
+            "diagnostics": true
+          },
+          "file": "common/traditions/atlas_frozen.txt",
+          "owner": 2,
+          "definition_line": 14,
+          "reader": {
+            "numeric": "Unresolved",
+            "scoped_operand": "Unresolved",
+            "id": "325efaa17499c32d",
+            "kind": "String",
+            "family": "NotApplicable"
+          },
+          "parsing": "NotRequested",
+          "storage": {
+            "Observed": {
+              "occurrences": [],
+              "final_value": {
+                "String": ""
+              },
+              "completeness": "Complete"
+            }
+          },
+          "diagnostics": []
+        },
+        {
+          "question": {
+            "registry": "common/traditions",
+            "definition": "atlas_repeated",
+            "field": "unlocks_agenda",
+            "parent_field": null,
+            "parsing": false,
+            "diagnostics": true
+          },
+          "file": "common/traditions/atlas_frozen.txt",
+          "owner": 3,
+          "definition_line": 15,
+          "reader": {
+            "numeric": "Unresolved",
+            "scoped_operand": "Unresolved",
+            "id": "325efaa17499c32d",
+            "kind": "String",
+            "family": "NotApplicable"
+          },
+          "parsing": "NotRequested",
+          "storage": {
+            "Observed": {
+              "occurrences": [
+                {
+                  "line": 16,
+                  "occurrence": 1,
+                  "value": {
+                    "String": "atlas_first"
+                  }
+                },
+                {
+                  "line": 17,
+                  "occurrence": 2,
+                  "value": {
+                    "String": "atlas_second"
+                  }
+                }
+              ],
+              "final_value": {
+                "String": "atlas_second"
+              },
+              "completeness": "Complete"
+            }
+          },
+          "diagnostics": []
+        },
+        {
+          "question": {
+            "registry": "common/traditions",
+            "definition": "atlas_unknown",
+            "field": "unlocks_agenda",
+            "parent_field": null,
+            "parsing": false,
+            "diagnostics": true
+          },
+          "file": "common/traditions/atlas_frozen.txt",
+          "owner": 5,
+          "definition_line": 23,
+          "reader": {
+            "numeric": "Unresolved",
+            "scoped_operand": "Unresolved",
+            "id": "325efaa17499c32d",
+            "kind": "String",
+            "family": "NotApplicable"
+          },
+          "parsing": "NotRequested",
+          "storage": {
+            "Observed": {
+              "occurrences": [
+                {
+                  "line": 24,
+                  "occurrence": 1,
+                  "value": {
+                    "String": "atlas_agenda"
+                  }
+                }
+              ],
+              "final_value": {
+                "String": "atlas_agenda"
+              },
+              "completeness": "Complete"
+            }
+          },
+          "diagnostics": []
+        },
+        {
+          "question": {
+            "registry": "common/traditions",
+            "definition": "atlas_valid",
+            "field": "ai_weight",
+            "parent_field": null,
+            "parsing": false,
+            "diagnostics": true
+          },
+          "file": "common/traditions/atlas_frozen.txt",
+          "owner": 1,
+          "definition_line": 1,
+          "reader": {
+            "numeric": "Unresolved",
+            "scoped_operand": "Unresolved",
+            "id": "f08cb83d92484a89",
+            "kind": "Block",
+            "family": "Unknown"
+          },
+          "parsing": "NotRequested",
+          "storage": {
+            "Unavailable": "No proven direct storage decoder and destination for this field"
+          },
+          "diagnostics": []
+        },
+        {
+          "question": {
+            "registry": "common/traditions",
+            "definition": "atlas_valid",
+            "field": "custom_tooltip",
+            "parent_field": null,
+            "parsing": false,
+            "diagnostics": true
+          },
+          "file": "common/traditions/atlas_frozen.txt",
+          "owner": 1,
+          "definition_line": 1,
+          "reader": {
+            "numeric": "Unresolved",
+            "scoped_operand": "Unresolved",
+            "id": "325efaa17499c32d",
+            "kind": "String",
+            "family": "NotApplicable"
+          },
+          "parsing": "NotRequested",
+          "storage": {
+            "Observed": {
+              "occurrences": [
+                {
+                  "line": 3,
+                  "occurrence": 1,
+                  "value": {
+                    "String": "atlas_tooltip"
+                  }
+                }
+              ],
+              "final_value": {
+                "String": "atlas_tooltip"
+              },
+              "completeness": "Complete"
+            }
+          },
+          "diagnostics": []
+        },
+        {
+          "question": {
+            "registry": "common/traditions",
+            "definition": "atlas_valid",
+            "field": "custom_tooltip_with_modifiers",
+            "parent_field": null,
+            "parsing": false,
+            "diagnostics": true
+          },
+          "file": "common/traditions/atlas_frozen.txt",
+          "owner": 1,
+          "definition_line": 1,
+          "reader": {
+            "numeric": "Unresolved",
+            "scoped_operand": "Unresolved",
+            "id": "325efaa17499c32d",
+            "kind": "String",
+            "family": "NotApplicable"
+          },
+          "parsing": "NotRequested",
+          "storage": {
+            "Observed": {
+              "occurrences": [
+                {
+                  "line": 4,
+                  "occurrence": 1,
+                  "value": {
+                    "String": "atlas_tooltip_with_modifiers"
+                  }
+                }
+              ],
+              "final_value": {
+                "String": "atlas_tooltip_with_modifiers"
+              },
+              "completeness": "Complete"
+            }
+          },
+          "diagnostics": []
+        },
+        {
+          "question": {
+            "registry": "common/traditions",
+            "definition": "atlas_valid",
+            "field": "modifier",
+            "parent_field": null,
+            "parsing": false,
+            "diagnostics": true
+          },
+          "file": "common/traditions/atlas_frozen.txt",
+          "owner": 1,
+          "definition_line": 1,
+          "reader": {
+            "numeric": "Unresolved",
+            "scoped_operand": "Unresolved",
+            "id": "1c2988588f7e8eaa",
+            "kind": "Block",
+            "family": "Modifier"
+          },
+          "parsing": "NotRequested",
+          "storage": {
+            "Unavailable": "No proven direct storage decoder and destination for this field"
+          },
+          "diagnostics": []
+        },
+        {
+          "question": {
+            "registry": "common/traditions",
+            "definition": "atlas_valid",
+            "field": "on_disabled",
+            "parent_field": null,
+            "parsing": false,
+            "diagnostics": true
+          },
+          "file": "common/traditions/atlas_frozen.txt",
+          "owner": 1,
+          "definition_line": 1,
+          "reader": {
+            "numeric": "Unresolved",
+            "scoped_operand": "Unresolved",
+            "id": "6e28a363faf61c52",
+            "kind": "Block",
+            "family": "Effect"
+          },
+          "parsing": "NotRequested",
+          "storage": {
+            "Unavailable": "No proven direct storage decoder and destination for this field"
+          },
+          "diagnostics": []
+        },
+        {
+          "question": {
+            "registry": "common/traditions",
+            "definition": "atlas_valid",
+            "field": "on_enabled",
+            "parent_field": null,
+            "parsing": false,
+            "diagnostics": true
+          },
+          "file": "common/traditions/atlas_frozen.txt",
+          "owner": 1,
+          "definition_line": 1,
+          "reader": {
+            "numeric": "Unresolved",
+            "scoped_operand": "Unresolved",
+            "id": "6e28a363faf61c52",
+            "kind": "Block",
+            "family": "Effect"
+          },
+          "parsing": "NotRequested",
+          "storage": {
+            "Unavailable": "No proven direct storage decoder and destination for this field"
+          },
+          "diagnostics": []
+        },
+        {
+          "question": {
+            "registry": "common/traditions",
+            "definition": "atlas_valid",
+            "field": "possible",
+            "parent_field": null,
+            "parsing": false,
+            "diagnostics": true
+          },
+          "file": "common/traditions/atlas_frozen.txt",
+          "owner": 1,
+          "definition_line": 1,
+          "reader": {
+            "numeric": "Unresolved",
+            "scoped_operand": "Unresolved",
+            "id": "e044b50825a1841d",
+            "kind": "Block",
+            "family": "Trigger"
+          },
+          "parsing": "NotRequested",
+          "storage": {
+            "Unavailable": "No proven direct storage decoder and destination for this field"
+          },
+          "diagnostics": []
+        },
+        {
+          "question": {
+            "registry": "common/traditions",
+            "definition": "atlas_valid",
+            "field": "potential",
+            "parent_field": null,
+            "parsing": false,
+            "diagnostics": true
+          },
+          "file": "common/traditions/atlas_frozen.txt",
+          "owner": 1,
+          "definition_line": 1,
+          "reader": {
+            "numeric": "Unresolved",
+            "scoped_operand": "Unresolved",
+            "id": "e044b50825a1841d",
+            "kind": "Block",
+            "family": "Trigger"
+          },
+          "parsing": "NotRequested",
+          "storage": {
+            "Unavailable": "No proven direct storage decoder and destination for this field"
+          },
+          "diagnostics": []
+        },
+        {
+          "question": {
+            "registry": "common/traditions",
+            "definition": "atlas_valid",
+            "field": "tradition_swap",
+            "parent_field": null,
+            "parsing": false,
+            "diagnostics": true
+          },
+          "file": "common/traditions/atlas_frozen.txt",
+          "owner": 1,
+          "definition_line": 1,
+          "reader": {
+            "numeric": "Unresolved",
+            "scoped_operand": "Unresolved",
+            "id": "3e4a6b47b20070ea",
+            "kind": "Block",
+            "family": "Unknown"
+          },
+          "parsing": "NotRequested",
+          "storage": {
+            "Unavailable": "No proven direct storage decoder and destination for this field"
+          },
+          "diagnostics": []
+        },
+        {
+          "question": {
+            "registry": "common/traditions",
+            "definition": "atlas_valid",
+            "field": "triggered_modifier",
+            "parent_field": null,
+            "parsing": false,
+            "diagnostics": true
+          },
+          "file": "common/traditions/atlas_frozen.txt",
+          "owner": 1,
+          "definition_line": 1,
+          "reader": {
+            "numeric": "Unresolved",
+            "scoped_operand": "Unresolved",
+            "id": null,
+            "kind": "Unknown",
+            "family": "Unknown"
+          },
+          "parsing": "NotRequested",
+          "storage": {
+            "Unavailable": "No proven direct storage decoder and destination for this field"
+          },
+          "diagnostics": []
+        },
+        {
+          "question": {
+            "registry": "common/traditions",
+            "definition": "atlas_valid",
+            "field": "unlocks_agenda",
+            "parent_field": null,
+            "parsing": false,
+            "diagnostics": true
+          },
+          "file": "common/traditions/atlas_frozen.txt",
+          "owner": 1,
+          "definition_line": 1,
+          "reader": {
+            "numeric": "Unresolved",
+            "scoped_operand": "Unresolved",
+            "id": "325efaa17499c32d",
+            "kind": "String",
+            "family": "NotApplicable"
+          },
+          "parsing": "NotRequested",
+          "storage": {
+            "Observed": {
+              "occurrences": [
+                {
+                  "line": 2,
+                  "occurrence": 1,
+                  "value": {
+                    "String": "atlas_agenda"
+                  }
+                }
+              ],
+              "final_value": {
+                "String": "atlas_agenda"
+              },
+              "completeness": "Complete"
+            }
+          },
+          "diagnostics": []
+        }
+      ],
+      "diagnostics": [
+        {
+          "text": "Malformed token",
+          "stage": "reader-malformed-report",
+          "join": {
+            "Source": {
+              "file": "common/traditions/atlas_frozen.txt",
+              "line": 21,
+              "definition": "atlas_malformed",
+              "field": "unlocks_agenda",
+              "occurrence": 1
+            }
+          }
+        },
+        {
+          "text": "Unexpected token",
+          "stage": "reader-unexpected-report",
+          "join": {
+            "Source": {
+              "file": "common/traditions/atlas_frozen.txt",
+              "line": 25,
+              "definition": null,
+              "field": null,
+              "occurrence": null
+            }
+          }
+        }
+      ],
+      "diagnostic_coverage": {
+        "Complete": {
+          "window": "FixtureFileLoad"
+        }
+      }
+    },
+    "completeness": "Partial",
+    "gaps": [
+      {
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "field",
+          "name": "ai_weight"
+        },
+        "detail": "No proven direct storage decoder and destination for this field"
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "field",
+          "name": "modifier"
+        },
+        "detail": "No proven direct storage decoder and destination for this field"
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "field",
+          "name": "on_disabled"
+        },
+        "detail": "No proven direct storage decoder and destination for this field"
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "field",
+          "name": "on_enabled"
+        },
+        "detail": "No proven direct storage decoder and destination for this field"
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "field",
+          "name": "possible"
+        },
+        "detail": "No proven direct storage decoder and destination for this field"
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "field",
+          "name": "potential"
+        },
+        "detail": "No proven direct storage decoder and destination for this field"
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "field",
+          "name": "tradition_swap"
+        },
+        "detail": "No proven direct storage decoder and destination for this field"
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "triggered_modifier"
+        },
+        "detail": "No proven direct storage decoder and destination for this field"
+      }
+    ],
+    "source": {
+      "build": "29fa877366040a528098da39ec7e70b7baac76782a2a6bd161616d691f86fa38",
+      "native_version": "0.1.0",
+      "method": "observe-fixture/v6",
+      "basis": "LiveObservation"
+    }
+  }
+}

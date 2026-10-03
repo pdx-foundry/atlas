@@ -2,7 +2,7 @@ use sha2::{Digest, Sha256};
 use std::{fs, path::Path, process::Command};
 
 fn recording() -> std::path::PathBuf {
-    Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/native/m45")
+    Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/native/m451-hotfix")
 }
 
 fn run(recording: &Path, output: &Path) -> std::process::Output {

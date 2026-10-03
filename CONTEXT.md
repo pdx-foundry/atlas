@@ -5,7 +5,7 @@ PDX Atlas describes engine-defined Stellaris scripting rules and their supportin
 ## Language
 
 **PDX Native**:
-The shared engine-integration module that exposes stable engine operations and observations while owning platform and game-version differences and native qualification. Atlas is its first consumer.
+The engine API that supplies static compiler facts and small live checks, and owns platform and build differences. Atlas is its only consumer.
 _Avoid_: Native foundation (former name)
 
 **PDX Atlas**:
@@ -30,7 +30,7 @@ An evidence-supported rule describing a script value's form or reference categor
 A machine-readable constraint whose applicability depends on stated input conditions, applied by the consumer to its project inputs. It does not simulate game execution or determine whether a runtime trigger succeeds.
 
 **Rule documentation**:
-Evidence-backed explanations accompanying Atlas's machine-readable rules, including execution, recovery, and scope identity relationships. These explanations remain distinct from structured shapes, references, cardinality, defaults, bounds, field conditions, and scope types or availability.
+Explanations of static facts that change what a compiler accepts, rejects, types or completes. They state the evidence and limits of shapes, references, conversion rules, field conditions and entry scopes.
 
 **Parser storage**:
 The value retained after the game reads an authored input. Storage alone does not establish successful validation or the value used during execution.
@@ -39,7 +39,7 @@ The value retained after the game reads an authored input. Storage alone does no
 The game's checks and diagnostics for an input at a stated processing stage. Continued execution does not by itself establish that an input passed these checks.
 
 **Runtime outcome**:
-What the game does when it uses an input, including fallback behavior and diagnostics under the stated conditions. Atlas explains these outcomes in rule documentation, separately from its machine-readable constraints.
+An evaluated value or action when the game uses an input. Runtime outcomes are out of scope under the simplification decision of 2026-10-02.
 
 **Authoring recommendation**:
 Advice about what an author should write, owned by a consumer such as the SDK. It is separate from facts about what the game stores, validates, or does.
@@ -54,13 +54,13 @@ Traced source material, analysis, or observations that support or challenge an e
 A value or structure found in the examined game content. An observation does not by itself establish an exhaustive set of permitted values or structures.
 
 **Scope availability**:
-Whether a scope is usable by script under the stated conditions. A raw pointer alone does not establish availability, and two scope links can refer to the same object.
+Whether a scope is usable in a running game. This is runtime meaning and is out of scope. The compiler instead needs the declared scope type at entry.
 
 **Scope identity**:
-The game object to which a scope refers, including established equality with other scope references. Atlas documents supported identity relationships rather than representing them as machine-readable scope constraints.
+The relation of `this`, `root`, `from` and `prev` established from call sites. Static self-link assumptions and their checks remain explicit; Atlas does not promise the identity of a live game object.
 
 **Scope contract**:
-An evidence-supported description of scope types and availability under stated conditions, with identity relationships supplied as documentation. An observation from one callback path establishes only the portion of the contract supported by that path's evidence.
+The declared entry scope (`this`) and the static call-site relationships for `root`, `from` and `prev`. Unresolved relationships remain gaps. A check of one entry path supports only that path.
 
 **Unresolved property**:
 A question about the game whose answer has not yet been established. Missing extraction or verification does not establish that a property requires permanent manual maintenance.

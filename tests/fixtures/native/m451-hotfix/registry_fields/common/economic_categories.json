@@ -1,0 +1,710 @@
+{
+  "Ok": {
+    "value": [
+      {
+        "name": "parent",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "6e16a88f362f7c3d",
+          "kind": "Reference",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "6e16a88f362f7c3d",
+                  "kind": "Reference",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Unknown"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": {
+          "Lookups": [
+            {
+              "condition": "Always",
+              "target": {
+                "Registry": {
+                  "name": "common/economic_categories"
+                }
+              },
+              "stage": "WhileReading",
+              "key_match": "FirstEqual",
+              "empty_key": "LookedUp",
+              "on_missing": "NullObject"
+            }
+          ]
+        }
+      },
+      {
+        "name": "icon",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "325efaa17499c32d",
+          "kind": "String",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "325efaa17499c32d",
+                  "kind": "String",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "modifier_category",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "use_for_ai_budget",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "ai_use_parent_for_resources_expenditure",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "ai_use_parent_for_resources_upkeep",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "ai_use_parent_for_resources_logistics",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "hidden",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "triggered_cost_modifier",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "triggered_produces_modifier",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "triggered_upkeep_modifier",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "triggered_logistics_modifier",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "generate_add_modifiers",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "generate_mult_modifiers",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "add_unscaled_value_to_tooltip",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "b894933b2b2853a5",
+          "kind": "Boolean",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "b894933b2b2853a5",
+                  "kind": "Boolean",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      },
+      {
+        "name": "scaled_value_key",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "325efaa17499c32d",
+          "kind": "String",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "325efaa17499c32d",
+                  "kind": "String",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished"
+      }
+    ],
+    "completeness": "Partial",
+    "gaps": [
+      {
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "registry",
+          "name": "common/economic_categories"
+        },
+        "detail": "Defaults, exhaustive enum domains, occurrence limits, deeper nested grammars, and non-owner runtime callers are not established by this method."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "modifier_category"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "use_for_ai_budget"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "ai_use_parent_for_resources_expenditure"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "ai_use_parent_for_resources_upkeep"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "ai_use_parent_for_resources_logistics"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "hidden"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "triggered_cost_modifier"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "triggered_produces_modifier"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "triggered_upkeep_modifier"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "triggered_logistics_modifier"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "generate_add_modifiers"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "generate_mult_modifiers"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "parent"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "modifier_category"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "use_for_ai_budget"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "ai_use_parent_for_resources_expenditure"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "ai_use_parent_for_resources_upkeep"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "ai_use_parent_for_resources_logistics"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "hidden"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "triggered_cost_modifier"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "triggered_produces_modifier"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "triggered_upkeep_modifier"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "triggered_logistics_modifier"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "generate_add_modifiers"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "generate_mult_modifiers"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      }
+    ],
+    "source": {
+      "build": "29fa877366040a528098da39ec7e70b7baac76782a2a6bd161616d691f86fa38",
+      "native_version": "0.1.0",
+      "method": "registry-fields/v12",
+      "basis": "StaticAnalysis"
+    }
+  }
+}

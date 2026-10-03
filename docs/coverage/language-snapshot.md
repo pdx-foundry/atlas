@@ -63,7 +63,7 @@ their contexts; on_action and game-rule names; define names and value types.
 | Argument grammar of each command, including target arguments | 2,170 | SDK-548 |
 | Scope that each command's block enters | 2,170 | SDK-549 |
 | Where a modifier or category takes effect | 603 | SDK-547 |
-| Entry scopes of on_actions and game rules | 517 | SDK-496 |
+| Entry scopes of on_actions and game rules | 517 | SDK-608 (current owner; SDK-496 was historical) |
 | What the data after a link prefix refers to | 2 | SDK-543 |
 | Native gaps (`native.{question}.{kind}`), from 945 typed Native gaps | 755 | none |
 | Generation condition of a modifier family | 42 | none |

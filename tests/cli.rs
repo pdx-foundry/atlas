@@ -12,7 +12,7 @@ fn compare_command_writes_separate_report_from_recorded_rule_snapshot() {
     .unwrap();
     let snapshot = root.path().join("snapshot.json");
     let fixture =
-        std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/native/m45");
+        std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/native/m451-hotfix");
     let produced = Command::new(env!("CARGO_BIN_EXE_pdx-atlas"))
         .args(["snapshot", "--recorded"])
         .arg(fixture)
