@@ -1,6 +1,7 @@
 //! Game-free inventory of config questions and evidence-backed Atlas coverage.
 #![forbid(unsafe_code)]
 #![deny(missing_docs)]
+mod callback_checks;
 pub mod coverage;
 pub mod extraction;
 pub mod ledger;

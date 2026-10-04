@@ -209,48 +209,248 @@ async fn each_native_gap_becomes_a_snapshot_gap() {
 }
 
 #[tokio::test]
-async fn entry_scopes_need_every_slot_established() {
+async fn entry_scopes_apply_self_links_and_preserve_prev() {
     let mut extraction = recorded().await;
     let scopes = &extraction.language.scopes.as_ref().unwrap().value;
-    let country = scopes
-        .types
-        .iter()
-        .find(|scope| scope.name == "country" && scope.keywords == ["country"])
-        .unwrap();
-    let reference = json!({"Scope": {"id": country.id, "name": "country"}});
-    let on_actions: Vec<OnAction> = serde_json::from_value(json!([
-        {"name": "atlas_resolved", "entries": [
-            {"this": reference, "root": reference, "from": ["NotSet"]}
-        ]},
-        {"name": "atlas_self_link", "entries": [
-            {"this": reference, "root": "SelfLink", "from": []}
-        ]},
-        {"name": "atlas_unresolved_from", "entries": [
-            {"this": reference, "root": reference, "from": ["Unresolved"]}
-        ]},
-        {"name": "atlas_no_site", "entries": []}
+    let reference = |name: &str| {
+        let scope = scopes
+            .types
+            .iter()
+            .find(|scope| scope.name == name && scope.keywords == [name])
+            .unwrap();
+        json!({"Scope": {"id": scope.id, "name": name}})
+    };
+    let country = reference("country");
+    let leader = reference("leader");
+    let entries = json!([
+        {"this": country, "root": "SelfLink", "from": ["SelfLink"], "prev": ["SelfLink"]},
+        {"this": country, "root": leader, "from": [leader, "SelfLink"], "prev": [country, "SelfLink"]},
+        {"this": "NotSet", "root": "SelfLink", "from": ["NotSet"], "prev": ["NotSet", leader, "SelfLink"]}
+    ]);
+    extraction.language.on_actions.as_mut().unwrap().value = serde_json::from_value(json!([
+        {"name": "atlas_resolved", "entries": entries}
     ]))
     .unwrap();
-    extraction.language.on_actions.as_mut().unwrap().value = on_actions;
+    extraction.language.game_rules.as_mut().unwrap().value = serde_json::from_value(json!([
+        {"name": "atlas_resolved", "kind": "Scripted", "entries": entries}
+    ]))
+    .unwrap();
+    let snapshot = snapshot::assemble(&extraction).unwrap();
+    let expected = json!([
+        {"this": "scope:country/country", "root": "scope:country/country", "from": ["not_set"], "prev": ["not_set"]},
+        {"this": "scope:country/country", "root": "scope:leader/leader", "from": ["scope:leader/leader", "scope:leader/leader"], "prev": ["scope:country/country", "scope:country/country"]},
+        {"this": "not_set", "root": "not_set", "from": ["not_set"], "prev": ["not_set", "scope:leader/leader", "scope:leader/leader"]}
+    ]);
+
+    for kind in ["on_action", "game_rule"] {
+        let id = format!("{kind}:atlas_resolved#entry_scopes");
+        assert_eq!(rule(&snapshot, &id).unwrap().answer, expected);
+        assert!(gap(&snapshot, &id).is_none());
+    }
+}
+
+#[tokio::test]
+async fn entry_scopes_need_every_slot_and_call_site_established() {
+    let mut extraction = recorded().await;
+    let resolved = json!({"this": "NotSet", "root": "SelfLink", "from": [], "prev": []});
+    let mut on_actions = Vec::<OnAction>::new();
+
+    for (name, slot, value) in [
+        ("unknown_this", "this", json!("Unresolved")),
+        ("self_this", "this", json!("SelfLink")),
+        ("unknown_root", "root", json!("Unresolved")),
+        ("unknown_from", "from", json!(["Unresolved"])),
+        ("unknown_prev", "prev", json!(["Unresolved"])),
+        (
+            "unknown_id",
+            "prev",
+            json!([{"Scope": {"id": "missing", "name": "country"}}]),
+        ),
+    ] {
+        let mut entry = resolved.clone();
+        entry[slot] = value;
+        on_actions.push(
+            serde_json::from_value(json!({"name": name, "entries": [resolved, entry]})).unwrap(),
+        );
+    }
+    on_actions.push(serde_json::from_value(json!({"name": "no_site", "entries": []})).unwrap());
+    extraction.language.on_actions.as_mut().unwrap().value = on_actions.clone();
     let snapshot = snapshot::assemble(&extraction).unwrap();
 
-    assert_eq!(
-        rule(&snapshot, "on_action:atlas_resolved#entry_scopes")
-            .unwrap()
-            .answer,
-        json!([{"this": "scope:country/country", "root": "scope:country/country", "from": ["not_set"]}])
-    );
-
-    for name in ["atlas_self_link", "atlas_unresolved_from", "atlas_no_site"] {
-        let id = format!("on_action:{name}#entry_scopes");
-
+    for on_action in on_actions {
+        let id = format!("on_action:{}#entry_scopes", on_action.name);
         assert!(rule(&snapshot, &id).is_none(), "{id}");
         assert_eq!(
             gap(&snapshot, &id).unwrap().owner.as_deref(),
             Some("callback_context")
         );
-        assert!(rule(&snapshot, &format!("on_action:{name}#existence")).is_some());
+        assert!(
+            rule(
+                &snapshot,
+                &format!("on_action:{}#existence", on_action.name)
+            )
+            .is_some()
+        );
     }
+    assert!(
+        gap(&snapshot, "on_action:unknown_prev#entry_scopes")
+            .unwrap()
+            .reason
+            .contains("prev=[unresolved]")
+    );
+}
+
+#[tokio::test]
+async fn callback_checks_keep_confirmed_disagreements_and_independent_source_gaps() {
+    let snapshot = snapshot::assemble(&recorded().await).unwrap();
+    let ledger = ledger::inventory(&BTreeMap::new());
+    let report = comparison::evaluate(
+        &ledger,
+        &snapshot::json_bytes(&snapshot).unwrap(),
+        &comparison::Inputs::default(),
+    )
+    .unwrap();
+    let checks = report.entry_scope_checks.unwrap();
+    assert_eq!(checks.agreements["on_actions"].agree, 184);
+    assert_eq!(checks.agreements["game_rules"].agree, 181);
+    let mut missing = 0;
+    let mut confirmed = 0;
+
+    for check in &checks.groups {
+        for name in &check.names {
+            let id = format!("{}#entry_scopes", check.kind.id(name));
+            if check.outcome == comparison::CheckOutcome::NoIndependentSource {
+                missing += 1;
+                assert!(rule(&snapshot, &id).is_none(), "{id}");
+                assert!(
+                    gap(&snapshot, &id)
+                        .unwrap()
+                        .reason
+                        .starts_with(&check.reason),
+                    "{id}"
+                );
+            } else {
+                confirmed += 1;
+                assert!(
+                    !gap(&snapshot, &id)
+                        .is_some_and(|gap| gap.reason.contains("No independent source")),
+                    "{id}"
+                );
+            }
+        }
+    }
+    assert_eq!((confirmed, missing), (15, 44));
+    assert_eq!(
+        rule(&snapshot, "game_rule:is_mercenary#entry_scopes")
+            .unwrap()
+            .answer[0]["from"],
+        json!(["not_set"])
+    );
+    assert_eq!(
+        rule(&snapshot, "game_rule:dismiss_leader_cost#entry_scopes")
+            .unwrap()
+            .answer[0]["this"],
+        "scope:leader/leader"
+    );
+    // Native followed one typed-prev context but hit its path limit at another site.
+    let partial_id = "on_action:on_modification_complete#entry_scopes";
+    assert!(rule(&snapshot, partial_id).is_none());
+    assert!(
+        gap(&snapshot, partial_id)
+            .unwrap()
+            .reason
+            .contains("every call site")
+    );
+    assert!(
+        gap(
+            &snapshot,
+            "on_action:on_modification_complete#native.on_actions.unresolved_path"
+        )
+        .is_some()
+    );
+
+    let mut other_build = snapshot;
+    let build = serde_json::from_value(json!("other-build")).unwrap();
+    other_build.applicability.builds = vec![build];
+    for source in other_build.sources.values_mut() {
+        source.build = other_build.applicability.builds[0].clone();
+    }
+    let report = comparison::evaluate(
+        &ledger,
+        &snapshot::json_bytes(&other_build).unwrap(),
+        &comparison::Inputs::default(),
+    )
+    .unwrap();
+    assert!(report.entry_scope_checks.is_none());
+}
+
+#[tokio::test]
+async fn callback_coverage_keeps_disagreements_and_blocks_missing_independent_sources() {
+    let mut snapshot = snapshot::assemble(&recorded().await).unwrap();
+    let ledger = ledger::inventory(&BTreeMap::from([(
+        "game_rules.cwt".into(),
+        r#"
+        game_rules = {
+            ## replace_scopes = { this = country from = country }
+            is_mercenary = { }
+            ## replace_scopes = { this = fleet }
+            can_jump_drive = { }
+        }
+    "#
+        .into(),
+    )]));
+    let recorded_report =
+        coverage::evaluate(&ledger, Some(&snapshot::json_bytes(&snapshot).unwrap())).unwrap();
+    assert!(
+        recorded_report
+            .claims
+            .iter()
+            .all(|assessment| !assessment.covered)
+    );
+    qualify_as_live(&mut snapshot);
+    let report =
+        coverage::evaluate(&ledger, Some(&snapshot::json_bytes(&snapshot).unwrap())).unwrap();
+
+    for claim in ledger
+        .claims
+        .iter()
+        .filter(|claim| claim.property == "scope_context")
+    {
+        let assessment = report
+            .claims
+            .iter()
+            .find(|assessment| assessment.claim == claim.id)
+            .unwrap();
+        assert_eq!(
+            assessment.covered,
+            claim.subject.iter().any(|part| part == "is_mercenary")
+        );
+    }
+    let comparison = comparison::evaluate(
+        &ledger,
+        &snapshot::json_bytes(&snapshot).unwrap(),
+        &comparison::Inputs::default(),
+    )
+    .unwrap();
+    let missing = ledger
+        .claims
+        .iter()
+        .find(|claim| {
+            claim.property == "scope_context"
+                && claim.subject.iter().any(|part| part == "can_jump_drive")
+        })
+        .unwrap();
+    let entry = comparison
+        .entries
+        .iter()
+        .find(|entry| entry.claim.as_deref() == Some(&missing.id))
+        .unwrap();
+    assert!(
+        entry
+            .gaps
+            .iter()
+            .any(|reason| reason.contains("No independent source"))
+    );
 }
 
 #[tokio::test]

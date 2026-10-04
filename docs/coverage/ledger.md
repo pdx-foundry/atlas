@@ -188,3 +188,36 @@ Other shapes receive the note “out of scope, vision 2026-10-02”. Measure fai
 M451-hotfix recordings after the Native pin move. A count or broad capability owner alone does
 not justify new discovery work. A compiler, rather than an Atlas policy overlay, selects severity;
 subtype names and alias factoring remain emitter test mappings.
+
+## Callback entry scopes (SDK-704)
+
+Atlas applies Native's hand-checked self-link assumption to `entry_scopes`: self-linked `root`
+has the type of `this`; the first self-linked `from` or `prev` is `not_set`; a later self-link
+has the type of the preceding scope. `this` must establish its own type. Each call site's
+alternative retains `this`, `root`, `from` and `prev`. Arrays describe the positions Native
+reported, not a maximum chain length: a terminal self-link can continue beyond that position.
+`prev` can pass through `not_set`. Unknown scope IDs, unresolved slots and missing call sites
+remain gaps. A resolved alternative does not cover another site's Native gap.
+
+[The independent-check ledger](entry-scope-checks.json) records SDK-608's M451-hotfix comparison:
+184 of 294 on_actions agreed with vanilla scope comments, and 181 of 223 game rules agreed with
+config `replace_scopes`. It names all 15 confirmed disagreements and all 44 names lacking an
+independent source, with stable reasons. The source is SDK-704 and Native's
+`docs/native/engine-commands.md`, “On_actions, game rules and their entry scopes”. The self-link
+rule remains an assumption. These checks apply only to the exact recorded build and
+`callbacks/v2`; comments and config never feed Native's extraction.
+
+The confirmed disagreements remain engine answers: nine game rules have no `from` despite the
+config; two pass `colony` where config says `planet`; `dismiss_leader_cost` evaluates on a leader;
+and three on_action comments name the wrong object or an object the engine never sets. These
+findings create no Native gaps. Unrelated Native failures still block coverage.
+
+The 44 names with no independent source receive an `entry_scopes` gap, including the two whose
+comment describes a site that Native could not follow. Native's original gaps remain attached.
+The ledger's coverage projection therefore keeps these reasons and grants no entry-scope credit.
+
+The comparison report's `entry_scope_checks` field publishes these historical results for a
+snapshot with the matching callback source. It is `null` for other builds or methods. It does
+not compare today's config and does not alter current comparison statuses. The ordinary
+scope-context comparison remains unmapped; it retains the structured engine answer or gap.
+Recorded answers still earn no current-engine coverage credit.
