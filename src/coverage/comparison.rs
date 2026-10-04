@@ -3,6 +3,8 @@
 mod name_lists;
 pub mod script_docs;
 
+pub use crate::callback_checks::{AgreementCount, CheckOutcome, EntryScopeCheck, EntryScopeChecks};
+
 use super::{Answer, Gap, projection};
 use crate::{ledger::Ledger, snapshot};
 use pdx_native::LoadedModifiers;
@@ -128,6 +130,10 @@ pub struct Report {
     pub loaded_modifiers_read: bool,
     /// Loaded against static modifier tags, when the loaded answer was read.
     pub modifier_tags: Option<TagComparison>,
+    /// SDK-608 historical hand checks, only when both callback answers match their exact
+    /// build and callback method. Absent or mismatched answers omit the entire check ledger.
+    /// These do not compare the current config or change comparison entry statuses.
+    pub entry_scope_checks: Option<&'static EntryScopeChecks>,
 }
 
 enum ComparisonKind {
@@ -396,7 +402,7 @@ pub fn evaluate(ledger: &Ledger, input: &[u8], inputs: &Inputs) -> Result<Report
     let engine = name_lists::Engine::new(&rules);
 
     Ok(Report {
-        format_version: 2,
+        format_version: 3,
         config_sha256: ledger.config_sha256.clone(),
         snapshot_sha256: format!("{:x}", Sha256::digest(input)),
         snapshot_id: projection.snapshot_id,
@@ -407,5 +413,6 @@ pub fn evaluate(ledger: &Ledger, input: &[u8], inputs: &Inputs) -> Result<Report
         define_files: name_lists::define_files(&engine, inputs)?,
         loaded_modifiers_read: inputs.loaded_modifiers.is_some(),
         modifier_tags: name_lists::modifier_tags(&engine, inputs),
+        entry_scope_checks: crate::callback_checks::for_snapshot(&rules),
     })
 }

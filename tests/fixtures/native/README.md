@@ -2,7 +2,17 @@
 
 `m451-hotfix/` holds fresh Native answers from the simplification capture of 2026-10-02 on
 M451-hotfix (build `29fa877366040a528098da39ec7e70b7baac76782a2a6bd161616d691f86fa38`).
-The Native revision is the pin in `Cargo.toml`. Registry fields use `registry-fields/v12` and
+The original Native revision was `2a23b2bacb345baab416d1c2cb5a50b0ddb569b4`.
+`on_actions.json` and `game_rules.json` were re-recorded on 2026-10-03 from Native main commit
+`b5049f90daf9db03cb52f8b51cfe645c691ac6b7` (SDK-608), now pinned in `Cargo.toml`.
+These unmodified `callbacks/v2` recordings include the required `prev` chains. The other
+recordings are unchanged. To refresh only the static callback answers, without starting a game:
+
+```sh
+cargo run --release --locked --example record_callbacks -- "$STELLARIS_PATH" tests/fixtures/native/m451-hotfix
+```
+
+Registry fields use `registry-fields/v12` and
 fixtures use `observe-fixture/v6`. Every required answer property is explicit; tests read them
 with `Native::from_recorded_answers` without a game. The prior M45 recordings remain at Atlas
 commit `3b1dc763723050b2f090327d6e61e789d6551cfb`.

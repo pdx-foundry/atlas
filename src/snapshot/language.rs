@@ -910,10 +910,18 @@ impl Builder<'_> {
         } else {
             self.entry_scopes(entries).ok_or_else(|| {
                 format!(
-                    "A call site supplies a self link or an unestablished scope, so what script sees there is not established: {}",
+                    "A call site supplies an unestablished scope, so what script sees there is not established: {}",
                     describe_entries(entries)
                 )
             })
+        };
+
+        let independent_gap = crate::callback_checks::missing_source(&answer.source, kind, name);
+
+        let established = match (established, independent_gap) {
+            (result, None) => result,
+            (Ok(_), Some(reason)) => Err(reason.to_owned()),
+            (Err(native_reason), Some(reason)) => Err(format!("{reason}; {native_reason}")),
         };
 
         match established {
@@ -930,30 +938,55 @@ impl Builder<'_> {
         Ok((id, link))
     }
 
-    /// Every context's scopes, or `None` when one slot is not a scope type or `NotSet`.
+    /// Every context's script-visible scopes, or `None` when a scope type is unknown.
     fn entry_scopes(&self, entries: &[EntryContext]) -> Option<Value> {
-        let slot = |scope: &EntryScope| match scope {
-            EntryScope::Scope(reference) => self
-                .scopes
-                .get(&reference.id)
-                .map(|name| json!(SubjectKind::Scope.id(name))),
-            EntryScope::NotSet => Some(json!("not_set")),
-            _ => None,
-        };
         let contexts: Option<Vec<_>> = entries
             .iter()
             .map(|entry| {
-                let from: Option<Vec<_>> = entry.from.iter().map(slot).collect();
+                let this = self.entry_scope(&entry.this)?;
+                let root = match entry.root {
+                    EntryScope::SelfLink => this.clone(),
+                    _ => self.entry_scope(&entry.root)?,
+                };
 
                 Some(json!({
-                    "this": slot(&entry.this)?,
-                    "root": slot(&entry.root)?,
-                    "from": from?,
+                    "this": this,
+                    "root": root,
+                    "from": self.entry_chain(&entry.from)?,
+                    "prev": self.entry_chain(&entry.prev)?,
                 }))
             })
             .collect();
 
         contexts.map(Value::from)
+    }
+
+    fn entry_scope(&self, scope: &EntryScope) -> Option<Value> {
+        match scope {
+            EntryScope::Scope(reference) => self
+                .scopes
+                .get(&reference.id)
+                .map(|name| json!(SubjectKind::Scope.id(name))),
+            EntryScope::NotSet => Some(json!("not_set")),
+            // `this` cannot establish its type by referring to itself.
+            _ => None,
+        }
+    }
+
+    /// Apply Native's hand-checked self-link assumption to the reported chain positions.
+    fn entry_chain(&self, chain: &[EntryScope]) -> Option<Vec<Value>> {
+        let mut scopes = Vec::new();
+
+        for scope in chain {
+            let value = match scope {
+                EntryScope::SelfLink => scopes.last().cloned().unwrap_or(json!("not_set")),
+                _ => self.entry_scope(scope)?,
+            };
+
+            scopes.push(value);
+        }
+
+        Some(scopes)
     }
 
     fn defines(&mut self, result: &Result<Answer<Vec<Define>>, Error>) -> Result<(), String> {
@@ -1237,12 +1270,14 @@ fn describe_entries(entries: &[EntryContext]) -> String {
         .iter()
         .map(|entry| {
             let from: Vec<_> = entry.from.iter().map(slot).collect();
+            let prev: Vec<_> = entry.prev.iter().map(slot).collect();
 
             format!(
-                "this={} root={} from=[{}]",
+                "this={} root={} from=[{}] prev=[{}]",
                 slot(&entry.this),
                 slot(&entry.root),
-                from.join(",")
+                from.join(","),
+                prev.join(",")
             )
         })
         .collect::<Vec<_>>()

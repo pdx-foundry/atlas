@@ -1,0 +1,164 @@
+{
+  "build": "29fa877366040a528098da39ec7e70b7baac76782a2a6bd161616d691f86fa38",
+  "method": "callbacks/v2",
+  "provenance": "SDK-608 hand checks, recorded by SDK-704; Native docs/native/engine-commands.md",
+  "agreements": {
+    "on_actions": {
+      "agree": 184,
+      "total": 294
+    },
+    "game_rules": {
+      "agree": 181,
+      "total": 223
+    }
+  },
+  "groups": [
+    {
+      "kind": "game_rule",
+      "outcome": "config_disagreement_engine_confirmed",
+      "source": "config replace_scopes",
+      "reason": "Config supplies from, but the engine constructs a fresh scope with no script-visible from; vanilla does not read from in these rules.",
+      "names": [
+        "can_country_initiate_storm",
+        "count_as_split_fallen_empire",
+        "has_shroud_insights",
+        "is_ending_cycle",
+        "is_mercenary",
+        "needs_psionic_aura_insights",
+        "should_hide_planet_sector_pop_amount",
+        "should_leader_gain_trait_every_level",
+        "unbidden_additional_conquer_desire"
+      ]
+    },
+    {
+      "kind": "game_rule",
+      "outcome": "config_disagreement_engine_confirmed",
+      "source": "config replace_scopes",
+      "reason": "Config says this is planet; the engine passes colony.",
+      "names": [
+        "can_ai_assign_governor"
+      ]
+    },
+    {
+      "kind": "game_rule",
+      "outcome": "config_disagreement_engine_confirmed",
+      "source": "config replace_scopes",
+      "reason": "Config says from is planet; the engine passes colony.",
+      "names": [
+        "can_be_renamed_by"
+      ]
+    },
+    {
+      "kind": "game_rule",
+      "outcome": "config_disagreement_engine_confirmed",
+      "source": "config replace_scopes",
+      "reason": "Config says this is country; the engine evaluates on a leader.",
+      "names": [
+        "dismiss_leader_cost"
+      ]
+    },
+    {
+      "kind": "on_action",
+      "outcome": "comment_disagreement_engine_confirmed",
+      "source": "vanilla scope comment",
+      "reason": "The comment names a war scope that the engine never sets.",
+      "names": [
+        "on_rebels_take_planet"
+      ]
+    },
+    {
+      "kind": "on_action",
+      "outcome": "comment_disagreement_engine_confirmed",
+      "source": "vanilla scope comment",
+      "reason": "The comment names an agreement; the engine passes the agreement's target country.",
+      "names": [
+        "on_specialist_subject_conversion_aborted"
+      ]
+    },
+    {
+      "kind": "on_action",
+      "outcome": "comment_disagreement_engine_confirmed",
+      "source": "vanilla scope comment",
+      "reason": "The comment says fleet; the engine passes a ship.",
+      "names": [
+        "on_system_survey"
+      ]
+    },
+    {
+      "kind": "on_action",
+      "outcome": "no_independent_source",
+      "source": "vanilla scope comment",
+      "reason": "No independent source for these entry scopes: the comment describes an unresolved call site or one past the path limit.",
+      "names": [
+        "on_ship_built",
+        "on_ship_quantum_catapult"
+      ]
+    },
+    {
+      "kind": "on_action",
+      "outcome": "no_independent_source",
+      "source": "vanilla scope comment",
+      "reason": "No independent source for these entry scopes: vanilla has no scope comment.",
+      "names": [
+        "on_active_accord_unlocked",
+        "on_add_to_council",
+        "on_become_advanced_empire",
+        "on_colony_monthly_pulse",
+        "on_colony_yearly_pulse",
+        "on_covenant_formed",
+        "on_galactic_council_established",
+        "on_galaxy_map_during_tutorial",
+        "on_game_start",
+        "on_game_start_country",
+        "on_join_alliance",
+        "on_leave_alliance",
+        "on_remove_community_member",
+        "on_remove_from_council"
+      ]
+    },
+    {
+      "kind": "on_action",
+      "outcome": "no_independent_source",
+      "source": "vanilla scope comment",
+      "reason": "No independent source for these entry scopes: the vanilla comment names no scope type.",
+      "names": [
+        "on_becoming_subject",
+        "on_proxy_war_started",
+        "on_released_as_vassal",
+        "on_resolution_failed",
+        "on_resolution_passed",
+        "on_resolution_put_to_vote",
+        "on_resolution_vetoed",
+        "on_status_quo",
+        "on_status_quo_forced",
+        "on_subject_integrated",
+        "on_war_ended"
+      ]
+    },
+    {
+      "kind": "game_rule",
+      "outcome": "no_independent_source",
+      "source": "config replace_scopes",
+      "reason": "No independent source for these entry scopes: config has no replace_scopes.",
+      "names": [
+        "can_access_vivarium",
+        "can_excavate_outside_borders",
+        "can_fauna_grow",
+        "can_fleet_be_captured_by_snares",
+        "can_jump_drive",
+        "can_orbitable_repair_ships",
+        "can_pop_group_auto_migrate_abroad",
+        "can_scavenge_and_research_debris",
+        "can_scavenge_debris",
+        "can_trade_specimens",
+        "can_use_artificial_breeding",
+        "can_use_exhibits",
+        "can_use_mutations",
+        "can_voidworms_bombard_country",
+        "force_create_default_ship_design",
+        "is_science_fleet_gravity_snare_on_cooldown",
+        "is_seeded"
+      ]
+    }
+  ]
+}

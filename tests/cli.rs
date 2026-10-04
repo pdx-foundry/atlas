@@ -31,6 +31,8 @@ fn compare_command_writes_separate_report_from_recorded_rule_snapshot() {
     assert!(compared.status.success(), "{compared:?}");
     let report: serde_json::Value =
         serde_json::from_slice(&fs::read(output.join("comparison.json")).unwrap()).unwrap();
+    assert_eq!(report["format_version"], 3);
+    assert!(report["entry_scope_checks"].is_object());
     assert!(
         report["entries"]
             .as_array()
