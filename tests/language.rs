@@ -385,6 +385,41 @@ async fn callback_checks_keep_confirmed_disagreements_and_independent_source_gap
 }
 
 #[tokio::test]
+async fn callback_checks_require_both_answers_to_use_the_checked_method() {
+    let snapshot = snapshot::assemble(&recorded().await).unwrap();
+    let ledger = ledger::inventory(&BTreeMap::new());
+
+    for key in ["on_actions", "game_rules"] {
+        let mut newer_method = snapshot.clone();
+        let answer = newer_method.answers.get_mut(key).unwrap();
+        let mut source = newer_method.sources[&answer.source].clone();
+        source.method = "callbacks/v3".into();
+        answer.source = "callbacks/v3@recorded".into();
+        newer_method.sources.insert(answer.source.clone(), source);
+
+        let mut missing = snapshot.clone();
+        missing.answers.remove(key);
+        missing
+            .rules
+            .retain(|rule| !rule.evidence.iter().any(|link| link.answer == key));
+        missing
+            .gaps
+            .retain(|gap| !gap.evidence.iter().any(|link| link.answer == key));
+
+        for input in [newer_method, missing] {
+            let report = comparison::evaluate(
+                &ledger,
+                &snapshot::json_bytes(&input).unwrap(),
+                &comparison::Inputs::default(),
+            )
+            .unwrap();
+            assert_eq!(report.format_version, 3);
+            assert!(report.entry_scope_checks.is_none(), "{key}");
+        }
+    }
+}
+
+#[tokio::test]
 async fn callback_coverage_keeps_disagreements_and_blocks_missing_independent_sources() {
     let mut snapshot = snapshot::assemble(&recorded().await).unwrap();
     let ledger = ledger::inventory(&BTreeMap::from([(

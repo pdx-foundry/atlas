@@ -56,7 +56,7 @@ properties (presence, loader path, basic value form, and numeric cardinality bou
 the same or different; an unmapped property is reported as missing a comparable answer with its
 raw Atlas answer retained. This report does not change coverage. A difference calls for review; it
 does not establish which source is correct. The command exits 2 if config diagnostics remain.
-The report's `entry_scope_checks` also retains the [historical callback checks](docs/coverage/entry-scope-checks.json)
+Comparison report format 3 adds `entry_scope_checks`, which retains the [historical callback checks](docs/coverage/entry-scope-checks.json)
 for their exact build and Native method, including confirmed config/comment disagreements and
 names without independent scope evidence. These recorded checks are separate from comparison
 with the current config. Callback scope rules include `prev` and apply the self-link assumption;

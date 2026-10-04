@@ -1,6 +1,6 @@
 //! Exact-build callback checks retained from SDK-608. Expectations never feed Native.
 
-use crate::snapshot::SubjectKind;
+use crate::snapshot::{Snapshot, SubjectKind};
 use pdx_native::{BuildId, Source};
 use serde::{Deserialize, Serialize};
 use std::sync::LazyLock;
@@ -63,8 +63,18 @@ static CHECKS: LazyLock<EntryScopeChecks> = LazyLock::new(|| {
         .expect("checked-in entry-scope checks must be valid")
 });
 
-pub(crate) fn for_source(source: &Source) -> Option<&'static EntryScopeChecks> {
+fn for_source(source: &Source) -> Option<&'static EntryScopeChecks> {
     (source.build == CHECKS.build && source.method == CHECKS.method).then_some(&CHECKS)
+}
+
+pub(crate) fn for_snapshot(snapshot: &Snapshot) -> Option<&'static EntryScopeChecks> {
+    for key in ["on_actions", "game_rules"] {
+        let answer = snapshot.answers.get(key)?;
+        let source = snapshot.sources.get(&answer.source)?;
+        for_source(source)?;
+    }
+
+    Some(&CHECKS)
 }
 
 pub(crate) fn missing_source(

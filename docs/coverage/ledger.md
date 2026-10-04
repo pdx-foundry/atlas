@@ -216,8 +216,9 @@ The 44 names with no independent source receive an `entry_scopes` gap, including
 comment describes a site that Native could not follow. Native's original gaps remain attached.
 The ledger's coverage projection therefore keeps these reasons and grants no entry-scope credit.
 
-The comparison report's `entry_scope_checks` field publishes these historical results for a
-snapshot with the matching callback source. It is `null` for other builds or methods. It does
+Comparison report format 3 adds `entry_scope_checks`. This field publishes the historical results
+only when both the on_action and game-rule answers have the matching build and callback method.
+It is `null` if either answer is absent or uses another build or method. It does
 not compare today's config and does not alter current comparison statuses. The ordinary
 scope-context comparison remains unmapped; it retains the structured engine answer or gap.
 Recorded answers still earn no current-engine coverage credit.
