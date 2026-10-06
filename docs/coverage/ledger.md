@@ -87,10 +87,20 @@ The full format is [rule-snapshot-v2.schema.json](../contract/rule-snapshot-v2.s
 Language rules join by the config's structure: `alias[effect:NAME]` command, scope and
 documentation claims; `modifiers.cwt` names and categories; `links.cwt` names, input and output
 scopes and data prefixes; localisation commands and links; `game_rules.cwt` names and
-`replace_scopes`; and `common/defines` names and value forms. Argument claims under a command
-receive its `arguments` gap. Where CWT identifies a subject only by a value, that value selects the
-question and never decides credit: an `on_actions.cwt` item's name, and a `scopes.cwt` scope's
-aliases, which must match the keywords of exactly one Native scope type or group. A game rule's
+`replace_scopes`; and `common/defines` names and value forms. A command's own `value_form` claim
+joins its `forms`, and a scope annotation on the command joins its `scope_context`. Each key that
+Native's command grammar establishes is an `argument:{command}/{key path}` subject with the same
+facets as a registry field, and claims under that key join it through the field question table.
+A claim under a key that the grammar does not establish joins the command's `arguments` gap,
+which exists only while the grammar's keys are partial or unresolved: an established argument
+never credits an unresolved sibling. Where CWT identifies a subject only by a value, that value
+selects the question and never decides credit: an `on_actions.cwt` item's name, a `scopes.cwt`
+scope's aliases, which must match the keywords of exactly one Native scope type or group, and a
+type's `localisation` or `images` naming line. A naming line joins the one
+`derived_name:{registry}/{lookup}/{name}` subject whose name it writes (`$` for the item key; a
+bare field name for the text of that field), in the registry of the type's `path`. A naming
+question whose occurrences state different values, such as `desc = "$_desc"` and `desc = desc`
+in one type, joins none. A game rule's
 evaluation kind does not answer its authored value form. The loaded modifier count summary is a
 content observation under a `content:` condition and credits no unconditional question.
 Snapshot assembly refuses a failed registry-discovery answer. It runs authored fixture recipes
@@ -148,6 +158,25 @@ retains the structured answer and gap. A CWT subtype name is not inferred from a
 Duplicate subject and record identities remain invalid. A missing reader ID does not erase an
 established broad value form; an opaque reader ID alone does not establish one.
 
+A block field's `nested_grammar` gap remains only when Native establishes neither its command
+family (`Trigger`, `Effect`) nor its members (`Fields`, `ModifierBlock`, `WeightBlock`,
+`TriggeredModifier`); the `block_family` and `members` rules carry what is established, including
+any partial member properties. Weight claims are credited at field level: the shared
+`alias[modifier_rule:…]` grammar in `modifier_rule.cwt` has no Native subject, because Native
+answers one weight block for each field. A block's `read_scope` (the read-time `this`) answers
+`push_scope` claims. Its `scope_context` answers `replace_scopes` only when the read-time `this`
+and at least one evaluation context are established, Native reports no context gap on the field,
+and every slot resolves; otherwise the gap says which part is established. Modifier blocks
+publish `accepted_categories` instead of a scope context. `Float` readers have the `number` form,
+and scoped-numeric readers the `scoped_number` form. A string-like field's `reference` gap closes
+when every lookup target is a registry or the trigger commands, or a derived name uses the field's
+text.
+
+Fixture conclusions remain parser outcomes of Atlas's two fixture games, separate from static
+answers. A question with no observation is a gap, never a rule. The parser and diagnostic checks
+of the Native methods (SDK-542, SDK-544, SDK-545, SDK-549, SDK-550) live in Native's tests and earn
+no Atlas credit.
+
 Scope and localization context display names are explicit `display_name` rules. Subject IDs
 remain opaque to consumers; an empty display name is retained but cannot name a comparison row.
 
@@ -169,10 +198,11 @@ the reason or evidence of a gap. Failed questions use deliberate stable text, re
 details and disposal uncertainty without depending on Native Debug formatting.
 
 Version-2 readers also accept historical `SDK-<number>` owner strings; new snapshots emit only
-categories. Native v6 field-gap subjects name leaf keys. Atlas resolves each leaf against all
-discovered registry-relative paths. A unique leaf can attach to a nested field. Ambiguous or
-missing paths stay in a registry `field_gap_subjects` gap with the original Native gaps; Atlas
-never chooses a root field merely because its leaf name matches.
+categories. Native names a nested field gap by its full path, as a key path or a dotted field
+name, and a root field gap by its key. Atlas attaches a full path to the field at that path, and
+resolves a single key against all discovered registry-relative paths, so a unique leaf can attach
+to a nested field. Ambiguous or missing paths stay in a registry `field_gap_subjects` gap with the
+original Native gaps; Atlas never chooses a root field merely because its leaf name matches.
 
 ## Compiler scope and gap triage (2026-10-02)
 
