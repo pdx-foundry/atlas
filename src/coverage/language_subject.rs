@@ -43,13 +43,121 @@ pub(super) fn classify<'a>(
     ledger: &'a Ledger,
     snapshot: &Snapshot,
 ) -> Vec<(&'a Claim, LanguageSubject)> {
-    let scopes = scope_join(ledger, snapshot);
-    let on_actions = on_action_names(ledger);
+    let joins = Joins {
+        scopes: scope_join(ledger, snapshot),
+        on_actions: on_action_names(ledger),
+        arguments: snapshot
+            .subjects
+            .iter()
+            .filter(|subject| subject.kind == SubjectKind::Argument)
+            .filter_map(|subject| Some((subject.name.clone()?, subject.field.clone()?)))
+            .collect(),
+        type_registries: type_registries(ledger),
+        naming_values: naming_values(ledger),
+        derived_names: snapshot
+            .subjects
+            .iter()
+            .filter(|subject| subject.kind == SubjectKind::DerivedName)
+            .filter_map(|subject| subject.name.clone())
+            .collect(),
+    };
     ledger
         .claims
         .iter()
         .filter(|claim| claim.conditions.is_empty())
-        .filter_map(|claim| record(claim, &scopes, &on_actions).map(|subject| (claim, subject)))
+        .filter_map(|claim| record(claim, &joins).map(|subject| (claim, subject)))
+        .collect()
+}
+
+/// What the join reads beyond one claim.
+struct Joins<'a> {
+    /// The Native scope subject of each config scope name.
+    scopes: BTreeMap<&'a str, (SubjectKind, String)>,
+    /// The on_action name of each bare `on_actions` item.
+    on_actions: BTreeMap<&'a str, String>,
+    /// Each command key that the snapshot publishes, as (command subject, key path).
+    arguments: BTreeSet<(String, String)>,
+    /// The content directories of each `type[…]`, from its `path`.
+    type_registries: BTreeMap<&'a str, BTreeSet<&'a str>>,
+    /// The one value of each naming question; a question with several values has none.
+    naming_values: BTreeMap<&'a str, &'a str>,
+    /// The names of the snapshot's derived-name subjects.
+    derived_names: BTreeSet<String>,
+}
+
+impl Joins<'_> {
+    /// The derived name that a type's naming line names. CWT identifies the name only by the
+    /// line's value, so the value selects the subject; a question whose occurrences disagree, or
+    /// that matches no name or several, has none.
+    fn derived_name(&self, claim: &Claim, type_name: &str, block: &str) -> Option<LanguageSubject> {
+        let value = self.naming_values.get(claim.question.as_str())?;
+        let rendered = if value.contains(['$', '/']) {
+            (*value).to_owned()
+        } else {
+            format!("{{field:{value}}}")
+        };
+        let lookups: &[&str] = match block {
+            "localisation" => &["localization"],
+            _ => &["sprite", "file"],
+        };
+        let mut matched = Vec::new();
+
+        for registry in self.type_registries.get(type_name)? {
+            for lookup in lookups {
+                let name = format!("{registry}/{lookup}/{rendered}");
+
+                if self.derived_names.contains(&name) {
+                    matched.push(name);
+                }
+            }
+        }
+
+        match matched.as_slice() {
+            [name] => Some(LanguageSubject {
+                kind: SubjectKind::DerivedName,
+                name: name.clone(),
+                question: "derived_name",
+            }),
+            _ => None,
+        }
+    }
+}
+
+/// The content directories of each config type, from its `path = "game/…"` line.
+fn type_registries(ledger: &Ledger) -> BTreeMap<&str, BTreeSet<&str>> {
+    let mut registries: BTreeMap<&str, BTreeSet<&str>> = BTreeMap::new();
+
+    for claim in &ledger.claims {
+        if let [types, type_name, path] = claim.subject.as_slice()
+            && types == "types"
+            && path == "path"
+            && claim.property == "loader_path"
+            && let Some(registry) = claim.config_answer.trim_matches('"').strip_prefix("game/")
+        {
+            registries.entry(type_name).or_default().insert(registry);
+        }
+    }
+
+    registries
+}
+
+/// The value of each naming question whose occurrences all state one value.
+fn naming_values(ledger: &Ledger) -> BTreeMap<&str, &str> {
+    let mut values: BTreeMap<&str, BTreeSet<&str>> = BTreeMap::new();
+
+    for claim in &ledger.claims {
+        if claim.property == "naming_rule" {
+            values
+                .entry(&claim.question)
+                .or_default()
+                .insert(claim.config_answer.trim_matches('"'));
+        }
+    }
+
+    values
+        .into_iter()
+        .filter(|(_, values)| values.len() == 1)
+        .filter_map(|(question, values)| Some((question, values.into_iter().next()?)))
         .collect()
 }
 
@@ -68,15 +176,14 @@ pub(super) fn scope_keyword(claim: &Claim) -> Option<String> {
     }
 }
 
-fn record(
-    claim: &Claim,
-    scopes: &BTreeMap<&str, (SubjectKind, String)>,
-    on_actions: &BTreeMap<&str, String>,
-) -> Option<LanguageSubject> {
+fn record(claim: &Claim, joins: &Joins<'_>) -> Option<LanguageSubject> {
     let subject: Vec<&str> = claim.subject.iter().map(String::as_str).collect();
+    let Joins {
+        scopes, on_actions, ..
+    } = joins;
 
     if let Some((kind, name)) = subject.first().and_then(|first| command(first)) {
-        return command_record(claim, kind, name, &subject[1..]);
+        return command_record(claim, kind, name, &subject[1..], &joins.arguments);
     }
 
     let language_subject = |kind: SubjectKind, name: &str, question: &'static str| {
@@ -156,6 +263,9 @@ fn record(
         ("on_actions.cwt", ["on_actions", item, "$annotation:replace_scopes"], "scope_context") => {
             language_subject(SubjectKind::OnAction, on_actions.get(item)?, "entry_scopes")
         }
+        (_, ["types", type_name, block @ ("localisation" | "images"), _], "naming_rule") => {
+            joins.derived_name(claim, type_name, block)
+        }
         ("game_rules.cwt", ["game_rules", name], "field_existence") => {
             language_subject(SubjectKind::GameRule, name, "existence")
         }
@@ -195,18 +305,37 @@ fn command(segment: &str) -> Option<(SubjectKind, &str)> {
     }
 }
 
+/// The command question of a claim under `alias[{kind}:{name}]`. A claim under a key that the
+/// snapshot publishes as an argument has no command question: it joins that argument instead.
 fn command_record(
     claim: &Claim,
     kind: SubjectKind,
     name: &str,
     rest: &[&str],
+    arguments: &BTreeSet<(String, String)>,
 ) -> Option<LanguageSubject> {
+    let engine_fact = claim.owner == Owner::EngineFact;
     let property = match (rest, claim.property.as_str()) {
         ([], "command_existence") => "existence",
         ([], "documentation") => "documentation",
+        ([], "value_form") if engine_fact => "forms",
         (["$annotation:scopes"], "declared_scopes") => "declared_scopes",
-        (_, "scope_context") => "scope_context",
-        ([], "value_form") | ([_, ..], _) if claim.owner == Owner::EngineFact => "arguments",
+        ([annotation], "scope_context") if annotation.starts_with("$annotation:") => {
+            "scope_context"
+        }
+        ([_, ..], _) if engine_fact => {
+            let keys: Vec<_> = rest
+                .iter()
+                .copied()
+                .take_while(|segment| !segment.starts_with("$annotation:"))
+                .collect();
+
+            if arguments.contains(&(kind.id(name), keys.join("/"))) {
+                return None;
+            }
+
+            "arguments"
+        }
         _ => return None,
     };
 
@@ -350,7 +479,15 @@ mod tests {
                 })
                 .unwrap()
         };
-        let classified = |claim| record(claim, &scopes, &on_actions).unwrap();
+        let joins = Joins {
+            scopes,
+            on_actions,
+            arguments: BTreeSet::new(),
+            type_registries: BTreeMap::new(),
+            naming_values: BTreeMap::new(),
+            derived_names: BTreeSet::new(),
+        };
+        let classified = |claim| record(claim, &joins).unwrap();
 
         assert_eq!(
             classified(find(

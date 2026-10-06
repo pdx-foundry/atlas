@@ -6,18 +6,20 @@
 //! typed value that Native could not follow becomes a gap on its property, and each Native gap
 //! becomes a `native.{question}.{kind}` gap on the item that it names or on the question.
 
+use super::registry::{FieldOwner, FieldSet};
+use super::scope::ScopeNames;
 use super::{
     EvidenceLink, Snapshot, Subject, SubjectKind, conditional_rule, evidence, gap, registry_id,
     rule,
 };
 use crate::extraction::{Extraction, LoadedModifierSession};
 use pdx_native::{
-    Answer, ContextScopes, Declaration, DeclaredScopes, DeclaredTags, Define, DefineValueType,
-    Disposal, EntryContext, EntryScope, Error, GameRule, Gap as NativeGap, GapKind, GapSubject,
-    GenerationCondition, LinkData, LoadedContent, LoadedModifiers, LocalizationContextId,
-    LocalizationContextReference, LocalizationDeclarations, LocalizationOutput, ModifierCategory,
-    ModifierDeclaration, ModifierFamily, NamePart, OnAction, OutputScope, RuleKind, ScopeId,
-    ScopeInventory, ScopeLink, ScopeReference,
+    Answer, ChildScope, CommandGrammar, ContextScopes, Declaration, DeclaredScopes, DeclaredTags,
+    Define, DefineValueType, Disposal, EntryContext, EntryScope, Error, GameRule, Gap as NativeGap,
+    GapKind, GapSubject, GenerationCondition, GrammarProperty, LinkData, LoadedContent,
+    LoadedModifiers, LocalizationContextId, LocalizationContextReference, LocalizationDeclarations,
+    LocalizationOutput, ModifierCategory, ModifierDeclaration, ModifierFamily, NamePart, OnAction,
+    OutputScope, RuleKind, ScopeInventory, ScopeLink,
 };
 use serde_json::{Value, json};
 use std::collections::{BTreeMap, BTreeSet};
@@ -30,9 +32,11 @@ pub(super) const PROPERTIES: &[&str] = &[
     "data",
     "declared_scopes",
     "documentation",
+    "derived_name",
     "display_name",
     "entry_scopes",
     "existence",
+    "forms",
     "generation",
     "groups",
     "input_scopes",
@@ -44,6 +48,7 @@ pub(super) const PROPERTIES: &[&str] = &[
     "name_template",
     "output_scope",
     "registry",
+    "scope_context",
     "scopes",
     "value_type",
 ];
@@ -54,19 +59,30 @@ const MODIFIER_APPLICATION: &str = "modifier_application";
 const REFERENCES: &str = "references";
 const CALLBACK_CONTEXTS: &str = "callback_context";
 
-pub(super) fn assemble(snapshot: &mut Snapshot, extraction: &Extraction) -> Result<(), String> {
+pub(super) fn assemble(
+    snapshot: &mut Snapshot,
+    extraction: &Extraction,
+    scopes: &ScopeNames,
+) -> Result<(), String> {
     let language = &extraction.language;
     let mut builder = Builder {
         snapshot,
         subjects: BTreeSet::new(),
-        scopes: match &language.scopes {
-            Ok(answer) => scope_names(&answer.value)?,
-            Err(_) => BTreeMap::new(),
-        },
+        scopes,
     };
 
-    builder.declarations(SubjectKind::Effect, "effect", &language.effects)?;
-    builder.declarations(SubjectKind::Trigger, "trigger", &language.triggers)?;
+    builder.declarations(
+        SubjectKind::Effect,
+        "effect",
+        &language.effects,
+        &language.effect_grammars,
+    )?;
+    builder.declarations(
+        SubjectKind::Trigger,
+        "trigger",
+        &language.triggers,
+        &language.trigger_grammars,
+    )?;
     builder.modifiers(&language.modifiers)?;
     builder.modifier_categories(&language.modifier_categories)?;
     for (registry, answer) in &language.modifier_families {
@@ -100,7 +116,7 @@ struct Builder<'a> {
     snapshot: &'a mut Snapshot,
     subjects: BTreeSet<String>,
     /// Subject name of each scope type in Native's scope inventory.
-    scopes: BTreeMap<ScopeId, String>,
+    scopes: &'a ScopeNames,
 }
 
 impl Builder<'_> {
@@ -239,18 +255,6 @@ impl Builder<'_> {
         Ok(())
     }
 
-    /// Scope subject identities for `references`, or `None` when one is not in the inventory.
-    fn scope_ids(&self, references: &[ScopeReference]) -> Option<Vec<String>> {
-        references
-            .iter()
-            .map(|reference| {
-                self.scopes
-                    .get(&reference.id)
-                    .map(|name| SubjectKind::Scope.id(name))
-            })
-            .collect()
-    }
-
     fn scope_set(
         &mut self,
         subject: &str,
@@ -260,7 +264,7 @@ impl Builder<'_> {
     ) {
         match scopes {
             DeclaredScopes::Any => self.rule(subject, property, json!("any"), link),
-            DeclaredScopes::Listed(references) => match self.scope_ids(references) {
+            DeclaredScopes::Listed(references) => match self.scopes.ids(references) {
                 Some(ids) => self.rule(subject, property, json!(ids), link),
                 None => self.unknown_scope(subject, property, link),
             },
@@ -302,6 +306,7 @@ impl Builder<'_> {
         kind: SubjectKind,
         question: &str,
         result: &Result<Answer<Vec<Declaration>>, Error>,
+        grammars: &BTreeMap<String, Result<Answer<CommandGrammar>, Error>>,
     ) -> Result<(), String> {
         let inventory = self.inventory(&format!("{question}s"));
         let Some(answer) = self.answered(&inventory, "answer", result) else {
@@ -341,25 +346,127 @@ impl Builder<'_> {
                 self.rule(&id, "documentation", documentation, &link);
             }
 
-            self.gap(
-                &id,
-                "arguments",
-                "The command's argument grammar, including target arguments, is not established",
-                Some(ARGUMENT_GRAMMARS),
-                vec![link.clone()],
-            );
-            self.gap(
-                &id,
-                "scope_context",
-                "The scope that the command's block enters is not established",
-                Some(SCOPE_CONTEXT),
-                vec![link],
-            );
+            match grammars.get(&declaration.name) {
+                Some(Ok(grammar)) => self.command_grammar(&id, question, declaration, grammar)?,
+                Some(Err(error)) => self.unknown_grammar(
+                    &id,
+                    &format!(
+                        "Native grammar question failed: {}",
+                        super::failure::error_reason(error)
+                    ),
+                ),
+                None => self.unknown_grammar(&id, "Native grammar answer is missing"),
+            }
         }
 
         self.native_gaps(question, &key, answer, &inventory, |subject| {
             item_target(subject, kind)
         })
+    }
+
+    /// The accepted value forms, block keys and child scopes of one command.
+    fn command_grammar(
+        &mut self,
+        id: &str,
+        question: &str,
+        declaration: &Declaration,
+        answer: &Answer<CommandGrammar>,
+    ) -> Result<(), String> {
+        let name = &declaration.name;
+        let key = format!("command_grammar/{question}/{name}");
+        let link = self.evidence(
+            &key,
+            answer,
+            name,
+            Some(GapSubject::AnswerItem { name: name.clone() }),
+        )?;
+        let grammar = &answer.value;
+
+        match &grammar.forms {
+            GrammarProperty::Known(forms) => self.rule(id, "forms", json!(forms), &link),
+            _ => self.gap(
+                id,
+                "forms",
+                "Native did not establish every accepted form of the command's value",
+                Some(ARGUMENT_GRAMMARS),
+                vec![link.clone()],
+            ),
+        }
+
+        let keys = match &grammar.fixed_keys {
+            GrammarProperty::Known(keys) => keys.as_slice(),
+            GrammarProperty::Partial(keys) => {
+                self.gap(
+                    id,
+                    "arguments",
+                    "Native established some keys of the command's block; other keys remain unknown",
+                    Some(ARGUMENT_GRAMMARS),
+                    vec![link.clone()],
+                );
+                keys.as_slice()
+            }
+            GrammarProperty::Unresolved => {
+                self.gap(
+                    id,
+                    "arguments",
+                    "Native did not establish the keys of the command's block",
+                    Some(ARGUMENT_GRAMMARS),
+                    vec![link.clone()],
+                );
+                &[]
+            }
+        };
+        let arguments = FieldSet::new(
+            FieldOwner::Command(id),
+            key.clone(),
+            format!("answers.command_grammar.{question}.{name}"),
+            answer,
+            keys,
+            self.scopes,
+            BTreeMap::new(),
+        );
+        arguments.assemble(self.snapshot, keys)?;
+
+        match self.child_scopes(&grammar.child_scopes) {
+            Some(scopes) => self.rule(id, "scope_context", scopes, &link),
+            None => self.gap(
+                id,
+                "scope_context",
+                "Native did not establish the read-time scope of every command family that the block dispatches to",
+                Some(SCOPE_CONTEXT),
+                vec![link],
+            ),
+        }
+
+        Ok(())
+    }
+
+    /// The read-time `this` of each command family that a block dispatches to, or `None` when
+    /// one is not established.
+    fn child_scopes(&self, child_scopes: &GrammarProperty<Vec<ChildScope>>) -> Option<Value> {
+        let GrammarProperty::Known(child_scopes) = child_scopes else {
+            return None;
+        };
+
+        child_scopes
+            .iter()
+            .map(|child| {
+                let GrammarProperty::Known(alternatives) = &child.scope else {
+                    return None;
+                };
+                let this = self.scopes.read_scope(alternatives)?;
+
+                Some(json!({"family": child.family, "this": this}))
+            })
+            .collect::<Option<Vec<_>>>()
+            .map(Value::from)
+    }
+
+    /// Gaps for a command whose grammar answer is unavailable.
+    fn unknown_grammar(&mut self, id: &str, reason: &str) {
+        for property in ["forms", "arguments", "scope_context"] {
+            self.gap(id, property, reason, None, Vec::new());
+        }
     }
 
     fn modifiers(
@@ -509,7 +616,7 @@ impl Builder<'_> {
         };
 
         for scope in &answer.value.types {
-            let name = self.scopes[&scope.id].clone();
+            let name = self.scopes.names[&scope.id].clone();
             let id = self.subject(SubjectKind::Scope, &name);
             let link = self.evidence(
                 "scopes",
@@ -547,7 +654,7 @@ impl Builder<'_> {
 
             self.rule(&id, "existence", json!(true), &link);
 
-            match self.scope_ids(&group.scopes) {
+            match self.scopes.ids(&group.scopes) {
                 Some(members) => self.rule(&id, "members", json!(members), &link),
                 None => self.unknown_scope(&id, "members", &link),
             }
@@ -582,7 +689,7 @@ impl Builder<'_> {
             self.scope_set(&id, "input_scopes", &link_declaration.input_scopes, &link);
 
             match &link_declaration.output_scope {
-                OutputScope::Listed(references) => match self.scope_ids(references) {
+                OutputScope::Listed(references) => match self.scopes.ids(references) {
                     Some(ids) => self.rule(&id, "output_scope", json!(ids), &link),
                     None => self.unknown_scope(&id, "output_scope", &link),
                 },
@@ -664,7 +771,7 @@ impl Builder<'_> {
                 }),
             )?;
             let scopes = match &context.scopes {
-                ContextScopes::Joined(references) => self.scope_ids(references),
+                ContextScopes::Joined(references) => self.scopes.ids(references),
                 ContextScopes::Missing => Some(Vec::new()),
                 ContextScopes::Partial(_) => None,
             };
@@ -812,7 +919,7 @@ impl Builder<'_> {
             }
         }
 
-        let scope_subjects_by_id = self.scopes.clone();
+        let scope_subjects_by_id = self.scopes.names.clone();
         self.native_gaps(
             "localization",
             key,
@@ -908,7 +1015,7 @@ impl Builder<'_> {
         } else if !link.native_gaps.is_empty() {
             Err("Native did not establish the entry scopes of every call site".to_owned())
         } else {
-            self.entry_scopes(entries).ok_or_else(|| {
+            self.scopes.entry_scopes(entries).ok_or_else(|| {
                 format!(
                     "A call site supplies an unestablished scope, so what script sees there is not established: {}",
                     describe_entries(entries)
@@ -936,57 +1043,6 @@ impl Builder<'_> {
         }
 
         Ok((id, link))
-    }
-
-    /// Every context's script-visible scopes, or `None` when a scope type is unknown.
-    fn entry_scopes(&self, entries: &[EntryContext]) -> Option<Value> {
-        let contexts: Option<Vec<_>> = entries
-            .iter()
-            .map(|entry| {
-                let this = self.entry_scope(&entry.this)?;
-                let root = match entry.root {
-                    EntryScope::SelfLink => this.clone(),
-                    _ => self.entry_scope(&entry.root)?,
-                };
-
-                Some(json!({
-                    "this": this,
-                    "root": root,
-                    "from": self.entry_chain(&entry.from)?,
-                    "prev": self.entry_chain(&entry.prev)?,
-                }))
-            })
-            .collect();
-
-        contexts.map(Value::from)
-    }
-
-    fn entry_scope(&self, scope: &EntryScope) -> Option<Value> {
-        match scope {
-            EntryScope::Scope(reference) => self
-                .scopes
-                .get(&reference.id)
-                .map(|name| json!(SubjectKind::Scope.id(name))),
-            EntryScope::NotSet => Some(json!("not_set")),
-            // `this` cannot establish its type by referring to itself.
-            _ => None,
-        }
-    }
-
-    /// Apply Native's hand-checked self-link assumption to the reported chain positions.
-    fn entry_chain(&self, chain: &[EntryScope]) -> Option<Vec<Value>> {
-        let mut scopes = Vec::new();
-
-        for scope in chain {
-            let value = match scope {
-                EntryScope::SelfLink => scopes.last().cloned().unwrap_or(json!("not_set")),
-                _ => self.entry_scope(scope)?,
-            };
-
-            scopes.push(value);
-        }
-
-        Some(scopes)
     }
 
     fn defines(&mut self, result: &Result<Answer<Vec<Define>>, Error>) -> Result<(), String> {
@@ -1107,25 +1163,6 @@ fn gap_kind(kind: GapKind) -> &'static str {
 
 /// Subject names of scope types: `{display name}/{keywords}`, so that the identity of one type
 /// does not depend on the others. Two types that share both have no identity, so assembly fails.
-fn scope_names(inventory: &ScopeInventory) -> Result<BTreeMap<ScopeId, String>, String> {
-    let mut names = BTreeMap::new();
-    let mut seen = BTreeSet::new();
-
-    for scope in &inventory.types {
-        let name = format!("{}/{}", scope.name, scope.keywords.join(","));
-
-        if !seen.insert(name.clone()) {
-            return Err(format!(
-                "Two scope types share the name and keywords {name}"
-            ));
-        }
-
-        names.insert(scope.id.clone(), name);
-    }
-
-    Ok(names)
-}
-
 /// Subject names of localization contexts: the display name, or Native's build-scoped identity
 /// when the name could not be read. Two contexts with one name have no identity, so assembly
 /// fails.

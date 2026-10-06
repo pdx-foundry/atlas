@@ -388,6 +388,7 @@
           "enum": [
             "registry",
             "field",
+            "argument",
             "effect",
             "trigger",
             "modifier",
@@ -402,7 +403,8 @@
             "on_action",
             "game_rule",
             "define",
-            "inventory"
+            "inventory",
+            "derived_name"
           ]
         },
         "registry": {
@@ -475,6 +477,27 @@
         {
           "properties": {
             "kind": {
+              "const": "argument"
+            },
+            "name": {
+              "type": "string",
+              "pattern": "^(effect|trigger):.+$"
+            }
+          },
+          "required": [
+            "name",
+            "field",
+            "conditional"
+          ],
+          "not": {
+            "required": [
+              "registry"
+            ]
+          }
+        },
+        {
+          "properties": {
+            "kind": {
               "enum": [
                 "effect",
                 "trigger",
@@ -490,7 +513,8 @@
                 "on_action",
                 "game_rule",
                 "define",
-                "inventory"
+                "inventory",
+                "derived_name"
               ]
             }
           },

@@ -49,6 +49,7 @@ fn project_with_gap_facets(
         .ok_or("Native build id is not a string")?
         .to_owned();
     let registry_types = registry_types(ledger);
+    let command_files = command_files(ledger);
     let claims = claim_index(ledger);
     let language = super::language_subject::index(ledger, rules);
     let mut projection = Projection {
@@ -66,6 +67,7 @@ fn project_with_gap_facets(
         let mut questions = questions(
             &claims,
             &registry_types,
+            &command_files,
             subjects[rule.subject.as_str()],
             &rule.property,
             &rule.conditions,
@@ -127,6 +129,7 @@ fn project_with_gap_facets(
         let mut questions = questions(
             &claims,
             &registry_types,
+            &command_files,
             subjects[gap.subject.as_str()],
             &gap.property,
             &[],
@@ -230,38 +233,70 @@ fn registry_types(ledger: &Ledger) -> BTreeMap<String, BTreeSet<(String, String)
 fn questions(
     claims: &ClaimIndex<'_>,
     registry_types: &BTreeMap<String, BTreeSet<(String, String)>>,
+    command_files: &BTreeMap<String, BTreeSet<String>>,
     subject: &snapshot::Subject,
     property: &str,
     conditions: &[String],
     gap_facet: bool,
 ) -> Vec<String> {
-    if !matches!(
-        subject.kind,
-        snapshot::SubjectKind::Registry | snapshot::SubjectKind::Field
-    ) {
-        return Vec::new();
+    match (subject.kind, &subject.name, &subject.field) {
+        (snapshot::SubjectKind::Registry | snapshot::SubjectKind::Field, _, field) => {
+            let Some(types) = subject
+                .registry
+                .as_ref()
+                .and_then(|registry| registry_types.get(registry))
+            else {
+                return Vec::new();
+            };
+
+            types
+                .iter()
+                .flat_map(|(type_name, file)| {
+                    type_questions(
+                        claims,
+                        type_name,
+                        file,
+                        field.as_deref(),
+                        property,
+                        conditions,
+                        gap_facet,
+                    )
+                })
+                .collect()
+        }
+        (snapshot::SubjectKind::Argument, Some(command), Some(field)) => {
+            let root = format!("alias[{command}]");
+            let Some(files) = command_files.get(&root) else {
+                return Vec::new();
+            };
+
+            files
+                .iter()
+                .flat_map(|file| {
+                    field_questions(claims, file, &root, field, property, conditions, gap_facet)
+                })
+                .collect()
+        }
+        _ => Vec::new(),
     }
-    let Some(types) = subject
-        .registry
-        .as_ref()
-        .and_then(|registry| registry_types.get(registry))
-    else {
-        return Vec::new();
-    };
-    types
-        .iter()
-        .flat_map(|(type_name, file)| {
-            type_questions(
-                claims,
-                type_name,
-                file,
-                subject.field.as_deref(),
-                property,
-                conditions,
-                gap_facet,
-            )
-        })
-        .collect()
+}
+
+/// The config files that declare each command, by its `alias[{kind}:{name}]` root.
+fn command_files(ledger: &Ledger) -> BTreeMap<String, BTreeSet<String>> {
+    let mut files: BTreeMap<String, BTreeSet<String>> = BTreeMap::new();
+
+    for claim in &ledger.claims {
+        if let [root] = claim.subject.as_slice()
+            && claim.property == "command_existence"
+        {
+            files
+                .entry(root.clone())
+                .or_default()
+                .insert(claim.file.clone());
+        }
+    }
+
+    files
 }
 
 fn type_questions(
@@ -276,69 +311,60 @@ fn type_questions(
     let (path, ledger_property): (Vec<&str>, &str) = match (field, property) {
         (None, "existence") => (vec!["types", type_name], "type_existence"),
         (None, "loader_path") => (vec!["types", type_name, "path"], "loader_path"),
-        (Some(field), "existence") => (
-            vec![
-                type_name.trim_start_matches("type[").trim_end_matches(']'),
-                field,
-            ],
-            "field_existence",
-        ),
-        (Some(field), "value_form" | "value_form.unresolved") => (
-            vec![
-                type_name.trim_start_matches("type[").trim_end_matches(']'),
-                field,
-            ],
-            "value_form",
-        ),
-        (Some(field), "reference" | "nested_grammar") if gap_facet => (
-            vec![
-                type_name.trim_start_matches("type[").trim_end_matches(']'),
-                field,
-            ],
-            "value_form",
-        ),
-        (Some(field), "occurrences.minimum") => (
-            vec![
-                type_name.trim_start_matches("type[").trim_end_matches(']'),
-                field,
-                "$annotation:cardinality",
-            ],
-            "cardinality_minimum",
-        ),
-        (Some(field), "occurrences.maximum" | "repeat_behavior") => (
-            vec![
-                type_name.trim_start_matches("type[").trim_end_matches(']'),
-                field,
-                "$annotation:cardinality",
-            ],
-            "cardinality_maximum",
-        ),
-        (Some(field), "scope_context") => (
-            vec![
-                type_name.trim_start_matches("type[").trim_end_matches(']'),
-                field,
-                "$annotation:replace_scopes",
-            ],
-            "scope_context",
-        ),
+        (Some(field), _) => {
+            let root = type_name.trim_start_matches("type[").trim_end_matches(']');
+
+            return field_questions(claims, file, root, field, property, conditions, gap_facet);
+        }
         _ => return Vec::new(),
     };
-    let path = if field.is_some() {
-        let mut expanded = Vec::with_capacity(path.len() + conditions.len());
-        expanded.push(path[0]);
-        expanded.extend(
-            conditions
-                .iter()
-                .filter(|condition| condition.starts_with("subtype["))
-                .map(String::as_str),
-        );
-        for segment in &path[1..] {
-            expanded.extend(segment.split('/'));
+
+    claim_questions(claims, file, ledger_property, path, conditions)
+}
+
+/// Config questions about the field at `field` below the config node `root`: a type's
+/// definition or a command's block.
+fn field_questions(
+    claims: &ClaimIndex<'_>,
+    file: &str,
+    root: &str,
+    field: &str,
+    property: &str,
+    conditions: &[String],
+    gap_facet: bool,
+) -> Vec<String> {
+    let (annotation, ledger_property) = match property {
+        "existence" => (None, "field_existence"),
+        "value_form" | "value_form.unresolved" => (None, "value_form"),
+        "reference" | "nested_grammar" if gap_facet => (None, "value_form"),
+        "occurrences.minimum" => (Some("$annotation:cardinality"), "cardinality_minimum"),
+        "occurrences.maximum" | "repeat_behavior" => {
+            (Some("$annotation:cardinality"), "cardinality_maximum")
         }
-        expanded
-    } else {
-        path
+        "scope_context" => (Some("$annotation:replace_scopes"), "scope_context"),
+        "read_scope" => (Some("$annotation:push_scope"), "scope_context"),
+        _ => return Vec::new(),
     };
+    let mut path = vec![root];
+    path.extend(
+        conditions
+            .iter()
+            .filter(|condition| condition.starts_with("subtype["))
+            .map(String::as_str),
+    );
+    path.extend(field.split('/'));
+    path.extend(annotation);
+
+    claim_questions(claims, file, ledger_property, path, conditions)
+}
+
+fn claim_questions(
+    claims: &ClaimIndex<'_>,
+    file: &str,
+    ledger_property: &str,
+    path: Vec<&str>,
+    conditions: &[String],
+) -> Vec<String> {
     claims
         .get(&(
             file,
