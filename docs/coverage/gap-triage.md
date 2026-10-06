@@ -20,7 +20,8 @@ closes here, and coverage does not change.
 **6,910 gaps have no owner.** The Milestone 3 review counted 755 on an earlier snapshot. The live
 simplification capture has the same 6,910 unowned gaps; SDK-704 changed only the owned
 `callback_context` gaps (517 to 270). Recorded answers earn no coverage, so "uncovered" below comes
-from the live capture's coverage report.
+from the live capture's coverage report (SHA-256 `a00f142a…`; see [simplification
+capture](simplification.md#capture-and-checks)).
 
 Each unowned gap belongs to exactly one shape below, and the sub-dispositions of each shape add up
 to its total. "Linked claims" are the config claims that a shape's gaps attach to: field gaps use
@@ -46,7 +47,7 @@ them and measures this table again on its final run.
 | Lookup target (`reference`) | 284 | 259 | Completion and invalid-reference diagnostics | [Below](#lookup-target) |
 | Command declared scopes (`declared_scopes`, `native.effect.unresolved_path`, `native.trigger.unresolved_path`) | 82 | 47 | Where a command is valid | SDK-711 |
 | Callback entry contexts (`native.on_actions.*` and `native.game_rules.*` paths and unnamed sites) | 252 | 131 | Callback scope checking | SDK-712. Out of scope, vision 2026-10-02: on_actions that content fires, names built at run time, and helpers whose scope type is a run-time value |
-| Modifier family generation (`generation`, `native.modifier_families.unresolved_path`, `category_tags`) | 62 | 44 | Which items make a template name valid | [Below](#modifier-families) |
+| Modifier family generation (`generation`, `native.modifier_families.unresolved_path`, `category_tags`) | 62 | 44 | Which items make a template name valid, and the template's modifier categories in category-constrained containers | [Below](#modifier-families) |
 | Unjoined generation sites (`native.modifier_families.unnamed_declaration` and `.outside_method`, `native.modifiers.unnamed_declaration`) | 329 | — | Template-name acceptance | [Below](#modifier-families) |
 | Define readers (`native.defines.unresolved_reader`) | 80 | 148 | Define key and type acceptance | SDK-610 |
 | Localisation link outputs (`alternatives`, `native.localization.unresolved_path`) | 32 | 16 | Completion after a link | SDK-609 |
@@ -121,17 +122,20 @@ missing key.
 ### Partial root search
 
 Atlas publishes `fields_complete` for every partial field answer, and its reason says that the root
-search is partial. Classify it by the attached Native gaps:
+search is partial. One gap can carry several Native causes, so give each gap the first owner that
+matches, in this order:
 
-- 65 registries have a path that the method could not follow, an unnamed key or unreadable input.
-  Root fields can be missing there: 499 of their 1,135 root `field_existence` claims are uncovered.
-  SDK-710; SDK-553 measures the result.
-- 91 registries have no such discovery failure; their causes are field readers, storage, numeric
-  conversion or use-time selections. Each cause has the owner of its field shape: unresolved
-  storage or repeat behavior is SDK-627; an unresolved or unclassified reader is SDK-710. Numeric
-  conversion limits (overflow, token boundary, trailing text, the C library) are out of scope,
-  vision 2026-10-02: SDK-544 closed with them, and the config claims only the established form.
-  Unresolved use-time selections are out of scope, as the ledger's `field_conditions` row says.
+1. 65 gaps: a path that the method could not follow, an unnamed key or unreadable input. Root
+   fields can be missing there: 499 of their 1,135 root `field_existence` claims are uncovered.
+   SDK-710; SDK-553 measures the result.
+2. 71 gaps: an unresolved or unclassified field reader. SDK-710.
+3. 17 gaps: unresolved storage or repeat behavior. SDK-627.
+4. 3 gaps (`asteroid_belts`, `leader_tiers`, `resource_regions`): only numeric conversion limits
+   (overflow, token boundary, trailing text, the C library). Out of scope, vision 2026-10-02:
+   SDK-544 closed with these limits, and the config claims only the established form.
+
+A gap stays open until all of its causes close. Unresolved use-time selections, which some of these
+gaps also carry, are out of scope, as the ledger's `field_conditions` row says.
 
 ## Owned categories
 
@@ -141,10 +145,15 @@ decisions on runtime modifier application and category `supported_scopes`.
 
 ## Reproduce
 
-Copy the simplification capture's answers to `.scratch/answers`, then:
+The gaps come from a recorded snapshot. Copy the simplification capture's answers to
+`.scratch/answers`, then:
 
 ```sh
 cp tests/fixtures/native/m451-hotfix/{on_actions,game_rules}.json .scratch/answers/
 cargo run --release --locked -- snapshot --recorded .scratch/answers .scratch/rules.json
 cargo run --release --locked -- ledger --config "$PDX_CONFIG_PATH" --snapshot .scratch/rules.json --output .scratch/ledger
 ```
+
+A recorded snapshot earns no coverage, so its ledger shows every claim uncovered. Take the
+"uncovered" counts from the live ledger that the [simplification capture](simplification.md#reproduce)
+reproduces.
