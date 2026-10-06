@@ -159,11 +159,12 @@ Published gap owners are capability categories, with these ticket mappings maint
 | `scope_context` | SDK-549 |
 | `modifier_application` | SDK-547 |
 | `references` | SDK-543 |
-| `callback_context` | SDK-608 |
+| `callback_context` | SDK-608 (done); SDK-712 owns the remaining contexts |
 | `field_semantics` | SDK-627 |
 | `field_conditions` | SDK-541 inheritance relation; runtime selection is out of scope |
 
-A null owner remains unassigned; SDK-626 owns the later triage. Owner categories do not change
+A null owner stays `null` in the snapshot. The [unowned gap triage](gap-triage.md) gives each such
+gap a failure shape and its ticket or out-of-scope note. Owner categories do not change
 the reason or evidence of a gap. Failed questions use deliberate stable text, retaining error
 details and disposal uncertainty without depending on Native Debug formatting.
 
@@ -179,12 +180,13 @@ Atlas publishes static facts that change what a compiler accepts, rejects, types
 Fixture conclusions describe parsing, storage and validation. Evaluated values, runtime weights,
 operand selection and duration consumption are out of scope. Numeric claims use established
 conversion properties; removed clamp and default placeholders supply no claims. Scope claims
-state declared entry scopes. SDK-608 owns callback entry contexts; SDK-549 owns field `this`,
-and SDK-677 owns field `root`, `from` and `prev`.
+state declared entry scopes. SDK-608 established callback entry contexts; SDK-549 established field
+`this`, and SDK-677 field `root`, `from` and `prev`. SDK-712 owns the contexts that they left unresolved.
 
 For SDK-626, give a failure shape a ticket only when closing it changes one of those compiler
 behaviors and a config claim depends on it. Record the dependent claim and compiler consequence.
-Other shapes receive the note “out of scope, vision 2026-10-02”. Measure failure shapes from fresh
+Other shapes receive the note “out of scope, vision 2026-10-02”. The [triage](gap-triage.md) records
+the result. Measure failure shapes from fresh
 M451-hotfix recordings after the Native pin move. A count or broad capability owner alone does
 not justify new discovery work. A compiler, rather than an Atlas policy overlay, selects severity;
 subtype names and alias factoring remain emitter test mappings.
