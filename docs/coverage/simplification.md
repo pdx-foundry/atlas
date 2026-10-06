@@ -66,7 +66,8 @@ no tickets. Other shapes require a named dependent claim and compiler consequenc
 The new `fields_complete` gaps for `common/resource_regions` and `common/leader_tiers` contain
 numeric-conversion uncertainty. Their existing root-search label does not establish missing
 fields; classify them by the attached Native gaps, not as discovery failures. This measurement
-does not create tickets from counts alone.
+does not create tickets from counts alone. The [unowned gap triage](gap-triage.md) gives each gap
+without an owner its disposition.
 
 ## Reproduce
 
