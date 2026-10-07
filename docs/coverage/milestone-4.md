@@ -85,7 +85,7 @@ the unrecorded operations (`check_script`, `dynamic_names`, `modifier_category_k
 `modifier_nodes`, `script_expansions`) unsupported.
 
 Tests use `tests/fixtures/native/m452`, recorded by the same Atlas extraction on Native
-`573e35f`, with the four-entry loaded-modifier reduction that its README states. SDK-608's
+`573e35f` and trimmed to the sample that its README states (SDK-719). SDK-608's
 callback hand checks carry to M452, because the `callbacks/v2` answers are identical on both
 builds (see the [ledger](ledger.md#callback-entry-scopes-sdk-704)).
 

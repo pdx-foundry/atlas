@@ -992,9 +992,9 @@ async fn comparison_reports_logs_lists_defines_and_tags() {
     };
 
     let effects = list(log("effects.log"), "names");
-    assert!(effects.agree.contains(&"add_age".to_owned()));
+    assert_eq!(effects.agree, ["add_age"]);
     assert_eq!(effects.config_only, ["atlas_fake"]);
-    assert!(effects.engine_only.len() > 1000);
+    assert_eq!(effects.engine_only, ["add_building", "set_variable"]);
     assert_eq!(
         list(log("effects.log"), "supported_scopes").agree,
         ["add_age: leader"]

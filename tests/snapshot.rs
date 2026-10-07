@@ -72,7 +72,15 @@ async fn recorded_snapshot_validates_and_is_byte_stable() {
         .collect();
     assert!(string_schemas.len() > 1);
     assert_eq!(first.schemas.definitions.len(), string_schemas.len());
-    assert_eq!(first.coverage.registries.len(), 164);
+    let recorded_registries: Vec<_> = extraction
+        .registries
+        .as_ref()
+        .unwrap()
+        .value
+        .iter()
+        .map(|registry| registry.name.clone())
+        .collect();
+    assert_eq!(first.coverage.registries, recorded_registries);
     assert!(
         first
             .rules
