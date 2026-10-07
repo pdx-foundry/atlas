@@ -199,10 +199,11 @@ details and disposal uncertainty without depending on Native Debug formatting.
 
 Version-2 readers also accept historical `SDK-<number>` owner strings; new snapshots emit only
 categories. Native names a nested field gap by its full path, as a key path or a dotted field
-name, and a root field gap by its key. Atlas attaches a full path to the field at that path, and
-resolves a single key against all discovered registry-relative paths, so a unique leaf can attach
-to a nested field. Ambiguous or missing paths stay in a registry `field_gap_subjects` gap with the
-original Native gaps; Atlas never chooses a root field merely because its leaf name matches.
+name, and a root field gap by its key. Atlas attaches a full path to the field at that path, or,
+for a path below a field's own members (a weight block's keys), to that field. A single key
+attaches to the root field of that name; when there is none, a key that only one nested path ends
+with attaches to that field. Other names stay in a registry `field_gap_subjects` gap with the
+original Native gaps.
 
 ## Compiler scope and gap triage (2026-10-02)
 

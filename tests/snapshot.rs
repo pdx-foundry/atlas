@@ -455,109 +455,95 @@ async fn unresolved_value_forms_keep_only_their_field_gaps_and_correct_reason() 
 }
 
 #[tokio::test]
-async fn leaf_gap_names_attach_only_when_the_field_path_is_unique() {
-    use pdx_native::{FieldMembers, Gap, GapKind, GapSubject};
+async fn gap_names_attach_to_one_field_path() {
+    use pdx_native::{Field, FieldMembers, Gap, GapKind, GapSubject};
     let mut extraction = recorded().await;
-    let answer = extraction
-        .fields
-        .get_mut(extraction::TRADITIONS)
+    let traditions = extraction.fields[extraction::TRADITIONS]
+        .as_ref()
         .unwrap()
-        .as_mut()
-        .unwrap();
-    let mut child = answer
         .value
-        .iter()
-        .find(|field| field.name == "unlocks_agenda")
-        .unwrap()
         .clone();
+    let template = |name: &str| {
+        traditions
+            .iter()
+            .find(|field| field.name == name)
+            .unwrap()
+            .clone()
+    };
+    let mut child = template("unlocks_agenda");
     child.name = "child".into();
-    let mut parent = answer
-        .value
-        .iter()
-        .find(|field| field.name == "on_enabled")
-        .unwrap()
-        .clone();
-    parent.name = "parent".into();
-    parent.members = FieldMembers::Fields(vec![child.clone()]);
-    let native_gap = Gap {
+    let parent = |name: &str| Field {
+        name: name.into(),
+        members: FieldMembers::Fields(vec![child.clone()]),
+        ..template("on_enabled")
+    };
+    let gap = |subject| Gap {
         kind: GapKind::UnresolvedStorage,
-        subject: Some(GapSubject::Field {
-            name: "child".into(),
-        }),
+        subject: Some(subject),
         detail: "test storage boundary".into(),
     };
-    answer.value = vec![parent];
-    answer.gaps = vec![native_gap.clone()];
-    let unique = snapshot::assemble(&extraction).unwrap();
-    let rule = unique
-        .rules
-        .iter()
-        .find(|rule| rule.id == "field:common/traditions/parent/child#read")
-        .unwrap();
-    assert_eq!(
-        rule.evidence[0].native_gaps.as_slice(),
-        std::slice::from_ref(&native_gap)
-    );
-    extraction
-        .fields
-        .get_mut(extraction::TRADITIONS)
-        .unwrap()
-        .as_mut()
-        .unwrap()
-        .value
-        .push(child);
-    let ambiguous = snapshot::assemble(&extraction).unwrap();
-    for path in ["child", "parent/child"] {
-        let rule = ambiguous
+    let leaf = gap(GapSubject::Field {
+        name: "child".into(),
+    });
+    let dotted = gap(GapSubject::Field {
+        name: "parent.child".into(),
+    });
+    let key_path = gap(GapSubject::KeyPath {
+        path: vec!["parent".into(), "child".into(), "factor".into()],
+    });
+    let mut assemble = |fields: Vec<Field>, gaps: Vec<Gap>| {
+        let answer = extraction
+            .fields
+            .get_mut(extraction::TRADITIONS)
+            .unwrap()
+            .as_mut()
+            .unwrap();
+        answer.value = fields;
+        answer.gaps = gaps;
+        snapshot::assemble(&extraction).unwrap()
+    };
+    let read_gaps = |snapshot: &snapshot::Snapshot, path: &str| {
+        snapshot
             .rules
             .iter()
             .find(|rule| rule.id == format!("field:common/traditions/{path}#read"))
-            .unwrap();
-        assert!(rule.evidence[0].native_gaps.is_empty());
-    }
-    let gap = ambiguous
-        .gaps
-        .iter()
-        .find(|gap| gap.id == "registry:common/traditions#field_gap_subjects")
-        .unwrap();
-    assert_eq!(gap.native_gaps, std::slice::from_ref(&native_gap));
-    assert!(gap.reason.contains("parent/child"));
-    assert!(gap.reason.contains("child"));
-
-    let full_paths = vec![
-        Gap {
-            subject: Some(GapSubject::Field {
-                name: "parent.child".into(),
-            }),
-            ..native_gap.clone()
-        },
-        Gap {
-            subject: Some(GapSubject::KeyPath {
-                path: vec!["parent".into(), "child".into()],
-            }),
-            ..native_gap
-        },
-    ];
-    extraction
-        .fields
-        .get_mut(extraction::TRADITIONS)
-        .unwrap()
-        .as_mut()
-        .unwrap()
-        .gaps = full_paths.clone();
-    let joined = snapshot::assemble(&extraction).unwrap();
-    let nested = joined
-        .rules
-        .iter()
-        .find(|rule| rule.id == "field:common/traditions/parent/child#read")
-        .unwrap();
-    assert_eq!(nested.evidence[0].native_gaps, full_paths);
-    assert!(
-        !joined
+            .unwrap()
+            .evidence[0]
+            .native_gaps
+            .clone()
+    };
+    let unjoined = |snapshot: &snapshot::Snapshot| {
+        snapshot
             .gaps
             .iter()
-            .any(|gap| gap.id == "registry:common/traditions#field_gap_subjects")
+            .find(|gap| gap.id == "registry:common/traditions#field_gap_subjects")
+            .cloned()
+    };
+
+    // A unique nested leaf, a dotted path and a key path below the field's members all join it.
+    let nested = assemble(
+        vec![parent("parent")],
+        vec![leaf.clone(), dotted.clone(), key_path.clone()],
     );
+    assert_eq!(
+        read_gaps(&nested, "parent/child"),
+        [leaf.clone(), dotted, key_path]
+    );
+    assert!(unjoined(&nested).is_none());
+
+    // One name is the root field of that name.
+    let root = assemble(vec![parent("parent"), child.clone()], vec![leaf.clone()]);
+    assert_eq!(read_gaps(&root, "child"), std::slice::from_ref(&leaf));
+    assert!(read_gaps(&root, "parent/child").is_empty());
+
+    // Without a root field, a name that two nested paths end with joins neither.
+    let ambiguous = assemble(vec![parent("parent"), parent("other")], vec![leaf.clone()]);
+    for path in ["parent/child", "other/child"] {
+        assert!(read_gaps(&ambiguous, path).is_empty());
+    }
+    let gap = unjoined(&ambiguous).unwrap();
+    assert_eq!(gap.native_gaps, [leaf]);
+    assert!(gap.reason.contains("parent/child") && gap.reason.contains("other/child"));
 }
 
 #[tokio::test]

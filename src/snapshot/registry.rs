@@ -411,11 +411,19 @@ impl<'a, T> FieldSet<'a, T> {
                 continue;
             };
             let path = match names.as_slice() {
+                // Native names a nested field by its full path, so one name is a root field;
+                // without one, a name that only one nested path ends with is that field.
+                [name] if full_paths.contains(name) => Some(name.clone()),
                 [name] => leaf_paths
                     .get(name)
                     .filter(|paths| paths.len() == 1)
                     .map(|paths| paths[0].clone()),
-                _ => Some(names.join("/")).filter(|path| full_paths.contains(path)),
+                // A path below a field's own members, such as a weight block's keys, names
+                // that field: Atlas publishes no subject below it.
+                _ => (1..=names.len())
+                    .rev()
+                    .map(|length| names[..length].join("/"))
+                    .find(|path| full_paths.contains(path)),
             };
 
             match path {
@@ -614,9 +622,7 @@ impl<'a, T> FieldSet<'a, T> {
             );
         }
         // A compiler checks a modifier block's keys by its accepted categories, not by scope.
-        let modifier_block = family == BlockFamily::Modifier
-            || matches!(field.members, FieldMembers::ModifierBlock(_));
-        if !modifier_block {
+        if !is_modifier_block(field) {
             self.assemble_scope_context(snapshot, id, field, evidence);
         }
     }
@@ -775,7 +781,8 @@ fn field_paths(fields: &[Field], parent: &str, paths: &mut BTreeMap<String, Vec<
     }
 }
 
-/// The categories of modifiers that a modifier reader accepts.
+/// The categories of modifiers that a modifier reader accepts. An unresolved answer is a gap only
+/// on a modifier block: Native also leaves it unresolved for fields whose reader is unknown.
 fn assemble_accepted_categories(
     snapshot: &mut Snapshot,
     id: &str,
@@ -798,7 +805,7 @@ fn assemble_accepted_categories(
             json!("enclosing"),
             evidence.clone(),
         ),
-        _ => gap(
+        _ if is_modifier_block(field) => gap(
             snapshot,
             id,
             "accepted_categories",
@@ -807,7 +814,13 @@ fn assemble_accepted_categories(
             evidence.native_gaps.clone(),
             vec![evidence.clone()],
         ),
+        _ => {}
     }
+}
+
+fn is_modifier_block(field: &Field) -> bool {
+    field.reader.family == BlockFamily::Modifier
+        || matches!(field.members, FieldMembers::ModifierBlock(_))
 }
 
 /// Publish the value form, and return whether the field is an unconditional block reader.
