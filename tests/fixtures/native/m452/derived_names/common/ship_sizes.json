@@ -1,0 +1,244 @@
+{
+  "Ok": {
+    "value": [
+      {
+        "name": [
+          {
+            "Literal": "GFX_"
+          },
+          {
+            "Field": [
+              "icon"
+            ]
+          }
+        ],
+        "lookup": "Sprite",
+        "stage": "OwnerInitialization",
+        "on_missing": "Unresolved",
+        "condition": {
+          "All": [
+            "Unresolved",
+            {
+              "FieldZero": {
+                "path": [
+                  "icon"
+                ],
+                "zero": false
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": [
+          {
+            "Literal": "GFX_"
+          },
+          {
+            "Field": [
+              "map_counter_icon"
+            ]
+          }
+        ],
+        "lookup": "Sprite",
+        "stage": "OwnerInitialization",
+        "on_missing": "Unresolved",
+        "condition": {
+          "All": [
+            "Unresolved",
+            {
+              "FieldZero": {
+                "path": [
+                  "map_counter_icon"
+                ],
+                "zero": false
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": [
+          {
+            "Literal": "gfx/portraits/arkships/ships/"
+          },
+          {
+            "Field": [
+              "arkship_picture"
+            ]
+          },
+          {
+            "Literal": ".dds"
+          }
+        ],
+        "lookup": "File",
+        "stage": "OwnerInitialization",
+        "on_missing": "Unresolved",
+        "condition": {
+          "All": [
+            "Unresolved",
+            {
+              "FieldZero": {
+                "path": [
+                  "arkship_picture"
+                ],
+                "zero": false
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": [
+          "ItemKey"
+        ],
+        "lookup": "Localization",
+        "stage": "WhenUsed",
+        "on_missing": "ShowsKey",
+        "condition": "Always"
+      },
+      {
+        "name": [
+          "ItemKey",
+          {
+            "Literal": "_plural"
+          }
+        ],
+        "lookup": "Localization",
+        "stage": "WhenUsed",
+        "on_missing": "ShowsKey",
+        "condition": "Always"
+      },
+      {
+        "name": [
+          {
+            "Field": [
+              "ship_family_name"
+            ]
+          }
+        ],
+        "lookup": "Localization",
+        "stage": "WhenUsed",
+        "on_missing": "Unresolved",
+        "condition": {
+          "All": [
+            "Unresolved",
+            {
+              "FieldZero": {
+                "path": [
+                  "ship_family_name"
+                ],
+                "zero": false
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "completeness": "Partial",
+    "gaps": [
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "registry",
+          "name": "common/ship_sizes"
+        },
+        "detail": "7 of the registry's methods have paths that go on after text that the method could not follow; their later lookups establish no condition or miss behavior"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "registry",
+          "name": "common/ship_sizes"
+        },
+        "detail": "1 of the registry's methods have paths that could not be followed at path-limit"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "registry",
+          "name": "common/ship_sizes"
+        },
+        "detail": "5 lookup or check calls receive a name with a part that the method could not follow"
+      },
+      {
+        "kind": "UnresolvedCondition",
+        "subject": {
+          "kind": "answer_item",
+          "name": "GFX_{icon}"
+        },
+        "detail": "what a missing GFX_{icon} gives is not established"
+      },
+      {
+        "kind": "UnresolvedCondition",
+        "subject": {
+          "kind": "answer_item",
+          "name": "GFX_{icon}"
+        },
+        "detail": "GFX_{icon} also depends on field states that the method does not explore"
+      },
+      {
+        "kind": "UnresolvedCondition",
+        "subject": {
+          "kind": "answer_item",
+          "name": "GFX_{map_counter_icon}"
+        },
+        "detail": "what a missing GFX_{map_counter_icon} gives is not established"
+      },
+      {
+        "kind": "UnresolvedCondition",
+        "subject": {
+          "kind": "answer_item",
+          "name": "GFX_{map_counter_icon}"
+        },
+        "detail": "GFX_{map_counter_icon} also depends on field states that the method does not explore"
+      },
+      {
+        "kind": "UnresolvedCondition",
+        "subject": {
+          "kind": "answer_item",
+          "name": "gfx/portraits/arkships/ships/{arkship_picture}.dds"
+        },
+        "detail": "what a missing gfx/portraits/arkships/ships/{arkship_picture}.dds gives is not established"
+      },
+      {
+        "kind": "UnresolvedCondition",
+        "subject": {
+          "kind": "answer_item",
+          "name": "gfx/portraits/arkships/ships/{arkship_picture}.dds"
+        },
+        "detail": "gfx/portraits/arkships/ships/{arkship_picture}.dds also depends on field states that the method does not explore"
+      },
+      {
+        "kind": "UnresolvedCondition",
+        "subject": {
+          "kind": "answer_item",
+          "name": "{ship_family_name}"
+        },
+        "detail": "what a missing {ship_family_name} gives is not established"
+      },
+      {
+        "kind": "UnresolvedCondition",
+        "subject": {
+          "kind": "answer_item",
+          "name": "{ship_family_name}"
+        },
+        "detail": "{ship_family_name} also depends on field states that the method does not explore"
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "registry",
+          "name": "common/ship_sizes"
+        },
+        "detail": "The search covers the registry's own const methods and its post-read initialization. Names that other code composes or looks up, such as interface code, and the run-time choice behind a selection condition, such as which swap the engine selects and whether it is valid, are outside it. The answer is no catalogue of the names that content defines."
+      }
+    ],
+    "source": {
+      "build": "c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b",
+      "native_version": "0.1.0",
+      "method": "derived-names/v1",
+      "basis": "StaticAnalysis"
+    }
+  }
+}

@@ -12,7 +12,7 @@ coverage commands still run without a game installation.
 
 ```sh
 cargo run --release --locked -- snapshot /path/to/Stellaris /path/to/recorded-answers /path/to/rules.json
-cargo run --release --locked -- snapshot --recorded tests/fixtures/native/m451-hotfix /path/to/rules.json
+cargo run --release --locked -- snapshot --recorded tests/fixtures/native/m452 /path/to/rules.json
 ```
 
 Both modes write deterministic JSON and a `.sha256` sidecar. The snapshot name includes a digest

@@ -1,0 +1,357 @@
+{
+  "Ok": {
+    "value": {
+      "reader": {
+        "numeric": {
+          "Known": null
+        },
+        "scoped_operand": {
+          "Known": null
+        },
+        "id": "5c739a0169f92d55",
+        "kind": "Block",
+        "family": "Effect"
+      },
+      "forms": {
+        "Known": [
+          "Block"
+        ]
+      },
+      "targets": "Unresolved",
+      "child_families": {
+        "Partial": [
+          "Effect"
+        ]
+      },
+      "child_scopes": {
+        "Partial": [
+          {
+            "family": "Effect",
+            "scope": {
+              "Partial": [
+                "Enclosing"
+              ]
+            }
+          }
+        ]
+      },
+      "fixed_keys": {
+        "Partial": [
+          {
+            "name": "type",
+            "reader": {
+              "numeric": {
+                "Known": null
+              },
+              "scoped_operand": {
+                "Known": null
+              },
+              "id": "325efaa17499c32d",
+              "kind": "String",
+              "family": "NotApplicable"
+            },
+            "shape": {
+              "value": "Scalar",
+              "repeat": "Replace"
+            },
+            "read": [
+              {
+                "condition": "Always",
+                "outcome": {
+                  "Read": {
+                    "reader": {
+                      "numeric": {
+                        "Known": null
+                      },
+                      "scoped_operand": {
+                        "Known": null
+                      },
+                      "id": "325efaa17499c32d",
+                      "kind": "String",
+                      "family": "NotApplicable"
+                    },
+                    "shape": {
+                      "value": "Scalar",
+                      "repeat": "Replace"
+                    }
+                  }
+                }
+              }
+            ],
+            "members": "None",
+            "domain": "Unknown",
+            "uses": [],
+            "reference": {
+              "Lookups": [
+                {
+                  "condition": "Always",
+                  "target": {
+                    "Registry": {
+                      "name": "common/storm_types"
+                    }
+                  },
+                  "stage": "OwnerInitialization",
+                  "key_match": "FirstEqual",
+                  "empty_key": "LookedUp",
+                  "on_missing": "NullObject"
+                }
+              ]
+            },
+            "entry_contexts": [],
+            "read_scope": {
+              "Known": []
+            },
+            "accepted_categories": "NotApplicable"
+          },
+          {
+            "name": "cosmic_storm_start_position",
+            "reader": {
+              "numeric": "Unresolved",
+              "scoped_operand": "Unresolved",
+              "id": null,
+              "kind": "Unknown",
+              "family": "Unknown"
+            },
+            "shape": {
+              "value": "Unknown",
+              "repeat": "Unknown"
+            },
+            "read": [
+              {
+                "condition": {
+                  "All": [
+                    "Unresolved",
+                    "Unresolved",
+                    "Unresolved"
+                  ]
+                },
+                "outcome": {
+                  "Read": {
+                    "reader": {
+                      "numeric": {
+                        "Known": null
+                      },
+                      "scoped_operand": {
+                        "Known": null
+                      },
+                      "id": "1b6f3b12faaef087",
+                      "kind": "Target",
+                      "family": "NotApplicable"
+                    },
+                    "shape": {
+                      "value": "Scalar",
+                      "repeat": "Unknown"
+                    }
+                  }
+                }
+              },
+              {
+                "condition": {
+                  "All": [
+                    "Unresolved",
+                    "Unresolved",
+                    "Unresolved"
+                  ]
+                },
+                "outcome": {
+                  "Read": {
+                    "reader": {
+                      "numeric": {
+                        "Known": null
+                      },
+                      "scoped_operand": {
+                        "Known": null
+                      },
+                      "id": "1b6f3b12faaef087",
+                      "kind": "Target",
+                      "family": "NotApplicable"
+                    },
+                    "shape": {
+                      "value": "Scalar",
+                      "repeat": "Unknown"
+                    }
+                  }
+                }
+              },
+              {
+                "condition": {
+                  "All": [
+                    "Unresolved",
+                    "Unresolved"
+                  ]
+                },
+                "outcome": {
+                  "Read": {
+                    "reader": {
+                      "numeric": {
+                        "Known": null
+                      },
+                      "scoped_operand": {
+                        "Known": null
+                      },
+                      "id": "1b6f3b12faaef087",
+                      "kind": "Target",
+                      "family": "NotApplicable"
+                    },
+                    "shape": {
+                      "value": "Scalar",
+                      "repeat": "Unknown"
+                    }
+                  }
+                }
+              },
+              {
+                "condition": "Unresolved",
+                "outcome": "Unresolved"
+              }
+            ],
+            "members": "Unresolved",
+            "domain": "Unknown",
+            "uses": [],
+            "reference": "NotEstablished",
+            "entry_contexts": [],
+            "read_scope": "Unresolved",
+            "accepted_categories": "Unresolved"
+          },
+          {
+            "name": "immediate",
+            "reader": {
+              "numeric": {
+                "Known": null
+              },
+              "scoped_operand": {
+                "Known": null
+              },
+              "id": "b894933b2b2853a5",
+              "kind": "Boolean",
+              "family": "NotApplicable"
+            },
+            "shape": {
+              "value": "Scalar",
+              "repeat": "Replace"
+            },
+            "read": [
+              {
+                "condition": "Always",
+                "outcome": {
+                  "Read": {
+                    "reader": {
+                      "numeric": {
+                        "Known": null
+                      },
+                      "scoped_operand": {
+                        "Known": null
+                      },
+                      "id": "b894933b2b2853a5",
+                      "kind": "Boolean",
+                      "family": "NotApplicable"
+                    },
+                    "shape": {
+                      "value": "Scalar",
+                      "repeat": "Replace"
+                    }
+                  }
+                }
+              }
+            ],
+            "members": "None",
+            "domain": "Unknown",
+            "uses": [],
+            "reference": "NotEstablished",
+            "entry_contexts": [],
+            "read_scope": {
+              "Known": []
+            },
+            "accepted_categories": "NotApplicable"
+          }
+        ]
+      },
+      "numeric_keys": "Unresolved",
+      "ordering": "Unresolved",
+      "durations": {
+        "Partial": []
+      }
+    },
+    "completeness": "Partial",
+    "gaps": [
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "answer_item",
+          "name": "spawn_random_storm"
+        },
+        "detail": "instruction"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "answer_item",
+          "name": "spawn_random_storm"
+        },
+        "detail": "Some child dispatch paths or names remain unresolved."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "answer_item",
+          "name": "spawn_random_storm"
+        },
+        "detail": "target-arguments"
+      },
+      {
+        "kind": "ReaderSemantics",
+        "subject": {
+          "kind": "answer_item",
+          "name": "spawn_random_storm"
+        },
+        "detail": "Child grammar extraction is incomplete; unresolved properties and conditional paths remain."
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "answer_item",
+          "name": "spawn_random_storm"
+        },
+        "detail": "Required keys, key combinations, defaults, value domains, occurrence limits, operators, numeric grammar, weights and runtime meaning are outside this method."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "cosmic_storm_start_position"
+        },
+        "detail": "instruction"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "cosmic_storm_start_position"
+        },
+        "detail": "unknown-key-reader"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "cosmic_storm_start_position"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "answer_item",
+          "name": "spawn_random_storm"
+        },
+        "detail": "read-scope: scope-argument"
+      }
+    ],
+    "source": {
+      "build": "c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b",
+      "native_version": "0.1.0",
+      "method": "command-grammar/v15",
+      "basis": "StaticAnalysis"
+    }
+  }
+}

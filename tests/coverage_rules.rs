@@ -62,7 +62,7 @@ types = {
 }
 
 async fn recorded_snapshot() -> snapshot::Snapshot {
-    let path = Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/native/m451-hotfix");
+    let path = Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/native/m452");
     let native = Native::from_recorded_answers(path).unwrap();
     let extraction =
         extraction::collect(&native, || GameOptions::new(Command::new("unused"))).await;

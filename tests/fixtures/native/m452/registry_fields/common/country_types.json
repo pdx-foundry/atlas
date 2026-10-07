@@ -1,0 +1,3603 @@
+{
+  "Ok": {
+    "value": [
+      {
+        "name": "randomize_ethos",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "has_pulse_events",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "has_deficits",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "branch_office_resources",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "can_use_invalid_technology",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "can_receive_envoys",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "is_enclave",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "is_mercenary",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "government",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "faction",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "fallen_empire",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "home_system",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "playable",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "modules",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": {
+              "All": [
+                "Unresolved",
+                "Unresolved"
+              ]
+            },
+            "outcome": "Unresolved"
+          },
+          {
+            "condition": {
+              "All": [
+                "Unresolved",
+                "Unresolved"
+              ]
+            },
+            "outcome": "Unresolved"
+          },
+          {
+            "condition": "Unresolved",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "prevent_automatic_genocidal_hostilities",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "can_own_empty_planets",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "shuffle_pop_ethos",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "sub_title",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "325efaa17499c32d",
+          "kind": "String",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "325efaa17499c32d",
+                  "kind": "String",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": {
+          "Known": []
+        },
+        "accepted_categories": "NotApplicable"
+      },
+      {
+        "name": "sub_title_desc",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "325efaa17499c32d",
+          "kind": "String",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "325efaa17499c32d",
+                  "kind": "String",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": {
+          "Known": []
+        },
+        "accepted_categories": "NotApplicable"
+      },
+      {
+        "name": "needs_survey",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "has_capital",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "enforces_borders",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "can_planets_be_attacked",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "colonizing_title",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "325efaa17499c32d",
+          "kind": "String",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "325efaa17499c32d",
+                  "kind": "String",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": {
+          "Known": []
+        },
+        "accepted_categories": "NotApplicable"
+      },
+      {
+        "name": "colonizing_desc",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "325efaa17499c32d",
+          "kind": "String",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "325efaa17499c32d",
+                  "kind": "String",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": {
+          "Known": []
+        },
+        "accepted_categories": "NotApplicable"
+      },
+      {
+        "name": "orbital_bombardment",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "diplomatic_wars",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "share_communications",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "hide_names_if_no_communication",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "pop_growth",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "custom_diplomacy",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "targets",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "pre_communications_fleet_name",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "325efaa17499c32d",
+          "kind": "String",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "325efaa17499c32d",
+                  "kind": "String",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": {
+          "Known": []
+        },
+        "accepted_categories": "NotApplicable"
+      },
+      {
+        "name": "has_plural_name",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "b894933b2b2853a5",
+          "kind": "Boolean",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "b894933b2b2853a5",
+                  "kind": "Boolean",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": {
+          "Known": []
+        },
+        "accepted_categories": "NotApplicable"
+      },
+      {
+        "name": "show_in_contacts_list",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "awakened_fallen_empire",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "uses_special_buildables",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "custom_opinion",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "minimalist_contacts_list_profile",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "default_ships",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "scaled_difficulty_bonuses",
+        "reader": {
+          "numeric": {
+            "Partial": {
+              "representation": {
+                "Known": "Integer"
+              },
+              "width_bits": {
+                "Known": 64
+              },
+              "signedness": {
+                "Known": "Signed"
+              },
+              "scale": {
+                "Known": 100000
+              },
+              "literal_syntax": {
+                "Partial": [
+                  "DecimalInteger",
+                  "DecimalFraction",
+                  "RadixPrefixedInteger"
+                ]
+              },
+              "accepted_range": {
+                "Known": {
+                  "minimum": {
+                    "Known": {
+                      "Rational": {
+                        "numerator": -9223372036854775808,
+                        "denominator": 100000
+                      }
+                    }
+                  },
+                  "maximum": {
+                    "Known": {
+                      "Rational": {
+                        "numerator": 9223372036854775807,
+                        "denominator": 100000
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "a9818fec780f8313",
+          "kind": "FixedPoint",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Partial": {
+                      "representation": {
+                        "Known": "Integer"
+                      },
+                      "width_bits": {
+                        "Known": 64
+                      },
+                      "signedness": {
+                        "Known": "Signed"
+                      },
+                      "scale": {
+                        "Known": 100000
+                      },
+                      "literal_syntax": {
+                        "Partial": [
+                          "DecimalInteger",
+                          "DecimalFraction",
+                          "RadixPrefixedInteger"
+                        ]
+                      },
+                      "accepted_range": {
+                        "Known": {
+                          "minimum": {
+                            "Known": {
+                              "Rational": {
+                                "numerator": -9223372036854775808,
+                                "denominator": 100000
+                              }
+                            }
+                          },
+                          "maximum": {
+                            "Known": {
+                              "Rational": {
+                                "numerator": 9223372036854775807,
+                                "denominator": 100000
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "a9818fec780f8313",
+                  "kind": "FixedPoint",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": {
+          "Known": []
+        },
+        "accepted_categories": "NotApplicable"
+      },
+      {
+        "name": "hub_system",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "is_the_shroud",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "has_complete_sensor",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "custom_starbase",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "325efaa17499c32d",
+          "kind": "String",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "325efaa17499c32d",
+                  "kind": "String",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": {
+          "Known": []
+        },
+        "accepted_categories": "NotApplicable"
+      },
+      {
+        "name": "ship_disengagement",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "destroys_starbases",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "fleet_manager",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "5acdd80c3e3b21f4",
+          "kind": "Block",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Block",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "5acdd80c3e3b21f4",
+                  "kind": "Block",
+                  "family": "Unknown"
+                },
+                "shape": {
+                  "value": "Block",
+                  "repeat": "Unknown"
+                }
+              }
+            }
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "attack_unarmed_orbital_stations",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "army_disengagement",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "piracy_risk",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "can_have_their_comms_shared",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "mid_game_crisis",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "end_game_crisis",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "anti_end_game_crisis",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "blocks_piracy",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "observable",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "uses_origins",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "resources",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "ai",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "0100641a6783ef9a",
+          "kind": "Block",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Block",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "0100641a6783ef9a",
+                  "kind": "Block",
+                  "family": "Unknown"
+                },
+                "shape": {
+                  "value": "Block",
+                  "repeat": "Unknown"
+                }
+              }
+            }
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "is_space_critter",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "do_critters_age",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "counts_for_victory",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "has_difficulty_bonuses",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "always_valid_target_aggressive",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "ownership_limits",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      },
+      {
+        "name": "ignore_ftl_inhibitors",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved"
+      }
+    ],
+    "completeness": "Partial",
+    "gaps": [
+      {
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "registry",
+          "name": "common/country_types"
+        },
+        "detail": "Defaults, exhaustive enum domains, occurrence limits, deeper nested grammars, and non-owner runtime callers are not established by this method."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "randomize_ethos"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "has_pulse_events"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "has_deficits"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "branch_office_resources"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "can_use_invalid_technology"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "can_receive_envoys"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "is_enclave"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "is_mercenary"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "government"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "faction"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "fallen_empire"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "home_system"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "playable"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "modules"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "prevent_automatic_genocidal_hostilities"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "can_own_empty_planets"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "shuffle_pop_ethos"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "needs_survey"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "has_capital"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "enforces_borders"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "can_planets_be_attacked"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "orbital_bombardment"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "diplomatic_wars"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "share_communications"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "hide_names_if_no_communication"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "pop_growth"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "custom_diplomacy"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "targets"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "show_in_contacts_list"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "awakened_fallen_empire"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "uses_special_buildables"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "custom_opinion"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "minimalist_contacts_list_profile"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "default_ships"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "hub_system"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "is_the_shroud"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "has_complete_sensor"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "ship_disengagement"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "destroys_starbases"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "attack_unarmed_orbital_stations"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "army_disengagement"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "piracy_risk"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "can_have_their_comms_shared"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "mid_game_crisis"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "end_game_crisis"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "anti_end_game_crisis"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "blocks_piracy"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "observable"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "uses_origins"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "resources"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "is_space_critter"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "do_critters_age"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "counts_for_victory"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "has_difficulty_bonuses"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "always_valid_target_aggressive"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "ownership_limits"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "ignore_ftl_inhibitors"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "registry",
+          "name": "common/country_types"
+        },
+        "detail": "The field's reader could not be established on at least one path."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "registry",
+          "name": "common/country_types"
+        },
+        "detail": "A path through the registry's reader could not be followed to its end."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "randomize_ethos"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "has_pulse_events"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "has_deficits"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "branch_office_resources"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "can_use_invalid_technology"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "can_receive_envoys"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "is_enclave"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "is_mercenary"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "government"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "faction"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "fallen_empire"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "home_system"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "playable"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "modules"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedCondition",
+        "subject": {
+          "kind": "field",
+          "name": "modules"
+        },
+        "detail": "A loader condition remains unresolved; its outcome is retained separately."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "prevent_automatic_genocidal_hostilities"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "can_own_empty_planets"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "shuffle_pop_ethos"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "needs_survey"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "has_capital"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "enforces_borders"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "can_planets_be_attacked"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "orbital_bombardment"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "diplomatic_wars"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "share_communications"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "hide_names_if_no_communication"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "pop_growth"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "custom_diplomacy"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "targets"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "show_in_contacts_list"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "awakened_fallen_empire"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "uses_special_buildables"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "custom_opinion"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "minimalist_contacts_list_profile"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "default_ships"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "hub_system"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "is_the_shroud"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "has_complete_sensor"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "ship_disengagement"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "destroys_starbases"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "fleet_manager"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "attack_unarmed_orbital_stations"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "army_disengagement"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "piracy_risk"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "can_have_their_comms_shared"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "mid_game_crisis"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "end_game_crisis"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "anti_end_game_crisis"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "blocks_piracy"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "observable"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "uses_origins"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "resources"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "ai"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "is_space_critter"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "do_critters_age"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "counts_for_victory"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "has_difficulty_bonuses"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "always_valid_target_aggressive"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "ownership_limits"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "ignore_ftl_inhibitors"
+        },
+        "detail": "Repeat behavior or nested fields remain unresolved."
+      },
+      {
+        "kind": "NumericConversion",
+        "subject": {
+          "kind": "field",
+          "name": "scaled_difficulty_bonuses"
+        },
+        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "randomize_ethos"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "has_pulse_events"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "has_deficits"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "branch_office_resources"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "can_use_invalid_technology"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "can_receive_envoys"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "is_enclave"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "is_mercenary"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "government"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "faction"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "fallen_empire"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "home_system"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "playable"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "modules"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "prevent_automatic_genocidal_hostilities"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "can_own_empty_planets"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "shuffle_pop_ethos"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "needs_survey"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "has_capital"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "enforces_borders"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "can_planets_be_attacked"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "orbital_bombardment"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "diplomatic_wars"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "share_communications"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "hide_names_if_no_communication"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "pop_growth"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "custom_diplomacy"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "targets"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "show_in_contacts_list"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "awakened_fallen_empire"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "uses_special_buildables"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "custom_opinion"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "minimalist_contacts_list_profile"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "default_ships"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "hub_system"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "is_the_shroud"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "has_complete_sensor"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "ship_disengagement"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "destroys_starbases"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "fleet_manager"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "attack_unarmed_orbital_stations"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "army_disengagement"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "piracy_risk"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "can_have_their_comms_shared"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "mid_game_crisis"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "end_game_crisis"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "anti_end_game_crisis"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "blocks_piracy"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "observable"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "uses_origins"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "resources"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "ai"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "is_space_critter"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "do_critters_age"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "counts_for_victory"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "has_difficulty_bonuses"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "always_valid_target_aggressive"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "ownership_limits"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "ignore_ftl_inhibitors"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": null,
+        "detail": "Entry contexts cover the root trigger and effect blocks that the owner's own methods evaluate by direct call. Virtual calls, evaluations outside the owner's methods, nested blocks, weights, script values and modifier blocks are outside this method."
+      }
+    ],
+    "source": {
+      "build": "c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b",
+      "native_version": "0.1.0",
+      "method": "registry-fields/v18",
+      "basis": "StaticAnalysis"
+    }
+  }
+}

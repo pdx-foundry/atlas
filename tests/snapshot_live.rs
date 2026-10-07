@@ -79,7 +79,13 @@ async fn live_and_recorded_snapshots_match_after_basis_normalization() {
         .collect();
     assert_eq!(
         unsupported,
-        ["check_script", "command_grammar", "dynamic_names"]
+        [
+            "check_script",
+            "dynamic_names",
+            "modifier_category_keys",
+            "modifier_nodes",
+            "script_expansions"
+        ]
     );
     let mut normalized_live = recorded_basis(live_snapshot);
     normalized_live.coverage.native_support = replay_snapshot.coverage.native_support.clone();

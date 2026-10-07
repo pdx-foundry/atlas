@@ -237,7 +237,11 @@ config `replace_scopes`. It names all 15 confirmed disagreements and all 44 name
 independent source, with stable reasons. The source is SDK-704 and Native's
 `docs/native/engine-commands.md`, “On_actions, game rules and their entry scopes”. The self-link
 rule remains an assumption. These checks apply only to the exact recorded build and
-`callbacks/v2`; comments and config never feed Native's extraction.
+`callbacks/v2`; comments and config never feed Native's extraction. The checks were made on
+M451-hotfix. SDK-625 carried them to M452 because Native's `callbacks/v2` on_action and game-rule
+answers, values and gaps, are identical on both builds. Carry them to a later build only on the
+same evidence; otherwise the gate drops them, and the names without an independent source
+lose their gap.
 
 The confirmed disagreements remain engine answers: nine game rules have no `from` despite the
 config; two pass `colony` where config says `planet`; `dismiss_leader_cost` evaluates on a leader;

@@ -4,7 +4,7 @@ use serde_json::{Value, json};
 use std::{path::PathBuf, process::Command};
 
 fn recording() -> PathBuf {
-    PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/native/m451-hotfix")
+    PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/native/m452")
 }
 
 async fn recorded() -> extraction::Extraction {
@@ -520,9 +520,44 @@ async fn leaf_gap_names_attach_only_when_the_field_path_is_unique() {
         .iter()
         .find(|gap| gap.id == "registry:common/traditions#field_gap_subjects")
         .unwrap();
-    assert_eq!(gap.native_gaps, [native_gap]);
+    assert_eq!(gap.native_gaps, std::slice::from_ref(&native_gap));
     assert!(gap.reason.contains("parent/child"));
     assert!(gap.reason.contains("child"));
+
+    let full_paths = vec![
+        Gap {
+            subject: Some(GapSubject::Field {
+                name: "parent.child".into(),
+            }),
+            ..native_gap.clone()
+        },
+        Gap {
+            subject: Some(GapSubject::KeyPath {
+                path: vec!["parent".into(), "child".into()],
+            }),
+            ..native_gap
+        },
+    ];
+    extraction
+        .fields
+        .get_mut(extraction::TRADITIONS)
+        .unwrap()
+        .as_mut()
+        .unwrap()
+        .gaps = full_paths.clone();
+    let joined = snapshot::assemble(&extraction).unwrap();
+    let nested = joined
+        .rules
+        .iter()
+        .find(|rule| rule.id == "field:common/traditions/parent/child#read")
+        .unwrap();
+    assert_eq!(nested.evidence[0].native_gaps, full_paths);
+    assert!(
+        !joined
+            .gaps
+            .iter()
+            .any(|gap| gap.id == "registry:common/traditions#field_gap_subjects")
+    );
 }
 
 #[tokio::test]
@@ -640,4 +675,144 @@ async fn repeat_facts_require_an_unconditional_successful_read() {
             .iter()
             .all(|rule| rule.property != "occurrences.maximum")
     );
+}
+
+#[tokio::test]
+async fn council_agenda_fields_carry_block_scope_value_and_reference_answers() {
+    let snapshot = snapshot::assemble(&recorded().await).unwrap();
+    let field = |name: &str| format!("field:common/council_agendas/{name}");
+    let rule = |id: String| snapshot.rules.iter().find(|rule| rule.id == id);
+    let gap = |id: String| snapshot.gaps.iter().find(|gap| gap.id == id);
+
+    let potential = field("potential");
+    assert!(
+        rule(format!("{potential}#block_family"))
+            .unwrap()
+            .answer
+            .to_string()
+            .contains("Trigger")
+    );
+    assert!(gap(format!("{potential}#nested_grammar")).is_none());
+    assert!(rule(format!("{potential}#read_scope")).is_some());
+    assert!(
+        gap(format!("{potential}#scope_context"))
+            .unwrap()
+            .reason
+            .contains("not every evaluation context")
+    );
+
+    let effect = field("effect");
+    let this = &rule(format!("{effect}#read_scope")).unwrap().answer;
+    assert_eq!(
+        rule(format!("{effect}#scope_context")).unwrap().answer["this"],
+        *this
+    );
+
+    let ai_weight = field("ai_weight");
+    assert!(gap(format!("{ai_weight}#nested_grammar")).is_none());
+    assert!(rule(format!("{ai_weight}#read_scope")).is_some());
+    assert!(
+        gap(format!("{ai_weight}#scope_context"))
+            .unwrap()
+            .reason
+            .contains("not every evaluation context")
+    );
+
+    assert_eq!(
+        rule(format!("{}#value_form", field("agenda_cost")))
+            .unwrap()
+            .answer["form"],
+        "scoped_number"
+    );
+    assert!(rule(format!("{}#reference", field("finish_modifier"))).is_some());
+    assert!(gap(format!("{}#reference", field("finish_modifier"))).is_none());
+
+    let modifier = field("modifier");
+    assert!(rule(format!("{modifier}#accepted_categories")).is_some());
+    assert!(rule(format!("{modifier}#scope_context")).is_none());
+    assert!(gap(format!("{modifier}#scope_context")).is_none());
+}
+
+#[tokio::test]
+async fn unestablished_block_parts_keep_their_gaps() {
+    use pdx_native::{BlockFamily, FieldMembers};
+    let mut extraction = recorded().await;
+    let effect = extraction
+        .fields
+        .get_mut("common/council_agendas")
+        .unwrap()
+        .as_mut()
+        .unwrap()
+        .value
+        .iter_mut()
+        .find(|field| field.name == "effect")
+        .unwrap();
+    effect.reader.family = BlockFamily::Unknown;
+    effect.members = FieldMembers::Unresolved;
+    effect.entry_contexts.clear();
+
+    let snapshot = snapshot::assemble(&extraction).unwrap();
+    let id = "field:common/council_agendas/effect";
+    let gap = |property: &str| {
+        snapshot
+            .gaps
+            .iter()
+            .find(|gap| gap.id == format!("{id}#{property}"))
+    };
+
+    assert!(gap("nested_grammar").is_some());
+    assert!(
+        gap("scope_context")
+            .unwrap()
+            .reason
+            .contains("not every evaluation context")
+    );
+    assert!(
+        snapshot
+            .rules
+            .iter()
+            .any(|rule| rule.id == format!("{id}#read_scope"))
+    );
+}
+
+#[tokio::test]
+async fn failed_grammar_and_derived_name_answers_are_gaps_and_fail_extraction() {
+    use pdx_native::{Error, Operation};
+    let mut extraction = recorded().await;
+    assert!(extraction.complete());
+    let failure = |operation| Error::Observation {
+        operation,
+        reason: "reader stopped".into(),
+    };
+    extraction.language.effect_grammars.insert(
+        "add_building".into(),
+        Err(failure(Operation::CommandGrammar)),
+    );
+    assert!(!extraction.complete());
+    extraction.language.effect_grammars = recorded().await.language.effect_grammars;
+    extraction.derived_names.insert(
+        "common/council_agendas".into(),
+        Err(failure(Operation::DerivedNames)),
+    );
+    assert!(!extraction.complete());
+    extraction.language.effect_grammars.insert(
+        "add_building".into(),
+        Err(failure(Operation::CommandGrammar)),
+    );
+
+    let snapshot = snapshot::assemble(&extraction).unwrap();
+    for id in [
+        "effect:add_building#arguments",
+        "effect:add_building#forms",
+        "effect:add_building#scope_context",
+        "registry:common/council_agendas#derived_names",
+    ] {
+        assert!(
+            snapshot
+                .gaps
+                .iter()
+                .any(|gap| gap.id == id && gap.reason.contains("reader stopped")),
+            "{id}"
+        );
+    }
 }

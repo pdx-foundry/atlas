@@ -1,0 +1,387 @@
+{
+  "Ok": {
+    "value": {
+      "reader": {
+        "numeric": {
+          "Known": null
+        },
+        "scoped_operand": {
+          "Known": null
+        },
+        "id": "504c989c6831f909",
+        "kind": "Block",
+        "family": "Unknown"
+      },
+      "forms": {
+        "Known": [
+          "Block"
+        ]
+      },
+      "targets": {
+        "Partial": [
+          {
+            "argument": {
+              "Key": [
+                "who"
+              ]
+            },
+            "scopes": "Unresolved",
+            "stage": "Unresolved"
+          }
+        ]
+      },
+      "child_families": "Unresolved",
+      "child_scopes": "Unresolved",
+      "fixed_keys": {
+        "Partial": [
+          {
+            "name": "type",
+            "reader": {
+              "numeric": "Unresolved",
+              "scoped_operand": "Unresolved",
+              "id": null,
+              "kind": "Unknown",
+              "family": "Unknown"
+            },
+            "shape": {
+              "value": "Unknown",
+              "repeat": "Unknown"
+            },
+            "read": [
+              {
+                "condition": {
+                  "All": [
+                    "Unresolved",
+                    "Unresolved"
+                  ]
+                },
+                "outcome": "Unresolved"
+              },
+              {
+                "condition": {
+                  "All": [
+                    "Unresolved",
+                    "Unresolved"
+                  ]
+                },
+                "outcome": "Unresolved"
+              },
+              {
+                "condition": "Unresolved",
+                "outcome": "Unresolved"
+              }
+            ],
+            "members": "Unresolved",
+            "domain": "Unknown",
+            "uses": [],
+            "reference": "NotEstablished",
+            "entry_contexts": [],
+            "read_scope": "Unresolved",
+            "accepted_categories": "Unresolved"
+          },
+          {
+            "name": "distance",
+            "reader": {
+              "numeric": "Unresolved",
+              "scoped_operand": "Unresolved",
+              "id": null,
+              "kind": "Unknown",
+              "family": "Unknown"
+            },
+            "shape": {
+              "value": "Unknown",
+              "repeat": "Unknown"
+            },
+            "read": [
+              {
+                "condition": "Always",
+                "outcome": "Unresolved"
+              }
+            ],
+            "members": "Unresolved",
+            "domain": "Unknown",
+            "uses": [],
+            "reference": "NotEstablished",
+            "entry_contexts": [],
+            "read_scope": "Unresolved",
+            "accepted_categories": "Unresolved"
+          },
+          {
+            "name": "who",
+            "reader": {
+              "numeric": {
+                "Known": null
+              },
+              "scoped_operand": {
+                "Known": null
+              },
+              "id": "1b6f3b12faaef087",
+              "kind": "Target",
+              "family": "NotApplicable"
+            },
+            "shape": {
+              "value": "Scalar",
+              "repeat": "Unknown"
+            },
+            "read": [
+              {
+                "condition": {
+                  "All": [
+                    "Unresolved",
+                    "Unresolved"
+                  ]
+                },
+                "outcome": {
+                  "Read": {
+                    "reader": {
+                      "numeric": {
+                        "Known": null
+                      },
+                      "scoped_operand": {
+                        "Known": null
+                      },
+                      "id": "1b6f3b12faaef087",
+                      "kind": "Target",
+                      "family": "NotApplicable"
+                    },
+                    "shape": {
+                      "value": "Scalar",
+                      "repeat": "Unknown"
+                    }
+                  }
+                }
+              },
+              {
+                "condition": {
+                  "All": [
+                    "Unresolved",
+                    "Unresolved"
+                  ]
+                },
+                "outcome": {
+                  "Read": {
+                    "reader": {
+                      "numeric": {
+                        "Known": null
+                      },
+                      "scoped_operand": {
+                        "Known": null
+                      },
+                      "id": "1b6f3b12faaef087",
+                      "kind": "Target",
+                      "family": "NotApplicable"
+                    },
+                    "shape": {
+                      "value": "Scalar",
+                      "repeat": "Unknown"
+                    }
+                  }
+                }
+              },
+              {
+                "condition": "Unresolved",
+                "outcome": {
+                  "Read": {
+                    "reader": {
+                      "numeric": {
+                        "Known": null
+                      },
+                      "scoped_operand": {
+                        "Known": null
+                      },
+                      "id": "1b6f3b12faaef087",
+                      "kind": "Target",
+                      "family": "NotApplicable"
+                    },
+                    "shape": {
+                      "value": "Scalar",
+                      "repeat": "Unknown"
+                    }
+                  }
+                }
+              }
+            ],
+            "members": "None",
+            "domain": "Unknown",
+            "uses": [],
+            "reference": "NotEstablished",
+            "entry_contexts": [],
+            "read_scope": {
+              "Known": []
+            },
+            "accepted_categories": "NotApplicable"
+          },
+          {
+            "name": "use_bypasses",
+            "reader": {
+              "numeric": {
+                "Known": null
+              },
+              "scoped_operand": {
+                "Known": null
+              },
+              "id": "b894933b2b2853a5",
+              "kind": "Boolean",
+              "family": "NotApplicable"
+            },
+            "shape": {
+              "value": "Scalar",
+              "repeat": "Replace"
+            },
+            "read": [
+              {
+                "condition": "Always",
+                "outcome": {
+                  "Read": {
+                    "reader": {
+                      "numeric": {
+                        "Known": null
+                      },
+                      "scoped_operand": {
+                        "Known": null
+                      },
+                      "id": "b894933b2b2853a5",
+                      "kind": "Boolean",
+                      "family": "NotApplicable"
+                    },
+                    "shape": {
+                      "value": "Scalar",
+                      "repeat": "Replace"
+                    }
+                  }
+                }
+              }
+            ],
+            "members": "None",
+            "domain": "Unknown",
+            "uses": [],
+            "reference": "NotEstablished",
+            "entry_contexts": [],
+            "read_scope": {
+              "Known": []
+            },
+            "accepted_categories": "NotApplicable"
+          }
+        ]
+      },
+      "numeric_keys": "Unresolved",
+      "ordering": "Unresolved",
+      "durations": {
+        "Partial": []
+      }
+    },
+    "completeness": "Partial",
+    "gaps": [
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "answer_item",
+          "name": "distance_to_empire"
+        },
+        "detail": "instruction"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "answer_item",
+          "name": "distance_to_empire"
+        },
+        "detail": "reader-routing"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "answer_item",
+          "name": "distance_to_empire"
+        },
+        "detail": "Some child dispatch paths or names remain unresolved."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "answer_item",
+          "name": "distance_to_empire"
+        },
+        "detail": "target-arguments"
+      },
+      {
+        "kind": "ReaderSemantics",
+        "subject": {
+          "kind": "answer_item",
+          "name": "distance_to_empire"
+        },
+        "detail": "Child grammar extraction is incomplete; unresolved properties and conditional paths remain."
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "answer_item",
+          "name": "distance_to_empire"
+        },
+        "detail": "Required keys, key combinations, defaults, value domains, occurrence limits, operators, numeric grammar, weights and runtime meaning are outside this method."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "distance"
+        },
+        "detail": "reader-routing"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "type"
+        },
+        "detail": "instruction"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "type"
+        },
+        "detail": "reader-routing"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "who"
+        },
+        "detail": "target-scope-check: unclassified execution call"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "type"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "distance"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "answer_item",
+          "name": "distance_to_empire"
+        },
+        "detail": "read-scope: child-family-boundary"
+      }
+    ],
+    "source": {
+      "build": "c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b",
+      "native_version": "0.1.0",
+      "method": "command-grammar/v15",
+      "basis": "StaticAnalysis"
+    }
+  }
+}

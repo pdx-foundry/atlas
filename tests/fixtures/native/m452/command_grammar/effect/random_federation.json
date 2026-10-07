@@ -1,0 +1,560 @@
+{
+  "Ok": {
+    "value": {
+      "reader": {
+        "numeric": {
+          "Known": null
+        },
+        "scoped_operand": {
+          "Known": null
+        },
+        "id": "17f44da5934df17b",
+        "kind": "Block",
+        "family": "Effect"
+      },
+      "forms": {
+        "Known": [
+          "Block"
+        ]
+      },
+      "targets": "Unresolved",
+      "child_families": {
+        "Partial": [
+          "Effect"
+        ]
+      },
+      "child_scopes": {
+        "Partial": [
+          {
+            "family": "Effect",
+            "scope": "Unresolved"
+          }
+        ]
+      },
+      "fixed_keys": {
+        "Partial": [
+          {
+            "name": "weights",
+            "reader": {
+              "numeric": {
+                "Known": null
+              },
+              "scoped_operand": {
+                "Known": null
+              },
+              "id": null,
+              "kind": "Block",
+              "family": "Unknown"
+            },
+            "shape": {
+              "value": "Block",
+              "repeat": "Unknown"
+            },
+            "read": [
+              {
+                "condition": "Always",
+                "outcome": {
+                  "Read": {
+                    "reader": {
+                      "numeric": {
+                        "Known": null
+                      },
+                      "scoped_operand": {
+                        "Known": null
+                      },
+                      "id": null,
+                      "kind": "Block",
+                      "family": "Unknown"
+                    },
+                    "shape": {
+                      "value": "Block",
+                      "repeat": "Unknown"
+                    }
+                  }
+                }
+              }
+            ],
+            "members": {
+              "Fields": [
+                {
+                  "name": "base",
+                  "reader": {
+                    "numeric": {
+                      "Partial": {
+                        "representation": {
+                          "Known": "Integer"
+                        },
+                        "width_bits": {
+                          "Known": 64
+                        },
+                        "signedness": {
+                          "Known": "Signed"
+                        },
+                        "scale": {
+                          "Known": 100000
+                        },
+                        "literal_syntax": {
+                          "Partial": [
+                            "DecimalInteger",
+                            "DecimalFraction",
+                            "RadixPrefixedInteger"
+                          ]
+                        },
+                        "accepted_range": {
+                          "Known": {
+                            "minimum": {
+                              "Known": {
+                                "Rational": {
+                                  "numerator": -9223372036854775808,
+                                  "denominator": 100000
+                                }
+                              }
+                            },
+                            "maximum": {
+                              "Known": {
+                                "Rational": {
+                                  "numerator": 9223372036854775807,
+                                  "denominator": 100000
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "scoped_operand": {
+                      "Known": null
+                    },
+                    "id": "a9818fec780f8313",
+                    "kind": "FixedPoint",
+                    "family": "NotApplicable"
+                  },
+                  "shape": {
+                    "value": "Scalar",
+                    "repeat": "Replace"
+                  },
+                  "read": [
+                    {
+                      "condition": "Always",
+                      "outcome": {
+                        "Read": {
+                          "reader": {
+                            "numeric": {
+                              "Partial": {
+                                "representation": {
+                                  "Known": "Integer"
+                                },
+                                "width_bits": {
+                                  "Known": 64
+                                },
+                                "signedness": {
+                                  "Known": "Signed"
+                                },
+                                "scale": {
+                                  "Known": 100000
+                                },
+                                "literal_syntax": {
+                                  "Partial": [
+                                    "DecimalInteger",
+                                    "DecimalFraction",
+                                    "RadixPrefixedInteger"
+                                  ]
+                                },
+                                "accepted_range": {
+                                  "Known": {
+                                    "minimum": {
+                                      "Known": {
+                                        "Rational": {
+                                          "numerator": -9223372036854775808,
+                                          "denominator": 100000
+                                        }
+                                      }
+                                    },
+                                    "maximum": {
+                                      "Known": {
+                                        "Rational": {
+                                          "numerator": 9223372036854775807,
+                                          "denominator": 100000
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "scoped_operand": {
+                              "Known": null
+                            },
+                            "id": "a9818fec780f8313",
+                            "kind": "FixedPoint",
+                            "family": "NotApplicable"
+                          },
+                          "shape": {
+                            "value": "Scalar",
+                            "repeat": "Replace"
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "members": "None",
+                  "domain": "Unknown",
+                  "uses": [],
+                  "reference": "NotEstablished",
+                  "entry_contexts": [],
+                  "read_scope": {
+                    "Known": []
+                  },
+                  "accepted_categories": "NotApplicable"
+                },
+                {
+                  "name": "modifier",
+                  "reader": {
+                    "numeric": "Unresolved",
+                    "scoped_operand": "Unresolved",
+                    "id": null,
+                    "kind": "Unknown",
+                    "family": "Unknown"
+                  },
+                  "shape": {
+                    "value": "Unknown",
+                    "repeat": "Unknown"
+                  },
+                  "read": [
+                    {
+                      "condition": "Always",
+                      "outcome": "Unresolved"
+                    }
+                  ],
+                  "members": "Unresolved",
+                  "domain": "Unknown",
+                  "uses": [],
+                  "reference": "NotEstablished",
+                  "entry_contexts": [],
+                  "read_scope": "Unresolved",
+                  "accepted_categories": "Unresolved"
+                },
+                {
+                  "name": "scaled_modifier",
+                  "reader": {
+                    "numeric": "Unresolved",
+                    "scoped_operand": "Unresolved",
+                    "id": null,
+                    "kind": "Unknown",
+                    "family": "Unknown"
+                  },
+                  "shape": {
+                    "value": "Unknown",
+                    "repeat": "Unknown"
+                  },
+                  "read": [
+                    {
+                      "condition": "Always",
+                      "outcome": "Unresolved"
+                    }
+                  ],
+                  "members": "Unresolved",
+                  "domain": "Unknown",
+                  "uses": [],
+                  "reference": "NotEstablished",
+                  "entry_contexts": [],
+                  "read_scope": "Unresolved",
+                  "accepted_categories": "Unresolved"
+                },
+                {
+                  "name": "complex_trigger_modifier",
+                  "reader": {
+                    "numeric": "Unresolved",
+                    "scoped_operand": "Unresolved",
+                    "id": null,
+                    "kind": "Unknown",
+                    "family": "Unknown"
+                  },
+                  "shape": {
+                    "value": "Unknown",
+                    "repeat": "Unknown"
+                  },
+                  "read": [
+                    {
+                      "condition": "Always",
+                      "outcome": "Unresolved"
+                    }
+                  ],
+                  "members": "Unresolved",
+                  "domain": "Unknown",
+                  "uses": [],
+                  "reference": "NotEstablished",
+                  "entry_contexts": [],
+                  "read_scope": "Unresolved",
+                  "accepted_categories": "Unresolved"
+                }
+              ]
+            },
+            "domain": "Unknown",
+            "uses": [],
+            "reference": "NotEstablished",
+            "entry_contexts": [],
+            "read_scope": "Unresolved",
+            "accepted_categories": "Unresolved"
+          },
+          {
+            "name": "limit",
+            "reader": {
+              "numeric": {
+                "Known": null
+              },
+              "scoped_operand": {
+                "Known": null
+              },
+              "id": "85bd4238680bd5b9",
+              "kind": "Block",
+              "family": "Trigger"
+            },
+            "shape": {
+              "value": "Block",
+              "repeat": "Unknown"
+            },
+            "read": [
+              {
+                "condition": "Always",
+                "outcome": {
+                  "Read": {
+                    "reader": {
+                      "numeric": {
+                        "Known": null
+                      },
+                      "scoped_operand": {
+                        "Known": null
+                      },
+                      "id": "85bd4238680bd5b9",
+                      "kind": "Block",
+                      "family": "Trigger"
+                    },
+                    "shape": {
+                      "value": "Block",
+                      "repeat": "Unknown"
+                    }
+                  }
+                }
+              }
+            ],
+            "members": "Unresolved",
+            "domain": "Unknown",
+            "uses": [],
+            "reference": "NotEstablished",
+            "entry_contexts": [],
+            "read_scope": "Unresolved",
+            "accepted_categories": "NotApplicable"
+          }
+        ]
+      },
+      "numeric_keys": "Unresolved",
+      "ordering": "Unresolved",
+      "durations": {
+        "Partial": []
+      }
+    },
+    "completeness": "Partial",
+    "gaps": [
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "answer_item",
+          "name": "random_federation"
+        },
+        "detail": "target-arguments"
+      },
+      {
+        "kind": "ReaderSemantics",
+        "subject": {
+          "kind": "answer_item",
+          "name": "random_federation"
+        },
+        "detail": "Child grammar extraction is incomplete; unresolved properties and conditional paths remain."
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "answer_item",
+          "name": "random_federation"
+        },
+        "detail": "Required keys, key combinations, defaults, value domains, occurrence limits, operators, numeric grammar, weights and runtime meaning are outside this method."
+      },
+      {
+        "kind": "UnreadableInput",
+        "subject": {
+          "kind": "field",
+          "name": "weights"
+        },
+        "detail": "The receiver's initializer could not be read, so a lookup that it makes is not established."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "weights"
+        },
+        "detail": "member-table-gap"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "weights"
+        },
+        "detail": "reader-routing"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "weights",
+            "complex_trigger_modifier"
+          ]
+        },
+        "detail": "reader-routing"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "weights",
+            "days"
+          ]
+        },
+        "detail": "jump-table-default"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "weights",
+            "factor"
+          ]
+        },
+        "detail": "addressing"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "weights",
+            "modifier"
+          ]
+        },
+        "detail": "reader-routing"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "weights",
+            "months"
+          ]
+        },
+        "detail": "jump-table-default"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "weights",
+            "scaled_modifier"
+          ]
+        },
+        "detail": "reader-routing"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "weights",
+            "years"
+          ]
+        },
+        "detail": "jump-table-default"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "weights"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "limit"
+        },
+        "detail": "read-scope: stored-scope"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "weights",
+            "modifier"
+          ]
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "weights",
+            "scaled_modifier"
+          ]
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "weights",
+            "complex_trigger_modifier"
+          ]
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "answer_item",
+          "name": "random_federation"
+        },
+        "detail": "read-scope: stored-scope"
+      },
+      {
+        "kind": "NumericConversion",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "weights",
+            "base"
+          ]
+        },
+        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+      }
+    ],
+    "source": {
+      "build": "c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b",
+      "native_version": "0.1.0",
+      "method": "command-grammar/v15",
+      "basis": "StaticAnalysis"
+    }
+  }
+}
