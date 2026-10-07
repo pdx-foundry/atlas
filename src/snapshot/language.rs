@@ -428,25 +428,28 @@ impl Builder<'_> {
         arguments.assemble(self.snapshot, keys)?;
 
         match self.child_scopes(&grammar.child_scopes) {
-            Some(scopes) => self.rule(id, "scope_context", scopes, &link),
-            None => self.gap(
-                id,
-                "scope_context",
-                "Native did not establish the read-time scope of every command family that the block dispatches to",
-                Some(SCOPE_CONTEXT),
-                vec![link],
-            ),
+            Ok(scopes) => self.rule(id, "scope_context", scopes, &link),
+            Err(reason) => self.gap(id, "scope_context", reason, Some(SCOPE_CONTEXT), vec![link]),
         }
 
         Ok(())
     }
 
-    /// The read-time `this` of each command family that a block dispatches to, or `None` when
-    /// one is not established.
-    fn child_scopes(&self, child_scopes: &GrammarProperty<Vec<ChildScope>>) -> Option<Value> {
+    /// The read-time `this` of each command family that a block dispatches to, or why it is not
+    /// established.
+    fn child_scopes(
+        &self,
+        child_scopes: &GrammarProperty<Vec<ChildScope>>,
+    ) -> Result<Value, &'static str> {
+        let unestablished = "Native did not establish the read-time scope of every command family that the block dispatches to";
         let GrammarProperty::Known(child_scopes) = child_scopes else {
-            return None;
+            return Err(unestablished);
         };
+        if child_scopes.is_empty() {
+            return Err(
+                "The command's block dispatches no command family, so no child scope applies",
+            );
+        }
 
         child_scopes
             .iter()
@@ -460,6 +463,7 @@ impl Builder<'_> {
             })
             .collect::<Option<Vec<_>>>()
             .map(Value::from)
+            .ok_or(unestablished)
     }
 
     /// Gaps for a command whose grammar answer is unavailable.
@@ -1118,7 +1122,7 @@ impl Builder<'_> {
                 "loaded_summary",
                 vec![condition],
                 summary,
-                link,
+                vec![link],
             ),
             None => self.gap(
                 &inventory,
@@ -1161,8 +1165,6 @@ fn gap_kind(kind: GapKind) -> &'static str {
     }
 }
 
-/// Subject names of scope types: `{display name}/{keywords}`, so that the identity of one type
-/// does not depend on the others. Two types that share both have no identity, so assembly fails.
 /// Subject names of localization contexts: the display name, or Native's build-scoped identity
 /// when the name could not be read. Two contexts with one name have no identity, so assembly
 /// fails.

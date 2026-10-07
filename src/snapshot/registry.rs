@@ -2,8 +2,8 @@
 
 use super::scope::ScopeNames;
 use super::{
-    EvidenceLink, Rule, Snapshot, Subject, SubjectKind, argument_id, evidence, field_id, gap,
-    registry_id, rule, rule_with_evidence,
+    EvidenceLink, Rule, Snapshot, Subject, SubjectKind, argument_id, conditional_rule, evidence,
+    field_id, gap, registry_id, rule,
 };
 use crate::extraction::Extraction;
 use pdx_native::{
@@ -724,10 +724,11 @@ impl<'a, T> FieldSet<'a, T> {
         } else {
             let mut links = vec![evidence.clone()];
             links.extend(names.iter().map(|(_, link)| link.clone()));
-            rule_with_evidence(
+            conditional_rule(
                 snapshot,
                 id,
                 "reference",
+                Vec::new(),
                 json!({
                     "lookups": lookups,
                     "derived_names": names.iter().map(|(name, _)| name).collect::<Vec<_>>(),

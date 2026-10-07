@@ -394,24 +394,14 @@ fn rule(
     answer: Value,
     evidence: EvidenceLink,
 ) {
-    conditional_rule(snapshot, subject, property, Vec::new(), answer, evidence);
-}
-
-fn rule_with_evidence(
-    snapshot: &mut Snapshot,
-    subject: &str,
-    property: &str,
-    answer: Value,
-    evidence: Vec<EvidenceLink>,
-) {
-    snapshot.rules.push(Rule {
-        id: format!("{subject}#{property}"),
-        subject: subject.into(),
-        property: property.into(),
-        conditions: Vec::new(),
+    conditional_rule(
+        snapshot,
+        subject,
+        property,
+        Vec::new(),
         answer,
-        evidence,
-    });
+        vec![evidence],
+    );
 }
 
 fn conditional_rule(
@@ -420,7 +410,7 @@ fn conditional_rule(
     property: &str,
     conditions: Vec<String>,
     answer: Value,
-    evidence: EvidenceLink,
+    evidence: Vec<EvidenceLink>,
 ) {
     snapshot.rules.push(Rule {
         id: format!("{subject}#{property}"),
@@ -428,7 +418,7 @@ fn conditional_rule(
         property: property.into(),
         conditions,
         answer,
-        evidence: vec![evidence],
+        evidence,
     });
 }
 
