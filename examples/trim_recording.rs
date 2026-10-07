@@ -102,15 +102,21 @@ fn rewrite_recorded_answer<T: Serialize + DeserializeOwned>(
 }
 
 /// Remove every `{subject}.json` below `directory` whose subject, its path from `root`, is not in
-/// `keep`, and the directories that become empty.
+/// `keep`, and the directories that become empty. Native records plain files and directories, so
+/// a symbolic link stops the trim rather than leading it outside the recording.
 fn remove_unkept(
     root: &Path,
     directory: &Path,
     keep: &[&str],
 ) -> Result<(), Box<dyn std::error::Error>> {
     for entry in fs::read_dir(directory)? {
-        let path = entry?.path();
-        if path.is_dir() {
+        let entry = entry?;
+        let path = entry.path();
+        let file_type = entry.file_type()?;
+        if file_type.is_symlink() {
+            return Err(format!("{} is a symbolic link", path.display()).into());
+        }
+        if file_type.is_dir() {
             remove_unkept(root, &path, keep)?;
             if fs::read_dir(&path)?.next().is_none() {
                 fs::remove_dir(&path)?;
@@ -118,8 +124,14 @@ fn remove_unkept(
             continue;
         }
 
-        let subject = path.strip_prefix(root)?.with_extension("");
-        if !keep.contains(&subject.to_string_lossy().as_ref()) {
+        // Subjects use `/` on every platform.
+        let subject: Vec<_> = path
+            .strip_prefix(root)?
+            .with_extension("")
+            .components()
+            .map(|component| component.as_os_str().to_string_lossy().into_owned())
+            .collect();
+        if !keep.contains(&subject.join("/").as_str()) {
             fs::remove_file(&path)?;
         }
     }
