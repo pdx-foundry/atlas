@@ -77,8 +77,8 @@ struct Joins<'a> {
     on_actions: BTreeMap<&'a str, String>,
     /// Each command key that the snapshot publishes, as (command subject, key path).
     arguments: BTreeSet<(String, String)>,
-    /// The content directories of each `type[…]`, from its `path`.
-    type_registries: BTreeMap<&'a str, BTreeSet<&'a str>>,
+    /// The content directories of each `type[…]` of each file, from its `path`.
+    type_registries: BTreeMap<(&'a str, &'a str), BTreeSet<&'a str>>,
     /// The one value of each naming question; a question with several values has none.
     naming_values: BTreeMap<&'a str, &'a str>,
     /// The names of the snapshot's derived-name subjects.
@@ -102,7 +102,10 @@ impl Joins<'_> {
         };
         let mut matched = Vec::new();
 
-        for registry in self.type_registries.get(type_name)? {
+        for registry in self
+            .type_registries
+            .get(&(claim.file.as_str(), type_name))?
+        {
             for lookup in lookups {
                 let name = format!("{registry}/{lookup}/{rendered}");
 
@@ -123,9 +126,9 @@ impl Joins<'_> {
     }
 }
 
-/// The content directories of each config type, from its `path = "game/…"` line.
-fn type_registries(ledger: &Ledger) -> BTreeMap<&str, BTreeSet<&str>> {
-    let mut registries: BTreeMap<&str, BTreeSet<&str>> = BTreeMap::new();
+/// The content directories of each config type of each file, from its `path = "game/…"` line.
+fn type_registries(ledger: &Ledger) -> BTreeMap<(&str, &str), BTreeSet<&str>> {
+    let mut registries: BTreeMap<(&str, &str), BTreeSet<&str>> = BTreeMap::new();
 
     for claim in &ledger.claims {
         if let [types, type_name, path] = claim.subject.as_slice()
@@ -134,7 +137,10 @@ fn type_registries(ledger: &Ledger) -> BTreeMap<&str, BTreeSet<&str>> {
             && claim.property == "loader_path"
             && let Some(registry) = claim.config_answer.trim_matches('"').strip_prefix("game/")
         {
-            registries.entry(type_name).or_default().insert(registry);
+            registries
+                .entry((claim.file.as_str(), type_name))
+                .or_default()
+                .insert(registry);
         }
     }
 

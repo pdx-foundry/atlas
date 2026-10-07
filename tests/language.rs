@@ -1365,6 +1365,20 @@ types = {
 "#
                 .to_owned(),
             ),
+            (
+                "common/other_agendas.cwt".to_owned(),
+                r#"
+types = {
+    type[agenda] = {
+        path = "game/common/traditions"
+        localisation = {
+            name = "council_agenda_$_name"
+        }
+    }
+}
+"#
+                .to_owned(),
+            ),
         ]
         .into(),
     );
@@ -1394,6 +1408,10 @@ types = {
     assert!(covered(
         "common/traditions.cwt",
         &["types", "type[tradition]", "localisation", "tooltip"]
+    ));
+    assert!(!covered(
+        "common/other_agendas.cwt",
+        &["types", "type[agenda]", "localisation", "name"]
     ));
     assert!(!agenda("localisation", "desc"));
     assert!(!agenda("localisation", "council_agenda_name"));

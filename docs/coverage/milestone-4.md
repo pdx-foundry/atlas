@@ -73,6 +73,9 @@ The [gap triage](gap-triage.md#sdk-625-final-run) measures the unowned gaps agai
 | `ledger.json` / `coverage.json` | `ba2bb263…f67947` / `e323dcda…cab6d4` (pinned in full in the gate fixture) |
 | `comparison.json` | `c438440f287ec0692dedfa4c547e8bf8483e197ba4577bad36ddb4cbcd958b5d` |
 
+A later review fix keys the naming join by file as well as type; recomputed from the same live
+snapshot, `coverage.json` is byte-identical.
+
 The live CLI exited 0. It asked every question once, with methods unchanged during the run,
 confirmed disposal of both fixture games and the loaded-modifier game, and took 7 minutes 39
 seconds. Ledger and comparison exit 2 for the retained source diagnostics. The ignored
