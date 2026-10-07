@@ -46,40 +46,45 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         return Err("expected only a recording directory".into());
     }
 
-    edit::<Vec<Registry>>(&recording.join("registries.json"), |registries| {
+    rewrite_recorded_answer::<Vec<Registry>>(&recording.join("registries.json"), |registries| {
         registries.retain(|registry| REGISTRIES.contains(&registry.name.as_str()));
     })?;
     for question in ["registry_fields", "derived_names", "modifier_families"] {
-        keep_files(&recording.join(question), REGISTRIES)?;
+        let answers = recording.join(question);
+        remove_unkept(&answers, &answers, REGISTRIES)?;
     }
 
     for (kind, names) in [("effect", EFFECTS), ("trigger", TRIGGERS)] {
-        edit::<Vec<Declaration>>(
+        rewrite_recorded_answer::<Vec<Declaration>>(
             &recording.join(format!("declarations/{kind}.json")),
             |declarations| {
                 declarations.retain(|declaration| names.contains(&declaration.name.as_str()));
             },
         )?;
-        keep_files(&recording.join(format!("command_grammar/{kind}")), names)?;
+        let grammars = recording.join(format!("command_grammar/{kind}"));
+        remove_unkept(&grammars, &grammars, names)?;
     }
 
-    edit::<LoadedModifiers>(&recording.join("loaded_modifiers.json"), |loaded| {
-        loaded
-            .modifiers
-            .retain(|modifier| LOADED_MODIFIERS.contains(&modifier.name.as_str()));
-        loaded
-            .registry_items
-            .retain(|registry, _| registry == "common/pop_jobs");
-        for items in loaded.registry_items.values_mut() {
-            items.retain(|item| POP_JOB_ITEMS.contains(&item.as_str()));
-        }
-    })?;
+    rewrite_recorded_answer::<LoadedModifiers>(
+        &recording.join("loaded_modifiers.json"),
+        |loaded| {
+            loaded
+                .modifiers
+                .retain(|modifier| LOADED_MODIFIERS.contains(&modifier.name.as_str()));
+            loaded
+                .registry_items
+                .retain(|registry, _| registry == "common/pop_jobs");
+            for items in loaded.registry_items.values_mut() {
+                items.retain(|item| POP_JOB_ITEMS.contains(&item.as_str()));
+            }
+        },
+    )?;
 
     Ok(())
 }
 
 /// Rewrite one recorded answer's value, in the form Native writes it.
-fn edit<T: Serialize + DeserializeOwned>(
+fn rewrite_recorded_answer<T: Serialize + DeserializeOwned>(
     path: &Path,
     change: impl FnOnce(&mut T),
 ) -> Result<(), Box<dyn std::error::Error>> {
@@ -96,12 +101,8 @@ fn edit<T: Serialize + DeserializeOwned>(
     Ok(())
 }
 
-/// Remove every `{subject}.json` below `root` whose subject is not in `keep`, and the
-/// directories that become empty.
-fn keep_files(root: &Path, keep: &[&str]) -> Result<(), Box<dyn std::error::Error>> {
-    remove_unkept(root, root, keep)
-}
-
+/// Remove every `{subject}.json` below `directory` whose subject, its path from `root`, is not in
+/// `keep`, and the directories that become empty.
 fn remove_unkept(
     root: &Path,
     directory: &Path,
