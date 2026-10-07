@@ -12,7 +12,7 @@ use serde_json::{Value, json};
 use std::{collections::BTreeMap, path::PathBuf, process::Command};
 
 fn recording() -> PathBuf {
-    PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/native/m451-hotfix")
+    PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/native/m452")
 }
 
 async fn recorded() -> Extraction {
@@ -678,6 +678,7 @@ alias[effect:add_age] = value_field
 
 alias[effect:add_building] = {
     building = <building>
+    atlas_unestablished = int
 }
 "#,
         ),
@@ -785,6 +786,14 @@ async fn language_claims_join_their_snapshot_answers() {
     let recorded =
         coverage::evaluate(&ledger, Some(&snapshot::json_bytes(&snapshot).unwrap())).unwrap();
 
+    assert!(rule(&snapshot, "argument:effect:add_building/building#existence").is_some());
+    assert!(
+        gap(&snapshot, "effect:add_building#arguments")
+            .unwrap()
+            .reason
+            .contains("other keys remain unknown")
+    );
+
     assert_eq!(recorded.totals.atlas_owned.covered, 0);
 
     qualify_as_live(&mut snapshot);
@@ -871,6 +880,11 @@ async fn language_claims_join_their_snapshot_answers() {
             vec!["localisation_commands", "GetAdj", "$item:1"],
             "value_form",
         ),
+        (
+            "effects.cwt",
+            vec!["alias[effect:add_building]", "building"],
+            "field_existence",
+        ),
     ] {
         let assessment = assessment(claim(&ledger, file, &subject, property));
 
@@ -884,7 +898,7 @@ async fn language_claims_join_their_snapshot_answers() {
     for (file, subject, property, reason) in [
         (
             "effects.cwt",
-            vec!["alias[effect:add_building]", "building"],
+            vec!["alias[effect:add_building]", "atlas_unestablished"],
             "field_existence",
             "gap",
         ),
@@ -1310,4 +1324,95 @@ async fn display_names_are_explicit_even_when_names_contain_spaces_or_are_unread
         list(&report.script_docs[0].lists, "supported_scopes").agree,
         ["add_age: pop job/worker"]
     );
+}
+
+#[tokio::test]
+async fn naming_lines_join_derived_names_per_question() {
+    let ledger = ledger::inventory(
+        &[
+            (
+                "common/council_agendas.cwt".to_owned(),
+                r#"
+types = {
+    type[agenda] = {
+        path = "game/common/council_agendas"
+        localisation = {
+            name = "council_agenda_$_name"
+            desc = "council_agenda_$_desc"
+            desc = desc
+            council_agenda_name = "council_agenda_$_name"
+            council_agenda_name = "council_agenda_$_desc"
+        }
+        images = {
+            icon = GFX_council_agenda_icon_$
+        }
+    }
+}
+"#
+                .to_owned(),
+            ),
+            (
+                "common/traditions.cwt".to_owned(),
+                r#"
+types = {
+    type[tradition] = {
+        path = "game/common/traditions"
+        localisation = {
+            tooltip = custom_tooltip
+        }
+    }
+}
+"#
+                .to_owned(),
+            ),
+            (
+                "common/other_agendas.cwt".to_owned(),
+                r#"
+types = {
+    type[agenda] = {
+        path = "game/common/traditions"
+        localisation = {
+            name = "council_agenda_$_name"
+        }
+    }
+}
+"#
+                .to_owned(),
+            ),
+        ]
+        .into(),
+    );
+    let mut snapshot = snapshot::assemble(&recorded().await).unwrap();
+    qualify_as_live(&mut snapshot);
+    let report =
+        coverage::evaluate(&ledger, Some(&snapshot::json_bytes(&snapshot).unwrap())).unwrap();
+    let covered = |file: &str, subject: &[&str]| {
+        let claim = claim(&ledger, file, subject, "naming_rule");
+
+        report
+            .claims
+            .iter()
+            .find(|assessment| assessment.claim == claim.id)
+            .unwrap()
+            .covered
+    };
+    let agenda = |block: &str, label: &str| {
+        covered(
+            "common/council_agendas.cwt",
+            &["types", "type[agenda]", block, label],
+        )
+    };
+
+    assert!(agenda("localisation", "name"));
+    assert!(agenda("images", "icon"));
+    assert!(covered(
+        "common/traditions.cwt",
+        &["types", "type[tradition]", "localisation", "tooltip"]
+    ));
+    assert!(!covered(
+        "common/other_agendas.cwt",
+        &["types", "type[agenda]", "localisation", "name"]
+    ));
+    assert!(!agenda("localisation", "desc"));
+    assert!(!agenda("localisation", "council_agenda_name"));
 }

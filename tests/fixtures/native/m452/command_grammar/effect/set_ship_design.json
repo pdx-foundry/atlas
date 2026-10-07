@@ -1,0 +1,220 @@
+{
+  "Ok": {
+    "value": {
+      "reader": {
+        "numeric": {
+          "Known": null
+        },
+        "scoped_operand": {
+          "Known": null
+        },
+        "id": "61b53804434a08d5",
+        "kind": "Block",
+        "family": "Effect"
+      },
+      "forms": {
+        "Known": [
+          "Block"
+        ]
+      },
+      "targets": "Unresolved",
+      "child_families": "Unresolved",
+      "child_scopes": "Unresolved",
+      "fixed_keys": {
+        "Partial": [
+          {
+            "name": "random_existing_design",
+            "reader": {
+              "numeric": {
+                "Known": null
+              },
+              "scoped_operand": {
+                "Known": null
+              },
+              "id": "325efaa17499c32d",
+              "kind": "String",
+              "family": "NotApplicable"
+            },
+            "shape": {
+              "value": "Scalar",
+              "repeat": "Replace"
+            },
+            "read": [
+              {
+                "condition": "Always",
+                "outcome": {
+                  "Read": {
+                    "reader": {
+                      "numeric": {
+                        "Known": null
+                      },
+                      "scoped_operand": {
+                        "Known": null
+                      },
+                      "id": "325efaa17499c32d",
+                      "kind": "String",
+                      "family": "NotApplicable"
+                    },
+                    "shape": {
+                      "value": "Scalar",
+                      "repeat": "Replace"
+                    }
+                  }
+                }
+              }
+            ],
+            "members": "None",
+            "domain": "Unknown",
+            "uses": [],
+            "reference": {
+              "Lookups": [
+                {
+                  "condition": "Always",
+                  "target": {
+                    "Registry": {
+                      "name": "common/ship_sizes"
+                    }
+                  },
+                  "stage": "OwnerInitialization",
+                  "key_match": "Equal",
+                  "empty_key": "NotLookedUp",
+                  "on_missing": "NullObject"
+                }
+              ]
+            },
+            "entry_contexts": [],
+            "read_scope": {
+              "Known": []
+            },
+            "accepted_categories": "NotApplicable"
+          },
+          {
+            "name": "design",
+            "reader": {
+              "numeric": "Unresolved",
+              "scoped_operand": "Unresolved",
+              "id": null,
+              "kind": "Unknown",
+              "family": "Unknown"
+            },
+            "shape": {
+              "value": "Unknown",
+              "repeat": "Unknown"
+            },
+            "read": [
+              {
+                "condition": "Unresolved",
+                "outcome": "Unresolved"
+              },
+              {
+                "condition": "Unresolved",
+                "outcome": "Unresolved"
+              }
+            ],
+            "members": "Unresolved",
+            "domain": "Unknown",
+            "uses": [],
+            "reference": "NotEstablished",
+            "entry_contexts": [],
+            "read_scope": "Unresolved",
+            "accepted_categories": "Unresolved"
+          }
+        ]
+      },
+      "numeric_keys": "Unresolved",
+      "ordering": "Unresolved",
+      "durations": {
+        "Partial": []
+      }
+    },
+    "completeness": "Partial",
+    "gaps": [
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "answer_item",
+          "name": "set_ship_design"
+        },
+        "detail": "instruction"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "answer_item",
+          "name": "set_ship_design"
+        },
+        "detail": "reader-routing"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "answer_item",
+          "name": "set_ship_design"
+        },
+        "detail": "Some child dispatch paths or names remain unresolved."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "answer_item",
+          "name": "set_ship_design"
+        },
+        "detail": "target-arguments"
+      },
+      {
+        "kind": "ReaderSemantics",
+        "subject": {
+          "kind": "answer_item",
+          "name": "set_ship_design"
+        },
+        "detail": "Child grammar extraction is incomplete; unresolved properties and conditional paths remain."
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "answer_item",
+          "name": "set_ship_design"
+        },
+        "detail": "Required keys, key combinations, defaults, value domains, occurrence limits, operators, numeric grammar, weights and runtime meaning are outside this method."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "design"
+        },
+        "detail": "instruction"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "design"
+        },
+        "detail": "reader-routing"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "design"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "answer_item",
+          "name": "set_ship_design"
+        },
+        "detail": "read-scope: child-family-boundary"
+      }
+    ],
+    "source": {
+      "build": "c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b",
+      "native_version": "0.1.0",
+      "method": "command-grammar/v15",
+      "basis": "StaticAnalysis"
+    }
+  }
+}

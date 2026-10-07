@@ -1,0 +1,48 @@
+{
+  "Ok": {
+    "value": [
+      {
+        "name": [
+          "ItemKey"
+        ],
+        "lookup": "Localization",
+        "stage": "OwnerInitialization",
+        "on_missing": "Diagnostic",
+        "condition": "Unresolved"
+      }
+    ],
+    "completeness": "Partial",
+    "gaps": [
+      {
+        "kind": "UnresolvedCondition",
+        "subject": {
+          "kind": "registry",
+          "name": "common/economic_categories"
+        },
+        "detail": "that the engine initializes every item after reading it is not established, so no name of the initialization is always used: a path of a database function keeps an item that it constructed without running its post-read code"
+      },
+      {
+        "kind": "UnresolvedCondition",
+        "subject": {
+          "kind": "answer_item",
+          "name": "{key}"
+        },
+        "detail": "the field values under which the engine uses {key} are not established"
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "registry",
+          "name": "common/economic_categories"
+        },
+        "detail": "The search covers the registry's own const methods and its post-read initialization. Names that other code composes or looks up, such as interface code, and the run-time choice behind a selection condition, such as which swap the engine selects and whether it is valid, are outside it. The answer is no catalogue of the names that content defines."
+      }
+    ],
+    "source": {
+      "build": "c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b",
+      "native_version": "0.1.0",
+      "method": "derived-names/v1",
+      "basis": "StaticAnalysis"
+    }
+  }
+}

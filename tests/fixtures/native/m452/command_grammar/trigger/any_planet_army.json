@@ -1,0 +1,130 @@
+{
+  "Ok": {
+    "value": {
+      "reader": {
+        "numeric": {
+          "Known": null
+        },
+        "scoped_operand": {
+          "Known": null
+        },
+        "id": "aedac806c6a283b3",
+        "kind": "Block",
+        "family": "Trigger"
+      },
+      "forms": {
+        "Known": [
+          "Block"
+        ]
+      },
+      "targets": {
+        "Known": []
+      },
+      "child_families": {
+        "Known": [
+          "Trigger"
+        ]
+      },
+      "child_scopes": {
+        "Known": [
+          {
+            "family": "Trigger",
+            "scope": {
+              "Known": [
+                {
+                  "Types": [
+                    {
+                      "id": "b99e91b88a72f0c9",
+                      "name": "army"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "fixed_keys": {
+        "Known": [
+          {
+            "name": "id",
+            "reader": {
+              "numeric": {
+                "Known": null
+              },
+              "scoped_operand": {
+                "Known": null
+              },
+              "id": "325efaa17499c32d",
+              "kind": "String",
+              "family": "NotApplicable"
+            },
+            "shape": {
+              "value": "Scalar",
+              "repeat": "Unknown"
+            },
+            "read": [
+              {
+                "condition": "Always",
+                "outcome": {
+                  "Read": {
+                    "reader": {
+                      "numeric": {
+                        "Known": null
+                      },
+                      "scoped_operand": {
+                        "Known": null
+                      },
+                      "id": "325efaa17499c32d",
+                      "kind": "String",
+                      "family": "NotApplicable"
+                    },
+                    "shape": {
+                      "value": "Scalar",
+                      "repeat": "Unknown"
+                    }
+                  }
+                }
+              }
+            ],
+            "members": "None",
+            "domain": "Unknown",
+            "uses": [],
+            "reference": "NotEstablished",
+            "entry_contexts": [],
+            "read_scope": {
+              "Known": []
+            },
+            "accepted_categories": "NotApplicable"
+          }
+        ]
+      },
+      "numeric_keys": {
+        "Known": null
+      },
+      "ordering": {
+        "Known": []
+      },
+      "durations": {
+        "Known": []
+      }
+    },
+    "completeness": "Complete",
+    "gaps": [
+      {
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "answer_item",
+          "name": "any_planet_army"
+        },
+        "detail": "Required keys, key combinations, defaults, value domains, occurrence limits, operators, numeric grammar, weights and runtime meaning are outside this method."
+      }
+    ],
+    "source": {
+      "build": "c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b",
+      "native_version": "0.1.0",
+      "method": "command-grammar/v15",
+      "basis": "StaticAnalysis"
+    }
+  }
+}

@@ -1,0 +1,301 @@
+{
+  "Ok": {
+    "value": {
+      "reader": {
+        "numeric": {
+          "Known": null
+        },
+        "scoped_operand": {
+          "Known": null
+        },
+        "id": "34c5914c0bfcfabd",
+        "kind": "Block",
+        "family": "Trigger"
+      },
+      "forms": {
+        "Known": [
+          "Block"
+        ]
+      },
+      "targets": {
+        "Partial": [
+          {
+            "argument": {
+              "Key": [
+                "owner"
+              ]
+            },
+            "scopes": "Unresolved",
+            "stage": "Unresolved"
+          }
+        ]
+      },
+      "child_families": "Unresolved",
+      "child_scopes": "Unresolved",
+      "fixed_keys": {
+        "Partial": [
+          {
+            "name": "owner",
+            "reader": {
+              "numeric": {
+                "Known": null
+              },
+              "scoped_operand": {
+                "Known": null
+              },
+              "id": "1b6f3b12faaef087",
+              "kind": "Target",
+              "family": "NotApplicable"
+            },
+            "shape": {
+              "value": "Scalar",
+              "repeat": "Unknown"
+            },
+            "read": [
+              {
+                "condition": {
+                  "All": [
+                    "Unresolved",
+                    "Unresolved"
+                  ]
+                },
+                "outcome": {
+                  "Read": {
+                    "reader": {
+                      "numeric": {
+                        "Known": null
+                      },
+                      "scoped_operand": {
+                        "Known": null
+                      },
+                      "id": "1b6f3b12faaef087",
+                      "kind": "Target",
+                      "family": "NotApplicable"
+                    },
+                    "shape": {
+                      "value": "Scalar",
+                      "repeat": "Unknown"
+                    }
+                  }
+                }
+              },
+              {
+                "condition": {
+                  "All": [
+                    "Unresolved",
+                    "Unresolved"
+                  ]
+                },
+                "outcome": {
+                  "Read": {
+                    "reader": {
+                      "numeric": {
+                        "Known": null
+                      },
+                      "scoped_operand": {
+                        "Known": null
+                      },
+                      "id": "1b6f3b12faaef087",
+                      "kind": "Target",
+                      "family": "NotApplicable"
+                    },
+                    "shape": {
+                      "value": "Scalar",
+                      "repeat": "Unknown"
+                    }
+                  }
+                }
+              },
+              {
+                "condition": "Unresolved",
+                "outcome": {
+                  "Read": {
+                    "reader": {
+                      "numeric": {
+                        "Known": null
+                      },
+                      "scoped_operand": {
+                        "Known": null
+                      },
+                      "id": "1b6f3b12faaef087",
+                      "kind": "Target",
+                      "family": "NotApplicable"
+                    },
+                    "shape": {
+                      "value": "Scalar",
+                      "repeat": "Unknown"
+                    }
+                  }
+                }
+              }
+            ],
+            "members": "None",
+            "domain": "Unknown",
+            "uses": [],
+            "reference": "NotEstablished",
+            "entry_contexts": [],
+            "read_scope": {
+              "Known": []
+            },
+            "accepted_categories": "NotApplicable"
+          },
+          {
+            "name": "holding",
+            "reader": {
+              "numeric": "Unresolved",
+              "scoped_operand": "Unresolved",
+              "id": null,
+              "kind": "Unknown",
+              "family": "Unknown"
+            },
+            "shape": {
+              "value": "Unknown",
+              "repeat": "Unknown"
+            },
+            "read": [
+              {
+                "condition": {
+                  "All": [
+                    "Unresolved",
+                    "Unresolved"
+                  ]
+                },
+                "outcome": "Unresolved"
+              },
+              {
+                "condition": {
+                  "All": [
+                    "Unresolved",
+                    "Unresolved"
+                  ]
+                },
+                "outcome": "Unresolved"
+              },
+              {
+                "condition": "Unresolved",
+                "outcome": "Unresolved"
+              }
+            ],
+            "members": "Unresolved",
+            "domain": "Unknown",
+            "uses": [],
+            "reference": "NotEstablished",
+            "entry_contexts": [],
+            "read_scope": "Unresolved",
+            "accepted_categories": "Unresolved"
+          }
+        ]
+      },
+      "numeric_keys": "Unresolved",
+      "ordering": "Unresolved",
+      "durations": {
+        "Partial": []
+      }
+    },
+    "completeness": "Partial",
+    "gaps": [
+      {
+        "kind": "ReaderSemantics",
+        "subject": {
+          "kind": "answer_item",
+          "name": "has_holding"
+        },
+        "detail": "The receiver's initializer reads a global instance, but no lookup of it is established: no qualified lookup shape matched the initializer."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "answer_item",
+          "name": "has_holding"
+        },
+        "detail": "instruction"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "answer_item",
+          "name": "has_holding"
+        },
+        "detail": "reader-routing"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "answer_item",
+          "name": "has_holding"
+        },
+        "detail": "Some child dispatch paths or names remain unresolved."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "answer_item",
+          "name": "has_holding"
+        },
+        "detail": "target-arguments"
+      },
+      {
+        "kind": "ReaderSemantics",
+        "subject": {
+          "kind": "answer_item",
+          "name": "has_holding"
+        },
+        "detail": "Child grammar extraction is incomplete; unresolved properties and conditional paths remain."
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "answer_item",
+          "name": "has_holding"
+        },
+        "detail": "Required keys, key combinations, defaults, value domains, occurrence limits, operators, numeric grammar, weights and runtime meaning are outside this method."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "holding"
+        },
+        "detail": "instruction"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "holding"
+        },
+        "detail": "reader-routing"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "owner"
+        },
+        "detail": "target-scope-check: unclassified getter call"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "holding"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "answer_item",
+          "name": "has_holding"
+        },
+        "detail": "read-scope: child-family-boundary"
+      }
+    ],
+    "source": {
+      "build": "c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b",
+      "native_version": "0.1.0",
+      "method": "command-grammar/v15",
+      "basis": "StaticAnalysis"
+    }
+  }
+}

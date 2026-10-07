@@ -1,5 +1,8 @@
 # Simplification capture: 2026-10-02
 
+Historical capture on M451-hotfix. The [Milestone 4 capture](milestone-4.md) supersedes its pin,
+recordings and coverage baseline.
+
 The M451-hotfix snapshot establishes **16,341 / 58,032 (28.158602%)** Atlas-owned config claims.
 Compared with the [shared-reader capture](shared-readers.md), 362 claims gain coverage and none
 lose it: 359 `Replace` facts answer maximum questions of 1, and three `Accumulate` facts answer

@@ -1,8 +1,8 @@
 //! Bounded tradition observations and language declarations through Native's public API.
 
 use pdx_native::{
-    Answer, BuildId, Declaration, DeclarationKind, Define, Disposal, Error, Field,
-    FixtureFieldQuestion, FixtureObservation, FixtureRequest, GameOptions, GameRule,
+    Answer, BuildId, CommandGrammar, Declaration, DeclarationKind, Define, DerivedName, Disposal,
+    Error, Field, FixtureFieldQuestion, FixtureObservation, FixtureRequest, GameOptions, GameRule,
     LoadedModifiers, LocalizationDeclarations, ModifierCategory, ModifierDeclaration,
     ModifierFamily, Native, OnAction, Registry, ScopeInventory, ScopeLink, Support,
 };
@@ -24,6 +24,8 @@ pub struct Extraction {
     pub registries: Result<Answer<Vec<Registry>>, Error>,
     /// Root fields of each requested directory.
     pub fields: BTreeMap<String, Result<Answer<Vec<Field>>, Error>>,
+    /// Names that each directory's own code derives from an item key or a field.
+    pub derived_names: BTreeMap<String, Result<Answer<Vec<DerivedName>>, Error>>,
     /// Independent fixture sessions and their disposal results.
     pub sessions: Vec<FixtureSession>,
     /// Static language declarations.
@@ -37,6 +39,7 @@ impl Extraction {
     pub fn complete(&self) -> bool {
         self.registries.is_ok()
             && self.fields.values().all(Result::is_ok)
+            && self.derived_names.values().all(Result::is_ok)
             && self.sessions.iter().all(|session| {
                 session.observation.is_ok()
                     && disposal_blocker(session.name, &session.disposal).is_none()
@@ -54,6 +57,10 @@ pub struct Language {
     pub effects: Result<Answer<Vec<Declaration>>, Error>,
     /// Trigger declarations.
     pub triggers: Result<Answer<Vec<Declaration>>, Error>,
+    /// Child grammar of each declared effect.
+    pub effect_grammars: BTreeMap<String, Result<Answer<CommandGrammar>, Error>>,
+    /// Child grammar of each declared trigger.
+    pub trigger_grammars: BTreeMap<String, Result<Answer<CommandGrammar>, Error>>,
     /// Directly declared modifiers.
     pub modifiers: Result<Answer<Vec<ModifierDeclaration>>, Error>,
     /// Declared modifier category names.
@@ -76,9 +83,14 @@ pub struct Language {
 
 impl Language {
     fn ask(native: &Native, registries: &[String]) -> Self {
+        let effects = native.declarations(DeclarationKind::Effect);
+        let triggers = native.declarations(DeclarationKind::Trigger);
+
         Self {
-            effects: native.declarations(DeclarationKind::Effect),
-            triggers: native.declarations(DeclarationKind::Trigger),
+            effect_grammars: command_grammars(native, DeclarationKind::Effect, &effects),
+            trigger_grammars: command_grammars(native, DeclarationKind::Trigger, &triggers),
+            effects,
+            triggers,
             modifiers: native.modifiers(),
             modifier_categories: native.modifier_categories(),
             modifier_families: registries
@@ -97,6 +109,8 @@ impl Language {
     fn complete(&self) -> bool {
         self.effects.is_ok()
             && self.triggers.is_ok()
+            && self.effect_grammars.values().all(Result::is_ok)
+            && self.trigger_grammars.values().all(Result::is_ok)
             && self.modifiers.is_ok()
             && self.modifier_categories.is_ok()
             && self.modifier_families.values().all(Result::is_ok)
@@ -107,6 +121,27 @@ impl Language {
             && self.game_rules.is_ok()
             && self.defines.is_ok()
     }
+}
+
+/// The grammar of every command that a declaration answer names.
+fn command_grammars(
+    native: &Native,
+    kind: DeclarationKind,
+    declarations: &Result<Answer<Vec<Declaration>>, Error>,
+) -> BTreeMap<String, Result<Answer<CommandGrammar>, Error>> {
+    let Ok(declarations) = declarations else {
+        return BTreeMap::new();
+    };
+
+    declarations
+        .value
+        .iter()
+        .map(|declaration| {
+            let grammar = native.command_grammar(kind, &declaration.name);
+
+            (declaration.name.clone(), grammar)
+        })
+        .collect()
 }
 
 const LOADED_MODIFIERS: &str = "loaded_modifiers";
@@ -155,6 +190,10 @@ pub async fn collect(native: &Native, options: impl Fn() -> GameOptions) -> Extr
             .collect(),
         Err(_) => BTreeMap::new(),
     };
+    let derived_names = fields
+        .keys()
+        .map(|registry| (registry.clone(), native.derived_names(registry)))
+        .collect();
     let discovered: std::collections::BTreeSet<_> = fields.keys().map(String::as_str).collect();
 
     let requests = [
@@ -193,6 +232,7 @@ pub async fn collect(native: &Native, options: impl Fn() -> GameOptions) -> Extr
         native_support,
         registries,
         fields,
+        derived_names,
         sessions,
         language,
         loaded_modifiers,

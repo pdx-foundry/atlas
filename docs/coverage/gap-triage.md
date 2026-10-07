@@ -33,7 +33,7 @@ claim counts.
 "On Native main" is Native `c9886a7` on the same build: its
 `tests/population/m451-hotfix/registry-field-sweep.json` and one `derived-name-population` run. It
 shows the answers that Native gives after the pin but Atlas does not carry yet. SDK-625 carries
-them and measures this table again on its final run.
+them and [measures this table again](#sdk-625-final-run) on its final run.
 
 ## Shapes
 
@@ -137,6 +137,52 @@ matches, in this order:
 A gap stays open until all of its causes close. Unresolved use-time selections, which some of these
 gaps also carry, are out of scope, as the ledger's `field_conditions` row says.
 
+## SDK-625 final run
+
+Measured on the [Milestone 4 capture](milestone-4.md): Atlas `b4e107c`, Native `573e35f`, build
+M452 (`c621723d…`), the same config. The build changed after SDK-626, so counts are not a
+before-and-after comparison on one build. Each row that SDK-626 gave to SDK-625 is credited or
+keeps a narrower gap; the old gap of each field is traced to its new state:
+
+| SDK-626 row | Gaps | Final state |
+| --- | ---: | --- |
+| Reader value form: triggered modifier clauses | 51 | Credited: `block` value form |
+| Reader value form: scoped-numeric and `Float` readers | 10 | Credited: 7 `scoped_number`, 3 `number` |
+| Reader value form: no shared reader, color or vector | 462 | Unchanged gaps (457 unresolved, 5 unknown reader kind); SDK-710 |
+| Nested grammar: `Trigger` or `Effect` family, established members | 351 | Closed: no `nested_grammar` gap; `block_family` and `members` carry the answer |
+| Nested grammar: unknown family, no reader | 71 | 70 gaps remain (SDK-676, SDK-710); 1 field is absent on M452 |
+| Field block scope | 422 | 102 credited `scope_context`; 186 narrower gaps with a `read_scope` rule (contexts or Native context gaps remain, SDK-712); 99 gaps with neither part (SDK-712); 34 modifier blocks publish `accepted_categories` instead; 1 field is absent on M452 |
+| Lookup target | 284 | 76 credited `reference` (lookups and derived names); 208 gaps remain with the SDK-626 owners (SDK-635, SDK-707, SDK-627, SDK-554, out of scope) |
+| Ambiguous gap subjects | 3 | Closed: a single name is the root field, and a path below a field's members joins that field |
+
+The final run has 14,038 unowned gaps. Each falls in exactly one SDK-626 shape; no new shape
+appears. Command arguments add gaps of the field shapes, replacing 2,170 owned `arguments` gaps
+that each covered a whole command: 1,545 commands keep an owned `arguments` gap for their
+unestablished keys.
+
+| Shape | Field and other gaps | Linked claims | Argument gaps | Linked claims |
+| --- | ---: | ---: | ---: | ---: |
+| Required field | 1,639 | 1,250 | 2,999 | 1,437 |
+| Repeat behavior | 1,003 | 791 | 2,317 | 1,115 |
+| Reader value form | 483 | 424 | 859 | 586 |
+| Nested grammar | 70 | 69 | — | — |
+| Field block scope (`scope_context`, `read_scope`) | 489 | 180 | 1,027 | 0 |
+| Lookup target | 209 | 193 | 283 | 152 |
+| Command declared scopes | 82 | — | — | — |
+| Callback entry contexts | 252 | — | — | — |
+| Modifier family generation | 62 | — | — | — |
+| Unjoined generation sites | 329 | — | — | — |
+| Define readers | 80 | — | — | — |
+| Localisation link outputs | 32 | — | — | — |
+| Partial root search | 156 | — | — | — |
+| Fixture outcome | 1,649 | — | — | — |
+| Method boundaries | 18 | — | — | — |
+| Ambiguous gap subjects | 0 | — | — | — |
+
+Linked claims use the coverage join for fields and arguments; other subjects are left blank here.
+Weight claims are credited at field level only: the 136 shared `alias[modifier_rule:…]` claims in
+`modifier_rule.cwt` have no Native subject, because Native answers one weight block for each field.
+
 ## Owned categories
 
 The owner categories have their own [ticket mapping](ledger.md#shared-reader-answers). The
@@ -145,8 +191,8 @@ decisions on runtime modifier application and category `supported_scopes`.
 
 ## Reproduce
 
-The gaps come from a recorded snapshot. Copy the simplification capture's answers to
-`.scratch/answers`, then:
+The SDK-626 gaps come from a recorded snapshot at Atlas `3c3472f`, which still has the
+M451-hotfix fixtures. Copy the simplification capture's answers to `.scratch/answers`, then:
 
 ```sh
 cp tests/fixtures/native/m451-hotfix/{on_actions,game_rules}.json .scratch/answers/

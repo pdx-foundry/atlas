@@ -1,27 +1,27 @@
 {
   "config_revision": "85747602a614ad7daa8cc66453777ecb023463a8",
   "config_sha256": "5c79cabb8d1b25e40994c0d134f5623bc2aef2a6b964059aabfc4834e6d039cc",
-  "snapshot_sha256": "de168c9538457a8433ceca17c776b3618d41137ca3403ab0188bd27d82f9671f",
+  "snapshot_sha256": "8c84d9c547d5b042b560081088246a3a4f2523cdf65e07aa97cddab0b36dca6d",
   "files": 175,
   "physical_lines": 50201,
   "meaningful_lines": 43842,
   "claims": 61146,
   "totals": {
     "atlas_owned": {
-      "covered": 16341,
+      "covered": 22668,
       "total": 58032,
-      "percent": 28.158602
+      "percent": 39.061208
     },
     "all_claims": {
-      "covered": 16341,
+      "covered": 22668,
       "total": 61146,
-      "percent": 26.724561
+      "percent": 37.071926
     },
     "by_owner": {
       "engine_fact": {
-        "covered": 16341,
+        "covered": 22668,
         "total": 54914,
-        "percent": 29.757439
+        "percent": 41.279091
       },
       "content_derived": {
         "covered": 0,
@@ -138,9 +138,9 @@
     }
   ],
   "ledger_sha256": "ba2bb263812b54f4f3b6d28a7b47f56b92a0be5f3f7f8da41aa6c375f2f67947",
-  "coverage_sha256": "a00f142a2b256b33a56472e273d3771841572f96cb0c8c836cc4c864420f7888",
-  "atlas_revision": "3b1dc763723050b2f090327d6e61e789d6551cfb",
-  "native_revision": "92b27b3eaf2f7021ad9e8105ad9818edd0b7ec19",
-  "build": "29fa877366040a528098da39ec7e70b7baac76782a2a6bd161616d691f86fa38",
-  "atlas_working_changes": "Simplification review of 2026-10-02"
+  "coverage_sha256": "e323dcda25b25fe129c1ba4d00f83e2181ec07188edd6a639abee446e0cab6d4",
+  "atlas_revision": "b4e107c05f76555200047e22b709586a5fb31e04",
+  "native_revision": "573e35f29fea8f54d32d48c90ff40c074e34b5f4",
+  "build": "c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b",
+  "atlas_working_changes": "None: the SDK-625 final live run of 2026-10-06"
 }

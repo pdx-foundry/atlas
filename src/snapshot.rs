@@ -3,6 +3,7 @@
 mod failure;
 mod language;
 mod registry;
+mod scope;
 
 pub(crate) use language::loaded_summary;
 
@@ -122,6 +123,8 @@ pub enum SubjectKind {
     Registry,
     /// A root or nested field of a registry's definitions.
     Field,
+    /// A named key of a command's block, `argument:{command subject}/{key path}`.
+    Argument,
     /// An effect command.
     Effect,
     /// A trigger command.
@@ -152,6 +155,10 @@ pub enum SubjectKind {
     Define,
     /// One Native question as a whole, such as `effects`.
     Inventory,
+    /// A name that a registry derives from each item and looks up, named
+    /// `{registry}/{lookup}/{name}`. `$` stands for the item key, and `{field:a/b}` for the text
+    /// of the field at that path.
+    DerivedName,
 }
 
 impl SubjectKind {
@@ -164,14 +171,15 @@ impl SubjectKind {
     }
 
     fn is_language(self) -> bool {
-        !matches!(self, Self::Registry | Self::Field)
+        !matches!(self, Self::Registry | Self::Field | Self::Argument)
     }
 }
 
 /// A registry, one discovered field path, or one language declaration.
 ///
-/// Registry subjects are `registry:{registry}`, field subjects `field:{registry}/{field}`, and
-/// every other subject is `{kind}:{name}`.
+/// Registry subjects are `registry:{registry}`, field subjects `field:{registry}/{field}`,
+/// argument subjects `argument:{command subject}/{field}`, and every other subject is
+/// `{kind}:{name}`.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct Subject {
@@ -182,13 +190,13 @@ pub struct Subject {
     /// Native content directory of a registry or field subject.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub registry: Option<String>,
-    /// Registry-relative field path, if this is a field subject.
+    /// Registry- or command-relative field path, if this is a field or argument subject.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub field: Option<String>,
     /// Whether the reader depends on state beyond the field key.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub conditional: Option<bool>,
-    /// Name of a language subject.
+    /// Name of a language subject, or the command subject of an argument.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
 }
@@ -288,8 +296,12 @@ pub fn assemble(extraction: &Extraction) -> Result<Snapshot, String> {
         rules: Vec::new(),
         gaps: Vec::new(),
     };
-    registry::assemble(&mut snapshot, extraction)?;
-    language::assemble(&mut snapshot, extraction)?;
+    let scopes = match &extraction.language.scopes {
+        Ok(answer) => scope::ScopeNames::new(&answer.value)?,
+        Err(_) => scope::ScopeNames::default(),
+    };
+    registry::assemble(&mut snapshot, extraction, &scopes)?;
+    language::assemble(&mut snapshot, extraction, &scopes)?;
     snapshot.coverage.established_properties.sort();
     snapshot.coverage.established_properties.dedup();
     snapshot.subjects.sort_by(|a, b| a.id.cmp(&b.id));
@@ -307,6 +319,10 @@ fn registry_id(registry: &str) -> String {
 
 fn field_id(registry: &str, field: &str) -> String {
     format!("field:{registry}/{field}")
+}
+
+fn argument_id(command: &str, field: &str) -> String {
+    format!("argument:{command}/{field}")
 }
 
 /// Record `answer` under `key` and link to one location in it. `subject` selects its gaps.
@@ -378,7 +394,14 @@ fn rule(
     answer: Value,
     evidence: EvidenceLink,
 ) {
-    conditional_rule(snapshot, subject, property, Vec::new(), answer, evidence);
+    conditional_rule(
+        snapshot,
+        subject,
+        property,
+        Vec::new(),
+        answer,
+        vec![evidence],
+    );
 }
 
 fn conditional_rule(
@@ -387,7 +410,7 @@ fn conditional_rule(
     property: &str,
     conditions: Vec<String>,
     answer: Value,
-    evidence: EvidenceLink,
+    evidence: Vec<EvidenceLink>,
 ) {
     snapshot.rules.push(Rule {
         id: format!("{subject}#{property}"),
@@ -395,7 +418,7 @@ fn conditional_rule(
         property: property.into(),
         conditions,
         answer,
-        evidence: vec![evidence],
+        evidence,
     });
 }
 
@@ -525,6 +548,11 @@ fn subject_identity(subject: &Subject) -> Result<String, String> {
         (SubjectKind::Registry, Some(registry), None, None, None) => Ok(registry_id(registry)),
         (SubjectKind::Field, Some(registry), Some(field), Some(_), None) => {
             Ok(field_id(registry, field))
+        }
+        (SubjectKind::Argument, None, Some(field), Some(_), Some(command))
+            if command.starts_with("effect:") || command.starts_with("trigger:") =>
+        {
+            Ok(argument_id(command, field))
         }
         (kind, None, None, None, Some(name)) if kind.is_language() && !name.is_empty() => {
             Ok(kind.id(name))

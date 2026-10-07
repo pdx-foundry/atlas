@@ -1,7 +1,7 @@
 {
-  "build": "29fa877366040a528098da39ec7e70b7baac76782a2a6bd161616d691f86fa38",
+  "build": "c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b",
   "method": "callbacks/v2",
-  "provenance": "SDK-608 hand checks, recorded by SDK-704; Native docs/native/engine-commands.md",
+  "provenance": "SDK-608 hand checks on M451-hotfix, recorded by SDK-704; Native docs/native/engine-commands.md. Carried to M452 by SDK-625: the callbacks/v2 on_action and game-rule answers, values and gaps, are identical on both builds",
   "agreements": {
     "on_actions": {
       "agree": 184,

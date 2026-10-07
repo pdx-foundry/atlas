@@ -1,0 +1,331 @@
+{
+  "Ok": {
+    "value": {
+      "reader": {
+        "numeric": {
+          "Known": null
+        },
+        "scoped_operand": {
+          "Known": null
+        },
+        "id": "21250b4e7057fd35",
+        "kind": "Block",
+        "family": "Effect"
+      },
+      "forms": {
+        "Known": [
+          "Block"
+        ]
+      },
+      "targets": "Unresolved",
+      "child_families": "Unresolved",
+      "child_scopes": "Unresolved",
+      "fixed_keys": {
+        "Partial": [
+          {
+            "name": "value",
+            "reader": {
+              "numeric": {
+                "Partial": {
+                  "representation": {
+                    "Known": "Integer"
+                  },
+                  "width_bits": {
+                    "Known": 64
+                  },
+                  "signedness": {
+                    "Known": "Signed"
+                  },
+                  "scale": {
+                    "Known": 100000
+                  },
+                  "literal_syntax": {
+                    "Partial": [
+                      "DecimalInteger",
+                      "DecimalFraction",
+                      "RadixPrefixedInteger"
+                    ]
+                  },
+                  "accepted_range": {
+                    "Known": {
+                      "minimum": {
+                        "Known": {
+                          "Rational": {
+                            "numerator": -9223372036854775808,
+                            "denominator": 100000
+                          }
+                        }
+                      },
+                      "maximum": {
+                        "Known": {
+                          "Rational": {
+                            "numerator": 9223372036854775807,
+                            "denominator": 100000
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "scoped_operand": {
+                "Known": {
+                  "forms": {
+                    "Partial": [
+                      "Literal",
+                      {
+                        "Prefixed": {
+                          "kind": "Trigger",
+                          "prefix": "trigger:"
+                        }
+                      },
+                      {
+                        "Prefixed": {
+                          "kind": "Modifier",
+                          "prefix": "modifier:"
+                        }
+                      },
+                      {
+                        "Prefixed": {
+                          "kind": "ScriptValue",
+                          "prefix": "value:"
+                        }
+                      },
+                      "Variable"
+                    ]
+                  }
+                }
+              },
+              "id": "c61abc171edc30aa",
+              "kind": "ScopedNumeric",
+              "family": "NotApplicable"
+            },
+            "shape": {
+              "value": "Scalar",
+              "repeat": "Unknown"
+            },
+            "read": [
+              {
+                "condition": "Always",
+                "outcome": {
+                  "Read": {
+                    "reader": {
+                      "numeric": {
+                        "Partial": {
+                          "representation": {
+                            "Known": "Integer"
+                          },
+                          "width_bits": {
+                            "Known": 64
+                          },
+                          "signedness": {
+                            "Known": "Signed"
+                          },
+                          "scale": {
+                            "Known": 100000
+                          },
+                          "literal_syntax": {
+                            "Partial": [
+                              "DecimalInteger",
+                              "DecimalFraction",
+                              "RadixPrefixedInteger"
+                            ]
+                          },
+                          "accepted_range": {
+                            "Known": {
+                              "minimum": {
+                                "Known": {
+                                  "Rational": {
+                                    "numerator": -9223372036854775808,
+                                    "denominator": 100000
+                                  }
+                                }
+                              },
+                              "maximum": {
+                                "Known": {
+                                  "Rational": {
+                                    "numerator": 9223372036854775807,
+                                    "denominator": 100000
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "scoped_operand": {
+                        "Known": {
+                          "forms": {
+                            "Partial": [
+                              "Literal",
+                              {
+                                "Prefixed": {
+                                  "kind": "Trigger",
+                                  "prefix": "trigger:"
+                                }
+                              },
+                              {
+                                "Prefixed": {
+                                  "kind": "Modifier",
+                                  "prefix": "modifier:"
+                                }
+                              },
+                              {
+                                "Prefixed": {
+                                  "kind": "ScriptValue",
+                                  "prefix": "value:"
+                                }
+                              },
+                              "Variable"
+                            ]
+                          }
+                        }
+                      },
+                      "id": "c61abc171edc30aa",
+                      "kind": "ScopedNumeric",
+                      "family": "NotApplicable"
+                    },
+                    "shape": {
+                      "value": "Scalar",
+                      "repeat": "Unknown"
+                    }
+                  }
+                }
+              }
+            ],
+            "members": "None",
+            "domain": "Unknown",
+            "uses": [],
+            "reference": "NotEstablished",
+            "entry_contexts": [],
+            "read_scope": {
+              "Known": []
+            },
+            "accepted_categories": "NotApplicable"
+          },
+          {
+            "name": "which",
+            "reader": {
+              "numeric": "Unresolved",
+              "scoped_operand": "Unresolved",
+              "id": null,
+              "kind": "Unknown",
+              "family": "Unknown"
+            },
+            "shape": {
+              "value": "Unknown",
+              "repeat": "Unknown"
+            },
+            "read": [
+              {
+                "condition": "Always",
+                "outcome": "Unresolved"
+              }
+            ],
+            "members": "Unresolved",
+            "domain": "Unknown",
+            "uses": [],
+            "reference": "NotEstablished",
+            "entry_contexts": [],
+            "read_scope": "Unresolved",
+            "accepted_categories": "Unresolved"
+          }
+        ]
+      },
+      "numeric_keys": "Unresolved",
+      "ordering": "Unresolved",
+      "durations": {
+        "Partial": []
+      }
+    },
+    "completeness": "Partial",
+    "gaps": [
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "answer_item",
+          "name": "change_variable"
+        },
+        "detail": "reader-routing"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "answer_item",
+          "name": "change_variable"
+        },
+        "detail": "Some child dispatch paths or names remain unresolved."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "answer_item",
+          "name": "change_variable"
+        },
+        "detail": "target-arguments"
+      },
+      {
+        "kind": "ReaderSemantics",
+        "subject": {
+          "kind": "answer_item",
+          "name": "change_variable"
+        },
+        "detail": "Child grammar extraction is incomplete; unresolved properties and conditional paths remain."
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "answer_item",
+          "name": "change_variable"
+        },
+        "detail": "Required keys, key combinations, defaults, value domains, occurrence limits, operators, numeric grammar, weights and runtime meaning are outside this method."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "which"
+        },
+        "detail": "reader-routing"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "which"
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "answer_item",
+          "name": "change_variable"
+        },
+        "detail": "read-scope: child-family-boundary"
+      },
+      {
+        "kind": "NumericConversion",
+        "subject": {
+          "kind": "field",
+          "name": "value"
+        },
+        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "field",
+          "name": "value"
+        },
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+      }
+    ],
+    "source": {
+      "build": "c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b",
+      "native_version": "0.1.0",
+      "method": "command-grammar/v15",
+      "basis": "StaticAnalysis"
+    }
+  }
+}
