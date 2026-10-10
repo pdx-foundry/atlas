@@ -594,6 +594,7 @@ async fn repeat_facts_require_an_unconditional_successful_read() {
             FieldCondition::Always,
             RepeatBehavior::Accumulate,
         ),
+        ("merges", FieldCondition::Always, RepeatBehavior::Merges),
         ("unknown", FieldCondition::Always, RepeatBehavior::Unknown),
         (
             "conditional",
@@ -627,7 +628,11 @@ async fn repeat_facts_require_an_unconditional_successful_read() {
         fields.value.push(field);
     }
     let snapshot = snapshot::assemble(&extraction).unwrap();
-    for (name, expected) in [("replace", "Replace"), ("accumulate", "Accumulate")] {
+    for (name, expected) in [
+        ("replace", "Replace"),
+        ("accumulate", "Accumulate"),
+        ("merges", "Merges"),
+    ] {
         let subject = format!("field:common/traditions/{name}");
         let rule = snapshot
             .rules
@@ -687,20 +692,15 @@ async fn council_agenda_fields_carry_block_scope_value_and_reference_answers() {
             .contains("Trigger")
     );
     assert!(gap(format!("{potential}#nested_grammar")).is_none());
-    assert!(rule(format!("{potential}#read_scope")).is_some());
-    assert!(
-        gap(format!("{potential}#scope_context"))
-            .unwrap()
-            .reason
-            .contains("not every evaluation context")
-    );
-
-    let effect = field("effect");
-    let this = &rule(format!("{effect}#read_scope")).unwrap().answer;
-    assert_eq!(
-        rule(format!("{effect}#scope_context")).unwrap().answer["this"],
-        *this
-    );
+    for name in ["potential", "effect"] {
+        let this = &rule(format!("{}#read_scope", field(name))).unwrap().answer;
+        assert_eq!(
+            rule(format!("{}#scope_context", field(name)))
+                .unwrap()
+                .answer["this"],
+            *this
+        );
+    }
 
     let ai_weight = field("ai_weight");
     assert!(gap(format!("{ai_weight}#nested_grammar")).is_none());

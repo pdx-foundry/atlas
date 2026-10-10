@@ -469,8 +469,10 @@ async fn repeat_facts_answer_maximum_questions_without_publishing_engine_limits(
     for (repeat, maximum, expected) in [
         ("Replace", "1", Status::Same),
         ("Accumulate", "inf", Status::Same),
+        ("Merges", "inf", Status::Same),
         ("Replace", "inf", Status::Different),
         ("Accumulate", "1", Status::Different),
+        ("Merges", "1", Status::Different),
     ] {
         let source = format!(
             "types = {{ type[tradition] = {{ path = \"game/common/traditions\" }} }}\ntradition = {{\n## cardinality = 0..{maximum}\nunlocks_agenda = scalar\n}}"

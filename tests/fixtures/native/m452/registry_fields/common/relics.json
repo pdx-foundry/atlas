@@ -67,7 +67,7 @@
         },
         "shape": {
           "value": "Block",
-          "repeat": "Unknown"
+          "repeat": "Replace"
         },
         "read": [
           {
@@ -87,7 +87,7 @@
                 },
                 "shape": {
                   "value": "Block",
-                  "repeat": "Unknown"
+                  "repeat": "Replace"
                 }
               }
             }
@@ -97,7 +97,23 @@
         "domain": "Unknown",
         "uses": [],
         "reference": "NotEstablished",
-        "entry_contexts": [],
+        "entry_contexts": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ],
+            "prev": [
+              "SelfLink"
+            ]
+          }
+        ],
         "read_scope": {
           "Known": [
             {
@@ -127,7 +143,7 @@
         },
         "shape": {
           "value": "Block",
-          "repeat": "Unknown"
+          "repeat": "Merges"
         },
         "read": [
           {
@@ -147,7 +163,7 @@
                 },
                 "shape": {
                   "value": "Block",
-                  "repeat": "Unknown"
+                  "repeat": "Merges"
                 }
               }
             }
@@ -2610,7 +2626,7 @@
                             },
                             "shape": {
                               "value": "Block",
-                              "repeat": "Unknown"
+                              "repeat": "Replace"
                             },
                             "read": [
                               {
@@ -2630,7 +2646,7 @@
                                     },
                                     "shape": {
                                       "value": "Block",
-                                      "repeat": "Unknown"
+                                      "repeat": "Replace"
                                     }
                                   }
                                 }
@@ -4308,7 +4324,23 @@
         "domain": "Unknown",
         "uses": [],
         "reference": "NotEstablished",
-        "entry_contexts": [],
+        "entry_contexts": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ],
+            "prev": [
+              "SelfLink"
+            ]
+          }
+        ],
         "read_scope": {
           "Known": [
             {
@@ -4701,7 +4733,7 @@
                   },
                   "shape": {
                     "value": "Scalar",
-                    "repeat": "Unknown"
+                    "repeat": "Merges"
                   },
                   "read": [
                     {
@@ -4786,7 +4818,7 @@
                           },
                           "shape": {
                             "value": "Scalar",
-                            "repeat": "Unknown"
+                            "repeat": "Merges"
                           }
                         }
                       }
@@ -4882,7 +4914,7 @@
                   },
                   "shape": {
                     "value": "Scalar",
-                    "repeat": "Unknown"
+                    "repeat": "Merges"
                   },
                   "read": [
                     {
@@ -4967,7 +4999,7 @@
                           },
                           "shape": {
                             "value": "Scalar",
-                            "repeat": "Unknown"
+                            "repeat": "Merges"
                           }
                         }
                       }
@@ -4998,7 +5030,7 @@
                   },
                   "shape": {
                     "value": "Block",
-                    "repeat": "Unknown"
+                    "repeat": "Merges"
                   },
                   "read": [
                     {
@@ -5018,7 +5050,7 @@
                           },
                           "shape": {
                             "value": "Block",
-                            "repeat": "Unknown"
+                            "repeat": "Merges"
                           }
                         }
                       }
@@ -6721,7 +6753,7 @@
         },
         "shape": {
           "value": "Block",
-          "repeat": "Unknown"
+          "repeat": "Replace"
         },
         "read": [
           {
@@ -6741,7 +6773,7 @@
                 },
                 "shape": {
                   "value": "Block",
-                  "repeat": "Unknown"
+                  "repeat": "Replace"
                 }
               }
             }
@@ -6751,7 +6783,23 @@
         "domain": "Unknown",
         "uses": [],
         "reference": "NotEstablished",
-        "entry_contexts": [],
+        "entry_contexts": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ],
+            "prev": [
+              "SelfLink"
+            ]
+          }
+        ],
         "read_scope": {
           "Known": [
             {
@@ -6870,46 +6918,6 @@
           "name": "common/relics"
         },
         "detail": "Use-time analysis covers local Boolean selections only; enclosing context, other callers and bounded or unsupported paths remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "possible"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "ai_weight"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "triggered_country_modifier"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "active_effect"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "resources"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
       },
       {
         "kind": "UnresolvedReader",
@@ -7946,31 +7954,23 @@
         "detail": "read-scope: scope-argument"
       },
       {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "field",
-          "name": "possible"
-        },
-        "detail": "no direct call in the owner's methods evaluates this block"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "field",
-          "name": "active_effect"
-        },
-        "detail": "no direct call in the owner's methods evaluates this block"
-      },
-      {
         "kind": "OutsideMethod",
         "subject": null,
-        "detail": "Entry contexts cover the root trigger and effect blocks that the owner's own methods evaluate by direct call. Virtual calls, evaluations outside the owner's methods, nested blocks, weights, script values and modifier blocks are outside this method."
+        "detail": "Entry contexts cover the root trigger, effect and weight blocks that a direct evaluator call, or a call through the block's own vtable, evaluates as a pointer to the owner's item plus the block's offset, where the method establishes that the pointer leads to the owner. Other virtual calls, nested blocks, script values and modifier blocks are outside this method."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "resources"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
       }
     ],
     "source": {
       "build": "c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b",
       "native_version": "0.1.0",
-      "method": "registry-fields/v18",
+      "method": "registry-fields/v24",
       "basis": "StaticAnalysis"
     }
   }

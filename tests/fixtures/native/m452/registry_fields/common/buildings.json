@@ -145,7 +145,7 @@
         },
         "shape": {
           "value": "Block",
-          "repeat": "Unknown"
+          "repeat": "Replace"
         },
         "read": [
           {
@@ -165,7 +165,7 @@
                 },
                 "shape": {
                   "value": "Block",
-                  "repeat": "Unknown"
+                  "repeat": "Replace"
                 }
               }
             }
@@ -221,7 +221,7 @@
         },
         "shape": {
           "value": "Block",
-          "repeat": "Unknown"
+          "repeat": "Replace"
         },
         "read": [
           {
@@ -241,7 +241,7 @@
                 },
                 "shape": {
                   "value": "Block",
-                  "repeat": "Unknown"
+                  "repeat": "Replace"
                 }
               }
             }
@@ -747,7 +747,7 @@
         },
         "shape": {
           "value": "Block",
-          "repeat": "Unknown"
+          "repeat": "Replace"
         },
         "read": [
           {
@@ -767,7 +767,7 @@
                 },
                 "shape": {
                   "value": "Block",
-                  "repeat": "Unknown"
+                  "repeat": "Replace"
                 }
               }
             }
@@ -791,6 +791,16 @@
             ],
             "prev": [
               "SelfLink"
+            ]
+          },
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ],
+            "prev": [
+              "Unresolved"
             ]
           }
         ],
@@ -823,7 +833,7 @@
         },
         "shape": {
           "value": "Block",
-          "repeat": "Unknown"
+          "repeat": "Replace"
         },
         "read": [
           {
@@ -843,7 +853,7 @@
                 },
                 "shape": {
                   "value": "Block",
-                  "repeat": "Unknown"
+                  "repeat": "Replace"
                 }
               }
             }
@@ -1097,7 +1107,7 @@
         },
         "shape": {
           "value": "Block",
-          "repeat": "Unknown"
+          "repeat": "Replace"
         },
         "read": [
           {
@@ -1117,7 +1127,7 @@
                 },
                 "shape": {
                   "value": "Block",
-                  "repeat": "Unknown"
+                  "repeat": "Replace"
                 }
               }
             }
@@ -1173,7 +1183,7 @@
         },
         "shape": {
           "value": "Block",
-          "repeat": "Unknown"
+          "repeat": "Replace"
         },
         "read": [
           {
@@ -1193,7 +1203,7 @@
                 },
                 "shape": {
                   "value": "Block",
-                  "repeat": "Unknown"
+                  "repeat": "Replace"
                 }
               }
             }
@@ -1249,7 +1259,7 @@
         },
         "shape": {
           "value": "Block",
-          "repeat": "Unknown"
+          "repeat": "Replace"
         },
         "read": [
           {
@@ -1269,7 +1279,7 @@
                 },
                 "shape": {
                   "value": "Block",
-                  "repeat": "Unknown"
+                  "repeat": "Replace"
                 }
               }
             }
@@ -1325,7 +1335,7 @@
         },
         "shape": {
           "value": "Block",
-          "repeat": "Unknown"
+          "repeat": "Replace"
         },
         "read": [
           {
@@ -1345,7 +1355,7 @@
                 },
                 "shape": {
                   "value": "Block",
-                  "repeat": "Unknown"
+                  "repeat": "Replace"
                 }
               }
             }
@@ -1396,7 +1406,7 @@
         },
         "shape": {
           "value": "Block",
-          "repeat": "Unknown"
+          "repeat": "Replace"
         },
         "read": [
           {
@@ -1416,7 +1426,7 @@
                 },
                 "shape": {
                   "value": "Block",
-                  "repeat": "Unknown"
+                  "repeat": "Replace"
                 }
               }
             }
@@ -1467,7 +1477,7 @@
         },
         "shape": {
           "value": "Block",
-          "repeat": "Unknown"
+          "repeat": "Replace"
         },
         "read": [
           {
@@ -1487,7 +1497,7 @@
                 },
                 "shape": {
                   "value": "Block",
-                  "repeat": "Unknown"
+                  "repeat": "Replace"
                 }
               }
             }
@@ -1597,7 +1607,7 @@
         },
         "shape": {
           "value": "Block",
-          "repeat": "Unknown"
+          "repeat": "Merges"
         },
         "read": [
           {
@@ -1617,7 +1627,7 @@
                 },
                 "shape": {
                   "value": "Block",
-                  "repeat": "Unknown"
+                  "repeat": "Merges"
                 }
               }
             }
@@ -4080,7 +4090,7 @@
                             },
                             "shape": {
                               "value": "Block",
-                              "repeat": "Unknown"
+                              "repeat": "Replace"
                             },
                             "read": [
                               {
@@ -4100,7 +4110,7 @@
                                     },
                                     "shape": {
                                       "value": "Block",
-                                      "repeat": "Unknown"
+                                      "repeat": "Replace"
                                     }
                                   }
                                 }
@@ -5778,7 +5788,44 @@
         "domain": "Unknown",
         "uses": [],
         "reference": "NotEstablished",
-        "entry_contexts": [],
+        "entry_contexts": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ],
+            "prev": [
+              "SelfLink"
+            ]
+          },
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ],
+            "prev": [
+              "SelfLink"
+            ]
+          }
+        ],
         "read_scope": "Unresolved",
         "accepted_categories": "NotApplicable"
       },
@@ -6136,7 +6183,7 @@
                   },
                   "shape": {
                     "value": "Scalar",
-                    "repeat": "Unknown"
+                    "repeat": "Merges"
                   },
                   "read": [
                     {
@@ -6221,7 +6268,7 @@
                           },
                           "shape": {
                             "value": "Scalar",
-                            "repeat": "Unknown"
+                            "repeat": "Merges"
                           }
                         }
                       }
@@ -6317,7 +6364,7 @@
                   },
                   "shape": {
                     "value": "Scalar",
-                    "repeat": "Unknown"
+                    "repeat": "Merges"
                   },
                   "read": [
                     {
@@ -6402,7 +6449,7 @@
                           },
                           "shape": {
                             "value": "Scalar",
-                            "repeat": "Unknown"
+                            "repeat": "Merges"
                           }
                         }
                       }
@@ -6433,7 +6480,7 @@
                   },
                   "shape": {
                     "value": "Block",
-                    "repeat": "Unknown"
+                    "repeat": "Merges"
                   },
                   "read": [
                     {
@@ -6453,7 +6500,7 @@
                           },
                           "shape": {
                             "value": "Block",
-                            "repeat": "Unknown"
+                            "repeat": "Merges"
                           }
                         }
                       }
@@ -8197,7 +8244,7 @@
                   },
                   "shape": {
                     "value": "Scalar",
-                    "repeat": "Unknown"
+                    "repeat": "Merges"
                   },
                   "read": [
                     {
@@ -8282,7 +8329,7 @@
                           },
                           "shape": {
                             "value": "Scalar",
-                            "repeat": "Unknown"
+                            "repeat": "Merges"
                           }
                         }
                       }
@@ -8378,7 +8425,7 @@
                   },
                   "shape": {
                     "value": "Scalar",
-                    "repeat": "Unknown"
+                    "repeat": "Merges"
                   },
                   "read": [
                     {
@@ -8463,7 +8510,7 @@
                           },
                           "shape": {
                             "value": "Scalar",
-                            "repeat": "Unknown"
+                            "repeat": "Merges"
                           }
                         }
                       }
@@ -8494,7 +8541,7 @@
                   },
                   "shape": {
                     "value": "Block",
-                    "repeat": "Unknown"
+                    "repeat": "Merges"
                   },
                   "read": [
                     {
@@ -8514,7 +8561,7 @@
                           },
                           "shape": {
                             "value": "Block",
-                            "repeat": "Unknown"
+                            "repeat": "Merges"
                           }
                         }
                       }
@@ -10249,7 +10296,7 @@
                   },
                   "shape": {
                     "value": "Scalar",
-                    "repeat": "Unknown"
+                    "repeat": "Merges"
                   },
                   "read": [
                     {
@@ -10334,7 +10381,7 @@
                           },
                           "shape": {
                             "value": "Scalar",
-                            "repeat": "Unknown"
+                            "repeat": "Merges"
                           }
                         }
                       }
@@ -10430,7 +10477,7 @@
                   },
                   "shape": {
                     "value": "Scalar",
-                    "repeat": "Unknown"
+                    "repeat": "Merges"
                   },
                   "read": [
                     {
@@ -10515,7 +10562,7 @@
                           },
                           "shape": {
                             "value": "Scalar",
-                            "repeat": "Unknown"
+                            "repeat": "Merges"
                           }
                         }
                       }
@@ -10546,7 +10593,7 @@
                   },
                   "shape": {
                     "value": "Block",
-                    "repeat": "Unknown"
+                    "repeat": "Merges"
                   },
                   "read": [
                     {
@@ -10566,7 +10613,7 @@
                           },
                           "shape": {
                             "value": "Block",
-                            "repeat": "Unknown"
+                            "repeat": "Merges"
                           }
                         }
                       }
@@ -12305,7 +12352,7 @@
         },
         "shape": {
           "value": "Block",
-          "repeat": "Unknown"
+          "repeat": "Replace"
         },
         "read": [
           {
@@ -12325,7 +12372,7 @@
                 },
                 "shape": {
                   "value": "Block",
-                  "repeat": "Unknown"
+                  "repeat": "Replace"
                 }
               }
             }
@@ -12392,7 +12439,7 @@
         },
         "shape": {
           "value": "Block",
-          "repeat": "Unknown"
+          "repeat": "Merges"
         },
         "read": [
           {
@@ -12412,7 +12459,7 @@
                 },
                 "shape": {
                   "value": "Block",
-                  "repeat": "Unknown"
+                  "repeat": "Merges"
                 }
               }
             }
@@ -14875,7 +14922,7 @@
                             },
                             "shape": {
                               "value": "Block",
-                              "repeat": "Unknown"
+                              "repeat": "Replace"
                             },
                             "read": [
                               {
@@ -14895,7 +14942,7 @@
                                     },
                                     "shape": {
                                       "value": "Block",
-                                      "repeat": "Unknown"
+                                      "repeat": "Replace"
                                     }
                                   }
                                 }
@@ -16573,7 +16620,23 @@
         "domain": "Unknown",
         "uses": [],
         "reference": "NotEstablished",
-        "entry_contexts": [],
+        "entry_contexts": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ],
+            "prev": [
+              "SelfLink"
+            ]
+          }
+        ],
         "read_scope": "Unresolved",
         "accepted_categories": "NotApplicable"
       },
@@ -16592,7 +16655,7 @@
         },
         "shape": {
           "value": "Block",
-          "repeat": "Unknown"
+          "repeat": "Merges"
         },
         "read": [
           {
@@ -16612,7 +16675,7 @@
                 },
                 "shape": {
                   "value": "Block",
-                  "repeat": "Unknown"
+                  "repeat": "Merges"
                 }
               }
             }
@@ -19075,7 +19138,7 @@
                             },
                             "shape": {
                               "value": "Block",
-                              "repeat": "Unknown"
+                              "repeat": "Replace"
                             },
                             "read": [
                               {
@@ -19095,7 +19158,7 @@
                                     },
                                     "shape": {
                                       "value": "Block",
-                                      "repeat": "Unknown"
+                                      "repeat": "Replace"
                                     }
                                   }
                                 }
@@ -20773,7 +20836,23 @@
         "domain": "Unknown",
         "uses": [],
         "reference": "NotEstablished",
-        "entry_contexts": [],
+        "entry_contexts": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ],
+            "prev": [
+              "SelfLink"
+            ]
+          }
+        ],
         "read_scope": "Unresolved",
         "accepted_categories": "NotApplicable"
       },
@@ -20846,7 +20925,7 @@
         },
         "shape": {
           "value": "Block",
-          "repeat": "Unknown"
+          "repeat": "Merges"
         },
         "read": [
           {
@@ -20866,7 +20945,7 @@
                 },
                 "shape": {
                   "value": "Block",
-                  "repeat": "Unknown"
+                  "repeat": "Merges"
                 }
               }
             }
@@ -23329,7 +23408,7 @@
                             },
                             "shape": {
                               "value": "Block",
-                              "repeat": "Unknown"
+                              "repeat": "Replace"
                             },
                             "read": [
                               {
@@ -23349,7 +23428,7 @@
                                     },
                                     "shape": {
                                       "value": "Block",
-                                      "repeat": "Unknown"
+                                      "repeat": "Replace"
                                     }
                                   }
                                 }
@@ -25027,7 +25106,23 @@
         "domain": "Unknown",
         "uses": [],
         "reference": "NotEstablished",
-        "entry_contexts": [],
+        "entry_contexts": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ],
+            "prev": [
+              "SelfLink"
+            ]
+          }
+        ],
         "read_scope": "Unresolved",
         "accepted_categories": "NotApplicable"
       },
@@ -25358,7 +25453,7 @@
                   },
                   "shape": {
                     "value": "Scalar",
-                    "repeat": "Unknown"
+                    "repeat": "Merges"
                   },
                   "read": [
                     {
@@ -25443,7 +25538,7 @@
                           },
                           "shape": {
                             "value": "Scalar",
-                            "repeat": "Unknown"
+                            "repeat": "Merges"
                           }
                         }
                       }
@@ -25539,7 +25634,7 @@
                   },
                   "shape": {
                     "value": "Scalar",
-                    "repeat": "Unknown"
+                    "repeat": "Merges"
                   },
                   "read": [
                     {
@@ -25624,7 +25719,7 @@
                           },
                           "shape": {
                             "value": "Scalar",
-                            "repeat": "Unknown"
+                            "repeat": "Merges"
                           }
                         }
                       }
@@ -25655,7 +25750,7 @@
                   },
                   "shape": {
                     "value": "Block",
-                    "repeat": "Unknown"
+                    "repeat": "Merges"
                   },
                   "read": [
                     {
@@ -25675,7 +25770,7 @@
                           },
                           "shape": {
                             "value": "Block",
-                            "repeat": "Unknown"
+                            "repeat": "Merges"
                           }
                         }
                       }
@@ -27116,7 +27211,7 @@
         },
         "shape": {
           "value": "Block",
-          "repeat": "Unknown"
+          "repeat": "Merges"
         },
         "read": [
           {
@@ -27136,7 +27231,7 @@
                 },
                 "shape": {
                   "value": "Block",
-                  "repeat": "Unknown"
+                  "repeat": "Merges"
                 }
               }
             }
@@ -29599,7 +29694,7 @@
                             },
                             "shape": {
                               "value": "Block",
-                              "repeat": "Unknown"
+                              "repeat": "Replace"
                             },
                             "read": [
                               {
@@ -29619,7 +29714,7 @@
                                     },
                                     "shape": {
                                       "value": "Block",
-                                      "repeat": "Unknown"
+                                      "repeat": "Replace"
                                     }
                                   }
                                 }
@@ -31297,7 +31392,23 @@
         "domain": "Unknown",
         "uses": [],
         "reference": "NotEstablished",
-        "entry_contexts": [],
+        "entry_contexts": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ],
+            "prev": [
+              "SelfLink"
+            ]
+          }
+        ],
         "read_scope": {
           "Known": [
             {
@@ -31354,7 +31465,7 @@
         },
         "shape": {
           "value": "Block",
-          "repeat": "Unknown"
+          "repeat": "Replace"
         },
         "read": [
           {
@@ -31374,7 +31485,7 @@
                 },
                 "shape": {
                   "value": "Block",
-                  "repeat": "Unknown"
+                  "repeat": "Replace"
                 }
               }
             }
@@ -31430,7 +31541,7 @@
         },
         "shape": {
           "value": "Block",
-          "repeat": "Unknown"
+          "repeat": "Replace"
         },
         "read": [
           {
@@ -31450,7 +31561,7 @@
                 },
                 "shape": {
                   "value": "Block",
-                  "repeat": "Unknown"
+                  "repeat": "Replace"
                 }
               }
             }
@@ -31677,7 +31788,7 @@
         },
         "shape": {
           "value": "Block",
-          "repeat": "Unknown"
+          "repeat": "Merges"
         },
         "read": [
           {
@@ -31697,7 +31808,7 @@
                 },
                 "shape": {
                   "value": "Block",
-                  "repeat": "Unknown"
+                  "repeat": "Merges"
                 }
               }
             }
@@ -34160,7 +34271,7 @@
                             },
                             "shape": {
                               "value": "Block",
-                              "repeat": "Unknown"
+                              "repeat": "Replace"
                             },
                             "read": [
                               {
@@ -34180,7 +34291,7 @@
                                     },
                                     "shape": {
                                       "value": "Block",
-                                      "repeat": "Unknown"
+                                      "repeat": "Replace"
                                     }
                                   }
                                 }
@@ -36216,7 +36327,7 @@
                   },
                   "shape": {
                     "value": "Scalar",
-                    "repeat": "Unknown"
+                    "repeat": "Merges"
                   },
                   "read": [
                     {
@@ -36301,7 +36412,7 @@
                           },
                           "shape": {
                             "value": "Scalar",
-                            "repeat": "Unknown"
+                            "repeat": "Merges"
                           }
                         }
                       }
@@ -36397,7 +36508,7 @@
                   },
                   "shape": {
                     "value": "Scalar",
-                    "repeat": "Unknown"
+                    "repeat": "Merges"
                   },
                   "read": [
                     {
@@ -36482,7 +36593,7 @@
                           },
                           "shape": {
                             "value": "Scalar",
-                            "repeat": "Unknown"
+                            "repeat": "Merges"
                           }
                         }
                       }
@@ -36513,7 +36624,7 @@
                   },
                   "shape": {
                     "value": "Block",
-                    "repeat": "Unknown"
+                    "repeat": "Merges"
                   },
                   "read": [
                     {
@@ -36533,7 +36644,7 @@
                           },
                           "shape": {
                             "value": "Block",
-                            "repeat": "Unknown"
+                            "repeat": "Merges"
                           }
                         }
                       }
@@ -38321,7 +38432,7 @@
                   },
                   "shape": {
                     "value": "Scalar",
-                    "repeat": "Unknown"
+                    "repeat": "Merges"
                   },
                   "read": [
                     {
@@ -38406,7 +38517,7 @@
                           },
                           "shape": {
                             "value": "Scalar",
-                            "repeat": "Unknown"
+                            "repeat": "Merges"
                           }
                         }
                       }
@@ -38502,7 +38613,7 @@
                   },
                   "shape": {
                     "value": "Scalar",
-                    "repeat": "Unknown"
+                    "repeat": "Merges"
                   },
                   "read": [
                     {
@@ -38587,7 +38698,7 @@
                           },
                           "shape": {
                             "value": "Scalar",
-                            "repeat": "Unknown"
+                            "repeat": "Merges"
                           }
                         }
                       }
@@ -38618,7 +38729,7 @@
                   },
                   "shape": {
                     "value": "Block",
-                    "repeat": "Unknown"
+                    "repeat": "Merges"
                   },
                   "read": [
                     {
@@ -38638,7 +38749,7 @@
                           },
                           "shape": {
                             "value": "Block",
-                            "repeat": "Unknown"
+                            "repeat": "Merges"
                           }
                         }
                       }
@@ -40337,422 +40448,6 @@
           "name": "common/buildings"
         },
         "detail": "Use-time analysis covers local Boolean selections only; enclosing context, other callers and bounded or unsupported paths remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "icon"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "category"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "on_destroy"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "on_repaired"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "convert_to"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "can_be_ruined"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "can_be_disabled"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "triggered_desc"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "can_build"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "capital"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "desc"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "prerequisites"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "potential"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "allow"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "country_modifier"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "planet_modifier"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "upgrades"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "abort_trigger"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "abort_effect"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "on_built"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "on_queued"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "on_unqueued"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "on_enabled"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "ruined_icon"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "army_modifier"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "ai_weight"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "ai_resource_production"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "triggered_planet_modifier"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "triggered_planet_pop_group_modifier_for_all"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "triggered_planet_pop_group_modifier_for_species"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "is_capped_by_modifier"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "skip_automation_upgrading"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "show_tech_unlock_if"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "can_demolish"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "planet_limit"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "district_limit"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "system_modifier"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "owner_type"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "base_cap_amount"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "triggered_country_modifier"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "empire_limit"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "planetary_ftl_inhibitor"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "ruined_trigger"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "destroy_trigger"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "building_sets"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "resources"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "custom_storm_ai_weight"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "waystation_network_system_modifier"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "triggered_waystation_network_system_modifier"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "waystation_network_country_modifier"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "triggered_waystation_network_country_modifier"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "is_colony"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
       },
       {
         "kind": "UnresolvedCondition",
@@ -47122,9 +46817,17 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "field",
-          "name": "on_queued"
+          "name": "potential"
         },
-        "detail": "a path to a call site could not be followed (instruction)"
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "potential"
+        },
+        "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
@@ -47141,14 +46844,6 @@
           "name": "on_queued"
         },
         "detail": "some entry scopes of a call site could not be established"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "field",
-          "name": "on_unqueued"
-        },
-        "detail": "a path to a call site could not be followed (instruction)"
       },
       {
         "kind": "UnresolvedPath",
@@ -47183,15 +46878,239 @@
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "custom_storm_ai_weight"
+        },
+        "detail": "no evaluation that the method attributes evaluates this block"
+      },
+      {
         "kind": "OutsideMethod",
         "subject": null,
-        "detail": "Entry contexts cover the root trigger and effect blocks that the owner's own methods evaluate by direct call. Virtual calls, evaluations outside the owner's methods, nested blocks, weights, script values and modifier blocks are outside this method."
+        "detail": "Entry contexts cover the root trigger, effect and weight blocks that a direct evaluator call, or a call through the block's own vtable, evaluates as a pointer to the owner's item plus the block's offset, where the method establishes that the pointer leads to the owner. Other virtual calls, nested blocks, script values and modifier blocks are outside this method."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "icon"
+        },
+        "detail": "Repeat behavior remains unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "category"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "convert_to"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "can_be_ruined"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "can_be_disabled"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "triggered_desc"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "can_build"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "capital"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "desc"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "prerequisites"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "country_modifier"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "planet_modifier"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "upgrades"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "ruined_icon"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "army_modifier"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "ai_resource_production"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "is_capped_by_modifier"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "skip_automation_upgrading"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "can_demolish"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "system_modifier"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "owner_type"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "planetary_ftl_inhibitor"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "building_sets"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "resources"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "waystation_network_system_modifier"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "waystation_network_country_modifier"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "is_colony"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
       }
     ],
     "source": {
       "build": "c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b",
       "native_version": "0.1.0",
-      "method": "registry-fields/v18",
+      "method": "registry-fields/v24",
       "basis": "StaticAnalysis"
     }
   }
