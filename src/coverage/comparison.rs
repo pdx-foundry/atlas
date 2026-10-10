@@ -193,7 +193,7 @@ impl ComparisonKind {
             }),
             Self::Cardinality => match answer.as_str() {
                 Some("Replace") => Some(Value::from(1)),
-                Some("Accumulate") => Some(Value::String("inf".into())),
+                Some("Accumulate" | "Merges") => Some(Value::String("inf".into())),
                 _ => answer.as_u64().map(Value::from),
             },
         }

@@ -523,36 +523,12 @@
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "localization"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "onclick"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
         "kind": "UnresolvedCondition",
         "subject": {
           "kind": "field",
           "name": "onclick"
         },
         "detail": "A loader condition remains unresolved; its outcome is retained separately."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "category"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
       },
       {
         "kind": "UnresolvedCondition",
@@ -563,36 +539,12 @@
         "detail": "A loader condition remains unresolved; its outcome is retained separately."
       },
       {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "situation"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "resources"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
         "kind": "UnresolvedCondition",
         "subject": {
           "kind": "field",
           "name": "resources"
         },
         "detail": "A loader condition remains unresolved; its outcome is retained separately."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "show_only_if_owned"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
       },
       {
         "kind": "UnresolvedCondition",
@@ -661,13 +613,61 @@
       {
         "kind": "OutsideMethod",
         "subject": null,
-        "detail": "Entry contexts cover the root trigger and effect blocks that the owner's own methods evaluate by direct call. Virtual calls, evaluations outside the owner's methods, nested blocks, weights, script values and modifier blocks are outside this method."
+        "detail": "Entry contexts cover the root trigger, effect and weight blocks that a direct evaluator call, or a call through the block's own vtable, evaluates as a pointer to the owner's item plus the block's offset, where the method establishes that the pointer leads to the owner. Other virtual calls, nested blocks, script values and modifier blocks are outside this method."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "localization"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "onclick"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "category"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "situation"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "resources"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "show_only_if_owned"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
       }
     ],
     "source": {
       "build": "c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b",
       "native_version": "0.1.0",
-      "method": "registry-fields/v18",
+      "method": "registry-fields/v24",
       "basis": "StaticAnalysis"
     }
   }

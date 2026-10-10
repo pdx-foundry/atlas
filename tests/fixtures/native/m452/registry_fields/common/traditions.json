@@ -154,7 +154,7 @@
         },
         "shape": {
           "value": "Block",
-          "repeat": "Unknown"
+          "repeat": "Replace"
         },
         "read": [
           {
@@ -174,7 +174,7 @@
                 },
                 "shape": {
                   "value": "Block",
-                  "repeat": "Unknown"
+                  "repeat": "Replace"
                 }
               }
             }
@@ -230,7 +230,7 @@
         },
         "shape": {
           "value": "Block",
-          "repeat": "Unknown"
+          "repeat": "Replace"
         },
         "read": [
           {
@@ -250,7 +250,7 @@
                 },
                 "shape": {
                   "value": "Block",
-                  "repeat": "Unknown"
+                  "repeat": "Replace"
                 }
               }
             }
@@ -306,7 +306,7 @@
         },
         "shape": {
           "value": "Block",
-          "repeat": "Unknown"
+          "repeat": "Replace"
         },
         "read": [
           {
@@ -326,7 +326,7 @@
                 },
                 "shape": {
                   "value": "Block",
-                  "repeat": "Unknown"
+                  "repeat": "Replace"
                 }
               }
             }
@@ -371,7 +371,23 @@
           }
         ],
         "reference": "NotEstablished",
-        "entry_contexts": [],
+        "entry_contexts": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ],
+            "prev": [
+              "SelfLink"
+            ]
+          }
+        ],
         "read_scope": {
           "Known": [
             {
@@ -401,7 +417,7 @@
         },
         "shape": {
           "value": "Block",
-          "repeat": "Unknown"
+          "repeat": "Replace"
         },
         "read": [
           {
@@ -421,7 +437,7 @@
                 },
                 "shape": {
                   "value": "Block",
-                  "repeat": "Unknown"
+                  "repeat": "Replace"
                 }
               }
             }
@@ -449,7 +465,23 @@
           }
         ],
         "reference": "NotEstablished",
-        "entry_contexts": [],
+        "entry_contexts": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ],
+            "prev": [
+              "SelfLink"
+            ]
+          }
+        ],
         "read_scope": {
           "Known": [
             {
@@ -791,7 +823,7 @@
                   },
                   "shape": {
                     "value": "Scalar",
-                    "repeat": "Unknown"
+                    "repeat": "Merges"
                   },
                   "read": [
                     {
@@ -876,7 +908,7 @@
                           },
                           "shape": {
                             "value": "Scalar",
-                            "repeat": "Unknown"
+                            "repeat": "Merges"
                           }
                         }
                       }
@@ -972,7 +1004,7 @@
                   },
                   "shape": {
                     "value": "Scalar",
-                    "repeat": "Unknown"
+                    "repeat": "Merges"
                   },
                   "read": [
                     {
@@ -1057,7 +1089,7 @@
                           },
                           "shape": {
                             "value": "Scalar",
-                            "repeat": "Unknown"
+                            "repeat": "Merges"
                           }
                         }
                       }
@@ -1088,7 +1120,7 @@
                   },
                   "shape": {
                     "value": "Block",
-                    "repeat": "Unknown"
+                    "repeat": "Merges"
                   },
                   "read": [
                     {
@@ -1108,7 +1140,7 @@
                           },
                           "shape": {
                             "value": "Block",
-                            "repeat": "Unknown"
+                            "repeat": "Merges"
                           }
                         }
                       }
@@ -2759,7 +2791,7 @@
         },
         "shape": {
           "value": "Block",
-          "repeat": "Unknown"
+          "repeat": "Merges"
         },
         "read": [
           {
@@ -2779,7 +2811,7 @@
                 },
                 "shape": {
                   "value": "Block",
-                  "repeat": "Unknown"
+                  "repeat": "Merges"
                 }
               }
             }
@@ -5242,7 +5274,7 @@
                             },
                             "shape": {
                               "value": "Block",
-                              "repeat": "Unknown"
+                              "repeat": "Replace"
                             },
                             "read": [
                               {
@@ -5262,7 +5294,7 @@
                                     },
                                     "shape": {
                                       "value": "Block",
-                                      "repeat": "Unknown"
+                                      "repeat": "Replace"
                                     }
                                   }
                                 }
@@ -6940,7 +6972,23 @@
         "domain": "Unknown",
         "uses": [],
         "reference": "NotEstablished",
-        "entry_contexts": [],
+        "entry_contexts": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ],
+            "prev": [
+              "SelfLink"
+            ]
+          }
+        ],
         "read_scope": {
           "Known": [
             {
@@ -7337,7 +7385,7 @@
               },
               "shape": {
                 "value": "Block",
-                "repeat": "Unknown"
+                "repeat": "Replace"
               },
               "read": [
                 {
@@ -7357,7 +7405,7 @@
                       },
                       "shape": {
                         "value": "Block",
-                        "repeat": "Unknown"
+                        "repeat": "Replace"
                       }
                     }
                   }
@@ -7397,7 +7445,7 @@
               },
               "shape": {
                 "value": "Block",
-                "repeat": "Unknown"
+                "repeat": "Replace"
               },
               "read": [
                 {
@@ -7417,7 +7465,7 @@
                       },
                       "shape": {
                         "value": "Block",
-                        "repeat": "Unknown"
+                        "repeat": "Replace"
                       }
                     }
                   }
@@ -7492,7 +7540,7 @@
               },
               "shape": {
                 "value": "Block",
-                "repeat": "Unknown"
+                "repeat": "Replace"
               },
               "read": [
                 {
@@ -7512,7 +7560,7 @@
                       },
                       "shape": {
                         "value": "Block",
-                        "repeat": "Unknown"
+                        "repeat": "Replace"
                       }
                     }
                   }
@@ -7859,7 +7907,7 @@
         },
         "shape": {
           "value": "Block",
-          "repeat": "Unknown"
+          "repeat": "Merges"
         },
         "read": [
           {
@@ -7879,7 +7927,7 @@
                 },
                 "shape": {
                   "value": "Block",
-                  "repeat": "Unknown"
+                  "repeat": "Merges"
                 }
               }
             }
@@ -8732,116 +8780,12 @@
         "detail": "Use-time analysis covers local Boolean selections only; enclosing context, other callers and bounded or unsupported paths remain unresolved."
       },
       {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "potential"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "possible"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "on_enabled"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "on_disabled"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "triggered_modifier"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "ai_weight"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "modifier"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
         "kind": "UnresolvedReader",
         "subject": {
           "kind": "field",
           "name": "tradition_swap.triggered_modifier"
         },
         "detail": "The field's alternatives do not establish one shared reader."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "tradition_swap.weight"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "tradition_swap.trigger"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "tradition_swap.on_enabled"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "tradition_swap.on_disabled"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "tradition_swap.triggered_modifier"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "tradition_swap.modifier"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
       },
       {
         "kind": "UnresolvedCondition",
@@ -10208,7 +10152,15 @@
           "kind": "field",
           "name": "on_enabled"
         },
-        "detail": "no direct call in the owner's methods evaluates this block"
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "on_enabled"
+        },
+        "detail": "a path to a call site could not be followed (selected-block-identity)"
       },
       {
         "kind": "UnresolvedPath",
@@ -10216,18 +10168,50 @@
           "kind": "field",
           "name": "on_disabled"
         },
-        "detail": "no direct call in the owner's methods evaluates this block"
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "on_disabled"
+        },
+        "detail": "a path to a call site could not be followed (selected-block-identity)"
       },
       {
         "kind": "OutsideMethod",
         "subject": null,
-        "detail": "Entry contexts cover the root trigger and effect blocks that the owner's own methods evaluate by direct call. Virtual calls, evaluations outside the owner's methods, nested blocks, weights, script values and modifier blocks are outside this method."
+        "detail": "Entry contexts cover the root trigger, effect and weight blocks that a direct evaluator call, or a call through the block's own vtable, evaluates as a pointer to the owner's item plus the block's offset, where the method establishes that the pointer leads to the owner. Other virtual calls, nested blocks, script values and modifier blocks are outside this method."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "tradition_swap.weight"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "tradition_swap.triggered_modifier"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "tradition_swap.modifier"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
       }
     ],
     "source": {
       "build": "c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b",
       "native_version": "0.1.0",
-      "method": "registry-fields/v18",
+      "method": "registry-fields/v24",
       "basis": "StaticAnalysis"
     }
   }

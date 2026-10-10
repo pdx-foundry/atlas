@@ -329,7 +329,7 @@
         },
         "shape": {
           "value": "Block",
-          "repeat": "Unknown"
+          "repeat": "Replace"
         },
         "read": [
           {
@@ -349,7 +349,7 @@
                 },
                 "shape": {
                   "value": "Block",
-                  "repeat": "Unknown"
+                  "repeat": "Replace"
                 }
               }
             }
@@ -359,7 +359,59 @@
         "domain": "Unknown",
         "uses": [],
         "reference": "NotEstablished",
-        "entry_contexts": [],
+        "entry_contexts": [
+          {
+            "this": {
+              "Scope": {
+                "id": "1a26ff288266684f",
+                "name": "pop_group"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "df2999a8f7dba6f6",
+                  "name": "colony"
+                }
+              },
+              "SelfLink"
+            ],
+            "prev": [
+              "SelfLink"
+            ]
+          },
+          {
+            "this": {
+              "Scope": {
+                "id": "1a26ff288266684f",
+                "name": "pop_group"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ],
+            "prev": [
+              "SelfLink"
+            ]
+          },
+          {
+            "this": {
+              "Scope": {
+                "id": "1a26ff288266684f",
+                "name": "pop_group"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "Unresolved"
+            ],
+            "prev": [
+              "SelfLink"
+            ]
+          }
+        ],
         "read_scope": {
           "Known": [
             {
@@ -761,7 +813,7 @@
                   },
                   "shape": {
                     "value": "Scalar",
-                    "repeat": "Unknown"
+                    "repeat": "Merges"
                   },
                   "read": [
                     {
@@ -777,7 +829,7 @@
                           },
                           "shape": {
                             "value": "Scalar",
-                            "repeat": "Unknown"
+                            "repeat": "Merges"
                           }
                         }
                       }
@@ -804,7 +856,7 @@
                   },
                   "shape": {
                     "value": "Scalar",
-                    "repeat": "Unknown"
+                    "repeat": "Merges"
                   },
                   "read": [
                     {
@@ -820,7 +872,7 @@
                           },
                           "shape": {
                             "value": "Scalar",
-                            "repeat": "Unknown"
+                            "repeat": "Merges"
                           }
                         }
                       }
@@ -1171,7 +1223,7 @@
                   },
                   "shape": {
                     "value": "Scalar",
-                    "repeat": "Unknown"
+                    "repeat": "Merges"
                   },
                   "read": [
                     {
@@ -1187,7 +1239,7 @@
                           },
                           "shape": {
                             "value": "Scalar",
-                            "repeat": "Unknown"
+                            "repeat": "Merges"
                           }
                         }
                       }
@@ -1214,7 +1266,7 @@
                   },
                   "shape": {
                     "value": "Scalar",
-                    "repeat": "Unknown"
+                    "repeat": "Merges"
                   },
                   "read": [
                     {
@@ -1230,7 +1282,7 @@
                           },
                           "shape": {
                             "value": "Scalar",
-                            "repeat": "Unknown"
+                            "repeat": "Merges"
                           }
                         }
                       }
@@ -1572,7 +1624,7 @@
                   },
                   "shape": {
                     "value": "Scalar",
-                    "repeat": "Unknown"
+                    "repeat": "Merges"
                   },
                   "read": [
                     {
@@ -1588,7 +1640,7 @@
                           },
                           "shape": {
                             "value": "Scalar",
-                            "repeat": "Unknown"
+                            "repeat": "Merges"
                           }
                         }
                       }
@@ -1615,7 +1667,7 @@
                   },
                   "shape": {
                     "value": "Scalar",
-                    "repeat": "Unknown"
+                    "repeat": "Merges"
                   },
                   "read": [
                     {
@@ -1631,7 +1683,7 @@
                           },
                           "shape": {
                             "value": "Scalar",
-                            "repeat": "Unknown"
+                            "repeat": "Merges"
                           }
                         }
                       }
@@ -2027,7 +2079,7 @@
                   },
                   "shape": {
                     "value": "Scalar",
-                    "repeat": "Unknown"
+                    "repeat": "Merges"
                   },
                   "read": [
                     {
@@ -2043,7 +2095,7 @@
                           },
                           "shape": {
                             "value": "Scalar",
-                            "repeat": "Unknown"
+                            "repeat": "Merges"
                           }
                         }
                       }
@@ -2070,7 +2122,7 @@
                   },
                   "shape": {
                     "value": "Scalar",
-                    "repeat": "Unknown"
+                    "repeat": "Merges"
                   },
                   "read": [
                     {
@@ -2086,7 +2138,7 @@
                           },
                           "shape": {
                             "value": "Scalar",
-                            "repeat": "Unknown"
+                            "repeat": "Merges"
                           }
                         }
                       }
@@ -2446,7 +2498,7 @@
                   },
                   "shape": {
                     "value": "Scalar",
-                    "repeat": "Unknown"
+                    "repeat": "Merges"
                   },
                   "read": [
                     {
@@ -2462,7 +2514,7 @@
                           },
                           "shape": {
                             "value": "Scalar",
-                            "repeat": "Unknown"
+                            "repeat": "Merges"
                           }
                         }
                       }
@@ -2489,7 +2541,7 @@
                   },
                   "shape": {
                     "value": "Scalar",
-                    "repeat": "Unknown"
+                    "repeat": "Merges"
                   },
                   "read": [
                     {
@@ -2505,7 +2557,7 @@
                           },
                           "shape": {
                             "value": "Scalar",
-                            "repeat": "Unknown"
+                            "repeat": "Merges"
                           }
                         }
                       }
@@ -3132,518 +3184,318 @@
       {
         "kind": "UnresolvedStorage",
         "subject": {
-          "kind": "field",
-          "name": "tags"
+          "kind": "key_path",
+          "path": [
+            "triggered_planet_modifier",
+            "multiplier"
+          ]
         },
-        "detail": "Repeat behavior or nested fields remain unresolved."
+        "detail": "Scoped destination vtable is not established."
       },
       {
         "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "triggered_planet_modifier",
+            "mult"
+          ]
+        },
+        "detail": "Scoped destination vtable is not established."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "triggered_planet_modifier",
+            "potential"
+          ]
+        },
+        "detail": "read-scope: stored-scope"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "triggered_planet_modifier",
+            "modifier"
+          ]
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "triggered_planet_modifier"
+        },
+        "detail": "The triggered modifier analysis stopped at triggered-embedded-point."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "triggered_planet_modifier"
+        },
+        "detail": "The reader of keys that the triggered modifier does not name is not established: triggered-delegate."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "triggered_planet_pop_group_modifier_for_all",
+            "multiplier"
+          ]
+        },
+        "detail": "Scoped destination vtable is not established."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "triggered_planet_pop_group_modifier_for_all",
+            "mult"
+          ]
+        },
+        "detail": "Scoped destination vtable is not established."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "triggered_planet_pop_group_modifier_for_all",
+            "potential"
+          ]
+        },
+        "detail": "read-scope: stored-scope"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "triggered_planet_pop_group_modifier_for_all",
+            "modifier"
+          ]
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "triggered_planet_pop_group_modifier_for_all"
+        },
+        "detail": "The triggered modifier analysis stopped at triggered-embedded-point."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "triggered_planet_pop_group_modifier_for_all"
+        },
+        "detail": "The reader of keys that the triggered modifier does not name is not established: triggered-delegate."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "triggered_planet_pop_group_modifier_for_species",
+            "multiplier"
+          ]
+        },
+        "detail": "Scoped destination vtable is not established."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "triggered_planet_pop_group_modifier_for_species",
+            "mult"
+          ]
+        },
+        "detail": "Scoped destination vtable is not established."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "triggered_planet_pop_group_modifier_for_species",
+            "potential"
+          ]
+        },
+        "detail": "read-scope: stored-scope"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "triggered_planet_pop_group_modifier_for_species",
+            "modifier"
+          ]
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "triggered_planet_pop_group_modifier_for_species"
+        },
+        "detail": "The triggered modifier analysis stopped at triggered-embedded-point."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "triggered_planet_pop_group_modifier_for_species"
+        },
+        "detail": "The reader of keys that the triggered modifier does not name is not established: triggered-delegate."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "triggered_country_modifier",
+            "multiplier"
+          ]
+        },
+        "detail": "Scoped destination vtable is not established."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "triggered_country_modifier",
+            "mult"
+          ]
+        },
+        "detail": "Scoped destination vtable is not established."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "triggered_country_modifier",
+            "potential"
+          ]
+        },
+        "detail": "read-scope: stored-scope"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "triggered_country_modifier",
+            "modifier"
+          ]
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "triggered_country_modifier"
+        },
+        "detail": "The triggered modifier analysis stopped at triggered-embedded-point."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "triggered_country_modifier"
+        },
+        "detail": "The reader of keys that the triggered modifier does not name is not established: triggered-delegate."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "triggered_system_modifier",
+            "multiplier"
+          ]
+        },
+        "detail": "Scoped destination vtable is not established."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "triggered_system_modifier",
+            "mult"
+          ]
+        },
+        "detail": "Scoped destination vtable is not established."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "triggered_system_modifier",
+            "potential"
+          ]
+        },
+        "detail": "read-scope: stored-scope"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "triggered_system_modifier",
+            "modifier"
+          ]
+        },
+        "detail": "read-scope: scope-argument"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "triggered_system_modifier"
+        },
+        "detail": "The triggered modifier analysis stopped at triggered-embedded-point."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "triggered_system_modifier"
+        },
+        "detail": "The reader of keys that the triggered modifier does not name is not established: triggered-delegate."
+      },
+      {
+        "kind": "UnresolvedPath",
         "subject": {
           "kind": "field",
           "name": "weight"
         },
-        "detail": "Repeat behavior or nested fields remain unresolved."
+        "detail": "Whether the field reads a modifier container, and its categories, are not established."
       },
       {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "category"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "purge"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "can_set_priority"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "country_modifier"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "possible"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "planet_modifier"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "triggered_planet_modifier"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "triggered_planet_pop_group_modifier_for_all"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "triggered_planet_pop_group_modifier_for_species"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "is_capped_by_modifier"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "system_modifier"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "triggered_country_modifier"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "triggered_system_modifier"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "overlord_resources"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "auto_trait_prio"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "is_pre_sapient"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
+        "kind": "UnresolvedPath",
         "subject": {
           "kind": "field",
           "name": "possible_pre_triggers"
         },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "contributes_to_diplo_weight"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "ignores_sapience"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "possible_precalc"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "resources"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "swappable_data"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "first_come_first_served"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "triggered_tags"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "allow_only_same_rank_pops"
-        },
-        "detail": "Repeat behavior or nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "key_path",
-          "path": [
-            "triggered_planet_modifier",
-            "multiplier"
-          ]
-        },
-        "detail": "Scoped destination vtable is not established."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "key_path",
-          "path": [
-            "triggered_planet_modifier",
-            "mult"
-          ]
-        },
-        "detail": "Scoped destination vtable is not established."
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "key_path",
-          "path": [
-            "triggered_planet_modifier",
-            "potential"
-          ]
-        },
-        "detail": "read-scope: stored-scope"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "key_path",
-          "path": [
-            "triggered_planet_modifier",
-            "modifier"
-          ]
-        },
-        "detail": "read-scope: scope-argument"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "field",
-          "name": "triggered_planet_modifier"
-        },
-        "detail": "The triggered modifier analysis stopped at triggered-embedded-point."
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "field",
-          "name": "triggered_planet_modifier"
-        },
-        "detail": "The reader of keys that the triggered modifier does not name is not established: triggered-delegate."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "key_path",
-          "path": [
-            "triggered_planet_pop_group_modifier_for_all",
-            "multiplier"
-          ]
-        },
-        "detail": "Scoped destination vtable is not established."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "key_path",
-          "path": [
-            "triggered_planet_pop_group_modifier_for_all",
-            "mult"
-          ]
-        },
-        "detail": "Scoped destination vtable is not established."
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "key_path",
-          "path": [
-            "triggered_planet_pop_group_modifier_for_all",
-            "potential"
-          ]
-        },
-        "detail": "read-scope: stored-scope"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "key_path",
-          "path": [
-            "triggered_planet_pop_group_modifier_for_all",
-            "modifier"
-          ]
-        },
-        "detail": "read-scope: scope-argument"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "field",
-          "name": "triggered_planet_pop_group_modifier_for_all"
-        },
-        "detail": "The triggered modifier analysis stopped at triggered-embedded-point."
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "field",
-          "name": "triggered_planet_pop_group_modifier_for_all"
-        },
-        "detail": "The reader of keys that the triggered modifier does not name is not established: triggered-delegate."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "key_path",
-          "path": [
-            "triggered_planet_pop_group_modifier_for_species",
-            "multiplier"
-          ]
-        },
-        "detail": "Scoped destination vtable is not established."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "key_path",
-          "path": [
-            "triggered_planet_pop_group_modifier_for_species",
-            "mult"
-          ]
-        },
-        "detail": "Scoped destination vtable is not established."
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "key_path",
-          "path": [
-            "triggered_planet_pop_group_modifier_for_species",
-            "potential"
-          ]
-        },
-        "detail": "read-scope: stored-scope"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "key_path",
-          "path": [
-            "triggered_planet_pop_group_modifier_for_species",
-            "modifier"
-          ]
-        },
-        "detail": "read-scope: scope-argument"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "field",
-          "name": "triggered_planet_pop_group_modifier_for_species"
-        },
-        "detail": "The triggered modifier analysis stopped at triggered-embedded-point."
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "field",
-          "name": "triggered_planet_pop_group_modifier_for_species"
-        },
-        "detail": "The reader of keys that the triggered modifier does not name is not established: triggered-delegate."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "key_path",
-          "path": [
-            "triggered_country_modifier",
-            "multiplier"
-          ]
-        },
-        "detail": "Scoped destination vtable is not established."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "key_path",
-          "path": [
-            "triggered_country_modifier",
-            "mult"
-          ]
-        },
-        "detail": "Scoped destination vtable is not established."
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "key_path",
-          "path": [
-            "triggered_country_modifier",
-            "potential"
-          ]
-        },
-        "detail": "read-scope: stored-scope"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "key_path",
-          "path": [
-            "triggered_country_modifier",
-            "modifier"
-          ]
-        },
-        "detail": "read-scope: scope-argument"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "field",
-          "name": "triggered_country_modifier"
-        },
-        "detail": "The triggered modifier analysis stopped at triggered-embedded-point."
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "field",
-          "name": "triggered_country_modifier"
-        },
-        "detail": "The reader of keys that the triggered modifier does not name is not established: triggered-delegate."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "key_path",
-          "path": [
-            "triggered_system_modifier",
-            "multiplier"
-          ]
-        },
-        "detail": "Scoped destination vtable is not established."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "key_path",
-          "path": [
-            "triggered_system_modifier",
-            "mult"
-          ]
-        },
-        "detail": "Scoped destination vtable is not established."
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "key_path",
-          "path": [
-            "triggered_system_modifier",
-            "potential"
-          ]
-        },
-        "detail": "read-scope: stored-scope"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "key_path",
-          "path": [
-            "triggered_system_modifier",
-            "modifier"
-          ]
-        },
-        "detail": "read-scope: scope-argument"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "field",
-          "name": "triggered_system_modifier"
-        },
-        "detail": "The triggered modifier analysis stopped at triggered-embedded-point."
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "field",
-          "name": "triggered_system_modifier"
-        },
-        "detail": "The reader of keys that the triggered modifier does not name is not established: triggered-delegate."
+        "detail": "Whether the field reads a modifier container, and its categories, are not established."
       },
       {
         "kind": "UnresolvedPath",
@@ -3851,7 +3703,7 @@
           "kind": "field",
           "name": "possible"
         },
-        "detail": "a path to a call site could not be followed (instruction)"
+        "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -3859,18 +3711,186 @@
           "kind": "field",
           "name": "possible"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "OutsideMethod",
         "subject": null,
-        "detail": "Entry contexts cover the root trigger and effect blocks that the owner's own methods evaluate by direct call. Virtual calls, evaluations outside the owner's methods, nested blocks, weights, script values and modifier blocks are outside this method."
+        "detail": "Entry contexts cover the root trigger, effect and weight blocks that a direct evaluator call, or a call through the block's own vtable, evaluates as a pointer to the owner's item plus the block's offset, where the method establishes that the pointer leads to the owner. Other virtual calls, nested blocks, script values and modifier blocks are outside this method."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "tags"
+        },
+        "detail": "Repeat behavior remains unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "weight"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "category"
+        },
+        "detail": "Repeat behavior remains unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "purge"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "can_set_priority"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "country_modifier"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "planet_modifier"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "is_capped_by_modifier"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "system_modifier"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "overlord_resources"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "auto_trait_prio"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "is_pre_sapient"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "possible_pre_triggers"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "contributes_to_diplo_weight"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "ignores_sapience"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "possible_precalc"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "resources"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "swappable_data"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "first_come_first_served"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "triggered_tags"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "allow_only_same_rank_pops"
+        },
+        "detail": "Repeat behavior and nested fields remain unresolved."
       }
     ],
     "source": {
       "build": "c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b",
       "native_version": "0.1.0",
-      "method": "registry-fields/v18",
+      "method": "registry-fields/v24",
       "basis": "StaticAnalysis"
     }
   }

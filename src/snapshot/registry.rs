@@ -941,7 +941,7 @@ fn assemble_field_repeat(
         Some(FieldReadOutcome::Read { shape, .. })
             if matches!(
                 shape.repeat,
-                RepeatBehavior::Replace | RepeatBehavior::Accumulate
+                RepeatBehavior::Replace | RepeatBehavior::Accumulate | RepeatBehavior::Merges
             ) =>
         {
             rule(
