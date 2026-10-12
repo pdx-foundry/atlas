@@ -208,18 +208,16 @@ fn mapping_gap(
     })
 }
 
-fn registry_types(ledger: &Ledger) -> BTreeMap<String, BTreeSet<(String, String)>> {
+/// The content directory of a config `path`. Two config types write their path without `game/`;
+/// the directory is the same.
+pub(super) fn config_directory(path: &str) -> &str {
+    let path = path.trim_matches('"');
+    path.strip_prefix("game/").unwrap_or(path)
+}
+
+pub(super) fn registry_types(ledger: &Ledger) -> BTreeMap<String, BTreeSet<(String, String)>> {
     let mut candidates: BTreeMap<String, BTreeSet<(String, String)>> = BTreeMap::new();
-    let existing_types = ledger
-        .claims
-        .iter()
-        .filter(|claim| {
-            claim.property == "type_existence"
-                && claim.subject.len() == 2
-                && claim.subject[0] == "types"
-        })
-        .map(|claim| (claim.file.as_str(), claim.subject[1].as_str()))
-        .collect::<BTreeSet<_>>();
+    let file_types = super::file_types(ledger);
     for claim in &ledger.claims {
         if claim.property != "loader_path"
             || claim.subject.len() != 3
@@ -229,11 +227,8 @@ fn registry_types(ledger: &Ledger) -> BTreeMap<String, BTreeSet<(String, String)
             continue;
         }
         let type_name = &claim.subject[1];
-        let Some(registry) = claim.config_answer.trim_matches('"').strip_prefix("game/") else {
-            continue;
-        };
-        let has_type = existing_types.contains(&(claim.file.as_str(), type_name.as_str()));
-        if has_type {
+        let registry = config_directory(&claim.config_answer);
+        if file_types[&claim.file].contains(type_name) {
             candidates
                 .entry(registry.into())
                 .or_default()

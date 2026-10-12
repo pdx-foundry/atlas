@@ -3,6 +3,8 @@
 pub mod comparison;
 mod language_subject;
 mod projection;
+/// Native's registry list compared with the config types.
+pub mod registries;
 #[cfg(test)]
 #[path = "coverage/tests.rs"]
 mod tests;
@@ -157,6 +159,38 @@ impl Totals {
         }
     }
 }
+/// One file's totals split by config type. The parts add up to the file's totals.
+#[derive(Clone, Debug, Default, Serialize, Deserialize)]
+pub struct FileTypes {
+    /// Totals of each type, such as `type[tradition]`, including types with no covered claim.
+    pub types: BTreeMap<String, Totals>,
+    /// Totals of the file's claims outside every type.
+    pub outside_types: Totals,
+}
+impl FileTypes {
+    fn totals(&mut self, type_name: Option<&str>) -> &mut Totals {
+        match type_name {
+            Some(type_name) => self.types.get_mut(type_name).expect("type of this file"),
+            None => &mut self.outside_types,
+        }
+    }
+    fn finish(&mut self) {
+        self.outside_types.finish();
+        for totals in self.types.values_mut() {
+            totals.finish();
+        }
+    }
+}
+/// The config type that a claim belongs to: claims below `types/type[x]`, and claims below the
+/// definition root `x` in the file that defines `type[x]`.
+fn claim_type<'a>(claim: &crate::ledger::Claim, types: &'a BTreeSet<String>) -> Option<&'a str> {
+    let first = claim.subject.first()?;
+    let type_name = match claim.subject.get(1) {
+        Some(second) if first == "types" => second.clone(),
+        _ => format!("type[{first}]"),
+    };
+    types.get(&type_name).map(String::as_str)
+}
 /// Per-claim support result, without an agreement/correctness score.
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Assessment {
@@ -191,6 +225,9 @@ pub struct Report {
     pub totals: Totals,
     /// Per-file totals, including empty files.
     pub by_file: BTreeMap<String, Totals>,
+    /// Per-file totals split by the config types that the file defines.
+    #[serde(default)]
+    pub by_type: BTreeMap<String, FileTypes>,
     /// Each source claim's support assessment.
     pub claims: Vec<Assessment>,
     /// Snapshot questions without a matching config question; excluded from the denominator.
@@ -336,6 +373,27 @@ pub fn evaluate(ledger: &Ledger, input: Option<&[u8]>) -> Result<Report, String>
     evaluate_projection(ledger, projection.as_ref(), snapshot_sha256)
 }
 
+/// The config types that each file defines, including files that define none.
+fn file_types(ledger: &Ledger) -> BTreeMap<String, BTreeSet<String>> {
+    let mut types: BTreeMap<_, _> = ledger
+        .files
+        .iter()
+        .map(|f| (f.path.clone(), BTreeSet::new()))
+        .collect();
+    for claim in &ledger.claims {
+        if let [types_key, type_name] = claim.subject.as_slice()
+            && types_key == "types"
+            && claim.property == "type_existence"
+        {
+            types
+                .get_mut(&claim.file)
+                .expect("claim file")
+                .insert(type_name.clone());
+        }
+    }
+    types
+}
+
 fn evaluate_projection(
     ledger: &Ledger,
     snapshot: Option<&Projection>,
@@ -350,6 +408,21 @@ fn evaluate_projection(
         .iter()
         .map(|f| (f.path.clone(), Totals::new()))
         .collect();
+    let file_types = file_types(ledger);
+    let mut by_type: BTreeMap<_, _> = file_types
+        .iter()
+        .map(|(file, types)| {
+            let types = types.iter().map(|t| (t.clone(), Totals::new())).collect();
+            let outside_types = Totals::new();
+            (
+                file.clone(),
+                FileTypes {
+                    types,
+                    outside_types,
+                },
+            )
+        })
+        .collect();
     let mut claims = Vec::new();
     let index = snapshot.map(ProjectionIndex::new);
     for claim in &ledger.claims {
@@ -359,11 +432,19 @@ fn evaluate_projection(
             .get_mut(&claim.file)
             .expect("claim file")
             .add(claim.owner, answer.covered);
+        by_type
+            .get_mut(&claim.file)
+            .expect("claim file")
+            .totals(claim_type(claim, &file_types[&claim.file]))
+            .add(claim.owner, answer.covered);
         claims.push(answer);
     }
     totals.finish();
     for totals in by_file.values_mut() {
         totals.finish();
+    }
+    for types in by_type.values_mut() {
+        types.finish();
     }
     let questions: BTreeSet<_> = ledger.claims.iter().map(|c| c.question.as_str()).collect();
     let atlas_only_questions = snapshot
@@ -388,6 +469,7 @@ fn evaluate_projection(
         inventory_complete: ledger.diagnostics.is_empty(),
         totals,
         by_file,
+        by_type,
         claims,
         atlas_only_questions,
     })

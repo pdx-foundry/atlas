@@ -164,10 +164,7 @@ impl ComparisonKind {
                 "absent" => Some(Value::Bool(false)),
                 _ => None,
             },
-            Self::LoaderPath => raw
-                .trim_matches('"')
-                .strip_prefix("game/")
-                .map(|path| Value::String(path.into())),
+            Self::LoaderPath => Some(Value::String(projection::config_directory(raw).into())),
             Self::ValueForm => ["bool", "int", "float", "string", "scalar", "block"]
                 .contains(&raw)
                 .then(|| Value::String(raw.into())),

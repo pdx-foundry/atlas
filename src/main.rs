@@ -1,5 +1,5 @@
 use pdx_atlas::{coverage::comparison, extraction, report, snapshot};
-use pdx_native::{GameOptions, Native, supervisor};
+use pdx_native::{Completeness, GameOptions, Native, supervisor};
 use sha2::{Digest, Sha256};
 use std::{
     collections::BTreeMap,
@@ -105,6 +105,23 @@ fn run_compare() -> Result<bool, Box<dyn std::error::Error>> {
     Ok(report.inventory_complete)
 }
 
+fn run_registries() -> Result<bool, Box<dyn std::error::Error>> {
+    let args: Vec<_> = std::env::args_os().skip(2).map(PathBuf::from).collect();
+    let [config, answers, output] = args.as_slice() else {
+        return Err("usage: pdx-atlas registries CONFIG_DIR ANSWERS OUTPUT_DIR".into());
+    };
+    let registries = Native::from_recorded_answers(answers)?.registries()?;
+    let report = report::generate_registries(config, &registries, output)?;
+    println!(
+        "{} directories in both; {} engine only; types by join: {:?}; report: {}",
+        report.directories_in_both,
+        report.engine_only.len(),
+        report.types_by_join,
+        output.join("registries.json").display()
+    );
+    Ok(report.inventory_complete && report.native_completeness == Completeness::Complete)
+}
+
 enum SnapshotMode {
     Live {
         installation: PathBuf,
@@ -204,8 +221,9 @@ fn main() -> ExitCode {
             .map_err(|error| Box::new(error) as Box<dyn std::error::Error>),
         Some("ledger") => run_ledger(),
         Some("compare") => run_compare(),
+        Some("registries") => run_registries(),
         Some("snapshot") => run_snapshot(),
-        _ => Err("usage: pdx-atlas ledger --config DIR [--snapshot FILE] --output DIR | compare CONFIG_DIR SNAPSHOT_FILE OUTPUT_DIR [--script-docs DIR] [--defines FILE]... [--answers DIR] | snapshot INSTALLATION ANSWERS OUTPUT [STARTUP_SECONDS] | snapshot --recorded ANSWERS OUTPUT".into()),
+        _ => Err("usage: pdx-atlas ledger --config DIR [--snapshot FILE] --output DIR | compare CONFIG_DIR SNAPSHOT_FILE OUTPUT_DIR [--script-docs DIR] [--defines FILE]... [--answers DIR] | registries CONFIG_DIR ANSWERS OUTPUT_DIR | snapshot INSTALLATION ANSWERS OUTPUT [STARTUP_SECONDS] | snapshot --recorded ANSWERS OUTPUT".into()),
     };
     match result {
         Ok(true) => ExitCode::SUCCESS,

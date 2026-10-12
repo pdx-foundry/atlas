@@ -37,6 +37,16 @@ and `coverage.json`. It returns 0 for a complete inventory, 2 after writing repo
 diagnostics, and 1 for invalid arguments, unreadable input, or an invalid snapshot contract.
 Output JSON contains input hashes and relative config paths, with no run timestamp.
 
+The [registry comparison](docs/coverage/registries.md) puts Native's registry list beside the
+config types and records a reason for each type that no registry names:
+
+```sh
+cargo run --locked -- registries \
+  /path/to/cwtools-stellaris-config/config \
+  /path/to/recorded-answers \
+  /path/to/reports
+```
+
 To compare a rule-bearing Atlas snapshot with config assertions, run the separate test command:
 
 ```sh
