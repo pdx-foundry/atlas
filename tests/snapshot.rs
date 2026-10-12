@@ -869,6 +869,7 @@ async fn partial_names_without_a_root_form_and_failed_loader_rules_are_gaps() {
         .unwrap()
         .as_mut()
         .unwrap();
+    rules.value.extension = GrammarProperty::Partial(Some(".txt".into()));
     rules.value.definition_names = GrammarProperty::Partial(vec![DefinitionForm {
         statement: DefinitionStatement::Nested {
             field_path: vec!["tradition_swap".into()],
@@ -887,6 +888,13 @@ async fn partial_names_without_a_root_form_and_failed_loader_rules_are_gaps() {
     let gap = |id: &str| snapshot.gaps.iter().find(|gap| gap.id == id);
 
     assert!(gap("registry:common/traditions#definition_names").is_some());
+    assert!(gap("registry:common/traditions#extension").is_some());
+    assert!(
+        !snapshot
+            .rules
+            .iter()
+            .any(|rule| rule.id == "registry:common/traditions#extension")
+    );
     assert!(
         snapshot
             .rules
@@ -903,6 +911,29 @@ async fn partial_names_without_a_root_form_and_failed_loader_rules_are_gaps() {
             gap(&format!("registry:common/relics#{property}"))
                 .is_some_and(|gap| gap.reason.contains("loader-rule question failed")),
             "{property}"
+        );
+    }
+}
+
+#[tokio::test]
+async fn build_wide_limits_stay_gaps_when_every_loader_rule_question_fails() {
+    use pdx_native::Error;
+
+    let mut extraction = recorded().await;
+    for (registry, result) in extraction.loader_rules.iter_mut() {
+        *result = Err(Error::UnknownRegistry {
+            name: registry.clone(),
+        });
+    }
+
+    let snapshot = snapshot::assemble(&extraction).unwrap();
+
+    for limit in ["file_order", "mod_over_vanilla"] {
+        assert!(
+            snapshot
+                .gaps
+                .iter()
+                .any(|gap| gap.id == format!("inventory:loader_rules#{limit}"))
         );
     }
 }

@@ -145,8 +145,9 @@ when Native answers one of those root keys.
 Native's `loader_rules` answer (`loader-rules/v4`) becomes four properties of each registry
 subject: `extension` (`{"suffix": …}`, `null` for every file), `recursion`, `duplicate_rule` and
 `definition_names` (the forms of root statements). A form that names a nested block becomes the
-`definition_names` rule of the field at its path. A property that Native leaves unresolved is a
-gap on the registry that blocks every joined claim. A partial `definition_names` answer keeps its
+`definition_names` rule of the field at its path. A property that Native leaves unresolved, or a
+partial `extension`, `recursion` or `duplicate_rule`, is a gap on the registry that blocks every
+joined claim. A partial `definition_names` answer keeps its
 stated forms and publishes a `definition_names.partial` gap that joins no config question; with no
 root form it is unresolved. The file order and the mod-over-vanilla rule, which Native states once
 for the build with no fixture, are the gaps `inventory:loader_rules#file_order` and
@@ -170,7 +171,8 @@ The type lines join by the type's selector:
   `D/F`. Native lists no such registry: the loaders of `common/alerts.txt` and
   `common/achievements.txt` are accepted special cases (Native's `loader-rules.md`, "Single named
   files"), so these claims stay uncredited. A join by name agrees or does not join; there is no
-  differing answer. A folder registry `D` does not establish which files a loader reads.
+  differing answer. Other types in the folder do not make the claim's selector unresolved: only
+  the registry named by its one file answers it. A folder registry `D` does not establish which files a loader reads.
 - An `overrides.cwt` priority joins the `duplicate_rule` of its directory: its presence, and its
   value. `lios` agrees with `LastWins`, `ordered` with `Merges`, and every other pair differs.
 

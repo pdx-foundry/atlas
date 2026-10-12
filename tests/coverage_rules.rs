@@ -1357,6 +1357,35 @@ types = {
 
     assert!(single_file.covered("loader_path", &path_file));
     assert_eq!(single_file.status("loader_path", &path_file), Status::Same);
+
+    let shared = r#"
+types = {
+    type[alert] = {
+        path = "game/common/traditions"
+        path_file = "alerts.txt"
+    }
+    type[achievement] = {
+        path = "game/common/traditions"
+        path_file = "achievements.txt"
+    }
+}
+"#;
+    let shared_folder = SharedDirectory::evaluate(&[("alerts.cwt", shared)], |snapshot| {
+        let registry = "common/traditions/alerts.txt";
+
+        add_registry(snapshot, registry);
+        set_rule(
+            snapshot,
+            &format!("registry:{registry}"),
+            "loader_path",
+            json!(registry),
+        );
+    })
+    .await;
+
+    assert!(shared_folder.covered("loader_path", &path_file));
+    assert!(!shared_folder.covered("loader_path", &["types", "type[alert]", "path"]));
+    assert!(!shared_folder.covered("loader_path", &["types", "type[achievement]", "path_file"]));
 }
 
 #[tokio::test]

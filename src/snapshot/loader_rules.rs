@@ -45,16 +45,16 @@ pub(super) fn assemble(snapshot: &mut Snapshot, extraction: &Extraction) -> Resu
         }
     }
 
+    if extraction.loader_rules.is_empty() {
+        return Ok(());
+    }
+
     let first_answer = extraction
         .loader_rules
         .iter()
-        .find_map(|(registry, result)| Some((registry, result.as_ref().ok()?)));
+        .find_map(|(registry, result)| Some((registry.as_str(), result.as_ref().ok()?)));
 
-    if let Some((registry, answer)) = first_answer {
-        assemble_build_wide(snapshot, registry, answer)?;
-    }
-
-    Ok(())
+    assemble_build_wide(snapshot, first_answer)
 }
 
 fn assemble_registry(
@@ -63,11 +63,11 @@ fn assemble_registry(
     answer: &Answer<LoaderRules>,
 ) -> Result<(), String> {
     let rules = &answer.value;
-    let extension = map(&rules.extension, |suffix| json!({ "suffix": suffix }));
-    let recursion = map(&rules.recursion, |recursion| json!(recursion));
-    let duplicate_rule = map(&rules.duplicate_rule, |duplicate_rule| {
+    let extension = whole(map(&rules.extension, |suffix| json!({ "suffix": suffix })));
+    let recursion = whole(map(&rules.recursion, |recursion| json!(recursion)));
+    let duplicate_rule = whole(map(&rules.duplicate_rule, |duplicate_rule| {
         json!(duplicate_rule)
-    });
+    }));
     let root_forms = root_forms(&rules.definition_names);
 
     for (property, value) in [
@@ -175,11 +175,10 @@ fn assemble_nested_forms(
 }
 
 /// One gap for each build-wide rule, on one inventory subject: Native states these rules once,
-/// with no fixture that verifies them.
+/// with no fixture that verifies them. With no loader-rule answer to cite, the gaps say so.
 fn assemble_build_wide(
     snapshot: &mut Snapshot,
-    registry: &str,
-    answer: &Answer<LoaderRules>,
+    cited: Option<(&str, &Answer<LoaderRules>)>,
 ) -> Result<(), String> {
     let id = SubjectKind::Inventory.id("loader_rules");
 
@@ -193,6 +192,18 @@ fn assemble_build_wide(
     });
 
     for property in BUILD_WIDE {
+        let Some((registry, answer)) = cited else {
+            gap(
+                snapshot,
+                &id,
+                property,
+                format!("No loader-rule answer states the build's {property}"),
+                None,
+                Vec::new(),
+                Vec::new(),
+            );
+            continue;
+        };
         let link = link(snapshot, registry, answer, property)?;
         let reason = link
             .native_gaps
@@ -243,6 +254,14 @@ fn map<T>(property: &GrammarProperty<T>, render: impl Fn(&T) -> Value) -> Gramma
         GrammarProperty::Known(value) => GrammarProperty::Known(render(value)),
         GrammarProperty::Partial(value) => GrammarProperty::Partial(render(value)),
         GrammarProperty::Unresolved => GrammarProperty::Unresolved,
+    }
+}
+
+/// A property that holds one value: a partial answer does not state it, so it is unresolved.
+fn whole(property: GrammarProperty<Value>) -> GrammarProperty<Value> {
+    match property {
+        GrammarProperty::Known(value) => GrammarProperty::Known(value),
+        GrammarProperty::Partial(_) | GrammarProperty::Unresolved => GrammarProperty::Unresolved,
     }
 }
 

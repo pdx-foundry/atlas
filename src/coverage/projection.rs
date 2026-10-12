@@ -238,6 +238,8 @@ struct TypeSelectors<'a> {
     questions: BTreeMap<&'a str, Selector>,
     /// The file-selection and naming-line questions of each type.
     loader_lines: BTreeSet<&'a str>,
+    /// The `path_file` questions of each type, which only a registry named by the one file answers.
+    single_file_lines: BTreeSet<&'a str>,
     /// Each type that `path_file` selects, by the content path of its one file.
     single_files: BTreeMap<String, Vec<(&'a str, &'a str)>>,
 }
@@ -342,16 +344,33 @@ impl<'a> TypeSelectors<'a> {
             .map(|claim| claim.question.as_str())
             .collect();
 
+        let single_file_lines = ledger
+            .claims
+            .iter()
+            .filter(|claim| {
+                matches!(claim.subject.as_slice(), [types, _, line] if types == "types" && line == "path_file")
+                    && claim.property == "loader_path"
+            })
+            .map(|claim| claim.question.as_str())
+            .collect();
+
         Self {
             directories,
             questions,
             loader_lines,
+            single_file_lines,
             single_files,
         }
     }
 
-    /// The gap that blocks a question whose type has an unresolved selector.
+    /// The gap that blocks a question whose type has an unresolved selector. A `path_file`
+    /// question is exempt: only the registry named by its one file answers it, whatever other
+    /// types share the folder.
     fn selector_gap(&self, question: &str, conditions: &[String]) -> Option<Gap> {
+        if self.single_file_lines.contains(question) {
+            return None;
+        }
+
         let reason = match self.questions.get(question)? {
             Selector::Unresolved(reason) => reason,
             Selector::RootKey { reason, .. } if !self.loader_lines.contains(question) => reason,
