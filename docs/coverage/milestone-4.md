@@ -86,6 +86,33 @@ lose credit: the naming lines of `type[swapped_civic]`, which had joined the civ
 names. `type[swapped_job]` keeps its selector gap, because the snapshot has `swappable_data` but
 not `swappable_data/swap_type`.
 
+The loader-rule joins of SDK-797 cover **23,204 / 58,032 (39.984836%)**, from 22,995: 209 more
+claims and none lost. This is a recomputation, not a live run: the same live snapshot, plus the
+loader-rule rules and gaps assembled from Native `2a43ede`'s `loader_rules` answers for its 164
+registries, read by static analysis of the same executable and kept with their own
+`loader-rules/v4@static_analysis` stamp. SDK-798 measures it on a live run.
+
+| Config line | Credited | Atlas-owned | Same | Different |
+| --- | ---: | ---: | ---: | ---: |
+| `path_extension` | 158 | 244 | 0 | 158 |
+| `path_strict` | 8 | 9 | 8 | 0 |
+| `overrides.cwt` priority present | 16 | 34 | 16 | 0 |
+| `overrides.cwt` priority value | 16 | 34 | 7 | 9 |
+| `skip_root_key` | 5 | 19 | 4 | 1 |
+| `name_field` | 4 | 55 | 4 | 0 |
+| `type_per_file` | 1 | 3 | 0 | 1 |
+| `name_from_file` | 1 | 1 | 0 | 1 |
+| `path_file` | 0 | 4 | 0 | 0 |
+| **Total** | **209** | **403** | | |
+
+Every template loader reads files of any extension, so each `path_extension = .txt` differs. The
+priorities differ for `fios` and `dupl` against `LastWins`, and for `dupl` against the `Merges` of
+`common/governments/authorities`. `common/country_container` differs for `skip_root_key` and
+`common/diplomacy_economy` for `type_per_file` and `name_from_file`: their template loaders name
+each root key. The 18 uncredited priorities (`events`, `common/on_actions`, `common/traits`, …),
+most `name_field` lines and the `path_file` lines belong to directories outside the 164 registries
+of this recording.
+
 The live CLI exited 0. It asked every question once, with methods unchanged during the run,
 confirmed disposal of both fixture games and the loaded-modifier game, and took 7 minutes 39
 seconds. Ledger and comparison exit 2 for the retained source diagnostics. The ignored

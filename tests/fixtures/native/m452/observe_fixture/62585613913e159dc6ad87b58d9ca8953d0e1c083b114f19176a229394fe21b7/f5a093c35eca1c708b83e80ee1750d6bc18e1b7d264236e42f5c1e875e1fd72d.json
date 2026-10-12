@@ -12,15 +12,12 @@
             "diagnostics": true
           },
           "file": "common/traditions/atlas_frozen.txt",
-          "owner": 4,
-          "definition_line": 19,
-          "reader": {
-            "numeric": "Unresolved",
-            "scoped_operand": "Unresolved",
-            "id": "325efaa17499c32d",
-            "kind": "String",
-            "family": "NotApplicable"
-          },
+          "definitions": [
+            {
+              "line": 19,
+              "owner": 4
+            }
+          ],
           "parsing": "NotRequested",
           "storage": {
             "Observed": {
@@ -53,15 +50,12 @@
             "diagnostics": true
           },
           "file": "common/traditions/atlas_frozen.txt",
-          "owner": 2,
-          "definition_line": 14,
-          "reader": {
-            "numeric": "Unresolved",
-            "scoped_operand": "Unresolved",
-            "id": "325efaa17499c32d",
-            "kind": "String",
-            "family": "NotApplicable"
-          },
+          "definitions": [
+            {
+              "line": 14,
+              "owner": 2
+            }
+          ],
           "parsing": "NotRequested",
           "storage": {
             "Observed": {
@@ -84,15 +78,12 @@
             "diagnostics": true
           },
           "file": "common/traditions/atlas_frozen.txt",
-          "owner": 3,
-          "definition_line": 15,
-          "reader": {
-            "numeric": "Unresolved",
-            "scoped_operand": "Unresolved",
-            "id": "325efaa17499c32d",
-            "kind": "String",
-            "family": "NotApplicable"
-          },
+          "definitions": [
+            {
+              "line": 15,
+              "owner": 3
+            }
+          ],
           "parsing": "NotRequested",
           "storage": {
             "Observed": {
@@ -130,15 +121,12 @@
             "diagnostics": true
           },
           "file": "common/traditions/atlas_frozen.txt",
-          "owner": 5,
-          "definition_line": 23,
-          "reader": {
-            "numeric": "Unresolved",
-            "scoped_operand": "Unresolved",
-            "id": "325efaa17499c32d",
-            "kind": "String",
-            "family": "NotApplicable"
-          },
+          "definitions": [
+            {
+              "line": 23,
+              "owner": 5
+            }
+          ],
           "parsing": "NotRequested",
           "storage": {
             "Observed": {
@@ -169,15 +157,12 @@
             "diagnostics": true
           },
           "file": "common/traditions/atlas_frozen.txt",
-          "owner": 1,
-          "definition_line": 1,
-          "reader": {
-            "numeric": "Unresolved",
-            "scoped_operand": "Unresolved",
-            "id": "f08cb83d92484a89",
-            "kind": "Block",
-            "family": "Weight"
-          },
+          "definitions": [
+            {
+              "line": 1,
+              "owner": 1
+            }
+          ],
           "parsing": "NotRequested",
           "storage": {
             "Unavailable": "No proven direct storage decoder and destination for this field"
@@ -194,15 +179,12 @@
             "diagnostics": true
           },
           "file": "common/traditions/atlas_frozen.txt",
-          "owner": 1,
-          "definition_line": 1,
-          "reader": {
-            "numeric": "Unresolved",
-            "scoped_operand": "Unresolved",
-            "id": "325efaa17499c32d",
-            "kind": "String",
-            "family": "NotApplicable"
-          },
+          "definitions": [
+            {
+              "line": 1,
+              "owner": 1
+            }
+          ],
           "parsing": "NotRequested",
           "storage": {
             "Observed": {
@@ -233,15 +215,12 @@
             "diagnostics": true
           },
           "file": "common/traditions/atlas_frozen.txt",
-          "owner": 1,
-          "definition_line": 1,
-          "reader": {
-            "numeric": "Unresolved",
-            "scoped_operand": "Unresolved",
-            "id": "325efaa17499c32d",
-            "kind": "String",
-            "family": "NotApplicable"
-          },
+          "definitions": [
+            {
+              "line": 1,
+              "owner": 1
+            }
+          ],
           "parsing": "NotRequested",
           "storage": {
             "Observed": {
@@ -272,15 +251,12 @@
             "diagnostics": true
           },
           "file": "common/traditions/atlas_frozen.txt",
-          "owner": 1,
-          "definition_line": 1,
-          "reader": {
-            "numeric": "Unresolved",
-            "scoped_operand": "Unresolved",
-            "id": "1c2988588f7e8eaa",
-            "kind": "Block",
-            "family": "Modifier"
-          },
+          "definitions": [
+            {
+              "line": 1,
+              "owner": 1
+            }
+          ],
           "parsing": "NotRequested",
           "storage": {
             "Unavailable": "No proven direct storage decoder and destination for this field"
@@ -297,15 +273,12 @@
             "diagnostics": true
           },
           "file": "common/traditions/atlas_frozen.txt",
-          "owner": 1,
-          "definition_line": 1,
-          "reader": {
-            "numeric": "Unresolved",
-            "scoped_operand": "Unresolved",
-            "id": "6e28a363faf61c52",
-            "kind": "Block",
-            "family": "Effect"
-          },
+          "definitions": [
+            {
+              "line": 1,
+              "owner": 1
+            }
+          ],
           "parsing": "NotRequested",
           "storage": {
             "Unavailable": "No proven direct storage decoder and destination for this field"
@@ -322,15 +295,12 @@
             "diagnostics": true
           },
           "file": "common/traditions/atlas_frozen.txt",
-          "owner": 1,
-          "definition_line": 1,
-          "reader": {
-            "numeric": "Unresolved",
-            "scoped_operand": "Unresolved",
-            "id": "6e28a363faf61c52",
-            "kind": "Block",
-            "family": "Effect"
-          },
+          "definitions": [
+            {
+              "line": 1,
+              "owner": 1
+            }
+          ],
           "parsing": "NotRequested",
           "storage": {
             "Unavailable": "No proven direct storage decoder and destination for this field"
@@ -347,15 +317,12 @@
             "diagnostics": true
           },
           "file": "common/traditions/atlas_frozen.txt",
-          "owner": 1,
-          "definition_line": 1,
-          "reader": {
-            "numeric": "Unresolved",
-            "scoped_operand": "Unresolved",
-            "id": "e044b50825a1841d",
-            "kind": "Block",
-            "family": "Trigger"
-          },
+          "definitions": [
+            {
+              "line": 1,
+              "owner": 1
+            }
+          ],
           "parsing": "NotRequested",
           "storage": {
             "Unavailable": "No proven direct storage decoder and destination for this field"
@@ -372,15 +339,12 @@
             "diagnostics": true
           },
           "file": "common/traditions/atlas_frozen.txt",
-          "owner": 1,
-          "definition_line": 1,
-          "reader": {
-            "numeric": "Unresolved",
-            "scoped_operand": "Unresolved",
-            "id": "e044b50825a1841d",
-            "kind": "Block",
-            "family": "Trigger"
-          },
+          "definitions": [
+            {
+              "line": 1,
+              "owner": 1
+            }
+          ],
           "parsing": "NotRequested",
           "storage": {
             "Unavailable": "No proven direct storage decoder and destination for this field"
@@ -397,15 +361,12 @@
             "diagnostics": true
           },
           "file": "common/traditions/atlas_frozen.txt",
-          "owner": 1,
-          "definition_line": 1,
-          "reader": {
-            "numeric": "Unresolved",
-            "scoped_operand": "Unresolved",
-            "id": "3e4a6b47b20070ea",
-            "kind": "Block",
-            "family": "Unknown"
-          },
+          "definitions": [
+            {
+              "line": 1,
+              "owner": 1
+            }
+          ],
           "parsing": "NotRequested",
           "storage": {
             "Unavailable": "No proven direct storage decoder and destination for this field"
@@ -422,15 +383,12 @@
             "diagnostics": true
           },
           "file": "common/traditions/atlas_frozen.txt",
-          "owner": 1,
-          "definition_line": 1,
-          "reader": {
-            "numeric": "Unresolved",
-            "scoped_operand": "Unresolved",
-            "id": "f9fb8c8f5f2ca714",
-            "kind": "Block",
-            "family": "TriggeredModifier"
-          },
+          "definitions": [
+            {
+              "line": 1,
+              "owner": 1
+            }
+          ],
           "parsing": "NotRequested",
           "storage": {
             "Unavailable": "No proven direct storage decoder and destination for this field"
@@ -447,15 +405,12 @@
             "diagnostics": true
           },
           "file": "common/traditions/atlas_frozen.txt",
-          "owner": 1,
-          "definition_line": 1,
-          "reader": {
-            "numeric": "Unresolved",
-            "scoped_operand": "Unresolved",
-            "id": "325efaa17499c32d",
-            "kind": "String",
-            "family": "NotApplicable"
-          },
+          "definitions": [
+            {
+              "line": 1,
+              "owner": 1
+            }
+          ],
           "parsing": "NotRequested",
           "storage": {
             "Observed": {

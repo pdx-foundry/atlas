@@ -9,7 +9,7 @@ use super::{Answer, Gap, projection};
 use crate::{ledger::Ledger, snapshot};
 use pdx_native::LoadedModifiers;
 use serde::Serialize;
-use serde_json::Value;
+use serde_json::{Value, json};
 use sha2::{Digest, Sha256};
 use std::collections::{BTreeMap, BTreeSet};
 
@@ -139,25 +139,69 @@ pub struct Report {
 enum ComparisonKind {
     Presence,
     LoaderPath,
+    /// `path_file`: the file name against the last segment of a single-file registry's name.
+    SingleFile,
+    /// `path_extension` against the loader's file-name suffix.
+    Extension,
+    /// `path_strict`: only the folder's own files against the loader's recursion.
+    FolderOnly,
+    /// `name_field` against what names the type's definitions.
+    NameField,
+    /// `skip_root_key`: definitions below a root statement against a nested form.
+    SkippedRootKey,
+    /// `type_per_file` and `name_from_file`: Native states no form that a file names.
+    FileNamed,
+    /// An `overrides.cwt` priority against the duplicate rule.
+    Priority,
+    /// An `overrides.cwt` directory against the presence of a duplicate rule.
+    PriorityListed,
     ValueForm,
     Cardinality,
 }
 
 impl ComparisonKind {
-    fn for_property(property: &str) -> Option<Self> {
-        match property {
+    fn for_claim(claim: &crate::ledger::Claim) -> Option<Self> {
+        if claim.file == "overrides.cwt" {
+            return match claim.property.as_str() {
+                "value_form" => Some(Self::Priority),
+                "field_existence" => Some(Self::PriorityListed),
+                _ => None,
+            };
+        }
+
+        match claim.property.as_str() {
             "type_existence"
             | "field_existence"
             | "command_existence"
             | "declaration_existence" => Some(Self::Presence),
-            "loader_path" => Some(Self::LoaderPath),
+            "loader_path" => Self::for_loader_line(claim.subject.last()?),
             "value_form" => Some(Self::ValueForm),
             "cardinality_minimum" | "cardinality_maximum" => Some(Self::Cardinality),
             _ => None,
         }
     }
 
+    fn for_loader_line(line: &str) -> Option<Self> {
+        match line {
+            "path" => Some(Self::LoaderPath),
+            "path_file" => Some(Self::SingleFile),
+            "path_extension" => Some(Self::Extension),
+            "path_strict" => Some(Self::FolderOnly),
+            "name_field" => Some(Self::NameField),
+            "skip_root_key" => Some(Self::SkippedRootKey),
+            "type_per_file" | "name_from_file" => Some(Self::FileNamed),
+            _ => None,
+        }
+    }
+
     fn config_value(&self, raw: &str) -> Option<Value> {
+        let text = raw.trim_matches('"');
+        let yes_no = || match text {
+            "yes" => Some(Value::Bool(true)),
+            "no" => Some(Value::Bool(false)),
+            _ => None,
+        };
+
         match self {
             Self::Presence => match raw {
                 "present" => Some(Value::Bool(true)),
@@ -165,6 +209,23 @@ impl ComparisonKind {
                 _ => None,
             },
             Self::LoaderPath => Some(Value::String(projection::config_directory(raw).into())),
+            Self::SingleFile | Self::Extension => Some(Value::String(text.into())),
+            Self::FolderOnly | Self::FileNamed => yes_no(),
+            Self::NameField => match text {
+                "" => None,
+                "-" => Some(json!("Value")),
+                field => Some(json!({ "Field": field })),
+            },
+            Self::SkippedRootKey => Some(Value::Bool(!text.is_empty())),
+            Self::Priority => Some(Value::String(
+                match text {
+                    "lios" => "LastWins",
+                    "ordered" => "Merges",
+                    other => other,
+                }
+                .into(),
+            )),
+            Self::PriorityListed => (text == "present").then_some(Value::Bool(true)),
             Self::ValueForm => ["bool", "int", "float", "string", "scalar", "block"]
                 .contains(&raw)
                 .then(|| Value::String(raw.into())),
@@ -177,6 +238,26 @@ impl ComparisonKind {
         match self {
             Self::Presence => answer.as_bool().map(Value::Bool),
             Self::LoaderPath => answer.as_str().map(|path| Value::String(path.into())),
+            Self::SingleFile => answer
+                .as_str()
+                .and_then(|path| path.rsplit('/').next())
+                .map(|file| Value::String(file.into())),
+            Self::Extension => answer.get("suffix").cloned(),
+            Self::FolderOnly => match answer {
+                Value::String(recursion) => Some(Value::Bool(recursion == "None")),
+                Value::Object(levels) if levels.contains_key("Levels") => Some(Value::Bool(false)),
+                _ => None,
+            },
+            Self::NameField if answer.as_array().is_some_and(Vec::is_empty) => {
+                Some(json!("no name"))
+            }
+            Self::NameField => answer.get("name").cloned(),
+            Self::SkippedRootKey => answer
+                .get("statement")
+                .map(|statement| Value::Bool(statement.get("Nested").is_some())),
+            Self::FileNamed => answer.get("statement").map(|_| Value::Bool(false)),
+            Self::Priority => answer.as_str().map(|rule| Value::String(rule.into())),
+            Self::PriorityListed => (!answer.is_null()).then_some(Value::Bool(true)),
             Self::ValueForm => answer.get("form")?.as_str().map(|form| {
                 Value::String(
                     match form {
@@ -239,7 +320,7 @@ fn comparison_outcome(
             Some("No applicable Atlas answer".into()),
         );
     }
-    let Some(kind) = ComparisonKind::for_property(&claim.property) else {
+    let Some(kind) = ComparisonKind::for_claim(claim) else {
         return (
             Status::MissingFromAtlas,
             Some("Config assertion has no comparison mapping for this property".into()),

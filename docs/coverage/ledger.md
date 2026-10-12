@@ -140,6 +140,42 @@ Native publishes no such answer for a whole type today: `namespace` is a key of 
 loader, not a field of `CEvent::ReadMember`, and SDK-791 owns definition-name rules. Add that join
 when Native answers one of those root keys.
 
+### Loader rules (SDK-797)
+
+Native's `loader_rules` answer (`loader-rules/v4`) becomes four properties of each registry
+subject: `extension` (`{"suffix": …}`, `null` for every file), `recursion`, `duplicate_rule` and
+`definition_names` (the forms of root statements). A form that names a nested block becomes the
+`definition_names` rule of the field at its path. A property that Native leaves unresolved, or a
+partial `extension`, `recursion` or `duplicate_rule`, is a gap on the registry that blocks every
+joined claim. A partial `definition_names` answer keeps its
+stated forms and publishes a `definition_names.partial` gap that joins no config question; with no
+root form it is unresolved. The file order and the mod-over-vanilla rule, which Native states once
+for the build with no fixture, are the gaps `inventory:loader_rules#file_order` and
+`#mod_over_vanilla`. They join no question, so a claim that needs only those stated facts and the
+duplicate rule keeps its credit.
+
+The type lines join by the type's selector:
+
+- `path_extension` and `path_strict` join `extension` and `recursion` for the root type, a nested
+  type and a type that a root key selects. `path_strict = yes` agrees with `None`; a `null` suffix
+  differs from `.txt`.
+- `name_field`, `skip_root_key`, `type_per_file` and `name_from_file` join the one form that names
+  the type's definitions: the `Root` form (or the only root form) for the root type, the
+  `RootKey(KEY)` form for a type with `type_key_filter = KEY` and no `skip_root_key`, and the
+  nested field's form for a nested type. Native's root-key form makes `event_namespace` such a
+  type; only its loader lines join it, and its other questions keep the selector gap. `name_field`
+  agrees with `Field(name)`, and `"-"` with `Value`. `skip_root_key` agrees with a nested form.
+  `type_per_file` and `name_from_file` agree only when they are `no`: Native has no form that a
+  file names. A loader that names no definition (a known empty list) answers only `name_field`.
+- `path_file = F` of a type in directory `D` joins only the `loader_path` rule of a registry named
+  `D/F`. Native lists no such registry: the loaders of `common/alerts.txt` and
+  `common/achievements.txt` are accepted special cases (Native's `loader-rules.md`, "Single named
+  files"), so these claims stay uncredited. A join by name agrees or does not join; there is no
+  differing answer. Other types in the folder do not make the claim's selector unresolved: only
+  the registry named by its one file answers it. A folder registry `D` does not establish which files a loader reads.
+- An `overrides.cwt` priority joins the `duplicate_rule` of its directory: its presence, and its
+  value. `lios` agrees with `LastWins`, `ordered` with `Merges`, and every other pair differs.
+
 The ledger accepts only the published `atlas_rule_snapshot` input. Its private scoring
 projection joins rule subjects to ledger questions and preserves exact Native source stamps,
 conditions and gaps. There is no second published coverage snapshot contract and no replay-era

@@ -1,0 +1,59 @@
+{
+  "Ok": {
+    "value": {
+      "extension": {
+        "Known": null
+      },
+      "name_contains": {
+        "Known": null
+      },
+      "recursion": {
+        "Known": "None"
+      },
+      "duplicate_rule": {
+        "Known": "LastWins"
+      },
+      "definition_names": {
+        "Known": [
+          {
+            "statement": "Root",
+            "name": "Key"
+          }
+        ]
+      }
+    },
+    "completeness": "Complete",
+    "gaps": [
+      {
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "answer_item",
+          "name": "file_order"
+        },
+        "detail": "The order in which the loader reads its files is a rule of the build's file system, stated once from its code and not for each registry. No fixture verifies it."
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "answer_item",
+          "name": "mod_over_vanilla"
+        },
+        "detail": "Whether a mod's file replaces or joins a game file in the same folder is a rule of the build's file system, stated once from its code and not for each registry. No fixture verifies it."
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "registry",
+          "name": "common/council_agendas"
+        },
+        "detail": "The search covers the arguments of the loader's file enumeration calls and the stated definition-name rules of its loaders. Files that the loader opens by a literal name, a check of the file name after the enumeration, and definitions nested in a definition's block other than the stated swap blocks are outside it."
+      }
+    ],
+    "source": {
+      "build": "c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b",
+      "native_version": "0.1.0",
+      "method": "loader-rules/v4",
+      "basis": "StaticAnalysis"
+    }
+  }
+}

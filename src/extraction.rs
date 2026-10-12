@@ -3,7 +3,7 @@
 use pdx_native::{
     Answer, BuildId, CommandGrammar, Declaration, DeclarationKind, Define, DerivedName, Disposal,
     Error, Field, FixtureFieldQuestion, FixtureObservation, FixtureRequest, GameOptions, GameRule,
-    LoadedModifiers, LocalizationDeclarations, ModifierCategory, ModifierDeclaration,
+    LoadedModifiers, LoaderRules, LocalizationDeclarations, ModifierCategory, ModifierDeclaration,
     ModifierFamily, Native, OnAction, Registry, ScopeInventory, ScopeLink, Support,
 };
 use std::collections::BTreeMap;
@@ -26,6 +26,9 @@ pub struct Extraction {
     pub fields: BTreeMap<String, Result<Answer<Vec<Field>>, Error>>,
     /// Names that each directory's own code derives from an item key or a field.
     pub derived_names: BTreeMap<String, Result<Answer<Vec<DerivedName>>, Error>>,
+    /// How each directory's loader selects its files, treats a repeated key and names its
+    /// definitions.
+    pub loader_rules: BTreeMap<String, Result<Answer<LoaderRules>, Error>>,
     /// Independent fixture sessions and their disposal results.
     pub sessions: Vec<FixtureSession>,
     /// Static language declarations.
@@ -40,6 +43,7 @@ impl Extraction {
         self.registries.is_ok()
             && self.fields.values().all(Result::is_ok)
             && self.derived_names.values().all(Result::is_ok)
+            && self.loader_rules.values().all(Result::is_ok)
             && self.sessions.iter().all(|session| {
                 session.observation.is_ok()
                     && disposal_blocker(session.name, &session.disposal).is_none()
@@ -194,6 +198,10 @@ pub async fn collect(native: &Native, options: impl Fn() -> GameOptions) -> Extr
         .keys()
         .map(|registry| (registry.clone(), native.derived_names(registry)))
         .collect();
+    let loader_rules = fields
+        .keys()
+        .map(|registry| (registry.clone(), native.loader_rules(registry)))
+        .collect();
     let discovered: std::collections::BTreeSet<_> = fields.keys().map(String::as_str).collect();
 
     let requests = [
@@ -233,6 +241,7 @@ pub async fn collect(native: &Native, options: impl Fn() -> GameOptions) -> Extr
         registries,
         fields,
         derived_names,
+        loader_rules,
         sessions,
         language,
         loaded_modifiers,

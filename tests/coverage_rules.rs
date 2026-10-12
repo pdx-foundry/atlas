@@ -1,6 +1,7 @@
+use coverage::comparison::Status;
 use pdx_atlas::{coverage, extraction, ledger, snapshot};
 use pdx_native::{Basis, GameOptions, Native};
-use serde_json::json;
+use serde_json::{Value, json};
 use std::{collections::BTreeMap, path::Path, process::Command};
 
 fn ledger() -> ledger::Ledger {
@@ -76,15 +77,22 @@ impl SharedDirectory {
 
     /// The comparison gaps of the claim at `subject` with `property`.
     fn gaps(&self, property: &str, subject: &[&str]) -> &[String] {
+        &self.entry(property, subject).gaps
+    }
+
+    /// The comparison status of the claim at `subject` with `property`.
+    fn status(&self, property: &str, subject: &[&str]) -> coverage::comparison::Status {
+        self.entry(property, subject).status
+    }
+
+    fn entry(&self, property: &str, subject: &[&str]) -> &coverage::comparison::Entry {
         let id = self.claim_id(property, subject);
 
-        &self
-            .comparison
+        self.comparison
             .entries
             .iter()
             .find(|entry| entry.claim.as_deref() == Some(id))
             .unwrap()
-            .gaps
     }
 }
 
@@ -924,5 +932,479 @@ async fn repeat_facts_answer_maximum_questions_without_publishing_engine_limits(
                 assert_eq!(entry.status, expected, "{repeat}");
             }
         }
+    }
+}
+
+/// Adds a registry subject for `registry` with no rules.
+fn add_registry(snapshot: &mut snapshot::Snapshot, registry: &str) {
+    snapshot.subjects.push(snapshot::Subject {
+        id: format!("registry:{registry}"),
+        kind: snapshot::SubjectKind::Registry,
+        registry: Some(registry.into()),
+        field: None,
+        conditional: None,
+        name: None,
+    });
+}
+
+/// Adds or replaces the rule `{subject}#{property}`, citing the traditions loader-rule evidence.
+fn set_rule(snapshot: &mut snapshot::Snapshot, subject: &str, property: &str, answer: Value) {
+    let template = snapshot
+        .rules
+        .iter()
+        .find(|rule| rule.id == "registry:common/traditions#extension")
+        .unwrap()
+        .clone();
+    let id = format!("{subject}#{property}");
+
+    snapshot.rules.retain(|rule| rule.id != id);
+    snapshot.rules.push(snapshot::Rule {
+        id,
+        subject: subject.into(),
+        property: property.into(),
+        answer,
+        ..template
+    });
+}
+
+/// Replaces the rule `{subject}#{property}` with a gap, as for an unresolved property.
+fn unresolve(snapshot: &mut snapshot::Snapshot, subject: &str, property: &str) {
+    let id = format!("{subject}#{property}");
+
+    snapshot.rules.retain(|rule| rule.id != id);
+    snapshot.gaps.push(snapshot::Gap {
+        id,
+        subject: subject.into(),
+        property: property.into(),
+        reason: format!("Native did not establish this registry's {property}"),
+        owner: None,
+        native_gaps: Vec::new(),
+        evidence: Vec::new(),
+    });
+}
+
+const TRADITIONS: &str = "registry:common/traditions";
+
+#[tokio::test]
+async fn file_selection_lines_join_the_loader_extension_and_recursion() {
+    let source = r#"
+types = {
+    type[tradition] = {
+        path = "game/common/traditions"
+        path_extension = .txt
+        path_strict = yes
+    }
+}
+"#;
+    let extension = ["types", "type[tradition]", "path_extension"];
+    let strict = ["types", "type[tradition]", "path_strict"];
+
+    let recorded = SharedDirectory::evaluate(&[("traditions.cwt", source)], |_| {}).await;
+
+    assert!(recorded.covered("loader_path", &extension));
+    assert!(recorded.covered("loader_path", &strict));
+    assert_eq!(
+        recorded.status("loader_path", &extension),
+        Status::Different
+    );
+    assert_eq!(recorded.status("loader_path", &strict), Status::Same);
+
+    let edited = SharedDirectory::evaluate(&[("traditions.cwt", source)], |snapshot| {
+        set_rule(
+            snapshot,
+            TRADITIONS,
+            "extension",
+            json!({ "suffix": ".txt" }),
+        );
+        set_rule(snapshot, TRADITIONS, "recursion", json!("Unlimited"));
+    })
+    .await;
+
+    assert_eq!(edited.status("loader_path", &extension), Status::Same);
+    assert_eq!(edited.status("loader_path", &strict), Status::Different);
+
+    let levels = SharedDirectory::evaluate(&[("traditions.cwt", source)], |snapshot| {
+        set_rule(snapshot, TRADITIONS, "recursion", json!({ "Levels": 2 }));
+    })
+    .await;
+
+    assert_eq!(levels.status("loader_path", &strict), Status::Different);
+}
+
+#[tokio::test]
+async fn override_priorities_join_the_duplicate_rule_of_their_directory() {
+    let overrides = r#"
+priorities = {
+    "common/traditions" = lios
+    "common/relics" = fios
+    "common/buildings" = ordered
+}
+"#;
+    let priority = |directory: &'static str| ["priorities", directory];
+
+    let recorded = SharedDirectory::evaluate(&[("overrides.cwt", overrides)], |_| {}).await;
+
+    for directory in ["common/traditions", "common/relics", "common/buildings"] {
+        assert!(
+            recorded.covered("value_form", &priority(directory)),
+            "{directory}"
+        );
+        assert!(recorded.covered("field_existence", &priority(directory)));
+        assert_eq!(
+            recorded.status("field_existence", &priority(directory)),
+            Status::Same
+        );
+    }
+    assert_eq!(
+        recorded.status("value_form", &priority("common/traditions")),
+        Status::Same
+    );
+    assert_eq!(
+        recorded.status("value_form", &priority("common/relics")),
+        Status::Different
+    );
+    assert_eq!(
+        recorded.status("value_form", &priority("common/buildings")),
+        Status::Different
+    );
+
+    let merging = SharedDirectory::evaluate(&[("overrides.cwt", overrides)], |snapshot| {
+        set_rule(
+            snapshot,
+            "registry:common/buildings",
+            "duplicate_rule",
+            json!("Merges"),
+        );
+    })
+    .await;
+
+    assert_eq!(
+        merging.status("value_form", &priority("common/buildings")),
+        Status::Same
+    );
+}
+
+#[tokio::test]
+async fn unresolved_loader_rules_credit_nothing_and_keep_their_gaps() {
+    let types = r#"
+types = {
+    type[tradition] = {
+        path = "game/common/traditions"
+        path_extension = .txt
+        path_strict = yes
+        name_field = name
+    }
+}
+"#;
+    let overrides = r#"priorities = { "common/traditions" = lios }"#;
+    let directory = SharedDirectory::evaluate(
+        &[("traditions.cwt", types), ("overrides.cwt", overrides)],
+        |snapshot| {
+            for property in [
+                "extension",
+                "recursion",
+                "duplicate_rule",
+                "definition_names",
+            ] {
+                unresolve(snapshot, TRADITIONS, property);
+            }
+        },
+    )
+    .await;
+
+    for (property, subject, unresolved) in [
+        (
+            "loader_path",
+            &["types", "type[tradition]", "path_extension"][..],
+            "extension",
+        ),
+        (
+            "loader_path",
+            &["types", "type[tradition]", "path_strict"],
+            "recursion",
+        ),
+        (
+            "loader_path",
+            &["types", "type[tradition]", "name_field"],
+            "definition_names",
+        ),
+        (
+            "value_form",
+            &["priorities", "common/traditions"],
+            "duplicate_rule",
+        ),
+    ] {
+        assert!(!directory.covered(property, subject), "{subject:?}");
+        assert!(
+            directory
+                .gaps(property, subject)
+                .iter()
+                .any(|gap| gap.contains(unresolved)),
+            "{subject:?}"
+        );
+    }
+}
+
+#[tokio::test]
+async fn naming_lines_join_the_form_of_their_type() {
+    let traditions = r#"
+types = {
+    type[tradition] = {
+        path = "game/common/traditions"
+        name_field = name
+    }
+    ## type_key_filter = tradition_swap
+    type[swapped_tradition] = {
+        base_type = tradition
+        path = "game/common/traditions"
+        skip_root_key = any
+        name_field = name
+    }
+}
+"#;
+    let relics = r#"
+types = {
+    type[relic] = {
+        path = "game/common/relics"
+        skip_root_key = collection
+        type_per_file = yes
+        name_from_file = no
+    }
+}
+"#;
+    let directory = SharedDirectory::evaluate(
+        &[("traditions.cwt", traditions), ("relics.cwt", relics)],
+        |_| {},
+    )
+    .await;
+    let swap = |line| ["types", "type[swapped_tradition]", line];
+    let relic = |line| ["types", "type[relic]", line];
+
+    for (subject, status) in [
+        (
+            ["types", "type[tradition]", "name_field"],
+            Status::Different,
+        ),
+        (swap("name_field"), Status::Same),
+        (swap("skip_root_key"), Status::Same),
+        (relic("skip_root_key"), Status::Different),
+        (relic("type_per_file"), Status::Different),
+        (relic("name_from_file"), Status::Same),
+    ] {
+        assert!(directory.covered("loader_path", &subject), "{subject:?}");
+        assert_eq!(
+            directory.status("loader_path", &subject),
+            status,
+            "{subject:?}"
+        );
+    }
+}
+
+#[tokio::test]
+async fn a_loader_that_names_no_definition_answers_only_the_name_field() {
+    let relics = r#"
+types = {
+    type[relic] = {
+        path = "game/common/relics"
+        name_field = name
+        skip_root_key = collection
+        type_per_file = yes
+    }
+}
+"#;
+    let directory = SharedDirectory::evaluate(&[("relics.cwt", relics)], |snapshot| {
+        set_rule(
+            snapshot,
+            "registry:common/relics",
+            "definition_names",
+            json!([]),
+        );
+    })
+    .await;
+    let relic = |line| ["types", "type[relic]", line];
+
+    assert!(directory.covered("loader_path", &relic("name_field")));
+    assert_eq!(
+        directory.status("loader_path", &relic("name_field")),
+        Status::Different
+    );
+    assert!(!directory.covered("loader_path", &relic("skip_root_key")));
+    assert!(!directory.covered("loader_path", &relic("type_per_file")));
+}
+
+#[tokio::test]
+async fn partial_names_credit_the_stated_root_form_and_publish_the_rest() {
+    let jobs = r#"
+types = {
+    type[pop_job] = {
+        path = "game/common/pop_jobs"
+        name_field = name
+    }
+}
+"#;
+    let directory = SharedDirectory::evaluate(&[("jobs.cwt", jobs)], |_| {}).await;
+    let name_field = ["types", "type[pop_job]", "name_field"];
+
+    assert!(directory.covered("loader_path", &name_field));
+    assert_eq!(
+        directory.status("loader_path", &name_field),
+        Status::Different
+    );
+    assert!(
+        directory
+            .coverage
+            .atlas_only_questions
+            .contains(&"atlas:registry:common/pop_jobs#definition_names.partial".into())
+    );
+}
+
+#[tokio::test]
+async fn a_root_key_form_joins_the_loader_lines_of_the_type_that_the_key_selects() {
+    let events = r#"
+types = {
+    type[event] = {
+        path = "game/events"
+        name_field = id
+    }
+}
+"#;
+    let namespaces = r#"
+types = {
+    ## type_key_filter = namespace
+    type[event_namespace] = {
+        path = "game/events"
+        name_field = "-"
+    }
+}
+event_namespace = scalar
+"#;
+    let sources = [
+        ("events/events.cwt", events),
+        ("events/event_namespaces.cwt", namespaces),
+    ];
+    let forms = |namespace_name: Value| {
+        json!([
+            { "statement": { "RootKey": "namespace" }, "name": namespace_name },
+            { "statement": "Root", "name": { "Field": "id" } },
+        ])
+    };
+    let with_forms = |namespace_name: Value| {
+        move |snapshot: &mut snapshot::Snapshot| {
+            add_registry(snapshot, "events");
+            set_rule(snapshot, "registry:events", "existence", json!(true));
+            set_rule(
+                snapshot,
+                "registry:events",
+                "definition_names",
+                forms(namespace_name),
+            );
+        }
+    };
+    let namespace = ["types", "type[event_namespace]", "name_field"];
+    let event = ["types", "type[event]", "name_field"];
+
+    let agreeing = SharedDirectory::evaluate(&sources, with_forms(json!("Value"))).await;
+
+    assert!(agreeing.covered("loader_path", &namespace));
+    assert_eq!(agreeing.status("loader_path", &namespace), Status::Same);
+    assert_eq!(agreeing.status("loader_path", &event), Status::Same);
+    assert!(!agreeing.covered("type_existence", &["types", "type[event_namespace]"]));
+    assert!(
+        agreeing
+            .gaps("type_existence", &["types", "type[event_namespace]"])
+            .iter()
+            .any(|gap| gap.contains("`type_key_filter = namespace`"))
+    );
+    assert!(!agreeing.covered("value_form", &["event_namespace"]));
+
+    let differing = SharedDirectory::evaluate(&sources, with_forms(json!("Key"))).await;
+
+    assert_eq!(
+        differing.status("loader_path", &namespace),
+        Status::Different
+    );
+}
+
+#[tokio::test]
+async fn path_file_joins_only_a_registry_named_by_the_one_file() {
+    let alerts = r#"
+types = {
+    type[alert] = {
+        path = "game/common/traditions"
+        path_file = "alerts.txt"
+    }
+}
+"#;
+    let path_file = ["types", "type[alert]", "path_file"];
+
+    let folder_only = SharedDirectory::evaluate(&[("alerts.cwt", alerts)], |_| {}).await;
+
+    assert!(folder_only.covered("loader_path", &["types", "type[alert]", "path"]));
+    assert!(!folder_only.covered("loader_path", &path_file));
+
+    let single_file = SharedDirectory::evaluate(&[("alerts.cwt", alerts)], |snapshot| {
+        let registry = "common/traditions/alerts.txt";
+
+        add_registry(snapshot, registry);
+        set_rule(
+            snapshot,
+            &format!("registry:{registry}"),
+            "loader_path",
+            json!(registry),
+        );
+    })
+    .await;
+
+    assert!(single_file.covered("loader_path", &path_file));
+    assert_eq!(single_file.status("loader_path", &path_file), Status::Same);
+
+    let shared = r#"
+types = {
+    type[alert] = {
+        path = "game/common/traditions"
+        path_file = "alerts.txt"
+    }
+    type[achievement] = {
+        path = "game/common/traditions"
+        path_file = "achievements.txt"
+    }
+}
+"#;
+    let shared_folder = SharedDirectory::evaluate(&[("alerts.cwt", shared)], |snapshot| {
+        let registry = "common/traditions/alerts.txt";
+
+        add_registry(snapshot, registry);
+        set_rule(
+            snapshot,
+            &format!("registry:{registry}"),
+            "loader_path",
+            json!(registry),
+        );
+    })
+    .await;
+
+    assert!(shared_folder.covered("loader_path", &path_file));
+    assert!(!shared_folder.covered("loader_path", &["types", "type[alert]", "path"]));
+    assert!(!shared_folder.covered("loader_path", &["types", "type[achievement]", "path_file"]));
+}
+
+#[tokio::test]
+async fn recorded_loader_rules_earn_no_credit_and_publish_the_build_wide_limits() {
+    let overrides = r#"priorities = { "common/traditions" = lios }"#;
+    let ledger = ledger::inventory(&BTreeMap::from([(
+        "overrides.cwt".into(),
+        overrides.into(),
+    )]));
+    let snapshot = recorded_snapshot().await;
+    let report =
+        coverage::evaluate(&ledger, Some(&snapshot::json_bytes(&snapshot).unwrap())).unwrap();
+
+    assert_eq!(report.totals.atlas_owned.covered, 0);
+    for limit in ["file_order", "mod_over_vanilla"] {
+        assert!(
+            report
+                .atlas_only_questions
+                .contains(&format!("atlas:inventory:loader_rules#{limit}"))
+        );
     }
 }
