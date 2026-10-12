@@ -3,28 +3,28 @@
 `m452/` holds a sample of the Native answers that live `snapshot` runs recorded on M452
 (Stellaris 4.5.2, build `c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b`).
 `registry_fields/` was recorded on 2026-10-09 with Native
-`0167bc5e4c163270ea17139cbffb0e94d8a41cde`, pinned in `Cargo.toml` (SDK-738). The other answers
-were recorded on 2026-10-06 with Native `573e35f29fea8f54d32d48c90ff40c074e34b5f4`: the
-[entry-scope checks](../../../docs/coverage/entry-scope-checks.json) apply only to
-`callbacks/v2`, and the pinned Native answers `callbacks/v4`. Until the checks cover
-`callbacks/v4`, refresh only `registry_fields/`: record a full run into an empty directory, copy
-its `registry_fields/`, then trim the sample:
+`0167bc5e4c163270ea17139cbffb0e94d8a41cde`, pinned in `Cargo.toml` (SDK-738). `on_actions.json`
+and `game_rules.json` were recorded on 2026-10-12 with the same Native (SDK-799), which answers
+`callbacks/v4`; the [entry-scope checks](../../../docs/coverage/entry-scope-checks.json) cover that
+method. The other answers were recorded on 2026-10-06 with Native
+`573e35f29fea8f54d32d48c90ff40c074e34b5f4`. To refresh the recording, record a full run into an
+empty directory, copy the answers, then trim the sample:
 
 ```sh
 rm -rf .scratch/m452
 cargo run --release --locked -- snapshot "$STELLARIS_PATH" .scratch/m452 .scratch/rules.json
-rm -rf tests/fixtures/native/m452/registry_fields
-cp -R .scratch/m452/registry_fields tests/fixtures/native/m452/
+rm -rf tests/fixtures/native/m452
+cp -R .scratch/m452 tests/fixtures/native/m452
 cargo run --release --locked --example trim_recording -- tests/fixtures/native/m452
 ```
 
-Registry fields use `registry-fields/v24`, command grammars `command-grammar/v15`, derived names
-`derived-names/v1`, callbacks `callbacks/v2` and fixtures `observe-fixture/v7`. Every required
-answer property is explicit; tests read them with `Native::from_recorded_answers` without a
-game. The M451-hotfix recordings remain at Atlas commit
+A change of the callback method needs the entry-scope checks again before the callback answers
+are refreshed. Registry fields use `registry-fields/v24`, command grammars `command-grammar/v15`,
+derived names `derived-names/v1`, callbacks `callbacks/v4` and fixtures `observe-fixture/v7`.
+Every required answer property is explicit; tests read them with `Native::from_recorded_answers`
+without a game. The M451-hotfix recordings remain at Atlas commit
 `3c3472fb143eed1c28a9c2f50640559c8d9e4ea8`. `examples/record_callbacks.rs` records only the
-static callback answers, without starting a game; on the pinned Native it writes
-`callbacks/v4`, so do not run it into `m452/` until the checks cover that method:
+static callback answers, without starting a game:
 
 ```sh
 cargo run --release --locked --example record_callbacks -- "$STELLARIS_PATH" .scratch/callbacks

@@ -233,26 +233,53 @@ reported, not a maximum chain length: a terminal self-link can continue beyond t
 `prev` can pass through `not_set`. Unknown scope IDs, unresolved slots and missing call sites
 remain gaps. A resolved alternative does not cover another site's Native gap.
 
-[The independent-check ledger](entry-scope-checks.json) records SDK-608's M451-hotfix comparison:
-184 of 294 on_actions agreed with vanilla scope comments, and 181 of 223 game rules agreed with
-config `replace_scopes`. It names all 15 confirmed disagreements and all 44 names lacking an
-independent source, with stable reasons. The source is SDK-704 and Native's
+[The independent-check ledger](entry-scope-checks.json) records the comparison for
+`callbacks/v4` on M452: 234 of 294 on_actions agree with the vanilla scope comments, and 201 of
+223 game rules agree with the config `replace_scopes`. It names all 18 confirmed disagreements
+and all 34 names with no independent source, with stable reasons. The sources are SDK-608's
+hand checks (carried by SDK-704 and SDK-625), SDK-799 and Native's
 `docs/native/engine-commands.md`, “On_actions, game rules and their entry scopes”. The self-link
 rule remains an assumption. These checks apply only to the exact recorded build and
-`callbacks/v2`; comments and config never feed Native's extraction. The checks were made on
-M451-hotfix. SDK-625 carried them to M452 because Native's `callbacks/v2` on_action and game-rule
-answers, values and gaps, are identical on both builds. Carry them to a later build only on the
-same evidence; otherwise the gate drops them, and the names without an independent source
-lose their gap.
+`callbacks/v4`; comments and config never feed Native's extraction. Carry them to a later build or
+method only after the same check; otherwise the gate drops them, and the names without an
+independent source lose their gap.
 
-The confirmed disagreements remain engine answers: nine game rules have no `from` despite the
+A name agrees when every context that Native gives matches each slot that its source names.
+A slot that the source does not name is not compared; config `any` matches every value, and
+config `no_scope` matches `NotSet`. A vanilla comment is an independent source only when it
+names the type of `this` (or of `root`, which some comments write for `this`); a comment with only
+role words there, such as `Actor` or `Main Ally`, is not. Each comment slot that names a scope
+type, an owner (a country) or an heir (a leader) is then compared. With this rule, the pinned
+config and the `callbacks/v2` answers, the game-rule count is 181, as SDK-608 recorded. The
+on_action count keeps SDK-608's result for the 232 names whose answer did not change and applies
+this rule to the 62 that changed.
+
+SDK-799 changed these results from `callbacks/v2`:
+
+- 62 on_actions changed answer (SDK-712, SDK-729, SDK-730, SDK-731). Each had an unresolved scope
+  or no context in `callbacks/v2`, so none agreed before. 50 agree now. Five keep no independent
+  source (`on_add_to_council`, `on_colony_yearly_pulse`, `on_proxy_war_started`, `on_status_quo`
+  and `on_status_quo_forced`), and `on_war_participant_leaves_early` joins them: its comment, as
+  for `on_status_quo`, names only roles and a war. The four debris names join the names whose
+  comment describes a branch past the path limit. Two are new confirmed disagreements:
+  `on_rebels_take_colony_owner_switched` (`CColony::DailyUpdateSerialHandleCombat` builds only
+  the country and the colony) and `special_project_success` (`CSpecialProjectInstance::OnSuccess`
+  links the ship only when `FindShipOfCountryForProject` finds one).
+- 7 game rules changed answer. The five `can_fill_*_job` rules and `system_blocks_sensors` agree;
+  `can_orbitable_repair_ships` keeps an unresolved context and has no `replace_scopes`.
+- 15 of the 17 game rules that SDK-608 recorded without `replace_scopes` have one in the pinned
+  config. 14 agree. `is_seeded` is a new confirmed disagreement: `CGameRules::IsSeeded` builds a
+  fresh scope and sets only the fleet, so script sees no `from`, and vanilla does not read it.
+
+The confirmed disagreements remain engine answers: ten game rules have no `from` despite the
 config; two pass `colony` where config says `planet`; `dismiss_leader_cost` evaluates on a leader;
-and three on_action comments name the wrong object or an object the engine never sets. These
-findings create no Native gaps. Unrelated Native failures still block coverage.
+and five on_action comments name the wrong object or an object that the engine does not always
+set. These findings create no Native gaps. Unrelated Native failures still block coverage.
 
-The 44 names with no independent source receive an `entry_scopes` gap, including the two whose
-comment describes a site that Native could not follow. Native's original gaps remain attached.
-The ledger's coverage projection therefore keeps these reasons and grants no entry-scope credit.
+The 34 names with no independent source receive an `entry_scopes` gap, including the six whose
+comment describes a site or branch that Native could not follow. Native's original gaps remain
+attached. The ledger's coverage projection therefore keeps these reasons and grants no
+entry-scope credit.
 
 Comparison report format 3 adds `entry_scope_checks`. This field publishes the historical results
 only when both the on_action and game-rule answers have the matching build and callback method.

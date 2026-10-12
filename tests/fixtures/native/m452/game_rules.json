@@ -1332,13 +1332,18 @@
         "kind": "Scripted",
         "entries": [
           {
-            "this": "Unresolved",
-            "root": "Unresolved",
+            "this": {
+              "Scope": {
+                "id": "1a26ff288266684f",
+                "name": "pop_group"
+              }
+            },
+            "root": "SelfLink",
             "from": [
-              "Unresolved"
+              "SelfLink"
             ],
             "prev": [
-              "Unresolved"
+              "SelfLink"
             ]
           }
         ]
@@ -1348,13 +1353,18 @@
         "kind": "Scripted",
         "entries": [
           {
-            "this": "Unresolved",
-            "root": "Unresolved",
+            "this": {
+              "Scope": {
+                "id": "1a26ff288266684f",
+                "name": "pop_group"
+              }
+            },
+            "root": "SelfLink",
             "from": [
-              "Unresolved"
+              "SelfLink"
             ],
             "prev": [
-              "Unresolved"
+              "SelfLink"
             ]
           }
         ]
@@ -1364,13 +1374,18 @@
         "kind": "Scripted",
         "entries": [
           {
-            "this": "Unresolved",
-            "root": "Unresolved",
+            "this": {
+              "Scope": {
+                "id": "1a26ff288266684f",
+                "name": "pop_group"
+              }
+            },
+            "root": "SelfLink",
             "from": [
-              "Unresolved"
+              "SelfLink"
             ],
             "prev": [
-              "Unresolved"
+              "SelfLink"
             ]
           }
         ]
@@ -1380,13 +1395,18 @@
         "kind": "Scripted",
         "entries": [
           {
-            "this": "Unresolved",
-            "root": "Unresolved",
+            "this": {
+              "Scope": {
+                "id": "1a26ff288266684f",
+                "name": "pop_group"
+              }
+            },
+            "root": "SelfLink",
             "from": [
-              "Unresolved"
+              "SelfLink"
             ],
             "prev": [
-              "Unresolved"
+              "SelfLink"
             ]
           }
         ]
@@ -1396,13 +1416,18 @@
         "kind": "Scripted",
         "entries": [
           {
-            "this": "Unresolved",
-            "root": "Unresolved",
+            "this": {
+              "Scope": {
+                "id": "1a26ff288266684f",
+                "name": "pop_group"
+              }
+            },
+            "root": "SelfLink",
             "from": [
-              "Unresolved"
+              "SelfLink"
             ],
             "prev": [
-              "Unresolved"
+              "SelfLink"
             ]
           }
         ]
@@ -2170,6 +2195,36 @@
         "name": "can_orbitable_repair_ships",
         "kind": "Scripted",
         "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "8bb6b317643be13a",
+                "name": "megastructure"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ],
+            "prev": [
+              "SelfLink"
+            ]
+          },
+          {
+            "this": {
+              "Scope": {
+                "id": "a28a4564ee636659",
+                "name": "starbase"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ],
+            "prev": [
+              "SelfLink"
+            ]
+          },
           {
             "this": "Unresolved",
             "root": "Unresolved",
@@ -5176,13 +5231,23 @@
         "kind": "Scripted",
         "entries": [
           {
-            "this": "Unresolved",
-            "root": "Unresolved",
+            "this": {
+              "Scope": {
+                "id": "5ab5fc854e81e429",
+                "name": "galactic_object"
+              }
+            },
+            "root": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
             "from": [
-              "Unresolved"
+              "SelfLink"
             ],
             "prev": [
-              "Unresolved"
+              "SelfLink"
             ]
           }
         ]
@@ -5349,7 +5414,23 @@
           "kind": "answer_item",
           "name": "can_fill_drone_job"
         },
-        "detail": "some entry scopes of a call site could not be established"
+        "detail": "a path to a call site could not be followed (branch-value)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "answer_item",
+          "name": "can_fill_drone_job"
+        },
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "answer_item",
+          "name": "can_fill_drone_job"
+        },
+        "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -5357,7 +5438,23 @@
           "kind": "answer_item",
           "name": "can_fill_precursor_job"
         },
-        "detail": "some entry scopes of a call site could not be established"
+        "detail": "a path to a call site could not be followed (branch-value)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "answer_item",
+          "name": "can_fill_precursor_job"
+        },
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "answer_item",
+          "name": "can_fill_precursor_job"
+        },
+        "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -5365,7 +5462,23 @@
           "kind": "answer_item",
           "name": "can_fill_ruler_job"
         },
-        "detail": "some entry scopes of a call site could not be established"
+        "detail": "a path to a call site could not be followed (branch-value)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "answer_item",
+          "name": "can_fill_ruler_job"
+        },
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "answer_item",
+          "name": "can_fill_ruler_job"
+        },
+        "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -5373,7 +5486,23 @@
           "kind": "answer_item",
           "name": "can_fill_specialist_job"
         },
-        "detail": "some entry scopes of a call site could not be established"
+        "detail": "a path to a call site could not be followed (branch-value)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "answer_item",
+          "name": "can_fill_specialist_job"
+        },
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "answer_item",
+          "name": "can_fill_specialist_job"
+        },
+        "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -5381,7 +5510,39 @@
           "kind": "answer_item",
           "name": "can_fill_worker_job"
         },
-        "detail": "some entry scopes of a call site could not be established"
+        "detail": "a path to a call site could not be followed (branch-value)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "answer_item",
+          "name": "can_fill_worker_job"
+        },
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "answer_item",
+          "name": "can_fill_worker_job"
+        },
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "answer_item",
+          "name": "can_orbitable_repair_ships"
+        },
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "answer_item",
+          "name": "can_orbitable_repair_ships"
+        },
+        "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -5453,7 +5614,15 @@
           "kind": "answer_item",
           "name": "system_blocks_sensors"
         },
-        "detail": "some entry scopes of a call site could not be established"
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "answer_item",
+          "name": "system_blocks_sensors"
+        },
+        "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnnamedDeclaration",
@@ -5469,7 +5638,7 @@
     "source": {
       "build": "c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b",
       "native_version": "0.1.0",
-      "method": "callbacks/v2",
+      "method": "callbacks/v4",
       "basis": "StaticAnalysis"
     }
   }

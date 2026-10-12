@@ -60,13 +60,18 @@
         "name": "empire_init_create_ships",
         "entries": [
           {
-            "this": "Unresolved",
-            "root": "Unresolved",
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
             "from": [
-              "Unresolved"
+              "SelfLink"
             ],
             "prev": [
-              "Unresolved"
+              "SelfLink"
             ]
           }
         ]
@@ -108,16 +113,6 @@
             "prev": [
               "SelfLink"
             ]
-          },
-          {
-            "this": "Unresolved",
-            "root": "Unresolved",
-            "from": [
-              "Unresolved"
-            ],
-            "prev": [
-              "Unresolved"
-            ]
           }
         ]
       },
@@ -137,16 +132,6 @@
             ],
             "prev": [
               "SelfLink"
-            ]
-          },
-          {
-            "this": "Unresolved",
-            "root": "Unresolved",
-            "from": [
-              "Unresolved"
-            ],
-            "prev": [
-              "Unresolved"
             ]
           }
         ]
@@ -219,16 +204,6 @@
             ],
             "prev": [
               "SelfLink"
-            ]
-          },
-          {
-            "this": "Unresolved",
-            "root": "Unresolved",
-            "from": [
-              "Unresolved"
-            ],
-            "prev": [
-              "Unresolved"
             ]
           }
         ]
@@ -480,13 +455,30 @@
         "name": "on_astral_rift_exploration_complete",
         "entries": [
           {
-            "this": "Unresolved",
-            "root": "Unresolved",
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
             "from": [
-              "Unresolved"
+              {
+                "Scope": {
+                  "id": "25453ebe741bae53",
+                  "name": "astral_rift"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "6dafeb9bcf25b500",
+                  "name": "fleet"
+                }
+              },
+              "SelfLink"
             ],
             "prev": [
-              "Unresolved"
+              "SelfLink"
             ]
           }
         ]
@@ -495,13 +487,30 @@
         "name": "on_astral_rift_exploration_start",
         "entries": [
           {
-            "this": "Unresolved",
-            "root": "Unresolved",
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
             "from": [
-              "Unresolved"
+              {
+                "Scope": {
+                  "id": "25453ebe741bae53",
+                  "name": "astral_rift"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "6dafeb9bcf25b500",
+                  "name": "fleet"
+                }
+              },
+              "SelfLink"
             ],
             "prev": [
-              "Unresolved"
+              "SelfLink"
             ]
           }
         ]
@@ -510,13 +519,30 @@
         "name": "on_astral_rift_pre_event_fire",
         "entries": [
           {
-            "this": "Unresolved",
-            "root": "Unresolved",
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
             "from": [
-              "Unresolved"
+              {
+                "Scope": {
+                  "id": "25453ebe741bae53",
+                  "name": "astral_rift"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "6dafeb9bcf25b500",
+                  "name": "fleet"
+                }
+              },
+              "SelfLink"
             ],
             "prev": [
-              "Unresolved"
+              "SelfLink"
             ]
           }
         ]
@@ -525,13 +551,24 @@
         "name": "on_astral_rift_spawned",
         "entries": [
           {
-            "this": "Unresolved",
-            "root": "Unresolved",
+            "this": {
+              "Scope": {
+                "id": "25453ebe741bae53",
+                "name": "astral_rift"
+              }
+            },
+            "root": "SelfLink",
             "from": [
-              "Unresolved"
+              {
+                "Scope": {
+                  "id": "6dafeb9bcf25b500",
+                  "name": "fleet"
+                }
+              },
+              "SelfLink"
             ],
             "prev": [
-              "Unresolved"
+              "SelfLink"
             ]
           }
         ]
@@ -693,13 +730,13 @@
         "name": "on_bi_yearly_pulse",
         "entries": [
           {
-            "this": "Unresolved",
-            "root": "Unresolved",
+            "this": "NotSet",
+            "root": "SelfLink",
             "from": [
-              "Unresolved"
+              "SelfLink"
             ],
             "prev": [
-              "Unresolved"
+              "SelfLink"
             ]
           }
         ]
@@ -708,13 +745,18 @@
         "name": "on_bi_yearly_pulse_country",
         "entries": [
           {
-            "this": "Unresolved",
-            "root": "Unresolved",
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
             "from": [
-              "Unresolved"
+              "SelfLink"
             ],
             "prev": [
-              "Unresolved"
+              "SelfLink"
             ]
           }
         ]
@@ -723,13 +765,18 @@
         "name": "on_biomass_monthly",
         "entries": [
           {
-            "this": "Unresolved",
-            "root": "Unresolved",
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
             "from": [
-              "Unresolved"
+              "SelfLink"
             ],
             "prev": [
-              "Unresolved"
+              "SelfLink"
             ]
           }
         ]
@@ -1279,13 +1326,30 @@
         "name": "on_colony_conquer",
         "entries": [
           {
-            "this": "Unresolved",
-            "root": "Unresolved",
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
             "from": [
-              "Unresolved"
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
             ],
             "prev": [
-              "Unresolved"
+              "SelfLink"
             ]
           }
         ]
@@ -1360,13 +1424,24 @@
         "name": "on_colony_destroyed_by_bombardment",
         "entries": [
           {
-            "this": "Unresolved",
-            "root": "Unresolved",
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
             "from": [
-              "Unresolved"
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
             ],
             "prev": [
-              "Unresolved"
+              "SelfLink"
             ]
           }
         ]
@@ -1457,19 +1532,46 @@
       },
       {
         "name": "on_colony_yearly_pulse",
-        "entries": []
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ],
+            "prev": [
+              "SelfLink"
+            ]
+          }
+        ]
       },
       {
         "name": "on_colony_zero_pops",
         "entries": [
           {
-            "this": "Unresolved",
-            "root": "Unresolved",
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
             "from": [
-              "Unresolved"
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
             ],
             "prev": [
-              "Unresolved"
+              "SelfLink"
             ]
           }
         ]
@@ -1478,13 +1580,24 @@
         "name": "on_colony_zero_pops_ground_combat",
         "entries": [
           {
-            "this": "Unresolved",
-            "root": "Unresolved",
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
             "from": [
-              "Unresolved"
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
             ],
             "prev": [
-              "Unresolved"
+              "SelfLink"
             ]
           }
         ]
@@ -1786,13 +1899,24 @@
         "name": "on_daily_pop_ethics_divergence",
         "entries": [
           {
-            "this": "Unresolved",
-            "root": "Unresolved",
+            "this": {
+              "Scope": {
+                "id": "1a26ff288266684f",
+                "name": "pop_group"
+              }
+            },
+            "root": "SelfLink",
             "from": [
-              "Unresolved"
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
             ],
             "prev": [
-              "Unresolved"
+              "SelfLink"
             ]
           }
         ]
@@ -1813,7 +1937,19 @@
             },
             "root": "SelfLink",
             "from": [
-              "Unresolved"
+              {
+                "Scope": {
+                  "id": "d3c8f1e8c2dbd149",
+                  "name": "debris"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
             ],
             "prev": [
               "SelfLink"
@@ -1833,7 +1969,19 @@
             },
             "root": "SelfLink",
             "from": [
-              "Unresolved"
+              {
+                "Scope": {
+                  "id": "d3c8f1e8c2dbd149",
+                  "name": "debris"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
             ],
             "prev": [
               "SelfLink"
@@ -1853,7 +2001,19 @@
             },
             "root": "SelfLink",
             "from": [
-              "Unresolved"
+              {
+                "Scope": {
+                  "id": "d3c8f1e8c2dbd149",
+                  "name": "debris"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
             ],
             "prev": [
               "SelfLink"
@@ -1873,7 +2033,19 @@
             },
             "root": "SelfLink",
             "from": [
-              "Unresolved"
+              {
+                "Scope": {
+                  "id": "d3c8f1e8c2dbd149",
+                  "name": "debris"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
             ],
             "prev": [
               "SelfLink"
@@ -1885,13 +2057,13 @@
         "name": "on_decade_pulse",
         "entries": [
           {
-            "this": "Unresolved",
-            "root": "Unresolved",
+            "this": "NotSet",
+            "root": "SelfLink",
             "from": [
-              "Unresolved"
+              "SelfLink"
             ],
             "prev": [
-              "Unresolved"
+              "SelfLink"
             ]
           }
         ]
@@ -1900,13 +2072,18 @@
         "name": "on_decade_pulse_country",
         "entries": [
           {
-            "this": "Unresolved",
-            "root": "Unresolved",
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
             "from": [
-              "Unresolved"
+              "SelfLink"
             ],
             "prev": [
-              "Unresolved"
+              "SelfLink"
             ]
           }
         ]
@@ -2227,16 +2404,6 @@
             "prev": [
               "SelfLink"
             ]
-          },
-          {
-            "this": "Unresolved",
-            "root": "Unresolved",
-            "from": [
-              "Unresolved"
-            ],
-            "prev": [
-              "Unresolved"
-            ]
           }
         ]
       },
@@ -2554,13 +2721,13 @@
         "name": "on_five_year_pulse",
         "entries": [
           {
-            "this": "Unresolved",
-            "root": "Unresolved",
+            "this": "NotSet",
+            "root": "SelfLink",
             "from": [
-              "Unresolved"
+              "SelfLink"
             ],
             "prev": [
-              "Unresolved"
+              "SelfLink"
             ]
           }
         ]
@@ -2569,13 +2736,18 @@
         "name": "on_five_year_pulse_country",
         "entries": [
           {
-            "this": "Unresolved",
-            "root": "Unresolved",
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
             "from": [
-              "Unresolved"
+              "SelfLink"
             ],
             "prev": [
-              "Unresolved"
+              "SelfLink"
             ]
           }
         ]
@@ -2658,13 +2830,36 @@
         "name": "on_fleet_destroyed_perp",
         "entries": [
           {
-            "this": "Unresolved",
-            "root": "Unresolved",
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
             "from": [
-              "Unresolved"
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "6dafeb9bcf25b500",
+                  "name": "fleet"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "6dafeb9bcf25b500",
+                  "name": "fleet"
+                }
+              },
+              "SelfLink"
             ],
             "prev": [
-              "Unresolved"
+              "SelfLink"
             ]
           }
         ]
@@ -2700,21 +2895,6 @@
                 }
               },
               "SelfLink"
-            ],
-            "prev": [
-              "SelfLink"
-            ]
-          },
-          {
-            "this": {
-              "Scope": {
-                "id": "44b5e21fe5e593d7",
-                "name": "country"
-              }
-            },
-            "root": "SelfLink",
-            "from": [
-              "Unresolved"
             ],
             "prev": [
               "SelfLink"
@@ -3156,7 +3336,13 @@
             },
             "root": "SelfLink",
             "from": [
-              "Unresolved"
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
             ],
             "prev": [
               "SelfLink"
@@ -3194,13 +3380,18 @@
         "name": "on_heir_promoted_to_ruler",
         "entries": [
           {
-            "this": "Unresolved",
-            "root": "Unresolved",
+            "this": {
+              "Scope": {
+                "id": "b09e3ce96bcb18ba",
+                "name": "leader"
+              }
+            },
+            "root": "SelfLink",
             "from": [
-              "Unresolved"
+              "SelfLink"
             ],
             "prev": [
-              "Unresolved"
+              "SelfLink"
             ]
           }
         ]
@@ -3327,13 +3518,13 @@
         "name": "on_late_game_pulse",
         "entries": [
           {
-            "this": "Unresolved",
-            "root": "Unresolved",
+            "this": "NotSet",
+            "root": "SelfLink",
             "from": [
-              "Unresolved"
+              "SelfLink"
             ],
             "prev": [
-              "Unresolved"
+              "SelfLink"
             ]
           }
         ]
@@ -3342,13 +3533,18 @@
         "name": "on_late_game_pulse_country",
         "entries": [
           {
-            "this": "Unresolved",
-            "root": "Unresolved",
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
             "from": [
-              "Unresolved"
+              "SelfLink"
             ],
             "prev": [
-              "Unresolved"
+              "SelfLink"
             ]
           }
         ]
@@ -3415,13 +3611,24 @@
         "name": "on_leader_death",
         "entries": [
           {
-            "this": "Unresolved",
-            "root": "Unresolved",
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
             "from": [
-              "Unresolved"
+              {
+                "Scope": {
+                  "id": "b09e3ce96bcb18ba",
+                  "name": "leader"
+                }
+              },
+              "SelfLink"
             ],
             "prev": [
-              "Unresolved"
+              "SelfLink"
             ]
           }
         ]
@@ -3938,13 +4145,13 @@
         "name": "on_mid_game_pulse",
         "entries": [
           {
-            "this": "Unresolved",
-            "root": "Unresolved",
+            "this": "NotSet",
+            "root": "SelfLink",
             "from": [
-              "Unresolved"
+              "SelfLink"
             ],
             "prev": [
-              "Unresolved"
+              "SelfLink"
             ]
           }
         ]
@@ -3953,13 +4160,18 @@
         "name": "on_mid_game_pulse_country",
         "entries": [
           {
-            "this": "Unresolved",
-            "root": "Unresolved",
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
             "from": [
-              "Unresolved"
+              "SelfLink"
             ],
             "prev": [
-              "Unresolved"
+              "SelfLink"
             ]
           }
         ]
@@ -4085,7 +4297,23 @@
       },
       {
         "name": "on_new_heir",
-        "entries": []
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "b09e3ce96bcb18ba",
+                "name": "leader"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ],
+            "prev": [
+              "SelfLink"
+            ]
+          }
+        ]
       },
       {
         "name": "on_operation_cancelled",
@@ -4111,13 +4339,18 @@
         "name": "on_operation_chapter_finished",
         "entries": [
           {
-            "this": "Unresolved",
-            "root": "Unresolved",
+            "this": {
+              "Scope": {
+                "id": "8dbe31e3bea11d4c",
+                "name": "espionage_operation"
+              }
+            },
+            "root": "SelfLink",
             "from": [
               "Unresolved"
             ],
             "prev": [
-              "Unresolved"
+              "SelfLink"
             ]
           }
         ]
@@ -4193,13 +4426,18 @@
         "name": "on_patron_delve_failed",
         "entries": [
           {
-            "this": "Unresolved",
-            "root": "Unresolved",
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
             "from": [
-              "Unresolved"
+              "SelfLink"
             ],
             "prev": [
-              "Unresolved"
+              "SelfLink"
             ]
           }
         ]
@@ -4216,7 +4454,13 @@
             },
             "root": "SelfLink",
             "from": [
-              "Unresolved"
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
             ],
             "prev": [
               "SelfLink"
@@ -4355,7 +4599,19 @@
             },
             "root": "SelfLink",
             "from": [
-              "Unresolved"
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "1a26ff288266684f",
+                  "name": "pop_group"
+                }
+              },
+              "SelfLink"
             ],
             "prev": [
               "SelfLink"
@@ -4367,13 +4623,30 @@
         "name": "on_pop_bombed_to_death",
         "entries": [
           {
-            "this": "Unresolved",
-            "root": "Unresolved",
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
             "from": [
-              "Unresolved"
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "6dafeb9bcf25b500",
+                  "name": "fleet"
+                }
+              },
+              "SelfLink"
             ],
             "prev": [
-              "Unresolved"
+              "SelfLink"
             ]
           }
         ]
@@ -4416,7 +4689,19 @@
             },
             "root": "SelfLink",
             "from": [
-              "Unresolved"
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "1a26ff288266684f",
+                  "name": "pop_group"
+                }
+              },
+              "SelfLink"
             ],
             "prev": [
               "SelfLink"
@@ -4462,7 +4747,13 @@
             },
             "root": "SelfLink",
             "from": [
-              "Unresolved"
+              {
+                "Scope": {
+                  "id": "df2999a8f7dba6f6",
+                  "name": "colony"
+                }
+              },
+              "SelfLink"
             ],
             "prev": [
               "SelfLink"
@@ -4474,13 +4765,24 @@
         "name": "on_pop_group_resettled",
         "entries": [
           {
-            "this": "Unresolved",
-            "root": "Unresolved",
+            "this": {
+              "Scope": {
+                "id": "1a26ff288266684f",
+                "name": "pop_group"
+              }
+            },
+            "root": "SelfLink",
             "from": [
-              "Unresolved"
+              {
+                "Scope": {
+                  "id": "df2999a8f7dba6f6",
+                  "name": "colony"
+                }
+              },
+              "SelfLink"
             ],
             "prev": [
-              "Unresolved"
+              "SelfLink"
             ]
           }
         ]
@@ -4523,7 +4825,13 @@
                   "name": "country"
                 }
               },
-              "Unresolved"
+              {
+                "Scope": {
+                  "id": "1a26ff288266684f",
+                  "name": "pop_group"
+                }
+              },
+              "SelfLink"
             ],
             "prev": [
               "SelfLink"
@@ -4623,13 +4931,18 @@
         "name": "on_post_government_changed",
         "entries": [
           {
-            "this": "Unresolved",
-            "root": "Unresolved",
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
             "from": [
-              "Unresolved"
+              "SelfLink"
             ],
             "prev": [
-              "Unresolved"
+              "SelfLink"
             ]
           }
         ]
@@ -4688,6 +5001,27 @@
         "name": "on_proxy_war_started",
         "entries": [
           {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ],
+            "prev": [
+              "SelfLink"
+            ]
+          },
+          {
             "this": "Unresolved",
             "root": "Unresolved",
             "from": [
@@ -4703,13 +5037,24 @@
         "name": "on_rebels_take_colony_owner_switched",
         "entries": [
           {
-            "this": "Unresolved",
-            "root": "Unresolved",
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
             "from": [
-              "Unresolved"
+              {
+                "Scope": {
+                  "id": "df2999a8f7dba6f6",
+                  "name": "colony"
+                }
+              },
+              "SelfLink"
             ],
             "prev": [
-              "Unresolved"
+              "SelfLink"
             ]
           }
         ]
@@ -5197,16 +5542,6 @@
             "prev": [
               "SelfLink"
             ]
-          },
-          {
-            "this": "Unresolved",
-            "root": "Unresolved",
-            "from": [
-              "Unresolved"
-            ],
-            "prev": [
-              "Unresolved"
-            ]
           }
         ]
       },
@@ -5349,16 +5684,6 @@
             ],
             "prev": [
               "SelfLink"
-            ]
-          },
-          {
-            "this": "Unresolved",
-            "root": "Unresolved",
-            "from": [
-              "Unresolved"
-            ],
-            "prev": [
-              "Unresolved"
             ]
           }
         ]
@@ -5820,7 +6145,25 @@
             },
             "root": "SelfLink",
             "from": [
-              "Unresolved"
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "6dafeb9bcf25b500",
+                  "name": "fleet"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "6dafeb9bcf25b500",
+                  "name": "fleet"
+                }
+              },
+              "SelfLink"
             ],
             "prev": [
               "SelfLink"
@@ -5840,7 +6183,25 @@
             },
             "root": "SelfLink",
             "from": [
-              "Unresolved"
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "6dafeb9bcf25b500",
+                  "name": "fleet"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "6dafeb9bcf25b500",
+                  "name": "fleet"
+                }
+              },
+              "SelfLink"
             ],
             "prev": [
               "SelfLink"
@@ -5852,13 +6213,36 @@
         "name": "on_space_battle_won",
         "entries": [
           {
-            "this": "Unresolved",
-            "root": "Unresolved",
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
             "from": [
-              "Unresolved"
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "6dafeb9bcf25b500",
+                  "name": "fleet"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "6dafeb9bcf25b500",
+                  "name": "fleet"
+                }
+              },
+              "SelfLink"
             ],
             "prev": [
-              "Unresolved"
+              "SelfLink"
             ]
           }
         ]
@@ -6150,7 +6534,7 @@
                   "name": "war"
                 }
               },
-              "Unresolved"
+              "SelfLink"
             ],
             "prev": [
               "SelfLink"
@@ -6194,7 +6578,7 @@
                   "name": "war"
                 }
               },
-              "Unresolved"
+              "SelfLink"
             ],
             "prev": [
               "SelfLink"
@@ -6433,7 +6817,13 @@
                   "name": "country"
                 }
               },
-              "Unresolved"
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
             ],
             "prev": [
               "SelfLink"
@@ -6553,7 +6943,35 @@
       },
       {
         "name": "on_system_occupied",
-        "entries": []
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "5ab5fc854e81e429",
+                "name": "galactic_object"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ],
+            "prev": [
+              "SelfLink"
+            ]
+          }
+        ]
       },
       {
         "name": "on_system_returned",
@@ -6573,7 +6991,13 @@
                   "name": "country"
                 }
               },
-              "Unresolved"
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
             ],
             "prev": [
               "SelfLink"
@@ -6877,16 +7301,6 @@
             "prev": [
               "SelfLink"
             ]
-          },
-          {
-            "this": "Unresolved",
-            "root": "Unresolved",
-            "from": [
-              "Unresolved"
-            ],
-            "prev": [
-              "Unresolved"
-            ]
           }
         ]
       },
@@ -6950,7 +7364,35 @@
       },
       {
         "name": "on_war_participant_leaves_early",
-        "entries": []
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "87aef3284d14374e",
+                  "name": "war"
+                }
+              },
+              "SelfLink"
+            ],
+            "prev": [
+              "SelfLink"
+            ]
+          }
+        ]
       },
       {
         "name": "on_war_won",
@@ -7003,21 +7445,6 @@
                 }
               },
               "SelfLink"
-            ],
-            "prev": [
-              "SelfLink"
-            ]
-          },
-          {
-            "this": {
-              "Scope": {
-                "id": "a28a4564ee636659",
-                "name": "starbase"
-              }
-            },
-            "root": "SelfLink",
-            "from": [
-              "Unresolved"
             ],
             "prev": [
               "SelfLink"
@@ -7092,7 +7519,52 @@
             },
             "root": "SelfLink",
             "from": [
-              "Unresolved"
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "69ead02b278522d1",
+                  "name": "ship"
+                }
+              },
+              "SelfLink"
+            ],
+            "prev": [
+              "SelfLink"
+            ]
+          },
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
             ],
             "prev": [
               "SelfLink"
@@ -7147,14 +7619,6 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "answer_item",
-          "name": "empire_init_create_ships"
-        },
-        "detail": "some entry scopes of a call site could not be established"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
           "name": "on_add_community_member"
         },
         "detail": "a call site has more paths than the method follows (path-limit)"
@@ -7163,25 +7627,9 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "answer_item",
-          "name": "on_add_community_member"
-        },
-        "detail": "some entry scopes of a call site could not be established"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
           "name": "on_add_to_council"
         },
         "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_add_to_council"
-        },
-        "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
@@ -7198,14 +7646,6 @@
           "name": "on_agenda_finished"
         },
         "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_agenda_finished"
-        },
-        "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
@@ -7301,7 +7741,7 @@
           "kind": "answer_item",
           "name": "on_astral_rift_exploration_complete"
         },
-        "detail": "some entry scopes of a call site could not be established"
+        "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -7315,33 +7755,9 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "answer_item",
-          "name": "on_astral_rift_exploration_start"
-        },
-        "detail": "some entry scopes of a call site could not be established"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
           "name": "on_astral_rift_pre_event_fire"
         },
         "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_astral_rift_pre_event_fire"
-        },
-        "detail": "some entry scopes of a call site could not be established"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_astral_rift_spawned"
-        },
-        "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
@@ -7403,31 +7819,7 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "answer_item",
-          "name": "on_bi_yearly_pulse"
-        },
-        "detail": "some entry scopes of a call site could not be established"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
           "name": "on_bi_yearly_pulse_country"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_bi_yearly_pulse_country"
-        },
-        "detail": "some entry scopes of a call site could not be established"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_biomass_monthly"
         },
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
@@ -7437,7 +7829,7 @@
           "kind": "answer_item",
           "name": "on_biomass_monthly"
         },
-        "detail": "some entry scopes of a call site could not be established"
+        "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -7603,14 +7995,6 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "answer_item",
-          "name": "on_colony_conquer"
-        },
-        "detail": "some entry scopes of a call site could not be established"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
           "name": "on_colony_defenders_lose"
         },
         "detail": "a call site has more paths than the method follows (path-limit)"
@@ -7643,14 +8027,6 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "answer_item",
-          "name": "on_colony_destroyed_by_bombardment"
-        },
-        "detail": "some entry scopes of a call site could not be established"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
           "name": "on_colony_ownerless"
         },
         "detail": "a call site has more paths than the method follows (path-limit)"
@@ -7667,31 +8043,7 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "answer_item",
-          "name": "on_colony_yearly_pulse"
-        },
-        "detail": "a path to a call site could not be followed (instruction)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
           "name": "on_colony_zero_pops"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_colony_zero_pops"
-        },
-        "detail": "some entry scopes of a call site could not be established"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_colony_zero_pops_ground_combat"
         },
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
@@ -7701,7 +8053,7 @@
           "kind": "answer_item",
           "name": "on_colony_zero_pops_ground_combat"
         },
-        "detail": "some entry scopes of a call site could not be established"
+        "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -7795,14 +8147,6 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "answer_item",
-          "name": "on_daily_pop_ethics_divergence"
-        },
-        "detail": "some entry scopes of a call site could not be established"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
           "name": "on_damage_taken"
         },
         "detail": "a call site has more paths than the method follows (path-limit)"
@@ -7819,25 +8163,9 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "answer_item",
-          "name": "on_debris_reanimated"
-        },
-        "detail": "some entry scopes of a call site could not be established"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
           "name": "on_debris_researched"
         },
         "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_debris_researched"
-        },
-        "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
@@ -7851,39 +8179,7 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "answer_item",
-          "name": "on_debris_scavenged"
-        },
-        "detail": "some entry scopes of a call site could not be established"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
           "name": "on_debris_scavenged_and_researched"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_debris_scavenged_and_researched"
-        },
-        "detail": "some entry scopes of a call site could not be established"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_decade_pulse"
-        },
-        "detail": "some entry scopes of a call site could not be established"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_decade_pulse_country"
         },
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
@@ -7893,7 +8189,7 @@
           "kind": "answer_item",
           "name": "on_decade_pulse_country"
         },
-        "detail": "some entry scopes of a call site could not be established"
+        "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -7958,14 +8254,6 @@
           "name": "on_entering_battle"
         },
         "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_entering_battle"
-        },
-        "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
@@ -8043,25 +8331,9 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "answer_item",
-          "name": "on_five_year_pulse"
-        },
-        "detail": "some entry scopes of a call site could not be established"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
           "name": "on_five_year_pulse_country"
         },
         "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_five_year_pulse_country"
-        },
-        "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
@@ -8099,25 +8371,9 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "answer_item",
-          "name": "on_fleet_destroyed_perp"
-        },
-        "detail": "some entry scopes of a call site could not be established"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
           "name": "on_fleet_destroyed_victim"
         },
         "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_fleet_destroyed_victim"
-        },
-        "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
@@ -8195,14 +8451,6 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "answer_item",
-          "name": "on_ground_combat_devastation"
-        },
-        "detail": "some entry scopes of a call site could not be established"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
           "name": "on_ground_combat_started"
         },
         "detail": "a call site has more paths than the method follows (path-limit)"
@@ -8214,14 +8462,6 @@
           "name": "on_heir_promoted_to_ruler"
         },
         "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_heir_promoted_to_ruler"
-        },
-        "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
@@ -8259,25 +8499,9 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "answer_item",
-          "name": "on_late_game_pulse"
-        },
-        "detail": "some entry scopes of a call site could not be established"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
           "name": "on_late_game_pulse_country"
         },
         "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_late_game_pulse_country"
-        },
-        "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
@@ -8302,14 +8526,6 @@
           "name": "on_leader_death"
         },
         "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_leader_death"
-        },
-        "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
@@ -8419,25 +8635,9 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "answer_item",
-          "name": "on_mid_game_pulse"
-        },
-        "detail": "some entry scopes of a call site could not be established"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
           "name": "on_mid_game_pulse_country"
         },
         "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_mid_game_pulse_country"
-        },
-        "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
@@ -8491,14 +8691,6 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "answer_item",
-          "name": "on_new_heir"
-        },
-        "detail": "no path from the function entry reaches a call site (site-not-reached)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
           "name": "on_operation_chapter_finished"
         },
         "detail": "some entry scopes of a call site could not be established"
@@ -8518,22 +8710,6 @@
           "name": "on_orbital_defense_planet_ownerless"
         },
         "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_patron_delve_failed"
-        },
-        "detail": "some entry scopes of a call site could not be established"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_planet_bombarded"
-        },
-        "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
@@ -8587,33 +8763,9 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "answer_item",
-          "name": "on_pop_assembly"
-        },
-        "detail": "some entry scopes of a call site could not be established"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_pop_bombed_to_death"
-        },
-        "detail": "some entry scopes of a call site could not be established"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
           "name": "on_pop_displaced"
         },
         "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_pop_displaced"
-        },
-        "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
@@ -8627,25 +8779,9 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "answer_item",
-          "name": "on_pop_group_added"
-        },
-        "detail": "some entry scopes of a call site could not be established"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
           "name": "on_pop_group_resettled"
         },
         "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_pop_group_resettled"
-        },
-        "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
@@ -8667,14 +8803,6 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "answer_item",
-          "name": "on_pop_growth"
-        },
-        "detail": "some entry scopes of a call site could not be established"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
           "name": "on_pop_purged"
         },
         "detail": "a call site has more paths than the method follows (path-limit)"
@@ -8686,14 +8814,6 @@
           "name": "on_post_government_changed"
         },
         "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_post_government_changed"
-        },
-        "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
@@ -8739,14 +8859,6 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "answer_item",
-          "name": "on_rebels_take_colony_owner_switched"
-        },
-        "detail": "some entry scopes of a call site could not be established"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
           "name": "on_rebels_take_planet"
         },
         "detail": "a call site has more paths than the method follows (path-limit)"
@@ -8756,6 +8868,14 @@
         "subject": {
           "kind": "answer_item",
           "name": "on_released_as_vassal"
+        },
+        "detail": "a call site has more paths than the method follows (path-limit)"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "answer_item",
+          "name": "on_relic_activated"
         },
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
@@ -8867,14 +8987,6 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "answer_item",
-          "name": "on_ruler_created"
-        },
-        "detail": "no path from the function entry reaches a call site (site-not-reached)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
           "name": "on_ruler_removed"
         },
         "detail": "a call site has more paths than the method follows (path-limit)"
@@ -8923,14 +9035,6 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "answer_item",
-          "name": "on_ship_destroyed_perp"
-        },
-        "detail": "some entry scopes of a call site could not be established"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
           "name": "on_ship_disabled"
         },
         "detail": "a call site has more paths than the method follows (path-limit)"
@@ -8950,14 +9054,6 @@
           "name": "on_ship_disengaged_perp"
         },
         "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_ship_disengaged_perp"
-        },
-        "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
@@ -9043,31 +9139,7 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "answer_item",
-          "name": "on_space_battle_lost"
-        },
-        "detail": "some entry scopes of a call site could not be established"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
           "name": "on_space_battle_over"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_space_battle_over"
-        },
-        "detail": "some entry scopes of a call site could not be established"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_space_battle_won"
         },
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
@@ -9077,7 +9149,7 @@
           "kind": "answer_item",
           "name": "on_space_battle_won"
         },
-        "detail": "some entry scopes of a call site could not be established"
+        "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -9123,25 +9195,9 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "answer_item",
-          "name": "on_status_quo"
-        },
-        "detail": "some entry scopes of a call site could not be established"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
           "name": "on_status_quo_forced"
         },
         "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_status_quo_forced"
-        },
-        "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
@@ -9243,14 +9299,6 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "answer_item",
-          "name": "on_system_controller_changed"
-        },
-        "detail": "some entry scopes of a call site could not be established"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
           "name": "on_system_gained"
         },
         "detail": "a call site has more paths than the method follows (path-limit)"
@@ -9275,25 +9323,9 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "answer_item",
-          "name": "on_system_occupied"
-        },
-        "detail": "no path from the function entry reaches a call site (site-not-reached)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
           "name": "on_system_returned"
         },
         "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_system_returned"
-        },
-        "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
@@ -9387,14 +9419,6 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "answer_item",
-          "name": "on_war_beginning"
-        },
-        "detail": "some entry scopes of a call site could not be established"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
           "name": "on_war_ended"
         },
         "detail": "a call site has more paths than the method follows (path-limit)"
@@ -9435,14 +9459,6 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "answer_item",
-          "name": "on_waystation_lost"
-        },
-        "detail": "some entry scopes of a call site could not be established"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
           "name": "on_yearly_pulse_country"
         },
         "detail": "a call site has more paths than the method follows (path-limit)"
@@ -9454,14 +9470,6 @@
           "name": "special_project_success"
         },
         "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "special_project_success"
-        },
-        "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnnamedDeclaration",
@@ -9487,7 +9495,7 @@
     "source": {
       "build": "c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b",
       "native_version": "0.1.0",
-      "method": "callbacks/v2",
+      "method": "callbacks/v4",
       "basis": "StaticAnalysis"
     }
   }
