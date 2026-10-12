@@ -114,7 +114,8 @@ and `base_type` lines; Native never reads a selector.
 - The root type is the one type with no `type_key_filter = KEY` and no `skip_root_key`. A
   `type_key_filter <> KEY` only excludes keys, so `species_name` (`<> named_lists`) is the root
   type of `common/species_names`. Registry and field rules join it as they join a type that is
-  alone in its directory, and a `root_key[KEY]` condition reaches its subtypes as above. `event`
+  alone in its directory, and a `root_key[KEY]` condition reaches its subtypes as above; the
+  subtypes of the directory's other types do not make that key ambiguous. `event`
   is the root type of `events`.
 - A nested type has `skip_root_key = any` (then any further keys), a `base_type` that names the
   root type, and `type_key_filter = KEY`. Its definitions are objects inside the root type's
@@ -128,7 +129,8 @@ and `base_type` lines; Native never reads a selector.
 - Every other type keeps a gap on each of its questions that names its selector, such as
   "The type is selected by `type_key_filter = namespace`; no Native answer identifies it". This
   covers a type that a root key selects (`event_namespace`, whose definitions are `namespace = x`
-  scalars with `name_field = "-"`; `diplo_phrase_greetings`; the `random_list` types), a type
+  scalars with `name_field = "-"`; `diplo_phrase_greetings`; the `random_list` types), a
+  `type_key_filter` list, a type
   inside a wrapper key with no nested base (`species_named_list` with `skip_root_key =
   named_lists`), a nested type whose field Native does not establish, and a second type with no
   selector. No event-kind rule reaches `event_namespace`: it has no subtypes.

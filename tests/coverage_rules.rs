@@ -311,8 +311,58 @@ async fn excluded_root_key_leaves_the_root_type_and_a_wrapped_type_keeps_its_gap
             .any(|gap| gap.contains("`skip_root_key = named_lists`"))
     );
 
-    let selected = species_names("= named_lists").await;
-    assert!(!selected.covered("type_existence", &["types", "type[species_name]"]));
+    for filter in ["= named_lists", "= { named_lists other_lists }"] {
+        let selected = species_names(filter).await;
+        let species_name = ["types", "type[species_name]"];
+
+        assert!(
+            !selected.covered("type_existence", &species_name),
+            "{filter}"
+        );
+        assert!(
+            selected
+                .gaps("type_existence", &species_name)
+                .iter()
+                .any(|gap| gap.contains(&format!("`type_key_filter {filter}`"))),
+            "{filter}"
+        );
+    }
+}
+
+#[tokio::test]
+async fn root_key_reaches_the_root_type_subtype_beside_a_secondary_type_with_the_same_key() {
+    let source = r#"
+types = {
+    type[tradition] = {
+        path = "game/common/traditions"
+        ## type_key_filter = special_tradition
+        subtype[special] = {}
+    }
+    ## type_key_filter = other_swap
+    type[swapped_tradition] = {
+        base_type = tradition
+        path = "game/common/traditions"
+        skip_root_key = any
+        ## type_key_filter = special_tradition
+        subtype[special] = {}
+    }
+}
+tradition = { subtype[special] = { unlocks_agenda = scalar } }
+"#;
+    let directory = SharedDirectory::evaluate(&[("traditions.cwt", source)], |snapshot| {
+        let rule = snapshot
+            .rules
+            .iter_mut()
+            .find(|rule| rule.id == "field:common/traditions/unlocks_agenda#existence")
+            .unwrap();
+        rule.conditions = vec!["root_key[special_tradition]".into()];
+    })
+    .await;
+
+    assert!(directory.covered(
+        "field_existence",
+        &["tradition", "subtype[special]", "unlocks_agenda"]
+    ));
 }
 
 async fn recorded_snapshot() -> snapshot::Snapshot {

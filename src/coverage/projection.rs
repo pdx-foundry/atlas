@@ -80,7 +80,7 @@ fn project_with_gap_facets(
     for rule in &rules.rules {
         let conditions = config_conditions(
             &key_subtypes,
-            &registry_types,
+            &selectors,
             subjects[rule.subject.as_str()],
             &rule.conditions,
         );
@@ -336,17 +336,19 @@ fn identified_fields<'a>(
         .collect()
 }
 
-/// A `## type_key_filter` annotation with one key.
+/// A `## type_key_filter` annotation.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 enum KeyFilter<'a> {
     /// `type_key_filter = KEY`: definitions whose key is `KEY`.
     Equals(&'a str),
     /// `type_key_filter <> KEY`: definitions whose key is not `KEY`.
     Excludes(&'a str),
+    /// Any other form, such as a `{ … }` list or an empty key, as written after `type_key_filter`.
+    Other(&'a str),
 }
 
-/// The filter that a `## type_key_filter` annotation writes; none for an empty key or a list.
-/// `config_answer` drops a `<>` operator, so this reads the source text.
+/// The filter that a `## type_key_filter` annotation writes. `config_answer` drops a `<>`
+/// operator, so this reads the source text.
 fn key_filter(claim: &Claim) -> Option<KeyFilter<'_>> {
     let rest = claim
         .source_text
@@ -354,14 +356,17 @@ fn key_filter(claim: &Claim) -> Option<KeyFilter<'_>> {
         .trim()
         .strip_prefix("type_key_filter")?
         .trim_start();
-    let filter = match rest.strip_prefix("<>") {
-        Some(key) => KeyFilter::Excludes(key.trim()),
-        None => KeyFilter::Equals(rest.strip_prefix('=')?.trim()),
+    let (excludes, key) = match rest.strip_prefix("<>") {
+        Some(key) => (true, key.trim()),
+        None => (false, rest.strip_prefix('=')?.trim()),
     };
-    let (KeyFilter::Equals(key) | KeyFilter::Excludes(key)) = filter;
     let one_key = !key.is_empty() && !key.contains(char::is_whitespace) && !key.contains('{');
 
-    one_key.then_some(filter)
+    Some(match (one_key, excludes) {
+        (false, _) => KeyFilter::Other(rest),
+        (true, true) => KeyFilter::Excludes(key),
+        (true, false) => KeyFilter::Equals(key),
+    })
 }
 
 /// The lines of a type's definition that select its definitions in the directory.
@@ -376,7 +381,8 @@ struct SelectorLines<'a> {
 impl SelectorLines<'_> {
     /// Whether these lines leave the type among the directory's root definitions.
     fn selects_root(&self) -> bool {
-        self.skip_root_key.is_empty() && !matches!(self.key_filter, Some(KeyFilter::Equals(_)))
+        self.skip_root_key.is_empty()
+            && matches!(self.key_filter, None | Some(KeyFilter::Excludes(_)))
     }
 
     /// The field path of a nested definition below the `root` type's definitions.
@@ -402,6 +408,7 @@ impl SelectorLines<'_> {
         match self.key_filter {
             Some(KeyFilter::Equals(key)) => lines.push(format!("type_key_filter = {key}")),
             Some(KeyFilter::Excludes(key)) => lines.push(format!("type_key_filter <> {key}")),
+            Some(KeyFilter::Other(text)) => lines.push(format!("type_key_filter {text}")),
             None => {}
         }
 
@@ -541,11 +548,11 @@ fn key_subtypes(ledger: &Ledger) -> KeySubtypes<'_> {
 }
 
 /// A rule's conditions in the config's terms. A `root_key[KEY]` condition becomes the one subtype
-/// that the key alone selects; `None` when no such subtype is unique for the rule's registry, or
-/// when another subtype or root-key condition goes with it.
+/// of the registry's root type that the key alone selects; `None` when no such subtype is unique,
+/// or when another subtype or root-key condition goes with it.
 fn config_conditions(
     key_subtypes: &KeySubtypes<'_>,
-    registry_types: &RegistryTypes,
+    type_selectors: &TypeSelectors<'_>,
     subject: &snapshot::Subject,
     conditions: &[String],
 ) -> Option<Vec<String>> {
@@ -565,13 +572,18 @@ fn config_conditions(
             if selectors > 1 {
                 return None;
             }
-            let types = registry_types.get(subject.registry.as_ref()?)?;
-            let mut subtypes = types.iter().flat_map(|(type_name, file)| {
-                key_subtypes
-                    .get(&(file.as_str(), type_name.as_str(), key))
-                    .into_iter()
-                    .flatten()
-            });
+            let types = type_selectors
+                .directories
+                .get(subject.registry.as_deref()?)?;
+            let mut subtypes = types
+                .iter()
+                .filter(|(_, _, selector)| *selector == Selector::Root)
+                .flat_map(|(type_name, file, _)| {
+                    key_subtypes
+                        .get(&(*file, *type_name, key))
+                        .into_iter()
+                        .flatten()
+                });
             match (subtypes.next(), subtypes.next()) {
                 (Some(subtype), None) => Some((*subtype).to_owned()),
                 _ => None,
