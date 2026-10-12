@@ -6,6 +6,7 @@ use crate::{
     snapshot,
 };
 use pdx_native::Basis;
+use serde_json::{Value, json};
 use std::collections::{BTreeMap, BTreeSet};
 
 type ClaimIndex<'a> = BTreeMap<(&'a str, &'a str, Vec<&'a str>, Vec<&'a str>), BTreeSet<&'a str>>;
@@ -13,6 +14,27 @@ type ClaimIndex<'a> = BTreeMap<(&'a str, &'a str, Vec<&'a str>, Vec<&'a str>), B
 type KeySubtypes<'a> = BTreeMap<(&'a str, &'a str, &'a str), BTreeSet<&'a str>>;
 /// The config types that load from each content directory, as (type, file).
 type RegistryTypes = BTreeMap<String, BTreeSet<(String, String)>>;
+
+/// The lines of a config type that state how its loader reads files and names definitions.
+const LOADER_LINES: &[&str] = &[
+    "path",
+    "path_extension",
+    "path_strict",
+    "path_file",
+    "name_field",
+    "skip_root_key",
+    "type_per_file",
+    "name_from_file",
+];
+/// The loader lines that the form naming a type's definitions answers.
+const NAMING_LINES: &[&str] = &[
+    "name_field",
+    "skip_root_key",
+    "type_per_file",
+    "name_from_file",
+];
+/// The config file that writes each directory's duplicate-definition priority.
+const OVERRIDES: &str = "overrides.cwt";
 
 fn claim_index(ledger: &Ledger) -> ClaimIndex<'_> {
     let mut index = ClaimIndex::new();
@@ -69,6 +91,7 @@ fn project_with_gap_facets(
         ledger,
         &registry_types,
         &identified_fields(&rules.rules, &subjects),
+        &named_root_keys(&rules.rules, &subjects),
     );
 
     let mut projection = Projection {
@@ -84,27 +107,37 @@ fn project_with_gap_facets(
             subjects[rule.subject.as_str()],
             &rule.conditions,
         );
-        let mut questions = match &conditions {
-            Some(conditions) => questions(
+        let subject = subjects[rule.subject.as_str()];
+        let mut answers = match (&conditions, rule.property.as_str()) {
+            (Some(_), "definition_names") => {
+                naming_answers(&claims, &selectors, subject, &rule.answer)
+            }
+            (Some(conditions), _) => questions(
                 &claims,
                 &selectors,
                 &command_files,
-                subjects[rule.subject.as_str()],
+                subject,
                 &rule.property,
                 conditions,
                 false,
-            ),
-            None => Vec::new(),
+            )
+            .into_iter()
+            .map(|question| (question, rule.answer.clone()))
+            .collect(),
+            (None, _) => Vec::new(),
         };
         let conditions = conditions.unwrap_or_else(|| rule.conditions.clone());
         if rule.conditions.is_empty() {
-            questions.extend(selectors.language_questions(&language, &rule.id));
+            answers.extend(
+                selectors
+                    .language_questions(&language, &rule.id)
+                    .into_iter()
+                    .map(|question| (question, rule.answer.clone())),
+            );
         }
-        let questions = if questions.is_empty() {
-            vec![format!("atlas:{}", rule.id)]
-        } else {
-            questions
-        };
+        if answers.is_empty() {
+            answers.push((format!("atlas:{}", rule.id), rule.answer.clone()));
+        }
         let mut evidence = Vec::new();
         for link in &rule.evidence {
             let key = &rules
@@ -124,7 +157,7 @@ fn project_with_gap_facets(
                 origin: Origin::Engine,
             });
         }
-        for question in questions {
+        for (question, value) in answers {
             if let Some(gap) = selectors.selector_gap(&question, &conditions) {
                 projection.gaps.push(gap);
                 continue;
@@ -132,7 +165,7 @@ fn project_with_gap_facets(
             projection.answers.push(Answer {
                 question,
                 conditions: conditions.clone(),
-                value: rule.answer.clone(),
+                value,
                 status: if rule.property == "value_form"
                     && rule.answer.get("alternatives").is_some()
                 {
@@ -197,6 +230,10 @@ enum Selector {
     /// `skip_root_key = any`, a `base_type` that names the root type, and `type_key_filter = KEY`
     /// for the last key. Native answers a nested definition only as a field under its owner.
     Nested(String),
+    /// Root statements with this key: `type_key_filter = KEY` and no `skip_root_key`, where
+    /// Native's loader names a `RootKey(KEY)` form. Only the type's loader lines join it; its other
+    /// questions keep the gap `reason`.
+    RootKey { key: String, reason: String },
     /// A selector that no Native answer identifies; the text is the gap reason.
     Unresolved(String),
 }
@@ -208,19 +245,26 @@ struct TypeSelectors<'a> {
     directories: BTreeMap<&'a str, Vec<(&'a str, &'a str, Selector)>>,
     /// The selector of each question's type, for types in a directory with several types.
     questions: BTreeMap<&'a str, Selector>,
+    /// The loader-line questions (`path`, `path_extension`, …) of each type.
+    loader_lines: BTreeSet<&'a str>,
+    /// Each type that `path_file` selects, by the content path of its one file.
+    single_files: BTreeMap<String, Vec<(&'a str, &'a str)>>,
 }
 
 impl<'a> TypeSelectors<'a> {
     /// `identified_fields` holds each (registry, field path) whose existence Native establishes
-    /// without conditions; a nested type is identified only by its field.
+    /// without conditions; a nested type is identified only by its field. `named_root_keys`
+    /// holds each (registry, root key) that Native's loader names as a form of its own.
     fn new(
         ledger: &'a Ledger,
         registry_types: &'a RegistryTypes,
         identified_fields: &BTreeSet<(&str, &str)>,
+        named_root_keys: &BTreeSet<(&str, &str)>,
     ) -> Self {
         let selector_lines = selector_lines(ledger);
         let no_lines = SelectorLines::default();
         let mut directories = BTreeMap::new();
+        let mut single_files: BTreeMap<_, Vec<_>> = BTreeMap::new();
 
         for (directory, types) in registry_types {
             let types: Vec<_> = types
@@ -245,14 +289,29 @@ impl<'a> TypeSelectors<'a> {
                 .map(|&(type_name, file, lines)| {
                     let selector = if types.len() == 1 || root == Some(type_name) {
                         Selector::Root
-                    } else {
-                        match lines.nested_path(root) {
-                            Some(path) if identified_fields.contains(&(directory, &path)) => {
-                                Selector::Nested(path)
-                            }
-                            _ => Selector::Unresolved(lines.unresolved_reason()),
+                    } else if let Some(path) = lines
+                        .nested_path(root)
+                        .filter(|path| identified_fields.contains(&(directory, path)))
+                    {
+                        Selector::Nested(path)
+                    } else if let Some(key) = lines
+                        .root_key()
+                        .filter(|key| named_root_keys.contains(&(directory, key)))
+                    {
+                        Selector::RootKey {
+                            key: key.into(),
+                            reason: lines.unresolved_reason(),
                         }
+                    } else {
+                        Selector::Unresolved(lines.unresolved_reason())
                     };
+
+                    if let Some(file_name) = lines.path_file {
+                        single_files
+                            .entry(format!("{directory}/{file_name}"))
+                            .or_default()
+                            .push((type_name, file));
+                    }
 
                     (type_name, file, selector)
                 })
@@ -278,17 +337,32 @@ impl<'a> TypeSelectors<'a> {
                 Some((claim.question.as_str(), (*selector).clone()))
             })
             .collect();
+        let loader_lines = ledger
+            .claims
+            .iter()
+            .filter(|claim| {
+                matches!(
+                    claim.subject.as_slice(),
+                    [types, _, key] if types == "types" && LOADER_LINES.contains(&key.as_str())
+                ) && claim.property == "loader_path"
+            })
+            .map(|claim| claim.question.as_str())
+            .collect();
 
         Self {
             directories,
             questions,
+            loader_lines,
+            single_files,
         }
     }
 
     /// The gap that blocks a question whose type has an unresolved selector.
     fn selector_gap(&self, question: &str, conditions: &[String]) -> Option<Gap> {
-        let Some(Selector::Unresolved(reason)) = self.questions.get(question) else {
-            return None;
+        let reason = match self.questions.get(question)? {
+            Selector::Unresolved(reason) => reason,
+            Selector::RootKey { reason, .. } if !self.loader_lines.contains(question) => reason,
+            _ => return None,
         };
 
         Some(Gap {
@@ -296,6 +370,20 @@ impl<'a> TypeSelectors<'a> {
             conditions: conditions.to_vec(),
             reason: reason.clone(),
         })
+    }
+
+    /// The `path_file` questions of the types whose one file is `registry`.
+    fn single_file_questions(&self, claims: &ClaimIndex<'_>, registry: &str) -> Vec<String> {
+        self.single_files
+            .get(registry)
+            .into_iter()
+            .flatten()
+            .flat_map(|(type_name, file)| {
+                let path = vec!["types", *type_name, "path_file"];
+
+                claim_questions(claims, file, "loader_path", path, &[])
+            })
+            .collect()
     }
 
     /// The language questions of a rule or gap. A nested type's naming lines name its own
@@ -332,6 +420,26 @@ fn identified_fields<'a>(
             let subject = subjects[rule.subject.as_str()];
 
             Some((subject.registry.as_deref()?, subject.field.as_deref()?))
+        })
+        .collect()
+}
+
+/// Each (registry, root key) that a registry's `definition_names` rule names as a form of its own.
+fn named_root_keys<'a>(
+    rules: &'a [snapshot::Rule],
+    subjects: &BTreeMap<&str, &'a snapshot::Subject>,
+) -> BTreeSet<(&'a str, &'a str)> {
+    rules
+        .iter()
+        .filter(|rule| rule.property == "definition_names")
+        .filter_map(|rule| Some((subjects[rule.subject.as_str()], rule.answer.as_array()?)))
+        .filter(|(subject, _)| subject.kind == snapshot::SubjectKind::Registry)
+        .flat_map(|(subject, forms)| {
+            forms.iter().filter_map(|form| {
+                let key = form.get("statement")?.get("RootKey")?.as_str()?;
+
+                Some((subject.registry.as_deref()?, key))
+            })
         })
         .collect()
 }
@@ -376,6 +484,8 @@ struct SelectorLines<'a> {
     /// `skip_root_key` keys in order: one key at 0, or the items of a `{ … }` list.
     skip_root_key: BTreeMap<usize, &'a str>,
     base_type: Option<&'a str>,
+    /// The one file of the type's directory that the type loads from.
+    path_file: Option<&'a str>,
 }
 
 impl SelectorLines<'_> {
@@ -383,6 +493,15 @@ impl SelectorLines<'_> {
     fn selects_root(&self) -> bool {
         self.skip_root_key.is_empty()
             && matches!(self.key_filter, None | Some(KeyFilter::Excludes(_)))
+    }
+
+    /// The root key that alone selects the type's definitions.
+    fn root_key(&self) -> Option<&str> {
+        let Some(KeyFilter::Equals(key)) = self.key_filter else {
+            return None;
+        };
+
+        self.skip_root_key.is_empty().then_some(key)
     }
 
     /// The field path of a nested definition below the `root` type's definitions.
@@ -472,6 +591,7 @@ fn selector_lines(ledger: &Ledger) -> BTreeMap<(&str, &str), SelectorLines<'_>> 
                 }
             }
             [key] if key == "base_type" => lines.base_type = Some(answer),
+            [key] if key == "path_file" => lines.path_file = Some(answer),
             _ => {}
         }
     }
@@ -603,32 +723,41 @@ fn questions(
 ) -> Vec<String> {
     match (subject.kind, &subject.name, &subject.field) {
         (snapshot::SubjectKind::Registry | snapshot::SubjectKind::Field, _, field) => {
-            let Some(types) = subject
-                .registry
-                .as_ref()
-                .and_then(|registry| selectors.directories.get(registry.as_str()))
-            else {
+            let Some(registry) = subject.registry.as_deref() else {
                 return Vec::new();
             };
+            let mut questions = match (subject.kind, property) {
+                (snapshot::SubjectKind::Registry, "duplicate_rule") => {
+                    return priority_questions(claims, registry);
+                }
+                (snapshot::SubjectKind::Registry, "loader_path") => {
+                    selectors.single_file_questions(claims, registry)
+                }
+                _ => Vec::new(),
+            };
+            let Some(types) = selectors.directories.get(registry) else {
+                return questions;
+            };
 
-            types
-                .iter()
-                .flat_map(|(type_name, file, selector)| {
-                    let field = field.as_deref();
-                    let (field, property) = match selector {
-                        Selector::Nested(path) => match (field, property) {
-                            (None, "loader_path") => (None, property),
-                            (Some(field), "existence") if field == path => (None, property),
-                            _ => return Vec::new(),
-                        },
-                        Selector::Root | Selector::Unresolved(_) => (field, property),
-                    };
+            questions.extend(types.iter().flat_map(|(type_name, file, selector)| {
+                let field = field.as_deref();
+                let (field, property) = match selector {
+                    Selector::Nested(path) => match (field, property) {
+                        (None, "loader_path" | "extension" | "recursion") => (None, property),
+                        (Some(field), "existence") if field == path => (None, property),
+                        _ => return Vec::new(),
+                    },
+                    Selector::Root | Selector::RootKey { .. } | Selector::Unresolved(_) => {
+                        (field, property)
+                    }
+                };
 
-                    type_questions(
-                        claims, type_name, file, field, property, conditions, gap_facet,
-                    )
-                })
-                .collect()
+                type_questions(
+                    claims, type_name, file, field, property, conditions, gap_facet,
+                )
+            }));
+
+            questions
         }
         (snapshot::SubjectKind::Argument, Some(command), Some(field)) => {
             let root = format!("alias[{command}]");
@@ -644,6 +773,104 @@ fn questions(
                 .collect()
         }
         _ => Vec::new(),
+    }
+}
+
+/// The `overrides.cwt` questions about a directory's priority: that it has one, and its value.
+fn priority_questions(claims: &ClaimIndex<'_>, registry: &str) -> Vec<String> {
+    ["field_existence", "value_form"]
+        .into_iter()
+        .flat_map(|property| {
+            claim_questions(
+                claims,
+                OVERRIDES,
+                property,
+                vec!["priorities", registry],
+                &[],
+            )
+        })
+        .collect()
+}
+
+/// The naming-line questions that a `definition_names` rule answers, each with the form that
+/// names its type's definitions as the answer. A registry rule lists the root forms and answers
+/// the Root and RootKey types; a field rule holds one nested form and answers the nested type at
+/// that path.
+fn naming_answers(
+    claims: &ClaimIndex<'_>,
+    selectors: &TypeSelectors<'_>,
+    subject: &snapshot::Subject,
+    answer: &Value,
+) -> Vec<(String, Value)> {
+    let Some(types) = subject
+        .registry
+        .as_deref()
+        .and_then(|registry| selectors.directories.get(registry))
+    else {
+        return Vec::new();
+    };
+
+    types
+        .iter()
+        .flat_map(|(type_name, file, selector)| {
+            let Some((lines, form)) = type_form(selector, subject.field.as_deref(), answer) else {
+                return Vec::new();
+            };
+
+            lines
+                .iter()
+                .flat_map(|line| {
+                    let path = vec!["types", *type_name, line];
+
+                    claim_questions(claims, file, "loader_path", path, &[])
+                })
+                .map(|question| (question, form.clone()))
+                .collect()
+        })
+        .collect()
+}
+
+/// The form that names the definitions of a type with `selector`, and the naming lines that it
+/// answers. A known empty list of root forms answers only `name_field`: the loader names no
+/// definition, which says nothing of how files or wrapper keys hold them.
+fn type_form(
+    selector: &Selector,
+    field: Option<&str>,
+    answer: &Value,
+) -> Option<(&'static [&'static str], Value)> {
+    let statement = |form: &&Value| form.get("statement").cloned();
+
+    match (selector, field) {
+        (Selector::Nested(path), Some(field)) if path == field => {
+            Some((NAMING_LINES, answer.clone()))
+        }
+        (Selector::Root, None) => {
+            let forms = answer.as_array()?;
+
+            if forms.is_empty() {
+                return Some((&["name_field"], answer.clone()));
+            }
+
+            let root = forms
+                .iter()
+                .find(|form| statement(form) == Some(json!("Root")));
+            let form = match (root, forms.as_slice()) {
+                (Some(root), _) => root,
+                (None, [only]) => only,
+                (None, _) => return None,
+            };
+
+            Some((NAMING_LINES, form.clone()))
+        }
+        (Selector::RootKey { key, .. }, None) => {
+            let form = answer
+                .as_array()?
+                .iter()
+                .find(|form| statement(form) == Some(json!({ "RootKey": key })))?;
+
+            Some((NAMING_LINES, form.clone()))
+        }
+        _ => None,
     }
 }
 
@@ -677,6 +904,18 @@ fn type_questions(
     let (path, ledger_property): (Vec<&str>, &str) = match (field, property) {
         (None, "existence") => (vec!["types", type_name], "type_existence"),
         (None, "loader_path") => (vec!["types", type_name, "path"], "loader_path"),
+        (None, "extension") => (vec!["types", type_name, "path_extension"], "loader_path"),
+        (None, "recursion") => (vec!["types", type_name, "path_strict"], "loader_path"),
+        (None, "definition_names") => {
+            return NAMING_LINES
+                .iter()
+                .flat_map(|line| {
+                    let path = vec!["types", type_name, line];
+
+                    claim_questions(claims, file, "loader_path", path, conditions)
+                })
+                .collect();
+        }
         (Some(field), _) => {
             let root = type_name.trim_start_matches("type[").trim_end_matches(']');
 

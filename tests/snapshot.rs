@@ -810,3 +810,99 @@ async fn failed_grammar_and_derived_name_answers_are_gaps_and_fail_extraction() 
         );
     }
 }
+
+#[tokio::test]
+async fn loader_rules_become_registry_and_nested_field_rules() {
+    let snapshot = snapshot::assemble(&recorded().await).unwrap();
+    let answer = |id: &str| {
+        snapshot
+            .rules
+            .iter()
+            .find(|rule| rule.id == id)
+            .unwrap_or_else(|| panic!("no rule {id}"))
+            .answer
+            .clone()
+    };
+
+    assert_eq!(
+        answer("registry:common/traditions#extension"),
+        json!({ "suffix": null })
+    );
+    assert_eq!(
+        answer("registry:common/traditions#recursion"),
+        json!("None")
+    );
+    assert_eq!(
+        answer("registry:common/traditions#duplicate_rule"),
+        json!("LastWins")
+    );
+    assert_eq!(
+        answer("registry:common/traditions#definition_names"),
+        json!([{ "statement": "Root", "name": "Key" }])
+    );
+    assert_eq!(
+        answer("field:common/traditions/tradition_swap#definition_names"),
+        json!({
+            "statement": { "Nested": { "field_path": ["tradition_swap"] } },
+            "name": { "Field": "name" },
+        })
+    );
+    for limit in ["file_order", "mod_over_vanilla"] {
+        assert!(
+            snapshot
+                .gaps
+                .iter()
+                .any(|gap| gap.id == format!("inventory:loader_rules#{limit}")
+                    && gap.reason.contains("No fixture verifies it"))
+        );
+    }
+}
+
+#[tokio::test]
+async fn partial_names_without_a_root_form_and_failed_loader_rules_are_gaps() {
+    use pdx_native::{DefinitionForm, DefinitionName, DefinitionStatement, Error, GrammarProperty};
+
+    let mut extraction = recorded().await;
+    let rules = extraction
+        .loader_rules
+        .get_mut("common/traditions")
+        .unwrap()
+        .as_mut()
+        .unwrap();
+    rules.value.definition_names = GrammarProperty::Partial(vec![DefinitionForm {
+        statement: DefinitionStatement::Nested {
+            field_path: vec!["tradition_swap".into()],
+        },
+        name: DefinitionName::Field("name".into()),
+    }]);
+    extraction.loader_rules.insert(
+        "common/relics".into(),
+        Err(Error::UnknownRegistry {
+            name: "common/relics".into(),
+        }),
+    );
+    assert!(!extraction.complete());
+
+    let snapshot = snapshot::assemble(&extraction).unwrap();
+    let gap = |id: &str| snapshot.gaps.iter().find(|gap| gap.id == id);
+
+    assert!(gap("registry:common/traditions#definition_names").is_some());
+    assert!(
+        snapshot
+            .rules
+            .iter()
+            .any(|rule| rule.id == "field:common/traditions/tradition_swap#definition_names")
+    );
+    for property in [
+        "extension",
+        "recursion",
+        "duplicate_rule",
+        "definition_names",
+    ] {
+        assert!(
+            gap(&format!("registry:common/relics#{property}"))
+                .is_some_and(|gap| gap.reason.contains("loader-rule question failed")),
+            "{property}"
+        );
+    }
+}

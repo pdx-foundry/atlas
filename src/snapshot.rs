@@ -2,6 +2,7 @@
 
 mod failure;
 mod language;
+mod loader_rules;
 mod registry;
 mod scope;
 
@@ -280,6 +281,7 @@ pub fn assemble(extraction: &Extraction) -> Result<Snapshot, String> {
             registries: extraction.fields.keys().cloned().collect(),
             established_properties: registry::PROPERTIES
                 .iter()
+                .chain(loader_rules::PROPERTIES)
                 .chain(language::PROPERTIES)
                 .map(|property| (*property).into())
                 .collect(),
@@ -301,6 +303,7 @@ pub fn assemble(extraction: &Extraction) -> Result<Snapshot, String> {
         Err(_) => scope::ScopeNames::default(),
     };
     registry::assemble(&mut snapshot, extraction, &scopes)?;
+    loader_rules::assemble(&mut snapshot, extraction)?;
     language::assemble(&mut snapshot, extraction, &scopes)?;
     snapshot.coverage.established_properties.sort();
     snapshot.coverage.established_properties.dedup();

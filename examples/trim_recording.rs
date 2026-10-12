@@ -11,7 +11,7 @@ use std::{
     path::{Path, PathBuf},
 };
 
-/// Registries whose fields, derived names and modifier families the tests read.
+/// Registries whose fields, derived names, modifier families and loader rules the tests read.
 const REGISTRIES: &[&str] = &[
     "common/buildings",
     "common/council_agendas",
@@ -49,7 +49,12 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     rewrite_recorded_answer::<Vec<Registry>>(&recording.join("registries.json"), |registries| {
         registries.retain(|registry| REGISTRIES.contains(&registry.name.as_str()));
     })?;
-    for question in ["registry_fields", "derived_names", "modifier_families"] {
+    for question in [
+        "registry_fields",
+        "derived_names",
+        "modifier_families",
+        "loader_rules",
+    ] {
         let answers = recording.join(question);
         remove_unkept(&answers, &answers, REGISTRIES)?;
     }

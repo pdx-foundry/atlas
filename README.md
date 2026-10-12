@@ -4,9 +4,10 @@ Atlas inventories the questions in CWTools config and measures which ones an Atl
 answer. **Coverage is not agreement with CWT.** An evidence-backed contradictory answer earns the
 same coverage as an agreeing answer. The config is a migration/discovery input, not the game oracle.
 
-Atlas also asks its pinned Native dependency for registry and tradition observations and for the
-script language declarations: effects, triggers, modifiers and their categories and generated
-families, scopes and scope links, localization, on_actions, game rules and defines. It assembles
+Atlas also asks its pinned Native dependency for registry and tradition observations, each
+registry's loader rules, and the script language declarations: effects, triggers, modifiers and
+their categories and generated families, scopes and scope links, localization, on_actions, game
+rules and defines. It assembles
 them into one offline rule snapshot. Native handles the game and platform details. The ledger and
 coverage commands still run without a game installation.
 
@@ -62,7 +63,8 @@ cargo run --locked -- compare \
 It writes `comparison.json` with one entry per config claim plus Atlas-only questions. Entries
 contain both answers where available and report `same`, `different`, `missing_from_atlas`, or
 `atlas_only`. Gaps keep their reasons and count as missing answers. Only the directly comparable
-properties (presence, loader path, basic value form, and numeric cardinality bounds) can be marked
+properties (presence, loader path and the other loader lines of a type, `overrides.cwt`
+priorities, basic value form, and numeric cardinality bounds) can be marked
 the same or different; an unmapped property is reported as missing a comparable answer with its
 raw Atlas answer retained. This report does not change coverage. A difference calls for review; it
 does not establish which source is correct. The command exits 2 if config diagnostics remain.
