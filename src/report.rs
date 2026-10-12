@@ -55,6 +55,18 @@ pub fn generate_comparison(
     fs::write(output.join("comparison.json"), json_bytes(&report)?)?;
     Ok(report)
 }
+/// Writes the comparison of Native's registry list with the config types.
+pub fn generate_registries(
+    config: &Path,
+    registries: &pdx_native::Answer<Vec<pdx_native::Registry>>,
+    output: &Path,
+) -> Result<coverage::registries::Report, Box<dyn std::error::Error>> {
+    let ledger = ledger::inventory(&read_sources(config)?);
+    let report = coverage::registries::compare(&ledger, registries);
+    fs::create_dir_all(output)?;
+    fs::write(output.join("registries.json"), json_bytes(&report)?)?;
+    Ok(report)
+}
 /// Reads each `script-docs` log of one game version's directory. A missing log is an error.
 pub fn read_script_docs(directory: &Path) -> io::Result<BTreeMap<String, String>> {
     comparison::script_docs::LOGS
