@@ -1022,6 +1022,13 @@ types = {
 
     assert_eq!(edited.status("loader_path", &extension), Status::Same);
     assert_eq!(edited.status("loader_path", &strict), Status::Different);
+
+    let levels = SharedDirectory::evaluate(&[("traditions.cwt", source)], |snapshot| {
+        set_rule(snapshot, TRADITIONS, "recursion", json!({ "Levels": 2 }));
+    })
+    .await;
+
+    assert_eq!(levels.status("loader_path", &strict), Status::Different);
 }
 
 #[tokio::test]

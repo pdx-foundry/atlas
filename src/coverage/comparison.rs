@@ -243,9 +243,11 @@ impl ComparisonKind {
                 .and_then(|path| path.rsplit('/').next())
                 .map(|file| Value::String(file.into())),
             Self::Extension => answer.get("suffix").cloned(),
-            Self::FolderOnly => answer
-                .as_str()
-                .map(|recursion| Value::Bool(recursion == "None")),
+            Self::FolderOnly => match answer {
+                Value::String(recursion) => Some(Value::Bool(recursion == "None")),
+                Value::Object(levels) if levels.contains_key("Levels") => Some(Value::Bool(false)),
+                _ => None,
+            },
             Self::NameField if answer.as_array().is_some_and(Vec::is_empty) => {
                 Some(json!("no name"))
             }

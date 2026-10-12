@@ -15,18 +15,9 @@ type KeySubtypes<'a> = BTreeMap<(&'a str, &'a str, &'a str), BTreeSet<&'a str>>;
 /// The config types that load from each content directory, as (type, file).
 type RegistryTypes = BTreeMap<String, BTreeSet<(String, String)>>;
 
-/// The lines of a config type that state how its loader reads files and names definitions.
-const LOADER_LINES: &[&str] = &[
-    "path",
-    "path_extension",
-    "path_strict",
-    "path_file",
-    "name_field",
-    "skip_root_key",
-    "type_per_file",
-    "name_from_file",
-];
-/// The loader lines that the form naming a type's definitions answers.
+/// The lines of a config type that state how its loader selects files.
+const FILE_SELECTION_LINES: &[&str] = &["path", "path_extension", "path_strict", "path_file"];
+/// The lines of a config type that the form naming its definitions answers.
 const NAMING_LINES: &[&str] = &[
     "name_field",
     "skip_root_key",
@@ -245,7 +236,7 @@ struct TypeSelectors<'a> {
     directories: BTreeMap<&'a str, Vec<(&'a str, &'a str, Selector)>>,
     /// The selector of each question's type, for types in a directory with several types.
     questions: BTreeMap<&'a str, Selector>,
-    /// The loader-line questions (`path`, `path_extension`, …) of each type.
+    /// The file-selection and naming-line questions of each type.
     loader_lines: BTreeSet<&'a str>,
     /// Each type that `path_file` selects, by the content path of its one file.
     single_files: BTreeMap<String, Vec<(&'a str, &'a str)>>,
@@ -343,7 +334,9 @@ impl<'a> TypeSelectors<'a> {
             .filter(|claim| {
                 matches!(
                     claim.subject.as_slice(),
-                    [types, _, key] if types == "types" && LOADER_LINES.contains(&key.as_str())
+                    [types, _, line] if types == "types"
+                        && (FILE_SELECTION_LINES.contains(&line.as_str())
+                            || NAMING_LINES.contains(&line.as_str()))
                 ) && claim.property == "loader_path"
             })
             .map(|claim| claim.question.as_str())
@@ -838,8 +831,6 @@ fn type_form(
     field: Option<&str>,
     answer: &Value,
 ) -> Option<(&'static [&'static str], Value)> {
-    let statement = |form: &&Value| form.get("statement").cloned();
-
     match (selector, field) {
         (Selector::Nested(path), Some(field)) if path == field => {
             Some((NAMING_LINES, answer.clone()))
@@ -853,7 +844,7 @@ fn type_form(
 
             let root = forms
                 .iter()
-                .find(|form| statement(form) == Some(json!("Root")));
+                .find(|form| form.get("statement") == Some(&json!("Root")));
             let form = match (root, forms.as_slice()) {
                 (Some(root), _) => root,
                 (None, [only]) => only,
@@ -866,7 +857,7 @@ fn type_form(
             let form = answer
                 .as_array()?
                 .iter()
-                .find(|form| statement(form) == Some(json!({ "RootKey": key })))?;
+                .find(|form| form.get("statement") == Some(&json!({ "RootKey": key })))?;
 
             Some((NAMING_LINES, form.clone()))
         }
