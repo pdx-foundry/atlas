@@ -17,7 +17,7 @@ has 19 diagnostics.
 | `join` | Meaning |
 | --- | --- |
 | `named` | A Native registry names the directory, and only this type loads from it. |
-| `several_types_in_directory` | A Native registry names the directory, but several types load from it. Coverage records a mapping gap until SDK-785 joins them. |
+| `several_types_in_directory` | A Native registry names the directory, but several types load from it. Coverage credits each type only through its config selector ([ledger contract](ledger.md#snapshot-input), SDK-785). |
 | `no_named_registry` | No Native registry names the directory. |
 | `deferred_format_family` | No Native registry names the directory, and it belongs to a Milestone 6 format family: `gfx`, `interface`, `sound`, `music`, `flags`, `fonts`, `map/setup_scenarios` or `prescripted_countries`. |
 

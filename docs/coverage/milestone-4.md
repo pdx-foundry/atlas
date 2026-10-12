@@ -76,6 +76,16 @@ The [gap triage](gap-triage.md#sdk-625-final-run) measures the unowned gaps agai
 A later review fix keys the naming join by file as well as type; recomputed from the same live
 snapshot, `coverage.json` is byte-identical.
 
+The [selector join](ledger.md#snapshot-input) of SDK-785, recomputed from the same live snapshot,
+covers **22,995 / 58,032 (39.624690%)**, from SDK-781's 22,679. It credits 320 more claims of the
+root and nested types in the six `swapped_*` directories, which Native already names:
+`common/governments.cwt` 135, `common/traditions.cwt` 57, `common/ascension_perks.cwt` 52,
+`common/pop_jobs.cwt` 50 and `common/technologies_consolidated.cwt` 26 (field existence 149, value
+forms 81, maximum cardinality 64, type existence 11, paths 11 and `replace_scopes` 4). Four claims
+lose credit: the naming lines of `type[swapped_civic]`, which had joined the civics' own derived
+names. `type[swapped_job]` keeps its selector gap, because the snapshot has `swappable_data` but
+not `swappable_data/swap_type`.
+
 The live CLI exited 0. It asked every question once, with methods unchanged during the run,
 confirmed disposal of both fixture games and the loaded-modifier game, and took 7 minutes 39
 seconds. Ledger and comparison exit 2 for the retained source diagnostics. The ignored

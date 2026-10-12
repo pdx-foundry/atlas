@@ -17,48 +17,352 @@ tradition = {
     ledger::inventory(&BTreeMap::from([("traditions.cwt".into(), source.into())]))
 }
 
-#[tokio::test]
-async fn shared_config_directory_counts_an_explicit_gap_for_each_type() {
-    let source = r#"
-types = {
-    type[technology] = { path = "game/common/technology" }
-    type[swapped_technology] = {
-        path = "game/common/technology"
-        base_type = technology
-    }
+/// Coverage and comparison gaps for the claims of config `sources`, against the recorded M452
+/// answers qualified as live and changed by `edit`.
+struct SharedDirectory {
+    ledger: ledger::Ledger,
+    coverage: coverage::Report,
+    comparison: coverage::comparison::Report,
 }
-"#;
-    let ledger = ledger::inventory(&BTreeMap::from([("technology.cwt".into(), source.into())]));
-    let snapshot = recorded_snapshot().await;
-    let comparison = coverage::comparison::evaluate(
-        &ledger,
-        &snapshot::json_bytes(&snapshot).unwrap(),
-        &Default::default(),
-    )
-    .unwrap();
-    for name in ["type[technology]", "type[swapped_technology]"] {
-        let claim = ledger
+
+impl SharedDirectory {
+    /// Evaluates `sources` after `edit` changes the recorded snapshot; the edited answers are then
+    /// qualified as live.
+    async fn evaluate(
+        sources: &[(&str, &str)],
+        edit: impl FnOnce(&mut snapshot::Snapshot),
+    ) -> Self {
+        let ledger = ledger::inventory(
+            &sources
+                .iter()
+                .map(|(file, source)| ((*file).into(), (*source).into()))
+                .collect(),
+        );
+        let mut snapshot = recorded_snapshot().await;
+        edit(&mut snapshot);
+        qualify_as_live(&mut snapshot);
+        let bytes = snapshot::json_bytes(&snapshot).unwrap();
+
+        Self {
+            coverage: coverage::evaluate(&ledger, Some(&bytes)).unwrap(),
+            comparison: coverage::comparison::evaluate(&ledger, &bytes, &Default::default())
+                .unwrap(),
+            ledger,
+        }
+    }
+
+    /// The ID of the claim at `subject` with `property`; panics when there is none.
+    fn claim_id(&self, property: &str, subject: &[&str]) -> &str {
+        &self
+            .ledger
             .claims
             .iter()
-            .find(|claim| claim.property == "type_existence" && claim.subject == ["types", name])
-            .unwrap();
-        let entry = comparison
+            .find(|claim| claim.property == property && claim.subject == subject)
+            .unwrap_or_else(|| panic!("no {property} claim at {subject:?}"))
+            .id
+    }
+
+    /// Whether the claim at `subject` with `property` is covered.
+    fn covered(&self, property: &str, subject: &[&str]) -> bool {
+        let id = self.claim_id(property, subject);
+
+        self.coverage
+            .claims
+            .iter()
+            .find(|assessment| assessment.claim == id)
+            .unwrap()
+            .covered
+    }
+
+    /// The comparison gaps of the claim at `subject` with `property`.
+    fn gaps(&self, property: &str, subject: &[&str]) -> &[String] {
+        let id = self.claim_id(property, subject);
+
+        &self
+            .comparison
             .entries
             .iter()
-            .find(|entry| entry.claim.as_deref() == Some(claim.id.as_str()))
-            .unwrap();
-        assert_eq!(
-            entry.status,
-            coverage::comparison::Status::MissingFromAtlas,
-            "{name}"
+            .find(|entry| entry.claim.as_deref() == Some(id))
+            .unwrap()
+            .gaps
+    }
+}
+
+/// A `tradition` directory with a second type written by `selector_lines`.
+async fn swapped_tradition(selector_lines: &str) -> SharedDirectory {
+    let source = format!(
+        r#"
+types = {{
+    type[tradition] = {{ path = "game/common/traditions" }}
+    {selector_lines}
+}}
+tradition = {{ unlocks_agenda = scalar }}
+"#
+    );
+
+    SharedDirectory::evaluate(&[("traditions.cwt", &source)], |_| {}).await
+}
+
+#[tokio::test]
+async fn root_and_swapped_types_join_through_their_selectors() {
+    let swap = r#"
+    ## type_key_filter = tradition_swap
+    type[swapped_tradition] = {
+        base_type = tradition
+        path = "game/common/traditions"
+        skip_root_key = any
+        name_field = name
+    }"#;
+    let directory = swapped_tradition(swap).await;
+
+    for (property, subject) in [
+        ("type_existence", &["types", "type[tradition]"][..]),
+        ("loader_path", &["types", "type[tradition]", "path"]),
+        ("field_existence", &["tradition", "unlocks_agenda"]),
+        ("type_existence", &["types", "type[swapped_tradition]"]),
+        ("loader_path", &["types", "type[swapped_tradition]", "path"]),
+    ] {
+        assert!(directory.covered(property, subject), "{subject:?}");
+    }
+}
+
+#[tokio::test]
+async fn nested_type_joins_through_a_skipped_key_path() {
+    let swap = r#"
+    ## type_key_filter = name
+    type[swapped_tradition] = {
+        base_type = tradition
+        path = "game/common/traditions"
+        skip_root_key = { any tradition_swap }
+    }"#;
+    let directory = swapped_tradition(swap).await;
+
+    assert!(directory.covered("type_existence", &["types", "type[swapped_tradition]"]));
+}
+
+#[tokio::test]
+async fn mismatched_nested_selector_keeps_a_gap_that_names_it() {
+    for (swap, selector) in [
+        (
+            r#"
+    ## type_key_filter = other_swap
+    type[swapped_tradition] = {
+        base_type = tradition
+        path = "game/common/traditions"
+        skip_root_key = any
+    }"#,
+            "`type_key_filter = other_swap`, `skip_root_key = any`, `base_type = tradition`",
+        ),
+        (
+            r#"
+    ## type_key_filter = tradition_swap
+    type[swapped_tradition] = {
+        base_type = other
+        path = "game/common/traditions"
+        skip_root_key = any
+    }"#,
+            "`base_type = other`",
+        ),
+        (
+            r#"
+    ## type_key_filter = swap_type
+    type[swapped_tradition] = {
+        base_type = tradition
+        path = "game/common/traditions"
+        skip_root_key = { any swappable_data }
+    }"#,
+            "`skip_root_key = { any swappable_data }`",
+        ),
+    ] {
+        let directory = swapped_tradition(swap).await;
+
+        for (property, subject) in [
+            ("type_existence", &["types", "type[swapped_tradition]"][..]),
+            ("loader_path", &["types", "type[swapped_tradition]", "path"]),
+        ] {
+            assert!(!directory.covered(property, subject), "{swap}");
+            assert!(
+                directory
+                    .gaps(property, subject)
+                    .iter()
+                    .any(|gap| gap.contains(selector)),
+                "{swap}"
+            );
+        }
+
+        assert!(directory.covered("field_existence", &["tradition", "unlocks_agenda"]));
+    }
+}
+
+#[tokio::test]
+async fn event_namespace_selector_stays_unresolved_and_takes_no_event_kind_claim() {
+    let events = r#"
+types = {
+    type[event] = {
+        path = "game/events"
+        ## type_key_filter = country_event
+        subtype[country] = {}
+    }
+}
+event = { subtype[country] = { trigger = scalar } }
+"#;
+    let namespaces = r#"
+types = {
+    ## type_key_filter = namespace
+    type[event_namespace] = {
+        path = "game/events"
+        name_field = "-"
+    }
+}
+event_namespace = scalar
+"#;
+    let directory = SharedDirectory::evaluate(
+        &[
+            ("events/events.cwt", events),
+            ("events/event_namespaces.cwt", namespaces),
+        ],
+        |snapshot| {
+            let template = snapshot
+                .rules
+                .iter()
+                .find(|rule| rule.id == "registry:common/traditions#existence")
+                .unwrap()
+                .clone();
+
+            snapshot.subjects.push(snapshot::Subject {
+                id: "registry:events".into(),
+                kind: snapshot::SubjectKind::Registry,
+                registry: Some("events".into()),
+                field: None,
+                conditional: None,
+                name: None,
+            });
+            snapshot.subjects.push(snapshot::Subject {
+                id: "field:events/trigger".into(),
+                kind: snapshot::SubjectKind::Field,
+                registry: Some("events".into()),
+                field: Some("trigger".into()),
+                conditional: Some(false),
+                name: None,
+            });
+            for (subject, conditions) in [
+                ("registry:events", vec![]),
+                (
+                    "field:events/trigger",
+                    vec!["root_key[country_event]".into()],
+                ),
+            ] {
+                snapshot.rules.push(snapshot::Rule {
+                    id: format!("{subject}#existence"),
+                    subject: subject.into(),
+                    conditions,
+                    ..template.clone()
+                });
+            }
+        },
+    )
+    .await;
+
+    assert!(directory.covered("type_existence", &["types", "type[event]"]));
+    assert!(directory.covered("field_existence", &["event", "subtype[country]", "trigger"]));
+    assert!(!directory.covered("type_existence", &["types", "type[event_namespace]"]));
+    assert!(
+        directory
+            .gaps("type_existence", &["types", "type[event_namespace]"])
+            .iter()
+            .any(|gap| gap.contains("`type_key_filter = namespace`"))
+    );
+    assert!(!directory.covered("value_form", &["event_namespace"]));
+}
+
+/// Coverage of the `species_name` and `species_named_list` types when the first is selected by
+/// `type_key_filter {species_filter}`.
+async fn species_names(species_filter: &str) -> SharedDirectory {
+    let source = format!(
+        r#"
+types = {{
+    ## type_key_filter {species_filter}
+    type[species_name] = {{
+        path = "game/common/traditions"
+        name_field = "name"
+    }}
+    type[species_named_list] = {{
+        path = "game/common/traditions"
+        skip_root_key = named_lists
+    }}
+}}
+"#
+    );
+
+    SharedDirectory::evaluate(&[("names.cwt", &source)], |_| {}).await
+}
+
+#[tokio::test]
+async fn excluded_root_key_leaves_the_root_type_and_a_wrapped_type_keeps_its_gap() {
+    let directory = species_names("<> named_lists").await;
+    let named_list = ["types", "type[species_named_list]"];
+
+    assert!(directory.covered("type_existence", &["types", "type[species_name]"]));
+    assert!(!directory.covered("type_existence", &named_list));
+    assert!(
+        directory
+            .gaps("type_existence", &named_list)
+            .iter()
+            .any(|gap| gap.contains("`skip_root_key = named_lists`"))
+    );
+
+    for filter in ["= named_lists", "= { named_lists other_lists }"] {
+        let selected = species_names(filter).await;
+        let species_name = ["types", "type[species_name]"];
+
+        assert!(
+            !selected.covered("type_existence", &species_name),
+            "{filter}"
         );
         assert!(
-            entry
-                .gaps
+            selected
+                .gaps("type_existence", &species_name)
                 .iter()
-                .any(|reason| reason.contains("several config types"))
+                .any(|gap| gap.contains(&format!("`type_key_filter {filter}`"))),
+            "{filter}"
         );
     }
+}
+
+#[tokio::test]
+async fn root_key_reaches_the_root_type_subtype_beside_a_secondary_type_with_the_same_key() {
+    let source = r#"
+types = {
+    type[tradition] = {
+        path = "game/common/traditions"
+        ## type_key_filter = special_tradition
+        subtype[special] = {}
+    }
+    ## type_key_filter = other_swap
+    type[swapped_tradition] = {
+        base_type = tradition
+        path = "game/common/traditions"
+        skip_root_key = any
+        ## type_key_filter = special_tradition
+        subtype[special] = {}
+    }
+}
+tradition = { subtype[special] = { unlocks_agenda = scalar } }
+"#;
+    let directory = SharedDirectory::evaluate(&[("traditions.cwt", source)], |snapshot| {
+        let rule = snapshot
+            .rules
+            .iter_mut()
+            .find(|rule| rule.id == "field:common/traditions/unlocks_agenda#existence")
+            .unwrap();
+        rule.conditions = vec!["root_key[special_tradition]".into()];
+    })
+    .await;
+
+    assert!(directory.covered(
+        "field_existence",
+        &["tradition", "subtype[special]", "unlocks_agenda"]
+    ));
 }
 
 async fn recorded_snapshot() -> snapshot::Snapshot {
@@ -524,7 +828,7 @@ second = { unlocks_agenda = scalar }
             entry
                 .gaps
                 .iter()
-                .filter(|gap| gap.contains("several config types"))
+                .filter(|gap| gap.contains("the applicable type is unresolved"))
                 .count(),
             1
         );

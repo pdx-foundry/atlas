@@ -78,8 +78,8 @@ its typed subject. A named Native gap has a subject kind; localization contexts 
 also carry stable IDs, so equal display names do not merge. Version 1 had registry and field subjects only, was never published, and is no longer
 read. The ledger accepts the file directly and projects its registry and field rules onto matching
 config questions. The join comes from the ledger's own `loader_path` claims; the rule producer
-does not read CWT. Each rule keeps Native's source stamp, completeness and typed gaps. Directories
-with more than one config type produce an explicit mapping gap for each matching type question: a registry fact cannot establish which type it describes. These unresolved joins are counted as gaps in both comparison and coverage. Field joins use typed subject fields, including registry-relative nested paths. Recorded sources
+does not read CWT. Each rule keeps Native's source stamp, completeness and typed gaps. Field
+joins use typed subject fields, including registry-relative nested paths. Recorded sources
 are unqualified for current-engine coverage. A matching gap blocks credit for its
 question. Unknown contract versions or broken subject, source or schema references are errors.
 The full format is [rule-snapshot-v2.schema.json](../contract/rule-snapshot-v2.schema.json).
@@ -106,6 +106,39 @@ content observation under a `content:` condition and credits no unconditional qu
 Snapshot assembly refuses a failed registry-discovery answer. It runs authored fixture recipes
 only for registries in the discovery answer, so an unrelated static listing does not require
 tradition fixture recordings.
+
+A directory can hold several config types (SDK-785). Each type then earns credit only through
+the selector that the config writes for it, read from its `## type_key_filter`, `skip_root_key`
+and `base_type` lines; Native never reads a selector.
+
+- The root type is the one type with no `type_key_filter = KEY` and no `skip_root_key`. A
+  `type_key_filter <> KEY` only excludes keys, so `species_name` (`<> named_lists`) is the root
+  type of `common/species_names`. Registry and field rules join it as they join a type that is
+  alone in its directory, and a `root_key[KEY]` condition reaches its subtypes as above; the
+  subtypes of the directory's other types do not make that key ambiguous. `event`
+  is the root type of `events`.
+- A nested type has `skip_root_key = any` (then any further keys), a `base_type` that names the
+  root type, and `type_key_filter = KEY`. Its definitions are objects inside the root type's
+  definitions, at the field path of the further keys and `KEY` (`tradition_swap`;
+  `swappable_data/swap_type` for `swapped_job`). Native gives such an object no identity of its
+  own: it stays a field under its owner's path (Native's `registry-fields.md`, "Registry names",
+  SDK-778). So the type is identified only when Native establishes that field's existence
+  without conditions. That rule answers the type's `type_existence`, and the registry's
+  `loader_path` rule answers its `path`. Other registry and field rules do not reach the type,
+  and its naming lines join no derived name: Native's derived names describe the owner's items.
+- Every other type keeps a gap on each of its questions that names its selector, such as
+  "The type is selected by `type_key_filter = namespace`; no Native answer identifies it". This
+  covers a type that a root key selects (`event_namespace`, whose definitions are `namespace = x`
+  scalars with `name_field = "-"`; `diplo_phrase_greetings`; the `random_list` types), a
+  `type_key_filter` list, a type
+  inside a wrapper key with no nested base (`species_named_list` with `skip_root_key =
+  named_lists`), a nested type whose field Native does not establish, and a second type with no
+  selector. No event-kind rule reaches `event_namespace`: it has no subtypes.
+
+A type that a root key selects would join through a `root_key[KEY]` condition, as a subtype does.
+Native publishes no such answer for a whole type today: `namespace` is a key of the events file
+loader, not a field of `CEvent::ReadMember`, and SDK-791 owns definition-name rules. Add that join
+when Native answers one of those root keys.
 
 The ledger accepts only the published `atlas_rule_snapshot` input. Its private scoring
 projection joins rule subjects to ledger questions and preserves exact Native source stamps,
