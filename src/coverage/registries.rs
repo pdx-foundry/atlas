@@ -3,7 +3,7 @@
 
 use super::projection::registry_types;
 use crate::ledger::Ledger;
-use pdx_native::{Answer, Gap, Registry};
+use pdx_native::{Answer, Completeness, Gap, Registry};
 use serde::Serialize;
 use std::collections::{BTreeMap, BTreeSet};
 
@@ -65,8 +65,12 @@ pub struct Report {
     pub format_version: u32,
     /// Source config content identity.
     pub config_sha256: String,
+    /// False when unresolved config diagnostics remain; a type behind a diagnostic may be missing.
+    pub inventory_complete: bool,
     /// Native's source of the registry list, with its exact build.
     pub native_source: pdx_native::Source,
+    /// Whether Native named every candidate inside its search.
+    pub native_completeness: Completeness,
     /// Native's gaps in the registry list, including the count of unnamed registries.
     pub native_gaps: Vec<Gap>,
     /// Config types in the gate population.
@@ -118,7 +122,9 @@ pub fn compare(ledger: &Ledger, registries: &Answer<Vec<Registry>>) -> Report {
     Report {
         format_version: 1,
         config_sha256: ledger.config_sha256.clone(),
+        inventory_complete: ledger.diagnostics.is_empty(),
         native_source: registries.source.clone(),
+        native_completeness: registries.completeness,
         native_gaps: registries.gaps.clone(),
         gate_types: rows.iter().filter(|row| row.gate).count(),
         types_by_join,

@@ -2,7 +2,7 @@ use pdx_atlas::{
     coverage::{self, registries::Join},
     ledger,
 };
-use pdx_native::{Gap, GapKind, Native, Registry};
+use pdx_native::{Completeness, Gap, GapKind, Native, Registry};
 use std::path::Path;
 
 const TYPES: &str = r#"
@@ -48,6 +48,7 @@ fn each_config_type_has_one_join_to_an_authored_registry_list() {
         subject: None,
         detail: "2 registries were found without one content directory.".into(),
     });
+    registries.completeness = Completeness::Partial;
 
     let report = coverage::registries::compare(&ledger(), &registries);
 
@@ -82,6 +83,8 @@ fn each_config_type_has_one_join_to_an_authored_registry_list() {
     assert_eq!(report.gate_types, 6);
     assert_eq!(report.directories_in_both, 4);
     assert_eq!(report.engine_only, ["common/lawsuits"]);
+    assert_eq!(report.native_completeness, Completeness::Partial);
+    assert!(report.inventory_complete);
     assert!(
         report
             .native_gaps

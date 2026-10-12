@@ -226,6 +226,7 @@ pub struct Report {
     /// Per-file totals, including empty files.
     pub by_file: BTreeMap<String, Totals>,
     /// Per-file totals split by the config types that the file defines.
+    #[serde(default)]
     pub by_type: BTreeMap<String, FileTypes>,
     /// Each source claim's support assessment.
     pub claims: Vec<Assessment>,

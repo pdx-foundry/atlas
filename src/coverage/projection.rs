@@ -195,6 +195,13 @@ fn mapping_gap(
     })
 }
 
+/// The content directory of a config `path`. Two config types write their path without `game/`;
+/// the directory is the same.
+pub(super) fn config_directory(path: &str) -> &str {
+    let path = path.trim_matches('"');
+    path.strip_prefix("game/").unwrap_or(path)
+}
+
 pub(super) fn registry_types(ledger: &Ledger) -> BTreeMap<String, BTreeSet<(String, String)>> {
     let mut candidates: BTreeMap<String, BTreeSet<(String, String)>> = BTreeMap::new();
     let file_types = super::file_types(ledger);
@@ -207,9 +214,7 @@ pub(super) fn registry_types(ledger: &Ledger) -> BTreeMap<String, BTreeSet<(Stri
             continue;
         }
         let type_name = &claim.subject[1];
-        // Two config types write their path without `game/`; the directory is the same.
-        let path = claim.config_answer.trim_matches('"');
-        let registry = path.strip_prefix("game/").unwrap_or(path);
+        let registry = config_directory(&claim.config_answer);
         if file_types[&claim.file].contains(type_name) {
             candidates
                 .entry(registry.into())

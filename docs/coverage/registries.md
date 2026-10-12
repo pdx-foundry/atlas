@@ -8,8 +8,11 @@ Native's `registries` answer from a recording; a live `snapshot` run writes that
 
 It writes `registries.json`: one row for each config type with a `path`, with its directory, the
 Native registry that names the directory, a `join`, and whether the type is in the gate
-population. The report also gives Native's source and gaps, the count of types by join, the count
-of directories in both, and the engine-only registries.
+population. The report also gives Native's source, completeness and gaps, whether the config inventory is
+complete, the count of types by join, the count
+of directories in both, and the engine-only registries. The command exits 2 after it writes the report when config
+diagnostics remain or Native's answer is partial, as `ledger` and `compare` do; the pinned config
+has 19 diagnostics.
 
 | `join` | Meaning |
 | --- | --- |

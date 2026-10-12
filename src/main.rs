@@ -1,5 +1,5 @@
 use pdx_atlas::{coverage::comparison, extraction, report, snapshot};
-use pdx_native::{GameOptions, Native, supervisor};
+use pdx_native::{Completeness, GameOptions, Native, supervisor};
 use sha2::{Digest, Sha256};
 use std::{
     collections::BTreeMap,
@@ -119,7 +119,7 @@ fn run_registries() -> Result<bool, Box<dyn std::error::Error>> {
         report.types_by_join,
         output.join("registries.json").display()
     );
-    Ok(true)
+    Ok(report.inventory_complete && report.native_completeness == Completeness::Complete)
 }
 
 enum SnapshotMode {
