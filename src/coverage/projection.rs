@@ -6,6 +6,8 @@ use pdx_native::Basis;
 use std::collections::{BTreeMap, BTreeSet};
 
 type ClaimIndex<'a> = BTreeMap<(&'a str, &'a str, Vec<&'a str>, Vec<&'a str>), BTreeSet<&'a str>>;
+/// Config subtypes whose whole selector is a root key, by (file, type, root key).
+type KeySubtypes<'a> = BTreeMap<(&'a str, &'a str, &'a str), BTreeSet<&'a str>>;
 
 fn claim_index(ledger: &Ledger) -> ClaimIndex<'_> {
     let mut index = ClaimIndex::new();
@@ -51,6 +53,7 @@ fn project_with_gap_facets(
     let registry_types = registry_types(ledger);
     let command_files = command_files(ledger);
     let claims = claim_index(ledger);
+    let key_subtypes = key_subtypes(ledger);
     let language = super::language_subject::index(ledger, rules);
     let mut projection = Projection {
         snapshot_id: format!("{}@{}", rules.snapshot.name, rules.snapshot.version),
@@ -64,15 +67,25 @@ fn project_with_gap_facets(
         .map(|subject| (subject.id.as_str(), subject))
         .collect();
     for rule in &rules.rules {
-        let mut questions = questions(
-            &claims,
+        let conditions = config_conditions(
+            &key_subtypes,
             &registry_types,
-            &command_files,
             subjects[rule.subject.as_str()],
-            &rule.property,
             &rule.conditions,
-            false,
         );
+        let mut questions = match &conditions {
+            Some(conditions) => questions(
+                &claims,
+                &registry_types,
+                &command_files,
+                subjects[rule.subject.as_str()],
+                &rule.property,
+                conditions,
+                false,
+            ),
+            None => Vec::new(),
+        };
+        let conditions = conditions.unwrap_or_else(|| rule.conditions.clone());
         if rule.conditions.is_empty() {
             questions.extend(language.get(&rule.id).into_iter().flatten().cloned());
         }
@@ -105,14 +118,14 @@ fn project_with_gap_facets(
                 subjects[rule.subject.as_str()],
                 &registry_types,
                 &question,
-                &rule.conditions,
+                &conditions,
             ) {
                 projection.gaps.push(gap);
                 continue;
             }
             projection.answers.push(Answer {
                 question,
-                conditions: rule.conditions.clone(),
+                conditions: conditions.clone(),
                 value: rule.answer.clone(),
                 status: if rule.property == "value_form"
                     && rule.answer.get("alternatives").is_some()
@@ -228,6 +241,83 @@ fn registry_types(ledger: &Ledger) -> BTreeMap<String, BTreeSet<(String, String)
         }
     }
     candidates
+}
+
+/// Config subtypes that `## type_key_filter = KEY` selects and whose definition body is empty, so
+/// the root key is their whole selector. A subtype that also tests a field is left out.
+fn key_subtypes(ledger: &Ledger) -> KeySubtypes<'_> {
+    let field_tested = ledger
+        .claims
+        .iter()
+        .filter(|claim| claim.property == "conditional_constraint")
+        .filter_map(|claim| match claim.subject.as_slice() {
+            [types, type_name, subtype, _, ..] if types == "types" => {
+                Some((claim.file.as_str(), type_name.as_str(), subtype.as_str()))
+            }
+            _ => None,
+        })
+        .collect::<BTreeSet<_>>();
+    let mut subtypes = KeySubtypes::new();
+    for claim in &ledger.claims {
+        let [types, type_name, subtype, annotation] = claim.subject.as_slice() else {
+            continue;
+        };
+        // `config_answer` drops a `<>` filter, so read the key from the source text.
+        let Some(key) = claim
+            .source_text
+            .strip_prefix("## type_key_filter =")
+            .map(str::trim)
+        else {
+            continue;
+        };
+        let selects_by_key = types == "types"
+            && annotation == "$annotation:type_key_filter"
+            && subtype.starts_with("subtype[")
+            && !key.is_empty()
+            && !key.contains(char::is_whitespace)
+            && !key.contains('{');
+        if selects_by_key
+            && !field_tested.contains(&(claim.file.as_str(), type_name.as_str(), subtype.as_str()))
+        {
+            subtypes
+                .entry((claim.file.as_str(), type_name.as_str(), key))
+                .or_default()
+                .insert(subtype.as_str());
+        }
+    }
+    subtypes
+}
+
+/// A rule's conditions in the config's terms. A `root_key[KEY]` condition becomes the one subtype
+/// that the key alone selects; `None` when no such subtype is unique for the rule's registry.
+fn config_conditions(
+    key_subtypes: &KeySubtypes<'_>,
+    registry_types: &BTreeMap<String, BTreeSet<(String, String)>>,
+    subject: &snapshot::Subject,
+    conditions: &[String],
+) -> Option<Vec<String>> {
+    conditions
+        .iter()
+        .map(|condition| {
+            let Some(key) = condition
+                .strip_prefix("root_key[")
+                .and_then(|rest| rest.strip_suffix(']'))
+            else {
+                return Some(condition.clone());
+            };
+            let types = registry_types.get(subject.registry.as_ref()?)?;
+            let mut subtypes = types.iter().flat_map(|(type_name, file)| {
+                key_subtypes
+                    .get(&(file.as_str(), type_name.as_str(), key))
+                    .into_iter()
+                    .flatten()
+            });
+            match (subtypes.next(), subtypes.next()) {
+                (Some(subtype), None) => Some((*subtype).to_owned()),
+                _ => None,
+            }
+        })
+        .collect()
 }
 
 fn questions(

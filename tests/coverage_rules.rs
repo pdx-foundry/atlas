@@ -189,6 +189,61 @@ tradition = { subtype[special] = { unlocks_agenda = scalar } }
     );
 }
 
+/// Coverage of the `tradition` claims under `subtype`, with `unlocks_agenda` answered for `root_key`.
+async fn root_key_coverage(root_key: &str, subtype: &str) -> bool {
+    let source = r#"
+types = {
+    type[tradition] = {
+        path = "game/common/traditions"
+        ## type_key_filter = special_tradition
+        subtype[special] = {}
+        ## type_key_filter = special_tradition
+        subtype[gated] = { gated = yes }
+    }
+}
+tradition = {
+    subtype[special] = { unlocks_agenda = scalar }
+    subtype[gated] = { unlocks_agenda = scalar }
+}
+"#;
+    let ledger = ledger::inventory(&BTreeMap::from([("traditions.cwt".into(), source.into())]));
+    let mut snapshot = recorded_snapshot().await;
+    qualify_as_live(&mut snapshot);
+    let rule = snapshot
+        .rules
+        .iter_mut()
+        .find(|rule| rule.id == "field:common/traditions/unlocks_agenda#existence")
+        .unwrap();
+    rule.conditions = vec![format!("root_key[{root_key}]")];
+    let report =
+        coverage::evaluate(&ledger, Some(&snapshot::json_bytes(&snapshot).unwrap())).unwrap();
+    let claim = ledger
+        .claims
+        .iter()
+        .find(|claim| {
+            claim.property == "field_existence"
+                && claim.subject == ["tradition", subtype, "unlocks_agenda"]
+        })
+        .unwrap();
+    report
+        .claims
+        .iter()
+        .find(|item| item.claim == claim.id)
+        .unwrap()
+        .covered
+}
+
+#[tokio::test]
+async fn root_key_credits_the_subtype_that_the_key_alone_selects() {
+    assert!(root_key_coverage("special_tradition", "subtype[special]").await);
+    assert!(!root_key_coverage("special_tradition", "subtype[gated]").await);
+}
+
+#[tokio::test]
+async fn mismatched_root_key_credits_no_subtype() {
+    assert!(!root_key_coverage("other_tradition", "subtype[special]").await);
+}
+
 #[tokio::test]
 async fn reference_facet_does_not_conflict_with_value_form() {
     let mut snapshot = recorded_snapshot().await;
