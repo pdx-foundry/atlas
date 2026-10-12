@@ -156,6 +156,16 @@ establish that a field is required or optional.
 Conditional value forms keep all alternatives in one answer. A separate `value_form.unresolved`
 gap blocks unconditional credit, including nested children of conditional parents. Comparison
 retains the structured answer and gap. A CWT subtype name is not inferred from a Native predicate.
+One exception, decided in SDK-800: a rule condition `root_key[KEY]` (the answer holds for
+definitions whose root key is `KEY`) credits the subtype that `## type_key_filter = KEY` selects,
+when that subtype's definition body is empty and it is the only such subtype of the registry's
+type. The loader dispatches on the root key, so the key is an engine fact, and the config itself
+writes the key-to-subtype mapping; Atlas infers nothing. A different key, a `<>` or list filter, a
+subtype that also tests a field (`planet_killer`, `asset_selectors.cwt`), and a claim with any
+other subtype condition earn no credit through this rule; SDK-716 owns those forms. At config
+`8574760`, 32 of 35 `type_key_filter` subtypes qualify, and 636 Atlas-owned claims carry only such
+conditions (440 in `components.cwt`, 143 in `sprites.cwt`, 53 in `events.cwt`). They earn credit
+only once Native answers per root key (event kinds, SDK-702).
 Duplicate subject and record identities remain invalid. A missing reader ID does not erase an
 established broad value form; an opaque reader ID alone does not establish one.
 

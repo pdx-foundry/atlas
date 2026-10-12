@@ -189,6 +189,76 @@ tradition = { subtype[special] = { unlocks_agenda = scalar } }
     );
 }
 
+/// Whether the `unlocks_agenda` existence claim under `subtypes` is covered when Native answers the
+/// field under `conditions`.
+async fn subtype_coverage(conditions: &[&str], subtypes: &[&str]) -> bool {
+    let source = r#"
+types = {
+    type[tradition] = {
+        path = "game/common/traditions"
+        ## type_key_filter = special_tradition
+        subtype[special] = {}
+        ## type_key_filter = special_tradition
+        subtype[gated] = { gated = yes }
+        ##type_key_filter=compact_tradition
+        subtype[compact] = {}
+    }
+}
+tradition = {
+    subtype[special] = {
+        unlocks_agenda = scalar
+        subtype[compact] = { unlocks_agenda = scalar }
+    }
+    subtype[gated] = { unlocks_agenda = scalar }
+    subtype[compact] = { unlocks_agenda = scalar }
+}
+"#;
+    let ledger = ledger::inventory(&BTreeMap::from([("traditions.cwt".into(), source.into())]));
+    let mut snapshot = recorded_snapshot().await;
+    qualify_as_live(&mut snapshot);
+    let rule = snapshot
+        .rules
+        .iter_mut()
+        .find(|rule| rule.id == "field:common/traditions/unlocks_agenda#existence")
+        .unwrap();
+    rule.conditions = conditions.iter().map(|&c| c.into()).collect();
+    let report =
+        coverage::evaluate(&ledger, Some(&snapshot::json_bytes(&snapshot).unwrap())).unwrap();
+    let mut subject = vec!["tradition"];
+    subject.extend(subtypes);
+    subject.push("unlocks_agenda");
+    let claim = ledger
+        .claims
+        .iter()
+        .find(|claim| claim.property == "field_existence" && claim.subject == subject)
+        .unwrap();
+    report
+        .claims
+        .iter()
+        .find(|item| item.claim == claim.id)
+        .unwrap()
+        .covered
+}
+
+#[tokio::test]
+async fn root_key_credits_the_subtype_that_the_key_alone_selects() {
+    assert!(subtype_coverage(&["root_key[special_tradition]"], &["subtype[special]"]).await);
+    assert!(subtype_coverage(&["root_key[compact_tradition]"], &["subtype[compact]"]).await);
+    assert!(!subtype_coverage(&["root_key[special_tradition]"], &["subtype[gated]"]).await);
+}
+
+#[tokio::test]
+async fn mismatched_or_mixed_root_key_credits_no_subtype() {
+    assert!(!subtype_coverage(&["root_key[other_tradition]"], &["subtype[special]"]).await);
+    assert!(
+        !subtype_coverage(
+            &["root_key[special_tradition]", "subtype[compact]"],
+            &["subtype[special]", "subtype[compact]"],
+        )
+        .await
+    );
+}
+
 #[tokio::test]
 async fn reference_facet_does_not_conflict_with_value_form() {
     let mut snapshot = recorded_snapshot().await;
