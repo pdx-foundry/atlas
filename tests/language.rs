@@ -311,8 +311,8 @@ async fn callback_checks_keep_confirmed_disagreements_and_independent_source_gap
     )
     .unwrap();
     let checks = report.entry_scope_checks.unwrap();
-    assert_eq!(checks.agreements["on_actions"].agree, 184);
-    assert_eq!(checks.agreements["game_rules"].agree, 181);
+    assert_eq!(checks.agreements["on_actions"].agree, 234);
+    assert_eq!(checks.agreements["game_rules"].agree, 201);
     let mut missing = 0;
     let mut confirmed = 0;
 
@@ -339,7 +339,7 @@ async fn callback_checks_keep_confirmed_disagreements_and_independent_source_gap
             }
         }
     }
-    assert_eq!((confirmed, missing), (15, 44));
+    assert_eq!((confirmed, missing), (18, 34));
     assert_eq!(
         rule(&snapshot, "game_rule:is_mercenary#entry_scopes")
             .unwrap()
@@ -393,8 +393,8 @@ async fn callback_checks_require_both_answers_to_use_the_checked_method() {
         let mut newer_method = snapshot.clone();
         let answer = newer_method.answers.get_mut(key).unwrap();
         let mut source = newer_method.sources[&answer.source].clone();
-        source.method = "callbacks/v3".into();
-        answer.source = "callbacks/v3@recorded".into();
+        source.method = "callbacks/v5".into();
+        answer.source = "callbacks/v5@recorded".into();
         newer_method.sources.insert(answer.source.clone(), source);
 
         let mut missing = snapshot.clone();
@@ -430,6 +430,8 @@ async fn callback_coverage_keeps_disagreements_and_blocks_missing_independent_so
             is_mercenary = { }
             ## replace_scopes = { this = fleet }
             can_jump_drive = { }
+            ## replace_scopes = { this = pop_group root = colony }
+            can_pop_group_auto_migrate_abroad = { }
         }
     "#
         .into(),
@@ -458,7 +460,10 @@ async fn callback_coverage_keeps_disagreements_and_blocks_missing_independent_so
             .unwrap();
         assert_eq!(
             assessment.covered,
-            claim.subject.iter().any(|part| part == "is_mercenary")
+            claim
+                .subject
+                .iter()
+                .any(|part| part == "is_mercenary" || part == "can_jump_drive")
         );
     }
     let comparison = comparison::evaluate(
@@ -472,7 +477,10 @@ async fn callback_coverage_keeps_disagreements_and_blocks_missing_independent_so
         .iter()
         .find(|claim| {
             claim.property == "scope_context"
-                && claim.subject.iter().any(|part| part == "can_jump_drive")
+                && claim
+                    .subject
+                    .iter()
+                    .any(|part| part == "can_pop_group_auto_migrate_abroad")
         })
         .unwrap();
     let entry = comparison
