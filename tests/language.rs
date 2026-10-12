@@ -1378,7 +1378,7 @@ types = {
                 r#"
 types = {
     type[agenda] = {
-        path = "game/common/traditions"
+        path = "game/common/tradition_categories"
         localisation = {
             name = "council_agenda_$_name"
         }

@@ -28,8 +28,8 @@ const GATE_DIRECTORIES: &[&str] = &["common", "events"];
 pub enum Join {
     /// A Native registry names the type's directory, and no other type loads from it.
     Named,
-    /// A Native registry names the directory, but several config types load from it, so the
-    /// applicable type is unresolved.
+    /// A Native registry names the directory, but several config types load from it. Coverage
+    /// credits each type only through its config selector.
     SeveralTypesInDirectory,
     /// No Native registry names the directory. Native's unnamed-registry count has no names, so it
     /// cannot say whether an engine candidate exists for this type.
