@@ -244,14 +244,15 @@ fn registry_types(ledger: &Ledger) -> BTreeMap<String, BTreeSet<(String, String)
 }
 
 /// Config subtypes that `## type_key_filter = KEY` selects and whose definition body is empty, so
-/// the root key is their whole selector. A subtype that also tests a field is left out.
+/// the root key is their whole selector. A subtype whose body holds any key is left out.
 fn key_subtypes(ledger: &Ledger) -> KeySubtypes<'_> {
-    let field_tested = ledger
+    let with_body = ledger
         .claims
         .iter()
-        .filter(|claim| claim.property == "conditional_constraint")
         .filter_map(|claim| match claim.subject.as_slice() {
-            [types, type_name, subtype, _, ..] if types == "types" => {
+            [types, type_name, subtype, child, ..]
+                if types == "types" && !child.starts_with("$annotation:") =>
+            {
                 Some((claim.file.as_str(), type_name.as_str(), subtype.as_str()))
             }
             _ => None,
@@ -262,10 +263,13 @@ fn key_subtypes(ledger: &Ledger) -> KeySubtypes<'_> {
         let [types, type_name, subtype, annotation] = claim.subject.as_slice() else {
             continue;
         };
-        // `config_answer` drops a `<>` filter, so read the key from the source text.
+        // `config_answer` drops a `<>` operator, so read the key from the source text.
         let Some(key) = claim
             .source_text
-            .strip_prefix("## type_key_filter =")
+            .trim_start_matches('#')
+            .trim()
+            .strip_prefix("type_key_filter")
+            .and_then(|rest| rest.trim_start().strip_prefix('='))
             .map(str::trim)
         else {
             continue;
@@ -277,7 +281,7 @@ fn key_subtypes(ledger: &Ledger) -> KeySubtypes<'_> {
             && !key.contains(char::is_whitespace)
             && !key.contains('{');
         if selects_by_key
-            && !field_tested.contains(&(claim.file.as_str(), type_name.as_str(), subtype.as_str()))
+            && !with_body.contains(&(claim.file.as_str(), type_name.as_str(), subtype.as_str()))
         {
             subtypes
                 .entry((claim.file.as_str(), type_name.as_str(), key))
@@ -289,13 +293,18 @@ fn key_subtypes(ledger: &Ledger) -> KeySubtypes<'_> {
 }
 
 /// A rule's conditions in the config's terms. A `root_key[KEY]` condition becomes the one subtype
-/// that the key alone selects; `None` when no such subtype is unique for the rule's registry.
+/// that the key alone selects; `None` when no such subtype is unique for the rule's registry, or
+/// when another subtype or root-key condition goes with it.
 fn config_conditions(
     key_subtypes: &KeySubtypes<'_>,
     registry_types: &BTreeMap<String, BTreeSet<(String, String)>>,
     subject: &snapshot::Subject,
     conditions: &[String],
 ) -> Option<Vec<String>> {
+    let selectors = conditions
+        .iter()
+        .filter(|condition| condition.starts_with("root_key[") || condition.starts_with("subtype["))
+        .count();
     conditions
         .iter()
         .map(|condition| {
@@ -305,6 +314,9 @@ fn config_conditions(
             else {
                 return Some(condition.clone());
             };
+            if selectors > 1 {
+                return None;
+            }
             let types = registry_types.get(subject.registry.as_ref()?)?;
             let mut subtypes = types.iter().flat_map(|(type_name, file)| {
                 key_subtypes

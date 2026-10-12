@@ -189,8 +189,9 @@ tradition = { subtype[special] = { unlocks_agenda = scalar } }
     );
 }
 
-/// Coverage of the `tradition` claims under `subtype`, with `unlocks_agenda` answered for `root_key`.
-async fn root_key_coverage(root_key: &str, subtype: &str) -> bool {
+/// Whether the `unlocks_agenda` existence claim under `subtypes` is covered when Native answers the
+/// field under `conditions`.
+async fn subtype_coverage(conditions: &[&str], subtypes: &[&str]) -> bool {
     let source = r#"
 types = {
     type[tradition] = {
@@ -199,11 +200,17 @@ types = {
         subtype[special] = {}
         ## type_key_filter = special_tradition
         subtype[gated] = { gated = yes }
+        ##type_key_filter=compact_tradition
+        subtype[compact] = {}
     }
 }
 tradition = {
-    subtype[special] = { unlocks_agenda = scalar }
+    subtype[special] = {
+        unlocks_agenda = scalar
+        subtype[compact] = { unlocks_agenda = scalar }
+    }
     subtype[gated] = { unlocks_agenda = scalar }
+    subtype[compact] = { unlocks_agenda = scalar }
 }
 "#;
     let ledger = ledger::inventory(&BTreeMap::from([("traditions.cwt".into(), source.into())]));
@@ -214,16 +221,16 @@ tradition = {
         .iter_mut()
         .find(|rule| rule.id == "field:common/traditions/unlocks_agenda#existence")
         .unwrap();
-    rule.conditions = vec![format!("root_key[{root_key}]")];
+    rule.conditions = conditions.iter().map(|&c| c.into()).collect();
     let report =
         coverage::evaluate(&ledger, Some(&snapshot::json_bytes(&snapshot).unwrap())).unwrap();
+    let mut subject = vec!["tradition"];
+    subject.extend(subtypes);
+    subject.push("unlocks_agenda");
     let claim = ledger
         .claims
         .iter()
-        .find(|claim| {
-            claim.property == "field_existence"
-                && claim.subject == ["tradition", subtype, "unlocks_agenda"]
-        })
+        .find(|claim| claim.property == "field_existence" && claim.subject == subject)
         .unwrap();
     report
         .claims
@@ -235,13 +242,21 @@ tradition = {
 
 #[tokio::test]
 async fn root_key_credits_the_subtype_that_the_key_alone_selects() {
-    assert!(root_key_coverage("special_tradition", "subtype[special]").await);
-    assert!(!root_key_coverage("special_tradition", "subtype[gated]").await);
+    assert!(subtype_coverage(&["root_key[special_tradition]"], &["subtype[special]"]).await);
+    assert!(subtype_coverage(&["root_key[compact_tradition]"], &["subtype[compact]"]).await);
+    assert!(!subtype_coverage(&["root_key[special_tradition]"], &["subtype[gated]"]).await);
 }
 
 #[tokio::test]
-async fn mismatched_root_key_credits_no_subtype() {
-    assert!(!root_key_coverage("other_tradition", "subtype[special]").await);
+async fn mismatched_or_mixed_root_key_credits_no_subtype() {
+    assert!(!subtype_coverage(&["root_key[other_tradition]"], &["subtype[special]"]).await);
+    assert!(
+        !subtype_coverage(
+            &["root_key[special_tradition]", "subtype[compact]"],
+            &["subtype[special]", "subtype[compact]"],
+        )
+        .await
+    );
 }
 
 #[tokio::test]
