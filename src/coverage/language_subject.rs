@@ -368,6 +368,43 @@ fn on_action_names(ledger: &Ledger) -> BTreeMap<&str, String> {
         .collect()
 }
 
+/// The scope subject IDs of the Native scope types that each `scopes.cwt` alias names: one type,
+/// or each member of a scope group. An alias whose config scope joins no subject, or a group whose
+/// members are not established, is left out.
+pub(super) fn scope_aliases(
+    ledger: &Ledger,
+    snapshot: &Snapshot,
+) -> BTreeMap<String, BTreeSet<String>> {
+    let scopes = scope_join(ledger, snapshot);
+    let members: BTreeMap<_, _> = snapshot
+        .rules
+        .iter()
+        .filter(|rule| rule.property == "members")
+        .map(|rule| (rule.subject.as_str(), &rule.answer))
+        .collect();
+
+    ledger
+        .claims
+        .iter()
+        .filter_map(|claim| {
+            let alias = scope_keyword(claim)?;
+            let (kind, name) = scopes.get(claim.subject[1].as_str())?;
+            let id = kind.id(name);
+            let types = match kind {
+                SubjectKind::ScopeGroup => members
+                    .get(id.as_str())?
+                    .as_array()?
+                    .iter()
+                    .map(|member| member.as_str().map(str::to_owned))
+                    .collect::<Option<_>>()?,
+                _ => BTreeSet::from([id]),
+            };
+
+            Some((alias, types))
+        })
+        .collect()
+}
+
 /// The Native scope type or group that each config scope names, joined by its declared aliases
 /// against Native's keywords. A config scope that matches no subject, or several, stays unjoined.
 fn scope_join<'a>(

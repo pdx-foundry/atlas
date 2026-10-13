@@ -140,6 +140,30 @@ Native publishes no such answer for a whole type today: `namespace` is a key of 
 loader, not a field of `CEvent::ReadMember`, and SDK-791 owns definition-name rules. Add that join
 when Native answers one of those root keys.
 
+### Event kinds and pre_trigger keys (SDK-793)
+
+Native answers each event kind as a root field of `events` (Native's `registry-fields.md`,
+"Event kinds"): `country_event` is read in the country scope, and its members are the `CEvent`
+fields. In `events`, and only there, a root field whose key alone selects a subtype of the root
+type (the SDK-800 rule below) is a root statement, not a field. Its path below the key joins with
+the condition `root_key[KEY]`, so `country_event/pre_triggers` answers
+`event/subtype[country]/pre_triggers`, and the kind's own `read_scope` answers
+`types/type[event]/subtype[country]/$annotation:push_scope`. Its gaps join the same questions. In
+every other registry a root field is a key inside a definition, whatever its name; extend the
+registry list only when Native answers another registry's root statements as fields.
+
+A block's `read_scope` that Native gives as a known empty list (the block is read with no scope,
+as for the `event` kind) is the rule `[]`, not a gap. It credits `scopeless` (`push_scope = any`).
+
+When the config writes `alias_name[X] = alias_match_left[X]` directly in a block, each Native
+field in that block answers the claims at `alias[X:KEY]` for its key, with no conditions: the
+alias holds wherever it is used. So the keys of `possible_pre_triggers`, `can_join_pre_triggers`
+and each event kind's `pre_triggers` answer the `pre_triggers.cwt` value forms. A key that the
+config does not list stays Atlas-only, and a config key that Native does not list has no answer.
+Two blocks that use one alias both answer it, and an applicable gap of either blocks the credit.
+On M452 every pre_trigger key keeps Native's unresolved reader, so these claims stay gaps until
+Native establishes the value reader.
+
 ### Loader rules (SDK-797)
 
 Native's `loader_rules` answer (`loader-rules/v4`) becomes four properties of each registry
@@ -233,8 +257,9 @@ writes the key-to-subtype mapping; Atlas infers nothing. A different key, a `<>`
 subtype that also tests a field (`planet_killer`, `asset_selectors.cwt`), and a claim with any
 other subtype condition earn no credit through this rule; SDK-716 owns those forms. At config
 `8574760`, 32 of 35 `type_key_filter` subtypes qualify, and 636 Atlas-owned claims carry only such
-conditions (440 in `components.cwt`, 143 in `sprites.cwt`, 53 in `events.cwt`). They earn credit
-only once Native answers per root key (event kinds, SDK-702).
+conditions (440 in `components.cwt`, 143 in `sprites.cwt`, 53 in `events.cwt`). The 53 in
+`events.cwt` join through the event kinds above; the others earn credit only once Native answers
+per root key.
 Duplicate subject and record identities remain invalid. A missing reader ID does not erase an
 established broad value form; an opaque reader ID alone does not establish one.
 
@@ -359,6 +384,13 @@ The 34 names with no independent source receive an `entry_scopes` gap, including
 comment describes a site or branch that Native could not follow. Native's original gaps remain
 attached. The ledger's coverage projection therefore keeps these reasons and grants no
 entry-scope credit.
+
+The comparison report compares a `push_scope` on a subtype of a type (an event kind's scope) with
+the root statement's `read_scope`. The config names a scope by a `scopes.cwt` alias, which joins
+one Native scope type, or a scope group that stands for its members (`carrier` is planet or ship).
+The two agree when they name the same set of scope types; `any` agrees with every answer,
+including no scope. A read scope of `enclosing`, or an alias that joins no scope, is not
+comparable. Field-level `push_scope` claims stay unmapped (SDK-717).
 
 Comparison report format 3 adds `entry_scope_checks`. This field publishes the historical results
 only when both the on_action and game-rule answers have the matching build and callback method.

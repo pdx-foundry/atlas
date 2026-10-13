@@ -157,6 +157,10 @@ enum ComparisonKind {
     PriorityListed,
     ValueForm,
     Cardinality,
+    /// A subtype's `push_scope` against the scopes that the root statement it selects is read in
+    /// (an event kind). The config names a scope type or group by a `scopes.cwt` alias, and `any`
+    /// agrees with every answer, including no scope.
+    PushScope,
 }
 
 impl ComparisonKind {
@@ -177,6 +181,17 @@ impl ComparisonKind {
             "loader_path" => Self::for_loader_line(claim.subject.last()?),
             "value_form" => Some(Self::ValueForm),
             "cardinality_minimum" | "cardinality_maximum" => Some(Self::Cardinality),
+            "scope_context"
+                if matches!(
+                    claim.subject.as_slice(),
+                    [types, _, subtype, annotation]
+                        if types == "types"
+                            && subtype.starts_with("subtype[")
+                            && annotation == "$annotation:push_scope"
+                ) =>
+            {
+                Some(Self::PushScope)
+            }
             _ => None,
         }
     }
@@ -194,7 +209,13 @@ impl ComparisonKind {
         }
     }
 
-    fn config_value(&self, raw: &str) -> Option<Value> {
+    /// The comparable form of a config assertion. `scopes` holds the scope subject IDs that each
+    /// `scopes.cwt` alias names.
+    fn config_value(
+        &self,
+        raw: &str,
+        scopes: &BTreeMap<String, BTreeSet<String>>,
+    ) -> Option<Value> {
         let text = raw.trim_matches('"');
         let yes_no = || match text {
             "yes" => Some(Value::Bool(true)),
@@ -231,6 +252,10 @@ impl ComparisonKind {
                 .then(|| Value::String(raw.into())),
             Self::Cardinality if raw == "inf" => Some(Value::String("inf".into())),
             Self::Cardinality => raw.parse::<u64>().ok().map(Value::from),
+            Self::PushScope => match raw.strip_prefix("push_scope:")?.trim() {
+                "any" => Some(json!("any")),
+                alias => scopes.get(alias).map(|types| json!(types)),
+            },
         }
     }
 
@@ -274,6 +299,15 @@ impl ComparisonKind {
                 Some("Accumulate" | "Merges") => Some(Value::String("inf".into())),
                 _ => answer.as_u64().map(Value::from),
             },
+            Self::PushScope => {
+                let scopes: BTreeSet<_> = answer
+                    .as_array()?
+                    .iter()
+                    .map(Value::as_str)
+                    .collect::<Option<_>>()?;
+
+                (!scopes.contains("enclosing")).then(|| json!(scopes))
+            }
         }
     }
 
@@ -281,6 +315,11 @@ impl ComparisonKind {
         if config == atlas {
             return true;
         }
+
+        if matches!(self, Self::PushScope) {
+            return config == "any";
+        }
+
         matches!(self, Self::ValueForm)
             && config.as_str() == Some("scalar")
             && matches!(
@@ -307,6 +346,7 @@ fn comparison_outcome(
     claim: &crate::ledger::Claim,
     answers: &[&Answer],
     gaps: &[String],
+    scopes: &BTreeMap<String, BTreeSet<String>>,
 ) -> (Status, Option<String>) {
     if !gaps.is_empty() {
         return (
@@ -326,7 +366,7 @@ fn comparison_outcome(
             Some("Config assertion has no comparison mapping for this property".into()),
         );
     };
-    let Some(config) = kind.config_value(&claim.config_answer) else {
+    let Some(config) = kind.config_value(&claim.config_answer, scopes) else {
         return (
             Status::MissingFromAtlas,
             Some("Config assertion has no comparable form for this property".into()),
@@ -352,6 +392,7 @@ fn entry(
     claim: &crate::ledger::Claim,
     answers_by_question: &QuestionIndex<'_, Answer>,
     gaps_by_question: &QuestionIndex<'_, Gap>,
+    scopes: &BTreeMap<String, BTreeSet<String>>,
 ) -> Entry {
     let key = (claim.question.as_str(), claim.conditions.as_slice());
     let answers = answers_by_question
@@ -369,7 +410,7 @@ fn entry(
         .iter()
         .map(|answer| answer.value.clone())
         .collect::<Vec<_>>();
-    let (status, reason) = comparison_outcome(claim, answers, &gaps);
+    let (status, reason) = comparison_outcome(claim, answers, &gaps, scopes);
     Entry {
         claim: Some(claim.id.clone()),
         question: claim.question.clone(),
@@ -431,10 +472,11 @@ pub fn evaluate(ledger: &Ledger, input: &[u8], inputs: &Inputs) -> Result<Report
     let gaps_by_question = question_index(&projection.gaps, |gap: &Gap| {
         (&gap.question, &gap.conditions)
     });
+    let scopes = super::language_subject::scope_aliases(ledger, &rules);
     let mut entries = ledger
         .claims
         .iter()
-        .map(|claim| entry(claim, &answers_by_question, &gaps_by_question))
+        .map(|claim| entry(claim, &answers_by_question, &gaps_by_question, &scopes))
         .collect::<Vec<_>>();
     let config_questions = ledger
         .claims

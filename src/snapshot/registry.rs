@@ -634,10 +634,9 @@ impl<'a, T> FieldSet<'a, T> {
         field: &Field,
         evidence: &EvidenceLink,
     ) {
+        // A known empty list is Native's answer that the block is read with no scope.
         let this = match &field.read_scope {
-            GrammarProperty::Known(alternatives) if !alternatives.is_empty() => {
-                self.scopes.read_scope(alternatives)
-            }
+            GrammarProperty::Known(alternatives) => self.scopes.read_scope(alternatives),
             _ => None,
         };
         let context_gap = evidence.native_gaps.iter().any(|native_gap| {
