@@ -52,6 +52,7 @@
             {
               "registry": "common/pop_jobs",
               "item": "miner",
+              "second_item": null,
               "template": [
                 {
                   "Literal": "job_"
@@ -124,21 +125,13 @@
       },
       {
         "kind": "UnnamedDeclaration",
-        "subject": {
-          "kind": "registry",
-          "name": "common/economic_categories"
-        },
-        "detail": "names that combine this registry's keys with the keys of content that Native does not name as a registry are unexplained"
+        "subject": null,
+        "detail": "18 sites that compose modifier names at run time are not joined to a registry (1 inside the registration function; 4 reached from the post-read code of content objects that are not items of a named registry; 13 reached by no chain of calls from a registry's code); the names that they add are unexplained"
       },
       {
         "kind": "UnnamedDeclaration",
         "subject": null,
-        "detail": "20 sites that compose modifier names at run time are not joined to a registry (1 inside the registration function; 1 combine a registry's keys with the keys of content that Native does not name as a registry; 5 reached from the post-read code of content objects that are not items of a named registry; 13 reached by no chain of calls from a registry's code); the names that they add are unexplained"
-      },
-      {
-        "kind": "UnnamedDeclaration",
-        "subject": null,
-        "detail": "39576 loaded modifiers are neither declared by the executable nor given by a returned family for a loaded item"
+        "detail": "33314 loaded modifiers are neither declared by the executable nor given by a returned family for a loaded item"
       },
       {
         "kind": "OutsideMethod",

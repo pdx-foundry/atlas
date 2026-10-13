@@ -812,6 +812,31 @@ async fn failed_grammar_and_derived_name_answers_are_gaps_and_fail_extraction() 
 }
 
 #[tokio::test]
+async fn unsupported_registry_answers_are_gaps_and_keep_extraction_complete() {
+    use pdx_native::{Error, Operation};
+    let mut extraction = recorded().await;
+    extraction.fields.insert(
+        "common/relics".into(),
+        Err(Error::Unsupported {
+            operation: Operation::RegistryFields,
+            reason: "the loader builds no class with a member reader".into(),
+        }),
+    );
+    assert!(extraction.complete());
+
+    let snapshot = snapshot::assemble(&extraction).unwrap();
+    assert!(snapshot.gaps.iter().any(|gap| {
+        gap.id == "registry:common/relics#fields" && gap.reason.contains("member reader")
+    }));
+
+    extraction.fields.insert(
+        "common/relics".into(),
+        Err(Error::Method("reader stopped".into())),
+    );
+    assert!(!extraction.complete());
+}
+
+#[tokio::test]
 async fn loader_rules_become_registry_and_nested_field_rules() {
     let snapshot = snapshot::assemble(&recorded().await).unwrap();
     let answer = |id: &str| {
@@ -848,13 +873,14 @@ async fn loader_rules_become_registry_and_nested_field_rules() {
         })
     );
     for limit in ["file_order", "mod_over_vanilla"] {
-        assert!(
-            snapshot
-                .gaps
-                .iter()
-                .any(|gap| gap.id == format!("inventory:loader_rules#{limit}")
-                    && gap.reason.contains("No fixture verifies it"))
-        );
+        let gap = snapshot
+            .gaps
+            .iter()
+            .find(|gap| gap.id == format!("inventory:loader_rules#{limit}"))
+            .unwrap_or_else(|| panic!("no gap for {limit}"));
+
+        assert_eq!(gap.reason, gap.native_gaps[0].detail);
+        assert!(gap.reason.contains("stated once from its code"));
     }
 }
 

@@ -148,29 +148,53 @@
       {
         "name": "use_for_ai_budget",
         "reader": {
-          "numeric": "Unresolved",
-          "scoped_operand": "Unresolved",
-          "id": null,
-          "kind": "Unknown",
-          "family": "Unknown"
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "b894933b2b2853a5",
+          "kind": "Boolean",
+          "family": "NotApplicable"
         },
         "shape": {
-          "value": "Unknown",
+          "value": "Scalar",
           "repeat": "Unknown"
         },
         "read": [
           {
             "condition": "Always",
-            "outcome": "Unresolved"
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "b894933b2b2853a5",
+                  "kind": "Boolean",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Unknown"
+                }
+              }
+            }
           }
         ],
-        "members": "Unresolved",
+        "members": "None",
         "domain": "Unknown",
         "uses": [],
         "reference": "NotEstablished",
         "entry_contexts": [],
-        "read_scope": "Unresolved",
-        "accepted_categories": "Unresolved"
+        "read_scope": {
+          "Known": []
+        },
+        "accepted_categories": "NotApplicable"
       },
       {
         "name": "ai_use_parent_for_resources_expenditure",
@@ -256,29 +280,53 @@
       {
         "name": "hidden",
         "reader": {
-          "numeric": "Unresolved",
-          "scoped_operand": "Unresolved",
-          "id": null,
-          "kind": "Unknown",
-          "family": "Unknown"
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "b894933b2b2853a5",
+          "kind": "Boolean",
+          "family": "NotApplicable"
         },
         "shape": {
-          "value": "Unknown",
+          "value": "Scalar",
           "repeat": "Unknown"
         },
         "read": [
           {
             "condition": "Always",
-            "outcome": "Unresolved"
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "b894933b2b2853a5",
+                  "kind": "Boolean",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Unknown"
+                }
+              }
+            }
           }
         ],
-        "members": "Unresolved",
+        "members": "None",
         "domain": "Unknown",
         "uses": [],
         "reference": "NotEstablished",
         "entry_contexts": [],
-        "read_scope": "Unresolved",
-        "accepted_categories": "Unresolved"
+        "read_scope": {
+          "Known": []
+        },
+        "accepted_categories": "NotApplicable"
       },
       {
         "name": "triggered_cost_modifier",
@@ -567,14 +615,6 @@
         "kind": "UnresolvedReader",
         "subject": {
           "kind": "field",
-          "name": "use_for_ai_budget"
-        },
-        "detail": "The field's alternatives do not establish one shared reader."
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "field",
           "name": "ai_use_parent_for_resources_expenditure"
         },
         "detail": "The field's alternatives do not establish one shared reader."
@@ -592,14 +632,6 @@
         "subject": {
           "kind": "field",
           "name": "ai_use_parent_for_resources_logistics"
-        },
-        "detail": "The field's alternatives do not establish one shared reader."
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "field",
-          "name": "hidden"
         },
         "detail": "The field's alternatives do not establish one shared reader."
       },
@@ -663,14 +695,6 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "field",
-          "name": "use_for_ai_budget"
-        },
-        "detail": "read-scope: scope-argument"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "field",
           "name": "ai_use_parent_for_resources_expenditure"
         },
         "detail": "read-scope: scope-argument"
@@ -688,14 +712,6 @@
         "subject": {
           "kind": "field",
           "name": "ai_use_parent_for_resources_logistics"
-        },
-        "detail": "read-scope: scope-argument"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "field",
-          "name": "hidden"
         },
         "detail": "read-scope: scope-argument"
       },
@@ -774,7 +790,7 @@
           "kind": "field",
           "name": "use_for_ai_budget"
         },
-        "detail": "Repeat behavior and nested fields remain unresolved."
+        "detail": "Repeat behavior remains unresolved."
       },
       {
         "kind": "UnresolvedStorage",
@@ -806,7 +822,7 @@
           "kind": "field",
           "name": "hidden"
         },
-        "detail": "Repeat behavior and nested fields remain unresolved."
+        "detail": "Repeat behavior remains unresolved."
       },
       {
         "kind": "UnresolvedStorage",
@@ -860,7 +876,7 @@
     "source": {
       "build": "c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b",
       "native_version": "0.1.0",
-      "method": "registry-fields/v24",
+      "method": "registry-fields/v33",
       "basis": "StaticAnalysis"
     }
   }

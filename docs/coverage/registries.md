@@ -65,12 +65,48 @@ The `several_types_in_directory` directories are `common/ascension_perks`,
 `common`, with the reason `no_named_registry`: Native names registries by content directory, and
 these load one named file directly in `common/`. `path_file` is file selection, which SDK-788 owns.
 
+## Rerun at Native `ee01bf3` (SDK-796)
+
+Over the full M452 recording of Native `ee01bf3` (`registry-directories/v6`, 185 registries), the
+answer is partial: its `UnnamedRegistries` gap says 13 of 198 scheduled databases have no template
+loader and enumerate no single content directory. The [pin move A capture](pin-move-a.md) gives the
+run's identities.
+
+| | Types | Directories | At `0167bc5` |
+| --- | --- | --- | --- |
+| Gate population | 218 | 187 | 218 / 187 |
+| `named` | 159 | 159 | 146 / 146 |
+| `several_types_in_directory` | 20 | 10 | 12 / 6 |
+| `no_named_registry` | 39 | 18 | 60 / 35 |
+
+Over every row, 177 directories are in both (from 157), 31 directories are config only (18 in the
+gate, 13 deferred format families) and 8 registries are engine only: the seven above and
+`common/component_tags`, which no config type's `path` names. Three more named directories are
+outside the gate: `flags`, `gfx/worldgfx` and `prescripted_countries`.
+
+25 types moved. Each is a registry that SDK-783 or SDK-786 names:
+
+| From | To | Types (directory) |
+| --- | --- | --- |
+| `no_named_registry` | `named` | `type[ambient_object]` (`common/ambient_objects`), `type[country_color]` (`common/colors`), `type[fallen_empires]` (`common/fallen_empires`), `type[global_ship_design]` (`common/global_ship_designs`), `type[on_action]` (`common/on_actions`), `type[opinion_modifier]` (`common/opinion_modifiers`), `type[ship_behavior]` (`common/ship_behaviors`), `type[special_project]` (`common/special_projects`), `type[start_screen_message]` (`common/start_screen_messages`), `type[static_modifier]` (`common/static_modifiers`), `type[resource]` (`common/strategic_resources`), `type[terraform_link]` (`common/terraform`), `type[trait]` (`common/traits`) |
+| `no_named_registry` | `several_types_in_directory` | `type[diplo_phrase]` and `type[diplo_phrase_greetings]` (`common/diplo_phrases`), `type[planet_class]` and `type[planet_class_random_list]` (`common/planet_classes`), `type[species_name]` and `type[species_named_list]` (`common/species_names`), `type[event]` and `type[event_namespace]` (`events`) |
+| `deferred_format_family` | `named` | `type[worldgfx]` (`gfx/worldgfx`), `type[prescripted_country]` (`prescripted_countries`) |
+| `deferred_format_family` | `several_types_in_directory` | `type[color_define]` and `type[randomizable_combo]` (`flags`) |
+
+The four deferred-family moves are outside the gate population. The 18 gate directories that no
+registry names are `common` (the three types of [`game/common` itself](#types-in-gamecommon-itself)),
+`common/ai_force_species`, `common/component_sets`, `common/component_templates`,
+`common/game_rules`, `common/gamesetup_settings`, `common/graphical_culture`,
+`common/lawsuit_type`, `common/mandates`, `common/message_types`, `common/name_lists`,
+`common/random_names`, `common/random_names/base`, `common/scripted_loc`,
+`common/section_templates`, `common/sector_focuses`, `common/solar_system_initializers` and
+`common/trade_conversions`.
+
 ## Rerunning
 
-Rerun the command after the Native pin moves (SDK-796) and for the sweep (SDK-798). A directory
-that a new Native registry names moves from `no_named_registry` to `named` or
-`several_types_in_directory`, and an engine-only registry that matches a config directory leaves
-`engine_only`.
+Rerun the command after each Native pin move, and for the sweep (SDK-798). A directory that a new
+Native registry names moves from `no_named_registry` to `named` or `several_types_in_directory`,
+and an engine-only registry that matches a config directory leaves `engine_only`.
 
 Reading paths without `game/` added 11 covered claims of `type[precursors]` and
 `type[prescripted_flags]` to the Milestone 4 snapshot's coverage: 22,679 / 58,032 instead of the

@@ -48,14 +48,6 @@
           "kind": "registry",
           "name": "common/tradition_categories"
         },
-        "detail": "1 of the registry's methods have paths that could not be followed at instruction"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "registry",
-          "name": "common/tradition_categories"
-        },
         "detail": "2 of the registry's methods have paths that could not be followed at path-limit"
       },
       {
