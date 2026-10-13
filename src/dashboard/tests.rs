@@ -81,6 +81,7 @@ fn a_claim_the_baseline_covers_and_the_run_does_not_is_lost_by_name() {
     assert_eq!(page.lost[0].property, "value_form");
     assert!(!page.lost[0].reason.is_empty());
     assert_eq!(page.gained, 1);
+    assert_eq!(page.missing_from_ledger, 1);
     assert!(page.warnings.is_empty(), "{:?}", page.warnings);
 
     let other = page

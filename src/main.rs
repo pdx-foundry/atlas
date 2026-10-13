@@ -53,15 +53,9 @@ fn run_ledger() -> Result<bool, Box<dyn std::error::Error>> {
         .get("--dashboard")
         .cloned()
         .or_else(shared_dashboard);
-    match dashboard {
-        Some(directory) => {
-            std::fs::create_dir_all(&directory)?;
-            std::fs::copy(
-                output.join("dashboard.html"),
-                directory.join("dashboard.html"),
-            )?;
-            println!("Dashboard: {}", directory.join("dashboard.html").display());
-        }
+    match dashboard.map(|directory| copy_dashboard(output, &directory)) {
+        Some(Ok(page)) => println!("Dashboard: {}", page.display()),
+        Some(Err(error)) => eprintln!("The dashboard was not copied: {error}"),
         None => eprintln!("No shared dashboard folder; the page is only in the reports folder."),
     }
     if !ledger.diagnostics.is_empty() {
@@ -104,6 +98,19 @@ fn shared_dashboard() -> Option<PathBuf> {
     let common = git(&["rev-parse", "--path-format=absolute", "--git-common-dir"])?;
 
     Some(Path::new(common.trim()).parent()?.join(".local/dashboard"))
+}
+
+/// Copies the reports folder's page to `directory`, unless it is already that file.
+fn copy_dashboard(output: &Path, directory: &Path) -> io::Result<PathBuf> {
+    let page = output.join("dashboard.html");
+    let copy = directory.join("dashboard.html");
+    std::fs::create_dir_all(directory)?;
+
+    if std::fs::canonicalize(&page)? != std::fs::canonicalize(directory)?.join("dashboard.html") {
+        std::fs::copy(&page, &copy)?;
+    }
+
+    Ok(copy)
 }
 
 const COMPARE_USAGE: &str = "usage: pdx-atlas compare CONFIG_DIR SNAPSHOT_FILE OUTPUT_DIR [--script-docs DIR] [--defines FILE]... [--answers DIR]";

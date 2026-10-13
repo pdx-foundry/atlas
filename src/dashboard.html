@@ -98,7 +98,20 @@
 
   const coverageHeaders = [["Covered", true], ["Atlas-owned", true], ["Share", true], [""], ["Change", true]];
   const [baselineCovered, baselineTotal] = data.baseline ?? [null, null];
-  const agreement = data.agreement;
+  const [agreementValue, agreementDetail] = agreementText(data.agreement);
+
+  function agreementText(agreement) {
+    if (!agreement) return ["not measured", "Run compare into the same folder"];
+
+    const same = agreement.same ?? 0;
+    const different = agreement.different ?? 0;
+    const missing = agreement.missing_from_atlas ?? 0;
+
+    return [
+      share(same, same + different),
+      `same ${same.toLocaleString()} · different ${different.toLocaleString()} · no Atlas answer ${missing.toLocaleString()}`,
+    ];
+  }
 
   app.append(
     element("h1", {}, ["Atlas config coverage"]),
@@ -125,15 +138,14 @@
           " / ",
           element("span", { class: data.gained ? "up" : "muted" }, [data.gained.toLocaleString()]),
         ]),
+        element("div", { class: data.missing_from_ledger ? "down" : "muted" }, [
+          `${data.missing_from_ledger.toLocaleString()} baseline claims no longer in the ledger`,
+        ]),
       ]),
       element("div", { class: "card" }, [
         element("div", { class: "muted" }, ["Agreement with the config (of compared answers)"]),
-        element("div", { class: "value" }, [agreement
-          ? share(agreement.same ?? 0, (agreement.same ?? 0) + (agreement.different ?? 0))
-          : "not measured"]),
-        element("div", { class: "muted" }, [agreement
-          ? `same ${(agreement.same ?? 0).toLocaleString()} · different ${(agreement.different ?? 0).toLocaleString()} · no Atlas answer ${(agreement.missing_from_atlas ?? 0).toLocaleString()}`
-          : "Run compare into the same folder"]),
+        element("div", { class: "value" }, [agreementValue]),
+        element("div", { class: "muted" }, [agreementDetail]),
       ]),
     ]),
   );

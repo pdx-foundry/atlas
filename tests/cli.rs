@@ -107,3 +107,27 @@ fn symlinked_config_root_is_rejected() {
             .contains("symlink")
     );
 }
+
+#[test]
+fn a_dashboard_folder_equal_to_the_output_keeps_the_page() {
+    let root = tempfile::tempdir().unwrap();
+    fs::create_dir(root.path().join("config")).unwrap();
+    fs::write(root.path().join("config/rules.cwt"), "x = bool\n").unwrap();
+    let output = root.path().join("out");
+    let result = Command::new(env!("CARGO_BIN_EXE_pdx-atlas"))
+        .args(["ledger", "--config"])
+        .arg(root.path().join("config"))
+        .arg("--output")
+        .arg(&output)
+        .arg("--dashboard")
+        .arg(&output)
+        .output()
+        .unwrap();
+
+    assert!(result.status.success(), "{result:?}");
+    assert!(
+        fs::read_to_string(output.join("dashboard.html"))
+            .unwrap()
+            .ends_with("</html>\n")
+    );
+}

@@ -37,7 +37,7 @@ const OTHER_AREA: &str = "Registry types and other files";
 /// The covered claims of one coverage run, with the identity of the inputs it measured.
 ///
 /// Its text form is the committed baseline `docs/coverage/covered-claims.txt`: four header lines,
-/// then one covered claim ID per line in ledger order.
+/// then one covered claim ID per line, sorted.
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct Baseline {
     /// Config content identity of the run.
@@ -160,6 +160,8 @@ pub struct PageData {
     pub lost: Vec<LostClaim>,
     /// Claims that this run covers and the baseline does not.
     pub gained: usize,
+    /// Baseline claims that this run's ledger no longer has.
+    pub missing_from_ledger: usize,
     /// Each area of the config.
     pub areas: Vec<Row>,
     /// Each config type of the Milestone 5 gate population, most uncovered claims first.
@@ -246,6 +248,13 @@ pub fn page_data(
         .filter(|claim| !is_covered(&claim.id))
         .map(|claim| lost_claim(claim, assessments[claim.id.as_str()]))
         .collect();
+    let missing_from_ledger = baseline.map_or(0, |baseline| {
+        baseline
+            .claims
+            .iter()
+            .filter(|id| !claims.contains_key(id.as_str()))
+            .count()
+    });
     let gained = baseline.map_or(0, |baseline| {
         assessments
             .values()
@@ -298,6 +307,7 @@ pub fn page_data(
         warnings,
         lost,
         gained,
+        missing_from_ledger,
         areas: areas(coverage, baseline_covered.as_deref()),
         gate_types: gate_types(
             ledger,
