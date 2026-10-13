@@ -174,7 +174,7 @@ partial `extension`, `recursion` or `duplicate_rule`, is a gap on the registry t
 joined claim. A partial `definition_names` answer keeps its
 stated forms and publishes a `definition_names.partial` gap that joins no config question; with no
 root form it is unresolved. The file order and the mod-over-vanilla rule, which Native states once
-for the build with no fixture, are the gaps `inventory:loader_rules#file_order` and
+for the build (a live fixture control checks the file order for a template loader), are the gaps `inventory:loader_rules#file_order` and
 `#mod_over_vanilla`. They join no question, so a claim that needs only those stated facts and the
 duplicate rule keeps its credit.
 

@@ -38,12 +38,14 @@ pub struct Extraction {
 }
 
 impl Extraction {
-    /// Whether every requested answer arrived and each game session closed safely.
+    /// Whether every requested answer arrived and each game session closed safely. A listed
+    /// registry that a method cannot read is answered `Unsupported`; that answer is kept as a gap
+    /// and counts as arrived.
     pub fn complete(&self) -> bool {
         self.registries.is_ok()
-            && self.fields.values().all(Result::is_ok)
-            && self.derived_names.values().all(Result::is_ok)
-            && self.loader_rules.values().all(Result::is_ok)
+            && self.fields.values().all(registry_answered)
+            && self.derived_names.values().all(registry_answered)
+            && self.loader_rules.values().all(registry_answered)
             && self.sessions.iter().all(|session| {
                 session.observation.is_ok()
                     && disposal_blocker(session.name, &session.disposal).is_none()
@@ -117,7 +119,7 @@ impl Language {
             && self.trigger_grammars.values().all(Result::is_ok)
             && self.modifiers.is_ok()
             && self.modifier_categories.is_ok()
-            && self.modifier_families.values().all(Result::is_ok)
+            && self.modifier_families.values().all(registry_answered)
             && self.scopes.is_ok()
             && self.scope_links.is_ok()
             && self.localization.is_ok()
@@ -125,6 +127,12 @@ impl Language {
             && self.game_rules.is_ok()
             && self.defines.is_ok()
     }
+}
+
+/// Whether Native answered a question about one listed registry, either with a value or with the
+/// method's stated `Unsupported`.
+fn registry_answered<T>(answer: &Result<Answer<T>, Error>) -> bool {
+    matches!(answer, Ok(_) | Err(Error::Unsupported { .. }))
 }
 
 /// The grammar of every command that a declaration answer names.
