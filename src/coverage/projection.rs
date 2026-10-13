@@ -1114,6 +1114,7 @@ impl<'a> AliasBlocks<'a> {
                 .strip_prefix("alias_name[")
                 .and_then(|alias| alias.strip_suffix(']'))
                 && claim.property == "alias_factoring"
+                && claim.config_answer == format!("alias_match_left[{alias}]")
             {
                 aliases.insert(
                     (
@@ -1160,33 +1161,40 @@ impl<'a> AliasBlocks<'a> {
             return Vec::new();
         };
         let condition_names: Vec<_> = conditions.iter().map(String::as_str).collect();
-
-        selectors
+        let root_types = selectors
             .directories
             .get(registry)
             .into_iter()
             .flatten()
-            .filter(|(_, _, selector)| *selector == Selector::Root)
-            .filter_map(|(type_name, file, _)| {
-                let root = type_name.trim_start_matches("type[").trim_end_matches(']');
-                let path = node_path(root, conditions, block);
+            .filter(|(_, _, selector)| *selector == Selector::Root);
+        let mut questions = Vec::new();
 
-                self.aliases.get(&(*file, path, condition_names.clone()))
-            })
-            .flat_map(|alias| {
-                let root = format!("alias[{alias}:{key}]");
-                let files = self.files.get(root.as_str()).into_iter().flatten();
+        for (type_name, file, _) in root_types {
+            let root = type_name.trim_start_matches("type[").trim_end_matches(']');
+            let block_path = node_path(root, conditions, block);
+            let Some(alias) = self
+                .aliases
+                .get(&(*file, block_path, condition_names.clone()))
+            else {
+                continue;
+            };
+            let alias_root = format!("alias[{alias}:{key}]");
 
-                files
-                    .flat_map(|file| {
-                        let mut path = vec![root.as_str()];
-                        path.extend(annotation);
+            for alias_file in self.files.get(alias_root.as_str()).into_iter().flatten() {
+                let mut path = vec![alias_root.as_str()];
+                path.extend(annotation);
 
-                        claim_questions(claims, file, ledger_property, path, &[])
-                    })
-                    .collect::<Vec<_>>()
-            })
-            .collect()
+                questions.extend(claim_questions(
+                    claims,
+                    alias_file,
+                    ledger_property,
+                    path,
+                    &[],
+                ));
+            }
+        }
+
+        questions
     }
 }
 

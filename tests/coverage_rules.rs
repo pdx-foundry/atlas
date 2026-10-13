@@ -1486,6 +1486,11 @@ scopes = {
 /// Native's answers for the event kinds and the `common/pop_jobs` pre_trigger block, beside the
 /// recorded M452 answers, against [`EVENT_CONFIG`].
 async fn event_kinds() -> SharedDirectory {
+    event_kinds_against(EVENT_CONFIG).await
+}
+
+/// [`event_kinds`] against the config `sources`.
+async fn event_kinds_against(sources: &[(&str, &str)]) -> SharedDirectory {
     use pdx_native::{
         Field, FieldMembers, FieldReadOutcome, GrammarProperty, ReadScope, ReaderKind,
     };
@@ -1573,7 +1578,7 @@ async fn event_kinds() -> SharedDirectory {
     }
 
     let ledger = ledger::inventory(
-        &EVENT_CONFIG
+        &sources
             .iter()
             .map(|(file, source)| ((*file).into(), (*source).into()))
             .collect(),
@@ -1630,6 +1635,27 @@ async fn pre_trigger_keys_credit_their_alias_claims() {
             .gaps("value_form", &["alias[colony_pre_trigger:is_capital]"])
             .is_empty()
     );
+}
+
+#[tokio::test]
+async fn a_block_that_takes_only_alias_names_answers_no_alias_value() {
+    let sources: Vec<_> = EVENT_CONFIG
+        .iter()
+        .map(|&(file, source)| match file {
+            "common/pop_jobs.cwt" => (
+                file,
+                r#"
+types = { type[job] = { path = "game/common/pop_jobs" } }
+job = { possible_pre_triggers = { alias_name[pop_pre_trigger] = bool } }
+"#,
+            ),
+            _ => (file, source),
+        })
+        .collect();
+    let events = event_kinds_against(&sources).await;
+
+    assert!(!events.covered("value_form", &["alias[pop_pre_trigger:is_enslaved]"]));
+    assert!(events.covered("value_form", &["alias[country_pre_trigger:is_ai]"]));
 }
 
 #[tokio::test]
