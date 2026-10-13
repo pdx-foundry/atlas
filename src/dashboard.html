@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas coverage</title>
+<style>
+  :root {
+    --bg: #fafaf9; --fg: #1c1917; --muted: #78716c; --line: #e7e5e4; --panel: #ffffff;
+    --good: #15803d; --bad: #b91c1c; --warn-bg: #fef3c7; --warn-fg: #78350f; --bar: #0f766e;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1917; --fg: #f5f5f4; --muted: #a8a29e; --line: #44403c; --panel: #292524;
+      --good: #4ade80; --bad: #f87171; --warn-bg: #451a03; --warn-fg: #fde68a; --bar: #2dd4bf;
+    }
+  }
+  body { margin: 0; background: var(--bg); color: var(--fg);
+         font: 14px/1.5 system-ui, -apple-system, sans-serif; }
+  main { max-width: 1100px; margin: 0 auto; padding: 24px 16px 64px; }
+  h1 { font-size: 22px; margin: 0 0 4px; }
+  h2 { font-size: 16px; margin: 32px 0 8px; }
+  .muted { color: var(--muted); }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;
+           margin-top: 16px; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; }
+  .card .value { font-size: 26px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .warning { background: var(--warn-bg); color: var(--warn-fg); border-radius: 6px; padding: 8px 12px;
+             margin-top: 8px; }
+  .scroll { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; background: var(--panel);
+          border: 1px solid var(--line); border-radius: 8px; }
+  th, td { padding: 6px 10px; border-bottom: 1px solid var(--line); text-align: left; white-space: nowrap; }
+  th { font-weight: 600; color: var(--muted); }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  td.wrap { white-space: normal; }
+  .up { color: var(--good); } .down { color: var(--bad); }
+  .bar { height: 6px; width: 120px; background: var(--line); border-radius: 3px; overflow: hidden; }
+  .bar > div { height: 100%; background: var(--bar); }
+</style>
+</head>
+<body>
+<main id="app"></main>
+<script id="data" type="application/json">/*DASHBOARD_DATA*/null</script>
+<script>
+  const data = JSON.parse(document.getElementById("data").textContent);
+  const app = document.getElementById("app");
+
+  function element(tag, attributes = {}, children = []) {
+    const node = document.createElement(tag);
+
+    for (const [key, value] of Object.entries(attributes)) node.setAttribute(key, value);
+    for (const child of children) node.append(child);
+
+    return node;
+  }
+
+  function share(covered, total) {
+    return total === 0 ? "–" : `${(covered / total * 100).toFixed(2)}%`;
+  }
+
+  function change(now, before) {
+    if (before === null || before === undefined) return element("span", { class: "muted" }, ["–"]);
+
+    const delta = now - before;
+    const text = delta === 0 ? "0" : `${delta > 0 ? "+" : ""}${delta.toLocaleString()}`;
+    const style = delta > 0 ? "up" : delta < 0 ? "down" : "muted";
+
+    return element("span", { class: style }, [text]);
+  }
+
+  function bar(covered, total) {
+    const width = total === 0 ? 0 : covered / total * 100;
+
+    return element("div", { class: "bar" }, [element("div", { style: `width: ${width}%` })]);
+  }
+
+  function table(headers, rows) {
+    const head = element("tr", {}, headers.map(([label, numeric]) =>
+      element("th", numeric ? { class: "num" } : {}, [label])));
+    const body = rows.map(cells => element("tr", {}, cells.map(([content, style]) =>
+      element("td", style ? { class: style } : {}, [content]))));
+
+    return element("div", { class: "scroll" }, [element("table", {}, [head, ...body])]);
+  }
+
+  function coverageRows(rows, withFile) {
+    return rows.map(row => [
+      [row.name],
+      ...(withFile ? [[row.file ?? ""], [row.join ?? "–"]] : []),
+      [row.covered.toLocaleString(), "num"],
+      [row.total.toLocaleString(), "num"],
+      [share(row.covered, row.total), "num"],
+      [bar(row.covered, row.total)],
+      [change(row.covered, row.baseline_covered), "num"],
+    ]);
+  }
+
+  const coverageHeaders = [["Covered", true], ["Atlas-owned", true], ["Share", true], [""], ["Change", true]];
+  const [baselineCovered, baselineTotal] = data.baseline ?? [null, null];
+  const agreement = data.agreement;
+
+  app.append(
+    element("h1", {}, ["Atlas config coverage"]),
+    element("div", { class: "muted" }, [data.snapshot_id ? `Snapshot ${data.snapshot_id}` : "No snapshot: nothing is covered"]),
+    ...data.warnings.map(text => element("div", { class: "warning" }, [text])),
+    ...(data.baseline ? [] : [element("div", { class: "warning" }, ["No baseline from main: the change is not measured."])]),
+    element("div", { class: "cards" }, [
+      element("div", { class: "card" }, [
+        element("div", { class: "muted" }, ["Coverage"]),
+        element("div", { class: "value" }, [share(data.covered, data.total)]),
+        element("div", {}, [`${data.covered.toLocaleString()} / ${data.total.toLocaleString()} claims`]),
+      ]),
+      element("div", { class: "card" }, [
+        element("div", { class: "muted" }, ["Change against main"]),
+        element("div", { class: "value" }, [change(data.covered, baselineCovered)]),
+        element("div", { class: "muted" }, [data.baseline
+          ? `main: ${baselineCovered.toLocaleString()} / ${baselineTotal.toLocaleString()} (${share(baselineCovered, baselineTotal)})`
+          : "not measured"]),
+      ]),
+      element("div", { class: "card" }, [
+        element("div", { class: "muted" }, ["Lost / gained claims"]),
+        element("div", { class: "value" }, [
+          element("span", { class: data.lost.length ? "down" : "muted" }, [data.lost.length.toLocaleString()]),
+          " / ",
+          element("span", { class: data.gained ? "up" : "muted" }, [data.gained.toLocaleString()]),
+        ]),
+      ]),
+      element("div", { class: "card" }, [
+        element("div", { class: "muted" }, ["Agreement with the config (of compared answers)"]),
+        element("div", { class: "value" }, [agreement
+          ? share(agreement.same ?? 0, (agreement.same ?? 0) + (agreement.different ?? 0))
+          : "not measured"]),
+        element("div", { class: "muted" }, [agreement
+          ? `same ${(agreement.same ?? 0).toLocaleString()} · different ${(agreement.different ?? 0).toLocaleString()} · no Atlas answer ${(agreement.missing_from_atlas ?? 0).toLocaleString()}`
+          : "Run compare into the same folder"]),
+      ]),
+    ]),
+  );
+
+  if (data.lost.length) {
+    app.append(
+      element("h2", { class: "down" }, [`Lost claims (${data.lost.length.toLocaleString()})`]),
+      table([["File"], ["Subject"], ["Property"], ["Reason"]], data.lost.map(claim => [
+        [claim.file], [claim.subject, "wrap"], [claim.property], [claim.reason, "wrap"],
+      ])),
+    );
+  }
+
+  app.append(
+    element("h2", {}, ["Areas"]),
+    table([["Area"], ...coverageHeaders], coverageRows(data.areas, false)),
+    element("h2", {}, [`Milestone 5 gate types (${data.gate_types.length})`]),
+    element("div", { class: "muted" }, ["Largest gaps first. Join comes from registries.json in the same folder."]),
+    table([["Type"], ["File"], ["Join"], ...coverageHeaders], coverageRows(data.gate_types, true)),
+  );
+</script>
+</body>
+</html>

@@ -3,6 +3,7 @@
 #![deny(missing_docs)]
 mod callback_checks;
 pub mod coverage;
+pub mod dashboard;
 pub mod extraction;
 pub mod ledger;
 pub mod report;

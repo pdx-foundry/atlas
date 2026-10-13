@@ -53,10 +53,19 @@ fn relocated_inputs_produce_identical_bytes_and_diagnostics_fail_visibly() {
             .arg(root.path().join(dir))
             .arg("--output")
             .arg(root.path().join(format!("{dir}-out")))
+            .arg("--dashboard")
+            .arg(root.path().join("dashboard"))
             .output()
             .unwrap();
         assert!(result.status.success(), "{:?}", result);
     }
+    for name in ["covered-claims.txt", "dashboard.html"] {
+        assert!(root.path().join("first-out").join(name).is_file());
+    }
+    assert_eq!(
+        fs::read(root.path().join("second-out/dashboard.html")).unwrap(),
+        fs::read(root.path().join("dashboard/dashboard.html")).unwrap()
+    );
     for name in ["ledger.json", "coverage.json"] {
         assert_eq!(
             fs::read(root.path().join("first-out").join(name)).unwrap(),
@@ -69,6 +78,8 @@ fn relocated_inputs_produce_identical_bytes_and_diagnostics_fail_visibly() {
         .arg(root.path().join("first"))
         .arg("--output")
         .arg(root.path().join("broken-out"))
+        .arg("--dashboard")
+        .arg(root.path().join("dashboard"))
         .output()
         .unwrap();
     assert_eq!(result.status.code(), Some(2));

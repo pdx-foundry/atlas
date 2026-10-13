@@ -38,6 +38,16 @@ and `coverage.json`. It returns 0 for a complete inventory, 2 after writing repo
 diagnostics, and 1 for invalid arguments, unreadable input, or an invalid snapshot contract.
 Output JSON contains input hashes and relative config paths, with no run timestamp.
 
+The command also writes `covered-claims.txt` and `dashboard.html`, and copies the page to
+`.local/dashboard/dashboard.html` of the main checkout, which every worktree shares (`--dashboard
+DIR` writes the copy elsewhere). The page shows Atlas-owned coverage by area and for each Milestone 5
+gate type, and its change against the baseline of `main` (`docs/coverage/covered-claims.txt`, read
+from `origin/main`), with each claim that lost coverage. Run `compare` and `registries` into the same
+output folder first to add agreement with the config and each type's registry join; a report of
+another config or snapshot is left out with a warning. A PR that changes coverage copies the new
+`covered-claims.txt` into `docs/coverage/`. The committed baseline is the Milestone 4 live snapshot
+under this code (22,995 claims) until SDK-798 records a new live run.
+
 The [registry comparison](docs/coverage/registries.md) puts Native's registry list beside the
 config types and records a reason for each type that no registry names:
 

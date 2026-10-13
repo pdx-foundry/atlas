@@ -1,20 +1,23 @@
-use pdx_atlas::{coverage::comparison, extraction, report, snapshot};
+use pdx_atlas::{coverage::comparison, dashboard::Baseline, extraction, report, snapshot};
 use pdx_native::{Completeness, GameOptions, Native, supervisor};
 use sha2::{Digest, Sha256};
 use std::{
     collections::BTreeMap,
     ffi::OsString,
     io::{self, ErrorKind},
-    path::PathBuf,
+    path::{Path, PathBuf},
     process::{Command, ExitCode},
 };
+
+/// Where `main` keeps the baseline that each ledger run is compared with.
+const BASELINE: &str = "origin/main:docs/coverage/covered-claims.txt";
 
 fn run_ledger() -> Result<bool, Box<dyn std::error::Error>> {
     let mut args = std::env::args().skip(1);
     args.next();
     let mut options = BTreeMap::new();
     while let Some(key) = args.next() {
-        if !["--config", "--snapshot", "--output"].contains(&key.as_str()) {
+        if !["--config", "--snapshot", "--output", "--dashboard"].contains(&key.as_str()) {
             return Err(format!("Unknown argument: {key}").into());
         }
         let value = args.next().ok_or("Missing argument value")?;
@@ -27,10 +30,12 @@ fn run_ledger() -> Result<bool, Box<dyn std::error::Error>> {
     }
     let config = options.get("--config").ok_or("--config is required")?;
     let output = options.get("--output").ok_or("--output is required")?;
+    let baseline = main_baseline()?;
     let (ledger, coverage) = report::generate(
         config,
         options.get("--snapshot").map(PathBuf::as_path),
         output,
+        baseline.as_ref(),
     )?;
     let headline = &coverage.totals.atlas_owned;
     let percentage = headline
@@ -44,6 +49,21 @@ fn run_ledger() -> Result<bool, Box<dyn std::error::Error>> {
         headline.total
     );
     println!("Reports: {}", output.display());
+    let dashboard = options
+        .get("--dashboard")
+        .cloned()
+        .or_else(shared_dashboard);
+    match dashboard {
+        Some(directory) => {
+            std::fs::create_dir_all(&directory)?;
+            std::fs::copy(
+                output.join("dashboard.html"),
+                directory.join("dashboard.html"),
+            )?;
+            println!("Dashboard: {}", directory.join("dashboard.html").display());
+        }
+        None => eprintln!("No shared dashboard folder; the page is only in the reports folder."),
+    }
     if !ledger.diagnostics.is_empty() {
         eprintln!(
             "{} source diagnostics remain; percentages cover inventoried claims only. See ledger.json.",
@@ -51,6 +71,39 @@ fn run_ledger() -> Result<bool, Box<dyn std::error::Error>> {
         );
     }
     Ok(ledger.diagnostics.is_empty())
+}
+
+/// Runs git in the checkout that built this binary, returning its output on success.
+fn git(args: &[&str]) -> Option<String> {
+    let output = Command::new("git")
+        .arg("-C")
+        .arg(env!("CARGO_MANIFEST_DIR"))
+        .args(args)
+        .output()
+        .ok()?;
+
+    if !output.status.success() {
+        return None;
+    }
+
+    String::from_utf8(output.stdout).ok()
+}
+
+/// The committed baseline of `main`, or `None` with a warning when git cannot show it.
+fn main_baseline() -> Result<Option<Baseline>, String> {
+    let Some(text) = git(&["show", BASELINE]) else {
+        eprintln!("No baseline at {BASELINE}; the dashboard does not measure the change.");
+        return Ok(None);
+    };
+
+    Baseline::parse(&text).map(Some)
+}
+
+/// `.local/dashboard` of the main checkout, shared by every worktree of the repository.
+fn shared_dashboard() -> Option<PathBuf> {
+    let common = git(&["rev-parse", "--path-format=absolute", "--git-common-dir"])?;
+
+    Some(Path::new(common.trim()).parent()?.join(".local/dashboard"))
 }
 
 const COMPARE_USAGE: &str = "usage: pdx-atlas compare CONFIG_DIR SNAPSHOT_FILE OUTPUT_DIR [--script-docs DIR] [--defines FILE]... [--answers DIR]";
@@ -223,7 +276,7 @@ fn main() -> ExitCode {
         Some("compare") => run_compare(),
         Some("registries") => run_registries(),
         Some("snapshot") => run_snapshot(),
-        _ => Err("usage: pdx-atlas ledger --config DIR [--snapshot FILE] --output DIR | compare CONFIG_DIR SNAPSHOT_FILE OUTPUT_DIR [--script-docs DIR] [--defines FILE]... [--answers DIR] | registries CONFIG_DIR ANSWERS OUTPUT_DIR | snapshot INSTALLATION ANSWERS OUTPUT [STARTUP_SECONDS] | snapshot --recorded ANSWERS OUTPUT".into()),
+        _ => Err("usage: pdx-atlas ledger --config DIR [--snapshot FILE] --output DIR [--dashboard DIR] | compare CONFIG_DIR SNAPSHOT_FILE OUTPUT_DIR [--script-docs DIR] [--defines FILE]... [--answers DIR] | registries CONFIG_DIR ANSWERS OUTPUT_DIR | snapshot INSTALLATION ANSWERS OUTPUT [STARTUP_SECONDS] | snapshot --recorded ANSWERS OUTPUT".into()),
     };
     match result {
         Ok(true) => ExitCode::SUCCESS,

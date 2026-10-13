@@ -1,8 +1,10 @@
 //! Filesystem boundary for reproducible config inventories and coverage reports.
 use crate::{
     coverage::{self, comparison},
+    dashboard::{self, Baseline},
     ledger::{self, Ledger, Sources},
 };
+use sha2::{Digest, Sha256};
 use std::{
     collections::BTreeMap,
     fs, io,
@@ -124,11 +126,14 @@ pub fn json_bytes(value: &impl serde::Serialize) -> Result<Vec<u8>, serde_json::
     bytes.push(b'\n');
     Ok(bytes)
 }
-/// Writes the ledger and coverage report.
+/// Writes the ledger, the coverage report, this run's baseline (`covered-claims.txt`) and the
+/// dashboard page (`dashboard.html`). The page compares the run with `baseline` and reads
+/// `comparison.json` and `registries.json` from `output` when they are present.
 pub fn generate(
     config: &Path,
     snapshot: Option<&Path>,
     output: &Path,
+    baseline: Option<&Baseline>,
 ) -> Result<(Ledger, coverage::Report), Box<dyn std::error::Error>> {
     let sources = read_sources(config)?;
     let ledger = ledger::inventory(&sources);
@@ -136,8 +141,43 @@ pub fn generate(
     let report = coverage::evaluate(&ledger, input.as_deref()).map_err(io::Error::other)?;
     let ledger_bytes = json_bytes(&ledger)?;
     let report_bytes = json_bytes(&report)?;
+    let ledger_sha256 = format!("{:x}", Sha256::digest(&ledger_bytes));
     fs::create_dir_all(output)?;
     fs::write(output.join("ledger.json"), ledger_bytes)?;
     fs::write(output.join("coverage.json"), report_bytes)?;
+
+    let comparison = read_optional_json(&output.join("comparison.json"))?;
+    let registries = read_optional_json(&output.join("registries.json"))?;
+    let page = dashboard::page_data(
+        &ledger,
+        &ledger_sha256,
+        &report,
+        baseline,
+        comparison.as_ref(),
+        registries.as_ref(),
+    );
+
+    fs::write(
+        output.join("covered-claims.txt"),
+        Baseline::of(&ledger, &ledger_sha256, &report).render(),
+    )?;
+    fs::write(output.join("dashboard.html"), dashboard::render_html(&page))?;
+
     Ok((ledger, report))
+}
+
+/// Reads a JSON report that another command may have written, or `None` when the file is absent.
+fn read_optional_json<T: serde::de::DeserializeOwned>(path: &Path) -> io::Result<Option<T>> {
+    let bytes = match fs::read(path) {
+        Ok(bytes) => bytes,
+        Err(error) if error.kind() == io::ErrorKind::NotFound => return Ok(None),
+        Err(error) => return Err(error),
+    };
+
+    serde_json::from_slice(&bytes).map(Some).map_err(|e| {
+        io::Error::new(
+            io::ErrorKind::InvalidData,
+            format!("{}: {e}", path.display()),
+        )
+    })
 }
