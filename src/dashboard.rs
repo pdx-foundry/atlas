@@ -60,11 +60,8 @@ impl Baseline {
             ledger_sha256: ledger_sha256.to_owned(),
             covered: coverage.totals.atlas_owned.covered,
             total: coverage.totals.atlas_owned.total,
-            claims: coverage
-                .claims
-                .iter()
-                .filter(|assessment| assessment.covered)
-                .map(|assessment| assessment.claim.clone())
+            claims: atlas_owned_covered(ledger, coverage)
+                .map(str::to_owned)
                 .collect(),
         }
     }
@@ -133,7 +130,13 @@ struct ComparisonEntry {
 #[derive(Debug, Deserialize)]
 pub struct RegistryJoins {
     config_sha256: String,
+    native_source: RegistrySource,
     rows: Vec<RegistryRow>,
+}
+
+#[derive(Debug, Deserialize)]
+struct RegistrySource {
+    build: String,
 }
 
 #[derive(Debug, Deserialize)]
@@ -256,14 +259,18 @@ pub fn page_data(
             .count()
     });
     let gained = baseline.map_or(0, |baseline| {
-        assessments
-            .values()
-            .filter(|assessment| assessment.covered && !baseline.claims.contains(&assessment.claim))
+        atlas_owned_covered(ledger, coverage)
+            .filter(|id| !baseline.claims.contains(*id))
             .count()
     });
 
     let joins = registries.and_then(|registries| {
-        if registries.config_sha256 == ledger.config_sha256 {
+        let same_target = coverage
+            .target
+            .as_ref()
+            .is_none_or(|target| *target == registries.native_source.build);
+
+        if registries.config_sha256 == ledger.config_sha256 && same_target {
             return Some(
                 registries
                     .rows
@@ -278,7 +285,9 @@ pub fn page_data(
             );
         }
 
-        warnings.push("registries.json describes another config; joins are left out.".into());
+        warnings.push(
+            "registries.json describes another config or game build; joins are left out.".into(),
+        );
 
         None
     });
@@ -326,6 +335,25 @@ pub fn render_html(data: &PageData) -> String {
         .replace('<', "\\u003c");
 
     TEMPLATE.replace(DATA_PLACEHOLDER, &json)
+}
+
+/// IDs of the Atlas-owned claims that `coverage` covers, the only claims that coverage counts.
+fn atlas_owned_covered<'a>(
+    ledger: &'a Ledger,
+    coverage: &'a coverage::Report,
+) -> impl Iterator<Item = &'a str> {
+    let covered: BTreeSet<&str> = coverage
+        .claims
+        .iter()
+        .filter(|assessment| assessment.covered)
+        .map(|assessment| assessment.claim.as_str())
+        .collect();
+
+    ledger
+        .claims
+        .iter()
+        .filter(move |claim| claim.owner.atlas_owned() && covered.contains(claim.id.as_str()))
+        .map(|claim| claim.id.as_str())
 }
 
 fn baseline_warnings(baseline: &Baseline, ledger: &Ledger, ledger_sha256: &str) -> Vec<String> {

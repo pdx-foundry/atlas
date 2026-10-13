@@ -146,8 +146,8 @@ pub fn generate(
     fs::write(output.join("ledger.json"), ledger_bytes)?;
     fs::write(output.join("coverage.json"), report_bytes)?;
 
-    let comparison = read_optional_json(&output.join("comparison.json"))?;
-    let registries = read_optional_json(&output.join("registries.json"))?;
+    let comparison = read_optional_json(&output.join("comparison.json"));
+    let registries = read_optional_json(&output.join("registries.json"));
     let page = dashboard::page_data(
         &ledger,
         &ledger_sha256,
@@ -166,18 +166,19 @@ pub fn generate(
     Ok((ledger, report))
 }
 
-/// Reads a JSON report that another command may have written, or `None` when the file is absent.
-fn read_optional_json<T: serde::de::DeserializeOwned>(path: &Path) -> io::Result<Option<T>> {
+/// Reads a JSON report that another command may have written. An absent file is `None`; an
+/// unreadable or invalid one is `None` with a warning, since the page only adds it when present.
+fn read_optional_json<T: serde::de::DeserializeOwned>(path: &Path) -> Option<T> {
     let bytes = match fs::read(path) {
         Ok(bytes) => bytes,
-        Err(error) if error.kind() == io::ErrorKind::NotFound => return Ok(None),
-        Err(error) => return Err(error),
+        Err(error) if error.kind() == io::ErrorKind::NotFound => return None,
+        Err(error) => {
+            eprintln!("The dashboard leaves out {}: {error}", path.display());
+            return None;
+        }
     };
 
-    serde_json::from_slice(&bytes).map(Some).map_err(|e| {
-        io::Error::new(
-            io::ErrorKind::InvalidData,
-            format!("{}: {e}", path.display()),
-        )
-    })
+    serde_json::from_slice(&bytes)
+        .inspect_err(|error| eprintln!("The dashboard leaves out {}: {error}", path.display()))
+        .ok()
 }

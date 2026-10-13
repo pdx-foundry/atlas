@@ -49,9 +49,12 @@ fn comparison(config_sha256: &str, snapshot_sha256: &str) -> ComparisonSummary {
     }
 }
 
-fn registries(config_sha256: &str) -> RegistryJoins {
+fn registries(config_sha256: &str, build: &str) -> RegistryJoins {
     RegistryJoins {
         config_sha256: config_sha256.into(),
+        native_source: RegistrySource {
+            build: build.into(),
+        },
         rows: vec![RegistryRow {
             type_name: "type[tradition]".into(),
             file: "traditions.cwt".into(),
@@ -143,6 +146,7 @@ fn a_baseline_of_another_ledger_warns() {
 fn reports_of_other_inputs_are_left_out_with_a_warning() {
     let (ledger, mut report) = fixture();
     report.snapshot_sha256 = Some("snapshot".into());
+    report.target = Some("build".into());
     let config = ledger.config_sha256.clone();
 
     let matching = page_data(
@@ -151,7 +155,7 @@ fn reports_of_other_inputs_are_left_out_with_a_warning() {
         &report,
         None,
         Some(&comparison(&config, "snapshot")),
-        Some(&registries(&config)),
+        Some(&registries(&config, "build")),
     );
     let stale = page_data(
         &ledger,
@@ -159,7 +163,7 @@ fn reports_of_other_inputs_are_left_out_with_a_warning() {
         &report,
         None,
         Some(&comparison(&config, "other-snapshot")),
-        Some(&registries("other-config")),
+        Some(&registries(&config, "other-build")),
     );
 
     assert_eq!(
