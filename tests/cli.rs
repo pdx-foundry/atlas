@@ -53,10 +53,19 @@ fn relocated_inputs_produce_identical_bytes_and_diagnostics_fail_visibly() {
             .arg(root.path().join(dir))
             .arg("--output")
             .arg(root.path().join(format!("{dir}-out")))
+            .arg("--dashboard")
+            .arg(root.path().join("dashboard"))
             .output()
             .unwrap();
         assert!(result.status.success(), "{:?}", result);
     }
+    for name in ["covered-claims.txt", "dashboard.html"] {
+        assert!(root.path().join("first-out").join(name).is_file());
+    }
+    assert_eq!(
+        fs::read(root.path().join("second-out/dashboard.html")).unwrap(),
+        fs::read(root.path().join("dashboard/dashboard.html")).unwrap()
+    );
     for name in ["ledger.json", "coverage.json"] {
         assert_eq!(
             fs::read(root.path().join("first-out").join(name)).unwrap(),
@@ -69,6 +78,8 @@ fn relocated_inputs_produce_identical_bytes_and_diagnostics_fail_visibly() {
         .arg(root.path().join("first"))
         .arg("--output")
         .arg(root.path().join("broken-out"))
+        .arg("--dashboard")
+        .arg(root.path().join("dashboard"))
         .output()
         .unwrap();
     assert_eq!(result.status.code(), Some(2));
@@ -94,5 +105,29 @@ fn symlinked_config_root_is_rejected() {
         String::from_utf8(result.stderr)
             .unwrap()
             .contains("symlink")
+    );
+}
+
+#[test]
+fn a_dashboard_folder_equal_to_the_output_keeps_the_page() {
+    let root = tempfile::tempdir().unwrap();
+    fs::create_dir(root.path().join("config")).unwrap();
+    fs::write(root.path().join("config/rules.cwt"), "x = bool\n").unwrap();
+    let output = root.path().join("out");
+    let result = Command::new(env!("CARGO_BIN_EXE_pdx-atlas"))
+        .args(["ledger", "--config"])
+        .arg(root.path().join("config"))
+        .arg("--output")
+        .arg(&output)
+        .arg("--dashboard")
+        .arg(&output)
+        .output()
+        .unwrap();
+
+    assert!(result.status.success(), "{result:?}");
+    assert!(
+        fs::read_to_string(output.join("dashboard.html"))
+            .unwrap()
+            .ends_with("</html>\n")
     );
 }

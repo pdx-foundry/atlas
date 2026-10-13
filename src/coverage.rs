@@ -3,6 +3,7 @@
 pub mod comparison;
 mod language_subject;
 mod projection;
+pub(crate) use projection::registry_types;
 /// Native's registry list compared with the config types.
 pub mod registries;
 #[cfg(test)]
@@ -183,7 +184,10 @@ impl FileTypes {
 }
 /// The config type that a claim belongs to: claims below `types/type[x]`, and claims below the
 /// definition root `x` in the file that defines `type[x]`.
-fn claim_type<'a>(claim: &crate::ledger::Claim, types: &'a BTreeSet<String>) -> Option<&'a str> {
+pub(crate) fn claim_type<'a>(
+    claim: &crate::ledger::Claim,
+    types: &'a BTreeSet<String>,
+) -> Option<&'a str> {
     let first = claim.subject.first()?;
     let type_name = match claim.subject.get(1) {
         Some(second) if first == "types" => second.clone(),
@@ -374,7 +378,7 @@ pub fn evaluate(ledger: &Ledger, input: Option<&[u8]>) -> Result<Report, String>
 }
 
 /// The config types that each file defines, including files that define none.
-fn file_types(ledger: &Ledger) -> BTreeMap<String, BTreeSet<String>> {
+pub(crate) fn file_types(ledger: &Ledger) -> BTreeMap<String, BTreeSet<String>> {
     let mut types: BTreeMap<_, _> = ledger
         .files
         .iter()

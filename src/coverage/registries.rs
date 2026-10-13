@@ -20,7 +20,7 @@ const DEFERRED_FORMAT_FAMILIES: &[&str] = &[
 ];
 
 /// Directories whose config types make up the Milestone 5 gate population, with what is below them.
-const GATE_DIRECTORIES: &[&str] = &["common", "events"];
+pub(crate) const GATE_DIRECTORIES: &[&str] = &["common", "events"];
 
 /// How a config type joins Native's registry list.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord, Serialize)]
@@ -142,7 +142,7 @@ pub fn compare(ledger: &Ledger, registries: &Answer<Vec<Registry>>) -> Report {
 }
 
 /// Whether `directory` is one of `roots` or below one of them.
-fn below(directory: &str, roots: &[&str]) -> bool {
+pub(crate) fn below(directory: &str, roots: &[&str]) -> bool {
     roots.iter().any(|root| {
         directory
             .strip_prefix(root)

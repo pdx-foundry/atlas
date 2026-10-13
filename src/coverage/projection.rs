@@ -618,7 +618,7 @@ pub(super) fn config_directory(path: &str) -> &str {
     path.strip_prefix("game/").unwrap_or(path)
 }
 
-pub(super) fn registry_types(ledger: &Ledger) -> RegistryTypes {
+pub(crate) fn registry_types(ledger: &Ledger) -> RegistryTypes {
     let mut candidates = RegistryTypes::new();
     let file_types = super::file_types(ledger);
     for claim in &ledger.claims {
