@@ -16,6 +16,10 @@ method set unchanged during the run. It is a baseline (decision D2): repairs tha
   3,985 of 7,511 relationship units (53.06%) are complete. By relationship: fields 52.97%, reader
   kinds 76.12%, shapes and conditions 58.92%, references 5.76%, numerics 34.45%, weights 0%, naming
   rules 0% and scope context 62.10% ([rates](#native-rates-sdk-780)).
+- **Open gaps (SDK-819).** Native's sweep now counts accepted limits apart. Over a fresh M452
+  recording at Native `34bd898` with SDK-819, **4,750** gaps are open; 639 are accepted limits
+  (SDK-739, SDK-809, SDK-811). Numerics are 216 / 598 (36.12%), weights 87 / 561 (15.51%) and all
+  units 4,082 / 7,511 (54.35%) ([open and accepted gaps](#open-and-accepted-gaps-sdk-819)).
 
 Coverage comes from the live snapshot. The recording repeats it without a game; recorded answers
 earn no coverage.
@@ -411,9 +415,34 @@ complete; small moves in reader kinds, shapes, scope context, weights and refere
 `common/espionage_assets`, `common/megastructures`, `common/pop_jobs`, `common/ship_sets` and
 `common/ship_sizes`). Native's record of the sweep (SDK-553) updates that baseline.
 
+### Open and accepted gaps (SDK-819)
+
+Native's sweep report lists accepted limits apart from open gaps (pdx-foundry/native#240): gaps
+that the method could close but Atlas does not need. Native still reports each one; the report
+leaves it out of the open shapes and the rates. The counts below are from a fresh recording of the
+three registry questions on M452 at Native `34bd898` with SDK-819, not from this run's recording,
+whose numeric details predate the split by obstacle.
+
+| | Gaps | Registries |
+| --- | ---: | ---: |
+| Open (not `OutsideMethod`, not accepted) | **4,750** | |
+| Accepted: SDK-739, the range of the weight keys `days`, `months`, `years`, `factor` | 346 | 55 |
+| Accepted: SDK-809, numeric range and storage of `float` and `short` fields | 41 | 5 |
+| Accepted: SDK-811, 207 listed loader conditions and 45 use-time selections | 252 | 45 |
+
+Before SDK-819 the same recording had 5,389 open gaps: 387 `NumericConversion` and 578
+`UnresolvedCondition`; after it, 0 and 326 (all `derived_names`). The 5,389 are 1,008 fewer than
+this run's 6,397 because SDK-807 established the reader of the pre_trigger keys. Numerics move from
+206 to 216 of 598 (the seven `short` and three `float` root fields) and weights from 0 to 87 of
+561 (the fields whose only open gaps were a weight key's range). No other rate changes; all units
+are 4,082 / 7,511 (54.35%). Native's [discovery page](https://github.com/pdx-foundry/native/blob/main/docs/native/discovery.md#accepted-limits-sdk-819)
+records the counts.
+
 ### Failure shapes
 
-Gaps that are not `OutsideMethod`, by operation and kind (260 distinct shapes):
+Gaps that are not `OutsideMethod`, by operation and kind (260 distinct shapes), as this run
+counted them; SDK-819 accepts the `NumericConversion` row and the `registry_fields`
+`UnresolvedCondition` row:
 
 | Operation | Gap kind | Gaps | Registries |
 | --- | --- | ---: | ---: |
@@ -756,9 +785,10 @@ None of the failure-shape tickets had landed by `ee01bf3`. Each is a deficit of 
 
 The shapes with no ticket above are for SDK-553 to file: the read scope of a field passed as a scope
 argument (1,346 gaps in 116 registries), a stored scope (72) or a zero mask (28); blocks that no
-attributed evaluation evaluates (75); path and loop limits; numeric conversion (387 gaps in 59
-registries); `event_namespace`, whose `namespace` key is not a field; and the root `event = {`
-claims.
+attributed evaluation evaluates (75); path and loop limits; `event_namespace`, whose `namespace` key is not a field; and the root `event = {`
+claims. Numeric conversion (387 gaps in 59 registries) and the `registry_fields` loader
+conditions and use-time selections (252 in 45) are not deficits: they are
+[accepted limits](#open-and-accepted-gaps-sdk-819).
 
 ## `modifier_families` cost (SDK-591)
 
