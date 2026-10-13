@@ -21,6 +21,7 @@
   h1 { font-size: 22px; margin: 0 0 4px; }
   h2 { font-size: 16px; margin: 32px 0 8px; }
   .muted { color: var(--muted); }
+  .identity { overflow-wrap: anywhere; }
   .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;
            margin-top: 16px; }
   .card { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; }
@@ -115,7 +116,7 @@
 
   app.append(
     element("h1", {}, ["Atlas config coverage"]),
-    element("div", { class: "muted" }, [data.snapshot_id ? `Snapshot ${data.snapshot_id}` : "No snapshot: nothing is covered"]),
+    element("div", { class: "muted identity" }, [data.snapshot_id ? `Snapshot ${data.snapshot_id}` : "No snapshot: nothing is covered"]),
     ...data.warnings.map(text => element("div", { class: "warning" }, [text])),
     ...(data.baseline ? [] : [element("div", { class: "warning" }, ["No baseline from main: the change is not measured."])]),
     element("div", { class: "cards" }, [
