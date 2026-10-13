@@ -2,17 +2,11 @@
 
 `m452/` holds a sample of the Native answers that live `snapshot` runs recorded on M452
 (Stellaris 4.5.2, build `c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b`).
-`registry_fields/` was recorded on 2026-10-09 with Native
-`0167bc5e4c163270ea17139cbffb0e94d8a41cde`, pinned in `Cargo.toml` (SDK-738). `on_actions.json`
-and `game_rules.json` were recorded on 2026-10-12 with the same Native (SDK-799), which answers
-`callbacks/v4`; the [entry-scope checks](../../../docs/coverage/entry-scope-checks.json) cover that
-method. `loader_rules/` was recorded on 2026-10-12 with Native
-`2a43eded4cfb31c753778cf1b5dfd2204dec5035`, pinned in `Cargo.toml` (SDK-797), by static analysis
-with no game. The other answers were recorded on 2026-10-06 with Native
-`573e35f29fea8f54d32d48c90ff40c074e34b5f4`. At the SDK-797 pin move the two `observe_fixture`
-answers were rewritten by hand to the `observe-fixture/v8` shape: each outcome's one `owner` and
-`definition_line` became one `definitions` entry, and its `reader` was dropped; the observed
-values and the `v7` stamp are unchanged. SDK-796 records them again. To refresh the recording, record a full run into an
+Every answer was recorded on 2026-10-12 with Native
+`ee01bf338872290eaaab2ca3c0503fc33244686e`, pinned in `Cargo.toml`, with no local path override
+(SDK-796; [capture](../../../docs/coverage/pin-move-a.md)). The callback answers use `callbacks/v4`;
+the [entry-scope checks](../../../docs/coverage/entry-scope-checks.json) cover that method
+(SDK-799). To refresh the recording, record a full run into an
 empty directory, copy the answers, then trim the sample:
 
 ```sh
@@ -24,8 +18,12 @@ cargo run --release --locked --example trim_recording -- tests/fixtures/native/m
 ```
 
 A change of the callback method needs the entry-scope checks again before the callback answers
-are refreshed. Registry fields use `registry-fields/v24`, command grammars `command-grammar/v15`,
-derived names `derived-names/v1`, loader rules `loader-rules/v4`, callbacks `callbacks/v4` and fixtures `observe-fixture/v7`.
+are refreshed. Registries use `registry-directories/v6`, registry fields `registry-fields/v33`,
+derived names `derived-names/v1`, modifier families `modifier-families/v3`, loader rules
+`loader-rules/v5`, command declarations `command-declarations/v3`, command grammars
+`command-grammar/v18`, callbacks `callbacks/v4`, fixtures `observe-fixture/v9` and the loaded
+modifier table `loaded-modifiers/v1`; the other declarations use `v1`, except scope links
+(`scope-links/v2`).
 Every required answer property is explicit; tests read them with `Native::from_recorded_answers`
 without a game. The M451-hotfix recordings remain at Atlas commit
 `3c3472fb143eed1c28a9c2f50640559c8d9e4ea8`. `examples/record_callbacks.rs` records only the

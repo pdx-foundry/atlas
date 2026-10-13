@@ -19,9 +19,10 @@ cargo run --release --locked -- snapshot --recorded tests/fixtures/native/m452 /
 Both modes write deterministic JSON and a `.sha256` sidecar. The snapshot name includes a digest
 of its contents, so different builds and incomplete extractions have distinct identities. The live
 mode starts the game for the tradition fixtures and once more to read the loaded modifier table;
-it exits 2 if an answer is missing or a game session did not confirm disposal.
+it exits 2 if an answer is missing or a game session did not confirm disposal. A registry that
+Native answers `Unsupported` is a gap, not a missing answer.
 Recorded answers keep their recorded basis and earn no current-engine coverage credit. The [version-2 schema](docs/contract/rule-snapshot-v2.schema.json)
-describes the snapshot. The [Milestone 4 capture](docs/coverage/milestone-4.md) records the current pin and coverage; the [unowned gap triage](docs/coverage/gap-triage.md) gives each gap without an owner its failure shape and disposition; [the language snapshot measurement](docs/coverage/language-snapshot.md)
+describes the snapshot. The [pin move A capture](docs/coverage/pin-move-a.md) records the current pin and coverage, after the [Milestone 4 capture](docs/coverage/milestone-4.md); the [unowned gap triage](docs/coverage/gap-triage.md) gives each gap without an owner its failure shape and disposition; [the language snapshot measurement](docs/coverage/language-snapshot.md)
 states what it establishes and what stays a gap. The [shared-reader measurement](docs/coverage/shared-readers.md)
 records the first Milestone 4 capture and its historical baseline. The historical caller's findings and original source remain in the
 preserved Native evidence bundle; the production tests cover its recorded-answer and fixture cases.
@@ -45,8 +46,9 @@ gate type, and its change against the baseline of `main` (`docs/coverage/covered
 from `origin/main`), with each claim that lost coverage. Run `compare` and `registries` into the same
 output folder first to add agreement with the config, a list of each disagreement (config answer beside Atlas's) and each type's registry join; a report of
 another config or snapshot is left out with a warning. A PR that changes coverage copies the new
-`covered-claims.txt` into `docs/coverage/`. The committed baseline is the Milestone 4 live snapshot
-under this code (22,995 claims) until SDK-798 records a new live run.
+`covered-claims.txt` into `docs/coverage/`. The committed baseline is the live snapshot of the
+[pin move A capture](docs/coverage/pin-move-a.md) (24,458 claims) until SDK-798 records a new live
+run.
 
 The [registry comparison](docs/coverage/registries.md) puts Native's registry list beside the
 config types and records a reason for each type that no registry names:
