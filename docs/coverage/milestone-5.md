@@ -122,7 +122,7 @@ outside them. 37 are covered: the read scopes of the 21 kinds, the `pre_triggers
 | Field-predicate subtype (`major`) | 5 | `cardinality_maximum` 1, `cardinality_minimum` 1, `conditional_constraint` 1, `field_existence` 1, `value_form` 1 | SDK-716 |
 | `enum[event_window_type]` items: no enum domain | 4 | `enum_member` 4 | SDK-627 |
 | `event_namespace`: `namespace` is not a field and no registry names the type | 3 | `field_existence` 1, `value_form` 1, `type_existence` 1 | none (SDK-553 files it) |
-| Root `event = {` outside any kind | 2 | `value_form` 1, `field_existence` 1 | none (SDK-553 files it) |
+| Root `event = {` outside any kind | 2 | `value_form` 1, `field_existence` 1 | SDK-815 credits both |
 | Field-predicate subtype (`mean_time_to_happen`) | 1 | `conditional_constraint` 1 | SDK-716 |
 | **Total** | **506** | | |
 
@@ -131,6 +131,10 @@ the root key, so the `type_key_filter` rule of the [ledger contract](ledger.md#s
 does not credit it; SDK-716 owns those claims. The `CEvent` members (`id`, `trigger`, `immediate`,
 `option` and the others) are fields of every kind, and none has one shared reader:
 `registry_fields("events")` keeps an `UnresolvedReader` gap on each.
+
+After the sweep, SDK-815 joins the root `event = {` to the kinds: each kind's existence and block
+form answer it ([ledger contract](ledger.md#event-kinds-and-pre_trigger-keys-sdk-793)). Over this
+run's snapshot, `type[event]` has 36 / 533 and the headline is 24,460 / 58,032 (42.149159%).
 
 ### Every gate type
 
@@ -786,7 +790,7 @@ None of the failure-shape tickets had landed by `ee01bf3`. Each is a deficit of 
 The shapes with no ticket above are for SDK-553 to file: the read scope of a field passed as a scope
 argument (1,346 gaps in 116 registries), a stored scope (72) or a zero mask (28); blocks that no
 attributed evaluation evaluates (75); path and loop limits; `event_namespace`, whose `namespace` key is not a field; and the root `event = {`
-claims. Numeric conversion (387 gaps in 59 registries) and the `registry_fields` loader
+claims (SDK-815). Numeric conversion (387 gaps in 59 registries) and the `registry_fields` loader
 conditions and use-time selections (252 in 45) are not deficits: they are
 [accepted limits](#open-and-accepted-gaps-sdk-819).
 

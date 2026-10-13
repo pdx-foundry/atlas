@@ -1617,6 +1617,14 @@ async fn event_kind_child_credits_the_field_of_its_subtype() {
 }
 
 #[tokio::test]
+async fn event_kinds_credit_the_type_wide_definition_block() {
+    let events = event_kinds().await;
+
+    assert!(events.covered("field_existence", &["event"]));
+    assert!(events.covered("value_form", &["event"]));
+}
+
+#[tokio::test]
 async fn pre_trigger_keys_credit_their_alias_claims() {
     let events = event_kinds().await;
 
