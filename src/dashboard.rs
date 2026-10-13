@@ -167,7 +167,8 @@ pub struct PageData {
     pub missing_from_ledger: usize,
     /// Each area of the config.
     pub areas: Vec<Row>,
-    /// Each config type of the Milestone 5 gate population, most uncovered claims first.
+    /// Each config type of the Milestone 5 gate population, lowest share first; among equal shares, most
+    /// uncovered claims first; types with no Atlas-owned claim last.
     pub gate_types: Vec<Row>,
     /// Comparison entries by status, absent when no matching `compare` report is present.
     pub agreement: Option<BTreeMap<String, usize>>,
@@ -480,7 +481,16 @@ fn gate_types(
         })
         .collect();
 
-    rows.sort_by_key(|row| std::cmp::Reverse(row.total - row.covered));
+    rows.sort_by(least_covered_first);
 
     rows
+}
+
+/// Orders rows by share ascending, comparing `covered / total` without division. A row with no
+/// claim has no share and goes last; equal shares put the larger gap first.
+fn least_covered_first(a: &Row, b: &Row) -> std::cmp::Ordering {
+    (a.total == 0)
+        .cmp(&(b.total == 0))
+        .then((a.covered * b.total).cmp(&(b.covered * a.total)))
+        .then((b.total - b.covered).cmp(&(a.total - a.covered)))
 }

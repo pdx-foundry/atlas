@@ -164,7 +164,7 @@
     element("h2", {}, ["Areas"]),
     table([["Area"], ...coverageHeaders], coverageRows(data.areas, false)),
     element("h2", {}, [`Milestone 5 gate types (${data.gate_types.length})`]),
-    element("div", { class: "muted" }, ["Largest gaps first. Join comes from registries.json in the same folder."]),
+    element("div", { class: "muted" }, ["Lowest share first. Join comes from registries.json in the same folder."]),
     table([["Type"], ["File"], ["Join"], ...coverageHeaders], coverageRows(data.gate_types, true)),
   );
 </script>

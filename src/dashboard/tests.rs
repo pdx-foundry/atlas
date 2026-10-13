@@ -202,3 +202,25 @@ fn source_text_cannot_close_the_data_script() {
     assert_eq!(html.matches("</script>").count(), 2);
     assert!(html.contains("\\u003c/script>\\u003cb>markup"));
 }
+
+#[test]
+fn gate_types_put_the_lowest_share_first() {
+    let row = |name: &str, covered, total| Row {
+        name: name.into(),
+        covered,
+        total,
+        ..Row::default()
+    };
+    let mut rows = [
+        row("empty", 0, 0),
+        row("half", 5, 10),
+        row("small-gap", 0, 2),
+        row("large-gap", 0, 9),
+        row("tenth", 1, 10),
+    ];
+
+    rows.sort_by(least_covered_first);
+
+    let names: Vec<_> = rows.iter().map(|row| row.name.as_str()).collect();
+    assert_eq!(names, ["large-gap", "small-gap", "tenth", "half", "empty"]);
+}
