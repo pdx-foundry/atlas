@@ -152,6 +152,13 @@ the condition `root_key[KEY]`, so `country_event/pre_triggers` answers
 every other registry a root field is a key inside a definition, whatever its name; extend the
 registry list only when Native answers another registry's root statements as fields.
 
+Every root statement is a definition of the root type, so the config's type-wide definition block
+(`event = { … }`, outside any subtype) describes each kind. A root statement's own existence and
+value form answer that block's unconditional `field_existence` and `value_form` claims (SDK-815).
+Each kind answers them, and a gap on any kind blocks the credit. On M452 all 22 kinds that Native
+lists are blocks with the one `CEvent::ReadMember` reader and the same 30 members; `pop_event`,
+which the config does not name as a kind, is no root statement and answers nothing.
+
 A block's `read_scope` that Native gives as a known empty list (the block is read with no scope,
 as for the `event` kind) is the rule `[]`, not a gap. It credits `scopeless` (`push_scope = any`).
 

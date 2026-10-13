@@ -106,7 +106,7 @@ fn project_with_gap_facets(
             None => (subjects[rule.subject.as_str()], rule.conditions.clone()),
         };
         let conditions = config_conditions(&key_subtypes, &selectors, subject, &rule_conditions);
-        let alias_questions = conditions.as_deref().map_or_else(Vec::new, |conditions| {
+        let mut unconditional = conditions.as_deref().map_or_else(Vec::new, |conditions| {
             alias_blocks.questions(
                 &claims,
                 &selectors,
@@ -116,6 +116,17 @@ fn project_with_gap_facets(
                 false,
             )
         });
+
+        if statement.is_some() {
+            unconditional.extend(definition_questions(
+                &claims,
+                &selectors,
+                subject,
+                &rule.property,
+                false,
+            ));
+        }
+
         let mut answers = match (&conditions, rule.property.as_str()) {
             (Some(_), "definition_names") => {
                 naming_answers(&claims, &selectors, subject, &rule.answer)
@@ -143,7 +154,7 @@ fn project_with_gap_facets(
                     .map(|question| (question, rule.answer.clone())),
             );
         }
-        if answers.is_empty() && alias_questions.is_empty() {
+        if answers.is_empty() && unconditional.is_empty() {
             answers.push((format!("atlas:{}", rule.id), rule.answer.clone()));
         }
         let mut evidence = Vec::new();
@@ -169,7 +180,7 @@ fn project_with_gap_facets(
             .into_iter()
             .map(|(question, value)| (question, conditions.clone(), value))
             .chain(
-                alias_questions
+                unconditional
                     .into_iter()
                     .map(|question| (question, Vec::new(), rule.answer.clone())),
             );
@@ -220,6 +231,16 @@ fn project_with_gap_facets(
         .into_iter()
         .map(|question| (question, conditions.clone()))
         .collect();
+        let definition = match statement {
+            Some(_) => definition_questions(
+                &claims,
+                &selectors,
+                subject,
+                &gap.property,
+                project_related_gap_facets,
+            ),
+            None => Vec::new(),
+        };
         let unconditional = selectors
             .language_questions(&language, &gap.id)
             .into_iter()
@@ -230,7 +251,8 @@ fn project_with_gap_facets(
                 &gap.property,
                 &conditions,
                 project_related_gap_facets,
-            ));
+            ))
+            .chain(definition);
         questions.extend(unconditional.map(|question| (question, Vec::new())));
 
         if questions.is_empty() {
@@ -813,6 +835,40 @@ fn root_statement(
     };
 
     Some((below, condition))
+}
+
+/// The claims of the root type's unconditional definition block (`event = { … }`) that a root
+/// statement's own `property` answers. `subject` is the part below the statement: with no field,
+/// it is the statement itself. Every statement is a definition, so each one answers these claims
+/// and a gap on any of them blocks the credit.
+fn definition_questions(
+    claims: &ClaimIndex<'_>,
+    selectors: &TypeSelectors<'_>,
+    subject: &snapshot::Subject,
+    property: &str,
+    gap_facet: bool,
+) -> Vec<String> {
+    let (None, Some(registry)) = (&subject.field, subject.registry.as_deref()) else {
+        return Vec::new();
+    };
+    let Some((annotation, ledger_property)) = field_property(property, gap_facet) else {
+        return Vec::new();
+    };
+    let Some(types) = selectors.directories.get(registry) else {
+        return Vec::new();
+    };
+
+    types
+        .iter()
+        .filter(|(_, _, selector)| *selector == Selector::Root)
+        .flat_map(|(type_name, file, _)| {
+            let root = type_name.trim_start_matches("type[").trim_end_matches(']');
+            let mut path = vec![root];
+            path.extend(annotation);
+
+            claim_questions(claims, file, ledger_property, path, &[])
+        })
+        .collect()
 }
 
 fn questions(
