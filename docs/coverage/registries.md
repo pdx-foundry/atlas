@@ -102,6 +102,9 @@ registry names are `common` (the three types of [`game/common` itself](#types-in
 `common/section_templates`, `common/sector_focuses`, `common/solar_system_initializers` and
 `common/trade_conversions`.
 
+The [Milestone 5 sweep](milestone-5.md) (SDK-798) ran at the same commit; its `registries.json`
+is byte-identical to this rerun's.
+
 ## Rerunning
 
 Rerun the command after each Native pin move, and for the sweep (SDK-798). A directory that a new
