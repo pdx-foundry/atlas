@@ -124,6 +124,10 @@ pub struct ComparisonSummary {
 #[derive(Debug, Deserialize)]
 struct ComparisonEntry {
     status: String,
+    claim: Option<String>,
+    config_answer: Option<String>,
+    #[serde(default)]
+    atlas_answers: Vec<serde_json::Value>,
 }
 
 /// The fields of a `registries` report that the page reads.
@@ -172,6 +176,25 @@ pub struct PageData {
     pub gate_types: Vec<Row>,
     /// Comparison entries by status, absent when no matching `compare` report is present.
     pub agreement: Option<BTreeMap<String, usize>>,
+    /// Config claims whose Atlas answer differs from the config's, in ledger order. Empty when
+    /// agreement is not measured.
+    pub disagreements: Vec<Disagreement>,
+}
+
+/// A config claim whose Atlas answer differs from the config's answer.
+#[derive(Debug, Serialize)]
+pub struct Disagreement {
+    /// Config file.
+    pub file: String,
+    /// Subject path, joined with `/`.
+    pub subject: String,
+    /// Property.
+    pub property: String,
+    /// The config's answer.
+    pub config_answer: String,
+    /// Atlas's answers as text: a string as itself, a lone `form` as its value, any other value as
+    /// compact JSON without the reader identity.
+    pub atlas_answers: Vec<String>,
 }
 
 /// A claim that lost coverage.
@@ -293,12 +316,12 @@ pub fn page_data(
         None
     });
 
-    let agreement = comparison.and_then(|comparison| {
+    let measured = comparison.and_then(|comparison| {
         let same_inputs = comparison.config_sha256 == coverage.config_sha256
             && Some(&comparison.snapshot_sha256) == coverage.snapshot_sha256.as_ref();
 
         if same_inputs {
-            return Some(agreement_counts(comparison));
+            return Some(comparison);
         }
 
         warnings.push(
@@ -308,6 +331,9 @@ pub fn page_data(
 
         None
     });
+    let agreement = measured.map(agreement_counts);
+    let disagreements =
+        measured.map_or_else(Vec::new, |comparison| disagreements(comparison, &claims));
 
     PageData {
         snapshot_id: coverage.snapshot_id.clone(),
@@ -326,6 +352,7 @@ pub fn page_data(
             joins.as_ref(),
         ),
         agreement,
+        disagreements,
     }
 }
 
@@ -392,6 +419,47 @@ fn agreement_counts(comparison: &ComparisonSummary) -> BTreeMap<String, usize> {
     }
 
     counts
+}
+
+fn disagreements(
+    comparison: &ComparisonSummary,
+    claims: &BTreeMap<&str, &Claim>,
+) -> Vec<Disagreement> {
+    comparison
+        .entries
+        .iter()
+        .filter(|entry| entry.status == "different")
+        .filter_map(|entry| {
+            let claim = claims.get(entry.claim.as_deref()?)?;
+
+            Some(Disagreement {
+                file: claim.file.clone(),
+                subject: claim.subject.join("/"),
+                property: claim.property.clone(),
+                config_answer: entry.config_answer.clone().unwrap_or_default(),
+                atlas_answers: entry.atlas_answers.iter().map(answer_text).collect(),
+            })
+        })
+        .collect()
+}
+
+/// Keys of an Atlas answer that identify how it was read, not what it says.
+const READER_KEYS: &[&str] = &["reader", "schema"];
+
+fn answer_text(answer: &serde_json::Value) -> String {
+    let serde_json::Value::Object(fields) = answer else {
+        return answer
+            .as_str()
+            .map_or_else(|| answer.to_string(), str::to_owned);
+    };
+    let mut fields = fields.clone();
+
+    fields.retain(|key, _| !READER_KEYS.contains(&key.as_str()));
+
+    match fields.get("form") {
+        Some(serde_json::Value::String(form)) if fields.len() == 1 => form.clone(),
+        _ => serde_json::Value::Object(fields).to_string(),
+    }
 }
 
 fn area_of(file: &str) -> &'static str {

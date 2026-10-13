@@ -36,16 +36,31 @@ fn baseline(ledger: &Ledger, claims: &[&str]) -> Baseline {
     }
 }
 
-fn comparison(config_sha256: &str, snapshot_sha256: &str) -> ComparisonSummary {
+fn comparison(config_sha256: &str, snapshot_sha256: &str, different: &Claim) -> ComparisonSummary {
+    let entry = |status: &str| ComparisonEntry {
+        status: status.into(),
+        claim: None,
+        config_answer: None,
+        atlas_answers: Vec::new(),
+    };
+
     ComparisonSummary {
         config_sha256: config_sha256.into(),
         snapshot_sha256: snapshot_sha256.into(),
-        entries: ["same", "same", "different"]
-            .into_iter()
-            .map(|status| ComparisonEntry {
-                status: status.into(),
-            })
-            .collect(),
+        entries: vec![
+            entry("same"),
+            entry("same"),
+            ComparisonEntry {
+                claim: Some(different.id.clone()),
+                config_answer: Some("int".into()),
+                atlas_answers: vec![
+                    serde_json::json!("Accumulate"),
+                    serde_json::json!({"form": "number", "reader": "a98"}),
+                    serde_json::json!({"form": "string", "values": ["a"]}),
+                ],
+                ..entry("different")
+            },
+        ],
     }
 }
 
@@ -148,13 +163,14 @@ fn reports_of_other_inputs_are_left_out_with_a_warning() {
     report.snapshot_sha256 = Some("snapshot".into());
     report.target = Some("build".into());
     let config = ledger.config_sha256.clone();
+    let different = atlas_owned(&ledger, "value_form");
 
     let matching = page_data(
         &ledger,
         LEDGER_SHA256,
         &report,
         None,
-        Some(&comparison(&config, "snapshot")),
+        Some(&comparison(&config, "snapshot", different)),
         Some(&registries(&config, "build")),
     );
     let stale = page_data(
@@ -162,7 +178,7 @@ fn reports_of_other_inputs_are_left_out_with_a_warning() {
         LEDGER_SHA256,
         &report,
         None,
-        Some(&comparison(&config, "other-snapshot")),
+        Some(&comparison(&config, "other-snapshot", different)),
         Some(&registries(&config, "other-build")),
     );
 
@@ -170,6 +186,20 @@ fn reports_of_other_inputs_are_left_out_with_a_warning() {
         matching.agreement,
         Some([("different".into(), 1), ("same".into(), 2)].into())
     );
+    let [disagreement] = matching.disagreements.as_slice() else {
+        panic!("one disagreement: {:?}", matching.disagreements);
+    };
+    assert_eq!(disagreement.property, "value_form");
+    assert_eq!(disagreement.config_answer, "int");
+    assert_eq!(
+        disagreement.atlas_answers,
+        [
+            "Accumulate",
+            "number",
+            r#"{"form":"string","values":["a"]}"#
+        ]
+    );
+    assert!(stale.disagreements.is_empty());
     assert_eq!(matching.gate_types[0].join.as_deref(), Some("named"));
     assert!(matching.warnings.is_empty(), "{:?}", matching.warnings);
     assert_eq!(stale.agreement, None);

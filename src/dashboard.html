@@ -34,7 +34,7 @@
   th, td { padding: 6px 10px; border-bottom: 1px solid var(--line); text-align: left; white-space: nowrap; }
   th { font-weight: 600; color: var(--muted); }
   td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
-  td.wrap { white-space: normal; }
+  td.wrap { white-space: normal; overflow-wrap: anywhere; }
   .up { color: var(--good); } .down { color: var(--bad); }
   .bar { height: 6px; width: 120px; background: var(--line); border-radius: 3px; overflow: hidden; }
   .bar > div { height: 100%; background: var(--bar); }
@@ -167,6 +167,17 @@
     element("div", { class: "muted" }, ["Lowest share first. Join comes from registries.json in the same folder."]),
     table([["Type"], ["File"], ["Join"], ...coverageHeaders], coverageRows(data.gate_types, true)),
   );
+
+  if (data.agreement) {
+    app.append(
+      element("h2", {}, [`Disagreements with the config (${data.disagreements.length.toLocaleString()})`]),
+      element("div", { class: "muted" }, ["Claims where Atlas answers and its answer differs from the config's."]),
+      table([["Subject"], ["Property"], ["Config"], ["Atlas"], ["File"]], data.disagreements.map(row => [
+        [row.subject, "wrap"], [row.property], [row.config_answer, "wrap"],
+        [row.atlas_answers.join(" | "), "wrap"], [row.file],
+      ])),
+    );
+  }
 </script>
 </body>
 </html>

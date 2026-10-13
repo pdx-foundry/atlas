@@ -43,7 +43,7 @@ The command also writes `covered-claims.txt` and `dashboard.html`, and copies th
 DIR` writes the copy elsewhere). The page shows Atlas-owned coverage by area and for each Milestone 5
 gate type, and its change against the baseline of `main` (`docs/coverage/covered-claims.txt`, read
 from `origin/main`), with each claim that lost coverage. Run `compare` and `registries` into the same
-output folder first to add agreement with the config and each type's registry join; a report of
+output folder first to add agreement with the config, a list of each disagreement (config answer beside Atlas's) and each type's registry join; a report of
 another config or snapshot is left out with a warning. A PR that changes coverage copies the new
 `covered-claims.txt` into `docs/coverage/`. The committed baseline is the Milestone 4 live snapshot
 under this code (22,995 claims) until SDK-798 records a new live run.
