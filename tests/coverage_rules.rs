@@ -41,6 +41,12 @@ impl SharedDirectory {
         );
         let mut snapshot = recorded_snapshot().await;
         edit(&mut snapshot);
+
+        Self::from_snapshot(ledger, snapshot)
+    }
+
+    /// Evaluates the claims of `ledger` against `snapshot` qualified as live.
+    fn from_snapshot(ledger: ledger::Ledger, mut snapshot: snapshot::Snapshot) -> Self {
         qualify_as_live(&mut snapshot);
         let bytes = snapshot::json_bytes(&snapshot).unwrap();
 
@@ -373,12 +379,15 @@ tradition = { subtype[special] = { unlocks_agenda = scalar } }
     ));
 }
 
-async fn recorded_snapshot() -> snapshot::Snapshot {
+async fn recorded_extraction() -> extraction::Extraction {
     let path = Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/native/m452");
     let native = Native::from_recorded_answers(path).unwrap();
-    let extraction =
-        extraction::collect(&native, || GameOptions::new(Command::new("unused"))).await;
-    snapshot::assemble(&extraction).unwrap()
+
+    extraction::collect(&native, || GameOptions::new(Command::new("unused"))).await
+}
+
+async fn recorded_snapshot() -> snapshot::Snapshot {
+    snapshot::assemble(&recorded_extraction().await).unwrap()
 }
 
 fn qualify_as_live(snapshot: &mut snapshot::Snapshot) {
@@ -1407,4 +1416,292 @@ async fn recorded_loader_rules_earn_no_credit_and_publish_the_build_wide_limits(
                 .contains(&format!("atlas:inventory:loader_rules#{limit}"))
         );
     }
+}
+
+/// Event kinds and pre_trigger key sets as the config writes them, trimmed to the claims that the
+/// event tests read.
+const EVENT_CONFIG: &[(&str, &str)] = &[
+    (
+        "events/events.cwt",
+        r#"
+types = {
+    type[event] = {
+        path = "game/events"
+        ## type_key_filter = event
+        ## push_scope = any
+        subtype[scopeless] = {}
+        ## type_key_filter = country_event
+        ## push_scope = country
+        subtype[country] = {}
+        ## type_key_filter = observer_event
+        ## push_scope = country
+        subtype[observer] = {}
+        ## type_key_filter = carrier_event
+        ## push_scope = carrier
+        subtype[carrier] = {}
+        ## type_key_filter = fleet_event
+        ## push_scope = fleet
+        subtype[fleet] = {}
+    }
+}
+event = {
+    subtype[country] = {
+        pre_triggers = { alias_name[country_pre_trigger] = alias_match_left[country_pre_trigger] }
+    }
+    subtype[carrier] = {
+        pre_triggers = { alias_name[colony_pre_trigger] = alias_match_left[colony_pre_trigger] }
+    }
+}
+"#,
+    ),
+    (
+        "common/pop_jobs.cwt",
+        r#"
+types = { type[job] = { path = "game/common/pop_jobs" } }
+job = { possible_pre_triggers = { alias_name[pop_pre_trigger] = alias_match_left[pop_pre_trigger] } }
+"#,
+    ),
+    (
+        "pre_triggers.cwt",
+        r#"
+alias[colony_pre_trigger:has_owner] = bool
+alias[colony_pre_trigger:is_capital] = bool
+alias[pop_pre_trigger:is_enslaved] = bool
+alias[pop_pre_trigger:is_robotic] = bool
+alias[country_pre_trigger:is_ai] = bool
+"#,
+    ),
+    (
+        "scopes.cwt",
+        r#"
+scopes = {
+    Country = { aliases = { country } }
+    Carrier = { aliases = { carrier } }
+    Fleet = { aliases = { fleet } }
+}
+"#,
+    ),
+];
+
+/// Native's answers for the event kinds and the `common/pop_jobs` pre_trigger block, beside the
+/// recorded M452 answers, against [`EVENT_CONFIG`].
+async fn event_kinds() -> SharedDirectory {
+    event_kinds_against(EVENT_CONFIG).await
+}
+
+/// [`event_kinds`] against the config `sources`.
+async fn event_kinds_against(sources: &[(&str, &str)]) -> SharedDirectory {
+    use pdx_native::{
+        Field, FieldMembers, FieldReadOutcome, GrammarProperty, ReadScope, ReaderKind,
+    };
+
+    let mut extraction = recorded_extraction().await;
+    let traditions = extraction.fields[extraction::TRADITIONS]
+        .as_ref()
+        .unwrap()
+        .clone();
+    let template = |name: &str| {
+        traditions
+            .value
+            .iter()
+            .find(|field| field.name == name)
+            .unwrap()
+            .clone()
+    };
+    let key = |name: &str, kind: Option<ReaderKind>| {
+        let mut field = template("unlocks_agenda");
+        field.name = name.into();
+        field.read[0].outcome = match (kind, field.read[0].outcome.clone()) {
+            (Some(kind), FieldReadOutcome::Read { mut reader, shape }) => {
+                reader.kind = kind;
+                reader.id = serde_json::from_value(json!(format!("{:016x}", kind as u8))).unwrap();
+                field.reader = reader.clone();
+                FieldReadOutcome::Read { reader, shape }
+            }
+            _ => FieldReadOutcome::Unresolved,
+        };
+        field
+    };
+    let block = |name: &str, read_scope, members| Field {
+        name: name.into(),
+        read_scope,
+        members: FieldMembers::Fields(members),
+        ..template("tradition_swap")
+    };
+    let scope = |id: &str| serde_json::from_value(json!({ "id": id, "name": "authored" })).unwrap();
+    let read_in = |ids: &[&str]| {
+        GrammarProperty::Known(vec![ReadScope::Types(
+            ids.iter().map(|id| scope(id)).collect(),
+        )])
+    };
+    let (country, observer, planet, ship) = (
+        "44b5e21fe5e593d7",
+        "c2bdd32188145ee1",
+        "37c52c03d3012e74",
+        "69ead02b278522d1",
+    );
+    let boolean = Some(ReaderKind::Boolean);
+    let kinds = vec![
+        block("event", GrammarProperty::Known(Vec::new()), Vec::new()),
+        block(
+            "country_event",
+            read_in(&[country]),
+            vec![block(
+                "pre_triggers",
+                GrammarProperty::Unresolved,
+                vec![key("is_ai", boolean), key("is_idle", boolean)],
+            )],
+        ),
+        block("observer_event", read_in(&[observer]), Vec::new()),
+        block(
+            "carrier_event",
+            read_in(&[planet, ship]),
+            vec![block(
+                "pre_triggers",
+                GrammarProperty::Unresolved,
+                vec![key("has_owner", boolean), key("is_capital", None)],
+            )],
+        ),
+        block("fleet_event", GrammarProperty::Unresolved, Vec::new()),
+    ];
+    let jobs = vec![block(
+        "possible_pre_triggers",
+        GrammarProperty::Unresolved,
+        vec![key("is_enslaved", Some(ReaderKind::Integer))],
+    )];
+
+    for (registry, fields) in [("events", kinds), ("common/pop_jobs", jobs)] {
+        let mut answer = traditions.clone();
+        answer.value = fields;
+        answer.gaps = Vec::new();
+        extraction.fields.insert(registry.into(), Ok(answer));
+    }
+
+    let ledger = ledger::inventory(
+        &sources
+            .iter()
+            .map(|(file, source)| ((*file).into(), (*source).into()))
+            .collect(),
+    );
+
+    SharedDirectory::from_snapshot(ledger, snapshot::assemble(&extraction).unwrap())
+}
+
+fn push_scope(subtype: &str) -> [&str; 4] {
+    ["types", "type[event]", subtype, "$annotation:push_scope"]
+}
+
+#[tokio::test]
+async fn event_kind_scope_credits_its_subtype_push_scope_and_a_gap_does_not() {
+    let events = event_kinds().await;
+
+    assert!(events.covered("scope_context", &push_scope("subtype[country]")));
+    assert!(events.covered("scope_context", &push_scope("subtype[scopeless]")));
+    assert!(!events.covered("scope_context", &push_scope("subtype[fleet]")));
+    assert!(
+        events
+            .gaps("scope_context", &push_scope("subtype[fleet]"))
+            .iter()
+            .any(|gap| gap.contains("did not establish the scope"))
+    );
+}
+
+#[tokio::test]
+async fn event_kind_child_credits_the_field_of_its_subtype() {
+    let events = event_kinds().await;
+
+    assert!(events.covered(
+        "field_existence",
+        &["event", "subtype[country]", "pre_triggers"]
+    ));
+}
+
+#[tokio::test]
+async fn pre_trigger_keys_credit_their_alias_claims() {
+    let events = event_kinds().await;
+
+    for alias in [
+        "alias[country_pre_trigger:is_ai]",
+        "alias[colony_pre_trigger:has_owner]",
+        "alias[pop_pre_trigger:is_enslaved]",
+    ] {
+        assert!(events.covered("value_form", &[alias]), "{alias}");
+    }
+
+    assert!(!events.covered("value_form", &["alias[pop_pre_trigger:is_robotic]"]));
+    assert!(!events.covered("value_form", &["alias[colony_pre_trigger:is_capital]"]));
+    assert!(
+        !events
+            .gaps("value_form", &["alias[colony_pre_trigger:is_capital]"])
+            .is_empty()
+    );
+}
+
+#[tokio::test]
+async fn a_block_that_takes_only_alias_names_answers_no_alias_value() {
+    let sources: Vec<_> = EVENT_CONFIG
+        .iter()
+        .map(|&(file, source)| match file {
+            "common/pop_jobs.cwt" => (
+                file,
+                r#"
+types = { type[job] = { path = "game/common/pop_jobs" } }
+job = { possible_pre_triggers = { alias_name[pop_pre_trigger] = bool } }
+"#,
+            ),
+            _ => (file, source),
+        })
+        .collect();
+    let events = event_kinds_against(&sources).await;
+
+    assert!(!events.covered("value_form", &["alias[pop_pre_trigger:is_enslaved]"]));
+    assert!(events.covered("value_form", &["alias[country_pre_trigger:is_ai]"]));
+}
+
+#[tokio::test]
+async fn event_kind_scopes_and_pre_trigger_keys_compare_with_the_config() {
+    let events = event_kinds().await;
+
+    for (subtype, status) in [
+        ("subtype[country]", Status::Same),
+        ("subtype[scopeless]", Status::Same),
+        ("subtype[carrier]", Status::Same),
+        ("subtype[observer]", Status::Different),
+    ] {
+        assert_eq!(
+            events.status("scope_context", &push_scope(subtype)),
+            status,
+            "{subtype}"
+        );
+    }
+
+    assert_eq!(
+        events.status("value_form", &["alias[country_pre_trigger:is_ai]"]),
+        Status::Same
+    );
+    assert_eq!(
+        events.status("value_form", &["alias[pop_pre_trigger:is_enslaved]"]),
+        Status::Different
+    );
+}
+
+#[tokio::test]
+async fn a_root_field_named_like_a_root_key_stays_a_field_outside_events() {
+    let source = r#"
+types = {
+    type[tradition] = {
+        path = "game/common/traditions"
+        ## type_key_filter = tradition_swap
+        subtype[swap] = {}
+    }
+}
+tradition = {
+    tradition_swap = { name = scalar }
+    subtype[swap] = { name = scalar }
+}
+"#;
+    let directory = SharedDirectory::evaluate(&[("traditions.cwt", source)], |_| {}).await;
+
+    assert!(directory.covered("field_existence", &["tradition", "tradition_swap"]));
+    assert!(!directory.covered("field_existence", &["tradition", "subtype[swap]", "name"]));
 }

@@ -74,7 +74,7 @@ It writes `comparison.json` with one entry per config claim plus Atlas-only ques
 contain both answers where available and report `same`, `different`, `missing_from_atlas`, or
 `atlas_only`. Gaps keep their reasons and count as missing answers. Only the directly comparable
 properties (presence, loader path and the other loader lines of a type, `overrides.cwt`
-priorities, basic value form, and numeric cardinality bounds) can be marked
+priorities, basic value form, numeric cardinality bounds, and the `push_scope` of an event kind) can be marked
 the same or different; an unmapped property is reported as missing a comparable answer with its
 raw Atlas answer retained. This report does not change coverage. A difference calls for review; it
 does not establish which source is correct. The command exits 2 if config diagnostics remain.

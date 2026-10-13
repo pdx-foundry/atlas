@@ -24,6 +24,10 @@ const NAMING_LINES: &[&str] = &[
     "type_per_file",
     "name_from_file",
 ];
+/// The registries whose root fields are root statements: Native answers each event kind
+/// (`country_event`) as a root field of `events` (Native's `registry-fields.md`, "Event kinds").
+/// In every other registry a root field is a key inside a definition.
+const ROOT_STATEMENT_REGISTRIES: &[&str] = &["events"];
 /// The config file that writes each directory's duplicate-definition priority.
 const OVERRIDES: &str = "overrides.cwt";
 
@@ -72,6 +76,7 @@ fn project_with_gap_facets(
     let command_files = command_files(ledger);
     let claims = claim_index(ledger);
     let key_subtypes = key_subtypes(ledger);
+    let alias_blocks = AliasBlocks::new(ledger);
     let language = super::language_subject::index(ledger, rules);
     let subjects: BTreeMap<_, _> = rules
         .subjects
@@ -92,13 +97,25 @@ fn project_with_gap_facets(
         gaps: Vec::new(),
     };
     for rule in &rules.rules {
-        let conditions = config_conditions(
-            &key_subtypes,
-            &selectors,
-            subjects[rule.subject.as_str()],
-            &rule.conditions,
-        );
-        let subject = subjects[rule.subject.as_str()];
+        let statement = root_statement(&key_subtypes, &selectors, subjects[rule.subject.as_str()]);
+        let (subject, rule_conditions) = match &statement {
+            Some((subject, key)) => (
+                subject,
+                [rule.conditions.clone(), vec![key.clone()]].concat(),
+            ),
+            None => (subjects[rule.subject.as_str()], rule.conditions.clone()),
+        };
+        let conditions = config_conditions(&key_subtypes, &selectors, subject, &rule_conditions);
+        let alias_questions = conditions.as_deref().map_or_else(Vec::new, |conditions| {
+            alias_blocks.questions(
+                &claims,
+                &selectors,
+                subject,
+                &rule.property,
+                conditions,
+                false,
+            )
+        });
         let mut answers = match (&conditions, rule.property.as_str()) {
             (Some(_), "definition_names") => {
                 naming_answers(&claims, &selectors, subject, &rule.answer)
@@ -126,7 +143,7 @@ fn project_with_gap_facets(
                     .map(|question| (question, rule.answer.clone())),
             );
         }
-        if answers.is_empty() {
+        if answers.is_empty() && alias_questions.is_empty() {
             answers.push((format!("atlas:{}", rule.id), rule.answer.clone()));
         }
         let mut evidence = Vec::new();
@@ -148,14 +165,22 @@ fn project_with_gap_facets(
                 origin: Origin::Engine,
             });
         }
-        for (question, value) in answers {
+        let answers = answers
+            .into_iter()
+            .map(|(question, value)| (question, conditions.clone(), value))
+            .chain(
+                alias_questions
+                    .into_iter()
+                    .map(|question| (question, Vec::new(), rule.answer.clone())),
+            );
+        for (question, conditions, value) in answers {
             if let Some(gap) = selectors.selector_gap(&question, &conditions) {
                 projection.gaps.push(gap);
                 continue;
             }
             projection.answers.push(Answer {
                 question,
-                conditions: conditions.clone(),
+                conditions,
                 value,
                 status: if rule.property == "value_form"
                     && rule.answer.get("alternatives").is_some()
@@ -169,28 +194,56 @@ fn project_with_gap_facets(
         }
     }
     for gap in &rules.gaps {
-        let mut questions = questions(
+        let statement = root_statement(&key_subtypes, &selectors, subjects[gap.subject.as_str()]);
+        let (subject, conditions) = match &statement {
+            Some((subject, key)) => (
+                subject,
+                config_conditions(
+                    &key_subtypes,
+                    &selectors,
+                    subject,
+                    std::slice::from_ref(key),
+                )
+                .unwrap_or_default(),
+            ),
+            None => (subjects[gap.subject.as_str()], Vec::new()),
+        };
+        let mut questions: Vec<_> = questions(
             &claims,
             &selectors,
             &command_files,
-            subjects[gap.subject.as_str()],
+            subject,
             &gap.property,
-            &[],
+            &conditions,
             project_related_gap_facets,
-        );
-        questions.extend(selectors.language_questions(&language, &gap.id));
-        let questions = if questions.is_empty() {
-            vec![format!("atlas:{}", gap.id)]
-        } else {
-            questions
-        };
-        for question in questions {
-            if let Some(selector_gap) = selectors.selector_gap(&question, &[]) {
+        )
+        .into_iter()
+        .map(|question| (question, conditions.clone()))
+        .collect();
+        let unconditional = selectors
+            .language_questions(&language, &gap.id)
+            .into_iter()
+            .chain(alias_blocks.questions(
+                &claims,
+                &selectors,
+                subject,
+                &gap.property,
+                &conditions,
+                project_related_gap_facets,
+            ));
+        questions.extend(unconditional.map(|question| (question, Vec::new())));
+
+        if questions.is_empty() {
+            questions.push((format!("atlas:{}", gap.id), Vec::new()));
+        }
+
+        for (question, conditions) in questions {
+            if let Some(selector_gap) = selectors.selector_gap(&question, &conditions) {
                 projection.gaps.push(selector_gap);
             }
             projection.gaps.push(Gap {
                 question,
-                conditions: Vec::new(),
+                conditions,
                 reason: gap.reason.clone(),
             });
         }
@@ -724,6 +777,44 @@ fn config_conditions(
         .collect()
 }
 
+/// A field of a registry in [`ROOT_STATEMENT_REGISTRIES`] whose first key alone selects a subtype
+/// of the registry's root type names a root statement with that key. The result is the subject
+/// below the statement and the `root_key[KEY]` condition that selects it.
+fn root_statement(
+    key_subtypes: &KeySubtypes<'_>,
+    selectors: &TypeSelectors<'_>,
+    subject: &snapshot::Subject,
+) -> Option<(snapshot::Subject, String)> {
+    let registry = subject.registry.as_deref()?;
+
+    if subject.kind != snapshot::SubjectKind::Field
+        || !ROOT_STATEMENT_REGISTRIES.contains(&registry)
+    {
+        return None;
+    }
+
+    let field = subject.field.as_deref()?;
+    let (key, below) = match field.split_once('/') {
+        Some((key, below)) => (key, Some(below)),
+        None => (field, None),
+    };
+    let condition = format!("root_key[{key}]");
+
+    config_conditions(
+        key_subtypes,
+        selectors,
+        subject,
+        std::slice::from_ref(&condition),
+    )?;
+
+    let below = snapshot::Subject {
+        field: below.map(Into::into),
+        ..subject.clone()
+    };
+
+    Some((below, condition))
+}
+
 fn questions(
     claims: &ClaimIndex<'_>,
     selectors: &TypeSelectors<'_>,
@@ -916,6 +1007,14 @@ fn type_questions(
         (None, "loader_path") => (vec!["types", type_name, "path"], "loader_path"),
         (None, "extension") => (vec!["types", type_name, "path_extension"], "loader_path"),
         (None, "recursion") => (vec!["types", type_name, "path_strict"], "loader_path"),
+        // A root statement's read scope: the `push_scope` of the subtype that its key selects.
+        (None, "read_scope") => {
+            let mut path = vec!["types", type_name];
+            path.extend(subtypes(conditions));
+            path.push("$annotation:push_scope");
+
+            (path, "scope_context")
+        }
         (None, "definition_names") => {
             return NAMING_LINES
                 .iter()
@@ -948,7 +1047,19 @@ fn field_questions(
     conditions: &[String],
     gap_facet: bool,
 ) -> Vec<String> {
-    let (annotation, ledger_property) = match property {
+    let Some((annotation, ledger_property)) = field_property(property, gap_facet) else {
+        return Vec::new();
+    };
+    let mut path = node_path(root, conditions, field);
+    path.extend(annotation);
+
+    claim_questions(claims, file, ledger_property, path, conditions)
+}
+
+/// The annotation below a field's config node and the ledger property that a field property
+/// answers, or `None` when no field claim answers it.
+fn field_property(property: &str, gap_facet: bool) -> Option<(Option<&'static str>, &'static str)> {
+    Some(match property {
         "existence" => (None, "field_existence"),
         "value_form" | "value_form.unresolved" => (None, "value_form"),
         "reference" | "nested_grammar" if gap_facet => (None, "value_form"),
@@ -958,19 +1069,133 @@ fn field_questions(
         }
         "scope_context" => (Some("$annotation:replace_scopes"), "scope_context"),
         "read_scope" => (Some("$annotation:push_scope"), "scope_context"),
-        _ => return Vec::new(),
-    };
-    let mut path = vec![root];
-    path.extend(
-        conditions
-            .iter()
-            .filter(|condition| condition.starts_with("subtype["))
-            .map(String::as_str),
-    );
-    path.extend(field.split('/'));
-    path.extend(annotation);
+        _ => return None,
+    })
+}
 
-    claim_questions(claims, file, ledger_property, path, conditions)
+/// The config path of the field at `field` below `root`, inside the subtypes of `conditions`.
+fn node_path<'a>(root: &'a str, conditions: &'a [String], field: &'a str) -> Vec<&'a str> {
+    let mut path = vec![root];
+    path.extend(subtypes(conditions));
+    path.extend(field.split('/'));
+
+    path
+}
+
+/// The `subtype[…]` conditions, in order.
+fn subtypes(conditions: &[String]) -> impl Iterator<Item = &str> {
+    conditions
+        .iter()
+        .filter(|condition| condition.starts_with("subtype["))
+        .map(String::as_str)
+}
+
+/// The blocks whose config entry is `alias_name[X] = alias_match_left[X]`. Each Native field in
+/// such a block answers the claims at `alias[X:KEY]`, which hold wherever the alias is used, so
+/// these answers have no conditions.
+struct AliasBlocks<'a> {
+    /// The alias that names the keys of each block, by (file, block path, conditions).
+    aliases: BTreeMap<(&'a str, Vec<&'a str>, Vec<&'a str>), &'a str>,
+    /// The config files that declare each `alias[X:KEY]` root.
+    files: BTreeMap<&'a str, BTreeSet<&'a str>>,
+}
+
+impl<'a> AliasBlocks<'a> {
+    fn new(ledger: &'a Ledger) -> Self {
+        let mut aliases = BTreeMap::new();
+        let mut files: BTreeMap<_, BTreeSet<_>> = BTreeMap::new();
+
+        for claim in &ledger.claims {
+            let Some((last, block)) = claim.subject.split_last() else {
+                continue;
+            };
+
+            if let Some(alias) = last
+                .strip_prefix("alias_name[")
+                .and_then(|alias| alias.strip_suffix(']'))
+                && claim.property == "alias_factoring"
+                && claim.config_answer == format!("alias_match_left[{alias}]")
+            {
+                aliases.insert(
+                    (
+                        claim.file.as_str(),
+                        block.iter().map(String::as_str).collect(),
+                        claim.conditions.iter().map(String::as_str).collect(),
+                    ),
+                    alias,
+                );
+            }
+
+            if claim.subject[0].starts_with("alias[") {
+                files
+                    .entry(claim.subject[0].as_str())
+                    .or_default()
+                    .insert(claim.file.as_str());
+            }
+        }
+
+        Self { aliases, files }
+    }
+
+    /// The `alias[X:KEY]` questions that a field of a registry's root type answers when its parent
+    /// block takes its keys from alias `X`.
+    fn questions(
+        &self,
+        claims: &ClaimIndex<'_>,
+        selectors: &TypeSelectors<'_>,
+        subject: &snapshot::Subject,
+        property: &str,
+        conditions: &[String],
+        gap_facet: bool,
+    ) -> Vec<String> {
+        let (Some(registry), Some((block, key))) = (
+            subject.registry.as_deref(),
+            subject
+                .field
+                .as_deref()
+                .and_then(|field| field.rsplit_once('/')),
+        ) else {
+            return Vec::new();
+        };
+        let Some((annotation, ledger_property)) = field_property(property, gap_facet) else {
+            return Vec::new();
+        };
+        let condition_names: Vec<_> = conditions.iter().map(String::as_str).collect();
+        let root_types = selectors
+            .directories
+            .get(registry)
+            .into_iter()
+            .flatten()
+            .filter(|(_, _, selector)| *selector == Selector::Root);
+        let mut questions = Vec::new();
+
+        for (type_name, file, _) in root_types {
+            let root = type_name.trim_start_matches("type[").trim_end_matches(']');
+            let block_path = node_path(root, conditions, block);
+            let Some(alias) = self
+                .aliases
+                .get(&(*file, block_path, condition_names.clone()))
+            else {
+                continue;
+            };
+            let alias_root = format!("alias[{alias}:{key}]");
+
+            for alias_file in self.files.get(alias_root.as_str()).into_iter().flatten() {
+                let mut path = vec![alias_root.as_str()];
+                path.extend(annotation);
+
+                questions.extend(claim_questions(
+                    claims,
+                    alias_file,
+                    ledger_property,
+                    path,
+                    &[],
+                ));
+            }
+        }
+
+        questions
+    }
 }
 
 fn claim_questions(
