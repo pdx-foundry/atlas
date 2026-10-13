@@ -117,7 +117,7 @@ fn project_with_gap_facets(
             )
         });
 
-        if statement.is_some() {
+        if statement.is_some() && rule.conditions.is_empty() {
             unconditional.extend(definition_questions(
                 &claims,
                 &selectors,
