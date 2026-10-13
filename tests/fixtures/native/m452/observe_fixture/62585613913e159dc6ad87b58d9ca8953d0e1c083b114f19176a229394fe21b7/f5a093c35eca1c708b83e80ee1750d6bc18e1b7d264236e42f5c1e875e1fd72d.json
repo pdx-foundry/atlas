@@ -1,6 +1,9 @@
 {
   "Ok": {
     "value": {
+      "loaded_files": [
+        "common/traditions/atlas_frozen.txt"
+      ],
       "field_outcomes": [
         {
           "question": {
@@ -11,9 +14,9 @@
             "parsing": false,
             "diagnostics": true
           },
-          "file": "common/traditions/atlas_frozen.txt",
           "definitions": [
             {
+              "file": "common/traditions/atlas_frozen.txt",
               "line": 19,
               "owner": 4
             }
@@ -23,6 +26,7 @@
             "Observed": {
               "occurrences": [
                 {
+                  "file": "common/traditions/atlas_frozen.txt",
                   "line": 21,
                   "occurrence": 1,
                   "value": {
@@ -49,9 +53,9 @@
             "parsing": false,
             "diagnostics": true
           },
-          "file": "common/traditions/atlas_frozen.txt",
           "definitions": [
             {
+              "file": "common/traditions/atlas_frozen.txt",
               "line": 14,
               "owner": 2
             }
@@ -77,9 +81,9 @@
             "parsing": false,
             "diagnostics": true
           },
-          "file": "common/traditions/atlas_frozen.txt",
           "definitions": [
             {
+              "file": "common/traditions/atlas_frozen.txt",
               "line": 15,
               "owner": 3
             }
@@ -89,6 +93,7 @@
             "Observed": {
               "occurrences": [
                 {
+                  "file": "common/traditions/atlas_frozen.txt",
                   "line": 16,
                   "occurrence": 1,
                   "value": {
@@ -96,6 +101,7 @@
                   }
                 },
                 {
+                  "file": "common/traditions/atlas_frozen.txt",
                   "line": 17,
                   "occurrence": 2,
                   "value": {
@@ -120,9 +126,9 @@
             "parsing": false,
             "diagnostics": true
           },
-          "file": "common/traditions/atlas_frozen.txt",
           "definitions": [
             {
+              "file": "common/traditions/atlas_frozen.txt",
               "line": 23,
               "owner": 5
             }
@@ -132,6 +138,7 @@
             "Observed": {
               "occurrences": [
                 {
+                  "file": "common/traditions/atlas_frozen.txt",
                   "line": 24,
                   "occurrence": 1,
                   "value": {
@@ -156,9 +163,9 @@
             "parsing": false,
             "diagnostics": true
           },
-          "file": "common/traditions/atlas_frozen.txt",
           "definitions": [
             {
+              "file": "common/traditions/atlas_frozen.txt",
               "line": 1,
               "owner": 1
             }
@@ -178,9 +185,9 @@
             "parsing": false,
             "diagnostics": true
           },
-          "file": "common/traditions/atlas_frozen.txt",
           "definitions": [
             {
+              "file": "common/traditions/atlas_frozen.txt",
               "line": 1,
               "owner": 1
             }
@@ -190,6 +197,7 @@
             "Observed": {
               "occurrences": [
                 {
+                  "file": "common/traditions/atlas_frozen.txt",
                   "line": 3,
                   "occurrence": 1,
                   "value": {
@@ -214,9 +222,9 @@
             "parsing": false,
             "diagnostics": true
           },
-          "file": "common/traditions/atlas_frozen.txt",
           "definitions": [
             {
+              "file": "common/traditions/atlas_frozen.txt",
               "line": 1,
               "owner": 1
             }
@@ -226,6 +234,7 @@
             "Observed": {
               "occurrences": [
                 {
+                  "file": "common/traditions/atlas_frozen.txt",
                   "line": 4,
                   "occurrence": 1,
                   "value": {
@@ -250,9 +259,9 @@
             "parsing": false,
             "diagnostics": true
           },
-          "file": "common/traditions/atlas_frozen.txt",
           "definitions": [
             {
+              "file": "common/traditions/atlas_frozen.txt",
               "line": 1,
               "owner": 1
             }
@@ -272,9 +281,9 @@
             "parsing": false,
             "diagnostics": true
           },
-          "file": "common/traditions/atlas_frozen.txt",
           "definitions": [
             {
+              "file": "common/traditions/atlas_frozen.txt",
               "line": 1,
               "owner": 1
             }
@@ -294,9 +303,9 @@
             "parsing": false,
             "diagnostics": true
           },
-          "file": "common/traditions/atlas_frozen.txt",
           "definitions": [
             {
+              "file": "common/traditions/atlas_frozen.txt",
               "line": 1,
               "owner": 1
             }
@@ -316,9 +325,9 @@
             "parsing": false,
             "diagnostics": true
           },
-          "file": "common/traditions/atlas_frozen.txt",
           "definitions": [
             {
+              "file": "common/traditions/atlas_frozen.txt",
               "line": 1,
               "owner": 1
             }
@@ -338,9 +347,9 @@
             "parsing": false,
             "diagnostics": true
           },
-          "file": "common/traditions/atlas_frozen.txt",
           "definitions": [
             {
+              "file": "common/traditions/atlas_frozen.txt",
               "line": 1,
               "owner": 1
             }
@@ -360,9 +369,9 @@
             "parsing": false,
             "diagnostics": true
           },
-          "file": "common/traditions/atlas_frozen.txt",
           "definitions": [
             {
+              "file": "common/traditions/atlas_frozen.txt",
               "line": 1,
               "owner": 1
             }
@@ -382,9 +391,9 @@
             "parsing": false,
             "diagnostics": true
           },
-          "file": "common/traditions/atlas_frozen.txt",
           "definitions": [
             {
+              "file": "common/traditions/atlas_frozen.txt",
               "line": 1,
               "owner": 1
             }
@@ -404,9 +413,9 @@
             "parsing": false,
             "diagnostics": true
           },
-          "file": "common/traditions/atlas_frozen.txt",
           "definitions": [
             {
+              "file": "common/traditions/atlas_frozen.txt",
               "line": 1,
               "owner": 1
             }
@@ -416,6 +425,7 @@
             "Observed": {
               "occurrences": [
                 {
+                  "file": "common/traditions/atlas_frozen.txt",
                   "line": 2,
                   "occurrence": 1,
                   "value": {
@@ -466,7 +476,7 @@
         }
       }
     },
-    "completeness": "Partial",
+    "completeness": "Complete",
     "gaps": [
       {
         "kind": "OutsideMethod",
@@ -536,7 +546,7 @@
     "source": {
       "build": "c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b",
       "native_version": "0.1.0",
-      "method": "observe-fixture/v7",
+      "method": "observe-fixture/v9",
       "basis": "LiveObservation"
     }
   }

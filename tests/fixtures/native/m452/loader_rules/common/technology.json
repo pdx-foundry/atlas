@@ -42,7 +42,7 @@
           "kind": "answer_item",
           "name": "file_order"
         },
-        "detail": "The order in which the loader reads its files is a rule of the build's file system, stated once from its code and not for each registry. No fixture verifies it."
+        "detail": "The order in which the loader reads its files is a rule of the build's file system, stated once from its code and not for each registry. A live fixture control checks it for a template loader."
       },
       {
         "kind": "OutsideMethod",
@@ -64,7 +64,7 @@
     "source": {
       "build": "c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b",
       "native_version": "0.1.0",
-      "method": "loader-rules/v4",
+      "method": "loader-rules/v5",
       "basis": "StaticAnalysis"
     }
   }

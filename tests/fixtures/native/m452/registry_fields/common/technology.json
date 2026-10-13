@@ -265,29 +265,53 @@
       {
         "name": "start_tech",
         "reader": {
-          "numeric": "Unresolved",
-          "scoped_operand": "Unresolved",
-          "id": null,
-          "kind": "Unknown",
-          "family": "Unknown"
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "b894933b2b2853a5",
+          "kind": "Boolean",
+          "family": "NotApplicable"
         },
         "shape": {
-          "value": "Unknown",
+          "value": "Scalar",
           "repeat": "Unknown"
         },
         "read": [
           {
             "condition": "Always",
-            "outcome": "Unresolved"
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "b894933b2b2853a5",
+                  "kind": "Boolean",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Unknown"
+                }
+              }
+            }
           }
         ],
-        "members": "Unresolved",
+        "members": "None",
         "domain": "Unknown",
         "uses": [],
         "reference": "NotEstablished",
         "entry_contexts": [],
-        "read_scope": "Unresolved",
-        "accepted_categories": "Unresolved"
+        "read_scope": {
+          "Known": []
+        },
+        "accepted_categories": "NotApplicable"
       },
       {
         "name": "levels",
@@ -608,33 +632,57 @@
         "members": {
           "ModifierBlock": {
             "fixed_keys": {
-              "Partial": [
+              "Known": [
                 {
                   "name": "name",
                   "reader": {
-                    "numeric": "Unresolved",
-                    "scoped_operand": "Unresolved",
-                    "id": null,
-                    "kind": "Unknown",
-                    "family": "Unknown"
+                    "numeric": {
+                      "Known": null
+                    },
+                    "scoped_operand": {
+                      "Known": null
+                    },
+                    "id": "6eccadf628e2e490",
+                    "kind": "Skipped",
+                    "family": "NotApplicable"
                   },
                   "shape": {
-                    "value": "Unknown",
+                    "value": "Any",
                     "repeat": "Unknown"
                   },
                   "read": [
                     {
                       "condition": "Always",
-                      "outcome": "Unresolved"
+                      "outcome": {
+                        "Read": {
+                          "reader": {
+                            "numeric": {
+                              "Known": null
+                            },
+                            "scoped_operand": {
+                              "Known": null
+                            },
+                            "id": "6eccadf628e2e490",
+                            "kind": "Skipped",
+                            "family": "NotApplicable"
+                          },
+                          "shape": {
+                            "value": "Any",
+                            "repeat": "Unknown"
+                          }
+                        }
+                      }
                     }
                   ],
-                  "members": "Unresolved",
+                  "members": "None",
                   "domain": "Unknown",
                   "uses": [],
                   "reference": "NotEstablished",
                   "entry_contexts": [],
-                  "read_scope": "Unresolved",
-                  "accepted_categories": "Unresolved"
+                  "read_scope": {
+                    "Known": []
+                  },
+                  "accepted_categories": "NotApplicable"
                 },
                 {
                   "name": "data",
@@ -748,7 +796,9 @@
                   "uses": [],
                   "reference": "NotEstablished",
                   "entry_contexts": [],
-                  "read_scope": "Unresolved",
+                  "read_scope": {
+                    "Known": []
+                  },
                   "accepted_categories": "NotApplicable"
                 }
               ]
@@ -828,7 +878,9 @@
         "uses": [],
         "reference": "NotEstablished",
         "entry_contexts": [],
-        "read_scope": "Unresolved",
+        "read_scope": {
+          "Known": []
+        },
         "accepted_categories": {
           "Listed": [
             "Pops",
@@ -1052,56 +1104,104 @@
       {
         "name": "unlocked",
         "reader": {
-          "numeric": "Unresolved",
-          "scoped_operand": "Unresolved",
-          "id": null,
-          "kind": "Unknown",
-          "family": "Unknown"
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "b894933b2b2853a5",
+          "kind": "Boolean",
+          "family": "NotApplicable"
         },
         "shape": {
-          "value": "Unknown",
+          "value": "Scalar",
           "repeat": "Unknown"
         },
         "read": [
           {
             "condition": "Always",
-            "outcome": "Unresolved"
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "b894933b2b2853a5",
+                  "kind": "Boolean",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Unknown"
+                }
+              }
+            }
           }
         ],
-        "members": "Unresolved",
+        "members": "None",
         "domain": "Unknown",
         "uses": [],
         "reference": "NotEstablished",
         "entry_contexts": [],
-        "read_scope": "Unresolved",
-        "accepted_categories": "Unresolved"
+        "read_scope": {
+          "Known": []
+        },
+        "accepted_categories": "NotApplicable"
       },
       {
         "name": "hidden",
         "reader": {
-          "numeric": "Unresolved",
-          "scoped_operand": "Unresolved",
-          "id": null,
-          "kind": "Unknown",
-          "family": "Unknown"
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "b894933b2b2853a5",
+          "kind": "Boolean",
+          "family": "NotApplicable"
         },
         "shape": {
-          "value": "Unknown",
+          "value": "Scalar",
           "repeat": "Unknown"
         },
         "read": [
           {
             "condition": "Always",
-            "outcome": "Unresolved"
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "b894933b2b2853a5",
+                  "kind": "Boolean",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Unknown"
+                }
+              }
+            }
           }
         ],
-        "members": "Unresolved",
+        "members": "None",
         "domain": "Unknown",
         "uses": [],
         "reference": "NotEstablished",
         "entry_contexts": [],
-        "read_scope": "Unresolved",
-        "accepted_categories": "Unresolved"
+        "read_scope": {
+          "Known": []
+        },
+        "accepted_categories": "NotApplicable"
       },
       {
         "name": "weight_modifier",
@@ -1204,7 +1304,28 @@
                 {
                   "name": "days",
                   "reader": {
-                    "numeric": "Unresolved",
+                    "numeric": {
+                      "Partial": {
+                        "representation": {
+                          "Known": "Integer"
+                        },
+                        "width_bits": {
+                          "Known": 32
+                        },
+                        "signedness": {
+                          "Known": "Signed"
+                        },
+                        "scale": {
+                          "Known": 1
+                        },
+                        "literal_syntax": {
+                          "Partial": [
+                            "DecimalInteger"
+                          ]
+                        },
+                        "accepted_range": "Unresolved"
+                      }
+                    },
                     "scoped_operand": {
                       "Known": null
                     },
@@ -1222,7 +1343,28 @@
                       "outcome": {
                         "Read": {
                           "reader": {
-                            "numeric": "Unresolved",
+                            "numeric": {
+                              "Partial": {
+                                "representation": {
+                                  "Known": "Integer"
+                                },
+                                "width_bits": {
+                                  "Known": 32
+                                },
+                                "signedness": {
+                                  "Known": "Signed"
+                                },
+                                "scale": {
+                                  "Known": 1
+                                },
+                                "literal_syntax": {
+                                  "Partial": [
+                                    "DecimalInteger"
+                                  ]
+                                },
+                                "accepted_range": "Unresolved"
+                              }
+                            },
                             "scoped_operand": {
                               "Known": null
                             },
@@ -1251,7 +1393,28 @@
                 {
                   "name": "months",
                   "reader": {
-                    "numeric": "Unresolved",
+                    "numeric": {
+                      "Partial": {
+                        "representation": {
+                          "Known": "Integer"
+                        },
+                        "width_bits": {
+                          "Known": 32
+                        },
+                        "signedness": {
+                          "Known": "Signed"
+                        },
+                        "scale": {
+                          "Known": 1
+                        },
+                        "literal_syntax": {
+                          "Partial": [
+                            "DecimalInteger"
+                          ]
+                        },
+                        "accepted_range": "Unresolved"
+                      }
+                    },
                     "scoped_operand": {
                       "Known": null
                     },
@@ -1269,7 +1432,28 @@
                       "outcome": {
                         "Read": {
                           "reader": {
-                            "numeric": "Unresolved",
+                            "numeric": {
+                              "Partial": {
+                                "representation": {
+                                  "Known": "Integer"
+                                },
+                                "width_bits": {
+                                  "Known": 32
+                                },
+                                "signedness": {
+                                  "Known": "Signed"
+                                },
+                                "scale": {
+                                  "Known": 1
+                                },
+                                "literal_syntax": {
+                                  "Partial": [
+                                    "DecimalInteger"
+                                  ]
+                                },
+                                "accepted_range": "Unresolved"
+                              }
+                            },
                             "scoped_operand": {
                               "Known": null
                             },
@@ -1298,7 +1482,28 @@
                 {
                   "name": "years",
                   "reader": {
-                    "numeric": "Unresolved",
+                    "numeric": {
+                      "Partial": {
+                        "representation": {
+                          "Known": "Integer"
+                        },
+                        "width_bits": {
+                          "Known": 32
+                        },
+                        "signedness": {
+                          "Known": "Signed"
+                        },
+                        "scale": {
+                          "Known": 1
+                        },
+                        "literal_syntax": {
+                          "Partial": [
+                            "DecimalInteger"
+                          ]
+                        },
+                        "accepted_range": "Unresolved"
+                      }
+                    },
                     "scoped_operand": {
                       "Known": null
                     },
@@ -1316,7 +1521,28 @@
                       "outcome": {
                         "Read": {
                           "reader": {
-                            "numeric": "Unresolved",
+                            "numeric": {
+                              "Partial": {
+                                "representation": {
+                                  "Known": "Integer"
+                                },
+                                "width_bits": {
+                                  "Known": 32
+                                },
+                                "signedness": {
+                                  "Known": "Signed"
+                                },
+                                "scale": {
+                                  "Known": 1
+                                },
+                                "literal_syntax": {
+                                  "Partial": [
+                                    "DecimalInteger"
+                                  ]
+                                },
+                                "accepted_range": "Unresolved"
+                              }
+                            },
                             "scoped_operand": {
                               "Known": null
                             },
@@ -1370,7 +1596,29 @@
                       "outcome": {
                         "Read": {
                           "reader": {
-                            "numeric": "Unresolved",
+                            "numeric": {
+                              "Partial": {
+                                "representation": {
+                                  "Known": "Integer"
+                                },
+                                "width_bits": {
+                                  "Known": 64
+                                },
+                                "signedness": {
+                                  "Known": "Signed"
+                                },
+                                "scale": {
+                                  "Known": 100000
+                                },
+                                "literal_syntax": {
+                                  "Partial": [
+                                    "DecimalInteger",
+                                    "DecimalFraction"
+                                  ]
+                                },
+                                "accepted_range": "Unresolved"
+                              }
+                            },
                             "scoped_operand": {
                               "Known": null
                             },
@@ -3089,7 +3337,14 @@
                               }
                             ],
                             "members": "None",
-                            "domain": "Unknown",
+                            "domain": {
+                              "Listed": [
+                                "planet_distance_empire",
+                                "planets_in_country",
+                                "pop_amount",
+                                "pop_happiness"
+                              ]
+                            },
                             "uses": [],
                             "reference": "NotEstablished",
                             "entry_contexts": [],
@@ -3472,7 +3727,7 @@
                         "Known": null
                       },
                       "fixed_keys": {
-                        "Partial": [
+                        "Known": [
                           {
                             "name": "desc",
                             "reader": {
@@ -3573,10 +3828,10 @@
                                 {
                                   "condition": "Always",
                                   "target": "Triggers",
-                                  "stage": "Unresolved",
+                                  "stage": "WhileReading",
                                   "key_match": "Unresolved",
-                                  "empty_key": "Unresolved",
-                                  "on_missing": "Unresolved"
+                                  "empty_key": "LookedUp",
+                                  "on_missing": "ScriptedTriggerPlaceholder"
                                 }
                               ]
                             },
@@ -4158,7 +4413,23 @@
                               }
                             ],
                             "members": "None",
-                            "domain": "Unknown",
+                            "domain": {
+                              "Listed": [
+                                "add",
+                                "divide",
+                                "factor",
+                                "max",
+                                "min",
+                                "modulo",
+                                "mult",
+                                "multiply",
+                                "pow",
+                                "round_to",
+                                "set",
+                                "subtract",
+                                "weight"
+                              ]
+                            },
                             "uses": [],
                             "reference": "NotEstablished",
                             "entry_contexts": [],
@@ -5333,56 +5604,104 @@
       {
         "name": "is_rare",
         "reader": {
-          "numeric": "Unresolved",
-          "scoped_operand": "Unresolved",
-          "id": null,
-          "kind": "Unknown",
-          "family": "Unknown"
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "b894933b2b2853a5",
+          "kind": "Boolean",
+          "family": "NotApplicable"
         },
         "shape": {
-          "value": "Unknown",
+          "value": "Scalar",
           "repeat": "Unknown"
         },
         "read": [
           {
             "condition": "Always",
-            "outcome": "Unresolved"
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "b894933b2b2853a5",
+                  "kind": "Boolean",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Unknown"
+                }
+              }
+            }
           }
         ],
-        "members": "Unresolved",
+        "members": "None",
         "domain": "Unknown",
         "uses": [],
         "reference": "NotEstablished",
         "entry_contexts": [],
-        "read_scope": "Unresolved",
-        "accepted_categories": "Unresolved"
+        "read_scope": {
+          "Known": []
+        },
+        "accepted_categories": "NotApplicable"
       },
       {
         "name": "is_reverse_engineerable",
         "reader": {
-          "numeric": "Unresolved",
-          "scoped_operand": "Unresolved",
-          "id": null,
-          "kind": "Unknown",
-          "family": "Unknown"
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "b894933b2b2853a5",
+          "kind": "Boolean",
+          "family": "NotApplicable"
         },
         "shape": {
-          "value": "Unknown",
+          "value": "Scalar",
           "repeat": "Unknown"
         },
         "read": [
           {
             "condition": "Always",
-            "outcome": "Unresolved"
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "b894933b2b2853a5",
+                  "kind": "Boolean",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Unknown"
+                }
+              }
+            }
           }
         ],
-        "members": "Unresolved",
+        "members": "None",
         "domain": "Unknown",
         "uses": [],
         "reference": "NotEstablished",
         "entry_contexts": [],
-        "read_scope": "Unresolved",
-        "accepted_categories": "Unresolved"
+        "read_scope": {
+          "Known": []
+        },
+        "accepted_categories": "NotApplicable"
       },
       {
         "name": "mod_weight_if_group_picked",
@@ -5530,7 +5849,28 @@
                 {
                   "name": "days",
                   "reader": {
-                    "numeric": "Unresolved",
+                    "numeric": {
+                      "Partial": {
+                        "representation": {
+                          "Known": "Integer"
+                        },
+                        "width_bits": {
+                          "Known": 32
+                        },
+                        "signedness": {
+                          "Known": "Signed"
+                        },
+                        "scale": {
+                          "Known": 1
+                        },
+                        "literal_syntax": {
+                          "Partial": [
+                            "DecimalInteger"
+                          ]
+                        },
+                        "accepted_range": "Unresolved"
+                      }
+                    },
                     "scoped_operand": {
                       "Known": null
                     },
@@ -5548,7 +5888,28 @@
                       "outcome": {
                         "Read": {
                           "reader": {
-                            "numeric": "Unresolved",
+                            "numeric": {
+                              "Partial": {
+                                "representation": {
+                                  "Known": "Integer"
+                                },
+                                "width_bits": {
+                                  "Known": 32
+                                },
+                                "signedness": {
+                                  "Known": "Signed"
+                                },
+                                "scale": {
+                                  "Known": 1
+                                },
+                                "literal_syntax": {
+                                  "Partial": [
+                                    "DecimalInteger"
+                                  ]
+                                },
+                                "accepted_range": "Unresolved"
+                              }
+                            },
                             "scoped_operand": {
                               "Known": null
                             },
@@ -5577,7 +5938,28 @@
                 {
                   "name": "months",
                   "reader": {
-                    "numeric": "Unresolved",
+                    "numeric": {
+                      "Partial": {
+                        "representation": {
+                          "Known": "Integer"
+                        },
+                        "width_bits": {
+                          "Known": 32
+                        },
+                        "signedness": {
+                          "Known": "Signed"
+                        },
+                        "scale": {
+                          "Known": 1
+                        },
+                        "literal_syntax": {
+                          "Partial": [
+                            "DecimalInteger"
+                          ]
+                        },
+                        "accepted_range": "Unresolved"
+                      }
+                    },
                     "scoped_operand": {
                       "Known": null
                     },
@@ -5595,7 +5977,28 @@
                       "outcome": {
                         "Read": {
                           "reader": {
-                            "numeric": "Unresolved",
+                            "numeric": {
+                              "Partial": {
+                                "representation": {
+                                  "Known": "Integer"
+                                },
+                                "width_bits": {
+                                  "Known": 32
+                                },
+                                "signedness": {
+                                  "Known": "Signed"
+                                },
+                                "scale": {
+                                  "Known": 1
+                                },
+                                "literal_syntax": {
+                                  "Partial": [
+                                    "DecimalInteger"
+                                  ]
+                                },
+                                "accepted_range": "Unresolved"
+                              }
+                            },
                             "scoped_operand": {
                               "Known": null
                             },
@@ -5624,7 +6027,28 @@
                 {
                   "name": "years",
                   "reader": {
-                    "numeric": "Unresolved",
+                    "numeric": {
+                      "Partial": {
+                        "representation": {
+                          "Known": "Integer"
+                        },
+                        "width_bits": {
+                          "Known": 32
+                        },
+                        "signedness": {
+                          "Known": "Signed"
+                        },
+                        "scale": {
+                          "Known": 1
+                        },
+                        "literal_syntax": {
+                          "Partial": [
+                            "DecimalInteger"
+                          ]
+                        },
+                        "accepted_range": "Unresolved"
+                      }
+                    },
                     "scoped_operand": {
                       "Known": null
                     },
@@ -5642,7 +6066,28 @@
                       "outcome": {
                         "Read": {
                           "reader": {
-                            "numeric": "Unresolved",
+                            "numeric": {
+                              "Partial": {
+                                "representation": {
+                                  "Known": "Integer"
+                                },
+                                "width_bits": {
+                                  "Known": 32
+                                },
+                                "signedness": {
+                                  "Known": "Signed"
+                                },
+                                "scale": {
+                                  "Known": 1
+                                },
+                                "literal_syntax": {
+                                  "Partial": [
+                                    "DecimalInteger"
+                                  ]
+                                },
+                                "accepted_range": "Unresolved"
+                              }
+                            },
                             "scoped_operand": {
                               "Known": null
                             },
@@ -5696,7 +6141,29 @@
                       "outcome": {
                         "Read": {
                           "reader": {
-                            "numeric": "Unresolved",
+                            "numeric": {
+                              "Partial": {
+                                "representation": {
+                                  "Known": "Integer"
+                                },
+                                "width_bits": {
+                                  "Known": 64
+                                },
+                                "signedness": {
+                                  "Known": "Signed"
+                                },
+                                "scale": {
+                                  "Known": 100000
+                                },
+                                "literal_syntax": {
+                                  "Partial": [
+                                    "DecimalInteger",
+                                    "DecimalFraction"
+                                  ]
+                                },
+                                "accepted_range": "Unresolved"
+                              }
+                            },
                             "scoped_operand": {
                               "Known": null
                             },
@@ -7415,7 +7882,14 @@
                               }
                             ],
                             "members": "None",
-                            "domain": "Unknown",
+                            "domain": {
+                              "Listed": [
+                                "planet_distance_empire",
+                                "planets_in_country",
+                                "pop_amount",
+                                "pop_happiness"
+                              ]
+                            },
                             "uses": [],
                             "reference": "NotEstablished",
                             "entry_contexts": [],
@@ -7798,7 +8272,7 @@
                         "Known": null
                       },
                       "fixed_keys": {
-                        "Partial": [
+                        "Known": [
                           {
                             "name": "desc",
                             "reader": {
@@ -7899,10 +8373,10 @@
                                 {
                                   "condition": "Always",
                                   "target": "Triggers",
-                                  "stage": "Unresolved",
+                                  "stage": "WhileReading",
                                   "key_match": "Unresolved",
-                                  "empty_key": "Unresolved",
-                                  "on_missing": "Unresolved"
+                                  "empty_key": "LookedUp",
+                                  "on_missing": "ScriptedTriggerPlaceholder"
                                 }
                               ]
                             },
@@ -8484,7 +8958,23 @@
                               }
                             ],
                             "members": "None",
-                            "domain": "Unknown",
+                            "domain": {
+                              "Listed": [
+                                "add",
+                                "divide",
+                                "factor",
+                                "max",
+                                "min",
+                                "modulo",
+                                "mult",
+                                "multiply",
+                                "pow",
+                                "round_to",
+                                "set",
+                                "subtract",
+                                "weight"
+                              ]
+                            },
                             "uses": [],
                             "reference": "NotEstablished",
                             "entry_contexts": [],
@@ -9659,29 +10149,53 @@
       {
         "name": "is_dangerous",
         "reader": {
-          "numeric": "Unresolved",
-          "scoped_operand": "Unresolved",
-          "id": null,
-          "kind": "Unknown",
-          "family": "Unknown"
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "b894933b2b2853a5",
+          "kind": "Boolean",
+          "family": "NotApplicable"
         },
         "shape": {
-          "value": "Unknown",
+          "value": "Scalar",
           "repeat": "Unknown"
         },
         "read": [
           {
             "condition": "Always",
-            "outcome": "Unresolved"
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "b894933b2b2853a5",
+                  "kind": "Boolean",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Unknown"
+                }
+              }
+            }
           }
         ],
-        "members": "Unresolved",
+        "members": "None",
         "domain": "Unknown",
         "uses": [],
         "reference": "NotEstablished",
         "entry_contexts": [],
-        "read_scope": "Unresolved",
-        "accepted_categories": "Unresolved"
+        "read_scope": {
+          "Known": []
+        },
+        "accepted_categories": "NotApplicable"
       },
       {
         "name": "gateway",
@@ -9836,29 +10350,53 @@
                 {
                   "name": "name",
                   "reader": {
-                    "numeric": "Unresolved",
-                    "scoped_operand": "Unresolved",
-                    "id": null,
-                    "kind": "Unknown",
-                    "family": "Unknown"
+                    "numeric": {
+                      "Known": null
+                    },
+                    "scoped_operand": {
+                      "Known": null
+                    },
+                    "id": "6eccadf628e2e490",
+                    "kind": "Skipped",
+                    "family": "NotApplicable"
                   },
                   "shape": {
-                    "value": "Unknown",
+                    "value": "Any",
                     "repeat": "Unknown"
                   },
                   "read": [
                     {
                       "condition": "Always",
-                      "outcome": "Unresolved"
+                      "outcome": {
+                        "Read": {
+                          "reader": {
+                            "numeric": {
+                              "Known": null
+                            },
+                            "scoped_operand": {
+                              "Known": null
+                            },
+                            "id": "6eccadf628e2e490",
+                            "kind": "Skipped",
+                            "family": "NotApplicable"
+                          },
+                          "shape": {
+                            "value": "Any",
+                            "repeat": "Unknown"
+                          }
+                        }
+                      }
                     }
                   ],
-                  "members": "Unresolved",
+                  "members": "None",
                   "domain": "Unknown",
                   "uses": [],
                   "reference": "NotEstablished",
                   "entry_contexts": [],
-                  "read_scope": "Unresolved",
-                  "accepted_categories": "Unresolved"
+                  "read_scope": {
+                    "Known": []
+                  },
+                  "accepted_categories": "NotApplicable"
                 },
                 {
                   "name": "icon",
@@ -9906,35 +10444,61 @@
                   "uses": [],
                   "reference": "NotEstablished",
                   "entry_contexts": [],
-                  "read_scope": "Unresolved",
+                  "read_scope": {
+                    "Known": []
+                  },
                   "accepted_categories": "NotApplicable"
                 },
                 {
                   "name": "key",
                   "reader": {
-                    "numeric": "Unresolved",
-                    "scoped_operand": "Unresolved",
-                    "id": null,
-                    "kind": "Unknown",
-                    "family": "Unknown"
+                    "numeric": {
+                      "Known": null
+                    },
+                    "scoped_operand": {
+                      "Known": null
+                    },
+                    "id": "5efd8c15a1a0eca4",
+                    "kind": "String",
+                    "family": "NotApplicable"
                   },
                   "shape": {
-                    "value": "Unknown",
+                    "value": "Scalar",
                     "repeat": "Unknown"
                   },
                   "read": [
                     {
                       "condition": "Always",
-                      "outcome": "Unresolved"
+                      "outcome": {
+                        "Read": {
+                          "reader": {
+                            "numeric": {
+                              "Known": null
+                            },
+                            "scoped_operand": {
+                              "Known": null
+                            },
+                            "id": "5efd8c15a1a0eca4",
+                            "kind": "String",
+                            "family": "NotApplicable"
+                          },
+                          "shape": {
+                            "value": "Scalar",
+                            "repeat": "Unknown"
+                          }
+                        }
+                      }
                     }
                   ],
-                  "members": "Unresolved",
+                  "members": "None",
                   "domain": "Unknown",
                   "uses": [],
                   "reference": "NotEstablished",
                   "entry_contexts": [],
-                  "read_scope": "Unresolved",
-                  "accepted_categories": "Unresolved"
+                  "read_scope": {
+                    "Known": []
+                  },
+                  "accepted_categories": "NotApplicable"
                 },
                 {
                   "name": "data",
@@ -10048,7 +10612,9 @@
                   "uses": [],
                   "reference": "NotEstablished",
                   "entry_contexts": [],
-                  "read_scope": "Unresolved",
+                  "read_scope": {
+                    "Known": []
+                  },
                   "accepted_categories": "NotApplicable"
                 },
                 {
@@ -10097,7 +10663,9 @@
                   "uses": [],
                   "reference": "NotEstablished",
                   "entry_contexts": [],
-                  "read_scope": "Unresolved",
+                  "read_scope": {
+                    "Known": []
+                  },
                   "accepted_categories": "NotApplicable"
                 },
                 {
@@ -10146,7 +10714,9 @@
                   "uses": [],
                   "reference": "NotEstablished",
                   "entry_contexts": [],
-                  "read_scope": "Unresolved",
+                  "read_scope": {
+                    "Known": []
+                  },
                   "accepted_categories": "NotApplicable"
                 },
                 {
@@ -10195,7 +10765,9 @@
                   "uses": [],
                   "reference": "NotEstablished",
                   "entry_contexts": [],
-                  "read_scope": "Unresolved",
+                  "read_scope": {
+                    "Known": []
+                  },
                   "accepted_categories": "NotApplicable"
                 },
                 {
@@ -10310,7 +10882,9 @@
                   "uses": [],
                   "reference": "NotEstablished",
                   "entry_contexts": [],
-                  "read_scope": "Unresolved",
+                  "read_scope": {
+                    "Known": []
+                  },
                   "accepted_categories": "NotApplicable"
                 },
                 {
@@ -10359,7 +10933,9 @@
                   "uses": [],
                   "reference": "NotEstablished",
                   "entry_contexts": [],
-                  "read_scope": "Unresolved",
+                  "read_scope": {
+                    "Known": []
+                  },
                   "accepted_categories": "NotApplicable"
                 },
                 {
@@ -10408,7 +10984,9 @@
                   "uses": [],
                   "reference": "NotEstablished",
                   "entry_contexts": [],
-                  "read_scope": "Unresolved",
+                  "read_scope": {
+                    "Known": []
+                  },
                   "accepted_categories": "NotApplicable"
                 },
                 {
@@ -10470,29 +11048,53 @@
                 {
                   "name": "divide_over_pop_groups",
                   "reader": {
-                    "numeric": "Unresolved",
-                    "scoped_operand": "Unresolved",
-                    "id": null,
-                    "kind": "Unknown",
-                    "family": "Unknown"
+                    "numeric": {
+                      "Known": null
+                    },
+                    "scoped_operand": {
+                      "Known": null
+                    },
+                    "id": "b894933b2b2853a5",
+                    "kind": "Boolean",
+                    "family": "NotApplicable"
                   },
                   "shape": {
-                    "value": "Unknown",
+                    "value": "Scalar",
                     "repeat": "Unknown"
                   },
                   "read": [
                     {
                       "condition": "Always",
-                      "outcome": "Unresolved"
+                      "outcome": {
+                        "Read": {
+                          "reader": {
+                            "numeric": {
+                              "Known": null
+                            },
+                            "scoped_operand": {
+                              "Known": null
+                            },
+                            "id": "b894933b2b2853a5",
+                            "kind": "Boolean",
+                            "family": "NotApplicable"
+                          },
+                          "shape": {
+                            "value": "Scalar",
+                            "repeat": "Unknown"
+                          }
+                        }
+                      }
                     }
                   ],
-                  "members": "Unresolved",
+                  "members": "None",
                   "domain": "Unknown",
                   "uses": [],
                   "reference": "NotEstablished",
                   "entry_contexts": [],
-                  "read_scope": "Unresolved",
-                  "accepted_categories": "Unresolved"
+                  "read_scope": {
+                    "Known": []
+                  },
+                  "accepted_categories": "NotApplicable"
                 },
                 {
                   "name": "hide_from_country_list",
@@ -10540,7 +11142,9 @@
                   "uses": [],
                   "reference": "NotEstablished",
                   "entry_contexts": [],
-                  "read_scope": "Unresolved",
+                  "read_scope": {
+                    "Known": []
+                  },
                   "accepted_categories": "NotApplicable"
                 }
               ]
@@ -10620,7 +11224,9 @@
         "uses": [],
         "reference": "NotEstablished",
         "entry_contexts": [],
-        "read_scope": "Unresolved",
+        "read_scope": {
+          "Known": []
+        },
         "accepted_categories": {
           "Listed": [
             "Pops",
@@ -10757,7 +11363,28 @@
                 {
                   "name": "days",
                   "reader": {
-                    "numeric": "Unresolved",
+                    "numeric": {
+                      "Partial": {
+                        "representation": {
+                          "Known": "Integer"
+                        },
+                        "width_bits": {
+                          "Known": 32
+                        },
+                        "signedness": {
+                          "Known": "Signed"
+                        },
+                        "scale": {
+                          "Known": 1
+                        },
+                        "literal_syntax": {
+                          "Partial": [
+                            "DecimalInteger"
+                          ]
+                        },
+                        "accepted_range": "Unresolved"
+                      }
+                    },
                     "scoped_operand": {
                       "Known": null
                     },
@@ -10775,7 +11402,28 @@
                       "outcome": {
                         "Read": {
                           "reader": {
-                            "numeric": "Unresolved",
+                            "numeric": {
+                              "Partial": {
+                                "representation": {
+                                  "Known": "Integer"
+                                },
+                                "width_bits": {
+                                  "Known": 32
+                                },
+                                "signedness": {
+                                  "Known": "Signed"
+                                },
+                                "scale": {
+                                  "Known": 1
+                                },
+                                "literal_syntax": {
+                                  "Partial": [
+                                    "DecimalInteger"
+                                  ]
+                                },
+                                "accepted_range": "Unresolved"
+                              }
+                            },
                             "scoped_operand": {
                               "Known": null
                             },
@@ -10804,7 +11452,28 @@
                 {
                   "name": "months",
                   "reader": {
-                    "numeric": "Unresolved",
+                    "numeric": {
+                      "Partial": {
+                        "representation": {
+                          "Known": "Integer"
+                        },
+                        "width_bits": {
+                          "Known": 32
+                        },
+                        "signedness": {
+                          "Known": "Signed"
+                        },
+                        "scale": {
+                          "Known": 1
+                        },
+                        "literal_syntax": {
+                          "Partial": [
+                            "DecimalInteger"
+                          ]
+                        },
+                        "accepted_range": "Unresolved"
+                      }
+                    },
                     "scoped_operand": {
                       "Known": null
                     },
@@ -10822,7 +11491,28 @@
                       "outcome": {
                         "Read": {
                           "reader": {
-                            "numeric": "Unresolved",
+                            "numeric": {
+                              "Partial": {
+                                "representation": {
+                                  "Known": "Integer"
+                                },
+                                "width_bits": {
+                                  "Known": 32
+                                },
+                                "signedness": {
+                                  "Known": "Signed"
+                                },
+                                "scale": {
+                                  "Known": 1
+                                },
+                                "literal_syntax": {
+                                  "Partial": [
+                                    "DecimalInteger"
+                                  ]
+                                },
+                                "accepted_range": "Unresolved"
+                              }
+                            },
                             "scoped_operand": {
                               "Known": null
                             },
@@ -10851,7 +11541,28 @@
                 {
                   "name": "years",
                   "reader": {
-                    "numeric": "Unresolved",
+                    "numeric": {
+                      "Partial": {
+                        "representation": {
+                          "Known": "Integer"
+                        },
+                        "width_bits": {
+                          "Known": 32
+                        },
+                        "signedness": {
+                          "Known": "Signed"
+                        },
+                        "scale": {
+                          "Known": 1
+                        },
+                        "literal_syntax": {
+                          "Partial": [
+                            "DecimalInteger"
+                          ]
+                        },
+                        "accepted_range": "Unresolved"
+                      }
+                    },
                     "scoped_operand": {
                       "Known": null
                     },
@@ -10869,7 +11580,28 @@
                       "outcome": {
                         "Read": {
                           "reader": {
-                            "numeric": "Unresolved",
+                            "numeric": {
+                              "Partial": {
+                                "representation": {
+                                  "Known": "Integer"
+                                },
+                                "width_bits": {
+                                  "Known": 32
+                                },
+                                "signedness": {
+                                  "Known": "Signed"
+                                },
+                                "scale": {
+                                  "Known": 1
+                                },
+                                "literal_syntax": {
+                                  "Partial": [
+                                    "DecimalInteger"
+                                  ]
+                                },
+                                "accepted_range": "Unresolved"
+                              }
+                            },
                             "scoped_operand": {
                               "Known": null
                             },
@@ -10923,7 +11655,29 @@
                       "outcome": {
                         "Read": {
                           "reader": {
-                            "numeric": "Unresolved",
+                            "numeric": {
+                              "Partial": {
+                                "representation": {
+                                  "Known": "Integer"
+                                },
+                                "width_bits": {
+                                  "Known": 64
+                                },
+                                "signedness": {
+                                  "Known": "Signed"
+                                },
+                                "scale": {
+                                  "Known": 100000
+                                },
+                                "literal_syntax": {
+                                  "Partial": [
+                                    "DecimalInteger",
+                                    "DecimalFraction"
+                                  ]
+                                },
+                                "accepted_range": "Unresolved"
+                              }
+                            },
                             "scoped_operand": {
                               "Known": null
                             },
@@ -12642,7 +13396,14 @@
                               }
                             ],
                             "members": "None",
-                            "domain": "Unknown",
+                            "domain": {
+                              "Listed": [
+                                "planet_distance_empire",
+                                "planets_in_country",
+                                "pop_amount",
+                                "pop_happiness"
+                              ]
+                            },
                             "uses": [],
                             "reference": "NotEstablished",
                             "entry_contexts": [],
@@ -13025,7 +13786,7 @@
                         "Known": null
                       },
                       "fixed_keys": {
-                        "Partial": [
+                        "Known": [
                           {
                             "name": "desc",
                             "reader": {
@@ -13126,10 +13887,10 @@
                                 {
                                   "condition": "Always",
                                   "target": "Triggers",
-                                  "stage": "Unresolved",
+                                  "stage": "WhileReading",
                                   "key_match": "Unresolved",
-                                  "empty_key": "Unresolved",
-                                  "on_missing": "Unresolved"
+                                  "empty_key": "LookedUp",
+                                  "on_missing": "ScriptedTriggerPlaceholder"
                                 }
                               ]
                             },
@@ -13711,7 +14472,23 @@
                               }
                             ],
                             "members": "None",
-                            "domain": "Unknown",
+                            "domain": {
+                              "Listed": [
+                                "add",
+                                "divide",
+                                "factor",
+                                "max",
+                                "min",
+                                "modulo",
+                                "mult",
+                                "multiply",
+                                "pow",
+                                "round_to",
+                                "set",
+                                "subtract",
+                                "weight"
+                              ]
+                            },
                             "uses": [],
                             "reference": "NotEstablished",
                             "entry_contexts": [],
@@ -14946,83 +15723,155 @@
       {
         "name": "is_insight",
         "reader": {
-          "numeric": "Unresolved",
-          "scoped_operand": "Unresolved",
-          "id": null,
-          "kind": "Unknown",
-          "family": "Unknown"
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "b894933b2b2853a5",
+          "kind": "Boolean",
+          "family": "NotApplicable"
         },
         "shape": {
-          "value": "Unknown",
+          "value": "Scalar",
           "repeat": "Unknown"
         },
         "read": [
           {
             "condition": "Always",
-            "outcome": "Unresolved"
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "b894933b2b2853a5",
+                  "kind": "Boolean",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Unknown"
+                }
+              }
+            }
           }
         ],
-        "members": "Unresolved",
+        "members": "None",
         "domain": "Unknown",
         "uses": [],
         "reference": "NotEstablished",
         "entry_contexts": [],
-        "read_scope": "Unresolved",
-        "accepted_categories": "Unresolved"
+        "read_scope": {
+          "Known": []
+        },
+        "accepted_categories": "NotApplicable"
       },
       {
         "name": "is_custom_tech_1",
         "reader": {
-          "numeric": "Unresolved",
-          "scoped_operand": "Unresolved",
-          "id": null,
-          "kind": "Unknown",
-          "family": "Unknown"
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "b894933b2b2853a5",
+          "kind": "Boolean",
+          "family": "NotApplicable"
         },
         "shape": {
-          "value": "Unknown",
+          "value": "Scalar",
           "repeat": "Unknown"
         },
         "read": [
           {
             "condition": "Always",
-            "outcome": "Unresolved"
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "b894933b2b2853a5",
+                  "kind": "Boolean",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Unknown"
+                }
+              }
+            }
           }
         ],
-        "members": "Unresolved",
+        "members": "None",
         "domain": "Unknown",
         "uses": [],
         "reference": "NotEstablished",
         "entry_contexts": [],
-        "read_scope": "Unresolved",
-        "accepted_categories": "Unresolved"
+        "read_scope": {
+          "Known": []
+        },
+        "accepted_categories": "NotApplicable"
       },
       {
         "name": "is_custom_tech_3",
         "reader": {
-          "numeric": "Unresolved",
-          "scoped_operand": "Unresolved",
-          "id": null,
-          "kind": "Unknown",
-          "family": "Unknown"
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "b894933b2b2853a5",
+          "kind": "Boolean",
+          "family": "NotApplicable"
         },
         "shape": {
-          "value": "Unknown",
+          "value": "Scalar",
           "repeat": "Unknown"
         },
         "read": [
           {
             "condition": "Always",
-            "outcome": "Unresolved"
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "b894933b2b2853a5",
+                  "kind": "Boolean",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Unknown"
+                }
+              }
+            }
           }
         ],
-        "members": "Unresolved",
+        "members": "None",
         "domain": "Unknown",
         "uses": [],
         "reference": "NotEstablished",
         "entry_contexts": [],
-        "read_scope": "Unresolved",
-        "accepted_categories": "Unresolved"
+        "read_scope": {
+          "Known": []
+        },
+        "accepted_categories": "NotApplicable"
       }
     ],
     "completeness": "Partial",
@@ -15055,14 +15904,6 @@
         "kind": "UnresolvedReader",
         "subject": {
           "kind": "field",
-          "name": "start_tech"
-        },
-        "detail": "The field's alternatives do not establish one shared reader."
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "field",
           "name": "risk_event"
         },
         "detail": "The field's alternatives do not establish one shared reader."
@@ -15087,47 +15928,7 @@
         "kind": "UnresolvedReader",
         "subject": {
           "kind": "field",
-          "name": "unlocked"
-        },
-        "detail": "The field's alternatives do not establish one shared reader."
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "field",
-          "name": "hidden"
-        },
-        "detail": "The field's alternatives do not establish one shared reader."
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "field",
-          "name": "is_rare"
-        },
-        "detail": "The field's alternatives do not establish one shared reader."
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "field",
-          "name": "is_reverse_engineerable"
-        },
-        "detail": "The field's alternatives do not establish one shared reader."
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "field",
           "name": "mod_weight_if_group_picked"
-        },
-        "detail": "The field's alternatives do not establish one shared reader."
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "field",
-          "name": "is_dangerous"
         },
         "detail": "The field's alternatives do not establish one shared reader."
       },
@@ -15144,30 +15945,6 @@
         "subject": {
           "kind": "field",
           "name": "area"
-        },
-        "detail": "The field's alternatives do not establish one shared reader."
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "field",
-          "name": "is_insight"
-        },
-        "detail": "The field's alternatives do not establish one shared reader."
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "field",
-          "name": "is_custom_tech_1"
-        },
-        "detail": "The field's alternatives do not establish one shared reader."
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "field",
-          "name": "is_custom_tech_3"
         },
         "detail": "The field's alternatives do not establish one shared reader."
       },
@@ -15200,28 +15977,6 @@
         "subject": {
           "kind": "key_path",
           "path": [
-            "component_modifier",
-            "name"
-          ]
-        },
-        "detail": "The modifier block analysis stopped at modifier-name-reader."
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "key_path",
-          "path": [
-            "modifier",
-            "key"
-          ]
-        },
-        "detail": "The modifier block analysis stopped at reader-routing."
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "key_path",
-          "path": [
             "modifier",
             "description_parameters"
           ]
@@ -15262,53 +16017,58 @@
         "detail": "The modifier block analysis stopped at instruction."
       },
       {
-        "kind": "UnresolvedReader",
+        "kind": "UnresolvedPath",
         "subject": {
           "kind": "key_path",
           "path": [
             "modifier",
-            "divide_over_pop_groups"
+            "description_parameters"
           ]
         },
-        "detail": "The modifier block analysis stopped at reader-routing."
+        "detail": "read-scope: scope-argument"
       },
       {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "key_path",
-          "path": [
-            "modifier",
-            "name"
-          ]
-        },
-        "detail": "The modifier block analysis stopped at modifier-name-reader."
-      },
-      {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "field",
           "name": "weight"
         },
-        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "field",
+          "name": "weight"
+        },
+        "detail": "The binary-lexer input path of save games and network data is outside this method."
+      },
+      {
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "field",
           "name": "levels"
         },
-        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "field",
           "name": "risk"
         },
-        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "field",
+          "name": "risk"
+        },
+        "detail": "The binary-lexer input path of save games and network data is outside this method."
+      },
+      {
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -15316,26 +16076,42 @@
             "data"
           ]
         },
-        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "field",
           "name": "component_modifier"
         },
-        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "field",
+          "name": "component_modifier"
+        },
+        "detail": "The binary-lexer input path of save games and network data is outside this method."
+      },
+      {
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "field",
           "name": "cost_per_level"
         },
-        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "field",
+          "name": "cost_per_level"
+        },
+        "detail": "The binary-lexer input path of save games and network data is outside this method."
+      },
+      {
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -15343,10 +16119,10 @@
             "data"
           ]
         },
-        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -15354,27 +16130,23 @@
             "icon_frame"
           ]
         },
-        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "field",
           "name": "modifier"
         },
-        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
-          "kind": "key_path",
-          "path": [
-            "weight_modifier",
-            "modifier",
-            "weight"
-          ]
+          "kind": "field",
+          "name": "modifier"
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "The binary-lexer input path of save games and network data is outside this method."
       },
       {
         "kind": "OutsideMethod",
@@ -15386,19 +16158,19 @@
             "weight"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "weight_modifier",
             "modifier",
-            "min"
+            "weight"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -15410,19 +16182,19 @@
             "min"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "weight_modifier",
             "modifier",
-            "max"
+            "min"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -15434,19 +16206,19 @@
             "max"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "weight_modifier",
             "modifier",
-            "factor"
+            "max"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -15458,19 +16230,19 @@
             "factor"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "weight_modifier",
             "modifier",
-            "add"
+            "factor"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -15482,19 +16254,19 @@
             "add"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "weight_modifier",
             "modifier",
-            "set"
+            "add"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -15506,19 +16278,19 @@
             "set"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "weight_modifier",
             "modifier",
-            "mult"
+            "set"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -15530,19 +16302,19 @@
             "mult"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "weight_modifier",
             "modifier",
-            "subtract"
+            "mult"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -15554,19 +16326,19 @@
             "subtract"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "weight_modifier",
             "modifier",
-            "multiply"
+            "subtract"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -15578,19 +16350,19 @@
             "multiply"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "weight_modifier",
             "modifier",
-            "divide"
+            "multiply"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -15602,19 +16374,19 @@
             "divide"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "weight_modifier",
             "modifier",
-            "modulo"
+            "divide"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -15626,10 +16398,22 @@
             "modulo"
           ]
         },
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "weight_modifier",
+            "modifier",
+            "modulo"
+          ]
+        },
         "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -15638,7 +16422,7 @@
             "round_to"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
         "kind": "OutsideMethod",
@@ -15653,7 +16437,7 @@
         "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -15662,7 +16446,7 @@
             "pow"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
         "kind": "OutsideMethod",
@@ -15677,7 +16461,7 @@
         "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
-        "kind": "UnresolvedPath",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -15685,22 +16469,10 @@
             "scaled_modifier"
           ]
         },
-        "detail": "read-scope: zero-mask: the engine reads this block with scope mask 0."
+        "detail": "Read with scope mask 0; the engine checks the scope later, when it validates the block, which the method does not report."
       },
       {
-        "kind": "ReaderSemantics",
-        "subject": {
-          "kind": "key_path",
-          "path": [
-            "weight_modifier",
-            "scaled_modifier",
-            "calc"
-          ]
-        },
-        "detail": "The keyword domain is not established."
-      },
-      {
-        "kind": "UnresolvedPath",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -15709,10 +16481,10 @@
             "limit"
           ]
         },
-        "detail": "read-scope: zero-mask: the engine reads this block with scope mask 0."
+        "detail": "Read with scope mask 0; the engine checks the scope later, when it validates the block, which the method does not report."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -15721,10 +16493,22 @@
             "add"
           ]
         },
-        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "weight_modifier",
+            "scaled_modifier",
+            "add"
+          ]
+        },
+        "detail": "The binary-lexer input path of save games and network data is outside this method."
+      },
+      {
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -15733,10 +16517,22 @@
             "mul"
           ]
         },
-        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "weight_modifier",
+            "scaled_modifier",
+            "mul"
+          ]
+        },
+        "detail": "The binary-lexer input path of save games and network data is outside this method."
+      },
+      {
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -15745,10 +16541,22 @@
             "div"
           ]
         },
-        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "UnresolvedPath",
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "weight_modifier",
+            "scaled_modifier",
+            "div"
+          ]
+        },
+        "detail": "The binary-lexer input path of save games and network data is outside this method."
+      },
+      {
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -15756,10 +16564,10 @@
             "complex_trigger_modifier"
           ]
         },
-        "detail": "read-scope: zero-mask: the engine reads this block with scope mask 0."
+        "detail": "Read with scope mask 0; the engine checks the scope later, when it validates the block, which the method does not report."
       },
       {
-        "kind": "UnresolvedReader",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -15768,10 +16576,10 @@
             "parameters"
           ]
         },
-        "detail": "The value is read by the object that `trigger` stores."
+        "detail": "The value is read by the trigger that `trigger` names: a built-in trigger's form and grammar are its `command_grammar` answer, and a scripted trigger's are its parameter forms."
       },
       {
-        "kind": "ReaderSemantics",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -15780,10 +16588,10 @@
             "trigger"
           ]
         },
-        "detail": "A name that no trigger command has becomes a scripted-trigger placeholder; when the lookup runs and how it matches are not established."
+        "detail": "The name is matched by its lexer token; how the lexer matches a name is outside the method."
       },
       {
-        "kind": "UnresolvedPath",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -15792,22 +16600,10 @@
             "potential"
           ]
         },
-        "detail": "read-scope: zero-mask: the engine reads this block with scope mask 0."
+        "detail": "Read with scope mask 0; the engine checks the scope later, when it validates the block, which the method does not report."
       },
       {
-        "kind": "ReaderSemantics",
-        "subject": {
-          "kind": "key_path",
-          "path": [
-            "weight_modifier",
-            "complex_trigger_modifier",
-            "mode"
-          ]
-        },
-        "detail": "The keyword domain is not established."
-      },
-      {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -15816,10 +16612,22 @@
             "multiplier"
           ]
         },
-        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "weight_modifier",
+            "complex_trigger_modifier",
+            "multiplier"
+          ]
+        },
+        "detail": "The binary-lexer input path of save games and network data is outside this method."
+      },
+      {
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -15828,10 +16636,22 @@
             "min_value"
           ]
         },
-        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "weight_modifier",
+            "complex_trigger_modifier",
+            "min_value"
+          ]
+        },
+        "detail": "The binary-lexer input path of save games and network data is outside this method."
+      },
+      {
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -15840,10 +16660,22 @@
             "max_value"
           ]
         },
-        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "weight_modifier",
+            "complex_trigger_modifier",
+            "max_value"
+          ]
+        },
+        "detail": "The binary-lexer input path of save games and network data is outside this method."
+      },
+      {
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -15852,7 +16684,19 @@
             "mult"
           ]
         },
-        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "weight_modifier",
+            "complex_trigger_modifier",
+            "mult"
+          ]
+        },
+        "detail": "The binary-lexer input path of save games and network data is outside this method."
       },
       {
         "kind": "NumericConversion",
@@ -15863,7 +16707,18 @@
             "days"
           ]
         },
-        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+        "detail": "Numeric conversion is incomplete: a storage property, the accepted range or an engine conversion path is not established."
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "weight_modifier",
+            "days"
+          ]
+        },
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
         "kind": "NumericConversion",
@@ -15874,7 +16729,18 @@
             "months"
           ]
         },
-        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+        "detail": "Numeric conversion is incomplete: a storage property, the accepted range or an engine conversion path is not established."
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "weight_modifier",
+            "months"
+          ]
+        },
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
         "kind": "NumericConversion",
@@ -15885,7 +16751,18 @@
             "years"
           ]
         },
-        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+        "detail": "Numeric conversion is incomplete: a storage property, the accepted range or an engine conversion path is not established."
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "weight_modifier",
+            "years"
+          ]
+        },
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
         "kind": "NumericConversion",
@@ -15896,10 +16773,32 @@
             "factor"
           ]
         },
-        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+        "detail": "Numeric conversion is incomplete: a storage property, the accepted range or an engine conversion path is not established."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "weight_modifier",
+            "factor"
+          ]
+        },
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "weight_modifier",
+            "factor"
+          ]
+        },
+        "detail": "The binary-lexer input path of save games and network data is outside this method."
+      },
+      {
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -15907,18 +16806,18 @@
             "base"
           ]
         },
-        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "weight_modifier",
-            "weight"
+            "base"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "The binary-lexer input path of save games and network data is outside this method."
       },
       {
         "kind": "OutsideMethod",
@@ -15929,18 +16828,18 @@
             "weight"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "weight_modifier",
-            "min"
+            "weight"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -15951,18 +16850,18 @@
             "min"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "weight_modifier",
-            "max"
+            "min"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -15973,18 +16872,18 @@
             "max"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "weight_modifier",
-            "add"
+            "max"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -15995,18 +16894,18 @@
             "add"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "weight_modifier",
-            "set"
+            "add"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -16017,18 +16916,18 @@
             "set"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "weight_modifier",
-            "mult"
+            "set"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -16039,18 +16938,18 @@
             "mult"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "weight_modifier",
-            "subtract"
+            "mult"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -16061,18 +16960,18 @@
             "subtract"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "weight_modifier",
-            "multiply"
+            "subtract"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -16083,18 +16982,18 @@
             "multiply"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "weight_modifier",
-            "divide"
+            "multiply"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -16105,18 +17004,18 @@
             "divide"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "weight_modifier",
-            "modulo"
+            "divide"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -16127,10 +17026,21 @@
             "modulo"
           ]
         },
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "weight_modifier",
+            "modulo"
+          ]
+        },
         "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -16138,7 +17048,7 @@
             "round_to"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
         "kind": "OutsideMethod",
@@ -16152,7 +17062,7 @@
         "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -16160,7 +17070,7 @@
             "pow"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
         "kind": "OutsideMethod",
@@ -16174,24 +17084,20 @@
         "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "field",
           "name": "weight_modifier"
         },
-        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
-          "kind": "key_path",
-          "path": [
-            "ai_weight",
-            "modifier",
-            "weight"
-          ]
+          "kind": "field",
+          "name": "weight_modifier"
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "The binary-lexer input path of save games and network data is outside this method."
       },
       {
         "kind": "OutsideMethod",
@@ -16203,19 +17109,19 @@
             "weight"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "ai_weight",
             "modifier",
-            "min"
+            "weight"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -16227,19 +17133,19 @@
             "min"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "ai_weight",
             "modifier",
-            "max"
+            "min"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -16251,19 +17157,19 @@
             "max"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "ai_weight",
             "modifier",
-            "factor"
+            "max"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -16275,19 +17181,19 @@
             "factor"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "ai_weight",
             "modifier",
-            "add"
+            "factor"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -16299,19 +17205,19 @@
             "add"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "ai_weight",
             "modifier",
-            "set"
+            "add"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -16323,19 +17229,19 @@
             "set"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "ai_weight",
             "modifier",
-            "mult"
+            "set"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -16347,19 +17253,19 @@
             "mult"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "ai_weight",
             "modifier",
-            "subtract"
+            "mult"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -16371,19 +17277,19 @@
             "subtract"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "ai_weight",
             "modifier",
-            "multiply"
+            "subtract"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -16395,19 +17301,19 @@
             "multiply"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "ai_weight",
             "modifier",
-            "divide"
+            "multiply"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -16419,19 +17325,19 @@
             "divide"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "ai_weight",
             "modifier",
-            "modulo"
+            "divide"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -16443,10 +17349,22 @@
             "modulo"
           ]
         },
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "ai_weight",
+            "modifier",
+            "modulo"
+          ]
+        },
         "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -16455,7 +17373,7 @@
             "round_to"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
         "kind": "OutsideMethod",
@@ -16470,7 +17388,7 @@
         "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -16479,7 +17397,7 @@
             "pow"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
         "kind": "OutsideMethod",
@@ -16494,7 +17412,7 @@
         "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
-        "kind": "UnresolvedPath",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -16502,22 +17420,10 @@
             "scaled_modifier"
           ]
         },
-        "detail": "read-scope: zero-mask: the engine reads this block with scope mask 0."
+        "detail": "Read with scope mask 0; the engine checks the scope later, when it validates the block, which the method does not report."
       },
       {
-        "kind": "ReaderSemantics",
-        "subject": {
-          "kind": "key_path",
-          "path": [
-            "ai_weight",
-            "scaled_modifier",
-            "calc"
-          ]
-        },
-        "detail": "The keyword domain is not established."
-      },
-      {
-        "kind": "UnresolvedPath",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -16526,10 +17432,10 @@
             "limit"
           ]
         },
-        "detail": "read-scope: zero-mask: the engine reads this block with scope mask 0."
+        "detail": "Read with scope mask 0; the engine checks the scope later, when it validates the block, which the method does not report."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -16538,10 +17444,22 @@
             "add"
           ]
         },
-        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "ai_weight",
+            "scaled_modifier",
+            "add"
+          ]
+        },
+        "detail": "The binary-lexer input path of save games and network data is outside this method."
+      },
+      {
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -16550,10 +17468,22 @@
             "mul"
           ]
         },
-        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "ai_weight",
+            "scaled_modifier",
+            "mul"
+          ]
+        },
+        "detail": "The binary-lexer input path of save games and network data is outside this method."
+      },
+      {
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -16562,10 +17492,22 @@
             "div"
           ]
         },
-        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "UnresolvedPath",
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "ai_weight",
+            "scaled_modifier",
+            "div"
+          ]
+        },
+        "detail": "The binary-lexer input path of save games and network data is outside this method."
+      },
+      {
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -16573,10 +17515,10 @@
             "complex_trigger_modifier"
           ]
         },
-        "detail": "read-scope: zero-mask: the engine reads this block with scope mask 0."
+        "detail": "Read with scope mask 0; the engine checks the scope later, when it validates the block, which the method does not report."
       },
       {
-        "kind": "UnresolvedReader",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -16585,10 +17527,10 @@
             "parameters"
           ]
         },
-        "detail": "The value is read by the object that `trigger` stores."
+        "detail": "The value is read by the trigger that `trigger` names: a built-in trigger's form and grammar are its `command_grammar` answer, and a scripted trigger's are its parameter forms."
       },
       {
-        "kind": "ReaderSemantics",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -16597,10 +17539,10 @@
             "trigger"
           ]
         },
-        "detail": "A name that no trigger command has becomes a scripted-trigger placeholder; when the lookup runs and how it matches are not established."
+        "detail": "The name is matched by its lexer token; how the lexer matches a name is outside the method."
       },
       {
-        "kind": "UnresolvedPath",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -16609,22 +17551,10 @@
             "potential"
           ]
         },
-        "detail": "read-scope: zero-mask: the engine reads this block with scope mask 0."
+        "detail": "Read with scope mask 0; the engine checks the scope later, when it validates the block, which the method does not report."
       },
       {
-        "kind": "ReaderSemantics",
-        "subject": {
-          "kind": "key_path",
-          "path": [
-            "ai_weight",
-            "complex_trigger_modifier",
-            "mode"
-          ]
-        },
-        "detail": "The keyword domain is not established."
-      },
-      {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -16633,10 +17563,22 @@
             "multiplier"
           ]
         },
-        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "ai_weight",
+            "complex_trigger_modifier",
+            "multiplier"
+          ]
+        },
+        "detail": "The binary-lexer input path of save games and network data is outside this method."
+      },
+      {
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -16645,10 +17587,22 @@
             "min_value"
           ]
         },
-        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "ai_weight",
+            "complex_trigger_modifier",
+            "min_value"
+          ]
+        },
+        "detail": "The binary-lexer input path of save games and network data is outside this method."
+      },
+      {
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -16657,10 +17611,22 @@
             "max_value"
           ]
         },
-        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "ai_weight",
+            "complex_trigger_modifier",
+            "max_value"
+          ]
+        },
+        "detail": "The binary-lexer input path of save games and network data is outside this method."
+      },
+      {
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -16669,7 +17635,19 @@
             "mult"
           ]
         },
-        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "ai_weight",
+            "complex_trigger_modifier",
+            "mult"
+          ]
+        },
+        "detail": "The binary-lexer input path of save games and network data is outside this method."
       },
       {
         "kind": "NumericConversion",
@@ -16680,7 +17658,18 @@
             "days"
           ]
         },
-        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+        "detail": "Numeric conversion is incomplete: a storage property, the accepted range or an engine conversion path is not established."
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "ai_weight",
+            "days"
+          ]
+        },
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
         "kind": "NumericConversion",
@@ -16691,7 +17680,18 @@
             "months"
           ]
         },
-        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+        "detail": "Numeric conversion is incomplete: a storage property, the accepted range or an engine conversion path is not established."
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "ai_weight",
+            "months"
+          ]
+        },
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
         "kind": "NumericConversion",
@@ -16702,7 +17702,18 @@
             "years"
           ]
         },
-        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+        "detail": "Numeric conversion is incomplete: a storage property, the accepted range or an engine conversion path is not established."
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "ai_weight",
+            "years"
+          ]
+        },
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
         "kind": "NumericConversion",
@@ -16713,10 +17724,32 @@
             "factor"
           ]
         },
-        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+        "detail": "Numeric conversion is incomplete: a storage property, the accepted range or an engine conversion path is not established."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "ai_weight",
+            "factor"
+          ]
+        },
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "ai_weight",
+            "factor"
+          ]
+        },
+        "detail": "The binary-lexer input path of save games and network data is outside this method."
+      },
+      {
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -16724,18 +17757,18 @@
             "base"
           ]
         },
-        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "ai_weight",
-            "weight"
+            "base"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "The binary-lexer input path of save games and network data is outside this method."
       },
       {
         "kind": "OutsideMethod",
@@ -16746,18 +17779,18 @@
             "weight"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "ai_weight",
-            "min"
+            "weight"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -16768,18 +17801,18 @@
             "min"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "ai_weight",
-            "max"
+            "min"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -16790,18 +17823,18 @@
             "max"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "ai_weight",
-            "add"
+            "max"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -16812,18 +17845,18 @@
             "add"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "ai_weight",
-            "set"
+            "add"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -16834,18 +17867,18 @@
             "set"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "ai_weight",
-            "mult"
+            "set"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -16856,18 +17889,18 @@
             "mult"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "ai_weight",
-            "subtract"
+            "mult"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -16878,18 +17911,18 @@
             "subtract"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "ai_weight",
-            "multiply"
+            "subtract"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -16900,18 +17933,18 @@
             "multiply"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "ai_weight",
-            "divide"
+            "multiply"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -16922,18 +17955,18 @@
             "divide"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "ai_weight",
-            "modulo"
+            "divide"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -16944,10 +17977,21 @@
             "modulo"
           ]
         },
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "ai_weight",
+            "modulo"
+          ]
+        },
         "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -16955,7 +17999,7 @@
             "round_to"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
         "kind": "OutsideMethod",
@@ -16969,7 +18013,7 @@
         "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -16977,7 +18021,7 @@
             "pow"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
         "kind": "OutsideMethod",
@@ -16991,24 +18035,20 @@
         "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "field",
           "name": "ai_weight"
         },
-        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
-          "kind": "key_path",
-          "path": [
-            "cost",
-            "modifier",
-            "weight"
-          ]
+          "kind": "field",
+          "name": "ai_weight"
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "The binary-lexer input path of save games and network data is outside this method."
       },
       {
         "kind": "OutsideMethod",
@@ -17020,19 +18060,19 @@
             "weight"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "cost",
             "modifier",
-            "min"
+            "weight"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -17044,19 +18084,19 @@
             "min"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "cost",
             "modifier",
-            "max"
+            "min"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -17068,19 +18108,19 @@
             "max"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "cost",
             "modifier",
-            "factor"
+            "max"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -17092,19 +18132,19 @@
             "factor"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "cost",
             "modifier",
-            "add"
+            "factor"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -17116,19 +18156,19 @@
             "add"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "cost",
             "modifier",
-            "set"
+            "add"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -17140,19 +18180,19 @@
             "set"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "cost",
             "modifier",
-            "mult"
+            "set"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -17164,19 +18204,19 @@
             "mult"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "cost",
             "modifier",
-            "subtract"
+            "mult"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -17188,19 +18228,19 @@
             "subtract"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "cost",
             "modifier",
-            "multiply"
+            "subtract"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -17212,19 +18252,19 @@
             "multiply"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "cost",
             "modifier",
-            "divide"
+            "multiply"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -17236,19 +18276,19 @@
             "divide"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "cost",
             "modifier",
-            "modulo"
+            "divide"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -17260,10 +18300,22 @@
             "modulo"
           ]
         },
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "cost",
+            "modifier",
+            "modulo"
+          ]
+        },
         "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -17272,7 +18324,7 @@
             "round_to"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
         "kind": "OutsideMethod",
@@ -17287,7 +18339,7 @@
         "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -17296,7 +18348,7 @@
             "pow"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
         "kind": "OutsideMethod",
@@ -17311,7 +18363,7 @@
         "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
-        "kind": "UnresolvedPath",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -17319,22 +18371,10 @@
             "scaled_modifier"
           ]
         },
-        "detail": "read-scope: zero-mask: the engine reads this block with scope mask 0."
+        "detail": "Read with scope mask 0; the engine checks the scope later, when it validates the block, which the method does not report."
       },
       {
-        "kind": "ReaderSemantics",
-        "subject": {
-          "kind": "key_path",
-          "path": [
-            "cost",
-            "scaled_modifier",
-            "calc"
-          ]
-        },
-        "detail": "The keyword domain is not established."
-      },
-      {
-        "kind": "UnresolvedPath",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -17343,10 +18383,10 @@
             "limit"
           ]
         },
-        "detail": "read-scope: zero-mask: the engine reads this block with scope mask 0."
+        "detail": "Read with scope mask 0; the engine checks the scope later, when it validates the block, which the method does not report."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -17355,10 +18395,22 @@
             "add"
           ]
         },
-        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "cost",
+            "scaled_modifier",
+            "add"
+          ]
+        },
+        "detail": "The binary-lexer input path of save games and network data is outside this method."
+      },
+      {
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -17367,10 +18419,22 @@
             "mul"
           ]
         },
-        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "cost",
+            "scaled_modifier",
+            "mul"
+          ]
+        },
+        "detail": "The binary-lexer input path of save games and network data is outside this method."
+      },
+      {
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -17379,10 +18443,22 @@
             "div"
           ]
         },
-        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "UnresolvedPath",
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "cost",
+            "scaled_modifier",
+            "div"
+          ]
+        },
+        "detail": "The binary-lexer input path of save games and network data is outside this method."
+      },
+      {
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -17390,10 +18466,10 @@
             "complex_trigger_modifier"
           ]
         },
-        "detail": "read-scope: zero-mask: the engine reads this block with scope mask 0."
+        "detail": "Read with scope mask 0; the engine checks the scope later, when it validates the block, which the method does not report."
       },
       {
-        "kind": "UnresolvedReader",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -17402,10 +18478,10 @@
             "parameters"
           ]
         },
-        "detail": "The value is read by the object that `trigger` stores."
+        "detail": "The value is read by the trigger that `trigger` names: a built-in trigger's form and grammar are its `command_grammar` answer, and a scripted trigger's are its parameter forms."
       },
       {
-        "kind": "ReaderSemantics",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -17414,10 +18490,10 @@
             "trigger"
           ]
         },
-        "detail": "A name that no trigger command has becomes a scripted-trigger placeholder; when the lookup runs and how it matches are not established."
+        "detail": "The name is matched by its lexer token; how the lexer matches a name is outside the method."
       },
       {
-        "kind": "UnresolvedPath",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -17426,22 +18502,10 @@
             "potential"
           ]
         },
-        "detail": "read-scope: zero-mask: the engine reads this block with scope mask 0."
+        "detail": "Read with scope mask 0; the engine checks the scope later, when it validates the block, which the method does not report."
       },
       {
-        "kind": "ReaderSemantics",
-        "subject": {
-          "kind": "key_path",
-          "path": [
-            "cost",
-            "complex_trigger_modifier",
-            "mode"
-          ]
-        },
-        "detail": "The keyword domain is not established."
-      },
-      {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -17450,10 +18514,22 @@
             "multiplier"
           ]
         },
-        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "cost",
+            "complex_trigger_modifier",
+            "multiplier"
+          ]
+        },
+        "detail": "The binary-lexer input path of save games and network data is outside this method."
+      },
+      {
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -17462,10 +18538,22 @@
             "min_value"
           ]
         },
-        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "cost",
+            "complex_trigger_modifier",
+            "min_value"
+          ]
+        },
+        "detail": "The binary-lexer input path of save games and network data is outside this method."
+      },
+      {
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -17474,10 +18562,22 @@
             "max_value"
           ]
         },
-        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "cost",
+            "complex_trigger_modifier",
+            "max_value"
+          ]
+        },
+        "detail": "The binary-lexer input path of save games and network data is outside this method."
+      },
+      {
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -17486,7 +18586,19 @@
             "mult"
           ]
         },
-        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "cost",
+            "complex_trigger_modifier",
+            "mult"
+          ]
+        },
+        "detail": "The binary-lexer input path of save games and network data is outside this method."
       },
       {
         "kind": "NumericConversion",
@@ -17497,7 +18609,18 @@
             "days"
           ]
         },
-        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+        "detail": "Numeric conversion is incomplete: a storage property, the accepted range or an engine conversion path is not established."
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "cost",
+            "days"
+          ]
+        },
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
         "kind": "NumericConversion",
@@ -17508,7 +18631,18 @@
             "months"
           ]
         },
-        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+        "detail": "Numeric conversion is incomplete: a storage property, the accepted range or an engine conversion path is not established."
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "cost",
+            "months"
+          ]
+        },
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
         "kind": "NumericConversion",
@@ -17519,7 +18653,18 @@
             "years"
           ]
         },
-        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+        "detail": "Numeric conversion is incomplete: a storage property, the accepted range or an engine conversion path is not established."
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "cost",
+            "years"
+          ]
+        },
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
         "kind": "NumericConversion",
@@ -17530,10 +18675,32 @@
             "factor"
           ]
         },
-        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+        "detail": "Numeric conversion is incomplete: a storage property, the accepted range or an engine conversion path is not established."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "cost",
+            "factor"
+          ]
+        },
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "cost",
+            "factor"
+          ]
+        },
+        "detail": "The binary-lexer input path of save games and network data is outside this method."
+      },
+      {
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -17541,18 +18708,18 @@
             "base"
           ]
         },
-        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "cost",
-            "weight"
+            "base"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "The binary-lexer input path of save games and network data is outside this method."
       },
       {
         "kind": "OutsideMethod",
@@ -17563,18 +18730,18 @@
             "weight"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "cost",
-            "min"
+            "weight"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -17585,18 +18752,18 @@
             "min"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "cost",
-            "max"
+            "min"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -17607,18 +18774,18 @@
             "max"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "cost",
-            "add"
+            "max"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -17629,18 +18796,18 @@
             "add"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "cost",
-            "set"
+            "add"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -17651,18 +18818,18 @@
             "set"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "cost",
-            "mult"
+            "set"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -17673,18 +18840,18 @@
             "mult"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "cost",
-            "subtract"
+            "mult"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -17695,18 +18862,18 @@
             "subtract"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "cost",
-            "multiply"
+            "subtract"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -17717,18 +18884,18 @@
             "multiply"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "cost",
-            "divide"
+            "multiply"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -17739,18 +18906,18 @@
             "divide"
           ]
         },
-        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
             "cost",
-            "modulo"
+            "divide"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
         "kind": "OutsideMethod",
@@ -17761,10 +18928,21 @@
             "modulo"
           ]
         },
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "cost",
+            "modulo"
+          ]
+        },
         "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -17772,7 +18950,7 @@
             "round_to"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
         "kind": "OutsideMethod",
@@ -17786,7 +18964,7 @@
         "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "key_path",
           "path": [
@@ -17794,7 +18972,7 @@
             "pow"
           ]
         },
-        "detail": "Scoped literal conversion boundaries and overflow are incomplete."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
       },
       {
         "kind": "OutsideMethod",
@@ -17808,12 +18986,20 @@
         "detail": "Qualified scope and parameter grammar, reference lookup outcomes, and evaluated values remain outside this operand method."
       },
       {
-        "kind": "NumericConversion",
+        "kind": "OutsideMethod",
         "subject": {
           "kind": "field",
           "name": "cost"
         },
-        "detail": "Numeric conversion is incomplete: lexical boundaries, trailing text, accepted range, overflow and library-dependent behavior are not fully established."
+        "detail": "The platform scanner's own conversion of the token text (overflow, the characters it consumes, locale and library behavior) is outside this method."
+      },
+      {
+        "kind": "OutsideMethod",
+        "subject": {
+          "kind": "field",
+          "name": "cost"
+        },
+        "detail": "The binary-lexer input path of save games and network data is outside this method."
       },
       {
         "kind": "UnresolvedPath",
@@ -17835,23 +19021,7 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "field",
-          "name": "start_tech"
-        },
-        "detail": "read-scope: scope-argument"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "field",
           "name": "risk_event"
-        },
-        "detail": "read-scope: scope-argument"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "field",
-          "name": "component_modifier"
         },
         "detail": "read-scope: scope-argument"
       },
@@ -17875,47 +19045,7 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "field",
-          "name": "unlocked"
-        },
-        "detail": "read-scope: scope-argument"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "field",
-          "name": "hidden"
-        },
-        "detail": "read-scope: scope-argument"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "field",
-          "name": "is_rare"
-        },
-        "detail": "read-scope: scope-argument"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "field",
-          "name": "is_reverse_engineerable"
-        },
-        "detail": "read-scope: scope-argument"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "field",
           "name": "mod_weight_if_group_picked"
-        },
-        "detail": "read-scope: scope-argument"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "field",
-          "name": "is_dangerous"
         },
         "detail": "read-scope: scope-argument"
       },
@@ -17932,38 +19062,6 @@
         "subject": {
           "kind": "field",
           "name": "area"
-        },
-        "detail": "read-scope: scope-argument"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "field",
-          "name": "modifier"
-        },
-        "detail": "read-scope: scope-argument"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "field",
-          "name": "is_insight"
-        },
-        "detail": "read-scope: scope-argument"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "field",
-          "name": "is_custom_tech_1"
-        },
-        "detail": "read-scope: scope-argument"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "field",
-          "name": "is_custom_tech_3"
         },
         "detail": "read-scope: scope-argument"
       },
@@ -18002,7 +19100,7 @@
           "kind": "field",
           "name": "start_tech"
         },
-        "detail": "Repeat behavior and nested fields remain unresolved."
+        "detail": "Repeat behavior remains unresolved."
       },
       {
         "kind": "UnresolvedStorage",
@@ -18034,7 +19132,7 @@
           "kind": "field",
           "name": "unlocked"
         },
-        "detail": "Repeat behavior and nested fields remain unresolved."
+        "detail": "Repeat behavior remains unresolved."
       },
       {
         "kind": "UnresolvedStorage",
@@ -18042,7 +19140,7 @@
           "kind": "field",
           "name": "hidden"
         },
-        "detail": "Repeat behavior and nested fields remain unresolved."
+        "detail": "Repeat behavior remains unresolved."
       },
       {
         "kind": "UnresolvedStorage",
@@ -18050,7 +19148,7 @@
           "kind": "field",
           "name": "is_rare"
         },
-        "detail": "Repeat behavior and nested fields remain unresolved."
+        "detail": "Repeat behavior remains unresolved."
       },
       {
         "kind": "UnresolvedStorage",
@@ -18058,7 +19156,7 @@
           "kind": "field",
           "name": "is_reverse_engineerable"
         },
-        "detail": "Repeat behavior and nested fields remain unresolved."
+        "detail": "Repeat behavior remains unresolved."
       },
       {
         "kind": "UnresolvedStorage",
@@ -18074,7 +19172,7 @@
           "kind": "field",
           "name": "is_dangerous"
         },
-        "detail": "Repeat behavior and nested fields remain unresolved."
+        "detail": "Repeat behavior remains unresolved."
       },
       {
         "kind": "UnresolvedStorage",
@@ -18098,7 +19196,7 @@
           "kind": "field",
           "name": "is_insight"
         },
-        "detail": "Repeat behavior and nested fields remain unresolved."
+        "detail": "Repeat behavior remains unresolved."
       },
       {
         "kind": "UnresolvedStorage",
@@ -18106,7 +19204,7 @@
           "kind": "field",
           "name": "is_custom_tech_1"
         },
-        "detail": "Repeat behavior and nested fields remain unresolved."
+        "detail": "Repeat behavior remains unresolved."
       },
       {
         "kind": "UnresolvedStorage",
@@ -18114,13 +19212,13 @@
           "kind": "field",
           "name": "is_custom_tech_3"
         },
-        "detail": "Repeat behavior and nested fields remain unresolved."
+        "detail": "Repeat behavior remains unresolved."
       }
     ],
     "source": {
       "build": "c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b",
       "native_version": "0.1.0",
-      "method": "registry-fields/v24",
+      "method": "registry-fields/v33",
       "basis": "StaticAnalysis"
     }
   }
