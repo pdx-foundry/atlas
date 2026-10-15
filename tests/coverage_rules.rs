@@ -1561,8 +1561,23 @@ async fn event_kinds() -> SharedDirectory {
     event_kinds_against(EVENT_CONFIG).await
 }
 
-/// [`event_kinds`] against the config `sources`.
+/// [`event_kinds`] against the config `sources`, with the events loader's two naming forms as
+/// Native states them on M452.
 async fn event_kinds_against(sources: &[(&str, &str)]) -> SharedDirectory {
+    let names = serde_json::from_value(json!([
+        { "statement": { "RootKey": "namespace" }, "name": "Value" },
+        { "statement": "Root", "name": { "Field": "id" } },
+    ]))
+    .unwrap();
+
+    event_kinds_named(sources, pdx_native::GrammarProperty::Known(names)).await
+}
+
+/// [`event_kinds_against`] with the events loader's `definition_names` replaced by `names`.
+async fn event_kinds_named(
+    sources: &[(&str, &str)],
+    names: pdx_native::GrammarProperty<Vec<pdx_native::DefinitionForm>>,
+) -> SharedDirectory {
     use pdx_native::{
         Field, FieldMembers, FieldReadOutcome, GrammarProperty, ReadScope, ReaderKind,
     };
@@ -1649,18 +1664,11 @@ async fn event_kinds_against(sources: &[(&str, &str)]) -> SharedDirectory {
         extraction.fields.insert(registry.into(), Ok(answer));
     }
 
-    // The events loader's two naming forms, as Native states them on M452.
     let mut loader_rules = extraction.loader_rules[extraction::TRADITIONS]
         .as_ref()
         .unwrap()
         .clone();
-    loader_rules.value.definition_names = GrammarProperty::Known(
-        serde_json::from_value(json!([
-            { "statement": { "RootKey": "namespace" }, "name": "Value" },
-            { "statement": "Root", "name": { "Field": "id" } },
-        ]))
-        .unwrap(),
-    );
+    loader_rules.value.definition_names = names;
     extraction
         .loader_rules
         .insert("events".into(), Ok(loader_rules));
@@ -1710,6 +1718,13 @@ async fn event_kinds_credit_the_type_wide_definition_block() {
 
     assert!(events.covered("field_existence", &["event"]));
     assert!(events.covered("value_form", &["event"]));
+}
+
+#[tokio::test]
+async fn an_unresolved_naming_rule_leaves_the_event_kinds_credit() {
+    let events = event_kinds_named(EVENT_CONFIG, pdx_native::GrammarProperty::Unresolved).await;
+
+    assert!(events.covered("field_existence", &["event"]));
 }
 
 #[tokio::test]

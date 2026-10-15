@@ -932,11 +932,16 @@ fn definition_questions(
         .collect()
 }
 
-/// Whether a registry's `definition_names` answers the definition line of a type with `selector`.
-/// A statement type's definitions are answered by the statement itself (SDK-818), and a nested
-/// type's by its field.
-fn names_definition_line(selector: &Selector) -> bool {
-    matches!(selector, Selector::Root | Selector::RootKey { .. })
+/// Whether the `definition_names` of `registry` answers the definition line of a type with
+/// `selector`. The definitions of a statement's own type (SDK-818) and of the root type of the
+/// event kinds (SDK-815) are answered by the statements themselves, and a nested type's by its
+/// field.
+fn names_definition_line(registry: &str, selector: &Selector) -> bool {
+    match selector {
+        Selector::Root => !ROOT_STATEMENT_REGISTRIES.contains(&registry),
+        Selector::RootKey { .. } => true,
+        Selector::Nested(_) | Selector::Statement(_) | Selector::Unresolved(_) => false,
+    }
 }
 
 /// The claims of a type's definition line (`ship_size = { … }`), outside any subtype.
@@ -1075,7 +1080,7 @@ fn questions(
 
                 if field.is_none()
                     && property == "definition_names"
-                    && names_definition_line(selector)
+                    && names_definition_line(registry, selector)
                 {
                     questions.extend(definition_line_questions(
                         claims,
@@ -1153,21 +1158,20 @@ fn priority_questions(claims: &ClaimIndex<'_>, registry: &str) -> Vec<String> {
         .collect()
 }
 
-/// The naming-line questions that a `definition_names` rule answers, each with the form that
-/// names its type's definitions as the answer. A registry rule lists the root forms and answers
-/// the Root and RootKey types; a field rule holds one nested form and answers the nested type at
-/// that path.
+/// The questions that a `definition_names` rule answers: each naming line, with the form that
+/// names its type's definitions as the answer, and the definition line's existence, with `true`.
+/// A registry rule lists the root forms and answers the Root and RootKey types; a field rule
+/// holds one nested form and answers only the naming lines of the nested type at that path.
 fn naming_answers(
     claims: &ClaimIndex<'_>,
     selectors: &TypeSelectors<'_>,
     subject: &snapshot::Subject,
     answer: &Value,
 ) -> Vec<(String, Value)> {
-    let Some(types) = subject
-        .registry
-        .as_deref()
-        .and_then(|registry| selectors.directories.get(registry))
-    else {
+    let Some(registry) = subject.registry.as_deref() else {
+        return Vec::new();
+    };
+    let Some(types) = selectors.directories.get(registry) else {
         return Vec::new();
     };
 
@@ -1185,7 +1189,9 @@ fn naming_answers(
             // A root form names the type's definitions, so they exist; a known empty list names
             // none, which says nothing of whether the type has any.
             let definitions = match form {
-                Value::Object(_) if subject.field.is_none() && names_definition_line(selector) => {
+                Value::Object(_)
+                    if subject.field.is_none() && names_definition_line(registry, selector) =>
+                {
                     definition_line_questions(claims, type_name, file, "field_existence")
                 }
                 _ => Vec::new(),

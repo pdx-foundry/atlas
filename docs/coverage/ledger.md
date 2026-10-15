@@ -217,6 +217,7 @@ of the whole definition (`## push_scope`, `## replace_scopes`).
   is not in the answer, and a custom loader states nothing. A field of a definition shows that a
   block is accepted, not that every definition is one (a script value can be `x = 5`). So the
   line's `value_form` keeps a gap with that reason, except where a root statement answers it.
+  SDK-863 asks Native to state it.
 - **Scope.** Native states the scope of each block that a definition reads on that block's field,
   which answers the block's own scope claims. No answer states one scope for the whole definition,
   so the line's `push_scope` and `replace_scopes` keep a gap with that reason.
