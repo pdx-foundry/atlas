@@ -91,6 +91,7 @@ fn project_with_gap_facets(
         .iter()
         .map(|subject| (subject.id.as_str(), subject))
         .collect();
+    let subtype_claims = SubtypeClaims::new(ledger, rules, &subjects);
     let selectors = TypeSelectors::new(
         ledger,
         &registry_types,
@@ -171,6 +172,12 @@ fn project_with_gap_facets(
             .collect(),
             (None, _) => Vec::new(),
         };
+        let subtype_answers = match statement {
+            None if rule.conditions.is_empty() => {
+                subtype_claims.questions(&selectors, &command_files, subject, &rule.property, false)
+            }
+            _ => Vec::new(),
+        };
         let conditions = conditions.unwrap_or_else(|| rule.conditions.clone());
         if rule.conditions.is_empty() {
             answers.extend(
@@ -180,7 +187,7 @@ fn project_with_gap_facets(
                     .map(|question| (question, rule.answer.clone())),
             );
         }
-        if answers.is_empty() && unconditional.is_empty() {
+        if answers.is_empty() && unconditional.is_empty() && subtype_answers.is_empty() {
             answers.push((format!("atlas:{}", rule.id), rule.answer.clone()));
         }
         let mut evidence = Vec::new();
@@ -202,15 +209,19 @@ fn project_with_gap_facets(
                 origin: Origin::Engine,
             });
         }
+        let subtype_evidence = subtype_claims.evidence(&rule.subject, &evidence);
         let answers = answers
             .into_iter()
-            .map(|(question, value)| (question, conditions.clone(), value))
+            .map(|(question, value)| (question, conditions.clone(), value, &evidence))
             .chain(
                 unconditional
                     .into_iter()
-                    .map(|(question, value)| (question, Vec::new(), value)),
-            );
-        for (question, conditions, value) in answers {
+                    .map(|(question, value)| (question, Vec::new(), value, &evidence)),
+            )
+            .chain(subtype_answers.into_iter().map(|(question, conditions)| {
+                (question, conditions, rule.answer.clone(), &subtype_evidence)
+            }));
+        for (question, conditions, value, evidence) in answers {
             if let Some(gap) = selectors.selector_gap(&question, &conditions) {
                 projection.gaps.push(gap);
                 continue;
@@ -270,6 +281,16 @@ fn project_with_gap_facets(
         .into_iter()
         .map(|question| (question, conditions.clone()))
         .collect();
+        if statement.is_none() {
+            questions.extend(subtype_claims.questions(
+                &selectors,
+                &command_files,
+                subject,
+                &gap.property,
+                project_related_gap_facets,
+            ));
+        }
+
         let definition = match statement {
             Some(_) => definition_questions(
                 &claims,
@@ -1370,6 +1391,190 @@ fn subtypes(conditions: &[String]) -> impl Iterator<Item = &str> {
         .iter()
         .filter(|condition| condition.starts_with("subtype["))
         .map(String::as_str)
+}
+
+/// The claims under `subtype[…]` conditions that an always-read field answers (SDK-716). When
+/// every read alternative of a field has the condition `Always`, Native reads it the same way on
+/// every path, so its unconditioned existence, value form and maximum also hold under any subtype.
+/// A subtype can require a field or change its scope, so no other property reaches these claims.
+/// A subtype that a root key selects keeps the SDK-800 rule and takes nothing from this one.
+struct SubtypeClaims<'a> {
+    /// Each claim with a subtype condition, keyed by its path without the subtype segments and no
+    /// conditions, so [`questions`] finds it as it finds the unconditioned claim at that path.
+    index: ClaimIndex<'a>,
+    /// The conditions of each question in `index`.
+    conditions: BTreeMap<&'a str, &'a [String]>,
+    /// The subjects whose read alternatives all have the condition `Always`, each with whether
+    /// qualified evidence establishes that premise.
+    always_read: BTreeMap<&'a str, bool>,
+}
+
+impl<'a> SubtypeClaims<'a> {
+    /// The rule and gap properties whose unconditioned answer holds under any subtype. `reference`
+    /// and `nested_grammar` reach the value form only as gap facets.
+    const PROPERTIES: &'static [&'static str] = &[
+        "existence",
+        "value_form",
+        "value_form.unresolved",
+        "reference",
+        "nested_grammar",
+        "occurrences.maximum",
+        "repeat_behavior",
+    ];
+
+    fn new(
+        ledger: &'a Ledger,
+        rules: &'a snapshot::Snapshot,
+        subjects: &BTreeMap<&str, &snapshot::Subject>,
+    ) -> Self {
+        let root_key_subtypes: BTreeSet<_> = ledger
+            .claims
+            .iter()
+            .filter_map(|claim| match claim.subject.as_slice() {
+                [types, type_name, subtype, annotation]
+                    if types == "types" && annotation == "$annotation:type_key_filter" =>
+                {
+                    let name = subtype.strip_prefix("subtype[")?.strip_suffix(']')?;
+
+                    Some((claim.file.as_str(), type_name.as_str(), name))
+                }
+                _ => None,
+            })
+            .collect();
+        let file_types = super::file_types(ledger);
+        let mut index = ClaimIndex::new();
+        let mut conditions = BTreeMap::new();
+
+        for claim in &ledger.claims {
+            if claim.conditions.is_empty() {
+                continue;
+            }
+
+            let type_name = super::claim_type(claim, &file_types[&claim.file]);
+            let selected_by_root_key = type_name.is_some_and(|type_name| {
+                claim
+                    .conditions
+                    .iter()
+                    .flat_map(|condition| subtype_terms(condition))
+                    .any(|name| root_key_subtypes.contains(&(claim.file.as_str(), type_name, name)))
+            });
+
+            if selected_by_root_key {
+                continue;
+            }
+
+            let base_path = claim
+                .subject
+                .iter()
+                .map(String::as_str)
+                .filter(|segment| !segment.starts_with("subtype["))
+                .collect();
+
+            index
+                .entry((&claim.file, &claim.property, base_path, Vec::new()))
+                .or_default()
+                .insert(&claim.question);
+            conditions.insert(claim.question.as_str(), claim.conditions.as_slice());
+        }
+
+        Self {
+            index,
+            conditions,
+            always_read: always_read_fields(rules, subjects),
+        }
+    }
+
+    /// The subtype questions, with their conditions, that the unconditioned `property` of
+    /// `subject` answers; none unless `subject` is always read and `property` holds under any
+    /// subtype.
+    fn questions(
+        &self,
+        selectors: &TypeSelectors<'_>,
+        command_files: &BTreeMap<String, BTreeSet<String>>,
+        subject: &snapshot::Subject,
+        property: &str,
+        gap_facet: bool,
+    ) -> Vec<(String, Vec<String>)> {
+        if !self.always_read.contains_key(subject.id.as_str())
+            || !Self::PROPERTIES.contains(&property)
+        {
+            return Vec::new();
+        }
+
+        questions(
+            &self.index,
+            selectors,
+            command_files,
+            subject,
+            property,
+            &[],
+            gap_facet,
+        )
+        .into_iter()
+        .map(|question| {
+            let conditions = self.conditions[question.as_str()].to_vec();
+
+            (question, conditions)
+        })
+        .collect()
+    }
+
+    /// The evidence of a subtype answer of `subject`: the rule's own `evidence`, qualified only
+    /// when the always-read premise is qualified too, so a recorded premise earns no credit.
+    fn evidence(&self, subject: &str, evidence: &[Evidence]) -> Vec<Evidence> {
+        let premise_qualified = self.always_read.get(subject).copied().unwrap_or(false);
+
+        evidence
+            .iter()
+            .map(|evidence| Evidence {
+                qualified: evidence.qualified && premise_qualified,
+                ..evidence.clone()
+            })
+            .collect()
+    }
+}
+
+/// The subtype names that a `subtype[…]` condition tests, without negation: `subtype[a&!b]`
+/// tests `a` and `b`.
+fn subtype_terms(condition: &str) -> impl Iterator<Item = &str> {
+    condition
+        .strip_prefix("subtype[")
+        .and_then(|terms| terms.strip_suffix(']'))
+        .into_iter()
+        .flat_map(|terms| terms.split('&'))
+        .map(|term| term.trim_start_matches('!'))
+}
+
+/// The subjects whose `conditions` rule lists only `Always` alternatives, each with whether every
+/// source of that rule is qualified. A subject that Native marks conditional, such as the child
+/// of a conditional parent, is not read on every path, whatever its own alternatives.
+fn always_read_fields<'a>(
+    rules: &'a snapshot::Snapshot,
+    subjects: &BTreeMap<&str, &snapshot::Subject>,
+) -> BTreeMap<&'a str, bool> {
+    rules
+        .rules
+        .iter()
+        .filter(|rule| rule.property == "conditions" && rule.conditions.is_empty())
+        .filter(|rule| subjects[rule.subject.as_str()].conditional != Some(true))
+        .filter(|rule| {
+            rule.answer.as_array().is_some_and(|alternatives| {
+                !alternatives.is_empty() && alternatives.iter().all(|a| a == "Always")
+            })
+        })
+        .map(|rule| {
+            let qualified = !rule.evidence.is_empty()
+                && rule.evidence.iter().all(|link| {
+                    rules
+                        .answers
+                        .get(&link.answer)
+                        .and_then(|answer| rules.sources.get(&answer.source))
+                        .is_some_and(|source| source.basis != Basis::Recorded)
+                });
+
+            (rule.subject.as_str(), qualified)
+        })
+        .collect()
 }
 
 /// The blocks whose config entry is `alias_name[X] = alias_match_left[X]`. Each Native field in

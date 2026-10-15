@@ -24,6 +24,8 @@ struct SharedDirectory {
     ledger: ledger::Ledger,
     coverage: coverage::Report,
     comparison: coverage::comparison::Report,
+    /// The snapshot that was evaluated, qualified as live.
+    snapshot: snapshot::Snapshot,
 }
 
 impl SharedDirectory {
@@ -55,6 +57,7 @@ impl SharedDirectory {
             comparison: coverage::comparison::evaluate(&ledger, &bytes, &Default::default())
                 .unwrap(),
             ledger,
+            snapshot,
         }
     }
 
@@ -2106,4 +2109,315 @@ async fn an_unknown_requirement_keeps_the_minimum_gap() {
     let directory = required_agenda("1..1", None).await;
 
     assert!(!directory.covered("cardinality_minimum", &AGENDA_CARDINALITY));
+}
+
+/// A traditions config whose `unlocks_agenda` is written unconditioned and under subtypes of each
+/// selector form, beside a second type whose selector no Native answer identifies.
+const SUBTYPE_AGENDA: &str = r#"
+types = {
+    type[tradition] = {
+        path = "game/common/traditions"
+        subtype[special] = { is_special = yes }
+        ## type_key_filter = keyed_tradition
+        subtype[keyed] = {}
+        ## type_key_filter <> other_tradition
+        subtype[excluded] = {}
+        ## type_key_filter = { listed_tradition other_tradition }
+        subtype[listed] = {}
+        ## type_key_filter = gated_tradition
+        subtype[gated] = { is_special = yes }
+    }
+    ## type_key_filter = unknown_key
+    type[special_tradition] = {
+        path = "game/common/traditions"
+        subtype[special] = { is_special = yes }
+    }
+}
+tradition = {
+    ## cardinality = 0..1
+    ## push_scope = country
+    ## replace_scopes = { this = country }
+    unlocks_agenda = scalar
+    subtype[special] = {
+        ## cardinality = 0..1
+        ## push_scope = country
+        ## replace_scopes = { this = country }
+        unlocks_agenda = scalar
+        subtype[!keyed] = { unlocks_agenda = scalar }
+    }
+    subtype[!special] = { unlocks_agenda = scalar }
+    subtype[keyed] = { unlocks_agenda = scalar }
+    subtype[excluded] = { unlocks_agenda = scalar }
+    subtype[listed] = { unlocks_agenda = scalar }
+    subtype[gated] = { unlocks_agenda = scalar }
+    subtype[special&!keyed] = { unlocks_agenda = scalar }
+}
+special_tradition = { subtype[special] = { unlocks_agenda = scalar } }
+"#;
+
+/// [`SUBTYPE_AGENDA`] against the recorded answers, where `unlocks_agenda` has every rule that the
+/// subtype rule can carry and no gap, then changed by `edit` and qualified as live.
+async fn subtype_agenda(edit: impl FnOnce(&mut snapshot::Snapshot)) -> SharedDirectory {
+    SharedDirectory::evaluate(&[("traditions.cwt", SUBTYPE_AGENDA)], |snapshot| {
+        let conditions = snapshot
+            .rules
+            .iter()
+            .find(|rule| rule.id == format!("{UNLOCKS_AGENDA}#conditions"))
+            .unwrap();
+
+        assert_eq!(conditions.answer, json!(["Always"]));
+
+        for property in ["reference", "occurrences.maximum"] {
+            snapshot
+                .gaps
+                .retain(|gap| gap.id != format!("{UNLOCKS_AGENDA}#{property}"));
+        }
+
+        establish(
+            snapshot,
+            UNLOCKS_AGENDA,
+            "repeat_behavior",
+            json!("Replace"),
+        );
+        establish(snapshot, UNLOCKS_AGENDA, "occurrences.minimum", json!(0));
+        establish(snapshot, UNLOCKS_AGENDA, "read_scope", json!(["country"]));
+        establish(
+            snapshot,
+            UNLOCKS_AGENDA,
+            "scope_context",
+            json!({"this": "country"}),
+        );
+        edit(snapshot);
+    })
+    .await
+}
+
+/// The `unlocks_agenda` subject of `root` under `subtypes`, with `annotation` when given.
+fn agenda_under<'a>(
+    root: &'a str,
+    subtypes: &[&'a str],
+    annotation: Option<&'a str>,
+) -> Vec<&'a str> {
+    let mut subject = vec![root];
+
+    subject.extend(subtypes);
+    subject.push("unlocks_agenda");
+    subject.extend(annotation);
+
+    subject
+}
+
+/// The field, value-form and maximum claims of `unlocks_agenda` in `tradition` under `subtypes`.
+fn subtype_independent_claims<'a>(subtypes: &[&'a str]) -> [(&'static str, Vec<&'a str>); 3] {
+    [
+        ("field_existence", agenda_under("tradition", subtypes, None)),
+        ("value_form", agenda_under("tradition", subtypes, None)),
+        (
+            "cardinality_maximum",
+            agenda_under("tradition", subtypes, Some("$annotation:cardinality")),
+        ),
+    ]
+}
+
+#[tokio::test]
+async fn an_always_read_field_answers_its_subtype_existence_form_and_maximum() {
+    let directory = subtype_agenda(|_| {}).await;
+
+    for subtypes in [&[][..], &["subtype[special]"]] {
+        for (property, subject) in subtype_independent_claims(subtypes) {
+            assert!(
+                directory.covered(property, &subject),
+                "{property} {subtypes:?}"
+            );
+        }
+    }
+
+    let negated = agenda_under("tradition", &["subtype[!special]"], None);
+
+    assert!(directory.covered("field_existence", &negated));
+    assert!(directory.covered("value_form", &negated));
+}
+
+#[tokio::test]
+async fn a_field_written_only_under_a_subtype_is_not_atlas_only() {
+    let source = r#"
+types = {
+    type[tradition] = {
+        path = "game/common/traditions"
+        subtype[special] = { is_special = yes }
+    }
+}
+tradition = { subtype[special] = { unlocks_agenda = scalar } }
+"#;
+    let directory = SharedDirectory::evaluate(&[("traditions.cwt", source)], |_| {}).await;
+    let existence = format!("atlas:{UNLOCKS_AGENDA}#existence");
+
+    assert!(directory.covered(
+        "field_existence",
+        &agenda_under("tradition", &["subtype[special]"], None)
+    ));
+    assert!(!directory.coverage.atlas_only_questions.contains(&existence));
+}
+
+#[tokio::test]
+async fn a_field_with_a_conditional_alternative_answers_no_subtype_claim() {
+    let directory = subtype_agenda(|snapshot| {
+        set_rule(
+            snapshot,
+            UNLOCKS_AGENDA,
+            "conditions",
+            json!(["Always", {"FieldZero": {"path": ["is_special"], "zero": false}}]),
+        );
+    })
+    .await;
+
+    for (property, subject) in subtype_independent_claims(&[]) {
+        assert!(directory.covered(property, &subject), "{property}");
+    }
+
+    for (property, subject) in subtype_independent_claims(&["subtype[special]"]) {
+        assert!(!directory.covered(property, &subject), "{property}");
+    }
+}
+
+#[tokio::test]
+async fn a_field_that_native_marks_conditional_answers_no_subtype_claim() {
+    let directory = subtype_agenda(|snapshot| {
+        let subject = snapshot
+            .subjects
+            .iter_mut()
+            .find(|subject| subject.id == UNLOCKS_AGENDA)
+            .unwrap();
+
+        subject.conditional = Some(true);
+    })
+    .await;
+
+    for (property, subject) in subtype_independent_claims(&[]) {
+        assert!(directory.covered(property, &subject), "{property}");
+    }
+
+    for (property, subject) in subtype_independent_claims(&["subtype[special]"]) {
+        assert!(!directory.covered(property, &subject), "{property}");
+    }
+}
+
+#[tokio::test]
+async fn a_recorded_always_read_premise_earns_no_subtype_credit() {
+    let ledger = ledger::inventory(&BTreeMap::from([(
+        "traditions.cwt".into(),
+        SUBTYPE_AGENDA.into(),
+    )]));
+    let mut snapshot = subtype_agenda(|_| {}).await.snapshot;
+    let conditions = snapshot
+        .rules
+        .iter_mut()
+        .find(|rule| rule.id == format!("{UNLOCKS_AGENDA}#conditions"))
+        .unwrap();
+    let link = &mut conditions.evidence[0];
+    let mut answer = snapshot.answers[&link.answer].clone();
+    let mut source = snapshot.sources[&answer.source].clone();
+
+    let recorded = format!("{}@recorded", source.method);
+
+    source.basis = Basis::Recorded;
+    answer.source = recorded.clone();
+    link.answer = "recorded-premise".into();
+    conditions.evidence.truncate(1);
+    snapshot.sources.insert(recorded, source);
+    snapshot.answers.insert("recorded-premise".into(), answer);
+
+    let bytes = snapshot::json_bytes(&snapshot).unwrap();
+    let directory = SharedDirectory {
+        coverage: coverage::evaluate(&ledger, Some(&bytes)).unwrap(),
+        comparison: coverage::comparison::evaluate(&ledger, &bytes, &Default::default()).unwrap(),
+        ledger,
+        snapshot,
+    };
+
+    for (property, subject) in subtype_independent_claims(&[]) {
+        assert!(directory.covered(property, &subject), "{property}");
+    }
+
+    for (property, subject) in subtype_independent_claims(&["subtype[special]"]) {
+        assert!(!directory.covered(property, &subject), "{property}");
+    }
+}
+
+#[tokio::test]
+async fn a_subtype_minimum_and_scope_stay_uncredited() {
+    let directory = subtype_agenda(|_| {}).await;
+
+    for (property, annotation) in [
+        ("cardinality_minimum", "$annotation:cardinality"),
+        ("scope_context", "$annotation:push_scope"),
+        ("scope_context", "$annotation:replace_scopes"),
+    ] {
+        let unconditioned = agenda_under("tradition", &[], Some(annotation));
+        let conditioned = agenda_under("tradition", &["subtype[special]"], Some(annotation));
+
+        assert!(directory.covered(property, &unconditioned), "{annotation}");
+        assert!(!directory.covered(property, &conditioned), "{annotation}");
+    }
+}
+
+#[tokio::test]
+async fn a_subtype_that_a_root_key_selects_takes_no_always_read_credit() {
+    let directory = subtype_agenda(|_| {}).await;
+
+    for subtypes in [
+        &["subtype[keyed]"][..],
+        &["subtype[excluded]"],
+        &["subtype[listed]"],
+        &["subtype[gated]"],
+        &["subtype[special]", "subtype[!keyed]"],
+        &["subtype[special&!keyed]"],
+    ] {
+        let subject = agenda_under("tradition", subtypes, None);
+
+        assert!(
+            !directory.covered("field_existence", &subject),
+            "{subtypes:?}"
+        );
+    }
+}
+
+#[tokio::test]
+async fn an_unresolved_selector_blocks_the_subtype_claims_of_its_type() {
+    let directory = subtype_agenda(|_| {}).await;
+    let subject = agenda_under("special_tradition", &["subtype[special]"], None);
+
+    assert!(!directory.covered("field_existence", &subject));
+    assert!(
+        directory
+            .gaps("field_existence", &subject)
+            .iter()
+            .any(|gap| gap.contains("type_key_filter = unknown_key"))
+    );
+}
+
+#[tokio::test]
+async fn an_unconditioned_gap_blocks_the_same_subtype_claim() {
+    for (gap, property, compared) in [
+        ("existence", "field_existence", true),
+        ("value_form.unresolved", "value_form", true),
+        ("reference", "value_form", false),
+        ("nested_grammar", "value_form", false),
+        ("occurrences.maximum", "cardinality_maximum", true),
+    ] {
+        let directory = subtype_agenda(|snapshot| unresolve(snapshot, UNLOCKS_AGENDA, gap)).await;
+
+        for (claim_property, subject) in subtype_independent_claims(&["subtype[special]"]) {
+            if claim_property != property {
+                continue;
+            }
+
+            assert!(!directory.covered(property, &subject), "{gap}");
+            assert_eq!(
+                directory.gaps(property, &subject).is_empty(),
+                !compared,
+                "{gap}"
+            );
+        }
+    }
 }

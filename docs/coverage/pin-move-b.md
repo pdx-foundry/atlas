@@ -178,8 +178,8 @@ The [event exceptions](milestone-5.md#events) are otherwise unchanged: the field
 
 After the capture, SDK-860 credits the existence of 164 definition lines over the same snapshot
 ([rule](ledger.md#definition-lines-sdk-860)), 158 of them in the gate: 152 of `named` types and 6
-of `several_types_in_directory`. No claim loses coverage. The gate is 6,253 / 18,228 (34.30%)
-and the headline 27,261 / 58,032 (46.975806%). The definition lines' block forms and their 28
+of `several_types_in_directory`. No claim loses coverage. With the SDK-716 subtype rule, the gate
+is 6,799 / 18,008 (37.76%) and the headline 27,807 / 57,807 (48.103171%). The definition lines' block forms and their 28
 definition-wide scopes keep a gap with the reason that no Native answer states them.
 
 ## Native rates
