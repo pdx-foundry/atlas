@@ -22,7 +22,7 @@ mode starts the game for the tradition fixtures and once more to read the loaded
 it exits 2 if an answer is missing or a game session did not confirm disposal. A registry that
 Native answers `Unsupported` is a gap, not a missing answer.
 Recorded answers keep their recorded basis and earn no current-engine coverage credit. The [version-2 schema](docs/contract/rule-snapshot-v2.schema.json)
-describes the snapshot. The [Milestone 5 capture](docs/coverage/milestone-5.md) records the current pin, the sweep's rates and coverage, after the [pin move A](docs/coverage/pin-move-a.md) and [Milestone 4](docs/coverage/milestone-4.md) captures; the [unowned gap triage](docs/coverage/gap-triage.md) gives each gap without an owner its failure shape and disposition; [the language snapshot measurement](docs/coverage/language-snapshot.md)
+describes the snapshot. The [pin move B capture](docs/coverage/pin-move-b.md) records the current pin and its coverage and rates, after the [Milestone 5 sweep](docs/coverage/milestone-5.md), [pin move A](docs/coverage/pin-move-a.md) and [Milestone 4](docs/coverage/milestone-4.md) captures; the [unowned gap triage](docs/coverage/gap-triage.md) gives each gap without an owner its failure shape and disposition; [the language snapshot measurement](docs/coverage/language-snapshot.md)
 states what it establishes and what stays a gap. The [shared-reader measurement](docs/coverage/shared-readers.md)
 records the first Milestone 4 capture and its historical baseline. The historical caller's findings and original source remain in the
 preserved Native evidence bundle; the production tests cover its recorded-answer and fixture cases.
@@ -47,7 +47,7 @@ from `origin/main`), with each claim that lost coverage. Run `compare` and `regi
 output folder first to add agreement with the config, a list of each disagreement (config answer beside Atlas's) and each type's registry join; a report of
 another config or snapshot is left out with a warning. A PR that changes coverage copies the new
 `covered-claims.txt` into `docs/coverage/`. The committed baseline is the live snapshot of the
-[Milestone 5 capture](docs/coverage/milestone-5.md) with the SDK-815 join (24,460 claims).
+[pin move B capture](docs/coverage/pin-move-b.md) (27,097 claims).
 
 The [registry comparison](docs/coverage/registries.md) puts Native's registry list beside the
 config types and records a reason for each type that no registry names:
@@ -75,7 +75,7 @@ It writes `comparison.json` with one entry per config claim plus Atlas-only ques
 contain both answers where available and report `same`, `different`, `missing_from_atlas`, or
 `atlas_only`. Gaps keep their reasons and count as missing answers. Only the directly comparable
 properties (presence, loader path and the other loader lines of a type, `overrides.cwt`
-priorities, basic value form, numeric cardinality bounds, and the `push_scope` of an event kind) can be marked
+priorities, basic value form, numeric cardinality bounds, enum members, and the `push_scope` of an event kind) can be marked
 the same or different; an unmapped property is reported as missing a comparable answer with its
 raw Atlas answer retained. This report does not change coverage. A difference calls for review; it
 does not establish which source is correct. The command exits 2 if config diagnostics remain.

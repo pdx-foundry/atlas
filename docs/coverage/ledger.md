@@ -126,10 +126,13 @@ and `base_type` lines; Native never reads a selector.
   without conditions. That rule answers the type's `type_existence`, and the registry's
   `loader_path` rule answers its `path`. Other registry and field rules do not reach the type,
   and its naming lines join no derived name: Native's derived names describe the owner's items.
+- A type that a root key selects whose key Native answers as a root statement of its own is
+  answered through that statement ([below](#root-statements-of-their-own-type-sdk-818)).
 - Every other type keeps a gap on each of its questions that names its selector, such as
   "The type is selected by `type_key_filter = namespace`; no Native answer identifies it". This
   covers a type that a root key selects (`event_namespace`, whose definitions are `namespace = x`
-  scalars with `name_field = "-"`; `diplo_phrase_greetings`; the `random_list` types), a
+  scalars with `name_field = "-"`; `diplo_phrase_greetings`; the `random_list` types other than
+  `planet_class_random_list`), a
   `type_key_filter` list, a type
   inside a wrapper key with no nested base (`species_named_list` with `skip_root_key =
   named_lists`), a nested type whose field Native does not establish, and a second type with no
@@ -171,6 +174,49 @@ config does not list stays Atlas-only, and a config key that Native does not lis
 Two blocks that use one alias both answer it, and an applicable gap of either blocks the credit.
 On M452 every pre_trigger key keeps Native's unresolved reader, so these claims stay gaps until
 Native establishes the value reader.
+
+### Root statements of their own type (SDK-818)
+
+Native answers `random_list` in `common/planet_classes` as a root field that is a root statement,
+not a member of a planet class: its members are the fields of `CPlanetClassRandomList` (Native's
+`registry-fields.md`, "Root-key owners (SDK-813)"). In the list of such (registry, key) pairs in
+`projection.rs`, and only there, the type whose selector is `type_key_filter = KEY` with no
+`skip_root_key` takes its answers from the statement, when Native establishes the statement's
+existence without conditions:
+
+- The statement's existence answers the type's `type_existence`, and its existence and value form
+  answer the type's definition block (`planet_class_random_list = { … }`).
+- Its path below the key answers the type's fields: `random_list/name` answers
+  `planet_class_random_list/name`.
+- Registry rules (`loader_path`, `extension`, `recursion`) reach the type as they reach the root
+  type; `definition_names` reaches it only through a `RootKey(KEY)` form. The registry's own
+  existence does not answer the type's existence.
+- No other root type of the directory takes the statement or its fields: a planet class has no
+  `random_list` member. This holds when the type is alone in its directory, too.
+
+Extend the list only when Native answers another root key as a statement of its own.
+
+### Enum domains (SDK-818)
+
+Native's `Field.domain` lists the names that a keyword field accepts (`Listed`, SDK-828), or is
+`Unknown`. A `Listed` domain is the rule `domain`, and the field's value form is
+`{"form": "keyword", "names": […]}`; an `Unknown` domain is a `domain` gap, and a keyword reader
+without a domain keeps its value-form gap. When the config value of the field that a rule or gap
+joins is exactly `enum[X]`, the `domain` rule answers each `enum_member` claim of `enum[X]`, in
+every file that lists it: `true` when the field accepts the member's name, `false` otherwise. The
+answers have no conditions, since an enum holds wherever it is used. A `domain` gap on any field
+whose config value names `enum[X]` blocks the credit of every member, and two fields with different
+domains are conflicting answers. The comparison report compares a member's answer with `true`:
+the config lists it as accepted.
+
+### Required fields (SDK-818)
+
+Native's `Field.requirement` says whether loading a definition without the field logs a report of
+its absence (Native's `registry-fields.md`, "Required fields"). `Required` is the rule
+`occurrences.minimum = 1` and `Optional` is `0`; `Unknown` keeps the gap. The rule answers the
+field's `cardinality_minimum` claim. A requirement gives presence, not a count, so `Required` does
+not answer a config minimum above 1: that claim keeps the gap "Native establishes that a
+definition must contain this field, not a count above 1". `Optional` answers every minimum.
 
 ### Loader rules (SDK-797)
 
@@ -346,13 +392,13 @@ reported, not a maximum chain length: a terminal self-link can continue beyond t
 remain gaps. A resolved alternative does not cover another site's Native gap.
 
 [The independent-check ledger](entry-scope-checks.json) records the comparison for
-`callbacks/v4` on M452: 234 of 294 on_actions agree with the vanilla scope comments, and 201 of
+`callbacks/v5` on M452: 238 of 294 on_actions agree with the vanilla scope comments, and 201 of
 223 game rules agree with the config `replace_scopes`. It names all 18 confirmed disagreements
-and all 34 names with no independent source, with stable reasons. The sources are SDK-608's
-hand checks (carried by SDK-704 and SDK-625), SDK-799 and Native's
+and all 35 names with no independent source, with stable reasons. The sources are SDK-608's
+hand checks (carried by SDK-704 and SDK-625), SDK-799, SDK-818 and Native's
 `docs/native/engine-commands.md`, “On_actions, game rules and their entry scopes”. The self-link
 rule remains an assumption. These checks apply only to the exact recorded build and
-`callbacks/v4`; comments and config never feed Native's extraction. Carry them to a later build or
+`callbacks/v5`; comments and config never feed Native's extraction. Carry them to a later build or
 method only after the same check; otherwise the gate drops them, and the names without an
 independent source lose their gap.
 
@@ -383,12 +429,29 @@ SDK-799 changed these results from `callbacks/v2`:
   config. 14 agree. `is_seeded` is a new confirmed disagreement: `CGameRules::IsSeeded` builds a
   fresh scope and sets only the fleet, so script sees no `from`, and vanilla does not read it.
 
+SDK-818 carried the checks from `callbacks/v4` to `callbacks/v5` (SDK-812; SDK-823's path joins).
+No game rule answer changed. 16 on_action answers changed, and only gained contexts:
+
+- Five that had no context now agree: `on_building_ruined`, `on_colony_attackers_win`,
+  `on_colony_defenders_lose`, `on_entering_war` (its `From` comment names a role) and
+  `on_pop_purged`.
+- `on_colony_destroyed_by_bombardment`, `on_colony_zero_pops` and
+  `on_colony_zero_pops_ground_combat` gain a context with a fleet as fromfrom, which their comments
+  do not name; they still agree. `on_resolution_passed` gains a context and keeps no independent
+  source.
+- `on_monthly_pulse_country` gains an unresolved context, so it no longer agrees.
+- The four debris names and `on_ship_quantum_catapult` now reach the call site that their comment
+  describes, and Native follows another site that the comment does not describe (no science ship;
+  no second system). They move to a group of their own with no independent source.
+- `on_gaining_station_control` gains its first context, a ship from a planet. Its comment's
+  `station` names no scope type, so it has no independent source.
+
 The confirmed disagreements remain engine answers: ten game rules have no `from` despite the
 config; two pass `colony` where config says `planet`; `dismiss_leader_cost` evaluates on a leader;
 and five on_action comments name the wrong object or an object that the engine does not always
 set. These findings create no Native gaps. Unrelated Native failures still block coverage.
 
-The 34 names with no independent source receive an `entry_scopes` gap, including the six whose
+The 35 names with no independent source receive an `entry_scopes` gap, including the six whose
 comment describes a site or branch that Native could not follow. Native's original gaps remain
 attached. The ledger's coverage projection therefore keeps these reasons and grants no
 entry-scope credit.

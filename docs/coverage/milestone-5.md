@@ -24,6 +24,9 @@ method set unchanged during the run. It is a baseline (decision D2): repairs tha
 Coverage comes from the live snapshot. The recording repeats it without a game; recorded answers
 earn no coverage.
 
+[Pin move B](pin-move-b.md) (SDK-818) moves the pin to the repairs of these deficits and gives the
+rates and gate after them.
+
 ## The recorded commit
 
 Native `main` was `ee01bf338872290eaaab2ca3c0503fc33244686e` before and after the run, the
