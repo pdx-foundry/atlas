@@ -420,8 +420,12 @@ async fn callback_coverage_keeps_disagreements_and_blocks_missing_independent_so
     "#
         .into(),
     )]));
-    let recorded_report =
-        coverage::evaluate(&ledger, Some(&snapshot::json_bytes(&snapshot).unwrap())).unwrap();
+    let recorded_report = coverage::evaluate(
+        &ledger,
+        Some(&snapshot::json_bytes(&snapshot).unwrap()),
+        None,
+    )
+    .unwrap();
     assert!(
         recorded_report
             .claims
@@ -429,8 +433,12 @@ async fn callback_coverage_keeps_disagreements_and_blocks_missing_independent_so
             .all(|assessment| !assessment.covered)
     );
     qualify_as_live(&mut snapshot);
-    let report =
-        coverage::evaluate(&ledger, Some(&snapshot::json_bytes(&snapshot).unwrap())).unwrap();
+    let report = coverage::evaluate(
+        &ledger,
+        Some(&snapshot::json_bytes(&snapshot).unwrap()),
+        None,
+    )
+    .unwrap();
 
     for claim in ledger
         .claims
@@ -775,8 +783,12 @@ fn claim<'a>(
 async fn language_claims_join_their_snapshot_answers() {
     let ledger = language_ledger();
     let mut snapshot = snapshot::assemble(&recorded().await).unwrap();
-    let recorded =
-        coverage::evaluate(&ledger, Some(&snapshot::json_bytes(&snapshot).unwrap())).unwrap();
+    let recorded = coverage::evaluate(
+        &ledger,
+        Some(&snapshot::json_bytes(&snapshot).unwrap()),
+        None,
+    )
+    .unwrap();
 
     assert!(rule(&snapshot, "argument:effect:add_building/building#existence").is_some());
     assert!(
@@ -789,8 +801,12 @@ async fn language_claims_join_their_snapshot_answers() {
     assert_eq!(recorded.totals.atlas_owned.covered, 0);
 
     qualify_as_live(&mut snapshot);
-    let report =
-        coverage::evaluate(&ledger, Some(&snapshot::json_bytes(&snapshot).unwrap())).unwrap();
+    let report = coverage::evaluate(
+        &ledger,
+        Some(&snapshot::json_bytes(&snapshot).unwrap()),
+        None,
+    )
+    .unwrap();
     let assessment = |claim: &ledger::Claim| {
         report
             .claims
@@ -1376,8 +1392,12 @@ types = {
     );
     let mut snapshot = snapshot::assemble(&recorded().await).unwrap();
     qualify_as_live(&mut snapshot);
-    let report =
-        coverage::evaluate(&ledger, Some(&snapshot::json_bytes(&snapshot).unwrap())).unwrap();
+    let report = coverage::evaluate(
+        &ledger,
+        Some(&snapshot::json_bytes(&snapshot).unwrap()),
+        None,
+    )
+    .unwrap();
     let covered = |file: &str, subject: &[&str]| {
         let claim = claim(&ledger, file, subject, "naming_rule");
 

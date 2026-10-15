@@ -51,15 +51,16 @@ this does not qualify the underlying game condition.
 | Class | Examples | Authority |
 | --- | --- | --- |
 | Engine fact | Fields, accepted forms, hard cardinality, references, scopes | Qualified engine evidence |
-| Content-derived | Dynamic content queries and shipped-comment documentation | Content observations |
-| Consumer policy | Severity, soft bounds, subtype naming and tests, aliases, scope groups | Consumer modeling choices |
+| Content-derived | Shipped-comment documentation and content inventories | Content observations |
+| Consumer policy | Severity, soft bounds, subtype naming and tests, aliases, scope groups, content queries | Consumer modeling choices |
 | Authored text | Unattributed documentation outside expected engine/content families | Its author |
 
 Documentation assignments are provisional; the historical [provenance measurement](documentation.md)
 compared every entry against explicit engine dumps and installed comments. It tagged all
 entries, recorded matching source locations, separated rewritten candidates, and listed the authored
-remainder. Current ledger output keeps the expected-owner assignments provisional.
-Neither expected ownership nor a text match supplies qualified rule coverage.
+remainder. Current ledger output keeps the expected-owner assignments provisional. A text match
+does not move a claim between classes; it answers a content-derived documentation question only
+as [below](#content-derived-documentation-sdk-718).
 Unknown metadata has a provisional policy assignment plus a diagnostic; it is not declared
 inherently manual.
 
@@ -285,9 +286,58 @@ the fixture; a changed digest is not a reason to rebaseline automatically.
 
 Direct snapshot-to-claim comparison is implemented by SDK-524 as a separate test report; SDK-570
 added the language name lists, the `script-docs` logs, the define files and the loaded modifier
-tags to it.
-Documentation source matching is implemented by SDK-525. Neither report promotes Native evidence
-or publishes a rule snapshot.
+tags to it. It does not promote Native evidence or publish a rule snapshot.
+
+## Content-derived documentation (SDK-718)
+
+Decision (2026-10-15): the content-derived claims split. Documentation is read from the shipped
+content; content queries are consumer policy. Native stays out of content (vision 2026-10-02).
+
+- **Content queries.** The 164 `content_query` claims (a `complex_enum` and its enumeration
+  recipe) are consumer policy: an enum filled from content is a listing that the consumer builds,
+  not an engine value set. They leave the Atlas-owned denominator.
+- **Documentation.** The headline keeps its denominator, engine facts plus content-derived
+  claims. Its content-derived claims are the `documentation` claims that
+  `classify::documentation_owner` assigns to shipped content: those of `common/` files, defines,
+  on_actions and game rules. The other documentation claims keep their classes: `effects.cwt` and
+  `triggers.cwt` text is an engine fact, and other prose is authored text outside the headline.
+
+`ledger --game-content INSTALLATION` reads the base-game `common/**/*.txt` of the installation, with
+the SDK-525 matcher (the association and comparison rules in [documentation.md](documentation.md)):
+
+- A claim is compared with the comments that document its key in its content directory: the
+  directory of each type `path` of its file (descendants included), else the file's own stem;
+  `common/defines` under the define's namespace; `common/on_actions`; and `common/game_rules`.
+- An exact match (comment markers removed, whitespace folded) answers the question. The answer
+  lists the distinct matched texts, with one content-origin evidence item for each location
+  (`shipped-comment:FILE:LINE-END_LINE`, method `shipped-comments/v1`).
+- A question is answered only when each of its occurrences matches exactly. Otherwise it has one
+  gap: "The shipped comment at FILE:LINE-END_LINE is a rewritten candidate, not the same text" for
+  a rewritten candidate, or "No shipped comment in the installation has this text".
+- Matching never changes a claim's owner, so the denominator does not depend on the installation.
+
+The content-origin rule: content evidence credits only content-derived claims, as the origin table
+of `coverage::suitable` already requires (an engine fact needs engine evidence). Its target is the
+installation's Native build (Native hashes the executable; no game starts), so it credits only a
+rule snapshot of that build; `evaluate` refuses content of another build and content without a
+snapshot. A snapshot whose sources are all recorded makes the content evidence unqualified: a
+recording measures no current capture. `coverage.json` then has a `content` section with the
+build, a digest of the sorted relative paths and file hashes, the file count, the parse problems,
+the number of answered questions and each gap. A file that does not parse keeps its guide headings
+(`key: prose`) but no other comments.
+
+At pin move B (live snapshot `.local/sdk-818/rules.json`, M452 build `c621723d…`, config
+`8574760`, 2,063 shipped files, 35 parse problems):
+
+| Measure | Before | After |
+| --- | ---: | ---: |
+| Atlas-owned headline | 27,643 / 57,807 (47.819%) | 29,791 / 57,643 (51.682%) |
+| Content-derived | 0 / 3,118 | 2,148 / 2,954 |
+| Milestone 5 gate types | 6,641 | 7,052 |
+
+The 2,148 claims are 1,285 of 1,329 defines, 269 of 342 on_actions, 183 of 215 game rules and 411
+of 1,068 type-schema entries. Of the 790 questions without credit, 129 have a rewritten candidate
+and 661 have no matching comment. Engine-fact credit is unchanged.
 
 ## Shared-reader answers
 

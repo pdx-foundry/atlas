@@ -1,11 +1,16 @@
 # Historical documentation provenance measurement
 
 SDK-525 measured every documentation claim in the config ledger against explicit source inputs.
-This is text attribution, not proof that the documented behavior is correct. No match creates an
-Atlas answer or raises verified rule coverage. The measurement is complete and its code was
-removed from the product build at milestone 2. Its source and tests remain in Git revision
+This is text attribution, not proof that the documented behavior is correct. In this measurement no
+match creates an Atlas answer or raises verified rule coverage. The measurement is complete and its
+code was removed from the product build at milestone 2. Its source and tests remain in Git revision
 `1521c2a44c1139fcd1a8f8c0b8c720a60c7dcb56`. The tracked
 `tests/fixtures/documentation-baseline.json` retains the input and report hashes.
+
+SDK-718 returned its shipped-comment matcher to the build as coverage: an exact shipped comment now
+answers a content-derived documentation question. The association and comparison rules below still
+apply; the engine-dump half and the separate report did not return. The [ledger
+contract](ledger.md#content-derived-documentation-sdk-718) states how the match earns credit.
 
 To reproduce it, check out that revision in a separate worktree and use the original
 source inputs named by the baseline fixture:

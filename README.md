@@ -31,10 +31,15 @@ preserved Native evidence bundle; the production tests cover its recorded-answer
 cargo run --locked -- ledger \
   --config /path/to/cwtools-stellaris-config/config \
   --snapshot /path/to/rules.json \
+  --game-content /path/to/Stellaris \
   --output /path/to/reports
 ```
 
-Omit `--snapshot` to inventory with zero established coverage. The command writes `ledger.json`
+Omit `--snapshot` to inventory with zero established coverage. `--game-content` reads the
+installation's base-game `common/**/*.txt` comments, which answer the content-derived
+documentation claims ([SDK-718](docs/coverage/ledger.md#content-derived-documentation-sdk-718)). It
+needs a snapshot of the installation's build and starts no game; without it those claims earn no
+credit. The command writes `ledger.json`
 and `coverage.json`. It returns 0 for a complete inventory, 2 after writing reports with source
 diagnostics, and 1 for invalid arguments, unreadable input, or an invalid snapshot contract.
 Output JSON contains input hashes and relative config paths, with no run timestamp.
@@ -47,7 +52,8 @@ from `origin/main`), with each claim that lost coverage. Run `compare` and `regi
 output folder first to add agreement with the config, a list of each disagreement (config answer beside Atlas's) and each type's registry join; a report of
 another config or snapshot is left out with a warning. A PR that changes coverage copies the new
 `covered-claims.txt` into `docs/coverage/`. The committed baseline is the live snapshot of the
-[pin move B capture](docs/coverage/pin-move-b.md) with the SDK-716 subtype rule (27,643 claims).
+[pin move B capture](docs/coverage/pin-move-b.md) with the SDK-716 subtype rule and the M452
+installation's shipped comments (29,791 claims).
 
 The [registry comparison](docs/coverage/registries.md) puts Native's registry list beside the
 config types and records a reason for each type that no registry names:
@@ -96,7 +102,8 @@ modifier answer, the loaded names and the declared modifiers whose loaded tags d
 static tags. The loaded table is a content observation, so the snapshot keeps only its counts.
 
 The headline is supported engine-fact plus content-derived claims divided by the total in those
-classes. Reports also give all-claims totals, every owner class, each file, and every claim's
+classes. Content-derived claims are the documentation claims of shipped content; content queries
+are consumer policy (SDK-718). Reports also give all-claims totals, every owner class, each file, and every claim's
 assessment. Consumer policy and authored text are included in the ledger but excluded from the
 headline. Empty denominators produce `null`, not 100%. If source diagnostics remain,
 `inventory_complete` is false: percentages describe inventoried claims, and the omissions remain

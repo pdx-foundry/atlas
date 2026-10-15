@@ -13,7 +13,7 @@ fn fixture() -> (Ledger, coverage::Report) {
         )]
         .into(),
     );
-    let report = coverage::evaluate(&ledger, None).unwrap();
+    let report = coverage::evaluate(&ledger, None, None).unwrap();
 
     (ledger, report)
 }

@@ -1,11 +1,14 @@
 //! Coverage of questions, independent of whether Atlas and CWT give the same answer.
 /// Direct comparison of Atlas rule answers with config assertions.
 pub mod comparison;
+mod documentation;
+pub use documentation::{Content, ContentReport};
 mod language_subject;
 mod projection;
 pub(crate) use projection::registry_types;
 /// Native's registry list compared with the config types.
 pub mod registries;
+mod shipped_comments;
 #[cfg(test)]
 #[path = "coverage/tests.rs"]
 mod tests;
@@ -236,6 +239,9 @@ pub struct Report {
     pub claims: Vec<Assessment>,
     /// Snapshot questions without a matching config question; excluded from the denominator.
     pub atlas_only_questions: Vec<String>,
+    /// What the installation's shipped comments answered, when they were supplied.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub content: Option<ContentReport>,
 }
 fn validate(snapshot: &Projection) -> Result<(), String> {
     if snapshot.snapshot_id.trim().is_empty() || snapshot.target.trim().is_empty() {
@@ -363,18 +369,62 @@ fn assessment(claim: &crate::ledger::Claim, snapshot: Option<&ProjectionIndex<'_
     result.evidence.dedup();
     result
 }
-/// Scores exact questions from the published Atlas rule snapshot.
-/// Invalid snapshot formats return an error rather than a successful zero-coverage report.
-pub fn evaluate(ledger: &Ledger, input: Option<&[u8]>) -> Result<Report, String> {
+/// Scores exact questions from the published Atlas rule snapshot. `content`, the shipped files
+/// of the snapshot's build, answers the content-derived documentation questions.
+/// Invalid snapshot formats return an error rather than a successful zero-coverage report, and so
+/// do content without a snapshot and content of another build.
+pub fn evaluate(
+    ledger: &Ledger,
+    input: Option<&[u8]>,
+    content: Option<&Content>,
+) -> Result<Report, String> {
     let snapshot_sha256 = input.map(|bytes| format!("{:x}", Sha256::digest(bytes)));
-    let projection = input
+    let rules: Option<crate::snapshot::Snapshot> = input
         .map(|bytes| {
-            let rules: crate::snapshot::Snapshot = serde_json::from_slice(bytes)
-                .map_err(|error| format!("Invalid rule snapshot input: {error}"))?;
-            projection::project(ledger, &rules)
+            serde_json::from_slice(bytes)
+                .map_err(|error| format!("Invalid rule snapshot input: {error}"))
         })
         .transpose()?;
-    evaluate_projection(ledger, projection.as_ref(), snapshot_sha256)
+    let mut projection = rules
+        .as_ref()
+        .map(|rules| projection::project(ledger, rules))
+        .transpose()?;
+    let mut content_report = None;
+
+    if let Some(content) = content {
+        let (Some(rules), Some(projection)) = (&rules, &mut projection) else {
+            return Err("Shipped comments need a rule snapshot of their build".into());
+        };
+
+        if content.build() != projection.target {
+            return Err(format!(
+                "The shipped files are of build {}, not the snapshot's build {}",
+                content.build(),
+                projection.target
+            ));
+        }
+
+        let (answers, report) = documentation::project(ledger, content, !recorded(rules));
+
+        projection.answers.extend(answers);
+        projection.gaps.extend(report.gaps.iter().cloned());
+        content_report = Some(report);
+    }
+
+    let mut report = evaluate_projection(ledger, projection.as_ref(), snapshot_sha256)?;
+
+    report.content = content_report;
+
+    Ok(report)
+}
+
+/// Whether every answer of `rules` was read from recorded files rather than a live build. Such a
+/// snapshot measures no current capture, so the shipped comments read beside it earn no credit.
+fn recorded(rules: &crate::snapshot::Snapshot) -> bool {
+    rules
+        .sources
+        .values()
+        .all(|source| source.basis == pdx_native::Basis::Recorded)
 }
 
 /// The config types that each file defines, including files that define none.
@@ -476,5 +526,6 @@ fn evaluate_projection(
         by_type,
         claims,
         atlas_only_questions,
+        content: None,
     })
 }

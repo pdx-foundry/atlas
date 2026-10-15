@@ -11,7 +11,8 @@ use std::{
     path::{Path, PathBuf},
 };
 
-fn visit(root: &Path, dir: &Path, sources: &mut Sources) -> io::Result<()> {
+/// Reads every file with `extension` below `dir`, keyed by its path relative to `root`.
+fn visit(root: &Path, dir: &Path, extension: &str, sources: &mut Sources) -> io::Result<()> {
     let mut entries = fs::read_dir(dir)?.collect::<Result<Vec<_>, _>>()?;
     entries.sort_by_key(|e| e.file_name());
     for entry in entries {
@@ -24,16 +25,13 @@ fn visit(root: &Path, dir: &Path, sources: &mut Sources) -> io::Result<()> {
             ));
         }
         if kind.is_dir() {
-            visit(root, &path, sources)?;
-        } else if path.extension().is_some_and(|s| s == "cwt") {
+            visit(root, &path, extension, sources)?;
+        } else if path.extension().is_some_and(|s| s == extension) {
             let relative = path.strip_prefix(root).expect("descendant");
             let name = relative
                 .to_str()
                 .ok_or_else(|| {
-                    io::Error::new(
-                        io::ErrorKind::InvalidInput,
-                        "Config filenames must be UTF-8",
-                    )
+                    io::Error::new(io::ErrorKind::InvalidInput, "Filenames must be UTF-8")
                 })?
                 .replace('\\', "/");
             let source = fs::read_to_string(&path)
@@ -102,6 +100,36 @@ pub fn read_define_files(paths: &[PathBuf]) -> io::Result<BTreeMap<String, Strin
     Ok(files)
 }
 
+/// Reads the base-game `common/**/*.txt` files of an installation, keyed by their path relative
+/// to the installation root. Rejects symlinks, unreadable or non-UTF-8 files, and an installation
+/// with no such file.
+pub fn read_game_content(installation: &Path) -> io::Result<BTreeMap<String, String>> {
+    if fs::symlink_metadata(installation)?.is_symlink() {
+        return Err(io::Error::new(
+            io::ErrorKind::InvalidInput,
+            "Installation root must not be a symlink",
+        ));
+    }
+
+    let mut files = BTreeMap::new();
+
+    visit(
+        installation,
+        &installation.join("common"),
+        "txt",
+        &mut files,
+    )?;
+
+    if files.is_empty() {
+        return Err(io::Error::new(
+            io::ErrorKind::InvalidInput,
+            "No common/**/*.txt files found in the installation",
+        ));
+    }
+
+    Ok(files)
+}
+
 /// Reads all CWT files below an explicit root. Rejects symlinks and empty inputs rather than skipping them.
 pub fn read_sources(root: &Path) -> io::Result<Sources> {
     if fs::symlink_metadata(root)?.is_symlink() {
@@ -111,7 +139,7 @@ pub fn read_sources(root: &Path) -> io::Result<Sources> {
         ));
     }
     let mut sources = Sources::new();
-    visit(root, root, &mut sources)?;
+    visit(root, root, "cwt", &mut sources)?;
     if sources.is_empty() {
         return Err(io::Error::new(
             io::ErrorKind::InvalidInput,
@@ -127,18 +155,21 @@ pub fn json_bytes(value: &impl serde::Serialize) -> Result<Vec<u8>, serde_json::
     Ok(bytes)
 }
 /// Writes the ledger, the coverage report, this run's baseline (`covered-claims.txt`) and the
-/// dashboard page (`dashboard.html`). The page compares the run with `baseline` and reads
+/// dashboard page (`dashboard.html`). `content` is the shipped files of the snapshot's build (see
+/// [`coverage::evaluate`]). The page compares the run with `baseline` and reads
 /// `comparison.json` and `registries.json` from `output` when they are present.
 pub fn generate(
     config: &Path,
     snapshot: Option<&Path>,
+    content: Option<&coverage::Content>,
     output: &Path,
     baseline: Option<&Baseline>,
 ) -> Result<(Ledger, coverage::Report), Box<dyn std::error::Error>> {
     let sources = read_sources(config)?;
     let ledger = ledger::inventory(&sources);
     let input = snapshot.map(fs::read).transpose()?;
-    let report = coverage::evaluate(&ledger, input.as_deref()).map_err(io::Error::other)?;
+    let report =
+        coverage::evaluate(&ledger, input.as_deref(), content).map_err(io::Error::other)?;
     let ledger_bytes = json_bytes(&ledger)?;
     let report_bytes = json_bytes(&report)?;
     let ledger_sha256 = format!("{:x}", Sha256::digest(&ledger_bytes));
