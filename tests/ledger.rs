@@ -69,6 +69,7 @@ fn owner_and_method_classification_separates_policy() {
     );
     for property in [
         "subtype_partition",
+        "conditional_constraint",
         "consumer_annotation",
         "soft_cardinality_minimum",
     ] {
@@ -81,14 +82,6 @@ fn owner_and_method_classification_separates_policy() {
         );
         assert!(ledger.claims.iter().any(|c| c.property == property));
     }
-    assert!(
-        ledger
-            .claims
-            .iter()
-            .any(|c| c.property == "conditional_constraint"
-                && c.expected_method.as_ref().unwrap().name
-                    == "Field shapes and conditional constraints")
-    );
     let schema = ledger
         .claims
         .iter()
@@ -99,6 +92,95 @@ fn owner_and_method_classification_separates_policy() {
         "Numeric conversion and duration rules"
     );
 }
+/// A subtype's defining test and the bounds written on it are consumer policy (SDK-716); the
+/// subtype's scope, its naming lines and its schema fields stay engine facts.
+#[test]
+fn only_the_tests_that_define_a_subtype_are_policy() {
+    let ledger = scan(
+        r#"types = {
+ type[x] = {
+  ## push_scope = country
+  subtype[foo] = {
+   ## cardinality = 0..0
+   flag = yes
+   potential = { always = no }
+   ## cardinality = 1..1
+   supported_scopes = country
+  }
+  localisation = { subtype[foo] = { ## required
+   name = "$" } }
+  images = { subtype[foo] = { ## optional
+   icon = "gfx/$.dds" } }
+ }
+}
+x = { subtype[foo] = {
+ ## cardinality = 1..1
+ field = int
+} }"#,
+    );
+    let owner = |subject: &[&str], property: &str| {
+        let claim = ledger
+            .claims
+            .iter()
+            .find(|c| c.subject == subject && c.property == property)
+            .unwrap_or_else(|| panic!("no {property} claim at {subject:?}"));
+
+        assert_eq!(
+            claim.expected_method.is_some(),
+            claim.owner == Owner::EngineFact
+        );
+
+        claim.owner
+    };
+    let test = ["types", "type[x]", "subtype[foo]", "flag"];
+    let bound = [
+        "types",
+        "type[x]",
+        "subtype[foo]",
+        "flag",
+        "$annotation:cardinality",
+    ];
+    let nested = ["types", "type[x]", "subtype[foo]", "potential", "always"];
+    let scopes = ["types", "type[x]", "subtype[foo]", "supported_scopes"];
+    let scopes_bound = [&scopes[..], &["$annotation:cardinality"]].concat();
+
+    for (subject, property) in [
+        (&test[..], "conditional_constraint"),
+        (&bound[..], "cardinality_minimum"),
+        (&bound[..], "cardinality_maximum"),
+        (&nested[..], "conditional_constraint"),
+        (&scopes[..], "conditional_constraint"),
+        (&scopes_bound[..], "cardinality_minimum"),
+    ] {
+        assert_eq!(
+            owner(subject, property),
+            Owner::ConsumerPolicy,
+            "{subject:?}"
+        );
+    }
+
+    let scope = ["types", "type[x]", "subtype[foo]", "$annotation:push_scope"];
+    let name = ["types", "type[x]", "localisation", "subtype[foo]", "name"];
+    let required = [&name[..], &["$annotation:required"]].concat();
+    let icon = ["types", "type[x]", "images", "subtype[foo]", "icon"];
+    let optional = [&icon[..], &["$annotation:optional"]].concat();
+    let field = ["x", "subtype[foo]", "field"];
+    let field_bound = ["x", "subtype[foo]", "field", "$annotation:cardinality"];
+
+    for (subject, property) in [
+        (&scope[..], "scope_context"),
+        (&name[..], "naming_rule"),
+        (&required[..], "naming_requirement"),
+        (&icon[..], "naming_rule"),
+        (&optional[..], "naming_requirement"),
+        (&field[..], "field_existence"),
+        (&field_bound[..], "cardinality_minimum"),
+        (&field_bound[..], "cardinality_maximum"),
+    ] {
+        assert_eq!(owner(subject, property), Owner::EngineFact, "{subject:?}");
+    }
+}
+
 #[test]
 fn source_accounting_handles_multiline_quotes_and_unterminated_last_line() {
     let ledger = scan("x = \"first\n# still text\nlast\"");

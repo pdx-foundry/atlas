@@ -94,7 +94,15 @@ impl Builder<'_> {
             message,
         });
     }
-    fn cardinality(&mut self, subject: &[String], value: &str, span: Span) -> bool {
+    /// Claims the two bounds of a `## cardinality` annotation. A hard bound on a subtype's
+    /// defining test (`subtype_test`) is part of that test, so it is consumer policy too.
+    fn cardinality(
+        &mut self,
+        subject: &[String],
+        value: &str,
+        span: Span,
+        subtype_test: bool,
+    ) -> bool {
         let range = value.split('#').next().unwrap_or(value).trim();
         let Some((minimum, maximum)) = range.split_once("..") else {
             return false;
@@ -104,21 +112,26 @@ impl Builder<'_> {
             (maximum, "cardinality_maximum", "soft_cardinality_maximum"),
         ] {
             let soft = bound.starts_with('~');
+            let (owner, reason) = if soft {
+                (
+                    Owner::ConsumerPolicy,
+                    "Soft occurrence recommendation belongs to the consumer",
+                )
+            } else if subtype_test {
+                (Owner::ConsumerPolicy, classify::SUBTYPE_TEST)
+            } else {
+                (
+                    Owner::EngineFact,
+                    "Hard occurrence bound requires engine evidence",
+                )
+            };
             self.claim(Question {
                 subject,
                 property: if soft { soft_property } else { hard_property },
                 answer: bound.trim_start_matches('~').into(),
                 span,
-                owner: if soft {
-                    Owner::ConsumerPolicy
-                } else {
-                    Owner::EngineFact
-                },
-                reason: if soft {
-                    "Soft occurrence recommendation belongs to the consumer"
-                } else {
-                    "Hard occurrence bound requires engine evidence"
-                },
+                owner,
+                reason,
                 provisional: false,
             });
         }
@@ -233,7 +246,12 @@ impl Builder<'_> {
                 let mut annotation_subject = subject.clone();
                 annotation_subject.push(format!("$annotation:{name}"));
                 if name == "cardinality"
-                    && self.cardinality(&annotation_subject, value, annotation.span)
+                    && self.cardinality(
+                        &annotation_subject,
+                        value,
+                        annotation.span,
+                        property == "conditional_constraint",
+                    )
                 {
                     continue;
                 }
