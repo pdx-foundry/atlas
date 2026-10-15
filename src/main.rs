@@ -81,7 +81,9 @@ fn run_ledger() -> Result<bool, Box<dyn std::error::Error>> {
             ledger.diagnostics.len()
         );
     }
-    Ok(ledger.diagnostics.is_empty())
+    let content_complete = content.is_none_or(|content| content.diagnostics.is_empty());
+
+    Ok(ledger.diagnostics.is_empty() && content_complete)
 }
 
 /// The shipped files of `installation`, identified by its build. Native hashes the executable;

@@ -306,7 +306,8 @@ content; content queries are consumer policy. Native stays out of content (visio
 the SDK-525 matcher (the association and comparison rules in [documentation.md](documentation.md)):
 
 - A claim is compared with the comments that document its key in its content directory: the
-  directory of each type `path` of its file (descendants included), else the file's own stem;
+  `path` directory of its own type (descendants included); for a claim outside every type with a
+  path, the directories of every type in its file; else the file's own stem;
   `common/defines` under the define's namespace; `common/on_actions`; and `common/game_rules`.
 - An exact match (comment markers removed, whitespace folded) answers the question. The answer
   lists the distinct matched texts, with one content-origin evidence item for each location
@@ -325,20 +326,22 @@ recording measures no current capture. `coverage.json` then has a `content` sect
 build, a digest of the sorted relative paths and file hashes, the file count, the parse problems,
 the number of answered questions and each gap. A file that the parser repairs keeps the comments of
 the repaired tree, as in SDK-525; a file that fails to parse keeps only its guide headings
-(`key: prose`). A missed comment withholds credit; a match still needs the exact text.
+(`key: prose`). A missed comment withholds credit; a match still needs the exact text. As with
+config diagnostics, the CLI exits 2 after writing the reports when the shipped files have parse
+problems.
 
 At pin move B (live snapshot `.local/sdk-818/rules.json`, M452 build `c621723d…`, config
 `8574760`, 2,063 shipped files, 35 parse problems):
 
 | Measure | Before | After |
 | --- | ---: | ---: |
-| Atlas-owned headline | 27,643 / 57,807 (47.819%) | 29,791 / 57,643 (51.682%) |
-| Content-derived | 0 / 3,118 | 2,148 / 2,954 |
-| Milestone 5 gate types | 6,641 | 7,052 |
+| Atlas-owned headline | 27,643 / 57,807 (47.819%) | 29,787 / 57,643 (51.675%) |
+| Content-derived | 0 / 3,118 | 2,144 / 2,954 |
+| Milestone 5 gate types | 6,641 | 7,048 |
 
-The 2,148 claims are 1,285 of 1,329 defines, 269 of 342 on_actions, 183 of 215 game rules and 411
-of 1,068 type-schema entries. Of the 790 questions without credit, 129 have a rewritten candidate
-and 661 have no matching comment. Engine-fact credit is unchanged.
+The 2,144 claims are 1,285 of 1,329 defines, 269 of 342 on_actions, 183 of 215 game rules and 407
+of 1,068 type-schema entries. Of the 794 questions without credit, 129 have a rewritten candidate
+and 665 have no matching comment. Engine-fact credit is unchanged.
 
 ## Shared-reader answers
 

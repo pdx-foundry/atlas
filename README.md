@@ -41,7 +41,7 @@ documentation claims ([SDK-718](docs/coverage/ledger.md#content-derived-document
 needs a snapshot of the installation's build and starts no game; without it those claims earn no
 credit. The command writes `ledger.json`
 and `coverage.json`. It returns 0 for a complete inventory, 2 after writing reports with source
-diagnostics, and 1 for invalid arguments, unreadable input, or an invalid snapshot contract.
+diagnostics or parse problems in the shipped files, and 1 for invalid arguments, unreadable input, or an invalid snapshot contract.
 Output JSON contains input hashes and relative config paths, with no run timestamp.
 
 The command also writes `covered-claims.txt` and `dashboard.html`, and copies the page to
@@ -53,7 +53,7 @@ output folder first to add agreement with the config, a list of each disagreemen
 another config or snapshot is left out with a warning. A PR that changes coverage copies the new
 `covered-claims.txt` into `docs/coverage/`. The committed baseline is the live snapshot of the
 [pin move B capture](docs/coverage/pin-move-b.md) with the SDK-716 subtype rule and the M452
-installation's shipped comments (29,791 claims).
+installation's shipped comments (29,787 claims).
 
 The [registry comparison](docs/coverage/registries.md) puts Native's registry list beside the
 config types and records a reason for each type that no registry names:

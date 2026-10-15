@@ -324,6 +324,24 @@ async fn type_folders_include_descendants_but_not_sibling_prefixes() {
 }
 
 #[tokio::test]
+async fn a_claim_reads_only_its_own_types_folder() {
+    let config = "types = {\n type[a] = { path = \"game/common/a\" }\n type[b] = { path = \"game/common/b\" }\n}\na = {\n ### Shared words\n field = int\n}\nb = {\n ### Shared words\n field = int\n}\n";
+    let run = Run::live(
+        &[("common/ab.cwt", config)],
+        &[("common/b/00.txt", "x = {\n field = 1 # Shared words\n}\n")],
+    )
+    .await;
+
+    assert_eq!(
+        run.documentation()
+            .iter()
+            .map(|a| a.covered)
+            .collect::<Vec<_>>(),
+        [false, true]
+    );
+}
+
+#[tokio::test]
 async fn a_define_comment_must_sit_under_its_namespace() {
     let config = "defines = {\n Right = {\n ### shared words\n VALUE = int\n }\n Wrong = {\n ### shared words\n VALUE = int\n }\n}\n";
     let run = Run::live(

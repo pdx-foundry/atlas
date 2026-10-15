@@ -1,6 +1,6 @@
 //! Content-derived documentation answered by the shipped comments of one installation (SDK-718).
 use super::{
-    Answer, Evidence, Gap, Origin, Status,
+    Answer, Evidence, Gap, Origin, Status, claim_type, file_types,
     projection::config_directory,
     shipped_comments::{self, Comment},
 };
@@ -110,7 +110,7 @@ pub(super) fn project(
     content: &Content,
     qualified: bool,
 ) -> (Vec<Answer>, ContentReport) {
-    let directories = content_directories(ledger);
+    let directories = TypeDirectories::new(ledger);
     let item_names = item_names(ledger);
     let mut questions: BTreeMap<(&str, &[String]), Vec<Comparison>> = BTreeMap::new();
 
@@ -215,31 +215,72 @@ fn answer(comparisons: &[Comparison]) -> Result<Vec<&Comment>, String> {
     Ok(comments)
 }
 
-/// The content directories that each config file's types load from (`path = game/common/x`).
-fn content_directories(ledger: &Ledger) -> BTreeMap<&str, Vec<String>> {
-    let mut result: BTreeMap<&str, Vec<String>> = BTreeMap::new();
+/// The content directories that the config types load from (`path = game/common/x`).
+struct TypeDirectories<'a> {
+    /// The directories of each type, by (file, type).
+    by_type: BTreeMap<(&'a str, &'a str), Vec<String>>,
+    /// The types that each file defines.
+    file_types: BTreeMap<String, BTreeSet<String>>,
+}
 
-    for claim in ledger
-        .claims
-        .iter()
-        .filter(|c| c.property == "loader_path" && c.subject.last().is_some_and(|s| s == "path"))
-    {
-        let path = config_directory(&claim.config_answer).trim_end_matches('/');
+impl<'a> TypeDirectories<'a> {
+    fn new(ledger: &'a Ledger) -> Self {
+        let mut by_type: BTreeMap<_, Vec<String>> = BTreeMap::new();
 
-        result.entry(&claim.file).or_default().push(path.into());
+        for claim in &ledger.claims {
+            let [types, type_name, path] = claim.subject.as_slice() else {
+                continue;
+            };
+
+            if claim.property != "loader_path" || types != "types" || path != "path" {
+                continue;
+            }
+
+            let directory = config_directory(&claim.config_answer).trim_end_matches('/');
+
+            by_type
+                .entry((claim.file.as_str(), type_name.as_str()))
+                .or_default()
+                .push(directory.into());
+        }
+
+        for paths in by_type.values_mut() {
+            paths.sort();
+            paths.dedup();
+        }
+
+        Self {
+            by_type,
+            file_types: file_types(ledger),
+        }
     }
 
-    for paths in result.values_mut() {
-        paths.sort();
-        paths.dedup();
-    }
+    /// The directories of `claim`'s own type; for a claim outside every type with a path, those
+    /// of every type in its file.
+    fn of(&self, claim: &Claim) -> Vec<String> {
+        let own_type = claim_type(claim, &self.file_types[&claim.file])
+            .and_then(|type_name| self.by_type.get(&(claim.file.as_str(), type_name)));
 
-    result
+        if let Some(directories) = own_type {
+            return directories.clone();
+        }
+
+        let mut directories: Vec<_> = self
+            .by_type
+            .iter()
+            .filter(|((file, _), _)| *file == claim.file)
+            .flat_map(|(_, directories)| directories.iter().cloned())
+            .collect();
+
+        directories.sort();
+        directories.dedup();
+        directories
+    }
 }
 
 /// The directories whose comments can document `claim`: the define, on_action and game rule
-/// folders, else the folders that the file's types load from, else the file's own stem.
-fn claim_directories(claim: &Claim, directories: &BTreeMap<&str, Vec<String>>) -> Vec<String> {
+/// folders, else the folders of its type, else the file's own stem.
+fn claim_directories(claim: &Claim, types: &TypeDirectories) -> Vec<String> {
     let name = claim.file.rsplit('/').next().unwrap_or(&claim.file);
 
     if claim.file.starts_with("common/defines/") {
@@ -253,10 +294,13 @@ fn claim_directories(claim: &Claim, directories: &BTreeMap<&str, Vec<String>>) -
         return vec![format!("common/{stem}")];
     }
 
+    let directories = types.of(claim);
+
+    if directories.is_empty() {
+        return vec![claim.file.trim_end_matches(".cwt").into()];
+    }
+
     directories
-        .get(claim.file.as_str())
-        .cloned()
-        .unwrap_or_else(|| vec![claim.file.trim_end_matches(".cwt").into()])
 }
 
 /// The value of each bare item, by (file, subject): an `on_actions.cwt` item is documented under
