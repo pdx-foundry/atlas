@@ -126,7 +126,15 @@
       {
         "kind": "UnnamedDeclaration",
         "subject": null,
-        "detail": "18 sites that compose modifier names at run time are not joined to a registry (1 inside the registration function; 4 reached from the post-read code of content objects that are not items of a named registry; 13 reached by no chain of calls from a registry's code); the names that they add are unexplained"
+        "detail": "17 sites that compose modifier names at run time are not joined to a registry (1 inside the registration function; 3 reached from the post-read code of content objects that are not items of a named registry; 13 reached by no chain of calls from a registry's code); the names that they add are unexplained"
+      },
+      {
+        "kind": "IncompleteObservation",
+        "subject": {
+          "kind": "registry",
+          "name": "common/planet_classes"
+        },
+        "detail": "the registry's loaded item keys could not be read (the registry's own loader builds a database whose item layout is not stated, so its item keys are not read); its families, and the families that combine its keys, explain no name"
       },
       {
         "kind": "UnnamedDeclaration",

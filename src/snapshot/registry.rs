@@ -8,10 +8,10 @@ use super::{
 use crate::extraction::Extraction;
 use pdx_native::{
     AcceptedCategories, Answer, BlockFamily, Completeness, DerivedName, DiagnosticCoverage,
-    DiagnosticJoin, Disposal, Field, FieldCondition, FieldMembers, FieldReadOutcome,
-    FieldReference, FixtureFieldOutcome, FixtureObservation, FixtureStorage, Gap as NativeGap,
-    GapKind, GapSubject, GrammarProperty, NameLookup, NamePart, ReaderKind, ReferenceTarget,
-    RepeatBehavior,
+    DiagnosticJoin, Disposal, Field, FieldCondition, FieldDomain, FieldMembers, FieldReadOutcome,
+    FieldReference, FieldRequirement, FixtureFieldOutcome, FixtureObservation, FixtureStorage,
+    Gap as NativeGap, GapKind, GapSubject, GrammarProperty, NameLookup, NamePart, ReaderKind,
+    ReferenceTarget, RepeatBehavior,
 };
 use serde_json::{Value, json};
 use std::collections::{BTreeMap, BTreeSet};
@@ -21,6 +21,7 @@ pub(super) const PROPERTIES: &[&str] = &[
     "existence",
     "loader_path",
     "occurrences.parser_accepted",
+    "occurrences.minimum",
     "value_form",
     "read",
     "shape",
@@ -33,6 +34,7 @@ pub(super) const PROPERTIES: &[&str] = &[
     "read_scope",
     "reference",
     "accepted_categories",
+    "domain",
 ];
 
 pub(super) fn assemble(
@@ -548,15 +550,20 @@ impl<'a, T> FieldSet<'a, T> {
             ),
             evidence.clone(),
         );
-        gap(
-            snapshot,
-            &id,
-            "domain",
-            "Native reports this field property as Unknown",
-            Some("field_semantics"),
-            Vec::new(),
-            vec![evidence.clone()],
-        );
+        match &field.domain {
+            FieldDomain::Listed(names) => {
+                rule(snapshot, &id, "domain", json!(names), evidence.clone());
+            }
+            _ => gap(
+                snapshot,
+                &id,
+                "domain",
+                "Native reports this field property as Unknown",
+                Some("field_semantics"),
+                Vec::new(),
+                vec![evidence.clone()],
+            ),
+        }
         rule(
             snapshot,
             &id,
@@ -582,15 +589,7 @@ impl<'a, T> FieldSet<'a, T> {
         assemble_field_repeat(snapshot, &id, unconditional_outcome, &evidence);
         self.assemble_reference(snapshot, &id, path, field, &evidence);
         assemble_accepted_categories(snapshot, &id, field, &evidence);
-        gap(
-            snapshot,
-            &id,
-            "occurrences.minimum",
-            "No validation result establishes that this field is required",
-            None,
-            Vec::new(),
-            vec![evidence],
-        );
+        assemble_field_requirement(snapshot, &id, field.requirement, evidence);
         Ok(())
     }
 
@@ -891,6 +890,22 @@ fn assemble_field_value_form(
             );
             return Ok(true);
         }
+        // The accepted names are the value form. Two fields can share a converter and still
+        // differ in domain, so the names stay on the rule, not on a reader-wide schema.
+        ReaderKind::Keyword => {
+            if let FieldDomain::Listed(names) = &field.domain {
+                rule(
+                    snapshot,
+                    id,
+                    "value_form",
+                    json!({"form":"keyword","names":names,"reader":reader_id}),
+                    evidence.clone(),
+                );
+                return Ok(false);
+            }
+
+            None
+        }
         _ => None,
     };
     let Some((form, schema_type)) = shape else {
@@ -961,6 +976,41 @@ fn assemble_field_repeat(
             vec![evidence.clone()],
         ),
     }
+}
+
+/// The fewest occurrences of a field in a definition. Native reports a field as required only
+/// where loading a definition without it logs a report of its absence; a minimum above 1 is a
+/// count that this answer does not give.
+fn assemble_field_requirement(
+    snapshot: &mut Snapshot,
+    id: &str,
+    requirement: FieldRequirement,
+    evidence: EvidenceLink,
+) {
+    let minimum = match requirement {
+        FieldRequirement::Required => 1,
+        FieldRequirement::Optional => 0,
+        _ => {
+            gap(
+                snapshot,
+                id,
+                "occurrences.minimum",
+                "Native did not establish whether a definition must contain this field",
+                None,
+                Vec::new(),
+                vec![evidence],
+            );
+            return;
+        }
+    };
+
+    rule(
+        snapshot,
+        id,
+        "occurrences.minimum",
+        json!(minimum),
+        evidence,
+    );
 }
 
 #[derive(Default)]

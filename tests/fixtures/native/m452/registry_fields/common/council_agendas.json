@@ -75,7 +75,8 @@
             }
           ]
         },
-        "accepted_categories": "NotApplicable"
+        "accepted_categories": "NotApplicable",
+        "requirement": "Optional"
       },
       {
         "name": "agenda_cost",
@@ -242,7 +243,8 @@
         "read_scope": {
           "Known": []
         },
-        "accepted_categories": "NotApplicable"
+        "accepted_categories": "NotApplicable",
+        "requirement": "Optional"
       },
       {
         "name": "agenda_cooldown",
@@ -359,7 +361,8 @@
         "read_scope": {
           "Known": []
         },
-        "accepted_categories": "NotApplicable"
+        "accepted_categories": "NotApplicable",
+        "requirement": "Optional"
       },
       {
         "name": "agenda_finish_modifier_duration",
@@ -476,7 +479,8 @@
         "read_scope": {
           "Known": []
         },
-        "accepted_categories": "NotApplicable"
+        "accepted_categories": "NotApplicable",
+        "requirement": "Optional"
       },
       {
         "name": "potential",
@@ -552,7 +556,8 @@
             }
           ]
         },
-        "accepted_categories": "NotApplicable"
+        "accepted_categories": "NotApplicable",
+        "requirement": "Optional"
       },
       {
         "name": "allow",
@@ -628,7 +633,8 @@
             }
           ]
         },
-        "accepted_categories": "NotApplicable"
+        "accepted_categories": "NotApplicable",
+        "requirement": "Optional"
       },
       {
         "name": "init_effect",
@@ -704,7 +710,8 @@
             }
           ]
         },
-        "accepted_categories": "NotApplicable"
+        "accepted_categories": "NotApplicable",
+        "requirement": "Optional"
       },
       {
         "name": "ai_weight",
@@ -891,7 +898,8 @@
                   "read_scope": {
                     "Known": []
                   },
-                  "accepted_categories": "NotApplicable"
+                  "accepted_categories": "NotApplicable",
+                  "requirement": "Unknown"
                 },
                 {
                   "name": "months",
@@ -980,7 +988,8 @@
                   "read_scope": {
                     "Known": []
                   },
-                  "accepted_categories": "NotApplicable"
+                  "accepted_categories": "NotApplicable",
+                  "requirement": "Unknown"
                 },
                 {
                   "name": "years",
@@ -1069,7 +1078,8 @@
                   "read_scope": {
                     "Known": []
                   },
-                  "accepted_categories": "NotApplicable"
+                  "accepted_categories": "NotApplicable",
+                  "requirement": "Unknown"
                 },
                 {
                   "name": "factor",
@@ -1207,7 +1217,8 @@
                   "read_scope": {
                     "Known": []
                   },
-                  "accepted_categories": "NotApplicable"
+                  "accepted_categories": "NotApplicable",
+                  "requirement": "Unknown"
                 },
                 {
                   "name": "base",
@@ -1338,7 +1349,8 @@
                   "read_scope": {
                     "Known": []
                   },
-                  "accepted_categories": "NotApplicable"
+                  "accepted_categories": "NotApplicable",
+                  "requirement": "Unknown"
                 },
                 {
                   "name": "modifier",
@@ -1437,7 +1449,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "desc",
@@ -1488,7 +1501,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           }
                         ]
                       },
@@ -2566,7 +2580,8 @@
                       "Enclosing"
                     ]
                   },
-                  "accepted_categories": "NotApplicable"
+                  "accepted_categories": "NotApplicable",
+                  "requirement": "Unknown"
                 },
                 {
                   "name": "scaled_modifier",
@@ -2665,7 +2680,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "add",
@@ -2796,7 +2812,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "calc",
@@ -2854,7 +2871,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "mul",
@@ -2985,7 +3003,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "div",
@@ -3116,7 +3135,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "limit",
@@ -3133,7 +3153,7 @@
                             },
                             "shape": {
                               "value": "Block",
-                              "repeat": "Unknown"
+                              "repeat": "Merges"
                             },
                             "read": [
                               {
@@ -3153,7 +3173,7 @@
                                     },
                                     "shape": {
                                       "value": "Block",
-                                      "repeat": "Unknown"
+                                      "repeat": "Merges"
                                     }
                                   }
                                 }
@@ -3165,7 +3185,8 @@
                             "reference": "NotEstablished",
                             "entry_contexts": [],
                             "read_scope": "Unresolved",
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           }
                         ]
                       },
@@ -3181,7 +3202,8 @@
                   "reference": "NotEstablished",
                   "entry_contexts": [],
                   "read_scope": "Unresolved",
-                  "accepted_categories": "Unresolved"
+                  "accepted_categories": "Unresolved",
+                  "requirement": "Unknown"
                 },
                 {
                   "name": "complex_trigger_modifier",
@@ -3280,7 +3302,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "trigger",
@@ -3342,7 +3365,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "potential",
@@ -3391,7 +3415,8 @@
                             "reference": "NotEstablished",
                             "entry_contexts": [],
                             "read_scope": "Unresolved",
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "multiplier",
@@ -3522,7 +3547,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "min_value",
@@ -3653,7 +3679,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "max_value",
@@ -3784,7 +3811,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "parameters",
@@ -3821,7 +3849,8 @@
                             "reference": "NotEstablished",
                             "entry_contexts": [],
                             "read_scope": "Unresolved",
-                            "accepted_categories": "Unresolved"
+                            "accepted_categories": "Unresolved",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "trigger_scope",
@@ -3872,7 +3901,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "mode",
@@ -3939,7 +3969,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "mult",
@@ -4070,7 +4101,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           }
                         ]
                       },
@@ -4086,7 +4118,8 @@
                   "reference": "NotEstablished",
                   "entry_contexts": [],
                   "read_scope": "Unresolved",
-                  "accepted_categories": "Unresolved"
+                  "accepted_categories": "Unresolved",
+                  "requirement": "Unknown"
                 }
               ]
             },
@@ -5086,7 +5119,8 @@
             }
           ]
         },
-        "accepted_categories": "NotApplicable"
+        "accepted_categories": "NotApplicable",
+        "requirement": "Optional"
       },
       {
         "name": "finish_modifier",
@@ -5152,7 +5186,8 @@
         "read_scope": {
           "Known": []
         },
-        "accepted_categories": "NotApplicable"
+        "accepted_categories": "NotApplicable",
+        "requirement": "Optional"
       },
       {
         "name": "modifier",
@@ -5248,7 +5283,8 @@
                   "read_scope": {
                     "Known": []
                   },
-                  "accepted_categories": "NotApplicable"
+                  "accepted_categories": "NotApplicable",
+                  "requirement": "Unknown"
                 },
                 {
                   "name": "icon",
@@ -5299,7 +5335,8 @@
                   "read_scope": {
                     "Known": []
                   },
-                  "accepted_categories": "NotApplicable"
+                  "accepted_categories": "NotApplicable",
+                  "requirement": "Unknown"
                 },
                 {
                   "name": "data",
@@ -5416,7 +5453,8 @@
                   "read_scope": {
                     "Known": []
                   },
-                  "accepted_categories": "NotApplicable"
+                  "accepted_categories": "NotApplicable",
+                  "requirement": "Unknown"
                 },
                 {
                   "name": "custom_tooltip",
@@ -5467,7 +5505,8 @@
                   "read_scope": {
                     "Known": []
                   },
-                  "accepted_categories": "NotApplicable"
+                  "accepted_categories": "NotApplicable",
+                  "requirement": "Unknown"
                 },
                 {
                   "name": "show_only_custom_tooltip",
@@ -5518,7 +5557,8 @@
                   "read_scope": {
                     "Known": []
                   },
-                  "accepted_categories": "NotApplicable"
+                  "accepted_categories": "NotApplicable",
+                  "requirement": "Unknown"
                 },
                 {
                   "name": "icon_frame",
@@ -5635,7 +5675,8 @@
                   "read_scope": {
                     "Known": []
                   },
-                  "accepted_categories": "NotApplicable"
+                  "accepted_categories": "NotApplicable",
+                  "requirement": "Unknown"
                 },
                 {
                   "name": "important",
@@ -5686,7 +5727,8 @@
                   "read_scope": {
                     "Known": []
                   },
-                  "accepted_categories": "NotApplicable"
+                  "accepted_categories": "NotApplicable",
+                  "requirement": "Unknown"
                 },
                 {
                   "name": "hide_from_country_list",
@@ -5737,7 +5779,8 @@
                   "read_scope": {
                     "Known": []
                   },
-                  "accepted_categories": "NotApplicable"
+                  "accepted_categories": "NotApplicable",
+                  "requirement": "Unknown"
                 }
               ]
             },
@@ -5852,7 +5895,8 @@
             "Galactic Community",
             "Colony"
           ]
-        }
+        },
+        "requirement": "Optional"
       }
     ],
     "completeness": "Partial",
@@ -5863,7 +5907,7 @@
           "kind": "registry",
           "name": "common/council_agendas"
         },
-        "detail": "Defaults, exhaustive enum domains, occurrence limits, deeper nested grammars, and non-owner runtime callers are not established by this method."
+        "detail": "Defaults, enum domains other than those of keyword fields, occurrence limits, deeper nested grammars, and non-owner runtime callers are not established by this method."
       },
       {
         "kind": "OutsideMethod",
@@ -6494,7 +6538,7 @@
             "days"
           ]
         },
-        "detail": "Numeric conversion is incomplete: a storage property, the accepted range or an engine conversion path is not established."
+        "detail": "Numeric conversion is incomplete: the accepted range is not established."
       },
       {
         "kind": "OutsideMethod",
@@ -6516,7 +6560,7 @@
             "months"
           ]
         },
-        "detail": "Numeric conversion is incomplete: a storage property, the accepted range or an engine conversion path is not established."
+        "detail": "Numeric conversion is incomplete: the accepted range is not established."
       },
       {
         "kind": "OutsideMethod",
@@ -6538,7 +6582,7 @@
             "years"
           ]
         },
-        "detail": "Numeric conversion is incomplete: a storage property, the accepted range or an engine conversion path is not established."
+        "detail": "Numeric conversion is incomplete: the accepted range is not established."
       },
       {
         "kind": "OutsideMethod",
@@ -6560,7 +6604,7 @@
             "factor"
           ]
         },
-        "detail": "Numeric conversion is incomplete: a storage property, the accepted range or an engine conversion path is not established."
+        "detail": "Numeric conversion is incomplete: the accepted range is not established."
       },
       {
         "kind": "OutsideMethod",
@@ -6903,7 +6947,7 @@
     "source": {
       "build": "c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b",
       "native_version": "0.1.0",
-      "method": "registry-fields/v33",
+      "method": "registry-fields/v45",
       "basis": "StaticAnalysis"
     }
   }

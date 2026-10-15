@@ -798,6 +798,11 @@
       },
       {
         "namespace": "NAI",
+        "name": "CREATURE_DESIGNER_MUTATION_TYPE_PREFERENCES",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NAI",
         "name": "CRISIS_CONSTRUCTOR_TARGET_SCORE",
         "value_type": "Integer"
       },
@@ -2798,6 +2803,11 @@
       },
       {
         "namespace": "NAI",
+        "name": "VOIDWORMS_NAVAL_CAP_PER_FLEET",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NAI",
         "name": "VOIDWORMS_NEWBORNS_SHIP_SIZE",
         "value_type": "String"
       },
@@ -3013,6 +3023,11 @@
       },
       {
         "namespace": "NAdditionalContent",
+        "name": "ADDITIONAL_CONTENT_ITEM_LABEL_DEFAULT_TEXT_COLOR",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NAdditionalContent",
         "name": "ADDITIONAL_CONTENT_ITEM_LABEL_DISCOUNT",
         "value_type": "String"
       },
@@ -3025,6 +3040,11 @@
         "namespace": "NAdditionalContent",
         "name": "ADDITIONAL_CONTENT_ITEM_LABEL_OWNED",
         "value_type": "String"
+      },
+      {
+        "namespace": "NAdditionalContent",
+        "name": "ADDITIONAL_CONTENT_ITEM_LABEL_OWNED_TEXT_COLOR",
+        "value_type": "List"
       },
       {
         "namespace": "NAdditionalContent",
@@ -3303,8 +3323,28 @@
       },
       {
         "namespace": "NCamera",
+        "name": "ENTITY_SPRITE_CUSTOMIZE_RINGWORLD_CAM_DIR",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NCamera",
+        "name": "ENTITY_SPRITE_CUSTOMIZE_RINGWORLD_CAM_LOOK_AT",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NCamera",
         "name": "ENTITY_SPRITE_CUSTOMIZE_RINGWORLD_ZOOM_SCALE",
         "value_type": "Float"
+      },
+      {
+        "namespace": "NCamera",
+        "name": "ENTITY_SPRITE_CUSTOMIZE_SPECIES_VIEW_CAM_DIR",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NCamera",
+        "name": "ENTITY_SPRITE_CUSTOMIZE_SPECIES_VIEW_CAM_LOOK_AT",
+        "value_type": "List"
       },
       {
         "namespace": "NCamera",
@@ -3313,8 +3353,28 @@
       },
       {
         "namespace": "NCamera",
+        "name": "ENTITY_SPRITE_DESIGN_ENTRY_CAM_DIR",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NCamera",
+        "name": "ENTITY_SPRITE_DESIGN_ENTRY_CAM_LOOK_AT",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NCamera",
         "name": "ENTITY_SPRITE_DESIGN_ENTRY_ZOOM_SCALE",
         "value_type": "Float"
+      },
+      {
+        "namespace": "NCamera",
+        "name": "ENTITY_SPRITE_FRONTEND_BG_CAM_DIR",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NCamera",
+        "name": "ENTITY_SPRITE_FRONTEND_BG_CAM_LOOK_AT",
+        "value_type": "List"
       },
       {
         "namespace": "NCamera",
@@ -3323,8 +3383,28 @@
       },
       {
         "namespace": "NCamera",
+        "name": "ENTITY_SPRITE_SHIP_SECTION_CAM_DIR",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NCamera",
+        "name": "ENTITY_SPRITE_SHIP_SECTION_CAM_LOOK_AT",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NCamera",
         "name": "ENTITY_SPRITE_SHIP_SECTION_ZOOM_SCALE",
         "value_type": "Float"
+      },
+      {
+        "namespace": "NCamera",
+        "name": "ENTITY_SPRITE_SYSTEM_VIEW_CAM_DIR",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NCamera",
+        "name": "ENTITY_SPRITE_SYSTEM_VIEW_CAM_LOOK_AT",
+        "value_type": "List"
       },
       {
         "namespace": "NCamera",
@@ -3500,6 +3580,21 @@
         "namespace": "NCamera",
         "name": "SYSTEM_SPACE_SCALE_MULT",
         "value_type": "Float"
+      },
+      {
+        "namespace": "NCamera",
+        "name": "ZOOM_STEPS_GALAXY",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NCamera",
+        "name": "ZOOM_STEPS_SHOW_FLEET_HEALTH_BARS",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NCamera",
+        "name": "ZOOM_STEPS_SYSTEM_PERCENTAGES",
+        "value_type": "List"
       },
       {
         "namespace": "NCombat",
@@ -3700,6 +3795,11 @@
         "namespace": "NCombat",
         "name": "SHIP_SMOOTH_ROTATION_THRESHOLD",
         "value_type": "FixedPoint"
+      },
+      {
+        "namespace": "NEconomy",
+        "name": "BORROW_DIPLO_WEIGHT_FAVOR_COST",
+        "value_type": "List"
       },
       {
         "namespace": "NEconomy",
@@ -4013,6 +4113,11 @@
       },
       {
         "namespace": "NEconomy",
+        "name": "SLAVE_MARKET_SLAVE_BASE_COST_AMOUNT",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NEconomy",
         "name": "SLAVE_MARKET_SLAVE_BASE_COST_RESOURCES",
         "value_type": "List"
       },
@@ -4020,6 +4125,11 @@
         "namespace": "NEconomy",
         "name": "SPACE_FAUNA_PREFERRED_PLANET_ORBIT_UPKEEP_MULT",
         "value_type": "FixedPoint"
+      },
+      {
+        "namespace": "NEconomy",
+        "name": "TRADE_AMOUNT_MULTIPLIER",
+        "value_type": "List"
       },
       {
         "namespace": "NEconomy",
@@ -4035,6 +4145,11 @@
         "namespace": "NEconomy",
         "name": "TRADE_POLICY_ECONOMIC_CATEGORY",
         "value_type": "String"
+      },
+      {
+        "namespace": "NEconomy",
+        "name": "TRADITION_COST_AMOUNTS",
+        "value_type": "List"
       },
       {
         "namespace": "NEconomy",
@@ -4578,6 +4693,11 @@
       },
       {
         "namespace": "NGameplay",
+        "name": "CARDINAL_PATRON_PASSIVE_ACCORD_DISTANCES",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NGameplay",
         "name": "CATAPULT_MAX_RADIUS",
         "value_type": "FixedPoint"
       },
@@ -4735,6 +4855,11 @@
         "namespace": "NGameplay",
         "name": "CONTAINMENT_PROTOCOLS_UNLOCKED",
         "value_type": "String"
+      },
+      {
+        "namespace": "NGameplay",
+        "name": "CONTAINMENT_PROTOCOLS_WILD_CRITTERS_RARITY_TABLE",
+        "value_type": "List"
       },
       {
         "namespace": "NGameplay",
@@ -5588,6 +5713,11 @@
       },
       {
         "namespace": "NGameplay",
+        "name": "EXHIBIT_UNLOCK_COSTS",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NGameplay",
         "name": "EXPERIMENTAL_SUBSPACE_NAVIGATION_TIME_MULT",
         "value_type": "FixedPoint"
       },
@@ -6378,6 +6508,11 @@
       },
       {
         "namespace": "NGameplay",
+        "name": "LEADER_JOB_BACKGROUND_STRATA_WEIGHTS",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NGameplay",
         "name": "LEADER_LIFESPAN_DEATH_CHANCE_AGE",
         "value_type": "Integer"
       },
@@ -6480,6 +6615,11 @@
         "namespace": "NGameplay",
         "name": "LEADER_SUBCLASS_CHOICE_LEVEL",
         "value_type": "Integer"
+      },
+      {
+        "namespace": "NGameplay",
+        "name": "LEADER_TRAIT_SELECTION_LEVELS",
+        "value_type": "List"
       },
       {
         "namespace": "NGameplay",
@@ -7668,6 +7808,11 @@
       },
       {
         "namespace": "NGameplay",
+        "name": "SCIENCE_SHIP_ANOMALY_RESEARCH_DAYS",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NGameplay",
         "name": "SCIENCE_SHIP_ASTRAL_RIFT_DIST",
         "value_type": "FixedPoint"
       },
@@ -7750,6 +7895,11 @@
         "namespace": "NGameplay",
         "name": "SEEN_ALIENS",
         "value_type": "String"
+      },
+      {
+        "namespace": "NGameplay",
+        "name": "SELL_SPECIMEN_ENERGY_VALUES",
+        "value_type": "List"
       },
       {
         "namespace": "NGameplay",
@@ -8478,6 +8628,26 @@
       },
       {
         "namespace": "NGameplay",
+        "name": "VIVARIUM_BREEDING_RARITY_COMMON",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NGameplay",
+        "name": "VIVARIUM_BREEDING_RARITY_EPIC",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NGameplay",
+        "name": "VIVARIUM_BREEDING_RARITY_LEGENDARY",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NGameplay",
+        "name": "VIVARIUM_BREEDING_RARITY_RARE",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NGameplay",
         "name": "VIVARIUM_GROWTH_RATE_MULTIPLIER",
         "value_type": "FixedPoint"
       },
@@ -8552,6 +8722,11 @@
         "value_type": "FixedPoint"
       },
       {
+        "namespace": "NGameplay",
+        "name": "WILD_CRITTERS_RARITY_TABLE",
+        "value_type": "List"
+      },
+      {
         "namespace": "NGraphics",
         "name": "ACTIVE_ACCORDS_ANGLE_BASE_OFFSET",
         "value_type": "FixedPoint"
@@ -8590,6 +8765,11 @@
         "namespace": "NGraphics",
         "name": "ACTIVE_ACCORDS_UNLOCKED_POS_Y",
         "value_type": "Integer"
+      },
+      {
+        "namespace": "NGraphics",
+        "name": "ALIENFX_DEFAULT_COLOR",
+        "value_type": "List"
       },
       {
         "namespace": "NGraphics",
@@ -8738,13 +8918,43 @@
       },
       {
         "namespace": "NGraphics",
+        "name": "CARDINAL_PATRON_PASSIVE_ACCORD_DISTANCES_VIEW",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NGraphics",
         "name": "CATAPULT_DESTINATION_ENTITY",
         "value_type": "String"
       },
       {
         "namespace": "NGraphics",
+        "name": "CATAPULT_INDICATOR_COLOR_CLICKABLE",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NGraphics",
+        "name": "CATAPULT_INDICATOR_COLOR_DEFAULT",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NGraphics",
+        "name": "CATAPULT_INDICATOR_COLOR_NO_RANGE",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NGraphics",
+        "name": "CATAPULT_POTENTIAL_TARGET_INDICATOR_COLOR",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NGraphics",
         "name": "CATAPULT_POTENTIAL_TARGET_INDICATOR_ENTITY",
         "value_type": "String"
+      },
+      {
+        "namespace": "NGraphics",
+        "name": "CATAPULT_RANGE_COLOR",
+        "value_type": "List"
       },
       {
         "namespace": "NGraphics",
@@ -8755,6 +8965,21 @@
         "namespace": "NGraphics",
         "name": "CELESTIAL_WARNING_COORDINATE_VALUE",
         "value_type": "FixedPoint"
+      },
+      {
+        "namespace": "NGraphics",
+        "name": "CONSTRUCTION_COLOR_INVALID",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NGraphics",
+        "name": "CONSTRUCTION_COLOR_IN_PROGRESS",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NGraphics",
+        "name": "CONSTRUCTION_COLOR_VALID",
+        "value_type": "List"
       },
       {
         "namespace": "NGraphics",
@@ -8790,6 +9015,16 @@
         "namespace": "NGraphics",
         "name": "CONSTRUCTION_SHIP_TERRAFORMING_PLANET_ENTITY_SCALE_R",
         "value_type": "Float"
+      },
+      {
+        "namespace": "NGraphics",
+        "name": "COUNTRY_BORDER_COLOR_RANDOM_SATURATION_OFFSETS",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NGraphics",
+        "name": "COUNTRY_BORDER_COLOR_RANDOM_VALUE_OFFSETS",
+        "value_type": "List"
       },
       {
         "namespace": "NGraphics",
@@ -8923,6 +9158,16 @@
       },
       {
         "namespace": "NGraphics",
+        "name": "FLEET_EFFECT_ENTITIES_BILLBOARD",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NGraphics",
+        "name": "FLEET_EFFECT_ENTITIES_SCALE",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NGraphics",
         "name": "FORGE_OWN_PATH_ACTIVE_ACCORD_OFFSET",
         "value_type": "Integer"
       },
@@ -9028,6 +9273,11 @@
       },
       {
         "namespace": "NGraphics",
+        "name": "GUI_PLANET_RING_DIR",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NGraphics",
         "name": "HIDE_HYPERLANES_OUTSIDE_TERRA_INCOGNITA",
         "value_type": "Boolean"
       },
@@ -9110,6 +9360,36 @@
         "namespace": "NGraphics",
         "name": "MAPNAME_SECTOR_SCALE",
         "value_type": "Float"
+      },
+      {
+        "namespace": "NGraphics",
+        "name": "MAP_ICON_COLOR_ACCESSIBLE",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NGraphics",
+        "name": "MAP_ICON_COLOR_EXPLORING",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NGraphics",
+        "name": "MAP_ICON_COLOR_INACCESSIBLE",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NGraphics",
+        "name": "MAP_ICON_COLOR_INACTIVE_HSV",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NGraphics",
+        "name": "MAP_ICON_COLOR_PENDING_EVENT",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NGraphics",
+        "name": "MAP_MODE_NEUTRAL_COLOR",
+        "value_type": "List"
       },
       {
         "namespace": "NGraphics",
@@ -9253,6 +9533,11 @@
       },
       {
         "namespace": "NGraphics",
+        "name": "ORBIT_HSV",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NGraphics",
         "name": "PATRON_CONTACTED_ALPHA",
         "value_type": "FixedPoint"
       },
@@ -9295,6 +9580,11 @@
         "namespace": "NGraphics",
         "name": "PLANET_RING_TILT_FROM_SUN",
         "value_type": "Float"
+      },
+      {
+        "namespace": "NGraphics",
+        "name": "PLANET_SCALE_SYSTEM",
+        "value_type": "List"
       },
       {
         "namespace": "NGraphics",
@@ -9348,6 +9638,31 @@
       },
       {
         "namespace": "NGraphics",
+        "name": "RELATION_COLOR_ALLIED_HSV",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NGraphics",
+        "name": "RELATION_COLOR_HOSTILE_HSV",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NGraphics",
+        "name": "RELATION_COLOR_NEUTRAL_HSV",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NGraphics",
+        "name": "RELATION_COLOR_PLAYER_HSV",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NGraphics",
+        "name": "RELATION_COLOR_SELECTED_RGB",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NGraphics",
         "name": "SCIENCE_SHIP_SURVEY_ENTITY",
         "value_type": "String"
       },
@@ -9365,6 +9680,26 @@
         "namespace": "NGraphics",
         "name": "SELECT_PATRON_CLICK_SOUND",
         "value_type": "String"
+      },
+      {
+        "namespace": "NGraphics",
+        "name": "SENSOR_RANGE_COLOR_LOW",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NGraphics",
+        "name": "SENSOR_RANGE_COLOR_MEDIUM",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NGraphics",
+        "name": "SHIELD_DISTANCE_FROM_SHIP",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NGraphics",
+        "name": "SHIELD_DISTANCE_FROM_SHIP_MULT",
+        "value_type": "List"
       },
       {
         "namespace": "NGraphics",
@@ -9453,8 +9788,23 @@
       },
       {
         "namespace": "NGraphics",
+        "name": "STAR_PIN_NEUTRAL_COLOR",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NGraphics",
         "name": "STORM_AREA_PLACER_INDICATOR_ENTITY",
         "value_type": "String"
+      },
+      {
+        "namespace": "NGraphics",
+        "name": "STORM_AREA_PLACER_INDICATOR_INVALID_PLACEMENT_COLOR",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NGraphics",
+        "name": "STORM_AREA_PLACER_INDICATOR_VALID_PLACEMENT_COLOR",
+        "value_type": "List"
       },
       {
         "namespace": "NGraphics",
@@ -9560,6 +9910,26 @@
         "namespace": "NGraphics",
         "name": "SYSTEM_BUILD_AREA_COLOR",
         "value_type": "Vector"
+      },
+      {
+        "namespace": "NGraphics",
+        "name": "SYSTEM_INNER_BORDER_HSV",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NGraphics",
+        "name": "SYSTEM_LINE_ALPHA_FADE_STEP",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NGraphics",
+        "name": "SYSTEM_LINE_ALPHA_FADE_VALUE",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NGraphics",
+        "name": "SYSTEM_OUTER_BORDER_HSV",
+        "value_type": "List"
       },
       {
         "namespace": "NGraphics",
@@ -9725,6 +10095,11 @@
         "namespace": "NInterface",
         "name": "ASTRAL_RIFT_LOG_CATEGORY",
         "value_type": "String"
+      },
+      {
+        "namespace": "NInterface",
+        "name": "AUTHORITY_DEFAULT_COLOR",
+        "value_type": "List"
       },
       {
         "namespace": "NInterface",
@@ -10015,6 +10390,11 @@
         "namespace": "NInterface",
         "name": "FLAG_CAPITAL_DECORATION_SCALE_BIG_FRAME",
         "value_type": "FixedPoint"
+      },
+      {
+        "namespace": "NInterface",
+        "name": "FLEET_ICON_POWER_TIERS",
+        "value_type": "List"
       },
       {
         "namespace": "NInterface",
@@ -10410,6 +10790,11 @@
         "namespace": "NInterface",
         "name": "PLANET_SKY_ORBITAL_RING_RUINED",
         "value_type": "String"
+      },
+      {
+        "namespace": "NInterface",
+        "name": "POPS_TO_SHOW_CITY_LEVEL",
+        "value_type": "List"
       },
       {
         "namespace": "NInterface",
@@ -10810,6 +11195,21 @@
         "namespace": "NInterface",
         "name": "TOOLTIP_MIN_DAYS_FOR_ROUNDED_YEARS",
         "value_type": "Integer"
+      },
+      {
+        "namespace": "NInterface",
+        "name": "TOOLTIP_POSITION_NESTED_OFFSET",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NInterface",
+        "name": "TOOLTIP_POSITION_OFFSET",
+        "value_type": "List"
+      },
+      {
+        "namespace": "NInterface",
+        "name": "TOOLTIP_POSITION_OFFSET_STAR",
+        "value_type": "List"
       },
       {
         "namespace": "NInterface",
@@ -11532,648 +11932,8 @@
         "value_type": "FixedPoint"
       }
     ],
-    "completeness": "Partial",
+    "completeness": "Complete",
     "gaps": [
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NAdditionalContent.ADDITIONAL_CONTENT_ITEM_LABEL_OWNED_TEXT_COLOR"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NAdditionalContent.ADDITIONAL_CONTENT_ITEM_LABEL_DEFAULT_TEXT_COLOR"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NAI.VOIDWORMS_NAVAL_CAP_PER_FLEET"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NAI.CREATURE_DESIGNER_MUTATION_TYPE_PREFERENCES"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NCamera.ENTITY_SPRITE_DESIGN_ENTRY_CAM_DIR"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NCamera.ENTITY_SPRITE_DESIGN_ENTRY_CAM_LOOK_AT"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NCamera.ENTITY_SPRITE_SHIP_SECTION_CAM_DIR"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NCamera.ENTITY_SPRITE_SHIP_SECTION_CAM_LOOK_AT"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NCamera.ENTITY_SPRITE_SYSTEM_VIEW_CAM_DIR"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NCamera.ENTITY_SPRITE_SYSTEM_VIEW_CAM_LOOK_AT"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NCamera.ENTITY_SPRITE_CUSTOMIZE_SPECIES_VIEW_CAM_DIR"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NCamera.ENTITY_SPRITE_CUSTOMIZE_SPECIES_VIEW_CAM_LOOK_AT"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NCamera.ENTITY_SPRITE_CUSTOMIZE_RINGWORLD_CAM_DIR"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NCamera.ENTITY_SPRITE_CUSTOMIZE_RINGWORLD_CAM_LOOK_AT"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NCamera.ENTITY_SPRITE_FRONTEND_BG_CAM_DIR"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NCamera.ENTITY_SPRITE_FRONTEND_BG_CAM_LOOK_AT"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NCamera.ZOOM_STEPS_SYSTEM_PERCENTAGES"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NCamera.ZOOM_STEPS_GALAXY"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NCamera.ZOOM_STEPS_SHOW_FLEET_HEALTH_BARS"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NEconomy.TRADITION_COST_AMOUNTS"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NEconomy.TRADE_AMOUNT_MULTIPLIER"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NEconomy.SLAVE_MARKET_SLAVE_BASE_COST_AMOUNT"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NEconomy.BORROW_DIPLO_WEIGHT_FAVOR_COST"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NGameplay.VIVARIUM_BREEDING_RARITY_COMMON"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NGameplay.VIVARIUM_BREEDING_RARITY_RARE"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NGameplay.VIVARIUM_BREEDING_RARITY_EPIC"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NGameplay.VIVARIUM_BREEDING_RARITY_LEGENDARY"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NGameplay.LEADER_JOB_BACKGROUND_STRATA_WEIGHTS"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NGameplay.SCIENCE_SHIP_ANOMALY_RESEARCH_DAYS"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NGameplay.LEADER_TRAIT_SELECTION_LEVELS"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NGameplay.SELL_SPECIMEN_ENERGY_VALUES"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NGameplay.EXHIBIT_UNLOCK_COSTS"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NGameplay.WILD_CRITTERS_RARITY_TABLE"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NGameplay.CONTAINMENT_PROTOCOLS_WILD_CRITTERS_RARITY_TABLE"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NGameplay.CARDINAL_PATRON_PASSIVE_ACCORD_DISTANCES"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NGraphics.SYSTEM_INNER_BORDER_HSV"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NGraphics.SYSTEM_OUTER_BORDER_HSV"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NGraphics.ORBIT_HSV"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NGraphics.SYSTEM_LINE_ALPHA_FADE_STEP"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NGraphics.SYSTEM_LINE_ALPHA_FADE_VALUE"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NGraphics.PLANET_SCALE_SYSTEM"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NGraphics.RELATION_COLOR_PLAYER_HSV"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NGraphics.RELATION_COLOR_ALLIED_HSV"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NGraphics.RELATION_COLOR_NEUTRAL_HSV"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NGraphics.RELATION_COLOR_HOSTILE_HSV"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NGraphics.RELATION_COLOR_SELECTED_RGB"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NGraphics.MAP_ICON_COLOR_INACTIVE_HSV"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NGraphics.MAP_ICON_COLOR_INACCESSIBLE"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NGraphics.MAP_ICON_COLOR_ACCESSIBLE"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NGraphics.MAP_ICON_COLOR_EXPLORING"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NGraphics.MAP_ICON_COLOR_PENDING_EVENT"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NGraphics.STAR_PIN_NEUTRAL_COLOR"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NGraphics.SHIELD_DISTANCE_FROM_SHIP"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NGraphics.SHIELD_DISTANCE_FROM_SHIP_MULT"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NGraphics.FLEET_EFFECT_ENTITIES_BILLBOARD"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NGraphics.FLEET_EFFECT_ENTITIES_SCALE"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NGraphics.GUI_PLANET_RING_DIR"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NGraphics.ALIENFX_DEFAULT_COLOR"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NGraphics.MAP_MODE_NEUTRAL_COLOR"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NGraphics.COUNTRY_BORDER_COLOR_RANDOM_SATURATION_OFFSETS"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NGraphics.COUNTRY_BORDER_COLOR_RANDOM_VALUE_OFFSETS"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NGraphics.SENSOR_RANGE_COLOR_MEDIUM"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NGraphics.SENSOR_RANGE_COLOR_LOW"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NGraphics.CATAPULT_RANGE_COLOR"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NGraphics.CATAPULT_POTENTIAL_TARGET_INDICATOR_COLOR"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NGraphics.CATAPULT_INDICATOR_COLOR_DEFAULT"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NGraphics.CATAPULT_INDICATOR_COLOR_NO_RANGE"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NGraphics.CATAPULT_INDICATOR_COLOR_CLICKABLE"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NGraphics.CONSTRUCTION_COLOR_INVALID"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NGraphics.CONSTRUCTION_COLOR_VALID"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NGraphics.CONSTRUCTION_COLOR_IN_PROGRESS"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NGraphics.STORM_AREA_PLACER_INDICATOR_VALID_PLACEMENT_COLOR"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NGraphics.STORM_AREA_PLACER_INDICATOR_INVALID_PLACEMENT_COLOR"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NGraphics.CARDINAL_PATRON_PASSIVE_ACCORD_DISTANCES_VIEW"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NInterface.FLEET_ICON_POWER_TIERS"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NInterface.TOOLTIP_POSITION_OFFSET"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NInterface.TOOLTIP_POSITION_NESTED_OFFSET"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NInterface.TOOLTIP_POSITION_OFFSET_STAR"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NInterface.POPS_TO_SHOW_CITY_LEVEL"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "answer_item",
-          "name": "NInterface.AUTHORITY_DEFAULT_COLOR"
-        },
-        "detail": "reader path exceeds the table-search limit"
-      },
       {
         "kind": "OutsideMethod",
         "subject": null,

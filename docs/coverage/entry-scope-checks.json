@@ -1,10 +1,10 @@
 {
   "build": "c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b",
-  "method": "callbacks/v4",
-  "provenance": "SDK-608 hand checks on M451-hotfix, recorded by SDK-704 and carried to M452 by SDK-625; checked again against callbacks/v4 on M452 by SDK-799, which hand-read each new disagreement. Native docs/native/engine-commands.md",
+  "method": "callbacks/v5",
+  "provenance": "SDK-608 hand checks on M451-hotfix, recorded by SDK-704 and carried to M452 by SDK-625; checked again against callbacks/v4 on M452 by SDK-799, which hand-read each new disagreement, and against callbacks/v5 by SDK-818 for the 16 on_actions whose answer changed. Native docs/native/engine-commands.md",
   "agreements": {
     "on_actions": {
-      "agree": 234,
+      "agree": 238,
       "total": 294
     },
     "game_rules": {
@@ -101,11 +101,19 @@
       "source": "vanilla scope comment",
       "reason": "No independent source for these entry scopes: the comment describes an unresolved call site or one past the path limit.",
       "names": [
+        "on_ship_built"
+      ]
+    },
+    {
+      "kind": "on_action",
+      "outcome": "no_independent_source",
+      "source": "vanilla scope comment",
+      "reason": "No independent source for these entry scopes: the comment describes one call site, and Native follows another that it does not describe.",
+      "names": [
         "on_debris_reanimated",
         "on_debris_researched",
         "on_debris_scavenged",
         "on_debris_scavenged_and_researched",
-        "on_ship_built",
         "on_ship_quantum_catapult"
       ]
     },
@@ -138,6 +146,7 @@
       "reason": "No independent source for these entry scopes: the vanilla comment names no scope type.",
       "names": [
         "on_becoming_subject",
+        "on_gaining_station_control",
         "on_proxy_war_started",
         "on_released_as_vassal",
         "on_resolution_failed",

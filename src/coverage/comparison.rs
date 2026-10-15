@@ -157,6 +157,9 @@ enum ComparisonKind {
     PriorityListed,
     ValueForm,
     Cardinality,
+    /// An `enum[X]` member, which the config lists as accepted, against whether a field that
+    /// takes its value from the enum accepts it.
+    EnumMember,
     /// A subtype's `push_scope` against the scopes that the root statement it selects is read in
     /// (an event kind). The config names a scope type or group by a `scopes.cwt` alias, and `any`
     /// agrees with every answer, including no scope.
@@ -181,6 +184,7 @@ impl ComparisonKind {
             "loader_path" => Self::for_loader_line(claim.subject.last()?),
             "value_form" => Some(Self::ValueForm),
             "cardinality_minimum" | "cardinality_maximum" => Some(Self::Cardinality),
+            "enum_member" => Some(Self::EnumMember),
             "scope_context"
                 if matches!(
                     claim.subject.as_slice(),
@@ -252,6 +256,7 @@ impl ComparisonKind {
                 .then(|| Value::String(raw.into())),
             Self::Cardinality if raw == "inf" => Some(Value::String("inf".into())),
             Self::Cardinality => raw.parse::<u64>().ok().map(Value::from),
+            Self::EnumMember => Some(Value::Bool(true)),
             Self::PushScope => match raw.strip_prefix("push_scope:")?.trim() {
                 "any" => Some(json!("any")),
                 alias => scopes.get(alias).map(|types| json!(types)),
@@ -299,6 +304,7 @@ impl ComparisonKind {
                 Some("Accumulate" | "Merges") => Some(Value::String("inf".into())),
                 _ => answer.as_u64().map(Value::from),
             },
+            Self::EnumMember => answer.as_bool().map(Value::Bool),
             Self::PushScope => {
                 let scopes: BTreeSet<_> = answer
                     .as_array()?

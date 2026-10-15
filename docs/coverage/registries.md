@@ -103,7 +103,8 @@ registry names are `common` (the three types of [`game/common` itself](#types-in
 `common/trade_conversions`.
 
 The [Milestone 5 sweep](milestone-5.md) (SDK-798) ran at the same commit; its `registries.json`
-is byte-identical to this rerun's.
+is byte-identical to this rerun's. So is that of [pin move B](pin-move-b.md) (SDK-818) at Native `2c94b30`: the
+registry list did not change.
 
 ## Rerunning
 
