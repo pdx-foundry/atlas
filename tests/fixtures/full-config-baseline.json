@@ -8,20 +8,20 @@
   "claims": 61146,
   "totals": {
     "atlas_owned": {
-      "covered": 27643,
+      "covered": 27807,
       "total": 57643,
-      "percent": 47.955519
+      "percent": 48.240029
     },
     "all_claims": {
-      "covered": 27643,
+      "covered": 27807,
       "total": 61146,
-      "percent": 45.20819
+      "percent": 45.476401
     },
     "by_owner": {
       "engine_fact": {
-        "covered": 27643,
+        "covered": 27807,
         "total": 54689,
-        "percent": 50.545814
+        "percent": 50.845691
       },
       "content_derived": {
         "covered": 0,
@@ -138,9 +138,9 @@
     }
   ],
   "ledger_sha256": "bd245ba973a33bf896cdf3ed933a2348dd709c05cf870d5fdd85539b86975837",
-  "coverage_sha256": "cc180416b95c0b5d359162e5618454483d9f7e3046ff754788c45a033a05cd12",
+  "coverage_sha256": "6ba72ecf3ff8a8a40266acfd541439e71e727b6f4c966ed84cf3c7f5b7658553",
   "atlas_revision": "b5dd4f690860c4e9197828aada3f3b8b403a657e",
   "native_revision": "2c94b304052b6b1859f8bab475241f58b8d49226",
   "build": "c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b",
-  "atlas_working_changes": "The SDK-716 subtype rule and the SDK-718 content-query move over the SDK-818 live snapshot, without shipped comments"
+  "atlas_working_changes": "The SDK-716 subtype rule and the SDK-860 definition lines over the SDK-818 live snapshot; the SDK-718 content-query move, without shipped comments"
 }

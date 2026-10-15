@@ -198,6 +198,38 @@ existence without conditions:
 
 Extend the list only when Native answers another root key as a statement of its own.
 
+### Definition lines (SDK-860)
+
+A type's definition line (`ship_size = { … }`, outside any subtype) states that the type has
+definitions (`field_existence`), that each is a block (`value_form`), and for some types the scope
+of the whole definition (`## push_scope`, `## replace_scopes`).
+
+- **Existence.** A registry's `definition_names` rule answers the definition line's
+  `field_existence` with `true` for the root type and for a type that a root key selects: the
+  form that names the type's naming lines (above) names its definitions, so they exist. A known
+  empty list names no definition and answers nothing. A `definition_names` gap joins the same
+  question and blocks it; the `.partial` gap joins no question, as for the naming lines, so the
+  stated root form of civics and jobs still answers. A selector gap still blocks a type that a
+  root key selects. A root statement's own type
+  ([above](#root-statements-of-their-own-type-sdk-818)) and the root type of the event kinds
+  (SDK-815) are answered by the statements, so the naming rule adds no answer there. Native
+  identifies a nested type only as a field under its owner (SDK-778), so its naming form answers
+  no definition line; this config writes none for a nested type.
+- **Block form.** No Native answer states the value form of a root definition. Native's loader
+  rules say a template loader logs `Expected format is "key={"` for any other statement, but that
+  is not in the answer, and a custom loader states nothing. A field of a definition shows that a
+  block is accepted, not that every definition is one (a script value can be `x = 5`). So the
+  line's `value_form` keeps a gap with that reason, except where a root statement answers it.
+  SDK-863 asks Native to state it.
+- **Scope.** Native states the scope of each block that a definition reads on that block's field,
+  which answers the block's own scope claims. No answer states one scope for the whole definition,
+  so the line's `push_scope` and `replace_scopes` keep a gap with that reason.
+
+These gaps apply to the types of each directory that Native lists, and only to a claim that no
+rule answers without conditions. A type whose selector Native does not identify also keeps its
+selector gap. A type whose directory Native does not list keeps no answer and no gap. On the pin
+move B snapshot the existence rule credits 164 definition lines.
+
 ### Enum domains (SDK-818)
 
 Native's `Field.domain` lists the names that a keyword field accepts (`Listed`, SDK-828), or is
@@ -330,14 +362,14 @@ the repaired tree, as in SDK-525; a file that fails to parse keeps only its guid
 config diagnostics, the CLI exits 2 after writing the reports when the shipped files have parse
 problems.
 
-At pin move B (live snapshot `.local/sdk-818/rules.json`, M452 build `c621723d…`, config
-`8574760`, 2,063 shipped files, 35 parse problems):
+At pin move B with SDK-860 (live snapshot `.local/sdk-818/rules.json`, M452 build `c621723d…`,
+config `8574760`, 2,063 shipped files, 35 parse problems):
 
 | Measure | Before | After |
 | --- | ---: | ---: |
-| Atlas-owned headline | 27,643 / 57,807 (47.819%) | 29,787 / 57,643 (51.675%) |
+| Atlas-owned headline | 27,807 / 57,807 (48.103%) | 29,951 / 57,643 (51.959%) |
 | Content-derived | 0 / 3,118 | 2,144 / 2,954 |
-| Milestone 5 gate types | 6,641 | 7,048 |
+| Milestone 5 gate types | 6,799 | 7,206 |
 
 The 2,144 claims are 1,285 of 1,329 defines, 269 of 342 on_actions, 183 of 215 game rules and 407
 of 1,068 type-schema entries. Of the 794 questions without credit, 129 have a rewritten candidate
