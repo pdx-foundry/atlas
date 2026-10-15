@@ -1813,16 +1813,24 @@ async fn a_root_statement_type_alone_in_its_directory_keeps_its_own_fields() {
     ));
 }
 
-/// The traditions config with `unlocks_agenda = enum[agenda_kind]`, against the recorded answers
-/// changed by `edit` and qualified as live.
-async fn agenda_kinds(edit: impl FnOnce(&mut snapshot::Snapshot)) -> SharedDirectory {
-    let source = r#"
+#[tokio::test]
+async fn a_root_statement_is_no_field_of_the_root_type_without_its_own_type() {
+    let directory = planet_classes(PLANET_CLASS_TYPE).await;
+
+    assert!(directory.covered("field_existence", &["planet_class", "can_be_capital"]));
+    assert!(!directory.covered("field_existence", &["planet_class", "random_list"]));
+}
+
+const AGENDA_KINDS: &str = r#"
 types = { type[tradition] = { path = "game/common/traditions" } }
 enums = { enum[agenda_kind] = { first second } }
 tradition = { unlocks_agenda = enum[agenda_kind] }
 "#;
 
-    SharedDirectory::evaluate(&[("traditions.cwt", source)], edit).await
+/// The traditions config with `unlocks_agenda = enum[agenda_kind]`, against the recorded answers
+/// changed by `edit` and qualified as live.
+async fn agenda_kinds(edit: impl FnOnce(&mut snapshot::Snapshot)) -> SharedDirectory {
+    SharedDirectory::evaluate(&[("traditions.cwt", AGENDA_KINDS)], edit).await
 }
 
 const UNLOCKS_AGENDA: &str = "field:common/traditions/unlocks_agenda";
@@ -1860,6 +1868,32 @@ async fn a_listed_domain_answers_each_member_of_the_fields_enum() {
     assert_eq!(
         directory.status("enum_member", &agenda_kind("$item:2")),
         Status::Different
+    );
+}
+
+#[tokio::test]
+async fn a_field_of_an_unidentified_type_does_not_answer_its_enum() {
+    let source = r#"
+types = {
+    type[tradition] = { path = "game/common/traditions" }
+    ## type_key_filter = unknown_key
+    type[special_tradition] = { path = "game/common/traditions" }
+}
+enums = { enum[agenda_kind] = { first second } }
+tradition = { unlocks_agenda = scalar }
+special_tradition = { unlocks_agenda = enum[agenda_kind] }
+"#;
+    let directory = SharedDirectory::evaluate(&[("traditions.cwt", source)], |snapshot| {
+        establish(snapshot, UNLOCKS_AGENDA, "domain", json!(["first"]));
+    })
+    .await;
+
+    assert!(!directory.covered("enum_member", &agenda_kind("$item:1")));
+    assert!(
+        directory
+            .gaps("enum_member", &agenda_kind("$item:1"))
+            .iter()
+            .any(|gap| gap.contains("type_key_filter = unknown_key"))
     );
 }
 

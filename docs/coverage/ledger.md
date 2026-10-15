@@ -191,8 +191,9 @@ existence without conditions:
 - Registry rules (`loader_path`, `extension`, `recursion`) reach the type as they reach the root
   type; `definition_names` reaches it only through a `RootKey(KEY)` form. The registry's own
   existence does not answer the type's existence.
-- No other root type of the directory takes the statement or its fields: a planet class has no
-  `random_list` member. This holds when the type is alone in its directory, too.
+- No other type of the directory takes the statement or its fields: a planet class has no
+  `random_list` member. This holds when the statement's type is alone in its directory, and when
+  the config declares no type for the key.
 
 Extend the list only when Native answers another root key as a statement of its own.
 
@@ -204,7 +205,9 @@ Native's `Field.domain` lists the names that a keyword field accepts (`Listed`, 
 without a domain keeps its value-form gap. When the config value of the field that a rule or gap
 joins is exactly `enum[X]`, the `domain` rule answers each `enum_member` claim of `enum[X]`, in
 every file that lists it: `true` when the field accepts the member's name, `false` otherwise. The
-answers have no conditions, since an enum holds wherever it is used. A `domain` gap on any field
+answers have no conditions, since an enum holds wherever it is used. A field of a type whose
+selector no Native answer identifies answers no member: the members keep that selector's gap. A
+`domain` gap on any field
 whose config value names `enum[X]` blocks the credit of every member, and two fields with different
 domains are conflicting answers. The comparison report compares a member's answer with `true`:
 the config lists it as accepted.

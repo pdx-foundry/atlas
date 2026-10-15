@@ -255,7 +255,10 @@ pdx-native` showed the Git revision. The main Atlas checkout's ignored `.cargo/c
 patches Native to a local path, so every command ran from a directory outside it. An earlier live
 run at the pin, before the mappings, recorded byte-identical answers. Ledger, comparison and
 registries exit 2 for the retained source diagnostics, and registries also for Native's partial
-registry list. The full-config gate passed with the live snapshot.
+registry list. The full-config gate passed with the live snapshot, and the ignored
+`snapshot_live` test passed with a third live recording. Two review fixes after the run (a root
+statement with no type of its own, and an enum named only by an unidentified type) change no
+report of this config: `coverage.json` is byte-identical.
 
 The full recording, the snapshot, the manifest and the sweep report and diff are on the capture
 host, outside Git, at `.local/sdk-818/` of the main Atlas checkout. Tests use the trimmed sample in

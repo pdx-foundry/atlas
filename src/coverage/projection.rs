@@ -26,7 +26,8 @@ const NAMING_LINES: &[&str] = &[
 ];
 /// The registries whose root fields are root statements: Native answers each event kind
 /// (`country_event`) as a root field of `events` (Native's `registry-fields.md`, "Event kinds").
-/// In every other registry a root field is a key inside a definition.
+/// In every other registry a root field is a key inside a definition, except the keys of
+/// [`ROOT_STATEMENT_KEYS`].
 const ROOT_STATEMENT_REGISTRIES: &[&str] = &["events"];
 /// Root fields that Native answers as root statements of a type of their own, not as keys inside
 /// a definition, by (registry, key): `random_list` of `common/planet_classes` (Native's
@@ -142,8 +143,14 @@ fn project_with_gap_facets(
         if let (Some(conditions), "domain") = (&conditions, rule.property.as_str()) {
             let value_forms =
                 field_value_forms(&claims, &selectors, &command_files, subject, conditions);
+            let (selected, unselected): (Vec<_>, Vec<_>) = value_forms
+                .into_iter()
+                .partition(|question| selectors.selector_gap(question, conditions).is_none());
 
-            unconditional.extend(enum_domains.answers(&value_forms, &rule.answer));
+            unconditional.extend(enum_domains.answers(&selected, &rule.answer));
+            projection
+                .gaps
+                .extend(enum_domains.selector_gaps(&selectors, &unselected, conditions));
         }
 
         let mut answers = match (&conditions, rule.property.as_str()) {
@@ -950,17 +957,10 @@ fn questions(
                 return questions;
             };
 
-            let statement_keys: Vec<_> = types
-                .iter()
-                .filter_map(|(_, _, selector)| match selector {
-                    Selector::Statement(key) => Some(key.as_str()),
-                    _ => None,
-                })
-                .collect();
             let statement_key = field
                 .as_deref()
                 .map(|field| field.split('/').next().unwrap_or(field))
-                .filter(|key| statement_keys.contains(key));
+                .filter(|key| ROOT_STATEMENT_KEYS.contains(&(registry, *key)));
 
             questions.extend(types.iter().flat_map(|(type_name, file, selector)| {
                 let field = field.as_deref();
@@ -1432,6 +1432,29 @@ impl<'a> EnumDomains<'a> {
         names
             .into_iter()
             .flat_map(|name| self.members.get(name).into_iter().flatten().copied())
+    }
+
+    /// The selector gap of each `value_forms` question, on the members of the enum that it names:
+    /// a field of a type that no Native answer identifies does not answer the enum.
+    fn selector_gaps(
+        &self,
+        selectors: &TypeSelectors<'_>,
+        value_forms: &[String],
+        conditions: &[String],
+    ) -> Vec<Gap> {
+        value_forms
+            .iter()
+            .filter_map(|question| selectors.selector_gap(question, conditions))
+            .flat_map(|gap| {
+                self.member_questions(std::slice::from_ref(&gap.question))
+                    .into_iter()
+                    .map(move |question| Gap {
+                        question,
+                        conditions: Vec::new(),
+                        reason: gap.reason.clone(),
+                    })
+            })
+            .collect()
     }
 
     fn member_questions(&self, value_forms: &[String]) -> Vec<String> {
