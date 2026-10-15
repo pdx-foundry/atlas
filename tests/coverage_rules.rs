@@ -1713,3 +1713,241 @@ tradition = {
     assert!(directory.covered("field_existence", &["tradition", "tradition_swap"]));
     assert!(!directory.covered("field_existence", &["tradition", "subtype[swap]", "name"]));
 }
+
+const PLANET_CLASS_TYPE: &str = r#"
+    ## type_key_filter <> random_list
+    type[planet_class] = { path = "game/common/planet_classes" }"#;
+const RANDOM_LIST_TYPE: &str = r#"
+    ## type_key_filter = random_list
+    type[planet_class_random_list] = {
+        path = "game/common/planet_classes"
+        name_field = "name"
+    }"#;
+const PLANET_CLASS_BLOCKS: &str = r#"
+planet_class = {
+    can_be_capital = bool
+    random_list = scalar
+}
+planet_class_random_list = {
+    name = scalar
+    can_be_capital = bool
+    planets = { <planet_class> }
+}
+"#;
+
+/// The recorded M452 answers, with `common/planet_classes` answering a planet-class field and the
+/// root statement `random_list` with its two fields, as Native does (SDK-813), against the
+/// planet-class config written by `types`.
+async fn planet_classes(types: &str) -> SharedDirectory {
+    use pdx_native::FieldMembers;
+
+    let mut extraction = recorded_extraction().await;
+    let traditions = extraction.fields[extraction::TRADITIONS]
+        .as_ref()
+        .unwrap()
+        .clone();
+    let template = |name: &str| {
+        traditions
+            .value
+            .iter()
+            .find(|field| field.name == name)
+            .unwrap()
+            .clone()
+    };
+    let key = |name: &str| pdx_native::Field {
+        name: name.into(),
+        ..template("unlocks_agenda")
+    };
+    let random_list = pdx_native::Field {
+        name: "random_list".into(),
+        members: FieldMembers::Fields(vec![key("name"), key("planets")]),
+        ..template("tradition_swap")
+    };
+    let mut answer = traditions.clone();
+    answer.value = vec![key("can_be_capital"), random_list];
+    answer.gaps = Vec::new();
+    extraction
+        .fields
+        .insert("common/planet_classes".into(), Ok(answer));
+
+    let source = format!("types = {{{types}\n}}\n{PLANET_CLASS_BLOCKS}");
+    let ledger = ledger::inventory(&BTreeMap::from([("planet_classes.cwt".into(), source)]));
+
+    SharedDirectory::from_snapshot(ledger, snapshot::assemble(&extraction).unwrap())
+}
+
+#[tokio::test]
+async fn a_root_statement_key_answers_the_type_that_it_selects() {
+    let directory = planet_classes(&format!("{PLANET_CLASS_TYPE}{RANDOM_LIST_TYPE}")).await;
+
+    for (property, subject) in [
+        (
+            "type_existence",
+            &["types", "type[planet_class_random_list]"][..],
+        ),
+        ("field_existence", &["planet_class_random_list"]),
+        ("value_form", &["planet_class_random_list"]),
+        ("field_existence", &["planet_class_random_list", "name"]),
+        ("field_existence", &["planet_class", "can_be_capital"]),
+    ] {
+        assert!(directory.covered(property, subject), "{subject:?}");
+    }
+
+    // A planet class has no `random_list` member, and a planet-class field is not a random-list
+    // field.
+    assert!(!directory.covered("field_existence", &["planet_class", "random_list"]));
+    assert!(!directory.covered(
+        "field_existence",
+        &["planet_class_random_list", "can_be_capital"]
+    ));
+}
+
+#[tokio::test]
+async fn a_root_statement_type_alone_in_its_directory_keeps_its_own_fields() {
+    let directory = planet_classes(RANDOM_LIST_TYPE).await;
+
+    assert!(directory.covered("field_existence", &["planet_class_random_list", "name"]));
+    assert!(!directory.covered(
+        "field_existence",
+        &["planet_class_random_list", "can_be_capital"]
+    ));
+}
+
+/// The traditions config with `unlocks_agenda = enum[agenda_kind]`, against the recorded answers
+/// changed by `edit` and qualified as live.
+async fn agenda_kinds(edit: impl FnOnce(&mut snapshot::Snapshot)) -> SharedDirectory {
+    let source = r#"
+types = { type[tradition] = { path = "game/common/traditions" } }
+enums = { enum[agenda_kind] = { first second } }
+tradition = { unlocks_agenda = enum[agenda_kind] }
+"#;
+
+    SharedDirectory::evaluate(&[("traditions.cwt", source)], edit).await
+}
+
+const UNLOCKS_AGENDA: &str = "field:common/traditions/unlocks_agenda";
+
+/// Replaces the gap `{subject}#{property}` with a rule that answers `answer`.
+fn establish(snapshot: &mut snapshot::Snapshot, subject: &str, property: &str, answer: Value) {
+    let id = format!("{subject}#{property}");
+
+    snapshot.gaps.retain(|gap| gap.id != id);
+    set_rule(snapshot, subject, property, answer);
+}
+
+fn agenda_kind(item: &str) -> [&str; 3] {
+    ["enums", "enum[agenda_kind]", item]
+}
+
+#[tokio::test]
+async fn a_listed_domain_answers_each_member_of_the_fields_enum() {
+    let directory = agenda_kinds(|snapshot| {
+        establish(
+            snapshot,
+            UNLOCKS_AGENDA,
+            "domain",
+            json!(["first", "third"]),
+        );
+    })
+    .await;
+
+    assert!(directory.covered("enum_member", &agenda_kind("$item:1")));
+    assert!(directory.covered("enum_member", &agenda_kind("$item:2")));
+    assert_eq!(
+        directory.status("enum_member", &agenda_kind("$item:1")),
+        Status::Same
+    );
+    assert_eq!(
+        directory.status("enum_member", &agenda_kind("$item:2")),
+        Status::Different
+    );
+}
+
+#[tokio::test]
+async fn an_unknown_domain_keeps_a_gap_on_the_fields_enum() {
+    let directory = agenda_kinds(|_| {}).await;
+
+    assert!(!directory.covered("enum_member", &agenda_kind("$item:1")));
+    assert!(
+        !directory
+            .gaps("enum_member", &agenda_kind("$item:1"))
+            .is_empty()
+    );
+}
+
+/// The traditions config with `unlocks_agenda` at `cardinality`, against the recorded answers
+/// with the field's requirement as `minimum`, or its gap when `None`.
+async fn required_agenda(cardinality: &str, minimum: Option<u64>) -> SharedDirectory {
+    let source = format!(
+        r#"
+types = {{ type[tradition] = {{ path = "game/common/traditions" }} }}
+tradition = {{
+    ## cardinality = {cardinality}
+    unlocks_agenda = scalar
+}}
+"#
+    );
+
+    SharedDirectory::evaluate(&[("traditions.cwt", &source)], |snapshot| {
+        let id = format!("{UNLOCKS_AGENDA}#occurrences.minimum");
+
+        match minimum {
+            Some(minimum) => establish(
+                snapshot,
+                UNLOCKS_AGENDA,
+                "occurrences.minimum",
+                json!(minimum),
+            ),
+            None => {
+                snapshot.rules.retain(|rule| rule.id != id);
+                assert!(snapshot.gaps.iter().any(|gap| gap.id == id));
+            }
+        }
+    })
+    .await
+}
+
+const AGENDA_CARDINALITY: [&str; 3] = ["tradition", "unlocks_agenda", "$annotation:cardinality"];
+
+#[tokio::test]
+async fn a_requirement_answers_a_minimum_of_zero_or_one() {
+    for (cardinality, minimum, status) in [
+        ("1..1", 1, Status::Same),
+        ("0..1", 0, Status::Same),
+        ("0..1", 1, Status::Different),
+        ("1..1", 0, Status::Different),
+        ("2..inf", 0, Status::Different),
+    ] {
+        let directory = required_agenda(cardinality, Some(minimum)).await;
+
+        assert!(
+            directory.covered("cardinality_minimum", &AGENDA_CARDINALITY),
+            "{cardinality} {minimum}"
+        );
+        assert_eq!(
+            directory.status("cardinality_minimum", &AGENDA_CARDINALITY),
+            status,
+            "{cardinality} {minimum}"
+        );
+    }
+}
+
+#[tokio::test]
+async fn a_required_field_does_not_answer_a_count_above_one() {
+    let directory = required_agenda("2..inf", Some(1)).await;
+
+    assert!(!directory.covered("cardinality_minimum", &AGENDA_CARDINALITY));
+    assert!(
+        directory
+            .gaps("cardinality_minimum", &AGENDA_CARDINALITY)
+            .iter()
+            .any(|gap| gap.contains("not a count above 1"))
+    );
+}
+
+#[tokio::test]
+async fn an_unknown_requirement_keeps_the_minimum_gap() {
+    let directory = required_agenda("1..1", None).await;
+
+    assert!(!directory.covered("cardinality_minimum", &AGENDA_CARDINALITY));
+}

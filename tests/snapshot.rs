@@ -963,3 +963,39 @@ async fn build_wide_limits_stay_gaps_when_every_loader_rule_question_fails() {
         );
     }
 }
+
+#[tokio::test]
+async fn a_listed_keyword_field_publishes_its_names_and_its_requirement() {
+    let snapshot = snapshot::assemble(&recorded().await).unwrap();
+    let rule = |property: &str| {
+        let id = format!("field:common/buildings/category#{property}");
+
+        snapshot
+            .rules
+            .iter()
+            .find(|rule| rule.id == id)
+            .unwrap_or_else(|| panic!("no rule {id}"))
+    };
+    let names = json!([
+        "amenity",
+        "army",
+        "government",
+        "manufacturing",
+        "pop_assembly",
+        "research",
+        "resource",
+        "trade",
+        "unity"
+    ]);
+
+    assert_eq!(rule("domain").answer, names);
+    assert_eq!(rule("value_form").answer["form"], "keyword");
+    assert_eq!(rule("value_form").answer["names"], names);
+    assert_eq!(rule("occurrences.minimum").answer, json!(1));
+    assert!(snapshot.gaps.iter().all(|gap| {
+        !gap.id.starts_with("field:common/buildings/category#")
+            || !["domain", "value_form", "occurrences.minimum"]
+                .iter()
+                .any(|property| gap.id.ends_with(&format!("#{property}")))
+    }));
+}

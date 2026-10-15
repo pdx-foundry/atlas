@@ -28,6 +28,11 @@ const NAMING_LINES: &[&str] = &[
 /// (`country_event`) as a root field of `events` (Native's `registry-fields.md`, "Event kinds").
 /// In every other registry a root field is a key inside a definition.
 const ROOT_STATEMENT_REGISTRIES: &[&str] = &["events"];
+/// Root fields that Native answers as root statements of a type of their own, not as keys inside
+/// a definition, by (registry, key): `random_list` of `common/planet_classes` (Native's
+/// `registry-fields.md`, "Root-key owners (SDK-813)"). The type is the one whose selector is
+/// `type_key_filter = KEY`.
+const ROOT_STATEMENT_KEYS: &[(&str, &str)] = &[("common/planet_classes", "random_list")];
 /// The config file that writes each directory's duplicate-definition priority.
 const OVERRIDES: &str = "overrides.cwt";
 
@@ -77,6 +82,8 @@ fn project_with_gap_facets(
     let claims = claim_index(ledger);
     let key_subtypes = key_subtypes(ledger);
     let alias_blocks = AliasBlocks::new(ledger);
+    let enum_domains = EnumDomains::new(ledger);
+    let counted_minimums = counted_minimums(ledger);
     let language = super::language_subject::index(ledger, rules);
     let subjects: BTreeMap<_, _> = rules
         .subjects
@@ -125,6 +132,18 @@ fn project_with_gap_facets(
                 &rule.property,
                 false,
             ));
+        }
+
+        let mut unconditional: Vec<_> = unconditional
+            .into_iter()
+            .map(|question| (question, rule.answer.clone()))
+            .collect();
+
+        if let (Some(conditions), "domain") = (&conditions, rule.property.as_str()) {
+            let value_forms =
+                field_value_forms(&claims, &selectors, &command_files, subject, conditions);
+
+            unconditional.extend(enum_domains.answers(&value_forms, &rule.answer));
         }
 
         let mut answers = match (&conditions, rule.property.as_str()) {
@@ -182,11 +201,24 @@ fn project_with_gap_facets(
             .chain(
                 unconditional
                     .into_iter()
-                    .map(|question| (question, Vec::new(), rule.answer.clone())),
+                    .map(|(question, value)| (question, Vec::new(), value)),
             );
         for (question, conditions, value) in answers {
             if let Some(gap) = selectors.selector_gap(&question, &conditions) {
                 projection.gaps.push(gap);
+                continue;
+            }
+            if rule.property == "occurrences.minimum"
+                && value == json!(1)
+                && counted_minimums.contains(question.as_str())
+            {
+                projection.gaps.push(Gap {
+                    question,
+                    conditions,
+                    reason: "Native establishes that a definition must contain this field, not a \
+                             count above 1"
+                        .into(),
+                });
                 continue;
             }
             projection.answers.push(Answer {
@@ -241,6 +273,15 @@ fn project_with_gap_facets(
             ),
             None => Vec::new(),
         };
+        let enum_members = match gap.property.as_str() {
+            "domain" => {
+                let value_forms =
+                    field_value_forms(&claims, &selectors, &command_files, subject, &conditions);
+
+                enum_domains.member_questions(&value_forms)
+            }
+            _ => Vec::new(),
+        };
         let unconditional = selectors
             .language_questions(&language, &gap.id)
             .into_iter()
@@ -252,7 +293,8 @@ fn project_with_gap_facets(
                 &conditions,
                 project_related_gap_facets,
             ))
-            .chain(definition);
+            .chain(definition)
+            .chain(enum_members);
         questions.extend(unconditional.map(|question| (question, Vec::new())));
 
         if questions.is_empty() {
@@ -300,6 +342,10 @@ enum Selector {
     /// Native's loader names a `RootKey(KEY)` form. Only the type's loader lines join it; its other
     /// questions keep the gap `reason`.
     RootKey { key: String, reason: String },
+    /// Root statements with this key, as `RootKey` selects them, where Native answers the key as
+    /// a root field of the registry ([`ROOT_STATEMENT_KEYS`]). The field answers the type and
+    /// its fields answer the type's fields; no other field of the registry reaches the type.
+    Statement(String),
     /// A selector that no Native answer identifies; the text is the gap reason.
     Unresolved(String),
 }
@@ -355,7 +401,13 @@ impl<'a> TypeSelectors<'a> {
             let selected: Vec<_> = types
                 .iter()
                 .map(|&(type_name, file, lines)| {
-                    let selector = if types.len() == 1 || root == Some(type_name) {
+                    let statement = lines.root_key().filter(|key| {
+                        ROOT_STATEMENT_KEYS.contains(&(directory.as_str(), *key))
+                            && identified_fields.contains(&(directory, *key))
+                    });
+                    let selector = if let Some(key) = statement {
+                        Selector::Statement(key.into())
+                    } else if types.len() == 1 || root == Some(type_name) {
                         Selector::Root
                     } else if let Some(path) = lines
                         .nested_path(root)
@@ -898,6 +950,18 @@ fn questions(
                 return questions;
             };
 
+            let statement_keys: Vec<_> = types
+                .iter()
+                .filter_map(|(_, _, selector)| match selector {
+                    Selector::Statement(key) => Some(key.as_str()),
+                    _ => None,
+                })
+                .collect();
+            let statement_key = field
+                .as_deref()
+                .map(|field| field.split('/').next().unwrap_or(field))
+                .filter(|key| statement_keys.contains(key));
+
             questions.extend(types.iter().flat_map(|(type_name, file, selector)| {
                 let field = field.as_deref();
                 let (field, property) = match selector {
@@ -906,6 +970,21 @@ fn questions(
                         (Some(field), "existence") if field == path => (None, property),
                         _ => return Vec::new(),
                     },
+                    Selector::Statement(key) => match (field, property) {
+                        (None, "existence") => return Vec::new(),
+                        (None, _) => (None, property),
+                        (Some(field), _) if field == key => {
+                            return statement_questions(
+                                claims, type_name, file, property, gap_facet,
+                            );
+                        }
+                        (Some(field), _) => match field.strip_prefix(&format!("{key}/")) {
+                            Some(below) => (Some(below), property),
+                            None => return Vec::new(),
+                        },
+                    },
+                    // A root statement's fields are not keys of the directory's other types.
+                    _ if statement_key.is_some() => return Vec::new(),
                     Selector::Root | Selector::RootKey { .. } | Selector::Unresolved(_) => {
                         (field, property)
                     }
@@ -933,6 +1012,36 @@ fn questions(
         }
         _ => Vec::new(),
     }
+}
+
+/// The questions that a root statement's own `property` answers about the type it selects: its
+/// existence is the type's, and its existence and value form are those of the type's definition
+/// block.
+fn statement_questions(
+    claims: &ClaimIndex<'_>,
+    type_name: &str,
+    file: &str,
+    property: &str,
+    gap_facet: bool,
+) -> Vec<String> {
+    let mut questions = match property {
+        "existence" => claim_questions(
+            claims,
+            file,
+            "type_existence",
+            vec!["types", type_name],
+            &[],
+        ),
+        _ => Vec::new(),
+    };
+    let Some((annotation, ledger_property)) = field_property(property, gap_facet) else {
+        return questions;
+    };
+    let mut path = vec![type_name.trim_start_matches("type[").trim_end_matches(']')];
+    path.extend(annotation);
+    questions.extend(claim_questions(claims, file, ledger_property, path, &[]));
+
+    questions
 }
 
 /// The `overrides.cwt` questions about a directory's priority: that it has one, and its value.
@@ -1019,7 +1128,7 @@ fn type_form(
 
             Some((NAMING_LINES, form.clone()))
         }
-        (Selector::RootKey { key, .. }, None) => {
+        (Selector::RootKey { key, .. } | Selector::Statement(key), None) => {
             let form = answer
                 .as_array()?
                 .iter()
@@ -1252,6 +1361,120 @@ impl<'a> AliasBlocks<'a> {
 
         questions
     }
+}
+
+/// The `value_form` questions of the config field that a field subject joins.
+fn field_value_forms(
+    claims: &ClaimIndex<'_>,
+    selectors: &TypeSelectors<'_>,
+    command_files: &BTreeMap<String, BTreeSet<String>>,
+    subject: &snapshot::Subject,
+    conditions: &[String],
+) -> Vec<String> {
+    questions(
+        claims,
+        selectors,
+        command_files,
+        subject,
+        "value_form",
+        conditions,
+        false,
+    )
+}
+
+/// The enums that config fields take their values from, and each enum's members. A field's
+/// `domain` (the names it accepts) answers each member of the enum that the field's config value
+/// names: whether the field accepts that name. The enum holds wherever it is used, so these
+/// answers have no conditions, and a domain gap on any field that names the enum blocks them.
+struct EnumDomains<'a> {
+    /// The enum that each `value_form` question names, when its whole config value is `enum[X]`.
+    enums: BTreeMap<&'a str, &'a str>,
+    /// Each enum's member questions with the member's name, from every file that lists it.
+    members: BTreeMap<&'a str, Vec<(&'a str, &'a str)>>,
+}
+
+impl<'a> EnumDomains<'a> {
+    fn new(ledger: &'a Ledger) -> Self {
+        let mut enums = BTreeMap::new();
+        let mut members: BTreeMap<_, Vec<_>> = BTreeMap::new();
+
+        for claim in &ledger.claims {
+            match claim.property.as_str() {
+                "value_form" => {
+                    if let Some(name) = enum_name(&claim.config_answer) {
+                        enums.insert(claim.question.as_str(), name);
+                    }
+                }
+                "enum_member" => {
+                    if let [.., name, _] = claim.subject.as_slice()
+                        && let Some(name) = enum_name(name)
+                    {
+                        members
+                            .entry(name)
+                            .or_default()
+                            .push((claim.question.as_str(), claim.config_answer.as_str()));
+                    }
+                }
+                _ => {}
+            }
+        }
+
+        Self { enums, members }
+    }
+
+    /// The members of the enums that `value_forms` name.
+    fn members(&self, value_forms: &[String]) -> impl Iterator<Item = (&'a str, &'a str)> {
+        let names: BTreeSet<_> = value_forms
+            .iter()
+            .filter_map(|question| self.enums.get(question.as_str()).copied())
+            .collect();
+
+        names
+            .into_iter()
+            .flat_map(|name| self.members.get(name).into_iter().flatten().copied())
+    }
+
+    fn member_questions(&self, value_forms: &[String]) -> Vec<String> {
+        self.members(value_forms)
+            .map(|(question, _)| question.to_owned())
+            .collect()
+    }
+
+    /// Whether `domain`, a list of accepted names, holds each member.
+    fn answers(&self, value_forms: &[String], domain: &Value) -> Vec<(String, Value)> {
+        let accepted: BTreeSet<_> = domain
+            .as_array()
+            .into_iter()
+            .flatten()
+            .filter_map(Value::as_str)
+            .collect();
+
+        self.members(value_forms)
+            .map(|(question, name)| (question.to_owned(), json!(accepted.contains(name))))
+            .collect()
+    }
+}
+
+/// The `cardinality_minimum` questions whose config minimum is above 1: a count, which a field's
+/// requirement does not answer.
+fn counted_minimums(ledger: &Ledger) -> BTreeSet<&str> {
+    ledger
+        .claims
+        .iter()
+        .filter(|claim| claim.property == "cardinality_minimum")
+        .filter(|claim| {
+            claim
+                .config_answer
+                .parse::<u64>()
+                .is_ok_and(|minimum| minimum > 1)
+        })
+        .map(|claim| claim.question.as_str())
+        .collect()
+}
+
+/// `X` of a config `enum[X]`.
+fn enum_name(text: &str) -> Option<&str> {
+    text.strip_prefix("enum[")?.strip_suffix(']')
 }
 
 fn claim_questions(
