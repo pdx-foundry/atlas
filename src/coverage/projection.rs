@@ -187,7 +187,7 @@ fn project_with_gap_facets(
                     .map(|question| (question, rule.answer.clone())),
             );
         }
-        if answers.is_empty() && unconditional.is_empty() {
+        if answers.is_empty() && unconditional.is_empty() && subtype_answers.is_empty() {
             answers.push((format!("atlas:{}", rule.id), rule.answer.clone()));
         }
         let mut evidence = Vec::new();
@@ -1313,7 +1313,9 @@ impl<'a> SubtypeClaims<'a> {
                 [types, type_name, subtype, annotation]
                     if types == "types" && annotation == "$annotation:type_key_filter" =>
                 {
-                    Some((claim.file.as_str(), type_name.as_str(), subtype.as_str()))
+                    let name = subtype.strip_prefix("subtype[")?.strip_suffix(']')?;
+
+                    Some((claim.file.as_str(), type_name.as_str(), name))
                 }
                 _ => None,
             })
@@ -1328,12 +1330,12 @@ impl<'a> SubtypeClaims<'a> {
             }
 
             let type_name = super::claim_type(claim, &file_types[&claim.file]);
-            let selected_by_root_key = claim.conditions.iter().any(|condition| {
-                let subtype = condition.replacen("subtype[!", "subtype[", 1);
-
-                type_name.is_some_and(|type_name| {
-                    root_key_subtypes.contains(&(claim.file.as_str(), type_name, subtype.as_str()))
-                })
+            let selected_by_root_key = type_name.is_some_and(|type_name| {
+                claim
+                    .conditions
+                    .iter()
+                    .flat_map(|condition| subtype_terms(condition))
+                    .any(|name| root_key_subtypes.contains(&(claim.file.as_str(), type_name, name)))
             });
 
             if selected_by_root_key {
@@ -1394,6 +1396,17 @@ impl<'a> SubtypeClaims<'a> {
         })
         .collect()
     }
+}
+
+/// The subtype names that a `subtype[…]` condition tests, without negation: `subtype[a&!b]`
+/// tests `a` and `b`.
+fn subtype_terms(condition: &str) -> impl Iterator<Item = &str> {
+    condition
+        .strip_prefix("subtype[")
+        .and_then(|terms| terms.strip_suffix(']'))
+        .into_iter()
+        .flat_map(|terms| terms.split('&'))
+        .map(|term| term.trim_start_matches('!'))
 }
 
 /// The subjects whose `conditions` rule lists only `Always` alternatives.

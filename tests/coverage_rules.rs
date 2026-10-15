@@ -2025,6 +2025,7 @@ tradition = {
     subtype[excluded] = { unlocks_agenda = scalar }
     subtype[listed] = { unlocks_agenda = scalar }
     subtype[gated] = { unlocks_agenda = scalar }
+    subtype[special&!keyed] = { unlocks_agenda = scalar }
 }
 special_tradition = { subtype[special] = { unlocks_agenda = scalar } }
 "#;
@@ -2113,6 +2114,27 @@ async fn an_always_read_field_answers_its_subtype_existence_form_and_maximum() {
 }
 
 #[tokio::test]
+async fn a_field_written_only_under_a_subtype_is_not_atlas_only() {
+    let source = r#"
+types = {
+    type[tradition] = {
+        path = "game/common/traditions"
+        subtype[special] = { is_special = yes }
+    }
+}
+tradition = { subtype[special] = { unlocks_agenda = scalar } }
+"#;
+    let directory = SharedDirectory::evaluate(&[("traditions.cwt", source)], |_| {}).await;
+    let existence = format!("atlas:{UNLOCKS_AGENDA}#existence");
+
+    assert!(directory.covered(
+        "field_existence",
+        &agenda_under("tradition", &["subtype[special]"], None)
+    ));
+    assert!(!directory.coverage.atlas_only_questions.contains(&existence));
+}
+
+#[tokio::test]
 async fn a_field_with_a_conditional_alternative_answers_no_subtype_claim() {
     let directory = subtype_agenda(|snapshot| {
         set_rule(
@@ -2160,6 +2182,7 @@ async fn a_subtype_that_a_root_key_selects_takes_no_always_read_credit() {
         &["subtype[listed]"],
         &["subtype[gated]"],
         &["subtype[special]", "subtype[!keyed]"],
+        &["subtype[special&!keyed]"],
     ] {
         let subject = agenda_under("tradition", subtypes, None);
 
