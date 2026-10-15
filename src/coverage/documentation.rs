@@ -19,8 +19,8 @@ pub struct Content {
     sha256: String,
     files: usize,
     comments: BTreeMap<String, Vec<Comment>>,
-    /// Parse problems of the shipped files. A file with a problem keeps its guide headings
-    /// (`key: prose`), but its other comments are not matched.
+    /// Parse problems of the shipped files. A file that the parser repairs keeps the comments of
+    /// the repaired tree; a file that fails to parse keeps only its guide headings (`key: prose`).
     pub diagnostics: Vec<String>,
 }
 

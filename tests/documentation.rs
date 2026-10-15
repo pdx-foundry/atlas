@@ -1,5 +1,5 @@
 //! Content-derived documentation credited by the shipped comments of the snapshot's build.
-use pdx_atlas::{coverage, extraction, ledger, snapshot};
+use pdx_atlas::{coverage, extraction, ledger, report, snapshot};
 use pdx_native::{Basis, GameOptions, Native};
 use std::{collections::BTreeMap, path::Path, process::Command};
 
@@ -381,4 +381,38 @@ async fn the_content_digest_follows_the_shipped_files() {
 
     assert_eq!(digest(&shipped), digest(&shipped.clone()));
     assert_ne!(digest(&shipped), digest(&changed));
+}
+
+#[cfg(unix)]
+#[test]
+fn shipped_files_are_read_below_common_without_following_symlinks() {
+    let installation = tempfile::tempdir().unwrap();
+    let other = tempfile::tempdir().unwrap();
+    let things = installation.path().join("common/things");
+
+    std::fs::create_dir_all(&things).unwrap();
+    std::fs::write(things.join("00.txt"), "a = 1 # text\n").unwrap();
+    std::fs::write(things.join("notes.md"), "# not content\n").unwrap();
+
+    assert_eq!(
+        report::read_game_content(installation.path())
+            .unwrap()
+            .into_keys()
+            .collect::<Vec<_>>(),
+        ["common/things/00.txt"]
+    );
+
+    std::fs::create_dir_all(other.path().join("common")).unwrap();
+    std::fs::rename(
+        installation.path().join("common"),
+        other.path().join("moved"),
+    )
+    .unwrap();
+    std::os::unix::fs::symlink(
+        other.path().join("moved"),
+        installation.path().join("common"),
+    )
+    .unwrap();
+
+    assert!(report::read_game_content(installation.path()).is_err());
 }

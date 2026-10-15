@@ -122,3 +122,15 @@ fn leading_bom_does_not_turn_first_line_documentation_into_inline_text() {
         && source.text == "Named documentation"
         && source.line == 1));
 }
+
+#[test]
+fn a_repaired_file_reports_its_problem_and_keeps_its_comments() {
+    let (parsed, errors) = parse("common/things/00.txt", "# Documented\nfield = 1\n}\n");
+
+    assert_eq!(errors.len(), 1);
+    assert!(
+        parsed
+            .iter()
+            .any(|source| source.key == ["field"] && source.text == "Documented")
+    );
+}

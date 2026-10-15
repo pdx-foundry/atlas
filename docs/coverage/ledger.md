@@ -323,8 +323,9 @@ rule snapshot of that build; `evaluate` refuses content of another build and con
 snapshot. A snapshot whose sources are all recorded makes the content evidence unqualified: a
 recording measures no current capture. `coverage.json` then has a `content` section with the
 build, a digest of the sorted relative paths and file hashes, the file count, the parse problems,
-the number of answered questions and each gap. A file that does not parse keeps its guide headings
-(`key: prose`) but no other comments.
+the number of answered questions and each gap. A file that the parser repairs keeps the comments of
+the repaired tree, as in SDK-525; a file that fails to parse keeps only its guide headings
+(`key: prose`). A missed comment withholds credit; a match still needs the exact text.
 
 At pin move B (live snapshot `.local/sdk-818/rules.json`, M452 build `c621723d…`, config
 `8574760`, 2,063 shipped files, 35 parse problems):

@@ -151,8 +151,8 @@ fn runs(source: &str) -> Vec<Run> {
 /// Binds preceding, inline and empty-block comments to the parsed keys of one shipped file, and
 /// reads guide headings such as `key: prose`. Defines also inherit a leading group comment
 /// through adjacent siblings until a blank line. Example files expose commented assignments.
-/// Returns the comments and the file's parse problems; a file that fails to parse keeps its
-/// guide headings.
+/// Returns the comments and the file's parse problems. A file that the parser repairs keeps the
+/// comments of the repaired tree; a file that fails to parse keeps only its guide headings.
 pub(crate) fn parse(file: &str, source: &str) -> (Vec<Comment>, Vec<String>) {
     let example = file.rsplit('/').next().is_some_and(|name| {
         let name = name.to_ascii_lowercase();
@@ -177,64 +177,8 @@ pub(crate) fn parse(file: &str, source: &str) -> (Vec<Comment>, Vec<String>) {
     let lines: Vec<_> = view.lines().collect();
     let mut output = named_comments(file, source);
     for comment in runs(&view) {
-        let mut targets: Vec<&Key> = Vec::new();
-        if comment.inline {
-            if let Some(key) = entries
-                .iter()
-                .filter(|k| k.span.line == comment.line || k.span.end_line == comment.line)
-                .max_by_key(|k| {
-                    (
-                        k.span.end_line == comment.line,
-                        if k.span.end_line == comment.line {
-                            k.span.end
-                        } else {
-                            k.span.start
-                        },
-                    )
-                })
-            {
-                targets.push(key);
-            }
-        } else {
-            let next = entries
-                .iter()
-                .filter(|k| k.span.line == comment.end_line + 1)
-                .min_by_key(|k| k.span.start);
-            if let Some(next) = next {
-                targets.push(next);
-                if file.starts_with("common/defines/") {
-                    for sibling in &entries {
-                        if sibling.span.start <= next.span.start
-                            || sibling.path.len() != next.path.len()
-                            || sibling.path[..sibling.path.len() - 1]
-                                != next.path[..next.path.len() - 1]
-                        {
-                            continue;
-                        }
-                        let between = if next.span.line == sibling.span.line {
-                            &[][..]
-                        } else {
-                            &lines[next.span.line..sibling.span.line - 1]
-                        };
-                        if between.iter().any(|line| {
-                            line.trim().is_empty() || line.trim_start().starts_with('#')
-                        }) {
-                            continue;
-                        }
-                        targets.push(sibling);
-                    }
-                }
-            }
-            // Prose inside a block can document that block, including commented examples.
-            if let Some(parent) = entries
-                .iter()
-                .filter(|k| k.span.line < comment.line && k.span.end_line > comment.end_line)
-                .max_by_key(|k| k.path.len())
-                && next.is_none()
-            {
-                targets.push(parent);
-            }
-        }
+        let targets = documented_keys(file, &entries, &lines, &comment);
+
         for key in targets {
             output.push(Comment {
                 file: file.into(),
@@ -246,6 +190,90 @@ pub(crate) fn parse(file: &str, source: &str) -> (Vec<Comment>, Vec<String>) {
         }
     }
     (output, diagnostics)
+}
+
+/// The keys that `comment` documents: for an inline comment, the key on its line; otherwise the
+/// key on the next line (and, in defines, the siblings of its group), or, with no next key, the
+/// innermost block around it.
+fn documented_keys<'a>(
+    file: &str,
+    entries: &'a [Key],
+    lines: &[&str],
+    comment: &Run,
+) -> Vec<&'a Key> {
+    if comment.inline {
+        return inline_key(entries, comment).into_iter().collect();
+    }
+
+    let Some(next) = following_key(entries, comment) else {
+        // Prose inside a block can document that block, including commented examples.
+        return enclosing_block(entries, comment).into_iter().collect();
+    };
+
+    let mut keys = vec![next];
+
+    if file.starts_with("common/defines/") {
+        keys.extend(define_group(entries, lines, next));
+    }
+
+    keys
+}
+
+/// The key that ends on the comment's line, else the last key that starts there.
+fn inline_key<'a>(entries: &'a [Key], comment: &Run) -> Option<&'a Key> {
+    entries
+        .iter()
+        .filter(|k| k.span.line == comment.line || k.span.end_line == comment.line)
+        .max_by_key(|k| {
+            let ends_here = k.span.end_line == comment.line;
+
+            (ends_here, if ends_here { k.span.end } else { k.span.start })
+        })
+}
+
+/// The first key on the line after the comment.
+fn following_key<'a>(entries: &'a [Key], comment: &Run) -> Option<&'a Key> {
+    entries
+        .iter()
+        .filter(|k| k.span.line == comment.end_line + 1)
+        .min_by_key(|k| k.span.start)
+}
+
+/// The later siblings of a define `first` that share its leading comment: those that follow it
+/// with no blank or comment line in between.
+fn define_group<'a>(entries: &'a [Key], lines: &[&str], first: &Key) -> Vec<&'a Key> {
+    let parent = &first.path[..first.path.len() - 1];
+
+    entries
+        .iter()
+        .filter(|sibling| {
+            let is_later_sibling = sibling.span.start > first.span.start
+                && sibling.path.len() == first.path.len()
+                && sibling.path[..sibling.path.len() - 1] == *parent;
+
+            if !is_later_sibling {
+                return false;
+            }
+
+            let between = if first.span.line == sibling.span.line {
+                &[][..]
+            } else {
+                &lines[first.span.line..sibling.span.line - 1]
+            };
+
+            !between
+                .iter()
+                .any(|line| line.trim().is_empty() || line.trim_start().starts_with('#'))
+        })
+        .collect()
+}
+
+/// The innermost key whose block contains the comment.
+fn enclosing_block<'a>(entries: &'a [Key], comment: &Run) -> Option<&'a Key> {
+    entries
+        .iter()
+        .filter(|k| k.span.line < comment.line && k.span.end_line > comment.end_line)
+        .max_by_key(|k| k.path.len())
 }
 
 fn valid_key(key: &str) -> bool {

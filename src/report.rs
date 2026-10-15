@@ -101,7 +101,7 @@ pub fn read_define_files(paths: &[PathBuf]) -> io::Result<BTreeMap<String, Strin
 }
 
 /// Reads the base-game `common/**/*.txt` files of an installation, keyed by their path relative
-/// to the installation root. Rejects symlinks, unreadable or non-UTF-8 files, and an installation
+/// to the installation root (the directory that holds `common`). Rejects symlinks, unreadable or non-UTF-8 files, and an installation
 /// with no such file.
 pub fn read_game_content(installation: &Path) -> io::Result<BTreeMap<String, String>> {
     if fs::symlink_metadata(installation)?.is_symlink() {
@@ -111,14 +111,18 @@ pub fn read_game_content(installation: &Path) -> io::Result<BTreeMap<String, Str
         ));
     }
 
+    let common = installation.join("common");
+
+    if fs::symlink_metadata(&common)?.is_symlink() {
+        return Err(io::Error::new(
+            io::ErrorKind::InvalidInput,
+            "The installation's common directory must not be a symlink",
+        ));
+    }
+
     let mut files = BTreeMap::new();
 
-    visit(
-        installation,
-        &installation.join("common"),
-        "txt",
-        &mut files,
-    )?;
+    visit(installation, &common, "txt", &mut files)?;
 
     if files.is_empty() {
         return Err(io::Error::new(
