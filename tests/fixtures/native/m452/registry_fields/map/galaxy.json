@@ -50,7 +50,8 @@
         "read_scope": {
           "Known": []
         },
-        "accepted_categories": "NotApplicable"
+        "accepted_categories": "NotApplicable",
+        "requirement": "Optional"
       },
       {
         "name": "ring",
@@ -95,7 +96,8 @@
         "reference": "NotEstablished",
         "entry_contexts": [],
         "read_scope": "Unresolved",
-        "accepted_categories": "Unresolved"
+        "accepted_categories": "Unresolved",
+        "requirement": "Optional"
       },
       {
         "name": "num_stars_core_perc",
@@ -226,7 +228,8 @@
         "read_scope": {
           "Known": []
         },
-        "accepted_categories": "NotApplicable"
+        "accepted_categories": "NotApplicable",
+        "requirement": "Optional"
       },
       {
         "name": "core_radius_perc",
@@ -357,7 +360,8 @@
         "read_scope": {
           "Known": []
         },
-        "accepted_categories": "NotApplicable"
+        "accepted_categories": "NotApplicable",
+        "requirement": "Optional"
       },
       {
         "name": "stars_min_dist",
@@ -488,7 +492,8 @@
         "read_scope": {
           "Known": []
         },
-        "accepted_categories": "NotApplicable"
+        "accepted_categories": "NotApplicable",
+        "requirement": "Required"
       },
       {
         "name": "num_arms",
@@ -605,7 +610,8 @@
         "read_scope": {
           "Known": []
         },
-        "accepted_categories": "NotApplicable"
+        "accepted_categories": "NotApplicable",
+        "requirement": "Optional"
       },
       {
         "name": "fallen_empires",
@@ -650,7 +656,8 @@
         "reference": "NotEstablished",
         "entry_contexts": [],
         "read_scope": "Unresolved",
-        "accepted_categories": "Unresolved"
+        "accepted_categories": "Unresolved",
+        "requirement": "Optional"
       },
       {
         "name": "arms",
@@ -695,7 +702,8 @@
         "reference": "NotEstablished",
         "entry_contexts": [],
         "read_scope": "Unresolved",
-        "accepted_categories": "Unresolved"
+        "accepted_categories": "Unresolved",
+        "requirement": "Optional"
       },
       {
         "name": "preview_icon",
@@ -746,7 +754,8 @@
         "read_scope": {
           "Known": []
         },
-        "accepted_categories": "NotApplicable"
+        "accepted_categories": "NotApplicable",
+        "requirement": "Optional"
       },
       {
         "name": "button_icon",
@@ -797,7 +806,8 @@
         "read_scope": {
           "Known": []
         },
-        "accepted_categories": "NotApplicable"
+        "accepted_categories": "NotApplicable",
+        "requirement": "Optional"
       },
       {
         "name": "countries",
@@ -842,7 +852,8 @@
         "reference": "NotEstablished",
         "entry_contexts": [],
         "read_scope": "Unresolved",
-        "accepted_categories": "Unresolved"
+        "accepted_categories": "Unresolved",
+        "requirement": "Optional"
       }
     ],
     "completeness": "Partial",
@@ -853,7 +864,7 @@
           "kind": "registry",
           "name": "map/galaxy"
         },
-        "detail": "Defaults, exhaustive enum domains, occurrence limits, deeper nested grammars, and non-owner runtime callers are not established by this method."
+        "detail": "Defaults, enum domains other than those of keyword fields, occurrence limits, deeper nested grammars, and non-owner runtime callers are not established by this method."
       },
       {
         "kind": "UnresolvedReader",
@@ -981,7 +992,7 @@
           "kind": "field",
           "name": "ring"
         },
-        "detail": "read-scope: scope-argument"
+        "detail": "read-scope: reader-path"
       },
       {
         "kind": "UnresolvedPath",
@@ -989,7 +1000,7 @@
           "kind": "field",
           "name": "fallen_empires"
         },
-        "detail": "read-scope: scope-argument"
+        "detail": "read-scope: reader-path"
       },
       {
         "kind": "UnresolvedPath",
@@ -997,7 +1008,7 @@
           "kind": "field",
           "name": "arms"
         },
-        "detail": "read-scope: scope-argument"
+        "detail": "read-scope: reader-path"
       },
       {
         "kind": "UnresolvedPath",
@@ -1005,7 +1016,7 @@
           "kind": "field",
           "name": "countries"
         },
-        "detail": "read-scope: scope-argument"
+        "detail": "read-scope: reader-path"
       },
       {
         "kind": "OutsideMethod",
@@ -1018,7 +1029,7 @@
           "kind": "field",
           "name": "ring"
         },
-        "detail": "Repeat behavior and nested fields remain unresolved."
+        "detail": "Repeat behavior waits for one shared reader. Nested fields remain unresolved."
       },
       {
         "kind": "UnresolvedStorage",
@@ -1026,7 +1037,7 @@
           "kind": "field",
           "name": "fallen_empires"
         },
-        "detail": "Repeat behavior and nested fields remain unresolved."
+        "detail": "Repeat behavior waits for one shared reader. Nested fields remain unresolved."
       },
       {
         "kind": "UnresolvedStorage",
@@ -1034,7 +1045,7 @@
           "kind": "field",
           "name": "arms"
         },
-        "detail": "Repeat behavior and nested fields remain unresolved."
+        "detail": "Repeat behavior waits for one shared reader. Nested fields remain unresolved."
       },
       {
         "kind": "UnresolvedStorage",
@@ -1042,13 +1053,13 @@
           "kind": "field",
           "name": "countries"
         },
-        "detail": "Repeat behavior and nested fields remain unresolved."
+        "detail": "Repeat behavior waits for one shared reader. Nested fields remain unresolved."
       }
     ],
     "source": {
       "build": "c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b",
       "native_version": "0.1.0",
-      "method": "registry-fields/v33",
+      "method": "registry-fields/v45",
       "basis": "StaticAnalysis"
     }
   }

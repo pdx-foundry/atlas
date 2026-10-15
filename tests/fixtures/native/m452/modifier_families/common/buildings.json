@@ -48,7 +48,7 @@
       {
         "kind": "UnnamedDeclaration",
         "subject": null,
-        "detail": "18 sites that compose modifier names at run time are not joined to a registry (1 inside the registration function; 4 reached from the post-read code of content objects that are not items of a named registry; 13 reached by no chain of calls from a registry's code); some may generate this registry's modifiers"
+        "detail": "17 sites that compose modifier names at run time are not joined to a registry (1 inside the registration function; 3 reached from the post-read code of content objects that are not items of a named registry; 13 reached by no chain of calls from a registry's code); some may generate this registry's modifiers"
       },
       {
         "kind": "OutsideMethod",
@@ -62,7 +62,7 @@
     "source": {
       "build": "c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b",
       "native_version": "0.1.0",
-      "method": "modifier-families/v3",
+      "method": "modifier-families/v4",
       "basis": "StaticAnalysis"
     }
   }

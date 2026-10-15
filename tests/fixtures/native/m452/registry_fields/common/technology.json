@@ -26,7 +26,8 @@
         "reference": "NotEstablished",
         "entry_contexts": [],
         "read_scope": "Unresolved",
-        "accepted_categories": "Unresolved"
+        "accepted_categories": "Unresolved",
+        "requirement": "Unknown"
       },
       {
         "name": "weight",
@@ -157,7 +158,8 @@
         "read_scope": {
           "Known": []
         },
-        "accepted_categories": "NotApplicable"
+        "accepted_categories": "NotApplicable",
+        "requirement": "Unknown"
       },
       {
         "name": "prerequisites",
@@ -184,7 +186,8 @@
         "reference": "NotEstablished",
         "entry_contexts": [],
         "read_scope": "Unresolved",
-        "accepted_categories": "Unresolved"
+        "accepted_categories": "Unresolved",
+        "requirement": "Unknown"
       },
       {
         "name": "potential",
@@ -260,7 +263,8 @@
             }
           ]
         },
-        "accepted_categories": "NotApplicable"
+        "accepted_categories": "NotApplicable",
+        "requirement": "Unknown"
       },
       {
         "name": "start_tech",
@@ -277,7 +281,7 @@
         },
         "shape": {
           "value": "Scalar",
-          "repeat": "Unknown"
+          "repeat": "Replace"
         },
         "read": [
           {
@@ -297,7 +301,7 @@
                 },
                 "shape": {
                   "value": "Scalar",
-                  "repeat": "Unknown"
+                  "repeat": "Replace"
                 }
               }
             }
@@ -311,7 +315,8 @@
         "read_scope": {
           "Known": []
         },
-        "accepted_categories": "NotApplicable"
+        "accepted_categories": "NotApplicable",
+        "requirement": "Unknown"
       },
       {
         "name": "levels",
@@ -428,7 +433,8 @@
         "read_scope": {
           "Known": []
         },
-        "accepted_categories": "NotApplicable"
+        "accepted_categories": "NotApplicable",
+        "requirement": "Unknown"
       },
       {
         "name": "risk",
@@ -559,7 +565,8 @@
         "read_scope": {
           "Known": []
         },
-        "accepted_categories": "NotApplicable"
+        "accepted_categories": "NotApplicable",
+        "requirement": "Unknown"
       },
       {
         "name": "risk_event",
@@ -586,7 +593,8 @@
         "reference": "NotEstablished",
         "entry_contexts": [],
         "read_scope": "Unresolved",
-        "accepted_categories": "Unresolved"
+        "accepted_categories": "Unresolved",
+        "requirement": "Unknown"
       },
       {
         "name": "component_modifier",
@@ -682,7 +690,8 @@
                   "read_scope": {
                     "Known": []
                   },
-                  "accepted_categories": "NotApplicable"
+                  "accepted_categories": "NotApplicable",
+                  "requirement": "Unknown"
                 },
                 {
                   "name": "data",
@@ -799,7 +808,8 @@
                   "read_scope": {
                     "Known": []
                   },
-                  "accepted_categories": "NotApplicable"
+                  "accepted_categories": "NotApplicable",
+                  "requirement": "Unknown"
                 }
               ]
             },
@@ -914,25 +924,48 @@
             "Galactic Community",
             "Colony"
           ]
-        }
+        },
+        "requirement": "Unknown"
       },
       {
         "name": "target_components",
         "reader": {
-          "numeric": "Unresolved",
-          "scoped_operand": "Unresolved",
-          "id": null,
-          "kind": "Unknown",
-          "family": "Unknown"
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "9bd187b656399df6",
+          "kind": "Block",
+          "family": "NotApplicable"
         },
         "shape": {
-          "value": "Unknown",
-          "repeat": "Unknown"
+          "value": "Block",
+          "repeat": "Accumulate"
         },
         "read": [
           {
             "condition": "Always",
-            "outcome": "Unresolved"
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "9bd187b656399df6",
+                  "kind": "Block",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Block",
+                  "repeat": "Accumulate"
+                }
+              }
+            }
           }
         ],
         "members": "Unresolved",
@@ -940,8 +973,11 @@
         "uses": [],
         "reference": "NotEstablished",
         "entry_contexts": [],
-        "read_scope": "Unresolved",
-        "accepted_categories": "Unresolved"
+        "read_scope": {
+          "Known": []
+        },
+        "accepted_categories": "NotApplicable",
+        "requirement": "Unknown"
       },
       {
         "name": "cost_per_level",
@@ -1072,25 +1108,48 @@
         "read_scope": {
           "Known": []
         },
-        "accepted_categories": "NotApplicable"
+        "accepted_categories": "NotApplicable",
+        "requirement": "Unknown"
       },
       {
         "name": "feature_flags",
         "reader": {
-          "numeric": "Unresolved",
-          "scoped_operand": "Unresolved",
-          "id": null,
-          "kind": "Unknown",
-          "family": "Unknown"
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "9bd187b656399df6",
+          "kind": "Block",
+          "family": "NotApplicable"
         },
         "shape": {
-          "value": "Unknown",
+          "value": "Block",
           "repeat": "Unknown"
         },
         "read": [
           {
             "condition": "Always",
-            "outcome": "Unresolved"
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "9bd187b656399df6",
+                  "kind": "Block",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Block",
+                  "repeat": "Unknown"
+                }
+              }
+            }
           }
         ],
         "members": "Unresolved",
@@ -1098,8 +1157,11 @@
         "uses": [],
         "reference": "NotEstablished",
         "entry_contexts": [],
-        "read_scope": "Unresolved",
-        "accepted_categories": "Unresolved"
+        "read_scope": {
+          "Known": []
+        },
+        "accepted_categories": "NotApplicable",
+        "requirement": "Unknown"
       },
       {
         "name": "unlocked",
@@ -1116,7 +1178,7 @@
         },
         "shape": {
           "value": "Scalar",
-          "repeat": "Unknown"
+          "repeat": "Replace"
         },
         "read": [
           {
@@ -1136,7 +1198,7 @@
                 },
                 "shape": {
                   "value": "Scalar",
-                  "repeat": "Unknown"
+                  "repeat": "Replace"
                 }
               }
             }
@@ -1150,7 +1212,8 @@
         "read_scope": {
           "Known": []
         },
-        "accepted_categories": "NotApplicable"
+        "accepted_categories": "NotApplicable",
+        "requirement": "Unknown"
       },
       {
         "name": "hidden",
@@ -1167,7 +1230,7 @@
         },
         "shape": {
           "value": "Scalar",
-          "repeat": "Unknown"
+          "repeat": "Replace"
         },
         "read": [
           {
@@ -1187,7 +1250,7 @@
                 },
                 "shape": {
                   "value": "Scalar",
-                  "repeat": "Unknown"
+                  "repeat": "Replace"
                 }
               }
             }
@@ -1201,7 +1264,8 @@
         "read_scope": {
           "Known": []
         },
-        "accepted_categories": "NotApplicable"
+        "accepted_categories": "NotApplicable",
+        "requirement": "Unknown"
       },
       {
         "name": "weight_modifier",
@@ -1388,7 +1452,8 @@
                   "read_scope": {
                     "Known": []
                   },
-                  "accepted_categories": "NotApplicable"
+                  "accepted_categories": "NotApplicable",
+                  "requirement": "Unknown"
                 },
                 {
                   "name": "months",
@@ -1477,7 +1542,8 @@
                   "read_scope": {
                     "Known": []
                   },
-                  "accepted_categories": "NotApplicable"
+                  "accepted_categories": "NotApplicable",
+                  "requirement": "Unknown"
                 },
                 {
                   "name": "years",
@@ -1566,7 +1632,8 @@
                   "read_scope": {
                     "Known": []
                   },
-                  "accepted_categories": "NotApplicable"
+                  "accepted_categories": "NotApplicable",
+                  "requirement": "Unknown"
                 },
                 {
                   "name": "factor",
@@ -1704,7 +1771,8 @@
                   "read_scope": {
                     "Known": []
                   },
-                  "accepted_categories": "NotApplicable"
+                  "accepted_categories": "NotApplicable",
+                  "requirement": "Unknown"
                 },
                 {
                   "name": "base",
@@ -1835,7 +1903,8 @@
                   "read_scope": {
                     "Known": []
                   },
-                  "accepted_categories": "NotApplicable"
+                  "accepted_categories": "NotApplicable",
+                  "requirement": "Unknown"
                 },
                 {
                   "name": "modifier",
@@ -1934,7 +2003,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "desc",
@@ -1985,7 +2055,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           }
                         ]
                       },
@@ -3063,7 +3134,8 @@
                       "Enclosing"
                     ]
                   },
-                  "accepted_categories": "NotApplicable"
+                  "accepted_categories": "NotApplicable",
+                  "requirement": "Unknown"
                 },
                 {
                   "name": "scaled_modifier",
@@ -3162,7 +3234,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "add",
@@ -3293,7 +3366,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "calc",
@@ -3351,7 +3425,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "mul",
@@ -3482,7 +3557,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "div",
@@ -3613,7 +3689,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "limit",
@@ -3630,7 +3707,7 @@
                             },
                             "shape": {
                               "value": "Block",
-                              "repeat": "Unknown"
+                              "repeat": "Merges"
                             },
                             "read": [
                               {
@@ -3650,7 +3727,7 @@
                                     },
                                     "shape": {
                                       "value": "Block",
-                                      "repeat": "Unknown"
+                                      "repeat": "Merges"
                                     }
                                   }
                                 }
@@ -3662,7 +3739,8 @@
                             "reference": "NotEstablished",
                             "entry_contexts": [],
                             "read_scope": "Unresolved",
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           }
                         ]
                       },
@@ -3678,7 +3756,8 @@
                   "reference": "NotEstablished",
                   "entry_contexts": [],
                   "read_scope": "Unresolved",
-                  "accepted_categories": "Unresolved"
+                  "accepted_categories": "Unresolved",
+                  "requirement": "Unknown"
                 },
                 {
                   "name": "complex_trigger_modifier",
@@ -3777,7 +3856,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "trigger",
@@ -3839,7 +3919,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "potential",
@@ -3888,7 +3969,8 @@
                             "reference": "NotEstablished",
                             "entry_contexts": [],
                             "read_scope": "Unresolved",
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "multiplier",
@@ -4019,7 +4101,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "min_value",
@@ -4150,7 +4233,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "max_value",
@@ -4281,7 +4365,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "parameters",
@@ -4318,7 +4403,8 @@
                             "reference": "NotEstablished",
                             "entry_contexts": [],
                             "read_scope": "Unresolved",
-                            "accepted_categories": "Unresolved"
+                            "accepted_categories": "Unresolved",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "trigger_scope",
@@ -4369,7 +4455,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "mode",
@@ -4436,7 +4523,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "mult",
@@ -4567,7 +4655,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           }
                         ]
                       },
@@ -4583,7 +4672,8 @@
                   "reference": "NotEstablished",
                   "entry_contexts": [],
                   "read_scope": "Unresolved",
-                  "accepted_categories": "Unresolved"
+                  "accepted_categories": "Unresolved",
+                  "requirement": "Unknown"
                 }
               ]
             },
@@ -5599,7 +5689,8 @@
             }
           ]
         },
-        "accepted_categories": "NotApplicable"
+        "accepted_categories": "NotApplicable",
+        "requirement": "Unknown"
       },
       {
         "name": "is_rare",
@@ -5616,7 +5707,7 @@
         },
         "shape": {
           "value": "Scalar",
-          "repeat": "Unknown"
+          "repeat": "Replace"
         },
         "read": [
           {
@@ -5636,7 +5727,7 @@
                 },
                 "shape": {
                   "value": "Scalar",
-                  "repeat": "Unknown"
+                  "repeat": "Replace"
                 }
               }
             }
@@ -5650,7 +5741,8 @@
         "read_scope": {
           "Known": []
         },
-        "accepted_categories": "NotApplicable"
+        "accepted_categories": "NotApplicable",
+        "requirement": "Unknown"
       },
       {
         "name": "is_reverse_engineerable",
@@ -5667,7 +5759,7 @@
         },
         "shape": {
           "value": "Scalar",
-          "repeat": "Unknown"
+          "repeat": "Replace"
         },
         "read": [
           {
@@ -5687,7 +5779,7 @@
                 },
                 "shape": {
                   "value": "Scalar",
-                  "repeat": "Unknown"
+                  "repeat": "Replace"
                 }
               }
             }
@@ -5701,7 +5793,8 @@
         "read_scope": {
           "Known": []
         },
-        "accepted_categories": "NotApplicable"
+        "accepted_categories": "NotApplicable",
+        "requirement": "Unknown"
       },
       {
         "name": "mod_weight_if_group_picked",
@@ -5746,7 +5839,8 @@
         "reference": "NotEstablished",
         "entry_contexts": [],
         "read_scope": "Unresolved",
-        "accepted_categories": "Unresolved"
+        "accepted_categories": "Unresolved",
+        "requirement": "Unknown"
       },
       {
         "name": "ai_weight",
@@ -5933,7 +6027,8 @@
                   "read_scope": {
                     "Known": []
                   },
-                  "accepted_categories": "NotApplicable"
+                  "accepted_categories": "NotApplicable",
+                  "requirement": "Unknown"
                 },
                 {
                   "name": "months",
@@ -6022,7 +6117,8 @@
                   "read_scope": {
                     "Known": []
                   },
-                  "accepted_categories": "NotApplicable"
+                  "accepted_categories": "NotApplicable",
+                  "requirement": "Unknown"
                 },
                 {
                   "name": "years",
@@ -6111,7 +6207,8 @@
                   "read_scope": {
                     "Known": []
                   },
-                  "accepted_categories": "NotApplicable"
+                  "accepted_categories": "NotApplicable",
+                  "requirement": "Unknown"
                 },
                 {
                   "name": "factor",
@@ -6249,7 +6346,8 @@
                   "read_scope": {
                     "Known": []
                   },
-                  "accepted_categories": "NotApplicable"
+                  "accepted_categories": "NotApplicable",
+                  "requirement": "Unknown"
                 },
                 {
                   "name": "base",
@@ -6380,7 +6478,8 @@
                   "read_scope": {
                     "Known": []
                   },
-                  "accepted_categories": "NotApplicable"
+                  "accepted_categories": "NotApplicable",
+                  "requirement": "Unknown"
                 },
                 {
                   "name": "modifier",
@@ -6479,7 +6578,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "desc",
@@ -6530,7 +6630,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           }
                         ]
                       },
@@ -7608,7 +7709,8 @@
                       "Enclosing"
                     ]
                   },
-                  "accepted_categories": "NotApplicable"
+                  "accepted_categories": "NotApplicable",
+                  "requirement": "Unknown"
                 },
                 {
                   "name": "scaled_modifier",
@@ -7707,7 +7809,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "add",
@@ -7838,7 +7941,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "calc",
@@ -7896,7 +8000,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "mul",
@@ -8027,7 +8132,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "div",
@@ -8158,7 +8264,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "limit",
@@ -8175,7 +8282,7 @@
                             },
                             "shape": {
                               "value": "Block",
-                              "repeat": "Unknown"
+                              "repeat": "Merges"
                             },
                             "read": [
                               {
@@ -8195,7 +8302,7 @@
                                     },
                                     "shape": {
                                       "value": "Block",
-                                      "repeat": "Unknown"
+                                      "repeat": "Merges"
                                     }
                                   }
                                 }
@@ -8207,7 +8314,8 @@
                             "reference": "NotEstablished",
                             "entry_contexts": [],
                             "read_scope": "Unresolved",
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           }
                         ]
                       },
@@ -8223,7 +8331,8 @@
                   "reference": "NotEstablished",
                   "entry_contexts": [],
                   "read_scope": "Unresolved",
-                  "accepted_categories": "Unresolved"
+                  "accepted_categories": "Unresolved",
+                  "requirement": "Unknown"
                 },
                 {
                   "name": "complex_trigger_modifier",
@@ -8322,7 +8431,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "trigger",
@@ -8384,7 +8494,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "potential",
@@ -8433,7 +8544,8 @@
                             "reference": "NotEstablished",
                             "entry_contexts": [],
                             "read_scope": "Unresolved",
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "multiplier",
@@ -8564,7 +8676,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "min_value",
@@ -8695,7 +8808,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "max_value",
@@ -8826,7 +8940,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "parameters",
@@ -8863,7 +8978,8 @@
                             "reference": "NotEstablished",
                             "entry_contexts": [],
                             "read_scope": "Unresolved",
-                            "accepted_categories": "Unresolved"
+                            "accepted_categories": "Unresolved",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "trigger_scope",
@@ -8914,7 +9030,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "mode",
@@ -8981,7 +9098,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "mult",
@@ -9112,7 +9230,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           }
                         ]
                       },
@@ -9128,7 +9247,8 @@
                   "reference": "NotEstablished",
                   "entry_contexts": [],
                   "read_scope": "Unresolved",
-                  "accepted_categories": "Unresolved"
+                  "accepted_categories": "Unresolved",
+                  "requirement": "Unknown"
                 }
               ]
             },
@@ -10144,7 +10264,8 @@
             }
           ]
         },
-        "accepted_categories": "NotApplicable"
+        "accepted_categories": "NotApplicable",
+        "requirement": "Unknown"
       },
       {
         "name": "is_dangerous",
@@ -10161,7 +10282,7 @@
         },
         "shape": {
           "value": "Scalar",
-          "repeat": "Unknown"
+          "repeat": "Replace"
         },
         "read": [
           {
@@ -10181,7 +10302,7 @@
                 },
                 "shape": {
                   "value": "Scalar",
-                  "repeat": "Unknown"
+                  "repeat": "Replace"
                 }
               }
             }
@@ -10195,7 +10316,8 @@
         "read_scope": {
           "Known": []
         },
-        "accepted_categories": "NotApplicable"
+        "accepted_categories": "NotApplicable",
+        "requirement": "Unknown"
       },
       {
         "name": "gateway",
@@ -10246,7 +10368,8 @@
         "read_scope": {
           "Known": []
         },
-        "accepted_categories": "NotApplicable"
+        "accepted_categories": "NotApplicable",
+        "requirement": "Unknown"
       },
       {
         "name": "technology_swap",
@@ -10273,34 +10396,60 @@
         "reference": "NotEstablished",
         "entry_contexts": [],
         "read_scope": "Unresolved",
-        "accepted_categories": "Unresolved"
+        "accepted_categories": "Unresolved",
+        "requirement": "Unknown"
       },
       {
         "name": "area",
         "reader": {
-          "numeric": "Unresolved",
-          "scoped_operand": "Unresolved",
-          "id": null,
-          "kind": "Unknown",
-          "family": "Unknown"
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "f06ce059b7f28c59",
+          "kind": "Keyword",
+          "family": "NotApplicable"
         },
         "shape": {
-          "value": "Unknown",
-          "repeat": "Unknown"
+          "value": "Scalar",
+          "repeat": "Replace"
         },
         "read": [
           {
             "condition": "Always",
-            "outcome": "Unresolved"
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "f06ce059b7f28c59",
+                  "kind": "Keyword",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
           }
         ],
-        "members": "Unresolved",
+        "members": "None",
         "domain": "Unknown",
         "uses": [],
         "reference": "NotEstablished",
         "entry_contexts": [],
-        "read_scope": "Unresolved",
-        "accepted_categories": "Unresolved"
+        "read_scope": {
+          "Known": []
+        },
+        "accepted_categories": "NotApplicable",
+        "requirement": "Unknown"
       },
       {
         "name": "modifier",
@@ -10346,7 +10495,7 @@
         "members": {
           "ModifierBlock": {
             "fixed_keys": {
-              "Partial": [
+              "Known": [
                 {
                   "name": "name",
                   "reader": {
@@ -10396,7 +10545,8 @@
                   "read_scope": {
                     "Known": []
                   },
-                  "accepted_categories": "NotApplicable"
+                  "accepted_categories": "NotApplicable",
+                  "requirement": "Unknown"
                 },
                 {
                   "name": "icon",
@@ -10447,7 +10597,8 @@
                   "read_scope": {
                     "Known": []
                   },
-                  "accepted_categories": "NotApplicable"
+                  "accepted_categories": "NotApplicable",
+                  "requirement": "Unknown"
                 },
                 {
                   "name": "key",
@@ -10498,7 +10649,8 @@
                   "read_scope": {
                     "Known": []
                   },
-                  "accepted_categories": "NotApplicable"
+                  "accepted_categories": "NotApplicable",
+                  "requirement": "Unknown"
                 },
                 {
                   "name": "data",
@@ -10615,7 +10767,8 @@
                   "read_scope": {
                     "Known": []
                   },
-                  "accepted_categories": "NotApplicable"
+                  "accepted_categories": "NotApplicable",
+                  "requirement": "Unknown"
                 },
                 {
                   "name": "custom_tooltip",
@@ -10666,7 +10819,8 @@
                   "read_scope": {
                     "Known": []
                   },
-                  "accepted_categories": "NotApplicable"
+                  "accepted_categories": "NotApplicable",
+                  "requirement": "Unknown"
                 },
                 {
                   "name": "apply_modifier_to_other_planets",
@@ -10717,7 +10871,8 @@
                   "read_scope": {
                     "Known": []
                   },
-                  "accepted_categories": "NotApplicable"
+                  "accepted_categories": "NotApplicable",
+                  "requirement": "Unknown"
                 },
                 {
                   "name": "show_only_custom_tooltip",
@@ -10768,7 +10923,8 @@
                   "read_scope": {
                     "Known": []
                   },
-                  "accepted_categories": "NotApplicable"
+                  "accepted_categories": "NotApplicable",
+                  "requirement": "Unknown"
                 },
                 {
                   "name": "icon_frame",
@@ -10885,7 +11041,8 @@
                   "read_scope": {
                     "Known": []
                   },
-                  "accepted_categories": "NotApplicable"
+                  "accepted_categories": "NotApplicable",
+                  "requirement": "Unknown"
                 },
                 {
                   "name": "description",
@@ -10936,7 +11093,8 @@
                   "read_scope": {
                     "Known": []
                   },
-                  "accepted_categories": "NotApplicable"
+                  "accepted_categories": "NotApplicable",
+                  "requirement": "Unknown"
                 },
                 {
                   "name": "important",
@@ -10987,25 +11145,48 @@
                   "read_scope": {
                     "Known": []
                   },
-                  "accepted_categories": "NotApplicable"
+                  "accepted_categories": "NotApplicable",
+                  "requirement": "Unknown"
                 },
                 {
                   "name": "description_parameters",
                   "reader": {
-                    "numeric": "Unresolved",
-                    "scoped_operand": "Unresolved",
-                    "id": null,
-                    "kind": "Unknown",
-                    "family": "Unknown"
+                    "numeric": {
+                      "Known": null
+                    },
+                    "scoped_operand": {
+                      "Known": null
+                    },
+                    "id": "15fb252014da6654",
+                    "kind": "Block",
+                    "family": "NotApplicable"
                   },
                   "shape": {
-                    "value": "Unknown",
-                    "repeat": "Unknown"
+                    "value": "Block",
+                    "repeat": "Accumulate"
                   },
                   "read": [
                     {
                       "condition": "Unresolved",
-                      "outcome": "Unresolved"
+                      "outcome": {
+                        "Read": {
+                          "reader": {
+                            "numeric": {
+                              "Known": null
+                            },
+                            "scoped_operand": {
+                              "Known": null
+                            },
+                            "id": "15fb252014da6654",
+                            "kind": "Block",
+                            "family": "NotApplicable"
+                          },
+                          "shape": {
+                            "value": "Block",
+                            "repeat": "Accumulate"
+                          }
+                        }
+                      }
                     },
                     {
                       "condition": {
@@ -11014,7 +11195,25 @@
                           "Unresolved"
                         ]
                       },
-                      "outcome": "Unresolved"
+                      "outcome": {
+                        "Read": {
+                          "reader": {
+                            "numeric": {
+                              "Known": null
+                            },
+                            "scoped_operand": {
+                              "Known": null
+                            },
+                            "id": "15fb252014da6654",
+                            "kind": "Block",
+                            "family": "NotApplicable"
+                          },
+                          "shape": {
+                            "value": "Block",
+                            "repeat": "Accumulate"
+                          }
+                        }
+                      }
                     },
                     {
                       "condition": {
@@ -11024,7 +11223,25 @@
                           "Unresolved"
                         ]
                       },
-                      "outcome": "Unresolved"
+                      "outcome": {
+                        "Read": {
+                          "reader": {
+                            "numeric": {
+                              "Known": null
+                            },
+                            "scoped_operand": {
+                              "Known": null
+                            },
+                            "id": "15fb252014da6654",
+                            "kind": "Block",
+                            "family": "NotApplicable"
+                          },
+                          "shape": {
+                            "value": "Block",
+                            "repeat": "Accumulate"
+                          }
+                        }
+                      }
                     },
                     {
                       "condition": {
@@ -11034,16 +11251,55 @@
                           "Unresolved"
                         ]
                       },
-                      "outcome": "Unresolved"
+                      "outcome": {
+                        "Read": {
+                          "reader": {
+                            "numeric": {
+                              "Known": null
+                            },
+                            "scoped_operand": {
+                              "Known": null
+                            },
+                            "id": "15fb252014da6654",
+                            "kind": "Block",
+                            "family": "NotApplicable"
+                          },
+                          "shape": {
+                            "value": "Block",
+                            "repeat": "Accumulate"
+                          }
+                        }
+                      }
                     }
                   ],
-                  "members": "Unresolved",
+                  "members": {
+                    "AnyKey": {
+                      "value_forms": {
+                        "Known": [
+                          "Number",
+                          "Text",
+                          {
+                            "Keyword": "long_float"
+                          },
+                          {
+                            "Keyword": "num64"
+                          },
+                          {
+                            "Keyword": "unum64"
+                          }
+                        ]
+                      }
+                    }
+                  },
                   "domain": "Unknown",
                   "uses": [],
                   "reference": "NotEstablished",
                   "entry_contexts": [],
-                  "read_scope": "Unresolved",
-                  "accepted_categories": "Unresolved"
+                  "read_scope": {
+                    "Known": []
+                  },
+                  "accepted_categories": "NotApplicable",
+                  "requirement": "Unknown"
                 },
                 {
                   "name": "divide_over_pop_groups",
@@ -11060,7 +11316,7 @@
                   },
                   "shape": {
                     "value": "Scalar",
-                    "repeat": "Unknown"
+                    "repeat": "Replace"
                   },
                   "read": [
                     {
@@ -11080,7 +11336,7 @@
                           },
                           "shape": {
                             "value": "Scalar",
-                            "repeat": "Unknown"
+                            "repeat": "Replace"
                           }
                         }
                       }
@@ -11094,7 +11350,8 @@
                   "read_scope": {
                     "Known": []
                   },
-                  "accepted_categories": "NotApplicable"
+                  "accepted_categories": "NotApplicable",
+                  "requirement": "Unknown"
                 },
                 {
                   "name": "hide_from_country_list",
@@ -11145,7 +11402,8 @@
                   "read_scope": {
                     "Known": []
                   },
-                  "accepted_categories": "NotApplicable"
+                  "accepted_categories": "NotApplicable",
+                  "requirement": "Unknown"
                 }
               ]
             },
@@ -11260,7 +11518,8 @@
             "Galactic Community",
             "Colony"
           ]
-        }
+        },
+        "requirement": "Unknown"
       },
       {
         "name": "cost",
@@ -11447,7 +11706,8 @@
                   "read_scope": {
                     "Known": []
                   },
-                  "accepted_categories": "NotApplicable"
+                  "accepted_categories": "NotApplicable",
+                  "requirement": "Unknown"
                 },
                 {
                   "name": "months",
@@ -11536,7 +11796,8 @@
                   "read_scope": {
                     "Known": []
                   },
-                  "accepted_categories": "NotApplicable"
+                  "accepted_categories": "NotApplicable",
+                  "requirement": "Unknown"
                 },
                 {
                   "name": "years",
@@ -11625,7 +11886,8 @@
                   "read_scope": {
                     "Known": []
                   },
-                  "accepted_categories": "NotApplicable"
+                  "accepted_categories": "NotApplicable",
+                  "requirement": "Unknown"
                 },
                 {
                   "name": "factor",
@@ -11763,7 +12025,8 @@
                   "read_scope": {
                     "Known": []
                   },
-                  "accepted_categories": "NotApplicable"
+                  "accepted_categories": "NotApplicable",
+                  "requirement": "Unknown"
                 },
                 {
                   "name": "base",
@@ -11894,7 +12157,8 @@
                   "read_scope": {
                     "Known": []
                   },
-                  "accepted_categories": "NotApplicable"
+                  "accepted_categories": "NotApplicable",
+                  "requirement": "Unknown"
                 },
                 {
                   "name": "modifier",
@@ -11993,7 +12257,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "desc",
@@ -12044,7 +12309,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           }
                         ]
                       },
@@ -13122,7 +13388,8 @@
                       "Enclosing"
                     ]
                   },
-                  "accepted_categories": "NotApplicable"
+                  "accepted_categories": "NotApplicable",
+                  "requirement": "Unknown"
                 },
                 {
                   "name": "scaled_modifier",
@@ -13221,7 +13488,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "add",
@@ -13352,7 +13620,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "calc",
@@ -13410,7 +13679,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "mul",
@@ -13541,7 +13811,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "div",
@@ -13672,7 +13943,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "limit",
@@ -13689,7 +13961,7 @@
                             },
                             "shape": {
                               "value": "Block",
-                              "repeat": "Unknown"
+                              "repeat": "Merges"
                             },
                             "read": [
                               {
@@ -13709,7 +13981,7 @@
                                     },
                                     "shape": {
                                       "value": "Block",
-                                      "repeat": "Unknown"
+                                      "repeat": "Merges"
                                     }
                                   }
                                 }
@@ -13721,7 +13993,8 @@
                             "reference": "NotEstablished",
                             "entry_contexts": [],
                             "read_scope": "Unresolved",
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           }
                         ]
                       },
@@ -13737,7 +14010,8 @@
                   "reference": "NotEstablished",
                   "entry_contexts": [],
                   "read_scope": "Unresolved",
-                  "accepted_categories": "Unresolved"
+                  "accepted_categories": "Unresolved",
+                  "requirement": "Unknown"
                 },
                 {
                   "name": "complex_trigger_modifier",
@@ -13836,7 +14110,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "trigger",
@@ -13898,7 +14173,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "potential",
@@ -13947,7 +14223,8 @@
                             "reference": "NotEstablished",
                             "entry_contexts": [],
                             "read_scope": "Unresolved",
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "multiplier",
@@ -14078,7 +14355,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "min_value",
@@ -14209,7 +14487,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "max_value",
@@ -14340,7 +14619,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "parameters",
@@ -14377,7 +14657,8 @@
                             "reference": "NotEstablished",
                             "entry_contexts": [],
                             "read_scope": "Unresolved",
-                            "accepted_categories": "Unresolved"
+                            "accepted_categories": "Unresolved",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "trigger_scope",
@@ -14428,7 +14709,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "mode",
@@ -14495,7 +14777,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           },
                           {
                             "name": "mult",
@@ -14626,7 +14909,8 @@
                             "read_scope": {
                               "Known": []
                             },
-                            "accepted_categories": "NotApplicable"
+                            "accepted_categories": "NotApplicable",
+                            "requirement": "Unknown"
                           }
                         ]
                       },
@@ -14642,7 +14926,8 @@
                   "reference": "NotEstablished",
                   "entry_contexts": [],
                   "read_scope": "Unresolved",
-                  "accepted_categories": "Unresolved"
+                  "accepted_categories": "Unresolved",
+                  "requirement": "Unknown"
                 }
               ]
             },
@@ -15629,7 +15914,23 @@
         "domain": "Unknown",
         "uses": [],
         "reference": "NotEstablished",
-        "entry_contexts": [],
+        "entry_contexts": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ],
+            "prev": [
+              "SelfLink"
+            ]
+          }
+        ],
         "read_scope": {
           "Known": [
             {
@@ -15642,7 +15943,8 @@
             }
           ]
         },
-        "accepted_categories": "NotApplicable"
+        "accepted_categories": "NotApplicable",
+        "requirement": "Unknown"
       },
       {
         "name": "starting_potential",
@@ -15718,7 +16020,8 @@
             }
           ]
         },
-        "accepted_categories": "NotApplicable"
+        "accepted_categories": "NotApplicable",
+        "requirement": "Unknown"
       },
       {
         "name": "is_insight",
@@ -15735,7 +16038,7 @@
         },
         "shape": {
           "value": "Scalar",
-          "repeat": "Unknown"
+          "repeat": "Replace"
         },
         "read": [
           {
@@ -15755,7 +16058,7 @@
                 },
                 "shape": {
                   "value": "Scalar",
-                  "repeat": "Unknown"
+                  "repeat": "Replace"
                 }
               }
             }
@@ -15769,7 +16072,8 @@
         "read_scope": {
           "Known": []
         },
-        "accepted_categories": "NotApplicable"
+        "accepted_categories": "NotApplicable",
+        "requirement": "Unknown"
       },
       {
         "name": "is_custom_tech_1",
@@ -15786,7 +16090,7 @@
         },
         "shape": {
           "value": "Scalar",
-          "repeat": "Unknown"
+          "repeat": "Replace"
         },
         "read": [
           {
@@ -15806,7 +16110,7 @@
                 },
                 "shape": {
                   "value": "Scalar",
-                  "repeat": "Unknown"
+                  "repeat": "Replace"
                 }
               }
             }
@@ -15820,7 +16124,8 @@
         "read_scope": {
           "Known": []
         },
-        "accepted_categories": "NotApplicable"
+        "accepted_categories": "NotApplicable",
+        "requirement": "Unknown"
       },
       {
         "name": "is_custom_tech_3",
@@ -15837,7 +16142,7 @@
         },
         "shape": {
           "value": "Scalar",
-          "repeat": "Unknown"
+          "repeat": "Replace"
         },
         "read": [
           {
@@ -15857,7 +16162,7 @@
                 },
                 "shape": {
                   "value": "Scalar",
-                  "repeat": "Unknown"
+                  "repeat": "Replace"
                 }
               }
             }
@@ -15871,7 +16176,8 @@
         "read_scope": {
           "Known": []
         },
-        "accepted_categories": "NotApplicable"
+        "accepted_categories": "NotApplicable",
+        "requirement": "Unknown"
       }
     ],
     "completeness": "Partial",
@@ -15882,7 +16188,7 @@
           "kind": "registry",
           "name": "common/technology"
         },
-        "detail": "Defaults, exhaustive enum domains, occurrence limits, deeper nested grammars, and non-owner runtime callers are not established by this method."
+        "detail": "Defaults, enum domains other than those of keyword fields, occurrence limits, deeper nested grammars, and non-owner runtime callers are not established by this method."
       },
       {
         "kind": "UnresolvedReader",
@@ -15912,22 +16218,6 @@
         "kind": "UnresolvedReader",
         "subject": {
           "kind": "field",
-          "name": "target_components"
-        },
-        "detail": "The field's alternatives do not establish one shared reader."
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "field",
-          "name": "feature_flags"
-        },
-        "detail": "The field's alternatives do not establish one shared reader."
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "field",
           "name": "mod_weight_if_group_picked"
         },
         "detail": "The field's alternatives do not establish one shared reader."
@@ -15941,12 +16231,12 @@
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
-        "kind": "UnresolvedReader",
+        "kind": "ReaderSemantics",
         "subject": {
           "kind": "field",
           "name": "area"
         },
-        "detail": "The field's alternatives do not establish one shared reader."
+        "detail": "An unknown name keeps the converter's fallback with no diagnostic."
       },
       {
         "kind": "UnresolvedReader",
@@ -15971,61 +16261,6 @@
           "name": "mod_weight_if_group_picked"
         },
         "detail": "A loader condition remains unresolved; its outcome is retained separately."
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "key_path",
-          "path": [
-            "modifier",
-            "description_parameters"
-          ]
-        },
-        "detail": "The modifier block analysis stopped at reader-routing."
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "key_path",
-          "path": [
-            "modifier",
-            "description_parameters"
-          ]
-        },
-        "detail": "The modifier block analysis stopped at instruction."
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "key_path",
-          "path": [
-            "modifier",
-            "description_parameters"
-          ]
-        },
-        "detail": "The modifier block analysis stopped at reader-routing."
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "key_path",
-          "path": [
-            "modifier",
-            "description_parameters"
-          ]
-        },
-        "detail": "The modifier block analysis stopped at instruction."
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "key_path",
-          "path": [
-            "modifier",
-            "description_parameters"
-          ]
-        },
-        "detail": "read-scope: scope-argument"
       },
       {
         "kind": "OutsideMethod",
@@ -16707,7 +16942,7 @@
             "days"
           ]
         },
-        "detail": "Numeric conversion is incomplete: a storage property, the accepted range or an engine conversion path is not established."
+        "detail": "Numeric conversion is incomplete: the accepted range is not established."
       },
       {
         "kind": "OutsideMethod",
@@ -16729,7 +16964,7 @@
             "months"
           ]
         },
-        "detail": "Numeric conversion is incomplete: a storage property, the accepted range or an engine conversion path is not established."
+        "detail": "Numeric conversion is incomplete: the accepted range is not established."
       },
       {
         "kind": "OutsideMethod",
@@ -16751,7 +16986,7 @@
             "years"
           ]
         },
-        "detail": "Numeric conversion is incomplete: a storage property, the accepted range or an engine conversion path is not established."
+        "detail": "Numeric conversion is incomplete: the accepted range is not established."
       },
       {
         "kind": "OutsideMethod",
@@ -16773,7 +17008,7 @@
             "factor"
           ]
         },
-        "detail": "Numeric conversion is incomplete: a storage property, the accepted range or an engine conversion path is not established."
+        "detail": "Numeric conversion is incomplete: the accepted range is not established."
       },
       {
         "kind": "OutsideMethod",
@@ -17658,7 +17893,7 @@
             "days"
           ]
         },
-        "detail": "Numeric conversion is incomplete: a storage property, the accepted range or an engine conversion path is not established."
+        "detail": "Numeric conversion is incomplete: the accepted range is not established."
       },
       {
         "kind": "OutsideMethod",
@@ -17680,7 +17915,7 @@
             "months"
           ]
         },
-        "detail": "Numeric conversion is incomplete: a storage property, the accepted range or an engine conversion path is not established."
+        "detail": "Numeric conversion is incomplete: the accepted range is not established."
       },
       {
         "kind": "OutsideMethod",
@@ -17702,7 +17937,7 @@
             "years"
           ]
         },
-        "detail": "Numeric conversion is incomplete: a storage property, the accepted range or an engine conversion path is not established."
+        "detail": "Numeric conversion is incomplete: the accepted range is not established."
       },
       {
         "kind": "OutsideMethod",
@@ -17724,7 +17959,7 @@
             "factor"
           ]
         },
-        "detail": "Numeric conversion is incomplete: a storage property, the accepted range or an engine conversion path is not established."
+        "detail": "Numeric conversion is incomplete: the accepted range is not established."
       },
       {
         "kind": "OutsideMethod",
@@ -18609,7 +18844,7 @@
             "days"
           ]
         },
-        "detail": "Numeric conversion is incomplete: a storage property, the accepted range or an engine conversion path is not established."
+        "detail": "Numeric conversion is incomplete: the accepted range is not established."
       },
       {
         "kind": "OutsideMethod",
@@ -18631,7 +18866,7 @@
             "months"
           ]
         },
-        "detail": "Numeric conversion is incomplete: a storage property, the accepted range or an engine conversion path is not established."
+        "detail": "Numeric conversion is incomplete: the accepted range is not established."
       },
       {
         "kind": "OutsideMethod",
@@ -18653,7 +18888,7 @@
             "years"
           ]
         },
-        "detail": "Numeric conversion is incomplete: a storage property, the accepted range or an engine conversion path is not established."
+        "detail": "Numeric conversion is incomplete: the accepted range is not established."
       },
       {
         "kind": "OutsideMethod",
@@ -18675,7 +18910,7 @@
             "factor"
           ]
         },
-        "detail": "Numeric conversion is incomplete: a storage property, the accepted range or an engine conversion path is not established."
+        "detail": "Numeric conversion is incomplete: the accepted range is not established."
       },
       {
         "kind": "OutsideMethod",
@@ -19007,7 +19242,7 @@
           "kind": "field",
           "name": "icon"
         },
-        "detail": "read-scope: scope-argument"
+        "detail": "read-scope: reader-path"
       },
       {
         "kind": "UnresolvedPath",
@@ -19015,7 +19250,7 @@
           "kind": "field",
           "name": "prerequisites"
         },
-        "detail": "read-scope: scope-argument"
+        "detail": "read-scope: reader-path"
       },
       {
         "kind": "UnresolvedPath",
@@ -19023,23 +19258,7 @@
           "kind": "field",
           "name": "risk_event"
         },
-        "detail": "read-scope: scope-argument"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "field",
-          "name": "target_components"
-        },
-        "detail": "read-scope: scope-argument"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "field",
-          "name": "feature_flags"
-        },
-        "detail": "read-scope: scope-argument"
+        "detail": "read-scope: reader-path"
       },
       {
         "kind": "UnresolvedPath",
@@ -19047,7 +19266,7 @@
           "kind": "field",
           "name": "mod_weight_if_group_picked"
         },
-        "detail": "read-scope: scope-argument"
+        "detail": "read-scope: reader-path"
       },
       {
         "kind": "UnresolvedPath",
@@ -19055,23 +19274,7 @@
           "kind": "field",
           "name": "technology_swap"
         },
-        "detail": "read-scope: scope-argument"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "field",
-          "name": "area"
-        },
-        "detail": "read-scope: scope-argument"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "field",
-          "name": "cost"
-        },
-        "detail": "no evaluation that the method attributes evaluates this block"
+        "detail": "read-scope: reader-path"
       },
       {
         "kind": "OutsideMethod",
@@ -19084,7 +19287,7 @@
           "kind": "field",
           "name": "icon"
         },
-        "detail": "Repeat behavior and nested fields remain unresolved."
+        "detail": "Repeat behavior waits for one shared reader. Nested fields remain unresolved."
       },
       {
         "kind": "UnresolvedStorage",
@@ -19092,15 +19295,7 @@
           "kind": "field",
           "name": "prerequisites"
         },
-        "detail": "Repeat behavior and nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "start_tech"
-        },
-        "detail": "Repeat behavior remains unresolved."
+        "detail": "Repeat behavior waits for one shared reader. Nested fields remain unresolved."
       },
       {
         "kind": "UnresolvedStorage",
@@ -19108,15 +19303,7 @@
           "kind": "field",
           "name": "risk_event"
         },
-        "detail": "Repeat behavior and nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "target_components"
-        },
-        "detail": "Repeat behavior and nested fields remain unresolved."
+        "detail": "Repeat behavior waits for one shared reader. Nested fields remain unresolved."
       },
       {
         "kind": "UnresolvedStorage",
@@ -19124,39 +19311,7 @@
           "kind": "field",
           "name": "feature_flags"
         },
-        "detail": "Repeat behavior and nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "unlocked"
-        },
-        "detail": "Repeat behavior remains unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "hidden"
-        },
-        "detail": "Repeat behavior remains unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "is_rare"
-        },
-        "detail": "Repeat behavior remains unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "is_reverse_engineerable"
-        },
-        "detail": "Repeat behavior remains unresolved."
+        "detail": "Repeat behavior has no stated rule for this block reader, or the read is not a tail call."
       },
       {
         "kind": "UnresolvedStorage",
@@ -19164,15 +19319,7 @@
           "kind": "field",
           "name": "mod_weight_if_group_picked"
         },
-        "detail": "Repeat behavior and nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "is_dangerous"
-        },
-        "detail": "Repeat behavior remains unresolved."
+        "detail": "Repeat behavior waits for one shared reader. Nested fields remain unresolved."
       },
       {
         "kind": "UnresolvedStorage",
@@ -19180,45 +19327,13 @@
           "kind": "field",
           "name": "technology_swap"
         },
-        "detail": "Repeat behavior and nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "area"
-        },
-        "detail": "Repeat behavior and nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "is_insight"
-        },
-        "detail": "Repeat behavior remains unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "is_custom_tech_1"
-        },
-        "detail": "Repeat behavior remains unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "is_custom_tech_3"
-        },
-        "detail": "Repeat behavior remains unresolved."
+        "detail": "Repeat behavior waits for one shared reader. Nested fields remain unresolved."
       }
     ],
     "source": {
       "build": "c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b",
       "native_version": "0.1.0",
-      "method": "registry-fields/v33",
+      "method": "registry-fields/v45",
       "basis": "StaticAnalysis"
     }
   }

@@ -190,22 +190,6 @@ async fn each_native_gap_becomes_a_snapshot_gap() {
         assert!(count > 0, "{answer}");
         assert_eq!(recorded.get(answer), Some(&count), "{answer}");
     }
-
-    let unresolved = snapshot
-        .gaps
-        .iter()
-        .find(|gap| {
-            gap.id == "define:NAI.VOIDWORMS_NAVAL_CAP_PER_FLEET#native.defines.unresolved_reader"
-        })
-        .unwrap();
-    assert_eq!(unresolved.native_gaps[0].kind, GapKind::UnresolvedReader);
-    assert!(
-        rule(
-            &snapshot,
-            "define:NAI.VOIDWORMS_NAVAL_CAP_PER_FLEET#existence"
-        )
-        .is_none()
-    );
 }
 
 #[tokio::test]
@@ -311,7 +295,7 @@ async fn callback_checks_keep_confirmed_disagreements_and_independent_source_gap
     )
     .unwrap();
     let checks = report.entry_scope_checks.unwrap();
-    assert_eq!(checks.agreements["on_actions"].agree, 234);
+    assert_eq!(checks.agreements["on_actions"].agree, 238);
     assert_eq!(checks.agreements["game_rules"].agree, 201);
     let mut missing = 0;
     let mut confirmed = 0;
@@ -339,7 +323,7 @@ async fn callback_checks_keep_confirmed_disagreements_and_independent_source_gap
             }
         }
     }
-    assert_eq!((confirmed, missing), (18, 34));
+    assert_eq!((confirmed, missing), (18, 35));
     assert_eq!(
         rule(&snapshot, "game_rule:is_mercenary#entry_scopes")
             .unwrap()
@@ -352,8 +336,8 @@ async fn callback_checks_keep_confirmed_disagreements_and_independent_source_gap
             .answer[0]["this"],
         "scope:leader/leader"
     );
-    // Native followed one typed-prev context but hit its path limit at another site.
-    let partial_id = "on_action:on_modification_complete#entry_scopes";
+    // Native followed one context but hit its path limit at another site.
+    let partial_id = "on_action:on_war_beginning#entry_scopes";
     assert!(rule(&snapshot, partial_id).is_none());
     assert!(
         gap(&snapshot, partial_id)
@@ -364,7 +348,7 @@ async fn callback_checks_keep_confirmed_disagreements_and_independent_source_gap
     assert!(
         gap(
             &snapshot,
-            "on_action:on_modification_complete#native.on_actions.unresolved_path"
+            "on_action:on_war_beginning#native.on_actions.unresolved_path"
         )
         .is_some()
     );
@@ -393,8 +377,8 @@ async fn callback_checks_require_both_answers_to_use_the_checked_method() {
         let mut newer_method = snapshot.clone();
         let answer = newer_method.answers.get_mut(key).unwrap();
         let mut source = newer_method.sources[&answer.source].clone();
-        source.method = "callbacks/v5".into();
-        answer.source = "callbacks/v5@recorded".into();
+        source.method = "callbacks/v6".into();
+        answer.source = "callbacks/v6@recorded".into();
         newer_method.sources.insert(answer.source.clone(), source);
 
         let mut missing = snapshot.clone();

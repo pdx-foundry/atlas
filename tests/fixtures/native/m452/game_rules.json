@@ -5414,39 +5414,7 @@
           "kind": "answer_item",
           "name": "can_fill_drone_job"
         },
-        "detail": "a path to a call site could not be followed (branch-value)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "can_fill_drone_job"
-        },
-        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "can_fill_drone_job"
-        },
         "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "can_fill_precursor_job"
-        },
-        "detail": "a path to a call site could not be followed (branch-value)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "can_fill_precursor_job"
-        },
-        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -5462,22 +5430,6 @@
           "kind": "answer_item",
           "name": "can_fill_ruler_job"
         },
-        "detail": "a path to a call site could not be followed (branch-value)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "can_fill_ruler_job"
-        },
-        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "can_fill_ruler_job"
-        },
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
@@ -5486,39 +5438,7 @@
           "kind": "answer_item",
           "name": "can_fill_specialist_job"
         },
-        "detail": "a path to a call site could not be followed (branch-value)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "can_fill_specialist_job"
-        },
-        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "can_fill_specialist_job"
-        },
         "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "can_fill_worker_job"
-        },
-        "detail": "a path to a call site could not be followed (branch-value)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "can_fill_worker_job"
-        },
-        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -5564,25 +5484,9 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "answer_item",
-          "name": "can_vote_in_democratic_election"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
           "name": "crisis_opinion_is_shown"
         },
         "detail": "the engine declares this rule, but no followed call site evaluates it (no-site)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "pop_group_can_join_factions"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -5604,9 +5508,9 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "answer_item",
-          "name": "species_uses_bonus_growth"
+          "name": "system_blocks_sensors"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "a path to a call site could not be followed (instruction)"
       },
       {
         "kind": "UnresolvedPath",
@@ -5638,7 +5542,7 @@
     "source": {
       "build": "c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b",
       "native_version": "0.1.0",
-      "method": "callbacks/v4",
+      "method": "callbacks/v5",
       "basis": "StaticAnalysis"
     }
   }

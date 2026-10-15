@@ -976,7 +976,29 @@
       },
       {
         "name": "on_building_ruined",
-        "entries": []
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ],
+            "prev": [
+              "SelfLink"
+            ]
+          }
+        ]
       },
       {
         "name": "on_building_unqueued",
@@ -1320,7 +1342,35 @@
       },
       {
         "name": "on_colony_attackers_win",
-        "entries": []
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "df2999a8f7dba6f6",
+                  "name": "colony"
+                }
+              },
+              "SelfLink"
+            ],
+            "prev": [
+              "SelfLink"
+            ]
+          }
+        ]
       },
       {
         "name": "on_colony_conquer",
@@ -1356,7 +1406,35 @@
       },
       {
         "name": "on_colony_defenders_lose",
-        "entries": []
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "df2999a8f7dba6f6",
+                  "name": "colony"
+                }
+              },
+              "SelfLink"
+            ],
+            "prev": [
+              "SelfLink"
+            ]
+          }
+        ]
       },
       {
         "name": "on_colony_defenders_win",
@@ -1423,6 +1501,33 @@
       {
         "name": "on_colony_destroyed_by_bombardment",
         "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "6dafeb9bcf25b500",
+                  "name": "fleet"
+                }
+              },
+              "SelfLink"
+            ],
+            "prev": [
+              "SelfLink"
+            ]
+          },
           {
             "this": {
               "Scope": {
@@ -1568,6 +1673,33 @@
                   "name": "country"
                 }
               },
+              {
+                "Scope": {
+                  "id": "6dafeb9bcf25b500",
+                  "name": "fleet"
+                }
+              },
+              "SelfLink"
+            ],
+            "prev": [
+              "SelfLink"
+            ]
+          },
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
               "SelfLink"
             ],
             "prev": [
@@ -1579,6 +1711,33 @@
       {
         "name": "on_colony_zero_pops_ground_combat",
         "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "6dafeb9bcf25b500",
+                  "name": "fleet"
+                }
+              },
+              "SelfLink"
+            ],
+            "prev": [
+              "SelfLink"
+            ]
+          },
           {
             "this": {
               "Scope": {
@@ -1949,6 +2108,39 @@
                   "name": "country"
                 }
               },
+              {
+                "Scope": {
+                  "id": "69ead02b278522d1",
+                  "name": "ship"
+                }
+              },
+              "SelfLink"
+            ],
+            "prev": [
+              "SelfLink"
+            ]
+          },
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "d3c8f1e8c2dbd149",
+                  "name": "debris"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
               "SelfLink"
             ],
             "prev": [
@@ -1960,6 +2152,39 @@
       {
         "name": "on_debris_researched",
         "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "d3c8f1e8c2dbd149",
+                  "name": "debris"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "69ead02b278522d1",
+                  "name": "ship"
+                }
+              },
+              "SelfLink"
+            ],
+            "prev": [
+              "SelfLink"
+            ]
+          },
           {
             "this": {
               "Scope": {
@@ -2013,6 +2238,39 @@
                   "name": "country"
                 }
               },
+              {
+                "Scope": {
+                  "id": "69ead02b278522d1",
+                  "name": "ship"
+                }
+              },
+              "SelfLink"
+            ],
+            "prev": [
+              "SelfLink"
+            ]
+          },
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "d3c8f1e8c2dbd149",
+                  "name": "debris"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
               "SelfLink"
             ],
             "prev": [
@@ -2024,6 +2282,39 @@
       {
         "name": "on_debris_scavenged_and_researched",
         "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "d3c8f1e8c2dbd149",
+                  "name": "debris"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "69ead02b278522d1",
+                  "name": "ship"
+                }
+              },
+              "SelfLink"
+            ],
+            "prev": [
+              "SelfLink"
+            ]
+          },
           {
             "this": {
               "Scope": {
@@ -2499,7 +2790,29 @@
       },
       {
         "name": "on_entering_war",
-        "entries": []
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              "SelfLink"
+            ],
+            "prev": [
+              "SelfLink"
+            ]
+          }
+        ]
       },
       {
         "name": "on_exhibit_unlocked",
@@ -3227,7 +3540,29 @@
       },
       {
         "name": "on_gaining_station_control",
-        "entries": []
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "69ead02b278522d1",
+                "name": "ship"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "37c52c03d3012e74",
+                  "name": "planet"
+                }
+              },
+              "SelfLink"
+            ],
+            "prev": [
+              "SelfLink"
+            ]
+          }
+        ]
       },
       {
         "name": "on_galactic_community_formed",
@@ -4272,6 +4607,16 @@
             "prev": [
               "SelfLink"
             ]
+          },
+          {
+            "this": "Unresolved",
+            "root": "Unresolved",
+            "from": [
+              "Unresolved"
+            ],
+            "prev": [
+              "Unresolved"
+            ]
           }
         ]
       },
@@ -4841,7 +5186,35 @@
       },
       {
         "name": "on_pop_purged",
-        "entries": []
+        "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "df2999a8f7dba6f6",
+                "name": "colony"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "44b5e21fe5e593d7",
+                  "name": "country"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "1a26ff288266684f",
+                  "name": "pop_group"
+                }
+              },
+              "SelfLink"
+            ],
+            "prev": [
+              "SelfLink"
+            ]
+          }
+        ]
       },
       {
         "name": "on_pop_sacrificed",
@@ -5290,6 +5663,21 @@
       {
         "name": "on_resolution_passed",
         "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "44b5e21fe5e593d7",
+                "name": "country"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              "SelfLink"
+            ],
+            "prev": [
+              "SelfLink"
+            ]
+          },
           {
             "this": {
               "Scope": {
@@ -5852,6 +6240,33 @@
       {
         "name": "on_ship_quantum_catapult",
         "entries": [
+          {
+            "this": {
+              "Scope": {
+                "id": "69ead02b278522d1",
+                "name": "ship"
+              }
+            },
+            "root": "SelfLink",
+            "from": [
+              {
+                "Scope": {
+                  "id": "5ab5fc854e81e429",
+                  "name": "galactic_object"
+                }
+              },
+              {
+                "Scope": {
+                  "id": "5ab5fc854e81e429",
+                  "name": "galactic_object"
+                }
+              },
+              "SelfLink"
+            ],
+            "prev": [
+              "SelfLink"
+            ]
+          },
           {
             "this": {
               "Scope": {
@@ -7621,7 +8036,7 @@
           "kind": "answer_item",
           "name": "on_add_community_member"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -7630,46 +8045,6 @@
           "name": "on_add_to_council"
         },
         "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_add_to_imperial_council"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_agenda_finished"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_agenda_finished_early"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_agreement_change_accepted"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_arch_site_finished"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -7699,17 +8074,9 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "answer_item",
-          "name": "on_army_disbanded"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
           "name": "on_army_killed_in_combat"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -7739,22 +8106,6 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "answer_item",
-          "name": "on_astral_rift_exploration_complete"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_astral_rift_exploration_start"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
           "name": "on_astral_rift_pre_event_fire"
         },
         "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
@@ -7765,39 +8116,7 @@
           "kind": "answer_item",
           "name": "on_astral_rift_surveyed"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_astral_rift_surveyed"
-        },
         "detail": "some entry scopes of a call site could not be established"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_attunement_gained"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_awareness_level_decrease"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_awareness_level_increase"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -7821,7 +8140,7 @@
           "kind": "answer_item",
           "name": "on_bi_yearly_pulse_country"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -7843,31 +8162,7 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "answer_item",
-          "name": "on_branch_office_established"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_building_complete"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
           "name": "on_building_demolished"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_building_downgraded"
         },
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
@@ -7883,22 +8178,6 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "answer_item",
-          "name": "on_building_replaced"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_building_ruined"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
           "name": "on_building_unqueued"
         },
         "detail": "some entry scopes of a call site could not be established"
@@ -7907,57 +8186,9 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "answer_item",
-          "name": "on_building_upgraded"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_bypass_explored"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_bypass_locked"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_capital_changed"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
           "name": "on_claim_system"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_colonization_started"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_colonized"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -7973,7 +8204,7 @@
           "kind": "answer_item",
           "name": "on_colony_attackers_lose"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -7989,7 +8220,7 @@
           "kind": "answer_item",
           "name": "on_colony_conquer"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "a path to a call site could not be followed (branch-value)"
       },
       {
         "kind": "UnresolvedPath",
@@ -8005,7 +8236,7 @@
           "kind": "answer_item",
           "name": "on_colony_defenders_win"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -8019,17 +8250,9 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "answer_item",
-          "name": "on_colony_destroyed_by_bombardment"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
           "name": "on_colony_ownerless"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "a path to a call site could not be followed (branch-value)"
       },
       {
         "kind": "UnresolvedPath",
@@ -8037,39 +8260,7 @@
           "kind": "answer_item",
           "name": "on_colony_transfer"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_colony_zero_pops"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_colony_zero_pops_ground_combat"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_commercial_pact_broken"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_country_attacked"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "a path to a call site could not be followed (branch-value)"
       },
       {
         "kind": "UnresolvedPath",
@@ -8101,7 +8292,7 @@
           "kind": "answer_item",
           "name": "on_crossing_border"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -8133,14 +8324,6 @@
           "kind": "answer_item",
           "name": "on_custom_diplomacy"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_custom_diplomacy"
-        },
         "detail": "some entry scopes of a call site could not be established"
       },
       {
@@ -8149,39 +8332,7 @@
           "kind": "answer_item",
           "name": "on_damage_taken"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_debris_reanimated"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_debris_researched"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_debris_scavenged"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_debris_scavenged_and_researched"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -8189,15 +8340,7 @@
           "kind": "answer_item",
           "name": "on_decade_pulse_country"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_decision_enacted"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -8206,22 +8349,6 @@
           "name": "on_decision_enacted"
         },
         "detail": "some entry scopes of a call site could not be established"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_dimensional_lock_expired"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_edict_activated"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -8237,7 +8364,7 @@
           "kind": "answer_item",
           "name": "on_election_ended"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -8251,17 +8378,9 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "answer_item",
-          "name": "on_entering_battle"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
           "name": "on_entering_system"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -8277,7 +8396,7 @@
           "kind": "answer_item",
           "name": "on_entering_system_fleet"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -8285,7 +8404,7 @@
           "kind": "answer_item",
           "name": "on_entering_war"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -8301,7 +8420,7 @@
           "kind": "answer_item",
           "name": "on_federation_new_leader"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -8309,7 +8428,7 @@
           "kind": "answer_item",
           "name": "on_federation_new_level_unlocked"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -8323,25 +8442,9 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "answer_item",
-          "name": "on_first_contact_finished"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
           "name": "on_five_year_pulse_country"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_fleet_auto_move_arrival"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -8349,7 +8452,7 @@
           "kind": "answer_item",
           "name": "on_fleet_contract_started"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -8363,55 +8466,7 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "answer_item",
-          "name": "on_fleet_destroyed_perp"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_fleet_destroyed_victim"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_fleet_detected"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_fleet_disbanded"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_fleet_quantum_catapult"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
           "name": "on_fleet_went_mia"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_gaining_station_control"
         },
         "detail": "a call site has more paths than the method follows (path-limit)"
       },
@@ -8443,30 +8498,6 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "answer_item",
-          "name": "on_game_start_country"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_ground_combat_started"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_heir_promoted_to_ruler"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
           "name": "on_initialize_advanced_colony"
         },
         "detail": "a call site has more paths than the method follows (path-limit)"
@@ -8477,7 +8508,7 @@
           "kind": "answer_item",
           "name": "on_join_alliance"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -8485,15 +8516,7 @@
           "kind": "answer_item",
           "name": "on_jump_drive"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_late_game_pulse"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -8501,7 +8524,7 @@
           "kind": "answer_item",
           "name": "on_late_game_pulse_country"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -8509,47 +8532,7 @@
           "kind": "answer_item",
           "name": "on_leader_assigned"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_leader_captured"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_leader_death"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_leader_death_no_notify"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_leader_death_notify"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_leader_fired"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -8557,15 +8540,7 @@
           "kind": "answer_item",
           "name": "on_leader_level_up"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_leader_unassigned"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -8573,23 +8548,7 @@
           "kind": "answer_item",
           "name": "on_leave_alliance"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_losing_station_control"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_megastructure_build_start"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -8597,7 +8556,7 @@
           "kind": "answer_item",
           "name": "on_megastructure_built"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -8605,7 +8564,7 @@
           "kind": "answer_item",
           "name": "on_megastructure_change_owner"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -8613,23 +8572,7 @@
           "kind": "answer_item",
           "name": "on_megastructure_ownerless"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_megastructure_upgraded"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_mid_game_pulse"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -8637,23 +8580,7 @@
           "kind": "answer_item",
           "name": "on_mid_game_pulse_country"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_modification_complete"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_modification_completion"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -8683,9 +8610,9 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "answer_item",
-          "name": "on_new_country_selected"
+          "name": "on_monthly_pulse_country"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "some entry scopes of a call site could not be established"
       },
       {
         "kind": "UnresolvedPath",
@@ -8707,25 +8634,9 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "answer_item",
-          "name": "on_orbital_defense_planet_ownerless"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_planet_class_changed"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
           "name": "on_planet_occupied"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -8733,15 +8644,7 @@
           "kind": "answer_item",
           "name": "on_planet_returned"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_planet_surveyed"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -8757,7 +8660,7 @@
           "kind": "answer_item",
           "name": "on_policy_changed"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -8771,33 +8674,9 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "answer_item",
-          "name": "on_pop_group_abducted"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_pop_group_resettled"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_pop_group_rights_change"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
           "name": "on_pop_growth"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -8819,14 +8698,6 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "answer_item",
-          "name": "on_pre_government_changed"
-        },
-        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
           "name": "on_press_begin"
         },
         "detail": "a call site passes a command that builds its own scope (scope-built-by-callee)"
@@ -8837,7 +8708,7 @@
           "kind": "answer_item",
           "name": "on_proxy_war_started"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -8851,33 +8722,9 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "answer_item",
-          "name": "on_rebels_take_colony_owner_switched"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_rebels_take_planet"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
           "name": "on_released_as_vassal"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_relic_activated"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -8901,7 +8748,7 @@
           "kind": "answer_item",
           "name": "on_remove_community_member"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -8909,15 +8756,7 @@
           "kind": "answer_item",
           "name": "on_remove_from_council"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_remove_from_imperial_council"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -8925,7 +8764,7 @@
           "kind": "answer_item",
           "name": "on_research_option_added"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -8971,17 +8810,9 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "answer_item",
-          "name": "on_resolution_vetoed"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
           "name": "on_ruler_created"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -9005,39 +8836,7 @@
           "kind": "answer_item",
           "name": "on_ship_built"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_ship_built"
-        },
         "detail": "some entry scopes of a call site could not be established"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_ship_designed"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_ship_destroyed_perp"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_ship_disabled"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -9045,23 +8844,7 @@
           "kind": "answer_item",
           "name": "on_ship_disbanded"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_ship_disengaged_perp"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_ship_enabled"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -9069,23 +8852,7 @@
           "kind": "answer_item",
           "name": "on_ship_engulfed"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_ship_quantum_catapult"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_ship_surveyed"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -9099,57 +8866,9 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "answer_item",
-          "name": "on_ship_upgraded"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_sign_non_aggression_pact"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_slave_sold_on_market"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
           "name": "on_snare_sent"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_space_battle_lost"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_space_battle_over"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_space_battle_won"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -9166,38 +8885,6 @@
           "name": "on_specialist_subject_conversion_finished"
         },
         "detail": "some entry scopes of a call site could not be established"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_starbase_disabled"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_starbase_transfer"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_status_quo"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_status_quo_forced"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -9235,49 +8922,9 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "answer_item",
-          "name": "on_subject_integrated"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_subspecies_integration_complete"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_subspecies_integration_step"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_survey_astral_rift"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
           "name": "on_survey_astral_rift"
         },
         "detail": "some entry scopes of a call site could not be established"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_survey_planet"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -9293,47 +8940,7 @@
           "kind": "answer_item",
           "name": "on_system_controller_changed"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_system_gained"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_system_locked_ship_killed"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_system_lost"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_system_returned"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_system_survey"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -9341,7 +8948,7 @@
           "kind": "answer_item",
           "name": "on_tech_increased"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -9355,22 +8962,6 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "answer_item",
-          "name": "on_terraforming_complete"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_terraforming_progress_25"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
           "name": "on_tradition_picked"
         },
         "detail": "a call site has more paths than the method follows (path-limit)"
@@ -9387,25 +8978,9 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "answer_item",
-          "name": "on_truce_end"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
           "name": "on_tutorial_level_changed"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_uplift_completion"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -9421,15 +8996,7 @@
           "kind": "answer_item",
           "name": "on_war_ended"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "on_war_lost"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -9443,17 +9010,9 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "answer_item",
-          "name": "on_war_won"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
           "name": "on_waystation_lost"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnresolvedPath",
@@ -9461,15 +9020,7 @@
           "kind": "answer_item",
           "name": "on_yearly_pulse_country"
         },
-        "detail": "a call site has more paths than the method follows (path-limit)"
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "answer_item",
-          "name": "special_project_success"
-        },
-        "detail": "a call site has more paths than the method follows (path-limit)"
+        "detail": "a path to a call site goes around a loop more often than the method follows (loop-limit)"
       },
       {
         "kind": "UnnamedDeclaration",
@@ -9495,7 +9046,7 @@
     "source": {
       "build": "c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b",
       "native_version": "0.1.0",
-      "method": "callbacks/v4",
+      "method": "callbacks/v5",
       "basis": "StaticAnalysis"
     }
   }
