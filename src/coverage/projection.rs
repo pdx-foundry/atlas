@@ -934,8 +934,8 @@ fn definition_questions(
 
 /// Whether the `definition_names` of `registry` answers the definition line of a type with
 /// `selector`. The definitions of a statement's own type (SDK-818) and of the root type of the
-/// event kinds (SDK-815) are answered by the statements themselves, and a nested type's by its
-/// field.
+/// event kinds (SDK-815) are answered by the statements themselves. Native identifies a nested
+/// type only as a field under its owner (SDK-778), so its naming form answers no definition line.
 fn names_definition_line(registry: &str, selector: &Selector) -> bool {
     match selector {
         Selector::Root => !ROOT_STATEMENT_REGISTRIES.contains(&registry),
@@ -957,7 +957,7 @@ fn definition_line_questions(
 }
 
 /// The reason why a definition line of a type whose directory Native lists has no answer, for
-/// each of its claims that no rule answers: Native states neither the value form of a root
+/// each of its claims that no unconditional rule answers, with the type's selector gap: Native states neither the value form of a root
 /// definition nor one scope for a whole definition. The definition lines that a root statement
 /// answers (SDK-815, SDK-818) keep their answers.
 fn definition_line_gaps(
@@ -980,6 +980,7 @@ fn definition_line_gaps(
     ];
     let answered: BTreeSet<_> = answers
         .iter()
+        .filter(|answer| answer.conditions.is_empty())
         .map(|answer| answer.question.as_str())
         .collect();
     let registries: BTreeSet<_> = subjects
@@ -1011,6 +1012,11 @@ fn definition_line_gaps(
                 })
         })
         .filter(|gap| !answered.contains(gap.question.as_str()))
+        .flat_map(|gap| {
+            let selector_gap = selectors.selector_gap(&gap.question, &[]);
+
+            selector_gap.into_iter().chain([gap])
+        })
         .collect()
 }
 

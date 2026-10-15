@@ -209,9 +209,11 @@ of the whole definition (`## push_scope`, `## replace_scopes`).
   empty list names no definition and answers nothing. A `definition_names` gap joins the same
   question and blocks it; the `.partial` gap joins no question, as for the naming lines, so the
   stated root form of civics and jobs still answers. A selector gap still blocks a type that a
-  root key selects. A nested type's definitions are answered by its field, and a root statement's
-  own type ([above](#root-statements-of-their-own-type-sdk-818)) and the event kinds (SDK-815) by
-  the statement; the naming rule adds no answer there.
+  root key selects. A root statement's own type
+  ([above](#root-statements-of-their-own-type-sdk-818)) and the root type of the event kinds
+  (SDK-815) are answered by the statements, so the naming rule adds no answer there. Native
+  identifies a nested type only as a field under its owner (SDK-778), so its naming form answers
+  no definition line; this config writes none for a nested type.
 - **Block form.** No Native answer states the value form of a root definition. Native's loader
   rules say a template loader logs `Expected format is "key={"` for any other statement, but that
   is not in the answer, and a custom loader states nothing. A field of a definition shows that a
@@ -223,7 +225,8 @@ of the whole definition (`## push_scope`, `## replace_scopes`).
   so the line's `push_scope` and `replace_scopes` keep a gap with that reason.
 
 These gaps apply to the types of each directory that Native lists, and only to a claim that no
-rule answers. A type whose directory Native does not list keeps no answer and no gap. On the pin
+rule answers without conditions. A type whose selector Native does not identify also keeps its
+selector gap. A type whose directory Native does not list keeps no answer and no gap. On the pin
 move B snapshot the existence rule credits 164 definition lines.
 
 ### Enum domains (SDK-818)

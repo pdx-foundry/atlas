@@ -1308,6 +1308,25 @@ async fn a_root_form_credits_the_existence_of_the_definition_line_only() {
 }
 
 #[tokio::test]
+async fn a_definition_line_gap_keeps_the_selector_gap_of_its_type() {
+    let source = r#"
+types = {
+    type[tradition] = { path = "game/common/traditions" }
+    ## type_key_filter = relic
+    type[tradition_relic] = { path = "game/common/traditions" }
+}
+tradition_relic = {}
+"#;
+    let directory = SharedDirectory::evaluate(&[("traditions.cwt", source)], |_| {}).await;
+    let gaps = directory.gaps("value_form", &["tradition_relic"]);
+
+    assert!(!directory.covered("value_form", &["tradition_relic"]));
+    assert!(gaps.contains(
+        &"The type is selected by `type_key_filter = relic`; no Native answer identifies it".into()
+    ));
+}
+
+#[tokio::test]
 async fn a_definition_line_without_a_root_form_stays_uncredited() {
     let unlisted = r#"
 types = {
