@@ -328,14 +328,16 @@ included, and its gaps on those properties block them. The limits:
 
 - `cardinality_minimum` and scope claims (`push_scope`, `replace_scopes`) under a subtype earn
   nothing, since a subtype can require a field or change its scope.
-- A field with any other alternative (`FieldZero`, `Unresolved`, `All`) earns nothing. Native's
+- A field with any other alternative (`FieldZero`, `Unresolved`, `All`) earns nothing, and so
+  does a field that Native marks conditional, such as the child of a conditional parent. Native's
   only field condition is `FieldZero`, and matching it to bool subtype tests is deferred.
+- The `Always` premise must itself rest on qualified evidence; a recorded premise earns nothing.
 - A claim under a subtype with any `## type_key_filter` keeps the SDK-800 rule and takes nothing
   from this one; `component_template` waits on SDK-843. Event kinds join as root statements above.
 - A claim whose field Native does not list earns this credit once field discovery lists it.
 - A type selector gap still blocks the claims of its type.
 
-The tests that define a subtype in `types` (`types/type[x]/subtype[y]/…`, such as
+The tests that define a subtype in `types` (every key in `types/type[x]/subtype[y]/…`, such as
 `colonizable = yes`) and the `## cardinality` bounds written on them are consumer policy, like
 subtype naming: they are CWT's partition, not engine rules. The subtype's own `## push_scope` and
 the naming lines under `localisation` or `images` subtypes stay engine facts. At pin move B

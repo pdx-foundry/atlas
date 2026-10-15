@@ -83,7 +83,6 @@ fn project_with_gap_facets(
     let claims = claim_index(ledger);
     let key_subtypes = key_subtypes(ledger);
     let alias_blocks = AliasBlocks::new(ledger);
-    let subtype_claims = SubtypeClaims::new(ledger, &rules.rules);
     let enum_domains = EnumDomains::new(ledger);
     let counted_minimums = counted_minimums(ledger);
     let language = super::language_subject::index(ledger, rules);
@@ -92,6 +91,7 @@ fn project_with_gap_facets(
         .iter()
         .map(|subject| (subject.id.as_str(), subject))
         .collect();
+    let subtype_claims = SubtypeClaims::new(ledger, rules, &subjects);
     let selectors = TypeSelectors::new(
         ledger,
         &registry_types,
@@ -209,20 +209,19 @@ fn project_with_gap_facets(
                 origin: Origin::Engine,
             });
         }
+        let subtype_evidence = subtype_claims.evidence(&rule.subject, &evidence);
         let answers = answers
             .into_iter()
-            .map(|(question, value)| (question, conditions.clone(), value))
+            .map(|(question, value)| (question, conditions.clone(), value, &evidence))
             .chain(
                 unconditional
                     .into_iter()
-                    .map(|(question, value)| (question, Vec::new(), value)),
+                    .map(|(question, value)| (question, Vec::new(), value, &evidence)),
             )
-            .chain(
-                subtype_answers
-                    .into_iter()
-                    .map(|(question, conditions)| (question, conditions, rule.answer.clone())),
-            );
-        for (question, conditions, value) in answers {
+            .chain(subtype_answers.into_iter().map(|(question, conditions)| {
+                (question, conditions, rule.answer.clone(), &subtype_evidence)
+            }));
+        for (question, conditions, value, evidence) in answers {
             if let Some(gap) = selectors.selector_gap(&question, &conditions) {
                 projection.gaps.push(gap);
                 continue;
@@ -1288,8 +1287,9 @@ struct SubtypeClaims<'a> {
     index: ClaimIndex<'a>,
     /// The conditions of each question in `index`.
     conditions: BTreeMap<&'a str, &'a [String]>,
-    /// The subjects whose read alternatives all have the condition `Always`.
-    always_read: BTreeSet<&'a str>,
+    /// The subjects whose read alternatives all have the condition `Always`, each with whether
+    /// qualified evidence establishes that premise.
+    always_read: BTreeMap<&'a str, bool>,
 }
 
 impl<'a> SubtypeClaims<'a> {
@@ -1305,7 +1305,11 @@ impl<'a> SubtypeClaims<'a> {
         "repeat_behavior",
     ];
 
-    fn new(ledger: &'a Ledger, rules: &'a [snapshot::Rule]) -> Self {
+    fn new(
+        ledger: &'a Ledger,
+        rules: &'a snapshot::Snapshot,
+        subjects: &BTreeMap<&str, &snapshot::Subject>,
+    ) -> Self {
         let root_key_subtypes: BTreeSet<_> = ledger
             .claims
             .iter()
@@ -1359,7 +1363,7 @@ impl<'a> SubtypeClaims<'a> {
         Self {
             index,
             conditions,
-            always_read: always_read_fields(rules),
+            always_read: always_read_fields(rules, subjects),
         }
     }
 
@@ -1374,7 +1378,8 @@ impl<'a> SubtypeClaims<'a> {
         property: &str,
         gap_facet: bool,
     ) -> Vec<(String, Vec<String>)> {
-        if !self.always_read.contains(subject.id.as_str()) || !Self::PROPERTIES.contains(&property)
+        if !self.always_read.contains_key(subject.id.as_str())
+            || !Self::PROPERTIES.contains(&property)
         {
             return Vec::new();
         }
@@ -1396,6 +1401,20 @@ impl<'a> SubtypeClaims<'a> {
         })
         .collect()
     }
+
+    /// The evidence of a subtype answer of `subject`: the rule's own `evidence`, qualified only
+    /// when the always-read premise is qualified too, so a recorded premise earns no credit.
+    fn evidence(&self, subject: &str, evidence: &[Evidence]) -> Vec<Evidence> {
+        let premise_qualified = self.always_read.get(subject).copied().unwrap_or(false);
+
+        evidence
+            .iter()
+            .map(|evidence| Evidence {
+                qualified: evidence.qualified && premise_qualified,
+                ..evidence.clone()
+            })
+            .collect()
+    }
 }
 
 /// The subtype names that a `subtype[…]` condition tests, without negation: `subtype[a&!b]`
@@ -1409,17 +1428,35 @@ fn subtype_terms(condition: &str) -> impl Iterator<Item = &str> {
         .map(|term| term.trim_start_matches('!'))
 }
 
-/// The subjects whose `conditions` rule lists only `Always` alternatives.
-fn always_read_fields(rules: &[snapshot::Rule]) -> BTreeSet<&str> {
+/// The subjects whose `conditions` rule lists only `Always` alternatives, each with whether every
+/// source of that rule is qualified. A subject that Native marks conditional, such as the child
+/// of a conditional parent, is not read on every path, whatever its own alternatives.
+fn always_read_fields<'a>(
+    rules: &'a snapshot::Snapshot,
+    subjects: &BTreeMap<&str, &snapshot::Subject>,
+) -> BTreeMap<&'a str, bool> {
     rules
+        .rules
         .iter()
         .filter(|rule| rule.property == "conditions" && rule.conditions.is_empty())
+        .filter(|rule| subjects[rule.subject.as_str()].conditional != Some(true))
         .filter(|rule| {
             rule.answer.as_array().is_some_and(|alternatives| {
                 !alternatives.is_empty() && alternatives.iter().all(|a| a == "Always")
             })
         })
-        .map(|rule| rule.subject.as_str())
+        .map(|rule| {
+            let qualified = !rule.evidence.is_empty()
+                && rule.evidence.iter().all(|link| {
+                    rules
+                        .answers
+                        .get(&link.answer)
+                        .and_then(|answer| rules.sources.get(&answer.source))
+                        .is_some_and(|source| source.basis != Basis::Recorded)
+                });
+
+            (rule.subject.as_str(), qualified)
+        })
         .collect()
 }
 

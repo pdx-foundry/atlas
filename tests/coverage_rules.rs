@@ -24,6 +24,8 @@ struct SharedDirectory {
     ledger: ledger::Ledger,
     coverage: coverage::Report,
     comparison: coverage::comparison::Report,
+    /// The snapshot that was evaluated, qualified as live.
+    snapshot: snapshot::Snapshot,
 }
 
 impl SharedDirectory {
@@ -55,6 +57,7 @@ impl SharedDirectory {
             comparison: coverage::comparison::evaluate(&ledger, &bytes, &Default::default())
                 .unwrap(),
             ledger,
+            snapshot,
         }
     }
 
@@ -2145,6 +2148,70 @@ async fn a_field_with_a_conditional_alternative_answers_no_subtype_claim() {
         );
     })
     .await;
+
+    for (property, subject) in subtype_independent_claims(&[]) {
+        assert!(directory.covered(property, &subject), "{property}");
+    }
+
+    for (property, subject) in subtype_independent_claims(&["subtype[special]"]) {
+        assert!(!directory.covered(property, &subject), "{property}");
+    }
+}
+
+#[tokio::test]
+async fn a_field_that_native_marks_conditional_answers_no_subtype_claim() {
+    let directory = subtype_agenda(|snapshot| {
+        let subject = snapshot
+            .subjects
+            .iter_mut()
+            .find(|subject| subject.id == UNLOCKS_AGENDA)
+            .unwrap();
+
+        subject.conditional = Some(true);
+    })
+    .await;
+
+    for (property, subject) in subtype_independent_claims(&[]) {
+        assert!(directory.covered(property, &subject), "{property}");
+    }
+
+    for (property, subject) in subtype_independent_claims(&["subtype[special]"]) {
+        assert!(!directory.covered(property, &subject), "{property}");
+    }
+}
+
+#[tokio::test]
+async fn a_recorded_always_read_premise_earns_no_subtype_credit() {
+    let ledger = ledger::inventory(&BTreeMap::from([(
+        "traditions.cwt".into(),
+        SUBTYPE_AGENDA.into(),
+    )]));
+    let mut snapshot = subtype_agenda(|_| {}).await.snapshot;
+    let conditions = snapshot
+        .rules
+        .iter_mut()
+        .find(|rule| rule.id == format!("{UNLOCKS_AGENDA}#conditions"))
+        .unwrap();
+    let link = &mut conditions.evidence[0];
+    let mut answer = snapshot.answers[&link.answer].clone();
+    let mut source = snapshot.sources[&answer.source].clone();
+
+    let recorded = format!("{}@recorded", source.method);
+
+    source.basis = Basis::Recorded;
+    answer.source = recorded.clone();
+    link.answer = "recorded-premise".into();
+    conditions.evidence.truncate(1);
+    snapshot.sources.insert(recorded, source);
+    snapshot.answers.insert("recorded-premise".into(), answer);
+
+    let bytes = snapshot::json_bytes(&snapshot).unwrap();
+    let directory = SharedDirectory {
+        coverage: coverage::evaluate(&ledger, Some(&bytes)).unwrap(),
+        comparison: coverage::comparison::evaluate(&ledger, &bytes, &Default::default()).unwrap(),
+        ledger,
+        snapshot,
+    };
 
     for (property, subject) in subtype_independent_claims(&[]) {
         assert!(directory.covered(property, &subject), "{property}");

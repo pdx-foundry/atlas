@@ -196,6 +196,20 @@ pub(super) fn node(
 ) -> (&'static str, Owner, &'static str) {
     let key = key.unwrap_or("");
     let context = path.join("/");
+    // Inside a subtype definition every key is part of its test, whatever the key names; only a
+    // nested subtype and the naming blocks below a subtype are something else.
+    if context.starts_with("types/")
+        && context.contains("subtype[")
+        && !key.starts_with("subtype[")
+        && !context.contains("/localisation")
+        && !context.contains("/images")
+    {
+        return (
+            "conditional_constraint",
+            Owner::ConsumerPolicy,
+            SUBTYPE_TEST,
+        );
+    }
     if [
         "types",
         "enums",
@@ -339,13 +353,6 @@ pub(super) fn node(
             "naming_rule",
             Owner::EngineFact,
             "Derived localisation or asset name requires evidence",
-        );
-    }
-    if context.starts_with("types/") && context.contains("subtype[") {
-        return (
-            "conditional_constraint",
-            Owner::ConsumerPolicy,
-            SUBTYPE_TEST,
         );
     }
     if context.contains("type[") {

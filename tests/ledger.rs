@@ -104,6 +104,8 @@ fn only_the_tests_that_define_a_subtype_are_policy() {
    ## cardinality = 0..0
    flag = yes
    potential = { always = no }
+   ## cardinality = 1..1
+   supported_scopes = country
   }
   localisation = { subtype[foo] = { ## required
    name = "$" } }
@@ -139,12 +141,16 @@ x = { subtype[foo] = {
         "$annotation:cardinality",
     ];
     let nested = ["types", "type[x]", "subtype[foo]", "potential", "always"];
+    let scopes = ["types", "type[x]", "subtype[foo]", "supported_scopes"];
+    let scopes_bound = [&scopes[..], &["$annotation:cardinality"]].concat();
 
     for (subject, property) in [
         (&test[..], "conditional_constraint"),
         (&bound[..], "cardinality_minimum"),
         (&bound[..], "cardinality_maximum"),
         (&nested[..], "conditional_constraint"),
+        (&scopes[..], "conditional_constraint"),
+        (&scopes_bound[..], "cardinality_minimum"),
     ] {
         assert_eq!(
             owner(subject, property),
