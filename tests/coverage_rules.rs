@@ -1250,10 +1250,12 @@ types = {
         name_field = name
     }
 }
+pop_job = {}
 "#;
     let directory = SharedDirectory::evaluate(&[("jobs.cwt", jobs)], |_| {}).await;
     let name_field = ["types", "type[pop_job]", "name_field"];
 
+    assert!(directory.covered("field_existence", &["pop_job"]));
     assert!(directory.covered("loader_path", &name_field));
     assert_eq!(
         directory.status("loader_path", &name_field),
@@ -1264,6 +1266,76 @@ types = {
             .coverage
             .atlas_only_questions
             .contains(&"atlas:registry:common/pop_jobs#definition_names.partial".into())
+    );
+}
+
+/// A config `tradition` type with a definition line, its push scope, and one field.
+const TRADITION_DEFINITION: &str = r#"
+types = {
+    type[tradition] = {
+        path = "game/common/traditions"
+    }
+}
+## push_scope = country
+tradition = {
+    unlocks_agenda = scalar
+}
+"#;
+
+#[tokio::test]
+async fn a_root_form_credits_the_existence_of_the_definition_line_only() {
+    let directory =
+        SharedDirectory::evaluate(&[("traditions.cwt", TRADITION_DEFINITION)], |_| {}).await;
+    let push_scope = ["tradition", "$annotation:push_scope"];
+
+    assert!(directory.covered("field_existence", &["tradition"]));
+    assert_eq!(
+        directory.status("field_existence", &["tradition"]),
+        Status::Same
+    );
+    assert!(!directory.covered("value_form", &["tradition"]));
+    assert!(directory.gaps("value_form", &["tradition"]).contains(
+        &"No Native answer states the value form of a root definition; a field of a definition \
+          does not show that every definition is a block"
+            .into()
+    ));
+    assert!(!directory.covered("scope_context", &push_scope));
+    assert!(directory.gaps("scope_context", &push_scope).contains(
+        &"Native states the scope of each block that a definition reads, on that block's field; \
+          no answer states one scope for the whole definition"
+            .into()
+    ));
+}
+
+#[tokio::test]
+async fn a_definition_line_without_a_root_form_stays_uncredited() {
+    let unlisted = r#"
+types = {
+    type[relic] = {
+        path = "game/common/not_a_registry"
+    }
+}
+relic = {}
+"#;
+    let unlisted = SharedDirectory::evaluate(&[("relics.cwt", unlisted)], |_| {}).await;
+    let unnamed = SharedDirectory::evaluate(&[("traditions.cwt", TRADITION_DEFINITION)], |s| {
+        set_rule(s, TRADITIONS, "definition_names", json!([]));
+    })
+    .await;
+    let unresolved =
+        SharedDirectory::evaluate(&[("traditions.cwt", TRADITION_DEFINITION)], |snapshot| {
+            unresolve(snapshot, TRADITIONS, "definition_names");
+        })
+        .await;
+
+    assert!(!unlisted.covered("field_existence", &["relic"]));
+    assert!(unlisted.gaps("value_form", &["relic"]).is_empty());
+    assert!(!unnamed.covered("field_existence", &["tradition"]));
+    assert!(!unresolved.covered("field_existence", &["tradition"]));
+    assert!(
+        unresolved
+            .gaps("field_existence", &["tradition"])
+            .contains(&"Native did not establish this registry's definition_names".into())
     );
 }
 
@@ -1576,6 +1648,22 @@ async fn event_kinds_against(sources: &[(&str, &str)]) -> SharedDirectory {
         answer.gaps = Vec::new();
         extraction.fields.insert(registry.into(), Ok(answer));
     }
+
+    // The events loader's two naming forms, as Native states them on M452.
+    let mut loader_rules = extraction.loader_rules[extraction::TRADITIONS]
+        .as_ref()
+        .unwrap()
+        .clone();
+    loader_rules.value.definition_names = GrammarProperty::Known(
+        serde_json::from_value(json!([
+            { "statement": { "RootKey": "namespace" }, "name": "Value" },
+            { "statement": "Root", "name": { "Field": "id" } },
+        ]))
+        .unwrap(),
+    );
+    extraction
+        .loader_rules
+        .insert("events".into(), Ok(loader_rules));
 
     let ledger = ledger::inventory(
         &sources

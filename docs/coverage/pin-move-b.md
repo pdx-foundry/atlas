@@ -176,6 +176,12 @@ cardinality maximum of three kinds (repeat behavior, SDK-627). `type[event_names
 The [event exceptions](milestone-5.md#events) are otherwise unchanged: the field-predicate subtypes
 (SDK-716) and the `CEvent` members that have no one shared reader.
 
+After the capture, SDK-860 credits the existence of 164 definition lines over the same snapshot
+([rule](ledger.md#definition-lines-sdk-860)), 158 of them in the gate: 152 of `named` types and 6
+of `several_types_in_directory`. No claim loses coverage. The gate is 6,253 / 18,228 (34.30%)
+and the headline 27,261 / 58,032 (46.975806%). The definition lines' block forms and their 28
+definition-wide scopes keep a gap with the reason that no Native answer states them.
+
 ## Native rates
 
 Native's `examples/registry-sweep.rs` at `2c94b30` reads the run's recording through

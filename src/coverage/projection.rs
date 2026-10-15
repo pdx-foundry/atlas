@@ -319,6 +319,8 @@ fn project_with_gap_facets(
             });
         }
     }
+    let definition_gaps = definition_line_gaps(&claims, &selectors, &subjects, &projection.answers);
+    projection.gaps.extend(definition_gaps);
     projection.gaps.sort_by(|left, right| {
         (&left.question, &left.conditions, &left.reason).cmp(&(
             &right.question,
@@ -930,6 +932,83 @@ fn definition_questions(
         .collect()
 }
 
+/// Whether a registry's `definition_names` answers the definition line of a type with `selector`.
+/// A statement type's definitions are answered by the statement itself (SDK-818), and a nested
+/// type's by its field.
+fn names_definition_line(selector: &Selector) -> bool {
+    matches!(selector, Selector::Root | Selector::RootKey { .. })
+}
+
+/// The claims of a type's definition line (`ship_size = { … }`), outside any subtype.
+fn definition_line_questions(
+    claims: &ClaimIndex<'_>,
+    type_name: &str,
+    file: &str,
+    ledger_property: &str,
+) -> Vec<String> {
+    let root = type_name.trim_start_matches("type[").trim_end_matches(']');
+
+    claim_questions(claims, file, ledger_property, vec![root], &[])
+}
+
+/// The reason why a definition line of a type whose directory Native lists has no answer, for
+/// each of its claims that no rule answers: Native states neither the value form of a root
+/// definition nor one scope for a whole definition. The definition lines that a root statement
+/// answers (SDK-815, SDK-818) keep their answers.
+fn definition_line_gaps(
+    claims: &ClaimIndex<'_>,
+    selectors: &TypeSelectors<'_>,
+    subjects: &BTreeMap<&str, &snapshot::Subject>,
+    answers: &[Answer],
+) -> Vec<Gap> {
+    const SCOPE: &str = "Native states the scope of each block that a definition reads, on that \
+                         block's field; no answer states one scope for the whole definition";
+    const LINES: &[(&str, Option<&str>, &str)] = &[
+        (
+            "value_form",
+            None,
+            "No Native answer states the value form of a root definition; a field of a definition \
+             does not show that every definition is a block",
+        ),
+        ("scope_context", Some("$annotation:push_scope"), SCOPE),
+        ("scope_context", Some("$annotation:replace_scopes"), SCOPE),
+    ];
+    let answered: BTreeSet<_> = answers
+        .iter()
+        .map(|answer| answer.question.as_str())
+        .collect();
+    let registries: BTreeSet<_> = subjects
+        .values()
+        .filter(|subject| subject.kind == snapshot::SubjectKind::Registry)
+        .filter_map(|subject| subject.registry.as_deref())
+        .collect();
+
+    registries
+        .into_iter()
+        .filter_map(|registry| selectors.directories.get(registry))
+        .flatten()
+        .flat_map(|(type_name, file, _)| {
+            let root = type_name.trim_start_matches("type[").trim_end_matches(']');
+
+            LINES
+                .iter()
+                .flat_map(move |(property, annotation, reason)| {
+                    let mut path = vec![root];
+                    path.extend(annotation);
+
+                    claim_questions(claims, file, property, path, &[])
+                        .into_iter()
+                        .map(|question| Gap {
+                            question,
+                            conditions: Vec::new(),
+                            reason: (*reason).into(),
+                        })
+                })
+        })
+        .filter(|gap| !answered.contains(gap.question.as_str()))
+        .collect()
+}
+
 fn questions(
     claims: &ClaimIndex<'_>,
     selectors: &TypeSelectors<'_>,
@@ -990,9 +1069,23 @@ fn questions(
                     }
                 };
 
-                type_questions(
+                let mut questions = type_questions(
                     claims, type_name, file, field, property, conditions, gap_facet,
-                )
+                );
+
+                if field.is_none()
+                    && property == "definition_names"
+                    && names_definition_line(selector)
+                {
+                    questions.extend(definition_line_questions(
+                        claims,
+                        type_name,
+                        file,
+                        "field_existence",
+                    ));
+                }
+
+                questions
             }));
 
             questions
@@ -1084,15 +1177,27 @@ fn naming_answers(
             let Some((lines, form)) = type_form(selector, subject.field.as_deref(), answer) else {
                 return Vec::new();
             };
+            let naming = lines.iter().flat_map(|line| {
+                let path = vec!["types", *type_name, line];
 
-            lines
-                .iter()
-                .flat_map(|line| {
-                    let path = vec!["types", *type_name, line];
+                claim_questions(claims, file, "loader_path", path, &[])
+            });
+            // A root form names the type's definitions, so they exist; a known empty list names
+            // none, which says nothing of whether the type has any.
+            let definitions = match form {
+                Value::Object(_) if subject.field.is_none() && names_definition_line(selector) => {
+                    definition_line_questions(claims, type_name, file, "field_existence")
+                }
+                _ => Vec::new(),
+            };
 
-                    claim_questions(claims, file, "loader_path", path, &[])
-                })
+            naming
                 .map(|question| (question, form.clone()))
+                .chain(
+                    definitions
+                        .into_iter()
+                        .map(|question| (question, json!(true))),
+                )
                 .collect()
         })
         .collect()
