@@ -83,6 +83,7 @@ fn project_with_gap_facets(
     let claims = claim_index(ledger);
     let key_subtypes = key_subtypes(ledger);
     let alias_blocks = AliasBlocks::new(ledger);
+    let subtype_claims = SubtypeClaims::new(ledger, &rules.rules);
     let enum_domains = EnumDomains::new(ledger);
     let counted_minimums = counted_minimums(ledger);
     let language = super::language_subject::index(ledger, rules);
@@ -171,6 +172,12 @@ fn project_with_gap_facets(
             .collect(),
             (None, _) => Vec::new(),
         };
+        let subtype_answers = match statement {
+            None if rule.conditions.is_empty() => {
+                subtype_claims.questions(&selectors, &command_files, subject, &rule.property, false)
+            }
+            _ => Vec::new(),
+        };
         let conditions = conditions.unwrap_or_else(|| rule.conditions.clone());
         if rule.conditions.is_empty() {
             answers.extend(
@@ -209,6 +216,11 @@ fn project_with_gap_facets(
                 unconditional
                     .into_iter()
                     .map(|(question, value)| (question, Vec::new(), value)),
+            )
+            .chain(
+                subtype_answers
+                    .into_iter()
+                    .map(|(question, conditions)| (question, conditions, rule.answer.clone())),
             );
         for (question, conditions, value) in answers {
             if let Some(gap) = selectors.selector_gap(&question, &conditions) {
@@ -270,6 +282,16 @@ fn project_with_gap_facets(
         .into_iter()
         .map(|question| (question, conditions.clone()))
         .collect();
+        if statement.is_none() {
+            questions.extend(subtype_claims.questions(
+                &selectors,
+                &command_files,
+                subject,
+                &gap.property,
+                project_related_gap_facets,
+            ));
+        }
+
         let definition = match statement {
             Some(_) => definition_questions(
                 &claims,
@@ -1253,6 +1275,139 @@ fn subtypes(conditions: &[String]) -> impl Iterator<Item = &str> {
         .iter()
         .filter(|condition| condition.starts_with("subtype["))
         .map(String::as_str)
+}
+
+/// The claims under `subtype[…]` conditions that an always-read field answers (SDK-716). When
+/// every read alternative of a field has the condition `Always`, Native reads it the same way on
+/// every path, so its unconditioned existence, value form and maximum also hold under any subtype.
+/// A subtype can require a field or change its scope, so no other property reaches these claims.
+/// A subtype that a root key selects keeps the SDK-800 rule and takes nothing from this one.
+struct SubtypeClaims<'a> {
+    /// Each claim with a subtype condition, keyed by its path without the subtype segments and no
+    /// conditions, so [`questions`] finds it as it finds the unconditioned claim at that path.
+    index: ClaimIndex<'a>,
+    /// The conditions of each question in `index`.
+    conditions: BTreeMap<&'a str, &'a [String]>,
+    /// The subjects whose read alternatives all have the condition `Always`.
+    always_read: BTreeSet<&'a str>,
+}
+
+impl<'a> SubtypeClaims<'a> {
+    /// The rule and gap properties whose unconditioned answer holds under any subtype. `reference`
+    /// and `nested_grammar` reach the value form only as gap facets.
+    const PROPERTIES: &'static [&'static str] = &[
+        "existence",
+        "value_form",
+        "value_form.unresolved",
+        "reference",
+        "nested_grammar",
+        "occurrences.maximum",
+        "repeat_behavior",
+    ];
+
+    fn new(ledger: &'a Ledger, rules: &'a [snapshot::Rule]) -> Self {
+        let root_key_subtypes: BTreeSet<_> = ledger
+            .claims
+            .iter()
+            .filter_map(|claim| match claim.subject.as_slice() {
+                [types, type_name, subtype, annotation]
+                    if types == "types" && annotation == "$annotation:type_key_filter" =>
+                {
+                    Some((claim.file.as_str(), type_name.as_str(), subtype.as_str()))
+                }
+                _ => None,
+            })
+            .collect();
+        let file_types = super::file_types(ledger);
+        let mut index = ClaimIndex::new();
+        let mut conditions = BTreeMap::new();
+
+        for claim in &ledger.claims {
+            if claim.conditions.is_empty() {
+                continue;
+            }
+
+            let type_name = super::claim_type(claim, &file_types[&claim.file]);
+            let selected_by_root_key = claim.conditions.iter().any(|condition| {
+                let subtype = condition.replacen("subtype[!", "subtype[", 1);
+
+                type_name.is_some_and(|type_name| {
+                    root_key_subtypes.contains(&(claim.file.as_str(), type_name, subtype.as_str()))
+                })
+            });
+
+            if selected_by_root_key {
+                continue;
+            }
+
+            let base_path = claim
+                .subject
+                .iter()
+                .map(String::as_str)
+                .filter(|segment| !segment.starts_with("subtype["))
+                .collect();
+
+            index
+                .entry((&claim.file, &claim.property, base_path, Vec::new()))
+                .or_default()
+                .insert(&claim.question);
+            conditions.insert(claim.question.as_str(), claim.conditions.as_slice());
+        }
+
+        Self {
+            index,
+            conditions,
+            always_read: always_read_fields(rules),
+        }
+    }
+
+    /// The subtype questions, with their conditions, that the unconditioned `property` of
+    /// `subject` answers; none unless `subject` is always read and `property` holds under any
+    /// subtype.
+    fn questions(
+        &self,
+        selectors: &TypeSelectors<'_>,
+        command_files: &BTreeMap<String, BTreeSet<String>>,
+        subject: &snapshot::Subject,
+        property: &str,
+        gap_facet: bool,
+    ) -> Vec<(String, Vec<String>)> {
+        if !self.always_read.contains(subject.id.as_str()) || !Self::PROPERTIES.contains(&property)
+        {
+            return Vec::new();
+        }
+
+        questions(
+            &self.index,
+            selectors,
+            command_files,
+            subject,
+            property,
+            &[],
+            gap_facet,
+        )
+        .into_iter()
+        .map(|question| {
+            let conditions = self.conditions[question.as_str()].to_vec();
+
+            (question, conditions)
+        })
+        .collect()
+    }
+}
+
+/// The subjects whose `conditions` rule lists only `Always` alternatives.
+fn always_read_fields(rules: &[snapshot::Rule]) -> BTreeSet<&str> {
+    rules
+        .iter()
+        .filter(|rule| rule.property == "conditions" && rule.conditions.is_empty())
+        .filter(|rule| {
+            rule.answer.as_array().is_some_and(|alternatives| {
+                !alternatives.is_empty() && alternatives.iter().all(|a| a == "Always")
+            })
+        })
+        .map(|rule| rule.subject.as_str())
+        .collect()
 }
 
 /// The blocks whose config entry is `alias_name[X] = alias_match_left[X]`. Each Native field in

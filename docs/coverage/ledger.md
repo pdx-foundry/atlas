@@ -33,8 +33,8 @@ this first format does not claim identity across those changes.
 
 The denominator counts source claim occurrences, not unique engine facts. One qualified question
 answer can cover repeated source occurrences. Alias expansion does not duplicate the shared grammar,
-and source-line links and closing braces do not create extra claims. CWT grouping, subtype naming,
-and alias factoring are explicit consumer-policy claims. A complete negative answer can cover a
+and source-line links and closing braces do not create extra claims. CWT grouping, subtype naming
+and tests, and alias factoring are explicit consumer-policy claims. A complete negative answer can cover a
 presence question without establishing any of its value/cardinality questions. Atlas-only questions
 are listed separately and do not change the config denominator.
 
@@ -52,7 +52,7 @@ this does not qualify the underlying game condition.
 | --- | --- | --- |
 | Engine fact | Fields, accepted forms, hard cardinality, references, scopes | Qualified engine evidence |
 | Content-derived | Dynamic content queries and shipped-comment documentation | Content observations |
-| Consumer policy | Severity, soft bounds, subtype naming, aliases, scope groups | Consumer modeling choices |
+| Consumer policy | Severity, soft bounds, subtype naming and tests, aliases, scope groups | Consumer modeling choices |
 | Authored text | Unattributed documentation outside expected engine/content families | Its author |
 
 Documentation assignments are provisional; the historical [provenance measurement](documentation.md)
@@ -312,11 +312,35 @@ when that subtype's definition body is empty and it is the only such subtype of 
 type. The loader dispatches on the root key, so the key is an engine fact, and the config itself
 writes the key-to-subtype mapping; Atlas infers nothing. A different key, a `<>` or list filter, a
 subtype that also tests a field (`planet_killer`, `asset_selectors.cwt`), and a claim with any
-other subtype condition earn no credit through this rule; SDK-716 owns those forms. At config
+other subtype condition earn no credit through this rule; the always-read rule below covers some
+of those forms. At config
 `8574760`, 32 of 35 `type_key_filter` subtypes qualify, and 636 Atlas-owned claims carry only such
 conditions (440 in `components.cwt`, 143 in `sprites.cwt`, 53 in `events.cwt`). The 53 in
 `events.cwt` join through the event kinds above; the others earn credit only once Native answers
 per root key.
+
+A second rule, decided in SDK-716, reaches other subtype conditions. When every read alternative
+of a field has the condition `Always` (its `conditions` rule lists only `Always`), Native reads
+the field the same way on every path. Its unconditioned `existence`, `value_form` and
+`repeat_behavior` then answer the same `field_existence`, `value_form` and
+`cardinality_maximum` questions under any `subtype[…]` condition, negated and nested ones
+included, and its gaps on those properties block them. The limits:
+
+- `cardinality_minimum` and scope claims (`push_scope`, `replace_scopes`) under a subtype earn
+  nothing, since a subtype can require a field or change its scope.
+- A field with any other alternative (`FieldZero`, `Unresolved`, `All`) earns nothing. Native's
+  only field condition is `FieldZero`, and matching it to bool subtype tests is deferred.
+- A claim under a subtype with any `## type_key_filter` keeps the SDK-800 rule and takes nothing
+  from this one; `component_template` waits on SDK-843. Event kinds join as root statements above.
+- A claim whose field Native does not list earns this credit once field discovery lists it.
+- A type selector gap still blocks the claims of its type.
+
+The tests that define a subtype in `types` (`types/type[x]/subtype[y]/…`, such as
+`colonizable = yes`) and the `## cardinality` bounds written on them are consumer policy, like
+subtype naming: they are CWT's partition, not engine rules. The subtype's own `## push_scope` and
+the naming lines under `localisation` or `images` subtypes stay engine facts. At pin move B
+(Native `2c94b30`), the rule credits 546 claims, all under `common/` types (`trait` 262), and the
+policy class removes 225 test claims from the Atlas-owned denominator.
 Duplicate subject and record identities remain invalid. A missing reader ID does not erase an
 established broad value form; an opaque reader ID alone does not establish one.
 

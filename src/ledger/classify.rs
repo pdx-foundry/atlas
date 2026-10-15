@@ -1,5 +1,9 @@
 use super::{Method, Owner};
 
+/// Why the test that defines a subtype, and any bound written on it, is consumer policy (SDK-716).
+pub(super) const SUBTYPE_TEST: &str =
+    "A subtype's defining test is CWT modeling, like subtype naming";
+
 pub(super) fn route(file: &str, subject: &[String], property: &str, answer: &str) -> Method {
     let context = subject.join("/");
     let filename = file.rsplit('/').next().unwrap_or(file);
@@ -340,8 +344,8 @@ pub(super) fn node(
     if context.starts_with("types/") && context.contains("subtype[") {
         return (
             "conditional_constraint",
-            Owner::EngineFact,
-            "Type metadata selects a subtype using a game-field predicate",
+            Owner::ConsumerPolicy,
+            SUBTYPE_TEST,
         );
     }
     if context.contains("type[") {

@@ -8,20 +8,20 @@
   "claims": 61146,
   "totals": {
     "atlas_owned": {
-      "covered": 27097,
-      "total": 58032,
-      "percent": 46.693204
+      "covered": 27643,
+      "total": 57807,
+      "percent": 47.819468
     },
     "all_claims": {
-      "covered": 27097,
+      "covered": 27643,
       "total": 61146,
-      "percent": 44.315245
+      "percent": 45.20819
     },
     "by_owner": {
       "engine_fact": {
-        "covered": 27097,
-        "total": 54914,
-        "percent": 49.344429
+        "covered": 27643,
+        "total": 54689,
+        "percent": 50.545814
       },
       "content_derived": {
         "covered": 0,
@@ -30,7 +30,7 @@
       },
       "consumer_policy": {
         "covered": 0,
-        "total": 2908,
+        "total": 3133,
         "percent": 0.0
       },
       "authored_text": {
@@ -137,9 +137,10 @@
       "kind": "unknown-annotation"
     }
   ],
-  "ledger_sha256": "ba2bb263812b54f4f3b6d28a7b47f56b92a0be5f3f7f8da41aa6c375f2f67947",
-  "coverage_sha256": "217faa5249579f8b17a81003341e0d6bd29b3318da558b3676cbd710be63503d",
+  "ledger_sha256": "254dd5d36eb4d1b904c11eb161172b1b4b0b5ed4dbbc543d1c14b3a9358e7351",
+  "coverage_sha256": "cf2ef0a4ec6cf34d03d312d214d5dd3d040538ddca165c366effd56fef727060",
   "atlas_revision": "b5dd4f690860c4e9197828aada3f3b8b403a657e",
   "native_revision": "2c94b304052b6b1859f8bab475241f58b8d49226",
-  "build": "c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b"
+  "build": "c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b",
+  "atlas_working_changes": "The SDK-716 subtype rule over the SDK-818 live snapshot"
 }
