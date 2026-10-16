@@ -323,15 +323,15 @@ pub(super) fn node(
     if key.starts_with("complex_enum[") {
         return (
             "content_query",
-            Owner::ContentDerived,
-            "Enum populated from content is not a closed engine value set",
+            Owner::ConsumerPolicy,
+            "An enum filled from content is a consumer listing, not an engine value set",
         );
     }
     if context.contains("complex_enum[") {
         return (
             "content_query",
-            Owner::ContentDerived,
-            "Content enumeration recipe, not an exhaustive engine rule",
+            Owner::ConsumerPolicy,
+            "A content enumeration recipe is consumer policy, not an engine rule",
         );
     }
     if key.starts_with("enum[") {

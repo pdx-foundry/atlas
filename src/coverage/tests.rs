@@ -85,7 +85,7 @@ fn unsupported_or_inapplicable_material_never_inflates_coverage() {
         s.answers[0].status = status;
         assert_eq!(score(&ledger, &s).totals.atlas_owned.covered, 0);
     }
-    for variant in 0..6 {
+    for variant in 0..7 {
         let mut s = original.clone();
         match variant {
             0 => s.answers[0].evidence.clear(),
@@ -93,6 +93,7 @@ fn unsupported_or_inapplicable_material_never_inflates_coverage() {
             2 => s.answers[0].evidence[0].qualified = false,
             3 => s.answers[0].evidence[0].target = "different-build".into(),
             4 => s.answers[0].conditions.push("narrower-condition".into()),
+            5 => s.answers[0].evidence[0].origin = Origin::Content,
             _ => s.answers[0].evidence[0].origin = Origin::Authored,
         }
         assert_eq!(
@@ -121,16 +122,20 @@ fn conflicts_and_gaps_prevent_complete_credit() {
 fn replay_era_registry_observations_are_rejected() {
     let (ledger, _) = fixture();
     let input = json!({"queries":{"traditions":{"Ok":{"native":{"registeredItems":[{"key":"x"}],"activation":"Demonstrated","completion":"Complete","limits":["items only"]},"gaps":["no rules"]}}}});
-    assert!(evaluate(&ledger, Some(&serde_json::to_vec(&input).unwrap())).is_err());
+    assert!(evaluate(&ledger, Some(&serde_json::to_vec(&input).unwrap()), None).is_err());
 }
 #[test]
 fn empty_denominators_and_unknown_formats_are_explicit() {
     let ledger = inventory(&[("empty.cwt".into(), "#empty".into())].into());
     assert_eq!(
-        evaluate(&ledger, None).unwrap().totals.atlas_owned.percent,
+        evaluate(&ledger, None, None)
+            .unwrap()
+            .totals
+            .atlas_owned
+            .percent,
         None
     );
-    assert!(evaluate(&ledger, Some(b"{}")).is_err());
+    assert!(evaluate(&ledger, Some(b"{}"), None).is_err());
 }
 #[test]
 fn per_file_and_owner_totals_reconcile() {
@@ -165,7 +170,7 @@ fn policy_and_authored_text_do_not_enter_headline_denominator() {
         )]
         .into(),
     );
-    let report = evaluate(&ledger, None).unwrap();
+    let report = evaluate(&ledger, None, None).unwrap();
     assert_eq!(report.totals.atlas_owned.total, 2);
     assert_eq!(report.totals.all_claims.total, 4);
     assert_eq!(report.totals.by_owner[&Owner::ConsumerPolicy].total, 1);

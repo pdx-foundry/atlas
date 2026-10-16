@@ -271,8 +271,12 @@ async fn conditional_branches_and_unknown_siblings_survive_all_consumers() {
     for answer in snapshot.answers.values_mut() {
         answer.source = keys[&answer.source].clone();
     }
-    let coverage =
-        coverage::evaluate(&ledger, Some(&snapshot::json_bytes(&snapshot).unwrap())).unwrap();
+    let coverage = coverage::evaluate(
+        &ledger,
+        Some(&snapshot::json_bytes(&snapshot).unwrap()),
+        None,
+    )
+    .unwrap();
     let question = ledger
         .claims
         .iter()

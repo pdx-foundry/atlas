@@ -105,7 +105,7 @@ fn each_config_type_has_one_join_to_an_authored_registry_list() {
 
 #[test]
 fn per_type_totals_add_up_to_per_file_totals() {
-    let report = coverage::evaluate(&ledger(), None).unwrap();
+    let report = coverage::evaluate(&ledger(), None, None).unwrap();
 
     let file = &report.by_type["common/types.cwt"];
     let tradition = &file.types["type[tradition]"];

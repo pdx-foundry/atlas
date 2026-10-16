@@ -1,4 +1,8 @@
-use pdx_atlas::{coverage::comparison, dashboard::Baseline, extraction, report, snapshot};
+use pdx_atlas::{
+    coverage::{self, comparison},
+    dashboard::Baseline,
+    extraction, report, snapshot,
+};
 use pdx_native::{Completeness, GameOptions, Native, supervisor};
 use sha2::{Digest, Sha256};
 use std::{
@@ -17,7 +21,15 @@ fn run_ledger() -> Result<bool, Box<dyn std::error::Error>> {
     args.next();
     let mut options = BTreeMap::new();
     while let Some(key) = args.next() {
-        if !["--config", "--snapshot", "--output", "--dashboard"].contains(&key.as_str()) {
+        if ![
+            "--config",
+            "--snapshot",
+            "--game-content",
+            "--output",
+            "--dashboard",
+        ]
+        .contains(&key.as_str())
+        {
             return Err(format!("Unknown argument: {key}").into());
         }
         let value = args.next().ok_or("Missing argument value")?;
@@ -31,9 +43,14 @@ fn run_ledger() -> Result<bool, Box<dyn std::error::Error>> {
     let config = options.get("--config").ok_or("--config is required")?;
     let output = options.get("--output").ok_or("--output is required")?;
     let baseline = main_baseline()?;
+    let content = options
+        .get("--game-content")
+        .map(|installation| game_content(installation))
+        .transpose()?;
     let (ledger, coverage) = report::generate(
         config,
         options.get("--snapshot").map(PathBuf::as_path),
+        content.as_ref(),
         output,
         baseline.as_ref(),
     )?;
@@ -64,7 +81,28 @@ fn run_ledger() -> Result<bool, Box<dyn std::error::Error>> {
             ledger.diagnostics.len()
         );
     }
-    Ok(ledger.diagnostics.is_empty())
+    let content_complete = content.is_none_or(|content| content.diagnostics.is_empty());
+
+    Ok(ledger.diagnostics.is_empty() && content_complete)
+}
+
+/// The shipped files of `installation`, identified by its build. Native hashes the executable;
+/// no game starts.
+fn game_content(installation: &Path) -> Result<coverage::Content, Box<dyn std::error::Error>> {
+    let build = serde_json::to_value(Native::open(installation)?.build())?
+        .as_str()
+        .ok_or("Native build id is not a string")?
+        .to_owned();
+    let content = coverage::Content::new(build, &report::read_game_content(installation)?);
+
+    if !content.diagnostics.is_empty() {
+        eprintln!(
+            "{} parse problems in the shipped files; their comments may be missed. See coverage.json.",
+            content.diagnostics.len()
+        );
+    }
+
+    Ok(content)
 }
 
 /// Runs git in the checkout that built this binary, returning its output on success.
@@ -283,7 +321,7 @@ fn main() -> ExitCode {
         Some("compare") => run_compare(),
         Some("registries") => run_registries(),
         Some("snapshot") => run_snapshot(),
-        _ => Err("usage: pdx-atlas ledger --config DIR [--snapshot FILE] --output DIR [--dashboard DIR] | compare CONFIG_DIR SNAPSHOT_FILE OUTPUT_DIR [--script-docs DIR] [--defines FILE]... [--answers DIR] | registries CONFIG_DIR ANSWERS OUTPUT_DIR | snapshot INSTALLATION ANSWERS OUTPUT [STARTUP_SECONDS] | snapshot --recorded ANSWERS OUTPUT".into()),
+        _ => Err("usage: pdx-atlas ledger --config DIR [--snapshot FILE [--game-content INSTALLATION]] --output DIR [--dashboard DIR] | compare CONFIG_DIR SNAPSHOT_FILE OUTPUT_DIR [--script-docs DIR] [--defines FILE]... [--answers DIR] | registries CONFIG_DIR ANSWERS OUTPUT_DIR | snapshot INSTALLATION ANSWERS OUTPUT [STARTUP_SECONDS] | snapshot --recorded ANSWERS OUTPUT".into()),
     };
     match result {
         Ok(true) => ExitCode::SUCCESS,

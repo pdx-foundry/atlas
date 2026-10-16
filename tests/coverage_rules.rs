@@ -53,7 +53,7 @@ impl SharedDirectory {
         let bytes = snapshot::json_bytes(&snapshot).unwrap();
 
         Self {
-            coverage: coverage::evaluate(&ledger, Some(&bytes)).unwrap(),
+            coverage: coverage::evaluate(&ledger, Some(&bytes), None).unwrap(),
             comparison: coverage::comparison::evaluate(&ledger, &bytes, &Default::default())
                 .unwrap(),
             ledger,
@@ -411,13 +411,18 @@ fn qualify_as_live(snapshot: &mut snapshot::Snapshot) {
 async fn rule_snapshot_credit_requires_live_basis_and_no_applicable_gap() {
     let snapshot = recorded_snapshot().await;
     let ledger = ledger();
-    let recorded =
-        coverage::evaluate(&ledger, Some(&snapshot::json_bytes(&snapshot).unwrap())).unwrap();
+    let recorded = coverage::evaluate(
+        &ledger,
+        Some(&snapshot::json_bytes(&snapshot).unwrap()),
+        None,
+    )
+    .unwrap();
     assert_eq!(recorded.totals.atlas_owned.covered, 0);
 
     let mut live = snapshot;
     qualify_as_live(&mut live);
-    let report = coverage::evaluate(&ledger, Some(&snapshot::json_bytes(&live).unwrap())).unwrap();
+    let report =
+        coverage::evaluate(&ledger, Some(&snapshot::json_bytes(&live).unwrap()), None).unwrap();
     assert!(report.totals.atlas_owned.covered > 0);
     let field = ledger
         .claims
@@ -463,18 +468,33 @@ async fn invalid_rule_snapshot_is_rejected() {
     for version in [1, 3] {
         snapshot.contract_version = version;
         assert!(
-            coverage::evaluate(&ledger(), Some(&snapshot::json_bytes(&snapshot).unwrap())).is_err()
+            coverage::evaluate(
+                &ledger(),
+                Some(&snapshot::json_bytes(&snapshot).unwrap()),
+                None
+            )
+            .is_err()
         );
     }
     snapshot.contract_version = snapshot::CONTRACT_VERSION;
     snapshot.schema_dialect = "https://json-schema.org/draft-07/schema".into();
     assert!(
-        coverage::evaluate(&ledger(), Some(&snapshot::json_bytes(&snapshot).unwrap())).is_err()
+        coverage::evaluate(
+            &ledger(),
+            Some(&snapshot::json_bytes(&snapshot).unwrap()),
+            None
+        )
+        .is_err()
     );
     snapshot.schema_dialect = "https://json-schema.org/draft/2020-12/schema".into();
     snapshot.schemas.dialect = "https://json-schema.org/draft-07/schema".into();
     assert!(
-        coverage::evaluate(&ledger(), Some(&snapshot::json_bytes(&snapshot).unwrap())).is_err()
+        coverage::evaluate(
+            &ledger(),
+            Some(&snapshot::json_bytes(&snapshot).unwrap()),
+            None
+        )
+        .is_err()
     );
 }
 
@@ -493,8 +513,12 @@ tradition = { subtype[special] = { unlocks_agenda = scalar } }
         .find(|rule| rule.id == "field:common/traditions/unlocks_agenda#existence")
         .unwrap();
     rule.conditions = vec!["subtype[special]".into()];
-    let report =
-        coverage::evaluate(&ledger, Some(&snapshot::json_bytes(&snapshot).unwrap())).unwrap();
+    let report = coverage::evaluate(
+        &ledger,
+        Some(&snapshot::json_bytes(&snapshot).unwrap()),
+        None,
+    )
+    .unwrap();
     let claim = ledger
         .claims
         .iter()
@@ -546,8 +570,12 @@ tradition = {
         .find(|rule| rule.id == "field:common/traditions/unlocks_agenda#existence")
         .unwrap();
     rule.conditions = conditions.iter().map(|&c| c.into()).collect();
-    let report =
-        coverage::evaluate(&ledger, Some(&snapshot::json_bytes(&snapshot).unwrap())).unwrap();
+    let report = coverage::evaluate(
+        &ledger,
+        Some(&snapshot::json_bytes(&snapshot).unwrap()),
+        None,
+    )
+    .unwrap();
     let mut subject = vec!["tradition"];
     subject.extend(subtypes);
     subject.push("unlocks_agenda");
@@ -606,8 +634,12 @@ async fn reference_facet_does_not_conflict_with_value_form() {
         evidence: base.evidence,
     });
     let ledger = ledger();
-    let report =
-        coverage::evaluate(&ledger, Some(&snapshot::json_bytes(&snapshot).unwrap())).unwrap();
+    let report = coverage::evaluate(
+        &ledger,
+        Some(&snapshot::json_bytes(&snapshot).unwrap()),
+        None,
+    )
+    .unwrap();
     let form = ledger
         .claims
         .iter()
@@ -643,7 +675,7 @@ tradition = { unlocks_agenda = int }
     form.answer = json!({"form":"boolean"});
     let bytes = snapshot::json_bytes(&rules).unwrap();
     let comparison = coverage::comparison::evaluate(&ledger, &bytes, &Default::default()).unwrap();
-    let coverage = coverage::evaluate(&ledger, Some(&bytes)).unwrap();
+    let coverage = coverage::evaluate(&ledger, Some(&bytes), None).unwrap();
     assert_eq!(
         coverage.totals.atlas_owned.covered, 0,
         "recorded evidence never earns coverage"
@@ -752,7 +784,7 @@ tradition = { unlocks_agenda = scalar on_enabled = {} }
         );
         assert!(entry.gaps.is_empty());
     }
-    let coverage = coverage::evaluate(&ledger, Some(&bytes)).unwrap();
+    let coverage = coverage::evaluate(&ledger, Some(&bytes), None).unwrap();
     let block = ledger
         .claims
         .iter()
@@ -905,7 +937,7 @@ async fn repeat_facts_answer_maximum_questions_without_publishing_engine_limits(
                 qualify_as_live(&mut snapshot);
             }
             let bytes = snapshot::json_bytes(&snapshot).unwrap();
-            let report = coverage::evaluate(&ledger, Some(&bytes)).unwrap();
+            let report = coverage::evaluate(&ledger, Some(&bytes), None).unwrap();
             let maximum = ledger
                 .claims
                 .iter()
@@ -1499,8 +1531,12 @@ async fn recorded_loader_rules_earn_no_credit_and_publish_the_build_wide_limits(
         overrides.into(),
     )]));
     let snapshot = recorded_snapshot().await;
-    let report =
-        coverage::evaluate(&ledger, Some(&snapshot::json_bytes(&snapshot).unwrap())).unwrap();
+    let report = coverage::evaluate(
+        &ledger,
+        Some(&snapshot::json_bytes(&snapshot).unwrap()),
+        None,
+    )
+    .unwrap();
 
     assert_eq!(report.totals.atlas_owned.covered, 0);
     for limit in ["file_order", "mod_over_vanilla"] {
@@ -2329,7 +2365,7 @@ async fn a_recorded_always_read_premise_earns_no_subtype_credit() {
 
     let bytes = snapshot::json_bytes(&snapshot).unwrap();
     let directory = SharedDirectory {
-        coverage: coverage::evaluate(&ledger, Some(&bytes)).unwrap(),
+        coverage: coverage::evaluate(&ledger, Some(&bytes), None).unwrap(),
         comparison: coverage::comparison::evaluate(&ledger, &bytes, &Default::default()).unwrap(),
         ledger,
         snapshot,

@@ -11,7 +11,7 @@ fn pinned_config_and_live_rule_snapshot() {
     let sources = report::read_sources(std::path::Path::new(&config)).unwrap();
     let ledger = ledger::inventory(&sources);
     let bytes = std::fs::read(snapshot).unwrap();
-    let coverage = coverage::evaluate(&ledger, Some(&bytes)).unwrap();
+    let coverage = coverage::evaluate(&ledger, Some(&bytes), None).unwrap();
     assert_eq!(
         ledger.config_sha256,
         expected["config_sha256"].as_str().unwrap()

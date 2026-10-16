@@ -275,8 +275,7 @@ fn grammar_subtypes_preserve_base_properties_and_ownership() {
         assert!(!claims.is_empty(), "{property}");
         assert!(claims.iter().all(|c| c.conditions == ["subtype[special]"]));
         let owner = match property {
-            "alias_factoring" => Owner::ConsumerPolicy,
-            "content_query" => Owner::ContentDerived,
+            "alias_factoring" | "content_query" => Owner::ConsumerPolicy,
             _ => Owner::EngineFact,
         };
         assert!(claims.iter().all(|c| c.owner == owner));
