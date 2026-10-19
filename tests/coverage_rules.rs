@@ -1982,6 +1982,78 @@ async fn a_root_statement_is_no_field_of_the_root_type_without_its_own_type() {
     assert!(!directory.covered("field_existence", &["planet_class", "random_list"]));
 }
 
+/// The recorded M452 answers, with `common/component_templates` answering one root statement
+/// per root key, as Native does (SDK-843), against a config whose root keys select subtypes.
+#[tokio::test]
+async fn a_component_template_key_answers_the_fields_of_its_subtype() {
+    use pdx_native::FieldMembers;
+
+    let mut extraction = recorded_extraction().await;
+    let traditions = extraction.fields[extraction::TRADITIONS]
+        .as_ref()
+        .unwrap()
+        .clone();
+    let template = |name: &str| {
+        traditions
+            .value
+            .iter()
+            .find(|field| field.name == name)
+            .unwrap()
+            .clone()
+    };
+    let key = |name: &str| pdx_native::Field {
+        name: name.into(),
+        ..template("unlocks_agenda")
+    };
+    let statement = |name: &str, members| pdx_native::Field {
+        name: name.into(),
+        members: FieldMembers::Fields(members),
+        ..template("tradition_swap")
+    };
+    let mut answer = traditions.clone();
+    answer.value = vec![
+        statement("utility_component_template", vec![key("sensor_range")]),
+        statement("weapon_component_template", vec![key("missile_speed")]),
+    ];
+    answer.gaps = Vec::new();
+    extraction
+        .fields
+        .insert("common/component_templates".into(), Ok(answer));
+    let source = r#"
+types = {
+    type[component_template] = {
+        path = "game/common/component_templates"
+        ## type_key_filter = utility_component_template
+        subtype[utility_component_template] = {}
+        ## type_key_filter = weapon_component_template
+        subtype[weapon_component_template] = {}
+    }
+}
+component_template = {
+    subtype[utility_component_template] = { sensor_range = int }
+    subtype[weapon_component_template] = { missile_speed = float }
+}
+"#;
+    let ledger = ledger::inventory(&BTreeMap::from([("components.cwt".into(), source.into())]));
+    let directory =
+        SharedDirectory::from_snapshot(ledger, snapshot::assemble(&extraction).unwrap());
+
+    for subject in [
+        &[
+            "component_template",
+            "subtype[utility_component_template]",
+            "sensor_range",
+        ],
+        &[
+            "component_template",
+            "subtype[weapon_component_template]",
+            "missile_speed",
+        ],
+    ] {
+        assert!(directory.covered("field_existence", subject), "{subject:?}");
+    }
+}
+
 const AGENDA_KINDS: &str = r#"
 types = { type[tradition] = { path = "game/common/traditions" } }
 enums = { enum[agenda_kind] = { first second } }

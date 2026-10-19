@@ -148,13 +148,17 @@ when Native answers one of those root keys.
 
 Native answers each event kind as a root field of `events` (Native's `registry-fields.md`,
 "Event kinds"): `country_event` is read in the country scope, and its members are the `CEvent`
-fields. In `events`, and only there, a root field whose key alone selects a subtype of the root
-type (the SDK-800 rule below) is a root statement, not a field. Its path below the key joins with
+fields. In `events` and `common/component_templates`, and only there, a root field whose key
+alone selects a subtype of the root type (the SDK-800 rule below) is a root statement, not a
+field. Its path below the key joins with
 the condition `root_key[KEY]`, so `country_event/pre_triggers` answers
 `event/subtype[country]/pre_triggers`, and the kind's own `read_scope` answers
-`types/type[event]/subtype[country]/$annotation:push_scope`. Its gaps join the same questions. In
-every other registry a root field is a key inside a definition, whatever its name; extend the
-registry list only when Native answers another registry's root statements as fields.
+`types/type[event]/subtype[country]/$annotation:push_scope`. Its gaps join the same questions.
+Native answers each component template class the same way (its `registry-fields.md`, "No owner
+(SDK-843)"): `weapon_component_template/missile_speed` answers
+`component_template/subtype[weapon_component_template]/missile_speed`. In every other registry a
+root field is a key inside a definition, whatever its name; extend the registry list only when
+Native answers another registry's root statements as fields.
 
 Every root statement is a definition of the root type, so the config's type-wide definition block
 (`event = { … }`, outside any subtype) describes each kind. An unconditional rule on a root
@@ -443,8 +447,8 @@ other subtype condition earn no credit through this rule; the always-read rule b
 of those forms. At config
 `8574760`, 32 of 35 `type_key_filter` subtypes qualify, and 636 Atlas-owned claims carry only such
 conditions (440 in `components.cwt`, 143 in `sprites.cwt`, 53 in `events.cwt`). The 53 in
-`events.cwt` join through the event kinds above; the others earn credit only once Native answers
-per root key.
+`events.cwt` and the `components.cwt` claims join through the root statements above; the
+others earn credit only once Native answers per root key.
 
 A second rule, decided in SDK-716, reaches other subtype conditions. When every read alternative
 of a field has the condition `Always` (its `conditions` rule lists only `Always`), Native reads
@@ -460,7 +464,7 @@ included, and its gaps on those properties block them. The limits:
   only field condition is `FieldZero`, and matching it to bool subtype tests is deferred.
 - The `Always` premise must itself rest on qualified evidence; a recorded premise earns nothing.
 - A claim under a subtype with any `## type_key_filter` keeps the SDK-800 rule and takes nothing
-  from this one; `component_template` waits on SDK-843. Event kinds join as root statements above.
+  from this one. Event kinds and component templates join as root statements above.
 - A claim whose field Native does not list earns this credit once field discovery lists it.
 - A type selector gap still blocks the claims of its type.
 
