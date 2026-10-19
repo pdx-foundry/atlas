@@ -342,6 +342,9 @@ fn project_with_gap_facets(
     }
     let definition_gaps = definition_line_gaps(&claims, &selectors, &subjects, &projection.answers);
     projection.gaps.extend(definition_gaps);
+    let listed_field_gaps =
+        ListedFields::new(rules, &subjects).gaps(ledger, &selectors, &projection);
+    projection.gaps.extend(listed_field_gaps);
     projection.gaps.sort_by(|left, right| {
         (&left.question, &left.conditions, &left.reason).cmp(&(
             &right.question,
@@ -933,7 +936,7 @@ fn definition_questions(
     let (None, Some(registry)) = (&subject.field, subject.registry.as_deref()) else {
         return Vec::new();
     };
-    let Some((annotation, ledger_property)) = field_property(property, gap_facet) else {
+    let Some((annotations, ledger_property)) = field_property(property, gap_facet) else {
         return Vec::new();
     };
     let Some(types) = selectors.directories.get(registry) else {
@@ -945,12 +948,256 @@ fn definition_questions(
         .filter(|(_, _, selector)| *selector == Selector::Root)
         .flat_map(|(type_name, file, _)| {
             let root = type_name.trim_start_matches("type[").trim_end_matches(']');
-            let mut path = vec![root];
-            path.extend(annotation);
 
-            claim_questions(claims, file, ledger_property, path, &[])
+            annotated_questions(claims, file, ledger_property, vec![root], annotations, &[])
         })
         .collect()
+}
+
+/// The root fields that Native lists, with the facts that say why a claim on one of them has no
+/// answer (SDK-859). Every claim on such a field, or on its items and annotations, ends in an
+/// answer or a gap: a field that Native lists has been read, so silence would hide which part of
+/// the claim Native leaves open. Keys nested below the field wait on Native's nested subjects.
+struct ListedFields<'a> {
+    /// The facts of each listed field, by (registry, field).
+    fields: BTreeMap<(&'a str, &'a str), FieldFacts>,
+}
+
+/// What Native establishes about a listed field that bears on its unanswered claims.
+struct FieldFacts {
+    /// Every read alternative has the condition `Always` (SDK-716).
+    always_read: bool,
+    /// How Native reads the field, for its scope claims.
+    read: FieldRead,
+}
+
+/// How Native reads a field, as far as it bears on the field's scope.
+enum FieldRead {
+    /// A block whose members are a modifier block: Native answers its accepted categories.
+    ModifierBlock,
+    /// A block of any other kind.
+    Block,
+    /// One value, not a block.
+    Value,
+    /// Native does not establish the value form without conditions.
+    Unresolved,
+}
+
+/// Why a claim on a listed field has no answer. Each variant names the part of the claim that
+/// Native leaves open; the order of [`ListedFields::unanswered`] picks the first that applies.
+#[derive(Clone, Copy)]
+enum Unanswered {
+    /// The claim is about an item of the field's value list (`$item:N`).
+    ListItem,
+    /// The claim is about the files that a path field accepts.
+    FileExtensions,
+    /// The claim is about the color form of a color field.
+    ColorForm,
+    /// A requirement under a subtype, which the SDK-716 decision leaves uncredited.
+    SubtypeMinimum,
+    /// A scope under a subtype, which the SDK-716 decision leaves uncredited.
+    SubtypeScope,
+    /// A claim under a subtype on a field that Native does not read on every path.
+    ReadOnSomePaths,
+    /// The scope of a modifier block.
+    ModifierScope,
+    /// The scope of a field whose read Native does not establish.
+    UnresolvedRead,
+    /// The scope of a field that Native reads as one value.
+    ValueScope,
+    /// No other reason applies.
+    Unjoined,
+}
+
+impl Unanswered {
+    fn reason(self) -> &'static str {
+        match self {
+            Self::ListItem => "Native does not establish the items of this field's value list",
+            Self::FileExtensions => "Native does not establish which files this field accepts",
+            Self::ColorForm => "Native does not establish the color form of this field",
+            Self::SubtypeMinimum => {
+                "Native answers whether every definition needs this field, not whether a \
+                 subtype's definitions need it"
+            }
+            Self::SubtypeScope => {
+                "Native answers this field's scope for every definition, not under a subtype"
+            }
+            Self::ReadOnSomePaths => {
+                "Native does not read this field on every path, so its answer without a \
+                 subtype does not hold under one"
+            }
+            Self::ModifierScope => {
+                "Native answers the modifier categories that this block accepts, not a scope"
+            }
+            Self::UnresolvedRead => {
+                "Native does not establish how this field is read, so it states no scope for it"
+            }
+            Self::ValueScope => {
+                "Native reads this field as one value, not a block, so it states no scope for it"
+            }
+            Self::Unjoined => "No Native answer about this field reaches this question",
+        }
+    }
+}
+
+impl<'a> ListedFields<'a> {
+    /// The ledger properties of the claims about a field, its items and its annotations.
+    const PROPERTIES: &'static [&'static str] = &[
+        "field_existence",
+        "value_form",
+        "cardinality_minimum",
+        "cardinality_maximum",
+        "scope_context",
+        "loader_path",
+    ];
+
+    fn new(
+        rules: &'a snapshot::Snapshot,
+        subjects: &BTreeMap<&str, &'a snapshot::Subject>,
+    ) -> Self {
+        let always_read = always_read_fields(rules, subjects);
+        let unconditioned = |property: &str| -> BTreeMap<&str, &Value> {
+            rules
+                .rules
+                .iter()
+                .filter(|rule| rule.property == property && rule.conditions.is_empty())
+                .map(|rule| (rule.subject.as_str(), &rule.answer))
+                .collect()
+        };
+        let value_forms = unconditioned("value_form");
+        let members = unconditioned("members");
+        let unresolved: BTreeSet<_> = rules
+            .gaps
+            .iter()
+            .filter(|gap| gap.property == "value_form.unresolved")
+            .map(|gap| gap.subject.as_str())
+            .collect();
+
+        let fields = subjects
+            .values()
+            .filter(|subject| subject.kind == snapshot::SubjectKind::Field)
+            .filter_map(|subject| {
+                let id = subject.id.as_str();
+                let read = match (value_forms.get(id), members.get(id)) {
+                    _ if unresolved.contains(id) => FieldRead::Unresolved,
+                    (_, Some(members)) if members.get("ModifierBlock").is_some() => {
+                        FieldRead::ModifierBlock
+                    }
+                    (Some(form), _) if form.get("form") == Some(&json!("block")) => {
+                        FieldRead::Block
+                    }
+                    (Some(_), _) => FieldRead::Value,
+                    (None, _) => FieldRead::Unresolved,
+                };
+                let facts = FieldFacts {
+                    always_read: always_read.contains_key(id),
+                    read,
+                };
+
+                Some((
+                    (subject.registry.as_deref()?, subject.field.as_deref()?),
+                    facts,
+                ))
+            })
+            .collect();
+
+        Self { fields }
+    }
+
+    /// A gap for each claim on a listed root field of a registry's root type that `projection`
+    /// neither answers nor gaps under the claim's conditions.
+    fn gaps(
+        &self,
+        ledger: &Ledger,
+        selectors: &TypeSelectors<'_>,
+        projection: &Projection,
+    ) -> Vec<Gap> {
+        let projected: BTreeSet<_> = projection
+            .answers
+            .iter()
+            .map(|answer| (&answer.question, &answer.conditions))
+            .chain(
+                projection
+                    .gaps
+                    .iter()
+                    .map(|gap| (&gap.question, &gap.conditions)),
+            )
+            .collect();
+        let root_types: BTreeMap<_, _> = selectors
+            .directories
+            .iter()
+            .flat_map(|(registry, types)| {
+                types
+                    .iter()
+                    .filter(|(_, _, selector)| *selector == Selector::Root)
+                    .map(move |(type_name, file, _)| {
+                        let root = type_name.trim_start_matches("type[").trim_end_matches(']');
+
+                        ((*file, root), *registry)
+                    })
+            })
+            .collect();
+
+        ledger
+            .claims
+            .iter()
+            .filter(|claim| Self::PROPERTIES.contains(&claim.property.as_str()))
+            .filter(|claim| !projected.contains(&(&claim.question, &claim.conditions)))
+            .filter_map(|claim| {
+                let (root, path) = claim.subject.split_first()?;
+                let registry = root_types.get(&(claim.file.as_str(), root.as_str()))?;
+                let mut path = path
+                    .iter()
+                    .map(String::as_str)
+                    .filter(|segment| !segment.starts_with("subtype["));
+                let field = path.next()?;
+                let below: Vec<_> = path.collect();
+
+                if below.iter().any(|segment| !segment.starts_with('$')) {
+                    return None;
+                }
+
+                let facts = self.fields.get(&(*registry, field))?;
+
+                Some(Gap {
+                    question: claim.question.clone(),
+                    conditions: claim.conditions.clone(),
+                    reason: Self::unanswered(claim, &below, facts).reason().into(),
+                })
+            })
+            .collect()
+    }
+
+    /// Why `claim`, at the `below` segments under a listed field with `facts`, has no answer.
+    fn unanswered(claim: &Claim, below: &[&str], facts: &FieldFacts) -> Unanswered {
+        let scope = claim.property == "scope_context";
+
+        if below.iter().any(|segment| segment.starts_with("$item:")) {
+            return Unanswered::ListItem;
+        }
+
+        match below.last() {
+            Some(&"$annotation:file_extensions") => return Unanswered::FileExtensions,
+            Some(&"$annotation:color_type") => return Unanswered::ColorForm,
+            _ => {}
+        }
+
+        if !claim.conditions.is_empty() {
+            match claim.property.as_str() {
+                "cardinality_minimum" => return Unanswered::SubtypeMinimum,
+                _ if scope => return Unanswered::SubtypeScope,
+                _ if !facts.always_read => return Unanswered::ReadOnSomePaths,
+                _ => {}
+            }
+        }
+
+        match (scope, &facts.read) {
+            (true, FieldRead::ModifierBlock) => Unanswered::ModifierScope,
+            (true, FieldRead::Unresolved) => Unanswered::UnresolvedRead,
+            (true, FieldRead::Value) => Unanswered::ValueScope,
+            _ => Unanswered::Unjoined,
+        }
+    }
 }
 
 /// Whether the `definition_names` of `registry` answers the definition line of a type with
@@ -1159,12 +1406,18 @@ fn statement_questions(
         ),
         _ => Vec::new(),
     };
-    let Some((annotation, ledger_property)) = field_property(property, gap_facet) else {
+    let Some((annotations, ledger_property)) = field_property(property, gap_facet) else {
         return questions;
     };
-    let mut path = vec![type_name.trim_start_matches("type[").trim_end_matches(']')];
-    path.extend(annotation);
-    questions.extend(claim_questions(claims, file, ledger_property, path, &[]));
+    let path = vec![type_name.trim_start_matches("type[").trim_end_matches(']')];
+    questions.extend(annotated_questions(
+        claims,
+        file,
+        ledger_property,
+        path,
+        annotations,
+        &[],
+    ));
 
     questions
 }
@@ -1350,30 +1603,61 @@ fn field_questions(
     conditions: &[String],
     gap_facet: bool,
 ) -> Vec<String> {
-    let Some((annotation, ledger_property)) = field_property(property, gap_facet) else {
+    let Some((annotations, ledger_property)) = field_property(property, gap_facet) else {
         return Vec::new();
     };
-    let mut path = node_path(root, conditions, field);
-    path.extend(annotation);
+    let path = node_path(root, conditions, field);
 
-    claim_questions(claims, file, ledger_property, path, conditions)
+    annotated_questions(claims, file, ledger_property, path, annotations, conditions)
 }
 
-/// The annotation below a field's config node and the ledger property that a field property
-/// answers, or `None` when no field claim answers it.
-fn field_property(property: &str, gap_facet: bool) -> Option<(Option<&'static str>, &'static str)> {
+/// The annotations below a field's config node that a field property answers, each a spelling of
+/// the same annotation (none for the node itself), and their ledger property; `None` when no field
+/// claim answers the property. The config writes a scope replacement as `replace_scopes` or, in a
+/// few files, `replace_scope`; the ledger classifies both as one scope claim (SDK-859).
+fn field_property(
+    property: &str,
+    gap_facet: bool,
+) -> Option<(&'static [&'static str], &'static str)> {
+    const CARDINALITY: &[&str] = &["$annotation:cardinality"];
+
     Some(match property {
-        "existence" => (None, "field_existence"),
-        "value_form" | "value_form.unresolved" => (None, "value_form"),
-        "reference" | "nested_grammar" if gap_facet => (None, "value_form"),
-        "occurrences.minimum" => (Some("$annotation:cardinality"), "cardinality_minimum"),
-        "occurrences.maximum" | "repeat_behavior" => {
-            (Some("$annotation:cardinality"), "cardinality_maximum")
-        }
-        "scope_context" => (Some("$annotation:replace_scopes"), "scope_context"),
-        "read_scope" => (Some("$annotation:push_scope"), "scope_context"),
+        "existence" => (&[], "field_existence"),
+        "value_form" | "value_form.unresolved" => (&[], "value_form"),
+        "reference" | "nested_grammar" if gap_facet => (&[], "value_form"),
+        "occurrences.minimum" => (CARDINALITY, "cardinality_minimum"),
+        "occurrences.maximum" | "repeat_behavior" => (CARDINALITY, "cardinality_maximum"),
+        "scope_context" => (
+            &["$annotation:replace_scopes", "$annotation:replace_scope"],
+            "scope_context",
+        ),
+        "read_scope" => (&["$annotation:push_scope"], "scope_context"),
         _ => return None,
     })
+}
+
+/// The questions at `path`, or, when `annotations` names any, at each of them below `path`.
+fn annotated_questions(
+    claims: &ClaimIndex<'_>,
+    file: &str,
+    ledger_property: &str,
+    path: Vec<&str>,
+    annotations: &[&str],
+    conditions: &[String],
+) -> Vec<String> {
+    if annotations.is_empty() {
+        return claim_questions(claims, file, ledger_property, path, conditions);
+    }
+
+    annotations
+        .iter()
+        .flat_map(|annotation| {
+            let mut path = path.clone();
+            path.push(annotation);
+
+            claim_questions(claims, file, ledger_property, path, conditions)
+        })
+        .collect()
 }
 
 /// The config path of the field at `field` below `root`, inside the subtypes of `conditions`.
@@ -1644,7 +1928,7 @@ impl<'a> AliasBlocks<'a> {
         ) else {
             return Vec::new();
         };
-        let Some((annotation, ledger_property)) = field_property(property, gap_facet) else {
+        let Some((annotations, ledger_property)) = field_property(property, gap_facet) else {
             return Vec::new();
         };
         let condition_names: Vec<_> = conditions.iter().map(String::as_str).collect();
@@ -1668,14 +1952,12 @@ impl<'a> AliasBlocks<'a> {
             let alias_root = format!("alias[{alias}:{key}]");
 
             for alias_file in self.files.get(alias_root.as_str()).into_iter().flatten() {
-                let mut path = vec![alias_root.as_str()];
-                path.extend(annotation);
-
-                questions.extend(claim_questions(
+                questions.extend(annotated_questions(
                     claims,
                     alias_file,
                     ledger_property,
-                    path,
+                    vec![alias_root.as_str()],
+                    annotations,
                     &[],
                 ));
             }
