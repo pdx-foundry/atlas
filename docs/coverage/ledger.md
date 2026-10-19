@@ -230,6 +230,47 @@ rule answers without conditions. A type whose selector Native does not identify 
 selector gap. A type whose directory Native does not list keeps no answer and no gap. On the pin
 move B snapshot the existence rule credits 164 definition lines.
 
+### Listed fields with no answer (SDK-859)
+
+A claim on a root field that Native lists ends in an answer or in a gap that says what Native
+leaves open. One mapping answers such claims:
+
+- **Scope spellings.** The config writes a scope replacement as `## replace_scopes` or, in four
+  files, `## replace_scope`; the ledger classifies both as one `scope_context` claim. A field's
+  `scope_context` rule answers both spellings under the same conditions, and its gap blocks both.
+  A `read_scope` rule alone answers neither: it gives the read-time `this` without the evaluation
+  contexts.
+
+Every other such claim that no rule or gap reaches takes a gap after all rules and gaps are
+projected, as the definition lines above do. The claims are those of the root type of a listed
+directory (`field_existence`, `value_form`, both cardinalities, scope and `file_extensions`) at the
+field, its `$item:N` entries or its annotations. A key nested below the field waits on Native's
+nested subjects (SDK-833) and takes no gap here; a claim that an answer or gap already reaches
+under its conditions takes none either. The first reason that applies is the gap:
+
+1. An item of the field's value list: "Native does not establish the items of this field's value
+   list". Native reports a value list as a block whose members are unresolved, or as one value read
+   per occurrence; neither states the item form or count (SDK-867).
+2. `## file_extensions`: Native does not establish which files the field accepts (SDK-868).
+3. `## color_type`: Native does not establish the color form of the field.
+4. Under a `subtype[…]` condition, as the SDK-716 decision states: a minimum ("Native answers
+   whether every definition needs this field, not whether a subtype's definitions need it"), a
+   scope, and any other claim on a field that Native does not read on every path.
+5. A scope claim, by how Native reads the field: a modifier block, whose keys a compiler checks by
+   the categories it accepts and which publishes no scope; a field whose read Native does not
+   establish (a `value_form.unresolved` gap or no value form); or a field that Native reads as one
+   value, not a block.
+6. Otherwise: "No Native answer about this field reaches this question". No claim takes this at
+   pin move B.
+
+Gaps earn no credit. On the pin move B snapshot (Native `2c94b30`) the scope mapping credits five
+`replace_scope` claims (three in `dust_clouds`, `crisis_objective`, `planet_class`), and 785
+claims that read "No qualified answer" take a gap; 761 of them are gate claims, and the other 24 are
+under `gfx`, `interface` and `sound`. The gate claims are 301 list items,
+224 subtype minimums, 84 subtype claims of fields not read on every path, 74 subtype scopes,
+38 modifier-block scopes, 23 scopes of unresolved reads, 12 file extensions, 3 scopes of values and
+2 color forms.
+
 ### Enum domains (SDK-818)
 
 Native's `Field.domain` lists the names that a keyword field accepts (`Listed`, SDK-828), or is

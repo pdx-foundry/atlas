@@ -2457,3 +2457,247 @@ async fn an_unconditioned_gap_blocks_the_same_subtype_claim() {
         }
     }
 }
+
+/// A `tradition` whose `unlocks_agenda` carries a value list, a nested key and scope annotations
+/// in both spellings, for the claims on a listed field that no rule answers (SDK-859).
+const LISTED_AGENDA: &str = r#"
+types = {
+    type[tradition] = {
+        path = "game/common/traditions"
+        subtype[special] = { is_special = yes }
+    }
+}
+tradition = {
+    ## replace_scope = { this = country }
+    unlocks_agenda = {
+        ## cardinality = 0..inf
+        enum[agenda_kind]
+        nested = scalar
+    }
+    ## replace_scopes = { this = country }
+    unlocks_agenda = scalar
+    subtype[special] = {
+        ## replace_scopes = { this = country }
+        unlocks_agenda = scalar
+    }
+}
+"#;
+
+async fn listed_agenda(edit: impl FnOnce(&mut snapshot::Snapshot)) -> SharedDirectory {
+    SharedDirectory::evaluate(&[("traditions.cwt", LISTED_AGENDA)], edit).await
+}
+
+fn agenda_item(annotation: Option<&str>) -> Vec<&str> {
+    let mut subject = vec!["tradition", "unlocks_agenda", "$item:1"];
+
+    subject.extend(annotation);
+
+    subject
+}
+
+/// Whether the claim at `subject` with `property` keeps exactly the gap `reason` and no credit.
+fn explained(directory: &SharedDirectory, property: &str, subject: &[&str], reason: &str) -> bool {
+    !directory.covered(property, subject) && directory.gaps(property, subject) == [reason]
+}
+
+#[tokio::test]
+async fn a_scope_context_rule_answers_both_spellings_of_a_scope_replacement() {
+    let directory = listed_agenda(|snapshot| {
+        set_rule(
+            snapshot,
+            UNLOCKS_AGENDA,
+            "scope_context",
+            json!({"contexts": [{"this": ["scope:country/country"]}]}),
+        );
+    })
+    .await;
+
+    for annotation in ["$annotation:replace_scope", "$annotation:replace_scopes"] {
+        let subject = ["tradition", "unlocks_agenda", annotation];
+
+        assert!(directory.covered("scope_context", &subject), "{annotation}");
+    }
+
+    let under_subtype = agenda_under(
+        "tradition",
+        &["subtype[special]"],
+        Some("$annotation:replace_scopes"),
+    );
+
+    assert!(!directory.covered("scope_context", &under_subtype));
+}
+
+#[tokio::test]
+async fn a_read_scope_alone_answers_no_scope_replacement() {
+    let directory = listed_agenda(|snapshot| {
+        set_rule(
+            snapshot,
+            UNLOCKS_AGENDA,
+            "read_scope",
+            json!(["scope:country/country"]),
+        );
+    })
+    .await;
+
+    for annotation in ["$annotation:replace_scope", "$annotation:replace_scopes"] {
+        let subject = ["tradition", "unlocks_agenda", annotation];
+
+        assert!(
+            !directory.covered("scope_context", &subject),
+            "{annotation}"
+        );
+    }
+}
+
+#[tokio::test]
+async fn a_scope_context_gap_blocks_the_singular_spelling() {
+    let directory =
+        listed_agenda(|snapshot| unresolve(snapshot, UNLOCKS_AGENDA, "scope_context")).await;
+    let subject = ["tradition", "unlocks_agenda", "$annotation:replace_scope"];
+
+    assert!(explained(
+        &directory,
+        "scope_context",
+        &subject,
+        "Native did not establish this registry's scope_context"
+    ));
+}
+
+#[tokio::test]
+async fn the_items_of_a_listed_field_keep_the_items_gap() {
+    let directory = listed_agenda(|_| {}).await;
+    const ITEMS: &str = "Native does not establish the items of this field's value list";
+
+    assert!(explained(
+        &directory,
+        "value_form",
+        &agenda_item(None),
+        ITEMS
+    ));
+
+    for property in ["cardinality_minimum", "cardinality_maximum"] {
+        let subject = agenda_item(Some("$annotation:cardinality"));
+
+        assert!(
+            explained(&directory, property, &subject, ITEMS),
+            "{property}"
+        );
+    }
+}
+
+#[tokio::test]
+async fn an_answered_claim_and_a_nested_key_take_no_listed_field_gap() {
+    let directory = listed_agenda(|_| {}).await;
+    let field = ["tradition", "unlocks_agenda"];
+
+    assert!(directory.covered("field_existence", &field));
+    assert!(directory.gaps("field_existence", &field).is_empty());
+
+    let nested = ["tradition", "unlocks_agenda", "nested"];
+
+    assert!(!directory.covered("field_existence", &nested));
+    assert!(directory.gaps("field_existence", &nested).is_empty());
+}
+
+#[tokio::test]
+async fn the_scope_of_a_listed_field_names_how_native_reads_it() {
+    let subject = ["tradition", "unlocks_agenda", "$annotation:replace_scopes"];
+    let value = listed_agenda(|_| {}).await;
+
+    assert!(explained(
+        &value,
+        "scope_context",
+        &subject,
+        "Native reads this field as one value, not a block, so it states no scope for it"
+    ));
+
+    let modifier = listed_agenda(|snapshot| {
+        set_rule(
+            snapshot,
+            UNLOCKS_AGENDA,
+            "value_form",
+            json!({"form": "block"}),
+        );
+        set_rule(
+            snapshot,
+            UNLOCKS_AGENDA,
+            "members",
+            json!({"ModifierBlock": {}}),
+        );
+    })
+    .await;
+
+    assert!(explained(
+        &modifier,
+        "scope_context",
+        &subject,
+        "Native answers the modifier categories that this block accepts, not a scope"
+    ));
+
+    let unresolved = listed_agenda(|snapshot| {
+        unresolve(snapshot, UNLOCKS_AGENDA, "value_form.unresolved");
+    })
+    .await;
+
+    assert!(explained(
+        &unresolved,
+        "scope_context",
+        &subject,
+        "Native does not establish how this field is read, so it states no scope for it"
+    ));
+}
+
+#[tokio::test]
+async fn a_subtype_minimum_and_scope_keep_the_subtype_gap() {
+    let directory = subtype_agenda(|_| {}).await;
+    let minimum = agenda_under(
+        "tradition",
+        &["subtype[special]"],
+        Some("$annotation:cardinality"),
+    );
+    let scope = agenda_under(
+        "tradition",
+        &["subtype[special]"],
+        Some("$annotation:replace_scopes"),
+    );
+
+    assert!(explained(
+        &directory,
+        "cardinality_minimum",
+        &minimum,
+        "Native answers whether every definition needs this field, not whether a subtype's \
+         definitions need it"
+    ));
+    assert!(explained(
+        &directory,
+        "scope_context",
+        &scope,
+        "Native answers this field's scope for every definition, not under a subtype"
+    ));
+}
+
+#[tokio::test]
+async fn a_field_read_on_some_paths_explains_its_subtype_claims() {
+    let directory = subtype_agenda(|snapshot| {
+        set_rule(
+            snapshot,
+            UNLOCKS_AGENDA,
+            "conditions",
+            json!(["Always", {"FieldZero": {"path": ["is_special"], "zero": false}}]),
+        );
+    })
+    .await;
+
+    for (property, subject) in subtype_independent_claims(&["subtype[special]"]) {
+        assert!(
+            explained(
+                &directory,
+                property,
+                &subject,
+                "Native does not read this field on every path, so its answer without a subtype \
+                 does not hold under one"
+            ),
+            "{property}"
+        );
+    }
+}
