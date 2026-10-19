@@ -1982,10 +1982,32 @@ async fn a_root_statement_is_no_field_of_the_root_type_without_its_own_type() {
     assert!(!directory.covered("field_existence", &["planet_class", "random_list"]));
 }
 
+const COMPONENT_TEMPLATES: &str = r#"
+types = {
+    type[component_template] = {
+        path = "game/common/component_templates"
+        ## type_key_filter = utility_component_template
+        subtype[utility_component_template] = {}
+        ## type_key_filter = weapon_component_template
+        subtype[weapon_component_template] = {}
+        subtype[hidden] = { hidden = yes }
+    }
+}
+component_template = {
+    key = scalar
+    power = float
+    size = scalar
+    subtype[utility_component_template] = { sensor_range = int }
+    subtype[weapon_component_template] = { missile_speed = float }
+    subtype[hidden] = { key = scalar }
+}
+"#;
+
 /// The recorded M452 answers, with `common/component_templates` answering one root statement
-/// per root key, as Native does (SDK-843), against a config whose root keys select subtypes.
-#[tokio::test]
-async fn a_component_template_key_answers_the_fields_of_its_subtype() {
+/// per root key, as Native does (SDK-843), against [`COMPONENT_TEMPLATES`]. Both statements read
+/// `key` alike; only the utility statement reads `power`; the weapon statement reads `size` only
+/// when another field is set.
+async fn component_templates() -> SharedDirectory {
     use pdx_native::FieldMembers;
 
     let mut extraction = recorded_extraction().await;
@@ -2012,31 +2034,40 @@ async fn a_component_template_key_answers_the_fields_of_its_subtype() {
     };
     let mut answer = traditions.clone();
     answer.value = vec![
-        statement("utility_component_template", vec![key("sensor_range")]),
-        statement("weapon_component_template", vec![key("missile_speed")]),
+        statement(
+            "utility_component_template",
+            vec![key("sensor_range"), key("key"), key("power"), key("size")],
+        ),
+        statement(
+            "weapon_component_template",
+            vec![key("missile_speed"), key("key"), key("size")],
+        ),
     ];
     answer.gaps = Vec::new();
     extraction
         .fields
         .insert("common/component_templates".into(), Ok(answer));
-    let source = r#"
-types = {
-    type[component_template] = {
-        path = "game/common/component_templates"
-        ## type_key_filter = utility_component_template
-        subtype[utility_component_template] = {}
-        ## type_key_filter = weapon_component_template
-        subtype[weapon_component_template] = {}
-    }
+    let ledger = ledger::inventory(&BTreeMap::from([(
+        "components.cwt".into(),
+        COMPONENT_TEMPLATES.into(),
+    )]));
+
+    let mut snapshot = snapshot::assemble(&extraction).unwrap();
+    let size_conditions = snapshot
+        .rules
+        .iter_mut()
+        .find(|rule| {
+            rule.id == "field:common/component_templates/weapon_component_template/size#conditions"
+        })
+        .unwrap();
+    size_conditions.answer = json!(["Always", {"FieldZero": {"path": ["hidden"], "zero": false}}]);
+
+    SharedDirectory::from_snapshot(ledger, snapshot)
 }
-component_template = {
-    subtype[utility_component_template] = { sensor_range = int }
-    subtype[weapon_component_template] = { missile_speed = float }
-}
-"#;
-    let ledger = ledger::inventory(&BTreeMap::from([("components.cwt".into(), source.into())]));
-    let directory =
-        SharedDirectory::from_snapshot(ledger, snapshot::assemble(&extraction).unwrap());
+
+#[tokio::test]
+async fn a_component_template_key_answers_the_fields_of_its_subtype() {
+    let directory = component_templates().await;
 
     for subject in [
         &[
@@ -2052,6 +2083,26 @@ component_template = {
     ] {
         assert!(directory.covered("field_existence", subject), "{subject:?}");
     }
+}
+
+#[tokio::test]
+async fn a_field_that_every_root_statement_reads_alike_answers_the_root_type() {
+    let directory = component_templates().await;
+
+    assert!(directory.covered("field_existence", &["component_template", "key"]));
+    // An always-read field of every statement also holds under a value subtype (SDK-716).
+    assert!(directory.covered(
+        "field_existence",
+        &["component_template", "subtype[hidden]", "key"]
+    ));
+}
+
+#[tokio::test]
+async fn a_field_that_one_root_statement_lacks_or_reads_otherwise_answers_no_root_claim() {
+    let directory = component_templates().await;
+
+    assert!(!directory.covered("field_existence", &["component_template", "power"]));
+    assert!(!directory.covered("field_existence", &["component_template", "size"]));
 }
 
 const AGENDA_KINDS: &str = r#"

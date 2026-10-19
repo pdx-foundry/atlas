@@ -168,6 +168,17 @@ them, and a gap on any kind blocks the credit. On M452 all 22 kinds that Native
 lists are blocks with the one `CEvent::ReadMember` reader and the same 30 members; `pop_event`,
 which the config does not name as a kind, is no root statement and answers nothing.
 
+A field below the root statements answers the root type's claims that no subtype condition
+limits (`event/is_triggered_only`, `component_template/key`) only when every statement agrees.
+The statements are those of the registry whose keys select a subtype of the root type. Each one
+must answer the property for the field, with no rule conditions and the same value, and each must
+give the field the same read `conditions`. A statement that lacks the field or disagrees gives no
+credit, and a gap on any statement's field blocks it. When the agreed field is always read, the
+SDK-716 rule below also reaches its claims under value subtypes (`event/subtype[hidden]/…`), with
+the same agreement. On the Milestone 5 baseline snapshot (Native `4a6498f`) these two rules credit
+34 `event` claims and lose none; `component_template` gains wait for the weapon and strike-craft
+fields of Native's value-reader repair.
+
 A block's `read_scope` that Native gives as a known empty list (the block is read with no scope,
 as for the `event` kind) is the rule `[]`, not a gap. It credits `scopeless` (`push_scope = any`).
 
@@ -464,7 +475,8 @@ included, and its gaps on those properties block them. The limits:
   only field condition is `FieldZero`, and matching it to bool subtype tests is deferred.
 - The `Always` premise must itself rest on qualified evidence; a recorded premise earns nothing.
 - A claim under a subtype with any `## type_key_filter` keeps the SDK-800 rule and takes nothing
-  from this one. Event kinds and component templates join as root statements above.
+  from this one. Event kinds and component templates join as root statements above; a field
+  that every root statement reads alike takes this rule as stated there.
 - A claim whose field Native does not list earns this credit once field discovery lists it.
 - A type selector gap still blocks the claims of its type.
 
