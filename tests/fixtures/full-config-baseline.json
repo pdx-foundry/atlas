@@ -1,27 +1,27 @@
 {
   "config_revision": "85747602a614ad7daa8cc66453777ecb023463a8",
   "config_sha256": "5c79cabb8d1b25e40994c0d134f5623bc2aef2a6b964059aabfc4834e6d039cc",
-  "snapshot_sha256": "48e5323aa6bbf2bc9c367acbb1d780a6e3d42d1e1682971a82d15ebb0ab3b16c",
+  "snapshot_sha256": "10d8dbadf021424dd3968caa2f74e821351b5c79e23b112abfa1f34256e9f1b4",
   "files": 175,
   "physical_lines": 50201,
   "meaningful_lines": 43842,
   "claims": 61146,
   "totals": {
     "atlas_owned": {
-      "covered": 27812,
+      "covered": 29049,
       "total": 57643,
-      "percent": 48.248703
+      "percent": 50.394671
     },
     "all_claims": {
-      "covered": 27812,
+      "covered": 29049,
       "total": 61146,
-      "percent": 45.484578
+      "percent": 47.507605
     },
     "by_owner": {
       "engine_fact": {
-        "covered": 27812,
+        "covered": 29049,
         "total": 54689,
-        "percent": 50.854834
+        "percent": 53.116715
       },
       "content_derived": {
         "covered": 0,
@@ -138,9 +138,9 @@
     }
   ],
   "ledger_sha256": "bd245ba973a33bf896cdf3ed933a2348dd709c05cf870d5fdd85539b86975837",
-  "coverage_sha256": "6d2e3dedcc6c9b438c889f22ff36deec463e87b59482035f3d0d26da2d3f0fe3",
-  "atlas_revision": "b5dd4f690860c4e9197828aada3f3b8b403a657e",
-  "native_revision": "2c94b304052b6b1859f8bab475241f58b8d49226",
+  "coverage_sha256": "61799829d6128cea0af22110385df6b550be3d43a4a667c6abccf19bb56c2130",
+  "atlas_revision": "c3377dbd4b1eea383d8b00e5dc42fb18178e2f14",
+  "native_revision": "4b4e1d6ae37a0661ffe1c23c86d55cfe3d833dcc",
   "build": "c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b",
-  "atlas_working_changes": "The SDK-716 subtype rule, the SDK-860 definition lines and the SDK-859 scope spelling over the SDK-818 live snapshot; the SDK-718 content-query move, without shipped comments"
+  "atlas_working_changes": "The pin move to 4b4e1d6 over the component template root statements; without shipped comments"
 }

@@ -49,7 +49,7 @@ async fn live_and_recorded_snapshots_match_after_basis_normalization() {
     assert!(live_answers.complete());
     let live_snapshot = snapshot::assemble(&live_answers).unwrap();
     // The recorded fixture keeps a sample; the live run checks the build's whole population.
-    assert_eq!(live_snapshot.coverage.registries.len(), 185);
+    assert_eq!(live_snapshot.coverage.registries.len(), 194);
 
     let replay = Native::from_recorded_answers(recording.path()).unwrap();
     let replay_answers =
