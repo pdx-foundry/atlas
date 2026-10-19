@@ -205,36 +205,16 @@ fn project_with_gap_facets(
                 (question, conditions, rule.answer.clone(), &subtype_evidence)
             }));
         for (question, conditions, value, evidence) in answers {
-            if let Some(gap) = selectors.selector_gap(&question, &conditions) {
-                projection.gaps.push(gap);
-                continue;
+            match rule_answer(
+                &selectors,
+                &counted_minimums,
+                &rule.property,
+                (question, conditions, value),
+                evidence,
+            ) {
+                Ok(answer) => projection.answers.push(answer),
+                Err(gap) => projection.gaps.push(gap),
             }
-            if rule.property == "occurrences.minimum"
-                && value == json!(1)
-                && counted_minimums.contains(question.as_str())
-            {
-                projection.gaps.push(Gap {
-                    question,
-                    conditions,
-                    reason: "Native establishes that a definition must contain this field, not a \
-                             count above 1"
-                        .into(),
-                });
-                continue;
-            }
-            projection.answers.push(Answer {
-                question,
-                conditions,
-                value,
-                status: if rule.property == "value_form"
-                    && rule.answer.get("alternatives").is_some()
-                {
-                    Status::Partial
-                } else {
-                    Status::Supported
-                },
-                evidence: evidence.clone(),
-            });
         }
     }
     for (subject, agreed) in agreed_statement_rules(rules, &subjects, &key_subtypes, &selectors) {
@@ -251,7 +231,7 @@ fn project_with_gap_facets(
             evidence.extend(own);
         }
 
-        let unconditioned = questions(
+        let mut unconditioned: Vec<_> = questions(
             &claims,
             &selectors,
             &command_files,
@@ -261,25 +241,54 @@ fn project_with_gap_facets(
             false,
         )
         .into_iter()
-        .map(|question| (question, Vec::new(), &evidence));
-        // An always-read field of every statement also holds under any subtype (SDK-716).
-        let subtype_answers = subtype_claims
-            .questions(&selectors, &command_files, &subject, &first.property, false)
-            .into_iter()
-            .map(|(question, conditions)| (question, conditions, &subtype_evidence));
+        .chain(alias_blocks.questions(&claims, &selectors, &subject, &first.property, &[], false))
+        .map(|question| (question, first.answer.clone()))
+        .collect();
 
-        for (question, conditions, evidence) in unconditioned.chain(subtype_answers) {
-            if let Some(gap) = selectors.selector_gap(&question, &conditions) {
-                projection.gaps.push(gap);
-                continue;
+        if first.property == "domain" {
+            let value_forms = field_value_forms(&claims, &selectors, &command_files, &subject, &[]);
+            let (selected, unselected): (Vec<_>, Vec<_>) = value_forms
+                .into_iter()
+                .partition(|question| selectors.selector_gap(question, &[]).is_none());
+
+            unconditioned.extend(enum_domains.answers(&selected, &first.answer));
+            projection
+                .gaps
+                .extend(enum_domains.selector_gaps(&selectors, &unselected, &[]));
+        }
+
+        // An always-read field of every statement also holds under any subtype (SDK-716).
+        let every_always_read = agreed
+            .iter()
+            .all(|rule| subtype_claims.reads_always(&rule.subject));
+        let subtype_answers = if every_always_read {
+            subtype_claims.questions(&selectors, &command_files, &subject, &first.property, false)
+        } else {
+            Vec::new()
+        };
+        let answers = unconditioned
+            .into_iter()
+            .map(|(question, value)| (question, Vec::new(), value, &evidence))
+            .chain(subtype_answers.into_iter().map(|(question, conditions)| {
+                (
+                    question,
+                    conditions,
+                    first.answer.clone(),
+                    &subtype_evidence,
+                )
+            }));
+
+        for (question, conditions, value, evidence) in answers {
+            match rule_answer(
+                &selectors,
+                &counted_minimums,
+                &first.property,
+                (question, conditions, value),
+                evidence,
+            ) {
+                Ok(answer) => projection.answers.push(answer),
+                Err(gap) => projection.gaps.push(gap),
             }
-            projection.answers.push(Answer {
-                question,
-                conditions,
-                value: first.answer.clone(),
-                status: Status::Supported,
-                evidence: evidence.clone(),
-            });
         }
     }
     for gap in &rules.gaps {
@@ -297,37 +306,32 @@ fn project_with_gap_facets(
             ),
             None => (subjects[gap.subject.as_str()], Vec::new()),
         };
-        let mut questions: Vec<_> = questions(
-            &claims,
-            &selectors,
-            &command_files,
-            subject,
-            &gap.property,
-            &conditions,
-            project_related_gap_facets,
-        )
-        .into_iter()
-        .map(|question| (question, conditions.clone()))
-        .collect();
         // A gap of one statement's field blocks the claims that every statement answers.
         let statement_field = statement
             .as_ref()
             .is_some_and(|(below, _)| below.field.is_some());
-        if statement_field {
-            questions.extend(
+        let unconditioned = Vec::new();
+        let field_conditions = if statement_field {
+            vec![&conditions, &unconditioned]
+        } else {
+            vec![&conditions]
+        };
+        let mut questions: Vec<_> = field_conditions
+            .iter()
+            .flat_map(|conditions| {
                 self::questions(
                     &claims,
                     &selectors,
                     &command_files,
                     subject,
                     &gap.property,
-                    &[],
+                    conditions,
                     project_related_gap_facets,
                 )
                 .into_iter()
-                .map(|question| (question, Vec::new())),
-            );
-        }
+                .map(|question| (question, (*conditions).clone()))
+            })
+            .collect();
         if statement.is_none() || statement_field {
             questions.extend(subtype_claims.questions(
                 &selectors,
@@ -348,26 +352,29 @@ fn project_with_gap_facets(
             ),
             None => Vec::new(),
         };
-        let enum_members = match gap.property.as_str() {
-            "domain" => {
+        let enum_members = field_conditions
+            .iter()
+            .filter(|_| gap.property == "domain")
+            .flat_map(|conditions| {
                 let value_forms =
-                    field_value_forms(&claims, &selectors, &command_files, subject, &conditions);
+                    field_value_forms(&claims, &selectors, &command_files, subject, conditions);
 
                 enum_domains.member_questions(&value_forms)
-            }
-            _ => Vec::new(),
-        };
-        let unconditional = selectors
-            .language_questions(&language, &gap.id)
-            .into_iter()
-            .chain(alias_blocks.questions(
+            });
+        let alias_questions = field_conditions.iter().flat_map(|conditions| {
+            alias_blocks.questions(
                 &claims,
                 &selectors,
                 subject,
                 &gap.property,
-                &conditions,
+                conditions,
                 project_related_gap_facets,
-            ))
+            )
+        });
+        let unconditional = selectors
+            .language_questions(&language, &gap.id)
+            .into_iter()
+            .chain(alias_questions)
             .chain(definition)
             .chain(enum_members);
         questions.extend(unconditional.map(|question| (question, Vec::new())));
@@ -405,6 +412,48 @@ fn project_with_gap_facets(
             && left.reason == right.reason
     });
     Ok(projection)
+}
+
+/// The answer that `value`, a rule's answer to `property`, gives to `question`, or the gap that
+/// blocks it: a type selector that no Native answer resolves, or a requirement against a config
+/// minimum above 1. A `value_form` with alternatives is partial.
+fn rule_answer(
+    selectors: &TypeSelectors<'_>,
+    counted_minimums: &BTreeSet<&str>,
+    property: &str,
+    (question, conditions, value): (String, Vec<String>, Value),
+    evidence: &[Evidence],
+) -> Result<Answer, Gap> {
+    if let Some(gap) = selectors.selector_gap(&question, &conditions) {
+        return Err(gap);
+    }
+
+    if property == "occurrences.minimum"
+        && value == json!(1)
+        && counted_minimums.contains(question.as_str())
+    {
+        return Err(Gap {
+            question,
+            conditions,
+            reason: "Native establishes that a definition must contain this field, not a count \
+                     above 1"
+                .into(),
+        });
+    }
+
+    let status = if property == "value_form" && value.get("alternatives").is_some() {
+        Status::Partial
+    } else {
+        Status::Supported
+    };
+
+    Ok(Answer {
+        question,
+        conditions,
+        value,
+        status,
+        evidence: evidence.to_vec(),
+    })
 }
 
 /// The engine evidence of `rule`, each source checked against the snapshot's one `build`.
@@ -1927,9 +1976,7 @@ impl<'a> SubtypeClaims<'a> {
         property: &str,
         gap_facet: bool,
     ) -> Vec<(String, Vec<String>)> {
-        if !self.always_read.contains_key(subject.id.as_str())
-            || !Self::PROPERTIES.contains(&property)
-        {
+        if !self.reads_always(&subject.id) || !Self::PROPERTIES.contains(&property) {
             return Vec::new();
         }
 
@@ -1949,6 +1996,12 @@ impl<'a> SubtypeClaims<'a> {
             (question, conditions)
         })
         .collect()
+    }
+
+    /// Whether Native reads `subject` on every path, so that its unconditioned answers can hold
+    /// under any subtype.
+    fn reads_always(&self, subject: &str) -> bool {
+        self.always_read.contains_key(subject)
     }
 
     /// The evidence of a subtype answer of `subject`: the rule's own `evidence`, qualified only

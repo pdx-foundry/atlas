@@ -1993,21 +1993,27 @@ types = {
         subtype[hidden] = { hidden = yes }
     }
 }
+enums = { enum[template_kind] = { energy kinetic } }
 component_template = {
     key = scalar
     power = float
     size = scalar
+    ## cardinality = 2..inf
+    count = int
+    kind = enum[template_kind]
+    modifier = { alias_name[template_modifier] = alias_match_left[template_modifier] }
     subtype[utility_component_template] = { sensor_range = int }
     subtype[weapon_component_template] = { missile_speed = float }
     subtype[hidden] = { key = scalar }
 }
+alias[template_modifier:range] = int
 "#;
 
 /// The recorded M452 answers, with `common/component_templates` answering one root statement
-/// per root key, as Native does (SDK-843), against [`COMPONENT_TEMPLATES`]. Both statements read
-/// `key` alike; only the utility statement reads `power`; the weapon statement reads `size` only
-/// when another field is set.
-async fn component_templates() -> SharedDirectory {
+/// per root key, as Native does (SDK-843), against [`COMPONENT_TEMPLATES`] and changed by `edit`.
+/// Both statements read `key`, `count`, `kind` and `modifier/range` alike; only the utility
+/// statement reads `power`; the weapon statement reads `size` only when another field is set.
+async fn component_templates(edit: impl FnOnce(&mut snapshot::Snapshot)) -> SharedDirectory {
     use pdx_native::FieldMembers;
 
     let mut extraction = recorded_extraction().await;
@@ -2036,11 +2042,26 @@ async fn component_templates() -> SharedDirectory {
     answer.value = vec![
         statement(
             "utility_component_template",
-            vec![key("sensor_range"), key("key"), key("power"), key("size")],
+            vec![
+                key("sensor_range"),
+                key("key"),
+                key("power"),
+                key("size"),
+                key("count"),
+                key("kind"),
+                statement("modifier", vec![key("range")]),
+            ],
         ),
         statement(
             "weapon_component_template",
-            vec![key("missile_speed"), key("key"), key("size")],
+            vec![
+                key("missile_speed"),
+                key("key"),
+                key("size"),
+                key("count"),
+                key("kind"),
+                statement("modifier", vec![key("range")]),
+            ],
         ),
     ];
     answer.gaps = Vec::new();
@@ -2061,13 +2082,14 @@ async fn component_templates() -> SharedDirectory {
         })
         .unwrap();
     size_conditions.answer = json!(["Always", {"FieldZero": {"path": ["hidden"], "zero": false}}]);
+    edit(&mut snapshot);
 
     SharedDirectory::from_snapshot(ledger, snapshot)
 }
 
 #[tokio::test]
 async fn a_component_template_key_answers_the_fields_of_its_subtype() {
-    let directory = component_templates().await;
+    let directory = component_templates(|_| {}).await;
 
     for subject in [
         &[
@@ -2087,7 +2109,7 @@ async fn a_component_template_key_answers_the_fields_of_its_subtype() {
 
 #[tokio::test]
 async fn a_field_that_every_root_statement_reads_alike_answers_the_root_type() {
-    let directory = component_templates().await;
+    let directory = component_templates(|_| {}).await;
 
     assert!(directory.covered("field_existence", &["component_template", "key"]));
     // An always-read field of every statement also holds under a value subtype (SDK-716).
@@ -2099,10 +2121,90 @@ async fn a_field_that_every_root_statement_reads_alike_answers_the_root_type() {
 
 #[tokio::test]
 async fn a_field_that_one_root_statement_lacks_or_reads_otherwise_answers_no_root_claim() {
-    let directory = component_templates().await;
+    let directory = component_templates(|_| {}).await;
 
     assert!(!directory.covered("field_existence", &["component_template", "power"]));
     assert!(!directory.covered("field_existence", &["component_template", "size"]));
+}
+
+const TEMPLATE_STATEMENTS: [&str; 2] = [
+    "field:common/component_templates/utility_component_template",
+    "field:common/component_templates/weapon_component_template",
+];
+
+/// [`component_templates`] with `property` of `field` below every statement established as
+/// `answer`.
+async fn agreed_templates(field: &str, property: &str, answer: Value) -> SharedDirectory {
+    component_templates(|snapshot| {
+        for statement in TEMPLATE_STATEMENTS {
+            establish(
+                snapshot,
+                &format!("{statement}/{field}"),
+                property,
+                answer.clone(),
+            );
+        }
+    })
+    .await
+}
+
+#[tokio::test]
+async fn a_field_that_every_root_statement_requires_does_not_answer_a_count_above_one() {
+    let directory = agreed_templates("count", "occurrences.minimum", json!(1)).await;
+    let cardinality = ["component_template", "count", "$annotation:cardinality"];
+
+    assert!(!directory.covered("cardinality_minimum", &cardinality));
+    assert!(
+        directory
+            .gaps("cardinality_minimum", &cardinality)
+            .iter()
+            .any(|gap| gap.contains("not a count above 1"))
+    );
+}
+
+#[tokio::test]
+async fn a_field_that_one_root_statement_reads_conditionally_answers_no_subtype_claim() {
+    let directory = component_templates(|snapshot| {
+        let weapon_key = format!("{}/key", TEMPLATE_STATEMENTS[1]);
+        let subject = snapshot
+            .subjects
+            .iter_mut()
+            .find(|subject| subject.id == weapon_key)
+            .unwrap();
+
+        subject.conditional = Some(true);
+    })
+    .await;
+
+    assert!(directory.covered("field_existence", &["component_template", "key"]));
+    assert!(!directory.covered(
+        "field_existence",
+        &["component_template", "subtype[hidden]", "key"]
+    ));
+}
+
+#[tokio::test]
+async fn a_domain_that_every_root_statement_agrees_on_answers_the_fields_enum() {
+    let directory = agreed_templates("kind", "domain", json!(["energy"])).await;
+
+    for member in ["$item:1", "$item:2"] {
+        assert!(
+            directory.covered("enum_member", &["enums", "enum[template_kind]", member]),
+            "{member}"
+        );
+    }
+}
+
+#[tokio::test]
+async fn a_field_that_every_root_statement_reads_in_an_alias_block_answers_the_alias() {
+    let range = ["alias[template_modifier:range]"];
+    let no_reference = json!({"derived_names": [], "lookups": []});
+    let referenced = agreed_templates("modifier/range", "reference", no_reference).await;
+    // The recorded field leaves its reference open, and that gap blocks its value form.
+    let unreferenced = component_templates(|_| {}).await;
+
+    assert!(referenced.covered("value_form", &range));
+    assert!(!unreferenced.covered("value_form", &range));
 }
 
 const AGENDA_KINDS: &str = r#"

@@ -173,9 +173,11 @@ limits (`event/is_triggered_only`, `component_template/key`) only when every sta
 The statements are those of the registry whose keys select a subtype of the root type. Each one
 must answer the property for the field, with no rule conditions and the same value, and each must
 give the field the same read `conditions`. A statement that lacks the field or disagrees gives no
-credit, and a gap on any statement's field blocks it. When the agreed field is always read, the
-SDK-716 rule below also reaches its claims under value subtypes (`event/subtype[hidden]/…`), with
-the same agreement. On the Milestone 5 baseline snapshot (Native `4a6498f`) these two rules credit
+credit, and a gap on any statement's field blocks it. The agreed answer reaches the claims that
+an ordinary field rule reaches: the `alias[X:KEY]` claims of an alias block, the members of an
+`enum[X]` domain, and no count above 1 from a requirement. When the field is always read in every
+statement, the SDK-716 rule below also reaches its claims under value subtypes
+(`event/subtype[hidden]/…`), with the same agreement. On the Milestone 5 baseline snapshot (Native `4a6498f`) these two rules credit
 34 `event` claims and lose none; `component_template` gains wait for the weapon and strike-craft
 fields of Native's value-reader repair.
 
