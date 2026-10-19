@@ -193,6 +193,18 @@ Two blocks that use one alias both answer it, and an applicable gap of either bl
 On M452 every pre_trigger key keeps Native's unresolved reader, so these claims stay gaps until
 Native establishes the value reader.
 
+A field whose config value is `single_alias_right[X]` stands for the block at `single_alias[X]`.
+The Native field answers the claims on `single_alias[X]` (its value form), and each Native field
+below it answers the claim below `single_alias[X]` at the same path, with no conditions. A single
+alias inside another (`modifier = single_alias_right[modifier_clause]` in an aura) is followed in
+turn. Every use answers the alias, and an applicable gap on any use blocks the credit, as for
+alias blocks above. The fields of a root statement reach these claims through the agreement rule
+above, so `component_template/hostile_aura` answers `single_alias[component_template_hostile_aura]`
+when every component template statement reads the aura alike. A block written with
+`alias_name[X]` inside a single alias is not followed. On the Milestone 5 baseline snapshot
+(Native `4a6498f`) this credits 4 claims and loses none: Native lists no aura members there, and a
+gap on one use blocks 17 claims.
+
 ### Root statements of their own type (SDK-818)
 
 Native answers `random_list` in `common/planet_classes` as a root field that is a root statement,

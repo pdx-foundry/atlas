@@ -2002,16 +2002,18 @@ component_template = {
     count = int
     kind = enum[template_kind]
     modifier = { alias_name[template_modifier] = alias_match_left[template_modifier] }
+    aura = single_alias_right[template_aura]
     subtype[utility_component_template] = { sensor_range = int }
     subtype[weapon_component_template] = { missile_speed = float }
     subtype[hidden] = { key = scalar }
 }
 alias[template_modifier:range] = int
+single_alias[template_aura] = { radius = int }
 "#;
 
 /// The recorded M452 answers, with `common/component_templates` answering one root statement
 /// per root key, as Native does (SDK-843), against [`COMPONENT_TEMPLATES`] and changed by `edit`.
-/// Both statements read `key`, `count`, `kind` and `modifier/range` alike; only the utility
+/// Both statements read `key`, `count`, `kind`, `modifier/range` and `aura/radius` alike; only the utility
 /// statement reads `power`; the weapon statement reads `size` only when another field is set.
 async fn component_templates(edit: impl FnOnce(&mut snapshot::Snapshot)) -> SharedDirectory {
     use pdx_native::FieldMembers;
@@ -2050,6 +2052,7 @@ async fn component_templates(edit: impl FnOnce(&mut snapshot::Snapshot)) -> Shar
                 key("count"),
                 key("kind"),
                 statement("modifier", vec![key("range")]),
+                statement("aura", vec![key("radius")]),
             ],
         ),
         statement(
@@ -2061,6 +2064,7 @@ async fn component_templates(edit: impl FnOnce(&mut snapshot::Snapshot)) -> Shar
                 key("count"),
                 key("kind"),
                 statement("modifier", vec![key("range")]),
+                statement("aura", vec![key("radius")]),
             ],
         ),
     ];
@@ -2205,6 +2209,59 @@ async fn a_field_that_every_root_statement_reads_in_an_alias_block_answers_the_a
 
     assert!(referenced.covered("value_form", &range));
     assert!(!unreferenced.covered("value_form", &range));
+}
+
+const SWAP_CLAUSE: &str = r#"
+types = { type[tradition] = { path = "game/common/traditions" } }
+tradition = { tradition_swap = single_alias_right[swap_clause] }
+single_alias[swap_clause] = {
+    inherit_effects = bool
+    modifier = single_alias_right[modifier_clause]
+}
+single_alias[modifier_clause] = { description = localisation }
+"#;
+
+#[tokio::test]
+async fn a_field_whose_value_is_a_single_alias_answers_the_alias_block() {
+    let directory = SharedDirectory::evaluate(&[("traditions.cwt", SWAP_CLAUSE)], |_| {}).await;
+
+    assert!(directory.covered("value_form", &["single_alias[swap_clause]"]));
+    assert!(directory.covered(
+        "field_existence",
+        &["single_alias[swap_clause]", "inherit_effects"]
+    ));
+    // `tradition_swap/modifier` names the single alias inside the first one.
+    assert!(directory.covered("value_form", &["single_alias[modifier_clause]"]));
+}
+
+#[tokio::test]
+async fn a_field_that_every_root_statement_reads_in_a_single_alias_answers_the_alias() {
+    let directory = component_templates(|_| {}).await;
+
+    assert!(directory.covered(
+        "field_existence",
+        &["single_alias[template_aura]", "radius"]
+    ));
+}
+
+#[tokio::test]
+async fn a_gap_on_one_use_of_a_single_alias_blocks_its_claim() {
+    let directory = SharedDirectory::evaluate(&[("traditions.cwt", SWAP_CLAUSE)], |snapshot| {
+        unresolve(
+            snapshot,
+            "field:common/traditions/tradition_swap/inherit_effects",
+            "existence",
+        );
+    })
+    .await;
+    let inherit_effects = ["single_alias[swap_clause]", "inherit_effects"];
+
+    assert!(!directory.covered("field_existence", &inherit_effects));
+    assert!(
+        !directory
+            .gaps("field_existence", &inherit_effects)
+            .is_empty()
+    );
 }
 
 const AGENDA_KINDS: &str = r#"
