@@ -62,13 +62,12 @@ fn line_keys(source: &str) -> Vec<Key> {
     let mut lines = 0;
 
     for (index, line) in source.split_inclusive('\n').enumerate() {
-        let code = code_part(line);
-        let mut rest = code;
+        let mut rest = line;
 
         lines = index + 1;
 
         while let Some(ch) = rest.chars().next() {
-            let at = offset + code.len() - rest.len();
+            let at = offset + line.len() - rest.len();
 
             if quoted {
                 match ch {
@@ -77,6 +76,9 @@ fn line_keys(source: &str) -> Vec<Key> {
                     '"' => quoted = false,
                     _ => {}
                 }
+            } else if ch == '#' {
+                // A comment ends the line's code; a quote that spans lines keeps its state.
+                break;
             } else if ch == '"' {
                 quoted = true;
                 pending = None;
@@ -135,30 +137,13 @@ fn line_keys(source: &str) -> Vec<Key> {
     keys
 }
 
-/// The part of `line` before its first `#` outside quotes, escaped quotes included.
-fn code_part(line: &str) -> &str {
-    let mut quoted = false;
-    let mut escaped = false;
-
-    for (index, ch) in line.char_indices() {
-        match ch {
-            _ if escaped => escaped = false,
-            '\\' if quoted => escaped = true,
-            '"' => quoted = !quoted,
-            '#' if !quoted => return &line[..index],
-            _ => {}
-        }
-    }
-
-    line
-}
-
 /// The key token at the start of `text`, with the length to skip: through the `=` of an
 /// assignment, else the whole token (`None` when `text` starts with no key character). The token
-/// is taken whole, scope prefixes (`event_target:field`) included, so its tail is never a key.
+/// is taken whole, scope prefixes (`event_target:field`) and paths (`namespace/field`) included,
+/// so its tail is never a key.
 fn assignment(text: &str) -> Option<(&str, usize)> {
     let key_length = text
-        .find(|c: char| !(c.is_alphanumeric() || "_@.-$:".contains(c)))
+        .find(|c: char| !(c.is_alphanumeric() || "_@.-$:/".contains(c)))
         .unwrap_or(text.len());
 
     if key_length == 0 {

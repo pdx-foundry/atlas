@@ -203,3 +203,17 @@ fn line_keys_take_a_scoped_key_whole() {
 
     assert!(keys.iter().all(|key| key.path != ["field"]));
 }
+
+#[test]
+fn line_keys_keep_a_quote_open_across_lines() {
+    let keys = line_keys("a = \"first line\nsecond # still quoted\"\nb = 1\n");
+
+    line_key(&keys, &["b"]);
+}
+
+#[test]
+fn line_keys_take_a_path_key_whole() {
+    let keys = line_keys("namespace/field = 1 # Field documentation\n");
+
+    assert!(keys.iter().all(|key| key.path != ["field"]));
+}
