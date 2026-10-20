@@ -6,7 +6,7 @@ use pdx_native::{
     LoadedModifiers, LoaderRules, LocalizationDeclarations, ModifierCategory, ModifierDeclaration,
     ModifierFamily, Native, OnAction, Registry, ScopeInventory, ScopeLink, Support,
 };
-use std::collections::BTreeMap;
+use std::collections::{BTreeMap, BTreeSet};
 
 /// The tradition definition directory.
 pub const TRADITIONS: &str = "common/traditions";
@@ -180,8 +180,54 @@ pub struct FixtureSession {
     pub disposal: Result<Disposal, Error>,
 }
 
+/// Native's static answers. No game starts to give them.
+#[derive(Debug)]
+pub struct StaticAnswers {
+    /// Exact build reported by Native.
+    pub build: BuildId,
+    /// Native's operation availability.
+    pub native_support: BTreeMap<String, Support>,
+    /// Discovered content directories.
+    pub registries: Result<Answer<Vec<Registry>>, Error>,
+    /// Root fields of each discovered directory.
+    pub fields: BTreeMap<String, Result<Answer<Vec<Field>>, Error>>,
+    /// Names that each directory's own code derives from an item key or a field.
+    pub derived_names: BTreeMap<String, Result<Answer<Vec<DerivedName>>, Error>>,
+    /// How each directory's loader selects its files, treats a repeated key and names its
+    /// definitions.
+    pub loader_rules: BTreeMap<String, Result<Answer<LoaderRules>, Error>>,
+    /// Static language declarations.
+    pub language: Language,
+}
+
+impl StaticAnswers {
+    /// The discovered directories, which select the fixture sessions of [`collect_live`].
+    pub fn discovered(&self) -> BTreeSet<String> {
+        self.fields.keys().cloned().collect()
+    }
+}
+
+/// Native's answers from game sessions.
+#[derive(Debug)]
+pub struct LiveObservations {
+    /// Exact build reported by the Native that observed them.
+    pub build: BuildId,
+    /// Independent fixture sessions and their disposal results.
+    pub sessions: Vec<FixtureSession>,
+    /// The loaded modifier table and its session's disposal result.
+    pub loaded_modifiers: LoadedModifierSession,
+}
+
 /// Ask Native the questions needed to assemble the registry and language snapshot.
 pub async fn collect(native: &Native, options: impl Fn() -> GameOptions) -> Extraction {
+    let static_answers = collect_static(native);
+    let live = collect_live(native, &static_answers.discovered(), options).await;
+
+    join(static_answers, live)
+}
+
+/// Ask Native every static question. No game starts.
+pub fn collect_static(native: &Native) -> StaticAnswers {
     use pdx_native::Operation;
 
     let native_support = Operation::ALL
@@ -189,7 +235,7 @@ pub async fn collect(native: &Native, options: impl Fn() -> GameOptions) -> Extr
         .map(|&operation| (operation.name().into(), native.supports(operation)))
         .collect();
     let registries = native.registries();
-    let fields = match &registries {
+    let fields: BTreeMap<_, _> = match &registries {
         Ok(answer) => answer
             .value
             .iter()
@@ -210,8 +256,28 @@ pub async fn collect(native: &Native, options: impl Fn() -> GameOptions) -> Extr
         .keys()
         .map(|registry| (registry.clone(), native.loader_rules(registry)))
         .collect();
-    let discovered: std::collections::BTreeSet<_> = fields.keys().map(String::as_str).collect();
+    let registry_names: Vec<_> = fields.keys().cloned().collect();
+    let language = Language::ask(native, &registry_names);
 
+    StaticAnswers {
+        build: native.build(),
+        native_support,
+        registries,
+        fields,
+        derived_names,
+        loader_rules,
+        language,
+    }
+}
+
+/// Run the fixture sessions of the `discovered` directories, then the loaded-modifier session.
+/// A session whose game may still run blocks every later session. Over recorded answers no game
+/// starts, and an answer that is not recorded is the session's error.
+pub async fn collect_live(
+    native: &Native,
+    discovered: &BTreeSet<String>,
+    options: impl Fn() -> GameOptions,
+) -> LiveObservations {
     let requests = [
         ("tradition_outcomes", TRADITIONS, tradition_fixture()),
         ("category_outcomes", CATEGORIES, category_fixture()),
@@ -220,7 +286,7 @@ pub async fn collect(native: &Native, options: impl Fn() -> GameOptions) -> Extr
     let mut blocker: Option<Error> = None;
     for (name, registry, request) in requests
         .into_iter()
-        .filter(|(_, registry, _)| discovered.contains(registry))
+        .filter(|(_, registry, _)| discovered.contains(*registry))
     {
         let session = match &blocker {
             Some(error) => FixtureSession {
@@ -234,8 +300,6 @@ pub async fn collect(native: &Native, options: impl Fn() -> GameOptions) -> Extr
         blocker = blocker.or_else(|| disposal_blocker(session.name, &session.disposal));
         sessions.push(session);
     }
-    let registry_names: Vec<_> = fields.keys().cloned().collect();
-    let language = Language::ask(native, &registry_names);
     let loaded_modifiers = match blocker {
         Some(error) => LoadedModifierSession {
             observation: Err(error.clone()),
@@ -243,16 +307,41 @@ pub async fn collect(native: &Native, options: impl Fn() -> GameOptions) -> Extr
         },
         None => read_loaded_modifiers(native, options()).await,
     };
-    Extraction {
+
+    LiveObservations {
         build: native.build(),
-        native_support,
-        registries,
-        fields,
-        derived_names,
-        loader_rules,
         sessions,
-        language,
         loaded_modifiers,
+    }
+}
+
+/// Join static answers with live observations of the same build, such as the answers of a
+/// recording. Observations of another build are refused.
+pub fn extraction(
+    static_answers: StaticAnswers,
+    live: LiveObservations,
+) -> Result<Extraction, String> {
+    if static_answers.build != live.build {
+        return Err(format!(
+            "The observations are of build {:?}, not the installation's build {:?}",
+            live.build, static_answers.build
+        ));
+    }
+
+    Ok(join(static_answers, live))
+}
+
+fn join(static_answers: StaticAnswers, live: LiveObservations) -> Extraction {
+    Extraction {
+        build: static_answers.build,
+        native_support: static_answers.native_support,
+        registries: static_answers.registries,
+        fields: static_answers.fields,
+        derived_names: static_answers.derived_names,
+        loader_rules: static_answers.loader_rules,
+        sessions: live.sessions,
+        language: static_answers.language,
+        loaded_modifiers: live.loaded_modifiers,
     }
 }
 

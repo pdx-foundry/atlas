@@ -1,5 +1,5 @@
-//! A local page that shows config coverage, its change against the baseline of `main`, and the
-//! claims that lost coverage.
+//! A local page that shows config coverage, its change against a baseline run, and the claims
+//! that lost coverage.
 use crate::{
     coverage::{self, Assessment, registries::GATE_DIRECTORIES},
     ledger::{Claim, Ledger},

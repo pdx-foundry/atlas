@@ -131,3 +131,57 @@ fn a_dashboard_folder_equal_to_the_output_keeps_the_page() {
             .ends_with("</html>\n")
     );
 }
+
+#[test]
+fn a_run_without_a_live_observation_compares_only_with_a_named_baseline() {
+    let root = tempfile::tempdir().unwrap();
+    let config = root.path().join("config");
+    fs::create_dir(&config).unwrap();
+    fs::write(
+        config.join("traditions.cwt"),
+        "types = { type[tradition] = { path = \"game/common/traditions\" } }\ntradition = { unlocks_agenda = int }\n",
+    )
+    .unwrap();
+    let snapshot = root.path().join("snapshot.json");
+    let fixture =
+        std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/native/m452");
+    let produced = Command::new(env!("CARGO_BIN_EXE_pdx-atlas"))
+        .args(["snapshot", "--recorded"])
+        .arg(fixture)
+        .arg(&snapshot)
+        .output()
+        .unwrap();
+    assert!(produced.status.success(), "{produced:?}");
+    let ledger = |output: &str, baseline: Option<&std::path::Path>| {
+        let mut command = Command::new(env!("CARGO_BIN_EXE_pdx-atlas"));
+        command
+            .args(["ledger", "--config"])
+            .arg(&config)
+            .arg("--snapshot")
+            .arg(&snapshot)
+            .arg("--output")
+            .arg(root.path().join(output))
+            .arg("--dashboard")
+            .arg(root.path().join("dashboard"));
+        if let Some(baseline) = baseline {
+            command.arg("--baseline").arg(baseline);
+        }
+        let result = command.output().unwrap();
+        assert!(result.status.success(), "{result:?}");
+        let page = fs::read_to_string(root.path().join(output).join("dashboard.html")).unwrap();
+        (String::from_utf8(result.stderr).unwrap(), page)
+    };
+
+    let (warning, page) = ledger("first", None);
+
+    assert!(warning.contains("No live observation"), "{warning}");
+    assert!(page.contains("\"baseline\":null"));
+
+    let (warning, page) = ledger(
+        "second",
+        Some(&root.path().join("first/covered-claims.txt")),
+    );
+
+    assert!(!warning.contains("No live observation"), "{warning}");
+    assert!(!page.contains("\"baseline\":null"));
+}

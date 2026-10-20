@@ -118,7 +118,7 @@
     element("h1", {}, ["Atlas config coverage"]),
     element("div", { class: "muted identity" }, [data.snapshot_id ? `Snapshot ${data.snapshot_id}` : "No snapshot: nothing is covered"]),
     ...data.warnings.map(text => element("div", { class: "warning" }, [text])),
-    ...(data.baseline ? [] : [element("div", { class: "warning" }, ["No baseline from main: the change is not measured."])]),
+    ...(data.baseline ? [] : [element("div", { class: "warning" }, ["No baseline: the change is not measured."])]),
     element("div", { class: "cards" }, [
       element("div", { class: "card" }, [
         element("div", { class: "muted" }, ["Coverage"]),
@@ -126,10 +126,10 @@
         element("div", {}, [`${data.covered.toLocaleString()} / ${data.total.toLocaleString()} claims`]),
       ]),
       element("div", { class: "card" }, [
-        element("div", { class: "muted" }, ["Change against main"]),
+        element("div", { class: "muted" }, ["Change against the baseline"]),
         element("div", { class: "value" }, [change(data.covered, baselineCovered)]),
         element("div", { class: "muted" }, [data.baseline
-          ? `main: ${baselineCovered.toLocaleString()} / ${baselineTotal.toLocaleString()} (${share(baselineCovered, baselineTotal)})`
+          ? `baseline: ${baselineCovered.toLocaleString()} / ${baselineTotal.toLocaleString()} (${share(baselineCovered, baselineTotal)})`
           : "not measured"]),
       ]),
       element("div", { class: "card" }, [

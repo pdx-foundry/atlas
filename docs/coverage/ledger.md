@@ -85,6 +85,25 @@ are unqualified for current-engine coverage. A matching gap blocks credit for it
 question. Unknown contract versions or broken subject, source or schema references are errors.
 The full format is [rule-snapshot-v2.schema.json](../contract/rule-snapshot-v2.schema.json).
 
+### Static mode
+
+`snapshot --static INSTALLATION --observations ANSWERS OUTPUT` measures a static change without a
+game. Native answers every static question from the installation, which it opens but does not
+start; the fixture sessions and the loaded modifier table come from a recording of an earlier live
+run, read with `Native::from_recorded_answers`. The fixture sessions are selected from the fresh
+registry discovery, as in a live run. The recording must be of the installation's build, or the
+command fails. A session answer that the recording lacks is a typed gap, as in a recorded run, and
+the command exits 2.
+
+The replayed answers keep their recorded basis and earn no coverage, so a static-mode snapshot
+gives the same coverage as a live snapshot only while no covered claim rests on a live observation
+(none did at Native `ec3342f`). It is a development measure, not the milestone number, which comes
+only from a live snapshot. The committed `docs/coverage/covered-claims.txt` is a live capture, so
+`ledger` compares a run with it only when the snapshot holds a live observation. To measure a
+static change, run static mode before and after the change and pass the first run's
+`covered-claims.txt` to the second `ledger` run with `--baseline FILE`. Atlas does not check that
+the named file is of a static-mode run.
+
 Language rules join by the config's structure: `alias[effect:NAME]` command, scope and
 documentation claims; `modifiers.cwt` names and categories; `links.cwt` names, input and output
 scopes and data prefixes; localisation commands and links; `game_rules.cwt` names and

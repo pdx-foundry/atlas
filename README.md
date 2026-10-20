@@ -14,6 +14,7 @@ coverage commands still run without a game installation.
 ```sh
 cargo run --release --locked -- snapshot /path/to/Stellaris /path/to/recorded-answers /path/to/rules.json
 cargo run --release --locked -- snapshot --recorded tests/fixtures/native/m452 /path/to/rules.json
+cargo run --release --locked -- snapshot --static /path/to/Stellaris --observations /path/to/recorded-answers /path/to/rules.json
 ```
 
 Both modes write deterministic JSON and a `.sha256` sidecar. The snapshot name includes a digest
@@ -21,7 +22,10 @@ of its contents, so different builds and incomplete extractions have distinct id
 mode starts the game for the tradition fixtures and once more to read the loaded modifier table;
 it exits 2 if an answer is missing or a game session did not confirm disposal. A registry that
 Native answers `Unsupported` is a gap, not a missing answer.
-Recorded answers keep their recorded basis and earn no current-engine coverage credit. The [version-2 schema](docs/contract/rule-snapshot-v2.schema.json)
+Recorded answers keep their recorded basis and earn no current-engine coverage credit.
+The static mode starts no game: it asks the installation the static questions and takes the game
+sessions' answers from a recording of the same build. It measures a static change in minutes; it
+is not the official coverage number ([static mode](docs/coverage/ledger.md#static-mode)). The [version-2 schema](docs/contract/rule-snapshot-v2.schema.json)
 describes the snapshot. The [pin move B capture](docs/coverage/pin-move-b.md) records the current pin and its coverage and rates, after the [Milestone 5 sweep](docs/coverage/milestone-5.md), [pin move A](docs/coverage/pin-move-a.md) and [Milestone 4](docs/coverage/milestone-4.md) captures; the [unowned gap triage](docs/coverage/gap-triage.md) gives each gap without an owner its failure shape and disposition; [the language snapshot measurement](docs/coverage/language-snapshot.md)
 states what it establishes and what stays a gap. The [shared-reader measurement](docs/coverage/shared-readers.md)
 records the first Milestone 4 capture and its historical baseline. The historical caller's findings and original source remain in the
@@ -48,8 +52,10 @@ Output JSON contains input hashes and relative config paths, with no run timesta
 The command also writes `covered-claims.txt` and `dashboard.html`, and copies the page to
 `.local/dashboard/dashboard.html` of the main checkout, which every worktree shares (`--dashboard
 DIR` writes the copy elsewhere). The page shows Atlas-owned coverage by area and for each Milestone 5
-gate type, and its change against the baseline of `main` (`docs/coverage/covered-claims.txt`, read
-from `origin/main`), with each claim that lost coverage. Run `compare` and `registries` into the same
+gate type, and its change against a baseline, with each claim that lost coverage. The baseline is
+the `covered-claims.txt` of another run that `--baseline FILE` names; without it, a snapshot that
+holds a live observation is compared with the baseline of `main` (`docs/coverage/covered-claims.txt`,
+read from `origin/main`), and any other run is not compared. Run `compare` and `registries` into the same
 output folder first to add agreement with the config, a list of each disagreement (config answer beside Atlas's) and each type's registry join; a report of
 another config or snapshot is left out with a warning. A PR that changes coverage copies the new
 `covered-claims.txt` into `docs/coverage/`. The committed baseline is a live snapshot at Native

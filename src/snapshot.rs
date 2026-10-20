@@ -50,6 +50,16 @@ pub struct Snapshot {
     pub gaps: Vec<Gap>,
 }
 
+impl Snapshot {
+    /// Whether a game session gave any of its answers. A snapshot of recorded answers, including
+    /// a static-mode snapshot, holds none.
+    pub fn observed_live(&self) -> bool {
+        self.sources
+            .values()
+            .any(|source| source.basis == Basis::LiveObservation)
+    }
+}
+
 /// Stable identity of one Atlas snapshot.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
