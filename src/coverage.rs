@@ -3,9 +3,10 @@
 pub mod comparison;
 mod documentation;
 pub use documentation::{Content, ContentReport, attribute_authored_text};
+mod config_types;
+pub(crate) use config_types::ConfigTypes;
 mod language_subject;
 mod projection;
-pub(crate) use projection::registry_types;
 /// Native's registry list compared with the config types.
 pub mod registries;
 mod shipped_comments;
@@ -184,19 +185,6 @@ impl FileTypes {
             totals.finish();
         }
     }
-}
-/// The config type that a claim belongs to: claims below `types/type[x]`, and claims below the
-/// definition root `x` in the file that defines `type[x]`.
-pub(crate) fn claim_type<'a>(
-    claim: &crate::ledger::Claim,
-    types: &'a BTreeSet<String>,
-) -> Option<&'a str> {
-    let first = claim.subject.first()?;
-    let type_name = match claim.subject.get(1) {
-        Some(second) if first == "types" => second.clone(),
-        _ => format!("type[{first}]"),
-    };
-    types.get(&type_name).map(String::as_str)
 }
 /// Per-claim support result, without an agreement/correctness score.
 #[derive(Clone, Debug, Serialize, Deserialize)]
@@ -385,9 +373,10 @@ pub fn evaluate(
                 .map_err(|error| format!("Invalid rule snapshot input: {error}"))
         })
         .transpose()?;
+    let types = ConfigTypes::new(ledger);
     let mut projection = rules
         .as_ref()
-        .map(|rules| projection::project(ledger, rules))
+        .map(|rules| projection::project(ledger, &types, rules))
         .transpose()?;
     let mut content_report = None;
 
@@ -404,14 +393,14 @@ pub fn evaluate(
             ));
         }
 
-        let (answers, report) = documentation::project(ledger, content, !recorded(rules));
+        let (answers, report) = documentation::project(ledger, &types, content, !recorded(rules));
 
         projection.answers.extend(answers);
         projection.gaps.extend(report.gaps.iter().cloned());
         content_report = Some(report);
     }
 
-    let mut report = evaluate_projection(ledger, projection.as_ref(), snapshot_sha256)?;
+    let mut report = evaluate_projection(ledger, &types, projection.as_ref(), snapshot_sha256)?;
 
     report.content = content_report;
 
@@ -427,29 +416,9 @@ fn recorded(rules: &crate::snapshot::Snapshot) -> bool {
         .all(|source| source.basis == pdx_native::Basis::Recorded)
 }
 
-/// The config types that each file defines, including files that define none.
-pub(crate) fn file_types(ledger: &Ledger) -> BTreeMap<String, BTreeSet<String>> {
-    let mut types: BTreeMap<_, _> = ledger
-        .files
-        .iter()
-        .map(|f| (f.path.clone(), BTreeSet::new()))
-        .collect();
-    for claim in &ledger.claims {
-        if let [types_key, type_name] = claim.subject.as_slice()
-            && types_key == "types"
-            && claim.property == "type_existence"
-        {
-            types
-                .get_mut(&claim.file)
-                .expect("claim file")
-                .insert(type_name.clone());
-        }
-    }
-    types
-}
-
 fn evaluate_projection(
     ledger: &Ledger,
+    types: &ConfigTypes<'_>,
     snapshot: Option<&Projection>,
     snapshot_sha256: Option<String>,
 ) -> Result<Report, String> {
@@ -462,8 +431,8 @@ fn evaluate_projection(
         .iter()
         .map(|f| (f.path.clone(), Totals::new()))
         .collect();
-    let file_types = file_types(ledger);
-    let mut by_type: BTreeMap<_, _> = file_types
+    let mut by_type: BTreeMap<_, _> = types
+        .file_types
         .iter()
         .map(|(file, types)| {
             let types = types.iter().map(|t| (t.clone(), Totals::new())).collect();
@@ -489,7 +458,7 @@ fn evaluate_projection(
         by_type
             .get_mut(&claim.file)
             .expect("claim file")
-            .totals(claim_type(claim, &file_types[&claim.file]))
+            .totals(types.claim_type(claim))
             .add(claim.owner, answer.covered);
         claims.push(answer);
     }

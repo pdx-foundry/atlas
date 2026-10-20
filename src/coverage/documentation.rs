@@ -1,7 +1,7 @@
 //! Content-derived documentation answered by the shipped comments of one installation (SDK-718).
 use super::{
-    Answer, Evidence, Gap, Origin, Status, claim_type, file_types,
-    projection::content_directory,
+    Answer, ConfigTypes, Evidence, Gap, Origin, Status,
+    config_types::content_directory,
     shipped_comments::{self, Comment},
 };
 use crate::ledger::{Claim, Ledger, Owner};
@@ -115,10 +115,11 @@ enum Comparison {
 /// the rule snapshot is a recording, which earns no credit.
 pub(super) fn project(
     ledger: &Ledger,
+    types: &ConfigTypes<'_>,
     content: &Content,
     qualified: bool,
 ) -> (Vec<Answer>, ContentReport) {
-    let directories = TypeDirectories::new(ledger);
+    let directories = TypeDirectories::new(types);
     let item_names = item_names(ledger);
     let mut questions: BTreeMap<(&str, &[String]), Vec<Comparison>> = BTreeMap::new();
 
@@ -199,7 +200,8 @@ pub(super) fn project(
 /// missed comment is no proof. A shipped file with a parse problem binds its comments by lines.
 pub fn attribute_authored_text(ledger: &mut Ledger, content: &Content) {
     let authored: BTreeSet<_> = {
-        let directories = TypeDirectories::new(ledger);
+        let types = ConfigTypes::new(ledger);
+        let directories = TypeDirectories::new(&types);
         let item_names = item_names(ledger);
 
         ledger
@@ -285,49 +287,38 @@ fn answer(comparisons: &[Comparison]) -> Result<Vec<&Comment>, String> {
 }
 
 /// The content directories that the config types load from (`path = game/common/x`).
-struct TypeDirectories<'a> {
+struct TypeDirectories<'t, 'a> {
     /// The directories of each type, by (file, type).
     by_type: BTreeMap<(&'a str, &'a str), Vec<String>>,
-    /// The types that each file defines.
-    file_types: BTreeMap<String, BTreeSet<String>>,
+    types: &'t ConfigTypes<'a>,
 }
 
-impl<'a> TypeDirectories<'a> {
-    fn new(ledger: &'a Ledger) -> Self {
-        let mut by_type: BTreeMap<_, Vec<String>> = BTreeMap::new();
+impl<'t, 'a> TypeDirectories<'t, 'a> {
+    fn new(types: &'t ConfigTypes<'a>) -> Self {
+        let by_type = types
+            .paths
+            .iter()
+            .map(|(&key, paths)| {
+                let mut directories: Vec<String> = paths
+                    .iter()
+                    .map(|path| content_directory(path).trim_end_matches('/').into())
+                    .collect();
 
-        for claim in &ledger.claims {
-            let [types, type_name, path] = claim.subject.as_slice() else {
-                continue;
-            };
+                directories.sort();
+                directories.dedup();
+                (key, directories)
+            })
+            .collect();
 
-            if claim.property != "loader_path" || types != "types" || path != "path" {
-                continue;
-            }
-
-            let directory = content_directory(&claim.config_answer).trim_end_matches('/');
-
-            by_type
-                .entry((claim.file.as_str(), type_name.as_str()))
-                .or_default()
-                .push(directory.into());
-        }
-
-        for paths in by_type.values_mut() {
-            paths.sort();
-            paths.dedup();
-        }
-
-        Self {
-            by_type,
-            file_types: file_types(ledger),
-        }
+        Self { by_type, types }
     }
 
     /// The directories of `claim`'s own type; for a claim outside every type with a path, those
     /// of every type in its file.
     fn of(&self, claim: &Claim) -> Vec<String> {
-        let own_type = claim_type(claim, &self.file_types[&claim.file])
+        let own_type = self
+            .types
+            .claim_type(claim)
             .and_then(|type_name| self.by_type.get(&(claim.file.as_str(), type_name)));
 
         if let Some(directories) = own_type {

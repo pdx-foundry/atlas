@@ -2,7 +2,7 @@
 
 use super::{Inputs, NameList, TagComparison, TagDifference};
 use crate::{
-    coverage::language_subject,
+    coverage::{ConfigTypes, language_subject},
     ledger::Ledger,
     snapshot::{Snapshot, SubjectKind},
 };
@@ -92,9 +92,14 @@ pub(super) fn compare(list: &str, engine: BTreeSet<String>, config: BTreeSet<Str
 }
 
 /// Each config name list against the snapshot's names.
-pub(super) fn config_lists(ledger: &Ledger, engine: &Engine, inputs: &Inputs) -> Vec<NameList> {
+pub(super) fn config_lists(
+    ledger: &Ledger,
+    types: &ConfigTypes<'_>,
+    engine: &Engine,
+    inputs: &Inputs,
+) -> Vec<NameList> {
     let mut modifiers = engine.names(SubjectKind::Modifier);
-    let classified = language_subject::classify(ledger, engine.snapshot);
+    let classified = language_subject::classify(ledger, types, engine.snapshot);
     let config_names = |kind| {
         classified
             .iter()

@@ -4,6 +4,7 @@
 //! structure and, where CWT identifies a subject only by its value (an on_action name, a scope
 //! alias), that value; it never compares the config's answer with Atlas's.
 
+use super::ConfigTypes;
 use crate::{
     ledger::{Claim, Ledger, Owner},
     snapshot::{Snapshot, SubjectKind},
@@ -12,9 +13,13 @@ use serde_json::Value;
 use std::collections::{BTreeMap, BTreeSet};
 
 /// Config questions answered by each snapshot rule or gap identity.
-pub(super) fn index(ledger: &Ledger, snapshot: &Snapshot) -> BTreeMap<String, BTreeSet<String>> {
+pub(super) fn index(
+    ledger: &Ledger,
+    types: &ConfigTypes<'_>,
+    snapshot: &Snapshot,
+) -> BTreeMap<String, BTreeSet<String>> {
     let mut index: BTreeMap<String, BTreeSet<String>> = BTreeMap::new();
-    for (claim, subject) in classify(ledger, snapshot) {
+    for (claim, subject) in classify(ledger, types, snapshot) {
         index
             .entry(subject.rule_id())
             .or_default()
@@ -41,6 +46,7 @@ impl LanguageSubject {
 /// unmatched or ambiguous scopes have no snapshot subject.
 pub(super) fn classify<'a>(
     ledger: &'a Ledger,
+    types: &ConfigTypes<'a>,
     snapshot: &Snapshot,
 ) -> Vec<(&'a Claim, LanguageSubject)> {
     let joins = Joins {
@@ -52,7 +58,7 @@ pub(super) fn classify<'a>(
             .filter(|subject| subject.kind == SubjectKind::Argument)
             .filter_map(|subject| Some((subject.name.clone()?, subject.field.clone()?)))
             .collect(),
-        type_registries: type_registries(ledger),
+        type_registries: type_registries(types),
         naming_values: naming_values(ledger),
         derived_names: snapshot
             .subjects
@@ -127,24 +133,19 @@ impl Joins<'_> {
 }
 
 /// The content directories of each config type of each file, from its `path = "game/…"` line.
-fn type_registries(ledger: &Ledger) -> BTreeMap<(&str, &str), BTreeSet<&str>> {
-    let mut registries: BTreeMap<(&str, &str), BTreeSet<&str>> = BTreeMap::new();
+fn type_registries<'a>(types: &ConfigTypes<'a>) -> BTreeMap<(&'a str, &'a str), BTreeSet<&'a str>> {
+    types
+        .paths
+        .iter()
+        .filter_map(|(&key, paths)| {
+            let registries: BTreeSet<_> = paths
+                .iter()
+                .filter_map(|path| path.trim_matches('"').strip_prefix("game/"))
+                .collect();
 
-    for claim in &ledger.claims {
-        if let [types, type_name, path] = claim.subject.as_slice()
-            && types == "types"
-            && path == "path"
-            && claim.property == "loader_path"
-            && let Some(registry) = claim.config_answer.trim_matches('"').strip_prefix("game/")
-        {
-            registries
-                .entry((claim.file.as_str(), type_name))
-                .or_default()
-                .insert(registry);
-        }
-    }
-
-    registries
+            (!registries.is_empty()).then_some((key, registries))
+        })
+        .collect()
 }
 
 /// The value of each naming question whose occurrences all state one value.
