@@ -311,8 +311,8 @@ impl ComparisonKind {
                 }
             }
             Self::Cardinality => match answer.as_str() {
-                Some("Replace") => Some(Value::from(1)),
-                Some("Accumulate" | "Merges") => Some(Value::String("inf".into())),
+                // No repeat behavior rejects an occurrence, so none states a finite maximum.
+                Some("Replace" | "Accumulate" | "Merges") => Some(Value::String("inf".into())),
                 _ => answer.as_u64().map(Value::from),
             },
             Self::EnumMember => answer.as_bool().map(Value::Bool),

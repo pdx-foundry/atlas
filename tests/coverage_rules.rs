@@ -899,10 +899,13 @@ async fn repeat_facts_answer_maximum_questions_without_publishing_engine_limits(
     let original = recorded_snapshot().await;
     let subject = "field:common/traditions/unlocks_agenda";
     for (repeat, maximum, expected) in [
-        ("Replace", "1", Status::Same),
         ("Accumulate", "inf", Status::Same),
         ("Merges", "inf", Status::Same),
-        ("Replace", "inf", Status::Different),
+        // A repeat that replaces rejects no occurrence, so it is unbounded as the others are.
+        ("Replace", "inf", Status::Same),
+        ("Replace", "1", Status::Different),
+        ("Replace", "20", Status::Different),
+        ("Replace", "0", Status::Different),
         ("Accumulate", "1", Status::Different),
         ("Merges", "1", Status::Different),
     ] {
