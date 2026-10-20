@@ -217,18 +217,36 @@ fn project_with_gap_facets(
             }
         }
     }
-    for (subject, agreed) in agreed_statement_rules(rules, &subjects, &key_subtypes, &selectors) {
+    for (subject, agreed, read_conditions) in
+        agreed_statement_rules(rules, &subjects, &key_subtypes, &selectors)
+    {
         let [first, ..] = agreed.as_slice() else {
             continue;
         };
         let mut evidence = Vec::new();
         let mut subtype_evidence = Vec::new();
+        // Agreement holds only when every statement's answer and read conditions rest on
+        // qualified evidence; one recorded premise leaves the whole answer unestablished.
+        let mut established = true;
+
+        for rule in &read_conditions {
+            established &= rule_evidence(rules, rule, build, &target)?
+                .iter()
+                .any(|evidence| evidence.qualified);
+        }
 
         for rule in &agreed {
             let own = rule_evidence(rules, rule, build, &target)?;
 
+            established &= own.iter().any(|evidence| evidence.qualified);
             subtype_evidence.extend(subtype_claims.evidence(&rule.subject, &own));
             evidence.extend(own);
+        }
+
+        if !established {
+            for evidence in evidence.iter_mut().chain(&mut subtype_evidence) {
+                evidence.qualified = false;
+            }
         }
 
         let mut unconditioned: Vec<_> = questions(
@@ -491,15 +509,20 @@ fn rule_evidence(
 
 /// The rules of a field below the root statements of a registry in
 /// [`ROOT_STATEMENT_REGISTRIES`] that every statement of the registry answers the same way, with
-/// the field below the key. Every statement must answer the property, with no rule conditions,
-/// the same value, and the same read `conditions`; then the field answers the root type's claim
-/// that no subtype condition limits. A statement that lacks the field, or disagrees, gives none.
+/// the field below the key, and the `conditions` rules that establish the agreement. Every
+/// statement must answer the property, with no rule conditions, the same value, and the same read
+/// `conditions`; then the field answers the root type's claim that no subtype condition limits. A
+/// statement that lacks the field, or disagrees, gives none.
 fn agreed_statement_rules<'a>(
     rules: &'a snapshot::Snapshot,
     subjects: &BTreeMap<&str, &snapshot::Subject>,
     key_subtypes: &KeySubtypes<'_>,
     selectors: &TypeSelectors<'_>,
-) -> Vec<(snapshot::Subject, Vec<&'a snapshot::Rule>)> {
+) -> Vec<(
+    snapshot::Subject,
+    Vec<&'a snapshot::Rule>,
+    Vec<&'a snapshot::Rule>,
+)> {
     type Group<'a> = (snapshot::Subject, BTreeMap<String, &'a snapshot::Rule>);
 
     let mut statements: BTreeMap<&str, BTreeSet<String>> = BTreeMap::new();
@@ -547,13 +570,18 @@ fn agreed_statement_rules<'a>(
 
     groups
         .iter()
-        .filter(|((registry, field, _), (_, by_key))| {
-            let read_conditions = groups.get(&(registry.clone(), field.clone(), "conditions"));
+        .filter_map(|((registry, field, _), (below, by_key))| {
+            let (_, read_conditions) =
+                groups.get(&(registry.clone(), field.clone(), "conditions"))?;
 
-            agrees(registry, by_key)
-                && read_conditions.is_some_and(|(_, conditions)| agrees(registry, conditions))
+            (agrees(registry, by_key) && agrees(registry, read_conditions)).then(|| {
+                (
+                    below.clone(),
+                    by_key.values().copied().collect(),
+                    read_conditions.values().copied().collect(),
+                )
+            })
         })
-        .map(|(_, (below, by_key))| (below.clone(), by_key.values().copied().collect()))
         .collect()
 }
 
