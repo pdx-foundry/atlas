@@ -364,7 +364,21 @@
             }
           }
         ],
-        "members": "Unresolved",
+        "members": {
+          "Items": {
+            "reader": {
+              "numeric": {
+                "Known": null
+              },
+              "scoped_operand": {
+                "Known": null
+              },
+              "id": null,
+              "kind": "String",
+              "family": "NotApplicable"
+            }
+          }
+        },
         "domain": "Unknown",
         "uses": [],
         "reference": "NotEstablished",
@@ -651,7 +665,21 @@
                   }
                 }
               ],
-              "members": "Unresolved",
+              "members": {
+                "Items": {
+                  "reader": {
+                    "numeric": {
+                      "Known": null
+                    },
+                    "scoped_operand": {
+                      "Known": null
+                    },
+                    "id": null,
+                    "kind": "String",
+                    "family": "NotApplicable"
+                  }
+                }
+              },
               "domain": "Unknown",
               "uses": [],
               "reference": "NotEstablished",
@@ -703,7 +731,21 @@
                   }
                 }
               ],
-              "members": "Unresolved",
+              "members": {
+                "Items": {
+                  "reader": {
+                    "numeric": {
+                      "Known": null
+                    },
+                    "scoped_operand": {
+                      "Known": null
+                    },
+                    "id": null,
+                    "kind": "String",
+                    "family": "NotApplicable"
+                  }
+                }
+              },
               "domain": "Unknown",
               "uses": [],
               "reference": "NotEstablished",
@@ -755,7 +797,21 @@
                   }
                 }
               ],
-              "members": "Unresolved",
+              "members": {
+                "Items": {
+                  "reader": {
+                    "numeric": {
+                      "Known": null
+                    },
+                    "scoped_operand": {
+                      "Known": null
+                    },
+                    "id": null,
+                    "kind": "String",
+                    "family": "NotApplicable"
+                  }
+                }
+              },
               "domain": "Unknown",
               "uses": [],
               "reference": "NotEstablished",
@@ -1551,7 +1607,21 @@
             }
           }
         ],
-        "members": "Unresolved",
+        "members": {
+          "Items": {
+            "reader": {
+              "numeric": {
+                "Known": null
+              },
+              "scoped_operand": {
+                "Known": null
+              },
+              "id": null,
+              "kind": "String",
+              "family": "NotApplicable"
+            }
+          }
+        },
         "domain": "Unknown",
         "uses": [],
         "reference": "NotEstablished",
@@ -34223,7 +34293,21 @@
             }
           }
         ],
-        "members": "Unresolved",
+        "members": {
+          "Items": {
+            "reader": {
+              "numeric": {
+                "Known": null
+              },
+              "scoped_operand": {
+                "Known": null
+              },
+              "id": null,
+              "kind": "String",
+              "family": "NotApplicable"
+            }
+          }
+        },
         "domain": "Unknown",
         "uses": [],
         "reference": "NotEstablished",
@@ -34355,23 +34439,76 @@
       {
         "name": "resources",
         "reader": {
-          "numeric": "Unresolved",
-          "scoped_operand": "Unresolved",
-          "id": null,
-          "kind": "Unknown",
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "4c60c5ce91cf8da1",
+          "kind": "Block",
           "family": "Unknown"
         },
         "shape": {
-          "value": "Unknown",
+          "value": "Block",
           "repeat": "Unknown"
         },
         "read": [
           {
             "condition": "Always",
-            "outcome": "Unresolved"
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "4c60c5ce91cf8da1",
+                  "kind": "Block",
+                  "family": "Unknown"
+                },
+                "shape": {
+                  "value": "Block",
+                  "repeat": "Unknown"
+                }
+              }
+            }
           }
         ],
-        "members": "Unresolved",
+        "members": {
+          "Fields": [
+            {
+              "name": "category",
+              "reader": {
+                "numeric": "Unresolved",
+                "scoped_operand": "Unresolved",
+                "id": null,
+                "kind": "Unknown",
+                "family": "Unknown"
+              },
+              "shape": {
+                "value": "Unknown",
+                "repeat": "Unknown"
+              },
+              "read": [
+                {
+                  "condition": "Always",
+                  "outcome": "Unresolved"
+                }
+              ],
+              "members": "Unresolved",
+              "domain": "Unknown",
+              "uses": [],
+              "reference": "NotEstablished",
+              "entry_contexts": [],
+              "read_scope": "Unresolved",
+              "accepted_categories": "Unresolved",
+              "requirement": "Unknown"
+            }
+          ]
+        },
         "domain": "Unknown",
         "uses": [],
         "reference": "NotEstablished",
@@ -43557,14 +43694,6 @@
         "kind": "UnresolvedReader",
         "subject": {
           "kind": "field",
-          "name": "resources"
-        },
-        "detail": "The field's alternatives do not establish one shared reader."
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "field",
           "name": "waystation_network_system_modifier"
         },
         "detail": "The field's alternatives do not establish one shared reader."
@@ -43648,6 +43777,30 @@
           "name": "triggered_desc.trigger"
         },
         "detail": "A loader condition remains unresolved; its outcome is retained separately."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "resources.category"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "resources"
+        },
+        "detail": "The field's reader could not be established on at least one path."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "resources"
+        },
+        "detail": "A path through the registry's reader could not be followed to its end."
       },
       {
         "kind": "OutsideMethod",
@@ -50299,6 +50452,17 @@
       {
         "kind": "UnresolvedPath",
         "subject": {
+          "kind": "key_path",
+          "path": [
+            "resources",
+            "category"
+          ]
+        },
+        "detail": "read-scope: reader-path"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
           "kind": "field",
           "name": "potential"
         },
@@ -50483,6 +50647,14 @@
           "kind": "field",
           "name": "resources"
         },
+        "detail": "Repeat behavior has no stated rule for this block reader, or the read is not a tail call."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "resources.category"
+        },
         "detail": "Repeat behavior waits for one shared reader. Nested fields remain unresolved."
       },
       {
@@ -50513,7 +50685,7 @@
     "source": {
       "build": "c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b",
       "native_version": "0.1.0",
-      "method": "registry-fields/v64",
+      "method": "registry-fields/v68",
       "basis": "StaticAnalysis"
     }
   }

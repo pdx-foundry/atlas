@@ -53,12 +53,12 @@ from `origin/main`), with each claim that lost coverage. Run `compare` and `regi
 output folder first to add agreement with the config, a list of each disagreement (config answer beside Atlas's) and each type's registry join; a report of
 another config or snapshot is left out with a warning. A PR that changes coverage copies the new
 `covered-claims.txt` into `docs/coverage/`. The committed baseline is a live snapshot at Native
-`bb0cc04`, made with the [pin move B capture](docs/coverage/pin-move-b.md) commands, with the
+`ec3342f`, made with the [pin move B capture](docs/coverage/pin-move-b.md) commands, with the
 component template root statements, the root-statement agreement rule, the single alias join and
 the M452 installation's shipped comments, with documentation that no shipped comment holds as
 authored text, documentation that a comment of the same key holds, the renamed lawsuit
 directory, whether each loader keeps a definition's text, and the comments of shipped files
-that fail to parse, bound by their lines, and the keys the engine never reads (32,012 of 56,917
+that fail to parse, bound by their lines, and the keys the engine never reads (32,103 of 56,917
 claims).
 
 The [registry comparison](docs/coverage/registries.md) puts Native's registry list beside the

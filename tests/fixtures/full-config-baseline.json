@@ -1,27 +1,27 @@
 {
   "config_revision": "85747602a614ad7daa8cc66453777ecb023463a8",
   "config_sha256": "5c79cabb8d1b25e40994c0d134f5623bc2aef2a6b964059aabfc4834e6d039cc",
-  "snapshot_sha256": "8a6389f97f180cba237237417d81bc22ae3650fedbd6b9b578e5e7bc3355804b",
+  "snapshot_sha256": "8b0ff31c8cee3d4e3dbd8f4d05e739e34b5024f0ad4f102b0cd6685c67c56360",
   "files": 175,
   "physical_lines": 50201,
   "meaningful_lines": 43842,
   "claims": 61146,
   "totals": {
     "atlas_owned": {
-      "covered": 29784,
+      "covered": 29875,
       "total": 57643,
-      "percent": 51.66976
+      "percent": 51.827629
     },
     "all_claims": {
-      "covered": 29784,
+      "covered": 29875,
       "total": 61146,
-      "percent": 48.709646
+      "percent": 48.85847
     },
     "by_owner": {
       "engine_fact": {
-        "covered": 29784,
+        "covered": 29875,
         "total": 54689,
-        "percent": 54.460678
+        "percent": 54.627073
       },
       "content_derived": {
         "covered": 0,
@@ -138,9 +138,9 @@
     }
   ],
   "ledger_sha256": "bd245ba973a33bf896cdf3ed933a2348dd709c05cf870d5fdd85539b86975837",
-  "coverage_sha256": "3213e64aeb76667f8307e2148099f8448190d8b3fcd4c6fe4e665e07ed3efb94",
-  "atlas_revision": "95d49b4be7b3587862ea7354367eb7d5961aa7d6",
-  "native_revision": "bb0cc0468fc3240150ff7dd077e2bdcc0691ef5c",
+  "coverage_sha256": "6c0c35589ce31661dc4b58ff72154beb1215613489b53427290955ce105bbcee",
+  "atlas_revision": "a35386f43351ccd8bfd8edef703a7d6ac929580a",
+  "native_revision": "ec3342f3e5bc5af17cc60ca4542eb6bb4e3d18fc",
   "build": "c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b",
-  "atlas_working_changes": "The not-a-field rule over main at bb0cc04; without shipped comments"
+  "atlas_working_changes": "The pin move to ec3342f over main at a35386f; without shipped comments"
 }
