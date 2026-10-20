@@ -34,10 +34,15 @@ const DEFINES_DIRECTORY: &str = "common/defines/";
 const DEFINES_AREA: &str = "Defines";
 const OTHER_AREA: &str = "Registry types and other files";
 
+/// The index file of a baseline's text form.
+pub const BASELINE_INDEX: &str = "index.txt";
+
 /// The covered claims of one coverage run, with the identity of the inputs it measured.
 ///
-/// Its text form is the committed baseline `docs/coverage/covered-claims.txt`: four header lines,
-/// then one covered claim ID per line, sorted.
+/// Its text form, committed at `docs/coverage/covered/`, is one shard per config file
+/// (`<config path>.txt` with `/` as `%2F`, one covered claim ID per line, sorted) and an index ([`BASELINE_INDEX`])
+/// with the run's identity, totals and the claim count of each shard. A change to one config
+/// file's coverage changes its shard and the index only.
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct Baseline {
     /// Config content identity of the run.
@@ -48,27 +53,54 @@ pub struct Baseline {
     pub covered: usize,
     /// Atlas-owned claims of the run.
     pub total: usize,
-    /// Covered claim IDs.
-    pub claims: BTreeSet<String>,
+    /// Whether the run's snapshot held a live observation. A run compares only with a baseline
+    /// of the same kind.
+    pub observed_live: bool,
+    /// Covered claim IDs, by the config file that holds them. A file with none is absent.
+    pub files: BTreeMap<String, BTreeSet<String>>,
 }
 
 impl Baseline {
     /// The baseline of one run.
-    pub fn of(ledger: &Ledger, ledger_sha256: &str, coverage: &coverage::Report) -> Self {
+    pub fn of(
+        ledger: &Ledger,
+        ledger_sha256: &str,
+        coverage: &coverage::Report,
+        observed_live: bool,
+    ) -> Self {
+        let mut files: BTreeMap<String, BTreeSet<String>> = BTreeMap::new();
+
+        for claim in atlas_owned_covered(ledger, coverage) {
+            files
+                .entry(claim.file.clone())
+                .or_default()
+                .insert(claim.id.clone());
+        }
+
         Self {
             config_sha256: ledger.config_sha256.clone(),
             ledger_sha256: ledger_sha256.to_owned(),
             covered: coverage.totals.atlas_owned.covered,
             total: coverage.totals.atlas_owned.total,
-            claims: atlas_owned_covered(ledger, coverage)
-                .map(str::to_owned)
-                .collect(),
+            observed_live,
+            files,
         }
     }
 
-    /// Parses the text form. Fails on a missing or malformed header line.
-    pub fn parse(text: &str) -> Result<Self, String> {
-        let mut lines = text.lines();
+    /// Every covered claim ID.
+    pub fn claims(&self) -> impl Iterator<Item = &str> {
+        self.files.values().flatten().map(String::as_str)
+    }
+
+    /// Parses the text form from its files, keyed by their path relative to the baseline
+    /// directory. Fails on a malformed index, a listed shard that is missing or holds another
+    /// count, a shard that the index does not list, or counts that do not add up to the covered
+    /// total.
+    pub fn parse(texts: &BTreeMap<String, String>) -> Result<Self, String> {
+        let index = texts
+            .get(BASELINE_INDEX)
+            .ok_or(format!("Baseline index `{BASELINE_INDEX}` is missing"))?;
+        let mut lines = index.lines();
         let mut header = |key: &str| {
             lines
                 .next()
@@ -79,38 +111,109 @@ impl Baseline {
         };
         let config_sha256 = header("config_sha256")?;
         let ledger_sha256 = header("ledger_sha256")?;
-        let count = |value: String| {
-            value
-                .parse::<usize>()
-                .map_err(|e| format!("Baseline count `{value}`: {e}"))
+        let covered = count(&header("atlas_owned_covered")?)?;
+        let total = count(&header("atlas_owned_total")?)?;
+        let observed_live = match header("observed_live")?.as_str() {
+            "true" => true,
+            "false" => false,
+            value => {
+                return Err(format!(
+                    "Baseline header `observed_live {value}` is not a bool"
+                ));
+            }
         };
-        let covered = count(header("atlas_owned_covered")?)?;
-        let total = count(header("atlas_owned_total")?)?;
-        let claims = lines.map(str::to_owned).collect();
+        let mut files = BTreeMap::new();
 
-        Ok(Self {
+        for line in lines {
+            let (file, listed) = line
+                .strip_prefix("file ")
+                .and_then(|entry| entry.rsplit_once(' '))
+                .ok_or(format!(
+                    "Baseline index line `{line}` is not `file PATH COUNT`"
+                ))?;
+            let shard = shard_path(file);
+            let text = texts
+                .get(&shard)
+                .ok_or(format!("Baseline shard `{shard}` is missing"))?;
+            let claims: BTreeSet<String> = text.lines().map(str::to_owned).collect();
+
+            if claims.len() != text.lines().count() {
+                return Err(format!("Baseline shard `{shard}` repeats a claim"));
+            }
+
+            if claims.len() != count(listed)? {
+                return Err(format!(
+                    "Baseline shard `{shard}` holds {} claims, not {listed}",
+                    claims.len()
+                ));
+            }
+
+            files.insert(file.to_owned(), claims);
+        }
+
+        if let Some(unlisted) = texts.keys().find(|path| {
+            *path != BASELINE_INDEX && !files.keys().any(|file| shard_path(file) == **path)
+        }) {
+            return Err(format!("Baseline shard `{unlisted}` is not in the index"));
+        }
+
+        let baseline = Self {
             config_sha256,
             ledger_sha256,
             covered,
             total,
-            claims,
-        })
-    }
+            observed_live,
+            files,
+        };
+        let shard_claims = baseline.claims().count();
+        let distinct_claims = baseline.claims().collect::<BTreeSet<_>>().len();
 
-    /// The text form, with a final newline.
-    pub fn render(&self) -> String {
-        let mut text = format!(
-            "config_sha256 {}\nledger_sha256 {}\natlas_owned_covered {}\natlas_owned_total {}\n",
-            self.config_sha256, self.ledger_sha256, self.covered, self.total
-        );
-
-        for claim in &self.claims {
-            text.push_str(claim);
-            text.push('\n');
+        if distinct_claims != shard_claims {
+            return Err("A baseline claim is in more than one shard".into());
         }
 
-        text
+        if shard_claims != covered {
+            return Err(format!(
+                "Baseline shards hold {shard_claims} claims, not the {covered} covered"
+            ));
+        }
+
+        Ok(baseline)
     }
+
+    /// The text form: each file's path relative to the baseline directory, and its text with a
+    /// final newline.
+    pub fn render(&self) -> BTreeMap<String, String> {
+        let mut index = format!(
+            "config_sha256 {}\nledger_sha256 {}\natlas_owned_covered {}\natlas_owned_total {}\nobserved_live {}\n",
+            self.config_sha256, self.ledger_sha256, self.covered, self.total, self.observed_live
+        );
+        let mut texts = BTreeMap::new();
+
+        for (file, claims) in &self.files {
+            index.push_str(&format!("file {file} {}\n", claims.len()));
+
+            let shard: String = claims.iter().map(|claim| format!("{claim}\n")).collect();
+            texts.insert(shard_path(file), shard);
+        }
+
+        texts.insert(BASELINE_INDEX.to_owned(), index);
+        texts
+    }
+}
+
+/// The shard of one config file: its path with `%` and `/` percent-encoded, so every shard is a
+/// file of the baseline directory itself and no two config paths name one shard.
+fn shard_path(file: &str) -> String {
+    let name = file.replace('%', "%25").replace('/', "%2F");
+
+    format!("{name}.txt")
+}
+
+fn count(value: &str) -> Result<usize, String> {
+    value
+        .parse::<usize>()
+        .map_err(|e| format!("Baseline count `{value}`: {e}"))
 }
 
 /// The fields of a `compare` report that the page reads.
@@ -258,13 +361,14 @@ pub fn page_data(
         ));
     }
 
+    let baseline_claims: Option<BTreeSet<&str>> =
+        baseline.map(|baseline| baseline.claims().collect());
     let baseline_covered = baseline.map(|baseline| {
         warnings.extend(baseline_warnings(baseline, ledger, ledger_sha256));
 
         baseline
-            .claims
-            .iter()
-            .filter_map(|id| claims.get(id.as_str()).copied())
+            .claims()
+            .filter_map(|id| claims.get(id).copied())
             .filter(|claim| claim.owner.atlas_owned())
             .collect::<Vec<_>>()
     });
@@ -277,14 +381,13 @@ pub fn page_data(
         .collect();
     let missing_from_ledger = baseline.map_or(0, |baseline| {
         baseline
-            .claims
-            .iter()
-            .filter(|id| !claims.contains_key(id.as_str()))
+            .claims()
+            .filter(|id| !claims.contains_key(id))
             .count()
     });
-    let gained = baseline.map_or(0, |baseline| {
+    let gained = baseline_claims.as_ref().map_or(0, |baseline_claims| {
         atlas_owned_covered(ledger, coverage)
-            .filter(|id| !baseline.claims.contains(*id))
+            .filter(|claim| !baseline_claims.contains(claim.id.as_str()))
             .count()
     });
 
@@ -365,11 +468,11 @@ pub fn render_html(data: &PageData) -> String {
     TEMPLATE.replace(DATA_PLACEHOLDER, &json)
 }
 
-/// IDs of the Atlas-owned claims that `coverage` covers, the only claims that coverage counts.
+/// The Atlas-owned claims that `coverage` covers, the only claims that coverage counts.
 fn atlas_owned_covered<'a>(
     ledger: &'a Ledger,
     coverage: &'a coverage::Report,
-) -> impl Iterator<Item = &'a str> {
+) -> impl Iterator<Item = &'a Claim> {
     let covered: BTreeSet<&str> = coverage
         .claims
         .iter()
@@ -381,7 +484,6 @@ fn atlas_owned_covered<'a>(
         .claims
         .iter()
         .filter(move |claim| claim.owner.atlas_owned() && covered.contains(claim.id.as_str()))
-        .map(|claim| claim.id.as_str())
 }
 
 fn baseline_warnings(baseline: &Baseline, ledger: &Ledger, ledger_sha256: &str) -> Vec<String> {
