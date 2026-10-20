@@ -8,20 +8,20 @@
   "claims": 61146,
   "totals": {
     "atlas_owned": {
-      "covered": 29178,
+      "covered": 29182,
       "total": 57643,
-      "percent": 50.618462
+      "percent": 50.625401
     },
     "all_claims": {
-      "covered": 29178,
+      "covered": 29182,
       "total": 61146,
-      "percent": 47.718575
+      "percent": 47.725117
     },
     "by_owner": {
       "engine_fact": {
-        "covered": 29178,
+        "covered": 29182,
         "total": 54689,
-        "percent": 53.352594
+        "percent": 53.359908
       },
       "content_derived": {
         "covered": 0,
@@ -138,9 +138,9 @@
     }
   ],
   "ledger_sha256": "bd245ba973a33bf896cdf3ed933a2348dd709c05cf870d5fdd85539b86975837",
-  "coverage_sha256": "5c87d2ca87df6915b49de91ae0d3a41fc0996435cd12424dd9747026c43046dc",
-  "atlas_revision": "c1a1cabe587b68135477c972e4c0c23adba52e9a",
+  "coverage_sha256": "3c942a9ae59e88ed4cb9708398ecea9c3e7632dcc5a45bd940375c52774babce",
+  "atlas_revision": "fc9bbf2b09276481eaf9bce8e62d6d1bc30a606c",
   "native_revision": "4b4e1d6ae37a0661ffe1c23c86d55cfe3d833dcc",
   "build": "c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b",
-  "atlas_working_changes": "The root-statement agreement rule over the pin move to 4b4e1d6; without shipped comments"
+  "atlas_working_changes": "The single alias join over the root-statement agreement rule at 4b4e1d6; without shipped comments"
 }
