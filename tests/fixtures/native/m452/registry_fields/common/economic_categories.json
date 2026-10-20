@@ -292,7 +292,21 @@
             }
           }
         ],
-        "members": "Unresolved",
+        "members": {
+          "Items": {
+            "reader": {
+              "numeric": {
+                "Known": null
+              },
+              "scoped_operand": {
+                "Known": null
+              },
+              "id": null,
+              "kind": "String",
+              "family": "NotApplicable"
+            }
+          }
+        },
         "domain": "Unknown",
         "uses": [],
         "reference": "NotEstablished",
@@ -344,7 +358,21 @@
             }
           }
         ],
-        "members": "Unresolved",
+        "members": {
+          "Items": {
+            "reader": {
+              "numeric": {
+                "Known": null
+              },
+              "scoped_operand": {
+                "Known": null
+              },
+              "id": null,
+              "kind": "String",
+              "family": "NotApplicable"
+            }
+          }
+        },
         "domain": "Unknown",
         "uses": [],
         "reference": "NotEstablished",
@@ -396,7 +424,21 @@
             }
           }
         ],
-        "members": "Unresolved",
+        "members": {
+          "Items": {
+            "reader": {
+              "numeric": {
+                "Known": null
+              },
+              "scoped_operand": {
+                "Known": null
+              },
+              "id": null,
+              "kind": "String",
+              "family": "NotApplicable"
+            }
+          }
+        },
         "domain": "Unknown",
         "uses": [],
         "reference": "NotEstablished",
@@ -895,7 +937,7 @@
     "source": {
       "build": "c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b",
       "native_version": "0.1.0",
-      "method": "registry-fields/v64",
+      "method": "registry-fields/v68",
       "basis": "StaticAnalysis"
     }
   }
