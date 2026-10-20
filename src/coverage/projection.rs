@@ -638,10 +638,23 @@ fn unread_key_answers(
         let Some(kept_text) = kept_text.filter(|rule| rule.answer == json!(false)) else {
             continue;
         };
-        let kept_text_evidence = rule_evidence(rules, kept_text, build, target)?;
+        // The naming rule must be stated, not only free of a gap: its fields are read keys.
+        let Some(naming) = rules
+            .rules
+            .iter()
+            .find(|rule| rule.id == format!("registry:{registry}#definition_names"))
+        else {
+            continue;
+        };
+        let premises = [
+            rule_evidence(rules, kept_text, build, target)?,
+            rule_evidence(rules, naming, build, target)?,
+        ];
         let qualified = source.basis != Basis::Recorded
-            && !kept_text_evidence.is_empty()
-            && kept_text_evidence.iter().all(|evidence| evidence.qualified);
+            && premises.iter().all(|evidence| {
+                !evidence.is_empty() && evidence.iter().all(|evidence| evidence.qualified)
+            });
+        let premise_evidence: Vec<_> = premises.into_iter().flatten().collect();
         let read_keys = read_root_keys(rules, registry);
 
         for (type_name, file, selector) in types {
@@ -690,7 +703,7 @@ fn unread_key_answers(
                         origin: Origin::Engine,
                     }]
                     .into_iter()
-                    .chain(kept_text_evidence.iter().map(|evidence| Evidence {
+                    .chain(premise_evidence.iter().map(|evidence| Evidence {
                         qualified,
                         ..evidence.clone()
                     }))
@@ -740,7 +753,7 @@ fn naming_fields(answer: &Value) -> Vec<&str> {
     }
 }
 
-/// Whether a config key is one literal name, not a pattern such as `scalar`, `<type>`,
+/// Whether a config key is one literal name, not a pattern such as `scalar`, `scope_field`, `<type>`,
 /// `enum[X]`, `alias_name[X]` or `$parameter`.
 fn literal_key(key: &str) -> bool {
     const PATTERNS: &[&str] = &[
@@ -758,6 +771,7 @@ fn literal_key(key: &str) -> bool {
         "int_variable_field",
         "value_field",
         "int_value_field",
+        "scope_field",
     ];
 
     !key.is_empty()

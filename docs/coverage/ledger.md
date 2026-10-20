@@ -318,9 +318,9 @@ reader path, field name and reader classification is resolved, so a key formed a
 dynamic name or an unfollowed inherited or nested reader would have made the answer partial; the
 two boundaries every answer carries (defaults, domains, limits, nested grammars and runtime
 callers; entry contexts) say nothing about which root keys exist. The key must be literal (not
-`scalar`, `int`, `<type>`, `enum[X]`, `alias_name[X]` or a `$` parameter), not a root statement
-key, and not the field that names a definition; the registry's `definition_names` must be
-established, since a loader can read a key to name its definitions. The loader rule
+`scalar`, `int`, `scope_field`, `<type>`, `enum[X]`, `alias_name[X]` or a `$` parameter), not a root statement
+key, and not the field that names a definition; the registry's `definition_names` must be a
+stated rule with qualified evidence, since a loader can read a key to name its definitions. The loader rule
 `keeps_definition_text` (Native `loader_rules`, `loader-rules/v8`) must be `false` with qualified
 evidence (decision of 2026-10-20): the item's member reader reads each statement once and reports
 and skips a key it does not handle, so no later code reads the key (Native `loader-rules.md`,

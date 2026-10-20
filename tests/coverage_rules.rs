@@ -2433,6 +2433,7 @@ tradition = {
     ## cardinality = 0..1
     never_read = int
     scalar = int
+    scope_field = int
     subtype[special] = { special_only = { inner = int } }
 }
 "#;
@@ -2473,6 +2474,23 @@ async fn unread_keys_with(
 }
 
 #[tokio::test]
+async fn an_unstated_or_recorded_naming_rule_leaves_an_unlisted_key_open() {
+    let naming = format!("{TRADITIONS}#definition_names");
+    let unstated = unread_keys_with(json!(false), |_| {}).await;
+    let mut snapshot = unstated.snapshot;
+    snapshot.rules.retain(|rule| rule.id != naming);
+    let unstated = SharedDirectory::as_recorded(unstated.ledger, snapshot);
+    let recorded = unread_keys_with(json!(false), |_| {}).await;
+    let mut snapshot = recorded.snapshot;
+    record(&mut snapshot, &naming);
+    let recorded = SharedDirectory::as_recorded(recorded.ledger, snapshot);
+
+    for directory in [unstated, recorded] {
+        assert!(!directory.covered("field_existence", &["tradition", "never_read"]));
+    }
+}
+
+#[tokio::test]
 async fn a_loader_that_may_keep_the_definition_text_leaves_an_unlisted_key_open() {
     for kept in [json!(true), Value::Null] {
         let directory = unread_keys_with(kept.clone(), |_| {}).await;
@@ -2509,6 +2527,7 @@ async fn a_key_that_a_complete_answer_does_not_list_is_not_a_field() {
     );
     // A pattern key names no literal field.
     assert!(!directory.covered("field_existence", &["tradition", "scalar"]));
+    assert!(!directory.covered("field_existence", &["tradition", "scope_field"]));
 }
 
 #[tokio::test]
