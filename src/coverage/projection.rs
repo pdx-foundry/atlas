@@ -191,6 +191,7 @@ fn project_with_gap_facets(
                 &command_files,
                 subject,
                 &rule.property,
+                Some(&rule.answer),
                 false,
             ),
             _ => Vec::new(),
@@ -334,6 +335,7 @@ fn project_with_gap_facets(
                 &command_files,
                 &subject,
                 &first.property,
+                Some(&first.answer),
                 false,
             )
         } else {
@@ -412,6 +414,7 @@ fn project_with_gap_facets(
                 &command_files,
                 subject,
                 &gap.property,
+                None,
                 project_related_gap_facets,
             ));
         }
@@ -1999,7 +2002,9 @@ fn subtypes(conditions: &[String]) -> impl Iterator<Item = &str> {
 /// The claims under `subtype[…]` conditions that an always-read field answers (SDK-716). When
 /// every read alternative of a field has the condition `Always`, Native reads it the same way on
 /// every path, so its unconditioned existence, value form and maximum also hold under any subtype.
-/// A subtype can require a field or change its scope, so no other property reaches these claims.
+/// A subtype can require a field or change its scope, so no other property reaches these claims,
+/// except a requirement: an unconditional check that the field is present holds in every
+/// definition, so a minimum of 1 crosses, and a minimum of 0 waits for a probe per subtype key.
 /// A subtype that a root key selects keeps the SDK-800 rule and takes nothing from this one.
 struct SubtypeClaims<'a> {
     /// Each claim with a subtype condition, keyed by its path without the subtype segments and no
@@ -2061,9 +2066,10 @@ impl<'a> SubtypeClaims<'a> {
     }
 
     /// The subtype questions, with their conditions, that the unconditioned `property` of
-    /// `subject` answers; none unless `subject` is always read and `property` holds under any
-    /// subtype. They include the single alias questions of the type's subtype fields, which have
-    /// no conditions.
+    /// `subject` answers with `answer` (`None` for a gap); none unless `subject` is always read
+    /// and the answer holds under any subtype. They include the single alias questions of the
+    /// type's subtype fields, which have no conditions.
+    #[allow(clippy::too_many_arguments)]
     fn questions(
         &self,
         (claims, single_aliases): (&ClaimIndex<'_>, &SingleAliases<'_>),
@@ -2071,9 +2077,10 @@ impl<'a> SubtypeClaims<'a> {
         command_files: &BTreeMap<String, BTreeSet<String>>,
         subject: &snapshot::Subject,
         property: &str,
+        answer: Option<&Value>,
         gap_facet: bool,
     ) -> Vec<(String, Vec<String>)> {
-        if !self.applies(&subject.id, property) {
+        if !self.applies(&subject.id, property, answer) {
             return Vec::new();
         }
 
@@ -2103,10 +2110,16 @@ impl<'a> SubtypeClaims<'a> {
         .collect()
     }
 
-    /// Whether the unconditioned `property` of `subject` holds under any subtype: Native reads
-    /// `subject` on every path, and a subtype does not change `property`.
-    fn applies(&self, subject: &str, property: &str) -> bool {
-        self.reads_always(subject) && Self::PROPERTIES.contains(&property)
+    /// Whether the unconditioned `answer` to `property` of `subject` holds under any subtype:
+    /// Native reads `subject` on every path, and a subtype does not change `property`. A
+    /// requirement (`occurrences.minimum = 1`) comes from an unconditional check, so it holds in
+    /// every definition; an optional field (0) may still be required by a subtype, so 0 does not
+    /// cross until a probe per subtype key shows it. A gap (`None`) crosses either way.
+    fn applies(&self, subject: &str, property: &str, answer: Option<&Value>) -> bool {
+        let crosses = Self::PROPERTIES.contains(&property)
+            || (property == "occurrences.minimum" && answer.is_none_or(|answer| *answer == 1));
+
+        self.reads_always(subject) && crosses
     }
 
     /// Whether Native reads `subject` on every path, so that its unconditioned answers can hold

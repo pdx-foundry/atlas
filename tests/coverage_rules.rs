@@ -2817,7 +2817,7 @@ async fn a_recorded_always_read_premise_earns_no_subtype_credit() {
 }
 
 #[tokio::test]
-async fn a_subtype_minimum_and_scope_stay_uncredited() {
+async fn an_optional_subtype_minimum_and_scope_stay_uncredited() {
     let directory = subtype_agenda(|_| {}).await;
 
     for (property, annotation) in [
@@ -2831,6 +2831,20 @@ async fn a_subtype_minimum_and_scope_stay_uncredited() {
         assert!(directory.covered(property, &unconditioned), "{annotation}");
         assert!(!directory.covered(property, &conditioned), "{annotation}");
     }
+}
+
+#[tokio::test]
+async fn a_required_field_answers_its_minimum_under_every_subtype() {
+    let directory = subtype_agenda(|snapshot| {
+        establish(snapshot, UNLOCKS_AGENDA, "occurrences.minimum", json!(1));
+    })
+    .await;
+    let annotation = Some("$annotation:cardinality");
+
+    assert!(directory.covered(
+        "cardinality_minimum",
+        &agenda_under("tradition", &["subtype[special]"], annotation)
+    ));
 }
 
 #[tokio::test]

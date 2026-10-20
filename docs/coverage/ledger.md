@@ -499,8 +499,16 @@ the field the same way on every path. Its unconditioned `existence`, `value_form
 `cardinality_maximum` questions under any `subtype[…]` condition, negated and nested ones
 included, and its gaps on those properties block them. The limits:
 
-- `cardinality_minimum` and scope claims (`push_scope`, `replace_scopes`) under a subtype earn
-  nothing, since a subtype can require a field or change its scope.
+- Scope claims (`push_scope`, `replace_scopes`) under a subtype earn nothing, since a subtype can
+  change its scope.
+- A `cardinality_minimum` claim under a subtype takes a requirement (decision of 2026-10-20):
+  `occurrences.minimum = 1` comes from an unconditional check that logs the field's absence, so it
+  holds in every definition and answers 1 under every subtype. An optional field (0) earns
+  nothing, since a subtype can require it; it gets 0 only after a fixture probe per subtype key
+  shows that a definition without the field loads with no diagnostic. A minimum gap blocks the
+  subtype claims. On M452 at Native `5143009` no subtype minimum has a required field, so this
+  credits none; 224 claims of optional fields wait for that probe, 64 carry a minimum gap
+  (requirement `Unknown`) and 260 have no Native field.
 - A field with any other alternative (`FieldZero`, `Unresolved`, `All`) earns nothing, and so
   does a field that Native marks conditional, such as the child of a conditional parent. Native's
   only field condition is `FieldZero`, and matching it to bool subtype tests is deferred.
