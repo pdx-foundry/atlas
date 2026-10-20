@@ -15,7 +15,7 @@
           "family": "NotApplicable"
         },
         "shape": {
-          "value": "Scalar",
+          "value": "Block",
           "repeat": "Accumulate"
         },
         "read": [
@@ -35,14 +35,28 @@
                   "family": "NotApplicable"
                 },
                 "shape": {
-                  "value": "Scalar",
+                  "value": "Block",
                   "repeat": "Accumulate"
                 }
               }
             }
           }
         ],
-        "members": "None",
+        "members": {
+          "Items": {
+            "reader": {
+              "numeric": {
+                "Known": null
+              },
+              "scoped_operand": {
+                "Known": null
+              },
+              "id": null,
+              "kind": "Reference",
+              "family": "NotApplicable"
+            }
+          }
+        },
         "domain": "Unknown",
         "uses": [],
         "reference": {
@@ -7210,23 +7224,76 @@
       {
         "name": "overlord_resources",
         "reader": {
-          "numeric": "Unresolved",
-          "scoped_operand": "Unresolved",
-          "id": null,
-          "kind": "Unknown",
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "4c60c5ce91cf8da1",
+          "kind": "Block",
           "family": "Unknown"
         },
         "shape": {
-          "value": "Unknown",
+          "value": "Block",
           "repeat": "Unknown"
         },
         "read": [
           {
             "condition": "Always",
-            "outcome": "Unresolved"
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "4c60c5ce91cf8da1",
+                  "kind": "Block",
+                  "family": "Unknown"
+                },
+                "shape": {
+                  "value": "Block",
+                  "repeat": "Unknown"
+                }
+              }
+            }
           }
         ],
-        "members": "Unresolved",
+        "members": {
+          "Fields": [
+            {
+              "name": "category",
+              "reader": {
+                "numeric": "Unresolved",
+                "scoped_operand": "Unresolved",
+                "id": null,
+                "kind": "Unknown",
+                "family": "Unknown"
+              },
+              "shape": {
+                "value": "Unknown",
+                "repeat": "Unknown"
+              },
+              "read": [
+                {
+                  "condition": "Always",
+                  "outcome": "Unresolved"
+                }
+              ],
+              "members": "Unresolved",
+              "domain": "Unknown",
+              "uses": [],
+              "reference": "NotEstablished",
+              "entry_contexts": [],
+              "read_scope": "Unresolved",
+              "accepted_categories": "Unresolved",
+              "requirement": "Unknown"
+            }
+          ]
+        },
         "domain": "Unknown",
         "uses": [],
         "reference": "NotEstablished",
@@ -7276,7 +7343,21 @@
             }
           }
         ],
-        "members": "Unresolved",
+        "members": {
+          "Items": {
+            "reader": {
+              "numeric": {
+                "Known": null
+              },
+              "scoped_operand": {
+                "Known": null
+              },
+              "id": null,
+              "kind": "String",
+              "family": "NotApplicable"
+            }
+          }
+        },
         "domain": "Unknown",
         "uses": [],
         "reference": "NotEstablished",
@@ -8279,23 +8360,76 @@
       {
         "name": "resources",
         "reader": {
-          "numeric": "Unresolved",
-          "scoped_operand": "Unresolved",
-          "id": null,
-          "kind": "Unknown",
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "4c60c5ce91cf8da1",
+          "kind": "Block",
           "family": "Unknown"
         },
         "shape": {
-          "value": "Unknown",
+          "value": "Block",
           "repeat": "Unknown"
         },
         "read": [
           {
             "condition": "Always",
-            "outcome": "Unresolved"
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "4c60c5ce91cf8da1",
+                  "kind": "Block",
+                  "family": "Unknown"
+                },
+                "shape": {
+                  "value": "Block",
+                  "repeat": "Unknown"
+                }
+              }
+            }
           }
         ],
-        "members": "Unresolved",
+        "members": {
+          "Fields": [
+            {
+              "name": "category",
+              "reader": {
+                "numeric": "Unresolved",
+                "scoped_operand": "Unresolved",
+                "id": null,
+                "kind": "Unknown",
+                "family": "Unknown"
+              },
+              "shape": {
+                "value": "Unknown",
+                "repeat": "Unknown"
+              },
+              "read": [
+                {
+                  "condition": "Always",
+                  "outcome": "Unresolved"
+                }
+              ],
+              "members": "Unresolved",
+              "domain": "Unknown",
+              "uses": [],
+              "reference": "NotEstablished",
+              "entry_contexts": [],
+              "read_scope": "Unresolved",
+              "accepted_categories": "Unresolved",
+              "requirement": "Unknown"
+            }
+          ]
+        },
         "domain": "Unknown",
         "uses": [],
         "reference": "NotEstablished",
@@ -8560,28 +8694,12 @@
         "detail": "The field's alternatives do not establish one shared reader."
       },
       {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "field",
-          "name": "overlord_resources"
-        },
-        "detail": "The field's alternatives do not establish one shared reader."
-      },
-      {
         "kind": "ReaderSemantics",
         "subject": {
           "kind": "field",
           "name": "possible_precalc"
         },
         "detail": "An unknown name keeps the converter's fallback with no diagnostic."
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "field",
-          "name": "resources"
-        },
-        "detail": "The field's alternatives do not establish one shared reader."
       },
       {
         "kind": "UnresolvedReader",
@@ -8606,6 +8724,54 @@
           "name": "common/pop_jobs"
         },
         "detail": "Use-time analysis covers local Boolean selections only; enclosing context, other callers and bounded or unsupported paths remain unresolved."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "overlord_resources.category"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "overlord_resources"
+        },
+        "detail": "The field's reader could not be established on at least one path."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "overlord_resources"
+        },
+        "detail": "A path through the registry's reader could not be followed to its end."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "resources.category"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "resources"
+        },
+        "detail": "The field's reader could not be established on at least one path."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "resources"
+        },
+        "detail": "A path through the registry's reader could not be followed to its end."
       },
       {
         "kind": "UnresolvedStorage",
@@ -9878,6 +10044,28 @@
       {
         "kind": "UnresolvedPath",
         "subject": {
+          "kind": "key_path",
+          "path": [
+            "overlord_resources",
+            "category"
+          ]
+        },
+        "detail": "read-scope: reader-path"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "resources",
+            "category"
+          ]
+        },
+        "detail": "read-scope: reader-path"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
           "kind": "field",
           "name": "weight"
         },
@@ -9942,6 +10130,14 @@
           "kind": "field",
           "name": "overlord_resources"
         },
+        "detail": "Repeat behavior has no stated rule for this block reader, or the read is not a tail call."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "overlord_resources.category"
+        },
         "detail": "Repeat behavior waits for one shared reader. Nested fields remain unresolved."
       },
       {
@@ -9949,6 +10145,14 @@
         "subject": {
           "kind": "field",
           "name": "resources"
+        },
+        "detail": "Repeat behavior has no stated rule for this block reader, or the read is not a tail call."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "resources.category"
         },
         "detail": "Repeat behavior waits for one shared reader. Nested fields remain unresolved."
       },
@@ -9972,7 +10176,7 @@
     "source": {
       "build": "c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b",
       "native_version": "0.1.0",
-      "method": "registry-fields/v64",
+      "method": "registry-fields/v68",
       "basis": "StaticAnalysis"
     }
   }

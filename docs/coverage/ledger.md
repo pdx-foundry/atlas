@@ -388,7 +388,7 @@ definition must contain this field, not a count above 1". `Optional` answers eve
 
 ### Loader rules (SDK-797)
 
-Native's `loader_rules` answer (`loader-rules/v8`) becomes five properties of each registry
+Native's `loader_rules` answer (`loader-rules/v9`) becomes five properties of each registry
 subject: `extension` (`{"suffix": …}`, `null` for every file), `recursion`, `duplicate_rule`,
 `definition_names` (the forms of root statements) and `keeps_definition_text` (whether the loader
 keeps a definition's text after it reads it; no config question joins it). A form that names a nested block becomes the
