@@ -464,7 +464,7 @@ the SDK-525 matcher (the association and comparison rules in [documentation.md](
   as where the shipped line adds the example key or "Optional". A comment of another key never
   answers, and neither do the lines of a comment that are a guide heading for another key
   (`other: prose`, a commented `other = …`, and the lines that continue it). The answer lists
-  the holding comments' texts. On M452 at Native `5143009` this credits 75 claims.
+  the holding comments' texts. On M452 at Native `bb0cc04` this credits 78 claims.
 - A question is answered only when each of its occurrences is answered. Otherwise it has one
   gap: "The shipped comment at FILE:LINE-END_LINE is a rewritten candidate, not the same text" for
   a rewritten candidate, or "No shipped comment in the installation has this text".
@@ -556,9 +556,9 @@ included, and its gaps on those properties block them. The limits:
   holds in every definition and answers 1 under every subtype. An optional field (0) earns
   nothing, since a subtype can require it; it gets 0 only after a fixture probe per subtype key
   shows that a definition without the field loads with no diagnostic. A minimum gap blocks the
-  subtype claims. On M452 at Native `5143009` no subtype minimum has a required field, so this
-  credits none; 224 claims of optional fields wait for that probe, 64 carry a minimum gap
-  (requirement `Unknown`) and 260 have no Native field.
+  subtype claims. On M452 at Native `bb0cc04` no subtype minimum has a required field, so this
+  credits none; 228 claims of optional fields wait for that probe, 66 carry a minimum gap
+  (requirement `Unknown`) and 254 have no Native field.
 - A field with any other alternative (`FieldZero`, `Unresolved`, `All`) earns nothing, and so
   does a field that Native marks conditional, such as the child of a conditional parent. Native's
   only field condition is `FieldZero`, and matching it to bool subtype tests is deferred.
