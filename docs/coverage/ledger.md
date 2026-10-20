@@ -120,7 +120,10 @@ type's `localisation` or `images` naming line. A naming line joins the one
 `derived_name:{registry}/{lookup}/{name}` subject whose name it writes (`$` for the item key; a
 bare field name for the text of that field), in the registry of the type's `path`. A naming
 question whose occurrences state different values, such as `desc = "$_desc"` and `desc = desc`
-in one type, joins none. A game rule's
+in one type, joins none. A naming line under `subtype[…]` joins its derived name, under the
+line's subtype conditions, only when every alternative of that name's rule has the condition
+`Always`: Native composes names for the registry's items, not per subtype, so only a name it
+composes for every item holds under a subtype. A game rule's
 evaluation kind does not answer its authored value form. The loaded modifier count summary is a
 content observation under a `content:` condition and credits no unconditional question.
 Snapshot assembly refuses a failed registry-discovery answer. It runs authored fixture recipes

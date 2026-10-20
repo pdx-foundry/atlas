@@ -4,7 +4,7 @@
 //! structure and, where CWT identifies a subject only by its value (an on_action name, a scope
 //! alias), that value; it never compares the config's answer with Atlas's.
 
-use super::ConfigTypes;
+use super::{ConfigTypes, config_types::is_subtype};
 use crate::{
     ledger::{Claim, Ledger, Owner},
     snapshot::{Snapshot, SubjectKind},
@@ -12,18 +12,18 @@ use crate::{
 use serde_json::Value;
 use std::collections::{BTreeMap, BTreeSet};
 
-/// Config questions answered by each snapshot rule or gap identity.
+/// Config questions, with their conditions, answered by each snapshot rule or gap identity.
 pub(super) fn index(
     ledger: &Ledger,
     types: &ConfigTypes<'_>,
     snapshot: &Snapshot,
-) -> BTreeMap<String, BTreeSet<String>> {
-    let mut index: BTreeMap<String, BTreeSet<String>> = BTreeMap::new();
+) -> BTreeMap<String, BTreeSet<(String, Vec<String>)>> {
+    let mut index: BTreeMap<String, BTreeSet<(String, Vec<String>)>> = BTreeMap::new();
     for (claim, subject) in classify(ledger, types, snapshot) {
         index
             .entry(subject.rule_id())
             .or_default()
-            .insert(claim.question.clone());
+            .insert((claim.question.clone(), claim.conditions.clone()));
     }
 
     index
@@ -66,12 +66,69 @@ pub(super) fn classify<'a>(
             .filter(|subject| subject.kind == SubjectKind::DerivedName)
             .filter_map(|subject| subject.name.clone())
             .collect(),
+        unconditional_names: unconditional_names(snapshot),
     };
     ledger
         .claims
         .iter()
-        .filter(|claim| claim.conditions.is_empty())
-        .filter_map(|claim| record(claim, &joins).map(|subject| (claim, subject)))
+        .filter_map(|claim| {
+            let subject = if claim.conditions.is_empty() {
+                record(claim, &joins)
+            } else {
+                subtype_naming_record(claim, &joins)
+            };
+
+            subject.map(|subject| (claim, subject))
+        })
+        .collect()
+}
+
+/// The derived name that a naming line under `subtype[…]` names. Native answers a name for every
+/// item of the registry, not per subtype, so it holds under a subtype only when the engine
+/// composes it unconditionally: every alternative of its rule has the condition `Always`.
+fn subtype_naming_record(claim: &Claim, joins: &Joins<'_>) -> Option<LanguageSubject> {
+    let [types, type_name, block, subtypes @ .., _] = claim.subject.as_slice() else {
+        return None;
+    };
+    let only_subtypes = !subtypes.is_empty()
+        && subtypes.iter().all(|segment| is_subtype(segment))
+        && claim
+            .conditions
+            .iter()
+            .all(|condition| is_subtype(condition));
+
+    if claim.property != "naming_rule"
+        || types != "types"
+        || !matches!(block.as_str(), "localisation" | "images")
+        || !only_subtypes
+    {
+        return None;
+    }
+
+    joins
+        .derived_name(claim, type_name, block)
+        .filter(|subject| joins.unconditional_names.contains(&subject.name))
+}
+
+/// The derived names whose rule has only `Always` alternatives.
+fn unconditional_names(snapshot: &Snapshot) -> BTreeSet<String> {
+    snapshot
+        .rules
+        .iter()
+        .filter(|rule| rule.property == "derived_name" && rule.conditions.is_empty())
+        .filter(|rule| {
+            rule.answer.as_array().is_some_and(|alternatives| {
+                !alternatives.is_empty()
+                    && alternatives
+                        .iter()
+                        .all(|alternative| alternative["condition"] == "Always")
+            })
+        })
+        .filter_map(|rule| {
+            rule.subject
+                .strip_prefix("derived_name:")
+                .map(str::to_owned)
+        })
         .collect()
 }
 
@@ -89,6 +146,8 @@ struct Joins<'a> {
     naming_values: BTreeMap<&'a str, &'a str>,
     /// The names of the snapshot's derived-name subjects.
     derived_names: BTreeSet<String>,
+    /// The derived names that the engine composes for every item.
+    unconditional_names: BTreeSet<String>,
 }
 
 impl Joins<'_> {
@@ -530,6 +589,7 @@ mod tests {
             type_registries: BTreeMap::new(),
             naming_values: BTreeMap::new(),
             derived_names: BTreeSet::new(),
+            unconditional_names: BTreeSet::new(),
         };
         let classified = |claim| record(claim, &joins).unwrap();
 

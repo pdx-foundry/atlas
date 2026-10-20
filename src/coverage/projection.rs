@@ -214,15 +214,21 @@ fn project_with_gap_facets(
             _ => Vec::new(),
         };
         let conditions = conditions.unwrap_or_else(|| rule.conditions.clone());
+        let mut conditioned_language = Vec::new();
         if rule.conditions.is_empty() {
-            answers.extend(
-                selectors
-                    .language_questions(&language, &rule.id)
-                    .into_iter()
-                    .map(|question| (question, rule.answer.clone())),
-            );
+            for (question, conditions) in selectors.language_questions(&language, &rule.id) {
+                if conditions.is_empty() {
+                    answers.push((question, rule.answer.clone()));
+                } else {
+                    conditioned_language.push((question, conditions));
+                }
+            }
         }
-        if answers.is_empty() && unconditional.is_empty() && subtype_answers.is_empty() {
+        if answers.is_empty()
+            && unconditional.is_empty()
+            && subtype_answers.is_empty()
+            && conditioned_language.is_empty()
+        {
             answers.push((format!("atlas:{}", rule.id), rule.answer.clone()));
         }
         let evidence = rule_evidence(rules, rule, build, &target)?;
@@ -237,7 +243,14 @@ fn project_with_gap_facets(
             )
             .chain(subtype_answers.into_iter().map(|(question, conditions)| {
                 (question, conditions, rule.answer.clone(), &subtype_evidence)
-            }));
+            }))
+            .chain(
+                conditioned_language
+                    .into_iter()
+                    .map(|(question, conditions)| {
+                        (question, conditions, rule.answer.clone(), &evidence)
+                    }),
+            );
         for (question, conditions, value, evidence) in answers {
             match rule_answer(
                 &selectors,
@@ -476,13 +489,18 @@ fn project_with_gap_facets(
             ));
             questions
         });
-        let unconditional = selectors
+        let (language_questions, conditioned_language): (Vec<_>, Vec<_>) = selectors
             .language_questions(&language, &gap.id)
             .into_iter()
+            .partition(|(_, conditions)| conditions.is_empty());
+        let unconditional = language_questions
+            .into_iter()
+            .map(|(question, _)| question)
             .chain(alias_questions)
             .chain(definition)
             .chain(enum_members);
         questions.extend(unconditional.map(|question| (question, Vec::new())));
+        questions.extend(conditioned_language);
 
         if questions.is_empty() {
             questions.push((format!("atlas:{}", gap.id), Vec::new()));
@@ -1118,14 +1136,14 @@ impl<'a> TypeSelectors<'a> {
     /// definitions, not the registry items that Native's derived names describe.
     fn language_questions(
         &self,
-        language: &BTreeMap<String, BTreeSet<String>>,
+        language: &BTreeMap<String, BTreeSet<(String, Vec<String>)>>,
         id: &str,
-    ) -> Vec<String> {
+    ) -> Vec<(String, Vec<String>)> {
         language
             .get(id)
             .into_iter()
             .flatten()
-            .filter(|question| {
+            .filter(|(question, _)| {
                 !matches!(
                     self.questions.get(question.as_str()),
                     Some(Selector::Nested(_))
