@@ -287,8 +287,8 @@ nested subjects (SDK-833) and takes no gap here; a claim that an answer or gap a
 under its conditions takes none either. The first reason that applies is the gap:
 
 1. An item of the field's value list: "Native does not establish the items of this field's value
-   list". Native reports a value list as a block whose members are unresolved, or as one value read
-   per occurrence; neither states the item form or count (SDK-867).
+   list", for a list that Native reports as a block whose members are unresolved, or as one value
+   read per occurrence (SDK-867). A list with established items answers them (below).
 2. `## file_extensions`: Native does not establish which files the field accepts (SDK-868).
 3. `## color_type`: Native does not establish the color form of the field.
 4. Under a `subtype[…]` condition, as the SDK-716 decision states: a minimum ("Native answers
@@ -342,6 +342,25 @@ it. On M452 at Native `bb0cc04` the snapshot has 149 `keeps_definition_text` rul
 `false`, including all 19 registries whose `registry_fields` is `Complete`; the rule covers 17
 `common/timeline_events` claims on `type`, `text` and `texture` (the engine reads `types`,
 `override_text` and `override_texture`).
+
+### List items
+
+Native reports a block of bare values (`tags = { a b }`, a `ReadUniform<T>` list or a key-reference
+list) with `members` `Items { reader }`: each value is read by that reader and appended. The
+snapshot then gives the field the value form `block` (also for a key-reference list, whose own
+reader is a `Reference`), counts its members as established, and adds one subject at the field's
+path with `$item` (`field:R/tags/$item`). That subject answers every `$item:N` claim of the list
+(projection indexes `$item:N` as `$item`):
+
+- `value_form`: the item reader's form (`string`, `reference`, `number`, …).
+- `cardinality_maximum`: repeat `Accumulate`, since each value is appended, so it compares as
+  `inf`.
+- `cardinality_minimum`: a gap. Native does not establish how many items a definition needs (a
+  post-read check can require a non-empty list).
+
+The item subject takes the field's read `conditions`, so the always-read rule (SDK-716) reaches
+items under a subtype as it reaches the field. A list whose value reader Native does not establish
+keeps `Unresolved` members and the gap of the list above.
 
 ### Enum domains (SDK-818)
 

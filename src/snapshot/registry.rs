@@ -571,6 +571,9 @@ impl<'a, T> FieldSet<'a, T> {
             json!(field.members),
             evidence.clone(),
         );
+        if let FieldMembers::Items { reader } = &field.members {
+            self.assemble_items(snapshot, path, field, reader, conditional, &evidence);
+        }
         if let FieldMembers::Fields(children) = &field.members {
             for child in children {
                 self.assemble_field(
@@ -593,6 +596,100 @@ impl<'a, T> FieldSet<'a, T> {
         Ok(())
     }
 
+    /// The items of a block of bare values (`tags = { a b }`): one subject at the field's path
+    /// with `$item`, which answers each `$item:N` claim. Each value is read by `reader` and
+    /// appended, so the items take its value form and repeat `Accumulate` under the field's read
+    /// conditions when the field is read unconditionally (a conditional read gives gaps, as for the
+    /// field); how many items a definition needs is not established.
+    fn assemble_items(
+        &self,
+        snapshot: &mut Snapshot,
+        path: &str,
+        field: &Field,
+        reader: &pdx_native::Reader,
+        conditional: bool,
+        evidence: &EvidenceLink,
+    ) {
+        let subject = self.owner.subject(&format!("{path}/$item"), conditional);
+        let id = subject.id.clone();
+
+        snapshot.subjects.push(subject);
+        rule(
+            snapshot,
+            &id,
+            "conditions",
+            json!(
+                field
+                    .read
+                    .iter()
+                    .map(|alternative| &alternative.condition)
+                    .collect::<Vec<_>>()
+            ),
+            evidence.clone(),
+        );
+        // As for the field itself, a conditional read establishes no unconditional form or repeat.
+        if conditional {
+            for (property, reason) in [
+                (
+                    "value_form",
+                    "Conditional alternatives do not establish an unconditional value form of this list's items",
+                ),
+                (
+                    "occurrences.maximum",
+                    "Native did not establish unconditional repeat behavior of this list's items",
+                ),
+            ] {
+                gap(
+                    snapshot,
+                    &id,
+                    property,
+                    reason,
+                    Some("field_conditions"),
+                    Vec::new(),
+                    vec![evidence.clone()],
+                );
+            }
+        } else {
+            rule(
+                snapshot,
+                &id,
+                "repeat_behavior",
+                json!("Accumulate"),
+                evidence.clone(),
+            );
+        }
+
+        match scalar_form(reader.kind) {
+            _ if conditional => {}
+            Some((form, _)) => rule(
+                snapshot,
+                &id,
+                "value_form",
+                json!({"form": form, "reader": reader.id}),
+                evidence.clone(),
+            ),
+            None => gap(
+                snapshot,
+                &id,
+                "value_form",
+                "Native did not establish the value form of this list's items",
+                None,
+                evidence.native_gaps.clone(),
+                vec![evidence.clone()],
+            ),
+        }
+
+        gap(
+            snapshot,
+            &id,
+            "occurrences.minimum",
+            "Native does not establish how many items a definition's list needs",
+            None,
+            Vec::new(),
+            vec![evidence.clone()],
+        );
+    }
+
     /// The nested grammar and scope context of an unconditional block reader.
     fn assemble_block(
         &self,
@@ -608,6 +705,7 @@ impl<'a, T> FieldSet<'a, T> {
                 | FieldMembers::ModifierBlock(_)
                 | FieldMembers::WeightBlock(_)
                 | FieldMembers::TriggeredModifier(_)
+                | FieldMembers::Items { .. }
         );
         if !matches!(family, BlockFamily::Trigger | BlockFamily::Effect) && !members_established {
             gap(
@@ -872,6 +970,19 @@ fn assemble_field_value_form(
         .map(serde_json::to_value)
         .transpose()
         .map_err(|error| error.to_string())?;
+    // A block of bare values is a block, whatever reader reads each value (a key-reference list's
+    // reader is a `Reference`); its items take the value reader's form on their own subject.
+    if let FieldMembers::Items { .. } = &field.members {
+        rule(
+            snapshot,
+            id,
+            "value_form",
+            json!({"form":"block","reader":reader_id}),
+            evidence.clone(),
+        );
+        return Ok(true);
+    }
+
     let shape = match reader.kind {
         // A weight or script-value block also takes a bare value, which Native reports with the
         // block's members; the rule names that value's form beside the block.
