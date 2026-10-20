@@ -43,21 +43,20 @@ definition keys.
 **Status: in progress.** Group 4 (41 claims) is open until its conditional checks are read; every
 other group has a verdict. The review completes when group 4 does.
 
-Every covered claim in `common/` and `events/` whose comparison status is `different`: **1,942
-claims in 19 groups**. The membership, one line per claim with its group number, is
+Every covered claim in `common/` and `events/` whose comparison status is `different`: **1,945
+claims in 20 groups**. The membership, one line per claim with its group number, is
 [`cwt-disagreements.tsv`](cwt-disagreements.tsv). A claim's group is the triple (property, the
 first 30 characters of the config answer, Atlas's answer form), as listed in the table.
 
 **Inputs.**
 
-- Atlas `2fc635c` (main with #48 and #49, and #52, which compares every repeat behavior as
-  `inf`), config revision
+- Atlas `d5a69ed` (main with #44, #48, #49, #51 and #52, with this page), config revision
   `8574760` (`config_sha256` `5c79cabb…039cc`).
 - The live M452 capture at Native `bb0cc04`: `rules.json` SHA-256 `8a6389f9…5804b`.
 - `ledger --config … --snapshot rules.json --game-content $STELLARIS_PATH --output R`, then
   `compare … rules.json R --script-docs …/script-docs/v4.5.0 --defines
   $STELLARIS_PATH/common/defines/00_defines.txt --answers <capture>/m452`. Outputs: `ledger.json`
-  `0c03b5a9…aca00`, `coverage.json` `89df3f9a…2ffe3`, `comparison.json` `411e17a5…45855`.
+  `0c03b5a9…aca00`, `coverage.json` `eb33bd15…513d8`, `comparison.json` `6a36a363…82995`.
 - Native methods behind the answers: `registry-fields/v64` (fields: repeat, requirement, value
   form, read scope), `loader-rules/v8` (extension, definition names) and
   `registry-directories/v8` (registry discovery: the content directory of `common/lawsuits`).
@@ -97,12 +96,14 @@ and a compiler may warn about it.
 | 17 | `value_form` | `int` | `scoped_number` | 1 | CWT error: `scripted_action/cooldown` accepts a scripted value |
 | 18 | `loader_path` (`path`) | `game/common/lawsuit_type` | `common/lawsuits` | 1 | CWT error ([renamed directories](#renamed-directories); evidence `registry-directories/v8`) |
 | 19 | `cardinality_maximum` | `0` | repeat `Replace` | 1 | Modelling difference: subtypes (`deposit/subtype[!null]/is_null` is read on every path, `conditions` `Always`; CWT's `0..0` describes the subtype that the key selects, not a rule the engine applies) |
+| 20 | `field_existence` | `present` | absent | 3 | CWT error: [keys the engine never reads](#keys-the-engine-never-reads) (`timeline_events` `type`, `text`, `texture`) |
 
-Totals: CWT error 10 groups (216 claims); modelling difference 5 groups (1,656 claims: soft
+Totals: CWT error 11 groups (219 claims); modelling difference 5 groups (1,656 claims: soft
 cardinality 1,655, subtypes 1); Atlas defect 2 groups (17 claims); Native defect 1 group (12
 claims); open 1 group (41 claims). Group 6 was 14 `inf` claims against `Replace`, an artifact of
 comparing `Replace` as a maximum of 1; #52 removed it, and the 1,377 `1` claims are the new group
-6.
+6. Group 20 joined with the not-a-field rule (#44); the dependent claims of those keys answer
+`not_a_field`, which the comparison does not map.
 
 ### Examples
 
