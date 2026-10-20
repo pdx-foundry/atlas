@@ -57,7 +57,8 @@ another config or snapshot is left out with a warning. A PR that changes coverag
 component template root statements, the root-statement agreement rule, the single alias join and
 the M452 installation's shipped comments, with documentation that no shipped comment holds as
 authored text, documentation that a comment of the same key holds, the renamed lawsuit
-directory and whether each loader keeps a definition's text (31,990 of 57,146 claims).
+directory, whether each loader keeps a definition's text, and the comments of shipped files
+that fail to parse, bound by their lines (31,995 of 56,917 claims).
 
 The [registry comparison](docs/coverage/registries.md) puts Native's registry list beside the
 config types and records a reason for each type that no registry names:
