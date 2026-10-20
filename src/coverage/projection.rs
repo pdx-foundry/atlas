@@ -44,17 +44,31 @@ const OVERRIDES: &str = "overrides.cwt";
 fn claim_index(ledger: &Ledger) -> ClaimIndex<'_> {
     let mut index = ClaimIndex::new();
     for claim in &ledger.claims {
-        index
-            .entry((
-                &claim.file,
-                &claim.property,
-                claim.subject.iter().map(String::as_str).collect(),
-                claim.conditions.iter().map(String::as_str).collect(),
-            ))
-            .or_default()
-            .insert(&claim.question);
+        let conditions: Vec<_> = claim.conditions.iter().map(String::as_str).collect();
+
+        for path in [
+            claim.subject.iter().map(String::as_str).collect(),
+            items_path(&claim.subject),
+        ] {
+            index
+                .entry((&claim.file, &claim.property, path, conditions.clone()))
+                .or_default()
+                .insert(&claim.question);
+        }
     }
     index
+}
+
+/// `subject` with each `$item:N` segment as `$item`: the path at which a list's items subject
+/// (`field/$item`) finds every item claim of the list.
+fn items_path(subject: &[String]) -> Vec<&str> {
+    subject
+        .iter()
+        .map(|segment| match segment.strip_prefix("$item:") {
+            Some(_) => "$item",
+            None => segment.as_str(),
+        })
+        .collect()
 }
 
 pub(super) fn project(ledger: &Ledger, rules: &snapshot::Snapshot) -> Result<Projection, String> {
@@ -2291,10 +2305,8 @@ impl<'a> SubtypeClaims<'a> {
                 continue;
             }
 
-            let base_path = claim
-                .subject
-                .iter()
-                .map(String::as_str)
+            let base_path: Vec<_> = items_path(&claim.subject)
+                .into_iter()
                 .filter(|segment| !segment.starts_with("subtype["))
                 .collect();
 

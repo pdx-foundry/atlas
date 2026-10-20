@@ -2583,6 +2583,99 @@ async fn a_weight_block_compares_with_its_bare_value_form_too() {
     assert_eq!(status("int").await, Status::Different);
 }
 
+const LIST_ITEMS: &str = r#"
+types = { type[tradition] = { path = "game/common/traditions" } }
+tradition = {
+    tags = {
+        ## cardinality = 1..inf
+        scalar
+    }
+    archetypes = { <species_archetype> }
+}
+"#;
+
+/// The recorded M452 answers with two traditions list fields that Native reads as blocks of bare
+/// values (`FieldMembers::Items`): `tags`, a list of strings, and `archetypes`, a list of keys
+/// whose own reader is a `Reference`, against [`LIST_ITEMS`].
+async fn list_items() -> SharedDirectory {
+    use pdx_native::{FieldMembers, FieldReadOutcome, ReaderKind};
+
+    let mut extraction = recorded_extraction().await;
+    let mut answer = extraction.fields[extraction::TRADITIONS]
+        .as_ref()
+        .unwrap()
+        .clone();
+    let template = |name: &str| {
+        answer
+            .value
+            .iter()
+            .find(|field| field.name == name)
+            .unwrap()
+            .clone()
+    };
+    let string_reader = template("unlocks_agenda").reader;
+    let list = |name: &str, item: ReaderKind, own: ReaderKind| {
+        let mut field = pdx_native::Field {
+            name: name.into(),
+            members: FieldMembers::Items {
+                reader: pdx_native::Reader {
+                    kind: item,
+                    ..string_reader.clone()
+                },
+            },
+            ..template("tradition_swap")
+        };
+
+        for alternative in &mut field.read {
+            if let FieldReadOutcome::Read { reader, .. } = &mut alternative.outcome {
+                reader.kind = own;
+            }
+        }
+
+        field
+    };
+
+    answer.value = vec![
+        list("tags", ReaderKind::String, ReaderKind::Block),
+        list("archetypes", ReaderKind::Reference, ReaderKind::Reference),
+    ];
+    answer.gaps = Vec::new();
+    extraction
+        .fields
+        .insert(extraction::TRADITIONS.into(), Ok(answer));
+
+    let ledger = ledger::inventory(&BTreeMap::from([(
+        "traditions.cwt".into(),
+        LIST_ITEMS.into(),
+    )]));
+
+    SharedDirectory::from_snapshot(ledger, snapshot::assemble(&extraction).unwrap())
+}
+
+#[tokio::test]
+async fn a_list_of_bare_values_answers_its_items() {
+    let directory = list_items().await;
+    let item = ["tradition", "tags", "$item:1"];
+    let item_cardinality = ["tradition", "tags", "$item:1", "$annotation:cardinality"];
+
+    assert!(directory.covered("value_form", &["tradition", "tags"]));
+    assert!(directory.covered("value_form", &item));
+    assert_eq!(directory.status("value_form", &item), Status::Same);
+    // Each value is appended: no item maximum, but the needed count is not established.
+    assert!(directory.covered("cardinality_maximum", &item_cardinality));
+    assert!(!directory.covered("cardinality_minimum", &item_cardinality));
+}
+
+#[tokio::test]
+async fn a_list_of_keys_is_a_block_of_references() {
+    let directory = list_items().await;
+    let list = ["tradition", "archetypes"];
+    let item = ["tradition", "archetypes", "$item:1"];
+
+    assert_eq!(directory.status("value_form", &list), Status::Same);
+    assert!(directory.covered("value_form", &item));
+}
+
 const AGENDA_KINDS: &str = r#"
 types = { type[tradition] = { path = "game/common/traditions" } }
 enums = { enum[agenda_kind] = { first second } }
