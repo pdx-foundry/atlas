@@ -48,26 +48,37 @@ fn keys(items: &[Item], path: &[String], output: &mut Vec<Key>) {
     }
 }
 /// The keys of `source` read line by line, without a parse tree: each `key =` outside quotes and
-/// comments, with the path of the blocks that open around it and the line where its own block
-/// closes. A file that the parser cannot read still binds its comments to these keys.
+/// comments, with the path of the blocks that open around it and the place where its own block
+/// closes (the end of the file for a block that never closes). A file that the parser cannot read
+/// still binds its comments to these keys.
 fn line_keys(source: &str) -> Vec<Key> {
     let mut keys: Vec<Key> = Vec::new();
     let mut open: Vec<Option<usize>> = Vec::new();
+    // The key whose value has not started yet; a `{` as its next token opens its block.
+    let mut pending: Option<usize> = None;
+    let mut quoted = false;
     let mut offset = 0;
+    let mut lines = 0;
 
     for (index, line) in source.split_inclusive('\n').enumerate() {
         let code = code_part(line);
         let mut rest = code;
-        let mut pending: Option<usize> = None;
 
-        while !rest.is_empty() {
-            let at = code.len() - rest.len();
-            let ch = rest.chars().next().expect("non-empty");
+        lines = index + 1;
 
-            if ch == '{' {
+        while let Some(ch) = rest.chars().next() {
+            let at = offset + code.len() - rest.len();
+
+            if quoted || ch == '"' {
+                quoted ^= ch == '"';
+                pending = None;
+            } else if ch == '{' {
                 open.push(pending.take());
             } else if ch == '}' {
+                pending = None;
+
                 if let Some(Some(key)) = open.pop() {
+                    keys[key].span.end = at + 1;
                     keys[key].span.end_line = index + 1;
                 }
             } else if let Some((key, length)) = assignment(rest) {
@@ -81,8 +92,8 @@ fn line_keys(source: &str) -> Vec<Key> {
                 keys.push(Key {
                     path,
                     span: Span {
-                        start: offset + at,
-                        end: offset + at + key.len(),
+                        start: at,
+                        end: at + key.len(),
                         line: index + 1,
                         end_line: index + 1,
                     },
@@ -90,12 +101,19 @@ fn line_keys(source: &str) -> Vec<Key> {
                 pending = Some(keys.len() - 1);
                 rest = &rest[length..];
                 continue;
+            } else if !ch.is_whitespace() {
+                pending = None;
             }
 
             rest = &rest[ch.len_utf8()..];
         }
 
         offset += line.len();
+    }
+
+    for key in open.into_iter().flatten() {
+        keys[key].span.end = source.len();
+        keys[key].span.end_line = lines;
     }
 
     keys
