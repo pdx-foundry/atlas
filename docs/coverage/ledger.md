@@ -320,7 +320,12 @@ two boundaries every answer carries (defaults, domains, limits, nested grammars 
 callers; entry contexts) say nothing about which root keys exist. The key must be literal (not
 `scalar`, `int`, `<type>`, `enum[X]`, `alias_name[X]` or a `$` parameter), not a root statement
 key, and not the field that names a definition; the registry's `definition_names` must be
-established, since a loader can read a key to name its definitions. Root statements (`events`,
+established, since a loader can read a key to name its definitions. The loader rule
+`keeps_definition_text` (Native `loader_rules`, `loader-rules/v8`) must be `false` with qualified
+evidence (decision of 2026-10-20): the item's member reader reads each statement once and reports
+and skips a key it does not handle, so no later code reads the key (Native `loader-rules.md`,
+"Definition text after the read", with its build-wide `later_text_reads` rule). A missing rule or
+a gap credits nothing. Root statements (`events`,
 `common/component_templates`) keep their own rules.
 
 The key's claims are covered, and each joins the [CWT disagreement review](cwt-disagreements.md):
@@ -333,12 +338,10 @@ The key's claims are covered, and each joins the [CWT disagreement review](cwt-d
   answers or gaps is left alone.
 
 A registry whose answer is `Partial` keeps every unlisted key open: an unresolved path could read
-it. Open question (for review): the standard boundary also says that "non-owner runtime callers"
-are not established. This rule reads it as the callers that evaluate a field's stored value, which
-see no key that the root reader did not store; if it can mean code that reads a definition's
-script keys at use time, the boundary reaches every root key and this rule credits nothing until
-Native states that no such reader exists. On M452 at Native `5143009` 19 registries are complete, and the rule covers 17 claims, all on
-three `common/timeline_events` keys (`type`, `text`, `texture`, which the engine reads as `types`,
+it. The live snapshot at Native `5143009` predates `keeps_definition_text`, so the rule credits
+nothing there. Native `8983b8b7` states `Known(false)` for all 19 registries whose
+`registry_fields` is `Complete` on M452; with that pin the rule would cover the 17
+`common/timeline_events` claims on `type`, `text` and `texture` (the engine reads `types`,
 `override_text` and `override_texture`).
 
 ### Enum domains (SDK-818)

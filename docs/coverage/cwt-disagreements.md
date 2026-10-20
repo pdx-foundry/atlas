@@ -8,7 +8,9 @@ evidence, and the verdict.
 ## Keys the engine never reads
 
 The [not-a-field rule](ledger.md#keys-the-engine-never-reads-decision-of-2026-10-20) answers these
-claims: Native's root-field answer for the registry is `Complete` and lists no field with the key.
+claims once the snapshot carries Native's `keeps_definition_text` (Native `8983b8b7`, `Known(false)`
+here): Native's root-field answer for the registry is `Complete` and lists no field with the key,
+and the loader keeps no definition text.
 Snapshot: live M452 capture at Native `5143009` (`registry-fields/v61`).
 
 ### `common/timeline_events` (`common/timeline_events.cwt`)

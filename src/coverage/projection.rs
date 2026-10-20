@@ -556,7 +556,9 @@ fn rule_answer(
 /// with no gap other than `OutsideMethod` boundaries: every reader path and field name is then
 /// resolved, so a key formed at run time or read by an unfollowed reader would make the answer
 /// partial. The registry's `definition_names` must be established, since a loader can read a key
-/// to name its definitions. The key must be literal, unlisted, and not the field that names a
+/// to name its definitions, and its loader rule `keeps_definition_text` must be `false` with
+/// qualified evidence (Native `loader-rules.md`, "Definition text after the read"), since kept
+/// text could be read again later. The key must be literal, unlisted, and not the field that names a
 /// definition.
 /// `field_existence` claims on the key and below it answer `false`; its other claims (value form,
 /// count, scope) answer `"not_a_field"`, since the engine reads no value there. Claims that the
@@ -627,6 +629,19 @@ fn unread_key_answers(
             ));
         }
 
+        // The loader must also drop the definition's text after the read (decision of
+        // 2026-10-20), or later code could read a key that the member reader skipped.
+        let kept_text = rules
+            .rules
+            .iter()
+            .find(|rule| rule.id == format!("registry:{registry}#keeps_definition_text"));
+        let Some(kept_text) = kept_text.filter(|rule| rule.answer == json!(false)) else {
+            continue;
+        };
+        let kept_text_evidence = rule_evidence(rules, kept_text, build, target)?;
+        let qualified = source.basis != Basis::Recorded
+            && !kept_text_evidence.is_empty()
+            && kept_text_evidence.iter().all(|evidence| evidence.qualified);
         let read_keys = read_root_keys(rules, registry);
 
         for (type_name, file, selector) in types {
@@ -667,13 +682,19 @@ fn unread_key_answers(
                     conditions: claim.conditions.clone(),
                     value,
                     status: Status::Supported,
-                    evidence: vec![Evidence {
+                    evidence: [Evidence {
                         id: format!("not_a_field:{registry}/{key}@{}", record.source),
                         method: source.method.clone(),
                         target: target.to_owned(),
-                        qualified: source.basis != Basis::Recorded,
+                        qualified,
                         origin: Origin::Engine,
-                    }],
+                    }]
+                    .into_iter()
+                    .chain(kept_text_evidence.iter().map(|evidence| Evidence {
+                        qualified,
+                        ..evidence.clone()
+                    }))
+                    .collect(),
                 });
             }
         }

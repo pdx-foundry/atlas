@@ -1385,6 +1385,7 @@ relic = {}
     let unresolved =
         SharedDirectory::evaluate(&[("traditions.cwt", TRADITION_DEFINITION)], |snapshot| {
             unresolve(snapshot, TRADITIONS, "definition_names");
+            set_rule(snapshot, TRADITIONS, "keeps_definition_text", json!(false));
         })
         .await;
 
@@ -2437,8 +2438,18 @@ tradition = {
 "#;
 
 /// [`UNREAD_KEYS`] against the recorded answers, with the traditions root-field answer
-/// `Complete` and only its `OutsideMethod` gaps, then changed by `edit`.
+/// `Complete` and only its `OutsideMethod` gaps, and a loader that keeps no definition text, then
+/// changed by `edit`.
 async fn unread_keys(edit: impl FnOnce(&mut snapshot::AnswerRecord)) -> SharedDirectory {
+    unread_keys_with(json!(false), edit).await
+}
+
+/// [`unread_keys`] with the loader rule `keeps_definition_text` answering `kept`, or a gap for
+/// `Value::Null`.
+async fn unread_keys_with(
+    kept: Value,
+    edit: impl FnOnce(&mut snapshot::AnswerRecord),
+) -> SharedDirectory {
     SharedDirectory::evaluate(&[("traditions.cwt", UNREAD_KEYS)], |snapshot| {
         let record = snapshot
             .answers
@@ -2450,8 +2461,27 @@ async fn unread_keys(edit: impl FnOnce(&mut snapshot::AnswerRecord)) -> SharedDi
             .native_gaps
             .retain(|gap| gap.kind == pdx_native::GapKind::OutsideMethod);
         edit(record);
+
+        if kept.is_null() {
+            set_rule(snapshot, TRADITIONS, "keeps_definition_text", json!(true));
+            unresolve(snapshot, TRADITIONS, "keeps_definition_text");
+        } else {
+            set_rule(snapshot, TRADITIONS, "keeps_definition_text", kept);
+        }
     })
     .await
+}
+
+#[tokio::test]
+async fn a_loader_that_may_keep_the_definition_text_leaves_an_unlisted_key_open() {
+    for kept in [json!(true), Value::Null] {
+        let directory = unread_keys_with(kept.clone(), |_| {}).await;
+
+        assert!(
+            !directory.covered("field_existence", &["tradition", "never_read"]),
+            "{kept}"
+        );
+    }
 }
 
 #[tokio::test]
@@ -2505,6 +2535,7 @@ async fn a_partial_answer_or_another_gap_leaves_an_unlisted_key_open() {
                 .native_gaps
                 .retain(|gap| gap.kind == pdx_native::GapKind::OutsideMethod);
             unresolve(snapshot, TRADITIONS, "definition_names");
+            set_rule(snapshot, TRADITIONS, "keeps_definition_text", json!(false));
         })
         .await;
 
