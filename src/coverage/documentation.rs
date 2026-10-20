@@ -102,6 +102,9 @@ fn files_sha256(files: &BTreeMap<String, String>) -> String {
 enum Comparison {
     /// Equal after removing comment markers and folding whitespace, at every listed location.
     Exact(Vec<Comment>),
+    /// Not equal, but each listed comment documents the same key and contains the text word for
+    /// word once both fold case, punctuation and whitespace (decision of 2026-10-20).
+    Held(Vec<Comment>),
     /// Similar but not equal text; the best candidates.
     Rewritten(Vec<Comment>),
     /// No comment in the claim's directory documents its key with similar text.
@@ -110,7 +113,8 @@ enum Comparison {
 
 /// The answers that `content` gives the content-derived documentation questions, and its report
 /// with the gaps of the others. A question is answered only when each of its occurrences matches
-/// a shipped comment exactly; the answer lists their distinct texts. `qualified` is false when
+/// a shipped comment exactly or is held by one of the same key; the answer lists their distinct
+/// texts. `qualified` is false when
 /// the rule snapshot is a recording, which earns no credit.
 pub(super) fn project(
     ledger: &Ledger,
@@ -274,7 +278,7 @@ fn answer(comparisons: &[Comparison]) -> Result<Vec<&Comment>, String> {
     let mut comments: Vec<_> = comparisons
         .iter()
         .flat_map(|c| match c {
-            Comparison::Exact(comments) => comments.as_slice(),
+            Comparison::Exact(comments) | Comparison::Held(comments) => comments.as_slice(),
             Comparison::Rewritten(_) | Comparison::Absent => &[],
         })
         .collect();
@@ -429,9 +433,18 @@ fn compare(claim: &Claim, key: &str, directories: &[String], content: &Content) 
         }
     }
 
+    if best_score == EXACT {
+        return Comparison::Exact(best);
+    }
+
+    let holding: Vec<_> = applicable_comments(claim, key, directories, content)
+        .filter(|comment| holds(&comment.text, &claim.config_answer))
+        .cloned()
+        .collect();
+
     match best_score {
+        _ if !holding.is_empty() => Comparison::Held(holding),
         0 => Comparison::Absent,
-        EXACT => Comparison::Exact(best),
         _ => Comparison::Rewritten(best),
     }
 }
