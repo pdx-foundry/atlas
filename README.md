@@ -39,7 +39,8 @@ Omit `--snapshot` to inventory with zero established coverage. `--game-content` 
 installation's base-game `common/**/*.txt` comments, which answer the content-derived
 documentation claims ([SDK-718](docs/coverage/ledger.md#content-derived-documentation-sdk-718)). It
 needs a snapshot of the installation's build and starts no game; without it those claims earn no
-credit. The command writes `ledger.json`
+credit. With it, documentation that no shipped comment holds is authored text, outside the
+Atlas-owned denominator. The command writes `ledger.json`
 and `coverage.json`. It returns 0 for a complete inventory, 2 after writing reports with source
 diagnostics or parse problems in the shipped files, and 1 for invalid arguments, unreadable input, or an invalid snapshot contract.
 Output JSON contains input hashes and relative config paths, with no run timestamp.
@@ -54,7 +55,8 @@ another config or snapshot is left out with a warning. A PR that changes coverag
 `covered-claims.txt` into `docs/coverage/`. The committed baseline is a live snapshot at Native
 `5143009`, made with the [pin move B capture](docs/coverage/pin-move-b.md) commands, with the
 component template root statements, the root-statement agreement rule, the single alias join and
-the M452 installation's shipped comments (31,593 claims).
+the M452 installation's shipped comments, with documentation that no shipped comment holds as
+authored text (31,595 of 56,889 claims).
 
 The [registry comparison](docs/coverage/registries.md) puts Native's registry list beside the
 config types and records a reason for each type that no registry names:

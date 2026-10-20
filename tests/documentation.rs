@@ -216,7 +216,7 @@ async fn content_needs_a_snapshot_of_its_build() {
 }
 
 #[tokio::test]
-async fn matching_changes_neither_ownership_nor_the_denominator() {
+async fn matching_alone_changes_neither_ownership_nor_the_denominator() {
     let config = format!(
         "{THINGS}thing = {{\n ### Documented\n value = int\n ### Not shipped\n other = int\n}}\n"
     );
@@ -231,26 +231,69 @@ async fn matching_changes_neither_ownership_nor_the_denominator() {
         with_content.report.totals.atlas_owned.total,
         without.report.totals.atlas_owned.total
     );
-    assert!(
-        with_content
-            .ledger
-            .claims
-            .iter()
-            .filter(|c| c.property == "documentation")
-            .all(|c| c.owner == ledger::Owner::ContentDerived)
-    );
-    assert_eq!(
-        with_content
-            .documentation()
-            .iter()
-            .map(|a| a.covered)
-            .collect::<Vec<_>>(),
-        [true, false]
-    );
     assert_eq!(
         with_content.gap_reasons(),
         ["No shipped comment in the installation has this text"]
     );
+}
+
+#[tokio::test]
+async fn documentation_that_no_shipped_comment_holds_is_authored_text() {
+    let config = format!(
+        "{THINGS}thing = {{
+ ### Documented
+ exact = int
+ ### Not shipped
+ absent = int
+ ### Changes the total amount of energy that is stored by the country
+ held = int
+ ### Changes the total amount of energy stored by the country
+ reworded = int
+}}
+"
+    );
+    let shipped = files(&[(
+        "common/things/00.txt",
+        "example = {
+ exact = 2 # Documented
+ held = 2 # changes the total amount of energy that is stored by the country Optional
+ # Changes the amount of energy stored by the country
+ reworded = 2
+}
+",
+    )]);
+    let snapshot = live_snapshot(recorded_snapshot().await);
+    let mut ledger = ledger::inventory(&files(&[("common/things.cwt", &config)]));
+    let before = coverage::evaluate(&ledger, None, None)
+        .unwrap()
+        .totals
+        .atlas_owned
+        .total;
+
+    coverage::attribute_authored_text(
+        &mut ledger,
+        &coverage::Content::new(build(&snapshot), &shipped),
+    );
+
+    let owner = |key: &str| {
+        ledger
+            .claims
+            .iter()
+            .find(|c| c.property == "documentation" && c.subject.last().unwrap() == key)
+            .unwrap()
+            .owner
+    };
+    let after = coverage::evaluate(&ledger, None, None)
+        .unwrap()
+        .totals
+        .atlas_owned
+        .total;
+
+    assert_eq!(owner("exact"), ledger::Owner::ContentDerived);
+    assert_eq!(owner("held"), ledger::Owner::ContentDerived);
+    assert_eq!(owner("absent"), ledger::Owner::AuthoredText);
+    assert_eq!(owner("reworded"), ledger::Owner::AuthoredText);
+    assert_eq!(after, before - 2);
 }
 
 #[tokio::test]

@@ -183,6 +183,62 @@ pub(super) fn project(
     (answers, report)
 }
 
+/// Makes each content-derived documentation claim that no shipped comment of `content` holds
+/// authored text (decision of 2026-10-20): CWT wrote it, so it is not an Atlas-owned claim. A
+/// claim with an exact comment, or a rewritten candidate that holds its text with case and
+/// punctuation folded, stays content-derived.
+pub fn attribute_authored_text(ledger: &mut Ledger, content: &Content) {
+    let authored: BTreeSet<_> = {
+        let directories = TypeDirectories::new(ledger);
+        let item_names = item_names(ledger);
+
+        ledger
+            .claims
+            .iter()
+            .enumerate()
+            .filter(|(_, c)| c.property == "documentation" && c.owner == Owner::ContentDerived)
+            .filter(|(_, claim)| {
+                let key = subject_key(claim, &item_names);
+                let directories = claim_directories(claim, &directories);
+
+                match compare(claim, &key, &directories, content) {
+                    Comparison::Exact(_) => false,
+                    Comparison::Rewritten(candidates) => !candidates
+                        .iter()
+                        .any(|candidate| holds(&candidate.text, &claim.config_answer)),
+                    Comparison::Absent => true,
+                }
+            })
+            .map(|(index, _)| index)
+            .collect()
+    };
+
+    for index in authored {
+        let claim = &mut ledger.claims[index];
+
+        claim.owner = Owner::AuthoredText;
+        claim.ownership_reason =
+            "CWT-authored documentation: no shipped comment in the installation holds this text"
+                .into();
+        claim.provisional_owner = false;
+    }
+}
+
+/// Whether `comment` contains `text` once both fold case, punctuation and whitespace: a shipped
+/// comment that CWT shortened or recapitalized still holds the text.
+fn holds(comment: &str, text: &str) -> bool {
+    let words = |text: &str| {
+        text.split(|c: char| !c.is_alphanumeric())
+            .filter(|word| !word.is_empty())
+            .map(str::to_lowercase)
+            .collect::<Vec<_>>()
+            .join(" ")
+    };
+    let text = words(text);
+
+    !text.is_empty() && words(comment).contains(&text)
+}
+
 /// The exact locations of every occurrence, or the reason of the weakest occurrence.
 fn answer(comparisons: &[Comparison]) -> Result<Vec<&Comment>, String> {
     if comparisons.iter().any(|c| matches!(c, Comparison::Absent)) {

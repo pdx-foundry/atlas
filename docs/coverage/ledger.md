@@ -426,7 +426,15 @@ the SDK-525 matcher (the association and comparison rules in [documentation.md](
 - A question is answered only when each of its occurrences matches exactly. Otherwise it has one
   gap: "The shipped comment at FILE:LINE-END_LINE is a rewritten candidate, not the same text" for
   a rewritten candidate, or "No shipped comment in the installation has this text".
-- Matching never changes a claim's owner, so the denominator does not depend on the installation.
+- Documentation that no shipped comment holds is authored text, not an Atlas-owned claim
+  (decision of 2026-10-20, as for SDK-718): CWT wrote it. `ledger --game-content` makes such a
+  claim `authored_text` before it scores: a claim with no similar comment, and a rewritten
+  candidate whose text the comment does not contain once both fold case, punctuation and
+  whitespace (CWT reworded it). A rewritten candidate that holds the text (CWT shortened or
+  recapitalized a shipped comment) stays content-derived with its gap. So the denominator of a run
+  with `--game-content` depends on the installation; a run without it keeps every documentation
+  claim content-derived. On M452 at Native `5143009` this moves 754 claims (651 in `common/` and
+  `events/`) and leaves 54 held candidates open.
 
 The content-origin rule: content evidence credits only content-derived claims, as the origin table
 of `coverage::suitable` already requires (an engine fact needs engine evidence). Its target is the

@@ -170,7 +170,12 @@ pub fn generate(
     baseline: Option<&Baseline>,
 ) -> Result<(Ledger, coverage::Report), Box<dyn std::error::Error>> {
     let sources = read_sources(config)?;
-    let ledger = ledger::inventory(&sources);
+    let mut ledger = ledger::inventory(&sources);
+
+    if let Some(content) = content {
+        coverage::attribute_authored_text(&mut ledger, content);
+    }
+
     let input = snapshot.map(fs::read).transpose()?;
     let report =
         coverage::evaluate(&ledger, input.as_deref(), content).map_err(io::Error::other)?;
