@@ -49,16 +49,20 @@ and `coverage.json`. It returns 0 for a complete inventory, 2 after writing repo
 diagnostics or parse problems in the shipped files, and 1 for invalid arguments, unreadable input, or an invalid snapshot contract.
 Output JSON contains input hashes and relative config paths, with no run timestamp.
 
-The command also writes `covered-claims.txt` and `dashboard.html`, and copies the page to
+The command also writes the run's baseline, `covered/`, and `dashboard.html`, and copies the page to
 `.local/dashboard/dashboard.html` of the main checkout, which every worktree shares (`--dashboard
 DIR` writes the copy elsewhere). The page shows Atlas-owned coverage by area and for each Milestone 5
 gate type, and its change against a baseline, with each claim that lost coverage. The baseline is
-the `covered-claims.txt` of another run that `--baseline FILE` names; without it, a snapshot that
-holds a live observation is compared with the baseline of `main` (`docs/coverage/covered-claims.txt`,
-read from `origin/main`), and any other run is not compared. Run `compare` and `registries` into the same
+the `covered/` directory of another run that `--baseline DIR` names; without it, the run is compared
+with the baseline of `main` (`docs/coverage/covered/`, read from `origin/main`). A baseline holds one
+shard of covered claim IDs per config file and an `index.txt` with the run's identity, totals,
+shard counts and whether its snapshot held a live observation. A run compares only with a baseline
+of its own kind: a named baseline of the other kind is an error, and the committed live baseline
+is left out for a static or recorded run. Run `compare` and `registries` into the same
 output folder first to add agreement with the config, a list of each disagreement (config answer beside Atlas's) and each type's registry join; a report of
-another config or snapshot is left out with a warning. A PR that changes coverage copies the new
-`covered-claims.txt` into `docs/coverage/`. The committed baseline is a live snapshot at Native
+another config or snapshot is left out with a warning. A PR that changes coverage replaces
+`docs/coverage/covered/` with the new `covered/`; a change to one config file's coverage changes
+its shard and the index only. The committed baseline is a live snapshot at Native
 `ec3342f`, made with the [pin move B capture](docs/coverage/pin-move-b.md) commands, with the
 component template root statements, the root-statement agreement rule, the single alias join and
 the M452 installation's shipped comments, with documentation that no shipped comment holds as

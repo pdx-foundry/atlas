@@ -13,8 +13,10 @@ use std::{
     process::{Command, ExitCode},
 };
 
-/// Where `main` keeps the baseline that each ledger run is compared with.
-const BASELINE: &str = "origin/main:docs/coverage/covered-claims.txt";
+/// The revision whose committed baseline each ledger run is compared with by default.
+const BASELINE_REVISION: &str = "origin/main";
+/// Where a revision keeps its baseline.
+const BASELINE_PATH: &str = "docs/coverage/covered/";
 
 fn run_ledger() -> Result<bool, Box<dyn std::error::Error>> {
     let mut args = std::env::args().skip(1);
@@ -44,9 +46,15 @@ fn run_ledger() -> Result<bool, Box<dyn std::error::Error>> {
     let config = options.get("--config").ok_or("--config is required")?;
     let output = options.get("--output").ok_or("--output is required")?;
     let snapshot = options.get("--snapshot").map(PathBuf::as_path);
+    let observed_live = match snapshot {
+        Some(path) => serde_json::from_slice::<snapshot::Snapshot>(&std::fs::read(path)?)
+            .map_err(|error| format!("Invalid rule snapshot input: {error}"))?
+            .observed_live(),
+        None => false,
+    };
     let baseline = match options.get("--baseline") {
-        Some(file) => Some(Baseline::parse(&std::fs::read_to_string(file)?)?),
-        None => committed_baseline(snapshot)?,
+        Some(directory) => Some(named_baseline(directory, observed_live)?),
+        None => committed_baseline(observed_live)?,
     };
     let content = options
         .get("--game-content")
@@ -56,6 +64,7 @@ fn run_ledger() -> Result<bool, Box<dyn std::error::Error>> {
         config,
         snapshot,
         content.as_ref(),
+        observed_live,
         output,
         baseline.as_ref(),
     )?;
@@ -126,36 +135,83 @@ fn git(args: &[&str]) -> Option<String> {
     String::from_utf8(output.stdout).ok()
 }
 
-/// The committed baseline of `main` for a live snapshot. The baseline is a live capture, so a run
-/// without a live observation, such as a static-mode snapshot, is not compared with it.
-fn committed_baseline(
-    snapshot: Option<&Path>,
-) -> Result<Option<Baseline>, Box<dyn std::error::Error>> {
-    let observed_live = match snapshot {
-        Some(path) => serde_json::from_slice::<snapshot::Snapshot>(&std::fs::read(path)?)
-            .map_err(|error| format!("Invalid rule snapshot input: {error}"))?
-            .observed_live(),
-        None => false,
+/// The kind of run, which a baseline must share to be compared.
+fn run_kind(observed_live: bool) -> &'static str {
+    if observed_live {
+        "live"
+    } else {
+        "static or recorded"
+    }
+}
+
+/// The baseline in `directory`, which must be of the same kind of run as this one.
+fn named_baseline(
+    directory: &Path,
+    observed_live: bool,
+) -> Result<Baseline, Box<dyn std::error::Error>> {
+    let baseline = report::read_baseline(directory)?;
+
+    if baseline.observed_live != observed_live {
+        return Err(format!(
+            "The baseline in {} is of a {} run, and this run is {}; they do not compare.",
+            directory.display(),
+            run_kind(baseline.observed_live),
+            run_kind(observed_live)
+        )
+        .into());
+    }
+
+    Ok(baseline)
+}
+
+/// The committed baseline of `main` when it is of the same kind of run as this one. The committed
+/// baseline is a live capture, so a static-mode run is not compared with it.
+fn committed_baseline(observed_live: bool) -> Result<Option<Baseline>, String> {
+    let Some(baseline) = main_baseline()? else {
+        return Ok(None);
     };
 
-    if !observed_live {
+    if baseline.observed_live != observed_live {
         eprintln!(
-            "No live observation in the snapshot: the dashboard does not compare the run with the live baseline of main. Pass --baseline FILE to compare it with another run."
+            "The baseline of {BASELINE_REVISION} is of a {} run, and this run is {}: the dashboard does not compare them. Pass --baseline DIR to compare with another run.",
+            run_kind(baseline.observed_live),
+            run_kind(observed_live)
         );
         return Ok(None);
     }
 
-    Ok(main_baseline()?)
+    Ok(Some(baseline))
 }
 
 /// The committed baseline of `main`, or `None` with a warning when git cannot show it.
 fn main_baseline() -> Result<Option<Baseline>, String> {
-    let Some(text) = git(&["show", BASELINE]) else {
-        eprintln!("No baseline at {BASELINE}; the dashboard does not measure the change.");
+    let listing = git(&[
+        "ls-tree",
+        "-r",
+        "--name-only",
+        BASELINE_REVISION,
+        "--",
+        BASELINE_PATH,
+    ])
+    .filter(|listing| !listing.trim().is_empty());
+    let Some(listing) = listing else {
+        eprintln!(
+            "No baseline at {BASELINE_REVISION}:{BASELINE_PATH}; the dashboard does not measure the change."
+        );
         return Ok(None);
     };
+    let mut texts = BTreeMap::new();
 
-    Baseline::parse(&text).map(Some)
+    for path in listing.lines().filter(|path| path.ends_with(".txt")) {
+        let revision_path = format!("{BASELINE_REVISION}:{path}");
+        let text =
+            git(&["show", &revision_path]).ok_or(format!("git cannot show {revision_path}"))?;
+        let relative = path.strip_prefix(BASELINE_PATH).unwrap_or(path);
+
+        texts.insert(relative.to_owned(), text);
+    }
+
+    Baseline::parse(&texts).map(Some)
 }
 
 /// `.local/dashboard` of the main checkout, shared by every worktree of the repository.
@@ -404,7 +460,7 @@ fn main() -> ExitCode {
         Some("compare") => run_compare(),
         Some("registries") => run_registries(),
         Some("snapshot") => run_snapshot(),
-        _ => Err("usage: pdx-atlas ledger --config DIR [--snapshot FILE [--game-content INSTALLATION]] --output DIR [--dashboard DIR] [--baseline FILE] | compare CONFIG_DIR SNAPSHOT_FILE OUTPUT_DIR [--script-docs DIR] [--defines FILE]... [--answers DIR] | registries CONFIG_DIR ANSWERS OUTPUT_DIR | snapshot INSTALLATION ANSWERS OUTPUT [STARTUP_SECONDS] | snapshot --recorded ANSWERS OUTPUT | snapshot --static INSTALLATION --observations ANSWERS OUTPUT".into()),
+        _ => Err("usage: pdx-atlas ledger --config DIR [--snapshot FILE [--game-content INSTALLATION]] --output DIR [--dashboard DIR] [--baseline DIR] | compare CONFIG_DIR SNAPSHOT_FILE OUTPUT_DIR [--script-docs DIR] [--defines FILE]... [--answers DIR] | registries CONFIG_DIR ANSWERS OUTPUT_DIR | snapshot INSTALLATION ANSWERS OUTPUT [STARTUP_SECONDS] | snapshot --recorded ANSWERS OUTPUT | snapshot --static INSTALLATION --observations ANSWERS OUTPUT".into()),
     };
     match result {
         Ok(true) => ExitCode::SUCCESS,

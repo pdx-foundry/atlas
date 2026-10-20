@@ -32,7 +32,12 @@ fn baseline(ledger: &Ledger, claims: &[&str]) -> Baseline {
         ledger_sha256: LEDGER_SHA256.into(),
         covered: claims.len(),
         total: 0,
-        claims: claims.iter().map(|claim| (*claim).to_owned()).collect(),
+        observed_live: false,
+        files: [(
+            "traditions.cwt".to_owned(),
+            claims.iter().map(|claim| (*claim).to_owned()).collect(),
+        )]
+        .into(),
     }
 }
 
@@ -207,17 +212,173 @@ fn reports_of_other_inputs_are_left_out_with_a_warning() {
     assert_eq!(stale.warnings.len(), 2);
 }
 
+/// A ledger of two config files and a report that covers every Atlas-owned claim but `uncovered`.
+fn two_files(uncovered: &[&str]) -> (Ledger, coverage::Report) {
+    let ledger = inventory(
+        &[
+            (
+                "traditions.cwt".into(),
+                "types = { type[tradition] = { path = \"game/common/traditions\" } }\n\
+                 tradition = { unlocks_agenda = int }\n"
+                    .into(),
+            ),
+            (
+                "common/relics.cwt".into(),
+                "types = { type[relic] = { path = \"game/common/relics\" } }\n\
+                 relic = { score = int }\n"
+                    .into(),
+            ),
+        ]
+        .into(),
+    );
+    let mut report = coverage::evaluate(&ledger, None, None).unwrap();
+    let atlas_owned: BTreeSet<&str> = ledger
+        .claims
+        .iter()
+        .filter(|claim| claim.owner.atlas_owned())
+        .map(|claim| claim.id.as_str())
+        .collect();
+
+    for assessment in &mut report.claims {
+        assessment.covered = atlas_owned.contains(assessment.claim.as_str())
+            && !uncovered.contains(&assessment.claim.as_str());
+    }
+
+    report.totals.atlas_owned.covered = report
+        .claims
+        .iter()
+        .filter(|assessment| assessment.covered)
+        .count();
+
+    (ledger, report)
+}
+
+fn claim_of(ledger: &Ledger, file: &str, property: &str) -> String {
+    ledger
+        .claims
+        .iter()
+        .find(|claim| claim.file == file && claim.property == property && claim.owner.atlas_owned())
+        .unwrap()
+        .id
+        .clone()
+}
+
 #[test]
 fn baseline_text_round_trips() {
-    let (ledger, mut report) = fixture();
-    report.claims[0].covered = true;
-    report.totals.atlas_owned.covered = 1;
+    let (ledger, report) = two_files(&[]);
 
-    let baseline = Baseline::of(&ledger, LEDGER_SHA256, &report);
+    let baseline = Baseline::of(&ledger, LEDGER_SHA256, &report, true);
+    let texts = baseline.render();
 
-    assert_eq!(baseline.claims.len(), 1);
-    assert_eq!(Baseline::parse(&baseline.render()), Ok(baseline));
-    assert!(Baseline::parse("config_sha256 x\n").is_err());
+    assert_eq!(baseline.files.len(), 2);
+    assert_eq!(
+        texts.keys().map(String::as_str).collect::<Vec<_>>(),
+        [
+            "common/relics.cwt.txt",
+            BASELINE_INDEX,
+            "traditions.cwt.txt"
+        ]
+    );
+    assert_eq!(Baseline::parse(&texts), Ok(baseline));
+}
+
+#[test]
+fn the_split_baseline_reconstructs_the_page_of_the_run() {
+    let (ledger, _) = two_files(&[]);
+    let lost = claim_of(&ledger, "common/relics.cwt", "value_form");
+    let gained = claim_of(&ledger, "traditions.cwt", "value_form");
+    let (_, earlier) = two_files(&[&gained]);
+    let (_, later) = two_files(&[&lost]);
+    let whole = Baseline::of(&ledger, LEDGER_SHA256, &earlier, true);
+    let loaded = Baseline::parse(&whole.render()).unwrap();
+
+    let page = |baseline: &Baseline| {
+        let page = page_data(&ledger, "other-ledger", &later, Some(baseline), None, None);
+        serde_json::to_value(page).unwrap()
+    };
+
+    assert_eq!(page(&loaded), page(&whole));
+    assert_eq!(page(&loaded)["gained"], 1);
+    assert_eq!(page(&loaded)["lost"][0]["claim"], lost.as_str());
+    assert_eq!(page(&loaded)["warnings"].as_array().unwrap().len(), 1);
+}
+
+#[test]
+fn a_change_to_one_files_claims_changes_only_its_shard_and_the_index() {
+    let (ledger, report) = two_files(&[]);
+    let relic = claim_of(&ledger, "common/relics.cwt", "value_form");
+    let (_, changed) = two_files(&[&relic]);
+
+    let before = Baseline::of(&ledger, LEDGER_SHA256, &report, true).render();
+    let after = Baseline::of(&ledger, LEDGER_SHA256, &changed, true).render();
+    let differ: Vec<_> = before
+        .keys()
+        .filter(|path| before.get(*path) != after.get(*path))
+        .map(String::as_str)
+        .collect();
+
+    assert_eq!(
+        before.keys().collect::<Vec<_>>(),
+        after.keys().collect::<Vec<_>>()
+    );
+    assert_eq!(differ, ["common/relics.cwt.txt", BASELINE_INDEX]);
+}
+
+#[test]
+fn an_incomplete_or_inconsistent_baseline_is_refused() {
+    let (ledger, report) = two_files(&[]);
+    let texts = Baseline::of(&ledger, LEDGER_SHA256, &report, true).render();
+    let edited = |edit: &dyn Fn(&mut BTreeMap<String, String>)| {
+        let mut texts = texts.clone();
+        edit(&mut texts);
+        Baseline::parse(&texts).unwrap_err()
+    };
+
+    assert!(
+        edited(&|texts| {
+            texts.remove("traditions.cwt.txt");
+        })
+        .contains("missing")
+    );
+    assert!(
+        edited(&|texts| {
+            texts.insert("stale.cwt.txt".into(), "question:x:1\n".into());
+        })
+        .contains("not in the index")
+    );
+    assert!(
+        edited(&|texts| {
+            texts
+                .get_mut("traditions.cwt.txt")
+                .unwrap()
+                .push_str("question:x:1\n");
+        })
+        .contains("holds")
+    );
+    assert!(
+        edited(&|texts| {
+            let index = texts.get_mut(BASELINE_INDEX).unwrap();
+            *index = index.replace("observed_live true", "observed_live yes");
+        })
+        .contains("not a bool")
+    );
+    assert!(
+        edited(&|texts| {
+            let index = &texts[BASELINE_INDEX];
+            let covered = index
+                .lines()
+                .find_map(|line| line.strip_prefix("atlas_owned_covered "))
+                .unwrap()
+                .to_owned();
+            let index = index.replace(
+                &format!("atlas_owned_covered {covered}"),
+                "atlas_owned_covered 0",
+            );
+            texts.insert(BASELINE_INDEX.into(), index);
+        })
+        .contains("not the 0 covered")
+    );
+    assert!(Baseline::parse(&BTreeMap::new()).is_err());
 }
 
 #[test]

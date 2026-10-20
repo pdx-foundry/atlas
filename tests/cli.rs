@@ -59,7 +59,7 @@ fn relocated_inputs_produce_identical_bytes_and_diagnostics_fail_visibly() {
             .unwrap();
         assert!(result.status.success(), "{:?}", result);
     }
-    for name in ["covered-claims.txt", "dashboard.html"] {
+    for name in ["covered/index.txt", "dashboard.html"] {
         assert!(root.path().join("first-out").join(name).is_file());
     }
     assert_eq!(
@@ -133,7 +133,7 @@ fn a_dashboard_folder_equal_to_the_output_keeps_the_page() {
 }
 
 #[test]
-fn a_run_without_a_live_observation_compares_only_with_a_named_baseline() {
+fn a_run_without_a_live_observation_compares_only_with_a_baseline_of_its_kind() {
     let root = tempfile::tempdir().unwrap();
     let config = root.path().join("config");
     fs::create_dir(&config).unwrap();
@@ -166,22 +166,32 @@ fn a_run_without_a_live_observation_compares_only_with_a_named_baseline() {
         if let Some(baseline) = baseline {
             command.arg("--baseline").arg(baseline);
         }
-        let result = command.output().unwrap();
-        assert!(result.status.success(), "{result:?}");
-        let page = fs::read_to_string(root.path().join(output).join("dashboard.html")).unwrap();
-        (String::from_utf8(result.stderr).unwrap(), page)
+        command.output().unwrap()
     };
+    let page =
+        |output: &str| fs::read_to_string(root.path().join(output).join("dashboard.html")).unwrap();
 
-    let (warning, page) = ledger("first", None);
+    let first = ledger("first", None);
 
-    assert!(warning.contains("No live observation"), "{warning}");
-    assert!(page.contains("\"baseline\":null"));
+    assert!(first.status.success(), "{first:?}");
+    assert!(page("first").contains("\"baseline\":null"));
 
-    let (warning, page) = ledger(
-        "second",
-        Some(&root.path().join("first/covered-claims.txt")),
-    );
+    let first_baseline = root.path().join("first/covered");
+    let second = ledger("second", Some(&first_baseline));
 
-    assert!(!warning.contains("No live observation"), "{warning}");
-    assert!(!page.contains("\"baseline\":null"));
+    assert!(second.status.success(), "{second:?}");
+    assert!(!page("second").contains("\"baseline\":null"));
+
+    let index = first_baseline.join("index.txt");
+    let text = fs::read_to_string(&index).unwrap();
+    assert!(text.contains("observed_live false"));
+    fs::write(
+        &index,
+        text.replace("observed_live false", "observed_live true"),
+    )
+    .unwrap();
+    let live_baseline = ledger("third", Some(&first_baseline));
+
+    assert_eq!(live_baseline.status.code(), Some(1));
+    assert!(String::from_utf8_lossy(&live_baseline.stderr).contains("do not compare"));
 }

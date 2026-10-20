@@ -158,14 +158,16 @@ pub fn json_bytes(value: &impl serde::Serialize) -> Result<Vec<u8>, serde_json::
     bytes.push(b'\n');
     Ok(bytes)
 }
-/// Writes the ledger, the coverage report, this run's baseline (`covered-claims.txt`) and the
-/// dashboard page (`dashboard.html`). `content` is the shipped files of the snapshot's build (see
-/// [`coverage::evaluate`]). The page compares the run with `baseline` and reads
-/// `comparison.json` and `registries.json` from `output` when they are present.
+/// Writes the ledger, the coverage report, this run's baseline (`covered/`, replaced whole) and
+/// the dashboard page (`dashboard.html`). `content` is the shipped files of the snapshot's build
+/// (see [`coverage::evaluate`]); `observed_live` is whether the snapshot holds a live observation.
+/// The page compares the run with `baseline` and reads `comparison.json` and `registries.json`
+/// from `output` when they are present.
 pub fn generate(
     config: &Path,
     snapshot: Option<&Path>,
     content: Option<&coverage::Content>,
+    observed_live: bool,
     output: &Path,
     baseline: Option<&Baseline>,
 ) -> Result<(Ledger, coverage::Report), Box<dyn std::error::Error>> {
@@ -197,13 +199,41 @@ pub fn generate(
         registries.as_ref(),
     );
 
-    fs::write(
-        output.join("covered-claims.txt"),
-        Baseline::of(&ledger, &ledger_sha256, &report).render(),
+    write_baseline(
+        &output.join(BASELINE_DIRECTORY),
+        &Baseline::of(&ledger, &ledger_sha256, &report, observed_live),
     )?;
     fs::write(output.join("dashboard.html"), dashboard::render_html(&page))?;
 
     Ok((ledger, report))
+}
+
+/// The directory of a run's baseline in its reports folder.
+pub const BASELINE_DIRECTORY: &str = "covered";
+
+/// Replaces `directory` with the text form of `baseline`, so no shard of an earlier run remains.
+fn write_baseline(directory: &Path, baseline: &Baseline) -> io::Result<()> {
+    match fs::remove_dir_all(directory) {
+        Ok(()) => {}
+        Err(error) if error.kind() == io::ErrorKind::NotFound => {}
+        Err(error) => return Err(error),
+    }
+
+    for (path, text) in baseline.render() {
+        let path = directory.join(path);
+        fs::create_dir_all(path.parent().expect("a shard lies inside the directory"))?;
+        fs::write(path, text)?;
+    }
+
+    Ok(())
+}
+
+/// Reads the baseline in `directory`: every `.txt` file below it, keyed by its relative path.
+pub fn read_baseline(directory: &Path) -> Result<Baseline, Box<dyn std::error::Error>> {
+    let mut texts = BTreeMap::new();
+    visit(directory, directory, "txt", &mut texts)?;
+
+    Ok(Baseline::parse(&texts)?)
 }
 
 /// Reads a JSON report that another command may have written. An absent file is `None`; an
