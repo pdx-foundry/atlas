@@ -50,6 +50,12 @@ impl SharedDirectory {
     /// Evaluates the claims of `ledger` against `snapshot` qualified as live.
     fn from_snapshot(ledger: ledger::Ledger, mut snapshot: snapshot::Snapshot) -> Self {
         qualify_as_live(&mut snapshot);
+
+        Self::as_recorded(ledger, snapshot)
+    }
+
+    /// Evaluates the claims of `ledger` against `snapshot` with its sources' bases as they are.
+    fn as_recorded(ledger: ledger::Ledger, snapshot: snapshot::Snapshot) -> Self {
         let bytes = snapshot::json_bytes(&snapshot).unwrap();
 
         Self {
@@ -1982,10 +1988,38 @@ async fn a_root_statement_is_no_field_of_the_root_type_without_its_own_type() {
     assert!(!directory.covered("field_existence", &["planet_class", "random_list"]));
 }
 
+const COMPONENT_TEMPLATES: &str = r#"
+types = {
+    type[component_template] = {
+        path = "game/common/component_templates"
+        ## type_key_filter = utility_component_template
+        subtype[utility_component_template] = {}
+        ## type_key_filter = weapon_component_template
+        subtype[weapon_component_template] = {}
+        subtype[hidden] = { hidden = yes }
+    }
+}
+enums = { enum[template_kind] = { energy kinetic } }
+component_template = {
+    key = scalar
+    power = float
+    size = scalar
+    ## cardinality = 2..inf
+    count = int
+    kind = enum[template_kind]
+    modifier = { alias_name[template_modifier] = alias_match_left[template_modifier] }
+    subtype[utility_component_template] = { sensor_range = int }
+    subtype[weapon_component_template] = { missile_speed = float }
+    subtype[hidden] = { key = scalar }
+}
+alias[template_modifier:range] = int
+"#;
+
 /// The recorded M452 answers, with `common/component_templates` answering one root statement
-/// per root key, as Native does (SDK-843), against a config whose root keys select subtypes.
-#[tokio::test]
-async fn a_component_template_key_answers_the_fields_of_its_subtype() {
+/// per root key, as Native does (SDK-843), against [`COMPONENT_TEMPLATES`] and changed by `edit`.
+/// Both statements read `key`, `count`, `kind` and `modifier/range` alike; only the utility
+/// statement reads `power`; the weapon statement reads `size` only when another field is set.
+async fn component_templates(edit: impl FnOnce(&mut snapshot::Snapshot)) -> SharedDirectory {
     use pdx_native::FieldMembers;
 
     let mut extraction = recorded_extraction().await;
@@ -2012,31 +2046,56 @@ async fn a_component_template_key_answers_the_fields_of_its_subtype() {
     };
     let mut answer = traditions.clone();
     answer.value = vec![
-        statement("utility_component_template", vec![key("sensor_range")]),
-        statement("weapon_component_template", vec![key("missile_speed")]),
+        statement(
+            "utility_component_template",
+            vec![
+                key("sensor_range"),
+                key("key"),
+                key("power"),
+                key("size"),
+                key("count"),
+                key("kind"),
+                statement("modifier", vec![key("range")]),
+            ],
+        ),
+        statement(
+            "weapon_component_template",
+            vec![
+                key("missile_speed"),
+                key("key"),
+                key("size"),
+                key("count"),
+                key("kind"),
+                statement("modifier", vec![key("range")]),
+            ],
+        ),
     ];
     answer.gaps = Vec::new();
     extraction
         .fields
         .insert("common/component_templates".into(), Ok(answer));
-    let source = r#"
-types = {
-    type[component_template] = {
-        path = "game/common/component_templates"
-        ## type_key_filter = utility_component_template
-        subtype[utility_component_template] = {}
-        ## type_key_filter = weapon_component_template
-        subtype[weapon_component_template] = {}
-    }
+    let ledger = ledger::inventory(&BTreeMap::from([(
+        "components.cwt".into(),
+        COMPONENT_TEMPLATES.into(),
+    )]));
+
+    let mut snapshot = snapshot::assemble(&extraction).unwrap();
+    let size_conditions = snapshot
+        .rules
+        .iter_mut()
+        .find(|rule| {
+            rule.id == "field:common/component_templates/weapon_component_template/size#conditions"
+        })
+        .unwrap();
+    size_conditions.answer = json!(["Always", {"FieldZero": {"path": ["hidden"], "zero": false}}]);
+    edit(&mut snapshot);
+
+    SharedDirectory::from_snapshot(ledger, snapshot)
 }
-component_template = {
-    subtype[utility_component_template] = { sensor_range = int }
-    subtype[weapon_component_template] = { missile_speed = float }
-}
-"#;
-    let ledger = ledger::inventory(&BTreeMap::from([("components.cwt".into(), source.into())]));
-    let directory =
-        SharedDirectory::from_snapshot(ledger, snapshot::assemble(&extraction).unwrap());
+
+#[tokio::test]
+async fn a_component_template_key_answers_the_fields_of_its_subtype() {
+    let directory = component_templates(|_| {}).await;
 
     for subject in [
         &[
@@ -2052,6 +2111,144 @@ component_template = {
     ] {
         assert!(directory.covered("field_existence", subject), "{subject:?}");
     }
+}
+
+#[tokio::test]
+async fn a_field_that_every_root_statement_reads_alike_answers_the_root_type() {
+    let directory = component_templates(|_| {}).await;
+
+    assert!(directory.covered("value_form", &["component_template"]));
+    assert!(directory.covered("field_existence", &["component_template", "key"]));
+    // An always-read field of every statement also holds under a value subtype (SDK-716).
+    assert!(directory.covered(
+        "field_existence",
+        &["component_template", "subtype[hidden]", "key"]
+    ));
+}
+
+#[tokio::test]
+async fn a_field_that_one_root_statement_lacks_or_reads_otherwise_answers_no_root_claim() {
+    let directory = component_templates(|_| {}).await;
+
+    assert!(!directory.covered("field_existence", &["component_template", "power"]));
+    assert!(!directory.covered("field_existence", &["component_template", "size"]));
+}
+
+const TEMPLATE_STATEMENTS: [&str; 2] = [
+    "field:common/component_templates/utility_component_template",
+    "field:common/component_templates/weapon_component_template",
+];
+
+/// [`component_templates`] with `property` of `field` below every statement established as
+/// `answer`.
+async fn agreed_templates(field: &str, property: &str, answer: Value) -> SharedDirectory {
+    component_templates(|snapshot| {
+        for statement in TEMPLATE_STATEMENTS {
+            establish(
+                snapshot,
+                &format!("{statement}/{field}"),
+                property,
+                answer.clone(),
+            );
+        }
+    })
+    .await
+}
+
+#[tokio::test]
+async fn a_configured_statement_that_native_does_not_answer_prevents_agreement() {
+    let directory = component_templates(|snapshot| {
+        let weapon = TEMPLATE_STATEMENTS[1];
+        let below_weapon = |id: &str| id == weapon || id.starts_with(&format!("{weapon}/"));
+
+        snapshot
+            .subjects
+            .retain(|subject| !below_weapon(&subject.id));
+        snapshot.rules.retain(|rule| !below_weapon(&rule.subject));
+        snapshot.gaps.retain(|gap| !below_weapon(&gap.subject));
+    })
+    .await;
+
+    assert!(!directory.covered("field_existence", &["component_template", "key"]));
+    // The statements' own value forms answer the definition block only when every one agrees.
+    assert!(!directory.covered("value_form", &["component_template"]));
+}
+
+#[tokio::test]
+async fn a_root_statement_with_recorded_evidence_leaves_the_agreement_unestablished() {
+    for property in ["existence", "conditions"] {
+        let templates = component_templates(|_| {}).await;
+        let mut snapshot = templates.snapshot;
+        record(
+            &mut snapshot,
+            &format!("{}/key#{property}", TEMPLATE_STATEMENTS[1]),
+        );
+        let directory = SharedDirectory::as_recorded(templates.ledger, snapshot);
+
+        assert!(
+            !directory.covered("field_existence", &["component_template", "key"]),
+            "{property}"
+        );
+    }
+}
+
+#[tokio::test]
+async fn a_field_that_every_root_statement_requires_does_not_answer_a_count_above_one() {
+    let directory = agreed_templates("count", "occurrences.minimum", json!(1)).await;
+    let cardinality = ["component_template", "count", "$annotation:cardinality"];
+
+    assert!(!directory.covered("cardinality_minimum", &cardinality));
+    assert!(
+        directory
+            .gaps("cardinality_minimum", &cardinality)
+            .iter()
+            .any(|gap| gap.contains("not a count above 1"))
+    );
+}
+
+#[tokio::test]
+async fn a_field_that_one_root_statement_reads_conditionally_answers_no_subtype_claim() {
+    let directory = component_templates(|snapshot| {
+        let weapon_key = format!("{}/key", TEMPLATE_STATEMENTS[1]);
+        let subject = snapshot
+            .subjects
+            .iter_mut()
+            .find(|subject| subject.id == weapon_key)
+            .unwrap();
+
+        subject.conditional = Some(true);
+    })
+    .await;
+
+    assert!(directory.covered("field_existence", &["component_template", "key"]));
+    assert!(!directory.covered(
+        "field_existence",
+        &["component_template", "subtype[hidden]", "key"]
+    ));
+}
+
+#[tokio::test]
+async fn a_domain_that_every_root_statement_agrees_on_answers_the_fields_enum() {
+    let directory = agreed_templates("kind", "domain", json!(["energy"])).await;
+
+    for member in ["$item:1", "$item:2"] {
+        assert!(
+            directory.covered("enum_member", &["enums", "enum[template_kind]", member]),
+            "{member}"
+        );
+    }
+}
+
+#[tokio::test]
+async fn a_field_that_every_root_statement_reads_in_an_alias_block_answers_the_alias() {
+    let range = ["alias[template_modifier:range]"];
+    let no_reference = json!({"derived_names": [], "lookups": []});
+    let referenced = agreed_templates("modifier/range", "reference", no_reference).await;
+    // The recorded field leaves its reference open, and that gap blocks its value form.
+    let unreferenced = component_templates(|_| {}).await;
+
+    assert!(referenced.covered("value_form", &range));
+    assert!(!unreferenced.covered("value_form", &range));
 }
 
 const AGENDA_KINDS: &str = r#"
@@ -2410,6 +2607,27 @@ async fn a_field_that_native_marks_conditional_answers_no_subtype_claim() {
     }
 }
 
+/// Makes the rule `id` rest on one recorded answer alone.
+fn record(snapshot: &mut snapshot::Snapshot, id: &str) {
+    let rule = snapshot
+        .rules
+        .iter_mut()
+        .find(|rule| rule.id == id)
+        .unwrap();
+    let link = &mut rule.evidence[0];
+    let mut answer = snapshot.answers[&link.answer].clone();
+    let mut source = snapshot.sources[&answer.source].clone();
+    let recorded = format!("{}@recorded", source.method);
+    let recorded_answer = format!("{id}@recorded");
+
+    source.basis = Basis::Recorded;
+    answer.source = recorded.clone();
+    link.answer = recorded_answer.clone();
+    rule.evidence.truncate(1);
+    snapshot.sources.insert(recorded, source);
+    snapshot.answers.insert(recorded_answer, answer);
+}
+
 #[tokio::test]
 async fn a_recorded_always_read_premise_earns_no_subtype_credit() {
     let ledger = ledger::inventory(&BTreeMap::from([(
@@ -2417,31 +2635,8 @@ async fn a_recorded_always_read_premise_earns_no_subtype_credit() {
         SUBTYPE_AGENDA.into(),
     )]));
     let mut snapshot = subtype_agenda(|_| {}).await.snapshot;
-    let conditions = snapshot
-        .rules
-        .iter_mut()
-        .find(|rule| rule.id == format!("{UNLOCKS_AGENDA}#conditions"))
-        .unwrap();
-    let link = &mut conditions.evidence[0];
-    let mut answer = snapshot.answers[&link.answer].clone();
-    let mut source = snapshot.sources[&answer.source].clone();
-
-    let recorded = format!("{}@recorded", source.method);
-
-    source.basis = Basis::Recorded;
-    answer.source = recorded.clone();
-    link.answer = "recorded-premise".into();
-    conditions.evidence.truncate(1);
-    snapshot.sources.insert(recorded, source);
-    snapshot.answers.insert("recorded-premise".into(), answer);
-
-    let bytes = snapshot::json_bytes(&snapshot).unwrap();
-    let directory = SharedDirectory {
-        coverage: coverage::evaluate(&ledger, Some(&bytes), None).unwrap(),
-        comparison: coverage::comparison::evaluate(&ledger, &bytes, &Default::default()).unwrap(),
-        ledger,
-        snapshot,
-    };
+    record(&mut snapshot, &format!("{UNLOCKS_AGENDA}#conditions"));
+    let directory = SharedDirectory::as_recorded(ledger, snapshot);
 
     for (property, subject) in subtype_independent_claims(&[]) {
         assert!(directory.covered(property, &subject), "{property}");

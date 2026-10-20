@@ -163,10 +163,27 @@ Native answers another registry's root statements as fields.
 Every root statement is a definition of the root type, so the config's type-wide definition block
 (`event = { … }`, outside any subtype) describes each kind. An unconditional rule on a root
 statement itself answers that block's unconditional claims as a field rule answers a field's: its
-existence answers `field_existence` and its value form `value_form` (SDK-815). Each kind answers
-them, and a gap on any kind blocks the credit. On M452 all 22 kinds that Native
+existence answers `field_existence` and its value form `value_form` (SDK-815). The block holds
+for every kind, so the answer takes the agreement rule below: every statement that the config
+requires must answer alike, and a gap on any kind blocks the credit. On M452 all 22 kinds that Native
 lists are blocks with the one `CEvent::ReadMember` reader and the same 30 members; `pop_event`,
 which the config does not name as a kind, is no root statement and answers nothing.
+
+A field below the root statements answers the root type's claims that no subtype condition
+limits (`event/is_triggered_only`, `component_template/key`) only when every statement agrees.
+The statements are those that the config requires: each key whose `type_key_filter` alone
+selects a subtype of the root type. A configured key that Native does not answer prevents the
+agreement. Each one
+must answer the property for the field, with no rule conditions and the same value, and each must
+give the field the same read `conditions`. A statement that lacks the field or disagrees gives no
+credit, and a gap on any statement's field blocks it. Every statement's answer and read
+`conditions` must rest on qualified evidence; one recorded premise gives the agreement none. The agreed answer reaches the claims that
+an ordinary field rule reaches: the `alias[X:KEY]` claims of an alias block, the members of an
+`enum[X]` domain, and no count above 1 from a requirement. When the field is always read in every
+statement, the SDK-716 rule below also reaches its claims under value subtypes
+(`event/subtype[hidden]/…`), with the same agreement. On the live snapshot at Native `4b4e1d6`
+these two rules credit 129 claims and lose none: 85 `event` claims (31 of them under value
+subtypes) and 44 `component_template` claims.
 
 A block's `read_scope` that Native gives as a known empty list (the block is read with no scope,
 as for the `event` kind) is the rule `[]`, not a gap. It credits `scopeless` (`push_scope = any`).
@@ -464,7 +481,8 @@ included, and its gaps on those properties block them. The limits:
   only field condition is `FieldZero`, and matching it to bool subtype tests is deferred.
 - The `Always` premise must itself rest on qualified evidence; a recorded premise earns nothing.
 - A claim under a subtype with any `## type_key_filter` keeps the SDK-800 rule and takes nothing
-  from this one. Event kinds and component templates join as root statements above.
+  from this one. Event kinds and component templates join as root statements above; a field
+  that every root statement reads alike takes this rule as stated there.
 - A claim whose field Native does not list earns this credit once field discovery lists it.
 - A type selector gap still blocks the claims of its type.
 
