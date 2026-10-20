@@ -13,6 +13,9 @@ type ClaimIndex<'a> = BTreeMap<(&'a str, &'a str, Vec<&'a str>, Vec<&'a str>), B
 /// Config subtypes whose whole selector is a root key, by (file, type, root key).
 type KeySubtypes<'a> = BTreeMap<(&'a str, &'a str, &'a str), BTreeSet<&'a str>>;
 /// The config types that load from each content directory, as (type, file).
+/// A config node: its file, its path and the conditions under which the config writes it.
+type ConfigNode<'a> = (&'a str, Vec<&'a str>, Vec<&'a str>);
+
 type RegistryTypes = BTreeMap<String, BTreeSet<(String, String)>>;
 
 /// The lines of a config type that state how its loader selects files.
@@ -84,7 +87,8 @@ fn project_with_gap_facets(
     let claims = claim_index(ledger);
     let key_subtypes = key_subtypes(ledger);
     let alias_blocks = AliasBlocks::new(ledger);
-    let single_aliases = SingleAliases::new(ledger);
+    let root_key_claims = root_key_subtype_claims(ledger);
+    let single_aliases = SingleAliases::new(ledger, &root_key_claims);
     let enum_domains = EnumDomains::new(ledger);
     let counted_minimums = counted_minimums(ledger);
     let language = super::language_subject::index(ledger, rules);
@@ -93,7 +97,7 @@ fn project_with_gap_facets(
         .iter()
         .map(|subject| (subject.id.as_str(), subject))
         .collect();
-    let subtype_claims = SubtypeClaims::new(ledger, rules, &subjects);
+    let subtype_claims = SubtypeClaims::new(ledger, rules, &subjects, &root_key_claims);
     let selectors = TypeSelectors::new(
         ledger,
         &registry_types,
@@ -154,8 +158,14 @@ fn project_with_gap_facets(
             .collect();
 
         if let (Some(conditions), "domain") = (&conditions, rule.property.as_str()) {
-            let value_forms =
-                field_value_forms(&claims, &selectors, &command_files, subject, conditions);
+            let value_forms = field_value_forms(
+                &claims,
+                &selectors,
+                &command_files,
+                &single_aliases,
+                subject,
+                conditions,
+            );
             let (selected, unselected): (Vec<_>, Vec<_>) = value_forms
                 .into_iter()
                 .partition(|question| selectors.selector_gap(question, conditions).is_none());
@@ -185,9 +195,14 @@ fn project_with_gap_facets(
             (None, _) => Vec::new(),
         };
         let subtype_answers = match statement {
-            None if rule.conditions.is_empty() => {
-                subtype_claims.questions(&selectors, &command_files, subject, &rule.property, false)
-            }
+            None if rule.conditions.is_empty() => subtype_claims.questions(
+                (&claims, &single_aliases),
+                &selectors,
+                &command_files,
+                subject,
+                &rule.property,
+                false,
+            ),
             _ => Vec::new(),
         };
         let conditions = conditions.unwrap_or_else(|| rule.conditions.clone());
@@ -276,7 +291,14 @@ fn project_with_gap_facets(
         .collect();
 
         if first.property == "domain" {
-            let value_forms = field_value_forms(&claims, &selectors, &command_files, &subject, &[]);
+            let value_forms = field_value_forms(
+                &claims,
+                &selectors,
+                &command_files,
+                &single_aliases,
+                &subject,
+                &[],
+            );
             let (selected, unselected): (Vec<_>, Vec<_>) = value_forms
                 .into_iter()
                 .partition(|question| selectors.selector_gap(question, &[]).is_none());
@@ -292,7 +314,14 @@ fn project_with_gap_facets(
             .iter()
             .all(|rule| subtype_claims.reads_always(&rule.subject));
         let subtype_answers = if every_always_read {
-            subtype_claims.questions(&selectors, &command_files, &subject, &first.property, false)
+            subtype_claims.questions(
+                (&claims, &single_aliases),
+                &selectors,
+                &command_files,
+                &subject,
+                &first.property,
+                false,
+            )
         } else {
             Vec::new()
         };
@@ -364,6 +393,7 @@ fn project_with_gap_facets(
             .collect();
         if statement.is_none() || statement_field {
             questions.extend(subtype_claims.questions(
+                (&claims, &single_aliases),
                 &selectors,
                 &command_files,
                 subject,
@@ -386,8 +416,14 @@ fn project_with_gap_facets(
             .iter()
             .filter(|_| gap.property == "domain")
             .flat_map(|conditions| {
-                let value_forms =
-                    field_value_forms(&claims, &selectors, &command_files, subject, conditions);
+                let value_forms = field_value_forms(
+                    &claims,
+                    &selectors,
+                    &command_files,
+                    &single_aliases,
+                    subject,
+                    conditions,
+                );
 
                 enum_domains.member_questions(&value_forms)
             });
@@ -1957,40 +1993,13 @@ impl<'a> SubtypeClaims<'a> {
         ledger: &'a Ledger,
         rules: &'a snapshot::Snapshot,
         subjects: &BTreeMap<&str, &snapshot::Subject>,
+        root_key_claims: &BTreeSet<&str>,
     ) -> Self {
-        let root_key_subtypes: BTreeSet<_> = ledger
-            .claims
-            .iter()
-            .filter_map(|claim| match claim.subject.as_slice() {
-                [types, type_name, subtype, annotation]
-                    if types == "types" && annotation == "$annotation:type_key_filter" =>
-                {
-                    let name = subtype.strip_prefix("subtype[")?.strip_suffix(']')?;
-
-                    Some((claim.file.as_str(), type_name.as_str(), name))
-                }
-                _ => None,
-            })
-            .collect();
-        let file_types = super::file_types(ledger);
         let mut index = ClaimIndex::new();
         let mut conditions = BTreeMap::new();
 
         for claim in &ledger.claims {
-            if claim.conditions.is_empty() {
-                continue;
-            }
-
-            let type_name = super::claim_type(claim, &file_types[&claim.file]);
-            let selected_by_root_key = type_name.is_some_and(|type_name| {
-                claim
-                    .conditions
-                    .iter()
-                    .flat_map(|condition| subtype_terms(condition))
-                    .any(|name| root_key_subtypes.contains(&(claim.file.as_str(), type_name, name)))
-            });
-
-            if selected_by_root_key {
+            if claim.conditions.is_empty() || root_key_claims.contains(claim.id.as_str()) {
                 continue;
             }
 
@@ -2017,18 +2026,23 @@ impl<'a> SubtypeClaims<'a> {
 
     /// The subtype questions, with their conditions, that the unconditioned `property` of
     /// `subject` answers; none unless `subject` is always read and `property` holds under any
-    /// subtype.
+    /// subtype. They include the single alias questions of the type's subtype fields, which have
+    /// no conditions.
     fn questions(
         &self,
+        (claims, single_aliases): (&ClaimIndex<'_>, &SingleAliases<'_>),
         selectors: &TypeSelectors<'_>,
         command_files: &BTreeMap<String, BTreeSet<String>>,
         subject: &snapshot::Subject,
         property: &str,
         gap_facet: bool,
     ) -> Vec<(String, Vec<String>)> {
-        if !self.reads_always(&subject.id) || !Self::PROPERTIES.contains(&property) {
+        if !self.applies(&subject.id, property) {
             return Vec::new();
         }
+
+        let alias_questions =
+            single_aliases.subtype_questions(claims, selectors, subject, property, gap_facet);
 
         questions(
             &self.index,
@@ -2045,7 +2059,18 @@ impl<'a> SubtypeClaims<'a> {
 
             (question, conditions)
         })
+        .chain(
+            alias_questions
+                .into_iter()
+                .map(|question| (question, Vec::new())),
+        )
         .collect()
+    }
+
+    /// Whether the unconditioned `property` of `subject` holds under any subtype: Native reads
+    /// `subject` on every path, and a subtype does not change `property`.
+    fn applies(&self, subject: &str, property: &str) -> bool {
+        self.reads_always(subject) && Self::PROPERTIES.contains(&property)
     }
 
     /// Whether Native reads `subject` on every path, so that its unconditioned answers can hold
@@ -2067,6 +2092,43 @@ impl<'a> SubtypeClaims<'a> {
             })
             .collect()
     }
+}
+
+/// The IDs of the claims under a subtype that a root key selects (`## type_key_filter`). Such a
+/// subtype keeps the SDK-800 rule, so the always-read rule (SDK-716) does not reach its claims.
+fn root_key_subtype_claims(ledger: &Ledger) -> BTreeSet<&str> {
+    let root_key_subtypes: BTreeSet<_> = ledger
+        .claims
+        .iter()
+        .filter_map(|claim| match claim.subject.as_slice() {
+            [types, type_name, subtype, annotation]
+                if types == "types" && annotation == "$annotation:type_key_filter" =>
+            {
+                let name = subtype.strip_prefix("subtype[")?.strip_suffix(']')?;
+
+                Some((claim.file.as_str(), type_name.as_str(), name))
+            }
+            _ => None,
+        })
+        .collect();
+    let file_types = super::file_types(ledger);
+
+    ledger
+        .claims
+        .iter()
+        .filter(|claim| {
+            let Some(type_name) = super::claim_type(claim, &file_types[&claim.file]) else {
+                return false;
+            };
+
+            claim
+                .conditions
+                .iter()
+                .flat_map(|condition| subtype_terms(condition))
+                .any(|name| root_key_subtypes.contains(&(claim.file.as_str(), type_name, name)))
+        })
+        .map(|claim| claim.id.as_str())
+        .collect()
 }
 
 /// The subtype names that a `subtype[…]` condition tests, without negation: `subtype[a&!b]`
@@ -2224,16 +2286,21 @@ impl<'a> AliasBlocks<'a> {
 /// hold wherever the alias is used, so the answers have no conditions, and a gap on any use
 /// blocks them.
 struct SingleAliases<'a> {
-    /// The single alias that each field's value names, by (file, field path, conditions).
-    fields: BTreeMap<(&'a str, Vec<&'a str>, Vec<&'a str>), &'a str>,
+    /// The single aliases that each field's value names, by (file, field path, conditions). A
+    /// field written more than once can name several.
+    fields: BTreeMap<ConfigNode<'a>, BTreeSet<&'a str>>,
     /// The config files that declare each `single_alias[X]` root, by root.
     files: BTreeMap<&'a str, BTreeSet<&'a str>>,
+    /// The subtype conditions of the alias fields of each type, by (file, type root), for the
+    /// subtypes that no root key selects. The always-read rule (SDK-716) reaches these uses.
+    subtype_uses: BTreeMap<(&'a str, &'a str), BTreeSet<&'a [String]>>,
 }
 
 impl<'a> SingleAliases<'a> {
-    fn new(ledger: &'a Ledger) -> Self {
-        let mut fields = BTreeMap::new();
+    fn new(ledger: &'a Ledger, root_key_claims: &BTreeSet<&str>) -> Self {
+        let mut fields: BTreeMap<_, BTreeSet<_>> = BTreeMap::new();
         let mut files: BTreeMap<_, BTreeSet<_>> = BTreeMap::new();
+        let mut subtype_uses: BTreeMap<_, BTreeSet<_>> = BTreeMap::new();
 
         for claim in &ledger.claims {
             if let Some(alias) = claim
@@ -2242,14 +2309,21 @@ impl<'a> SingleAliases<'a> {
                 .and_then(|alias| alias.strip_suffix(']'))
                 && claim.property == "value_form"
             {
-                fields.insert(
-                    (
+                fields
+                    .entry((
                         claim.file.as_str(),
                         claim.subject.iter().map(String::as_str).collect(),
                         claim.conditions.iter().map(String::as_str).collect(),
-                    ),
-                    alias,
-                );
+                    ))
+                    .or_default()
+                    .insert(alias);
+
+                if !claim.conditions.is_empty() && !root_key_claims.contains(claim.id.as_str()) {
+                    subtype_uses
+                        .entry((claim.file.as_str(), claim.subject[0].as_str()))
+                        .or_default()
+                        .insert(claim.conditions.as_slice());
+                }
             }
 
             if claim.subject[0].starts_with("single_alias[") {
@@ -2260,12 +2334,15 @@ impl<'a> SingleAliases<'a> {
             }
         }
 
-        Self { fields, files }
+        Self {
+            fields,
+            files,
+            subtype_uses,
+        }
     }
 
-    /// The questions below `single_alias[X]` that a field of a registry's root type answers when
-    /// it is, or is below, a field whose value is `single_alias_right[X]`. A single alias can name
-    /// another inside it, so the path follows each one in turn.
+    /// The questions below `single_alias[X]` that a field of a registry's type answers, under
+    /// `conditions`, when it is or is below a field whose value is `single_alias_right[X]`.
     fn questions(
         &self,
         claims: &ClaimIndex<'_>,
@@ -2275,44 +2352,71 @@ impl<'a> SingleAliases<'a> {
         conditions: &[String],
         gap_facet: bool,
     ) -> Vec<String> {
-        let (Some(registry), Some(field)) = (subject.registry.as_deref(), subject.field.as_deref())
-        else {
-            return Vec::new();
-        };
+        type_fields(selectors, subject)
+            .into_iter()
+            .flat_map(|(file, root, field)| {
+                self.field_questions(claims, (file, root, field), property, conditions, gap_facet)
+            })
+            .collect()
+    }
+
+    /// The questions that an always-read field answers through the alias fields of its type's
+    /// subtypes (SDK-716): as [`Self::questions`] under the conditions of each such use.
+    fn subtype_questions(
+        &self,
+        claims: &ClaimIndex<'_>,
+        selectors: &TypeSelectors<'_>,
+        subject: &snapshot::Subject,
+        property: &str,
+        gap_facet: bool,
+    ) -> Vec<String> {
+        type_fields(selectors, subject)
+            .into_iter()
+            .flat_map(|(file, root, field)| {
+                self.subtype_uses
+                    .get(&(file, root))
+                    .into_iter()
+                    .flatten()
+                    .flat_map(move |conditions| {
+                        self.field_questions(
+                            claims,
+                            (file, root, field),
+                            property,
+                            conditions,
+                            gap_facet,
+                        )
+                    })
+            })
+            .collect()
+    }
+
+    /// The alias questions of `field` below the type `root` of `file`, under `conditions`.
+    fn field_questions(
+        &self,
+        claims: &ClaimIndex<'_>,
+        (file, root, field): (&str, &str, &str),
+        property: &str,
+        conditions: &[String],
+        gap_facet: bool,
+    ) -> Vec<String> {
         let Some((annotations, ledger_property)) = field_property(property, gap_facet) else {
             return Vec::new();
         };
-        let root_types = selectors
-            .directories
-            .get(registry)
+        let mut type_path = vec![root];
+        type_path.extend(subtypes(conditions));
+
+        self.alias_paths(file, type_path, conditions, field)
             .into_iter()
-            .flatten()
-            .filter(|(_, _, selector)| *selector == Selector::Root);
-        let mut questions = Vec::new();
-
-        for (type_name, file, _) in root_types {
-            let root = type_name.trim_start_matches("type[").trim_end_matches(']');
-            let mut type_path = vec![root];
-            type_path.extend(subtypes(conditions));
-
-            for (alias_file, path) in self.alias_paths(file, type_path, conditions, field) {
-                questions.extend(annotated_questions(
-                    claims,
-                    alias_file,
-                    ledger_property,
-                    path,
-                    annotations,
-                    &[],
-                ));
-            }
-        }
-
-        questions
+            .flat_map(|(alias_file, path)| {
+                annotated_questions(claims, alias_file, ledger_property, path, annotations, &[])
+            })
+            .collect()
     }
 
     /// The paths below `single_alias[X]` roots that `field` names below `type_path` (a type root
     /// and its subtypes) of `file`, each with the file that declares its root. A field that names
-    /// no single alias gives none.
+    /// no single alias gives none. A field inside one alias that names another answers both its
+    /// own path and the other alias.
     fn alias_paths<'p>(
         &self,
         file: &'p str,
@@ -2332,20 +2436,19 @@ impl<'a> SingleAliases<'a> {
             for (file, mut path, conditions) in current {
                 path.push(segment);
 
-                let Some(alias) = self.fields.get(&(file, path.clone(), conditions.clone())) else {
-                    next.push((file, path, conditions));
-                    continue;
-                };
-                let Some((root, alias_files)) = self
-                    .files
-                    .get_key_value(format!("single_alias[{alias}]").as_str())
-                else {
-                    continue;
-                };
+                let aliases = self.fields.get(&(file, path.clone(), conditions.clone()));
+                let roots = aliases.into_iter().flatten().filter_map(|alias| {
+                    self.files
+                        .get_key_value(format!("single_alias[{alias}]").as_str())
+                });
 
-                for alias_file in alias_files {
-                    next.push((*alias_file, vec![*root], Vec::new()));
+                for (root, alias_files) in roots {
+                    for alias_file in alias_files {
+                        next.push((*alias_file, vec![*root], Vec::new()));
+                    }
                 }
+
+                next.push((file, path, conditions));
             }
 
             current = next;
@@ -2359,15 +2462,49 @@ impl<'a> SingleAliases<'a> {
     }
 }
 
-/// The `value_form` questions of the config field that a field subject joins.
+/// The config types of `subject`'s registry that its field joins, each with its file, its root
+/// node and the field below that node, as [`questions`] joins them: the root type, or the type of
+/// a root statement ([`Selector::Statement`]) with the field below the statement's key.
+fn type_fields<'s>(
+    selectors: &TypeSelectors<'s>,
+    subject: &'s snapshot::Subject,
+) -> Vec<(&'s str, &'s str, &'s str)> {
+    let (Some(registry), Some(field)) = (subject.registry.as_deref(), subject.field.as_deref())
+    else {
+        return Vec::new();
+    };
+    let first_key = field.split('/').next().unwrap_or(field);
+    let statement_key = ROOT_STATEMENT_KEYS.contains(&(registry, first_key));
+
+    selectors
+        .directories
+        .get(registry)
+        .into_iter()
+        .flatten()
+        .filter_map(|(type_name, file, selector)| {
+            let below = match selector {
+                Selector::Root if !statement_key => field,
+                Selector::Statement(key) => field.strip_prefix(&format!("{key}/"))?,
+                _ => return None,
+            };
+            let root = type_name.trim_start_matches("type[").trim_end_matches(']');
+
+            Some((*file, root, below))
+        })
+        .collect()
+}
+
+/// The `value_form` questions of the config field that a field subject joins, directly or through
+/// a single alias.
 fn field_value_forms(
     claims: &ClaimIndex<'_>,
     selectors: &TypeSelectors<'_>,
     command_files: &BTreeMap<String, BTreeSet<String>>,
+    single_aliases: &SingleAliases<'_>,
     subject: &snapshot::Subject,
     conditions: &[String],
 ) -> Vec<String> {
-    questions(
+    let mut value_forms = questions(
         claims,
         selectors,
         command_files,
@@ -2375,7 +2512,17 @@ fn field_value_forms(
         "value_form",
         conditions,
         false,
-    )
+    );
+
+    value_forms.extend(single_aliases.questions(
+        claims,
+        selectors,
+        subject,
+        "value_form",
+        conditions,
+        false,
+    ));
+    value_forms
 }
 
 /// The enums that config fields take their values from, and each enum's members. A field's

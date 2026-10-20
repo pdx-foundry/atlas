@@ -1906,6 +1906,11 @@ planet_class_random_list = {
 /// root statement `random_list` with its two fields, as Native does (SDK-813), against the
 /// planet-class config written by `types`.
 async fn planet_classes(types: &str) -> SharedDirectory {
+    planet_classes_with(types, PLANET_CLASS_BLOCKS).await
+}
+
+/// [`planet_classes`] against the type blocks `blocks`.
+async fn planet_classes_with(types: &str, blocks: &str) -> SharedDirectory {
     use pdx_native::FieldMembers;
 
     let mut extraction = recorded_extraction().await;
@@ -1937,7 +1942,7 @@ async fn planet_classes(types: &str) -> SharedDirectory {
         .fields
         .insert("common/planet_classes".into(), Ok(answer));
 
-    let source = format!("types = {{{types}\n}}\n{PLANET_CLASS_BLOCKS}");
+    let source = format!("types = {{{types}\n}}\n{blocks}");
     let ledger = ledger::inventory(&BTreeMap::from([("planet_classes.cwt".into(), source)]));
 
     SharedDirectory::from_snapshot(ledger, snapshot::assemble(&extraction).unwrap())
@@ -1967,6 +1972,31 @@ async fn a_root_statement_key_answers_the_type_that_it_selects() {
         "field_existence",
         &["planet_class_random_list", "can_be_capital"]
     ));
+}
+
+#[tokio::test]
+async fn a_root_statement_field_answers_the_single_alias_that_it_names() {
+    let blocks = r#"
+planet_class = { can_be_capital = bool }
+planet_class_random_list = {
+    name = scalar
+    planets = single_alias_right[list_planets]
+}
+single_alias[list_planets] = { <planet_class> }
+"#;
+    let recorded =
+        planet_classes_with(&format!("{PLANET_CLASS_TYPE}{RANDOM_LIST_TYPE}"), blocks).await;
+    let mut snapshot = recorded.snapshot;
+    // The recorded field leaves its reference open, and that gap blocks its value form.
+    establish(
+        &mut snapshot,
+        "field:common/planet_classes/random_list/planets",
+        "reference",
+        json!({"derived_names": [], "lookups": []}),
+    );
+    let directory = SharedDirectory::from_snapshot(recorded.ledger, snapshot);
+
+    assert!(directory.covered("value_form", &["single_alias[list_planets]"]));
 }
 
 #[tokio::test]
@@ -2237,11 +2267,17 @@ async fn a_field_that_every_root_statement_reads_in_an_alias_block_answers_the_a
 
 const SWAP_CLAUSE: &str = r#"
 types = { type[tradition] = { path = "game/common/traditions" } }
-tradition = { tradition_swap = single_alias_right[swap_clause] }
+enums = { enum[agenda_kind] = { first second } }
+tradition = {
+    tradition_swap = single_alias_right[swap_clause]
+    tradition_swap = single_alias_right[name_clause]
+}
 single_alias[swap_clause] = {
     inherit_effects = bool
     modifier = single_alias_right[modifier_clause]
+    unlocks_agenda = enum[agenda_kind]
 }
+single_alias[name_clause] = { inherit_name = bool }
 single_alias[modifier_clause] = { description = localisation }
 "#;
 
@@ -2254,8 +2290,84 @@ async fn a_field_whose_value_is_a_single_alias_answers_the_alias_block() {
         "field_existence",
         &["single_alias[swap_clause]", "inherit_effects"]
     ));
-    // `tradition_swap/modifier` names the single alias inside the first one.
+    // `tradition_swap/modifier` is a field of the first alias and names the alias inside it.
+    assert!(directory.covered(
+        "field_existence",
+        &["single_alias[swap_clause]", "modifier"]
+    ));
     assert!(directory.covered("value_form", &["single_alias[modifier_clause]"]));
+}
+
+#[tokio::test]
+async fn a_field_written_with_two_single_aliases_answers_both() {
+    let directory = SharedDirectory::evaluate(&[("traditions.cwt", SWAP_CLAUSE)], |_| {}).await;
+
+    assert!(directory.covered("value_form", &["single_alias[swap_clause]"]));
+    assert!(directory.covered(
+        "field_existence",
+        &["single_alias[name_clause]", "inherit_name"]
+    ));
+}
+
+#[tokio::test]
+async fn a_domain_below_a_single_alias_answers_the_fields_enum() {
+    let directory = SharedDirectory::evaluate(&[("traditions.cwt", SWAP_CLAUSE)], |snapshot| {
+        establish(
+            snapshot,
+            "field:common/traditions/tradition_swap/unlocks_agenda",
+            "domain",
+            json!(["first"]),
+        );
+    })
+    .await;
+
+    assert!(directory.covered("enum_member", &agenda_kind("$item:1")));
+    assert!(directory.covered("enum_member", &agenda_kind("$item:2")));
+}
+
+/// A traditions config whose `subtype[special]` writes `subtype_uses`, beside the root fields
+/// `root_uses`, with the single alias `swap_clause`.
+fn special_swap_clause(root_uses: &str, subtype_uses: &str) -> String {
+    format!(
+        r#"
+types = {{
+    type[tradition] = {{
+        path = "game/common/traditions"
+        subtype[special] = {{ is_special = yes }}
+    }}
+}}
+tradition = {{
+    {root_uses}
+    subtype[special] = {{ {subtype_uses} }}
+}}
+single_alias[swap_clause] = {{ inherit_effects = bool }}
+"#
+    )
+}
+
+#[tokio::test]
+async fn an_always_read_field_answers_a_single_alias_that_a_subtype_uses() {
+    let source = special_swap_clause("", "tradition_swap = single_alias_right[swap_clause]");
+    let directory = SharedDirectory::evaluate(&[("traditions.cwt", &source)], |_| {}).await;
+
+    assert!(directory.covered(
+        "field_existence",
+        &["single_alias[swap_clause]", "inherit_effects"]
+    ));
+}
+
+#[tokio::test]
+async fn a_gap_on_a_subtype_use_of_a_single_alias_blocks_its_claim() {
+    let source = special_swap_clause(
+        "tradition_swap = single_alias_right[swap_clause]",
+        "modifier = single_alias_right[swap_clause]",
+    );
+    let directory = SharedDirectory::evaluate(&[("traditions.cwt", &source)], |snapshot| {
+        unresolve(snapshot, "field:common/traditions/modifier", "value_form");
+    })
+    .await;
+
+    assert!(!directory.covered("value_form", &["single_alias[swap_clause]"]));
 }
 
 #[tokio::test]
