@@ -27,6 +27,7 @@ fn run_ledger() -> Result<bool, Box<dyn std::error::Error>> {
             "--game-content",
             "--output",
             "--dashboard",
+            "--baseline",
         ]
         .contains(&key.as_str())
         {
@@ -42,14 +43,18 @@ fn run_ledger() -> Result<bool, Box<dyn std::error::Error>> {
     }
     let config = options.get("--config").ok_or("--config is required")?;
     let output = options.get("--output").ok_or("--output is required")?;
-    let baseline = main_baseline()?;
+    let snapshot = options.get("--snapshot").map(PathBuf::as_path);
+    let baseline = match options.get("--baseline") {
+        Some(file) => Some(Baseline::parse(&std::fs::read_to_string(file)?)?),
+        None => committed_baseline(snapshot)?,
+    };
     let content = options
         .get("--game-content")
         .map(|installation| game_content(installation))
         .transpose()?;
     let (ledger, coverage) = report::generate(
         config,
-        options.get("--snapshot").map(PathBuf::as_path),
+        snapshot,
         content.as_ref(),
         output,
         baseline.as_ref(),
@@ -119,6 +124,28 @@ fn git(args: &[&str]) -> Option<String> {
     }
 
     String::from_utf8(output.stdout).ok()
+}
+
+/// The committed baseline of `main` for a live snapshot. The baseline is a live capture, so a run
+/// without a live observation, such as a static-mode snapshot, is not compared with it.
+fn committed_baseline(
+    snapshot: Option<&Path>,
+) -> Result<Option<Baseline>, Box<dyn std::error::Error>> {
+    let observed_live = match snapshot {
+        Some(path) => serde_json::from_slice::<snapshot::Snapshot>(&std::fs::read(path)?)
+            .map_err(|error| format!("Invalid rule snapshot input: {error}"))?
+            .observed_live(),
+        None => false,
+    };
+
+    if !observed_live {
+        eprintln!(
+            "No live observation in the snapshot: the dashboard does not compare the run with the live baseline of main. Pass --baseline FILE to compare it with another run."
+        );
+        return Ok(None);
+    }
+
+    Ok(main_baseline()?)
 }
 
 /// The committed baseline of `main`, or `None` with a warning when git cannot show it.
@@ -229,7 +256,15 @@ enum SnapshotMode {
     Recorded {
         answers: PathBuf,
     },
+    /// Static answers from the installation, game-session answers from an earlier recording.
+    Static {
+        installation: PathBuf,
+        observations: PathBuf,
+    },
 }
+
+const STATIC_USAGE: &str =
+    "usage: pdx-atlas snapshot --static INSTALLATION --observations ANSWERS OUTPUT";
 
 fn parse_snapshot_args(
     args: &[OsString],
@@ -243,6 +278,21 @@ fn parse_snapshot_args(
                 answers: PathBuf::from(&args[1]),
             },
             PathBuf::from(&args[2]),
+        ));
+    }
+    if args.first().is_some_and(|arg| arg == "--static") {
+        let [_, installation, flag, observations, output] = args else {
+            return Err(STATIC_USAGE.into());
+        };
+        if flag != "--observations" {
+            return Err(STATIC_USAGE.into());
+        }
+        return Ok((
+            SnapshotMode::Static {
+                installation: PathBuf::from(installation),
+                observations: PathBuf::from(observations),
+            },
+            PathBuf::from(output),
         ));
     }
     if !(3..=4).contains(&args.len()) {
@@ -276,6 +326,9 @@ fn run_snapshot() -> Result<bool, Box<dyn std::error::Error>> {
             Err(error) => return Err(error.into()),
         }
     }
+    let runtime = tokio::runtime::Builder::new_current_thread()
+        .enable_time()
+        .build()?;
     let (native, seconds) = match mode {
         SnapshotMode::Live {
             installation,
@@ -286,10 +339,14 @@ fn run_snapshot() -> Result<bool, Box<dyn std::error::Error>> {
             seconds,
         ),
         SnapshotMode::Recorded { answers } => (Native::from_recorded_answers(answers)?, None),
+        SnapshotMode::Static {
+            installation,
+            observations,
+        } => {
+            let extraction = runtime.block_on(static_extraction(&installation, &observations))?;
+            return write_snapshot(&extraction, &output, &checksum_path);
+        }
     };
-    let runtime = tokio::runtime::Builder::new_current_thread()
-        .enable_time()
-        .build()?;
     let executable = std::env::current_exe()?;
     let extraction = runtime.block_on(extraction::collect(&native, || {
         let mut host = Command::new(&executable);
@@ -300,9 +357,35 @@ fn run_snapshot() -> Result<bool, Box<dyn std::error::Error>> {
         }
         options
     }));
-    let snapshot = snapshot::assemble(&extraction)?;
+    write_snapshot(&extraction, &output, &checksum_path)
+}
+
+/// Fresh static answers from `installation` joined with the game-session answers recorded in
+/// `observations`. No game starts: the recorded Native answers every session from its files.
+async fn static_extraction(
+    installation: &Path,
+    observations: &Path,
+) -> Result<extraction::Extraction, Box<dyn std::error::Error>> {
+    let installation = Native::open(installation)?;
+    let recording = Native::from_recorded_answers(observations)?;
+    let static_answers = extraction::collect_static(&installation);
+    let live = extraction::collect_live(&recording, &static_answers.discovered(), || {
+        GameOptions::new(Command::new("unused"))
+    })
+    .await;
+
+    Ok(extraction::extraction(static_answers, live)?)
+}
+
+/// Writes the snapshot of `extraction` and its digest. Returns whether the extraction is complete.
+fn write_snapshot(
+    extraction: &extraction::Extraction,
+    output: &Path,
+    checksum_path: &Path,
+) -> Result<bool, Box<dyn std::error::Error>> {
+    let snapshot = snapshot::assemble(extraction)?;
     let bytes = snapshot::json_bytes(&snapshot)?;
-    std::fs::write(&output, &bytes)?;
+    std::fs::write(output, &bytes)?;
     std::fs::write(checksum_path, format!("{:x}\n", Sha256::digest(&bytes)))?;
     println!(
         "{} rules; {} gaps",
@@ -321,7 +404,7 @@ fn main() -> ExitCode {
         Some("compare") => run_compare(),
         Some("registries") => run_registries(),
         Some("snapshot") => run_snapshot(),
-        _ => Err("usage: pdx-atlas ledger --config DIR [--snapshot FILE [--game-content INSTALLATION]] --output DIR [--dashboard DIR] | compare CONFIG_DIR SNAPSHOT_FILE OUTPUT_DIR [--script-docs DIR] [--defines FILE]... [--answers DIR] | registries CONFIG_DIR ANSWERS OUTPUT_DIR | snapshot INSTALLATION ANSWERS OUTPUT [STARTUP_SECONDS] | snapshot --recorded ANSWERS OUTPUT".into()),
+        _ => Err("usage: pdx-atlas ledger --config DIR [--snapshot FILE [--game-content INSTALLATION]] --output DIR [--dashboard DIR] [--baseline FILE] | compare CONFIG_DIR SNAPSHOT_FILE OUTPUT_DIR [--script-docs DIR] [--defines FILE]... [--answers DIR] | registries CONFIG_DIR ANSWERS OUTPUT_DIR | snapshot INSTALLATION ANSWERS OUTPUT [STARTUP_SECONDS] | snapshot --recorded ANSWERS OUTPUT | snapshot --static INSTALLATION --observations ANSWERS OUTPUT".into()),
     };
     match result {
         Ok(true) => ExitCode::SUCCESS,
