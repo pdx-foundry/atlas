@@ -2420,6 +2420,84 @@ async fn a_gap_on_one_use_of_a_single_alias_blocks_its_claim() {
     );
 }
 
+const UNREAD_KEYS: &str = r#"
+types = {
+    type[tradition] = {
+        path = "game/common/traditions"
+        subtype[special] = { is_special = yes }
+    }
+}
+tradition = {
+    unlocks_agenda = scalar
+    ## cardinality = 0..1
+    never_read = int
+    scalar = int
+    subtype[special] = { special_only = { inner = int } }
+}
+"#;
+
+/// [`UNREAD_KEYS`] against the recorded answers, with the traditions root-field answer
+/// `Complete` and only its `OutsideMethod` gaps, then changed by `edit`.
+async fn unread_keys(edit: impl FnOnce(&mut snapshot::AnswerRecord)) -> SharedDirectory {
+    SharedDirectory::evaluate(&[("traditions.cwt", UNREAD_KEYS)], |snapshot| {
+        let record = snapshot
+            .answers
+            .get_mut("registry_fields/common/traditions")
+            .unwrap();
+
+        record.completeness = pdx_native::Completeness::Complete;
+        record
+            .native_gaps
+            .retain(|gap| gap.kind == pdx_native::GapKind::OutsideMethod);
+        edit(record);
+    })
+    .await
+}
+
+#[tokio::test]
+async fn a_key_that_a_complete_answer_does_not_list_is_not_a_field() {
+    let directory = unread_keys(|_| {}).await;
+
+    for (property, subject) in [
+        ("field_existence", &["tradition", "never_read"][..]),
+        ("value_form", &["tradition", "never_read"]),
+        (
+            "cardinality_maximum",
+            &["tradition", "never_read", "$annotation:cardinality"],
+        ),
+        (
+            "field_existence",
+            &["tradition", "subtype[special]", "special_only", "inner"],
+        ),
+    ] {
+        assert!(directory.covered(property, subject), "{subject:?}");
+    }
+
+    assert_eq!(
+        directory.status("field_existence", &["tradition", "never_read"]),
+        Status::Different
+    );
+    // A pattern key names no literal field.
+    assert!(!directory.covered("field_existence", &["tradition", "scalar"]));
+}
+
+#[tokio::test]
+async fn a_partial_answer_or_another_gap_leaves_an_unlisted_key_open() {
+    let partial =
+        unread_keys(|record| record.completeness = pdx_native::Completeness::Partial).await;
+    let unnamed = unread_keys(|record| {
+        let mut gap = record.native_gaps[0].clone();
+
+        gap.kind = pdx_native::GapKind::UnnamedField;
+        record.native_gaps.push(gap);
+    })
+    .await;
+
+    for directory in [partial, unnamed] {
+        assert!(!directory.covered("field_existence", &["tradition", "never_read"]));
+    }
+}
+
 const AGENDA_KINDS: &str = r#"
 types = { type[tradition] = { path = "game/common/traditions" } }
 enums = { enum[agenda_kind] = { first second } }

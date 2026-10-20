@@ -309,6 +309,33 @@ under `gfx`, `interface` and `sound`. The gate claims are 301 list items,
 38 modifier-block scopes, 23 scopes of unresolved reads, 12 file extensions, 3 scopes of values and
 2 color forms.
 
+### Keys the engine never reads (decision of 2026-10-20)
+
+A root key of a registry's root type is "not a field" when Native's root-field answer for the
+registry (`registry_fields/R` in the snapshot's answers) is `Complete` and every gap it carries is
+an `OutsideMethod` boundary, and Native lists no field with that first key. `Complete` means every
+reader path, field name and reader classification is resolved, so a key formed at run time, a
+dynamic name or an unfollowed inherited or nested reader would have made the answer partial; the
+two boundaries every answer carries (defaults, domains, limits, nested grammars and runtime
+callers; entry contexts) say nothing about which root keys exist. The key must be literal (not
+`scalar`, `int`, `<type>`, `enum[X]`, `alias_name[X]` or a `$` parameter), not a root statement
+key, and not the field that names a definition. Root statements (`events`,
+`common/component_templates`) keep their own rules.
+
+The key's claims are covered, and each joins the [CWT disagreement review](cwt-disagreements.md):
+
+- `field_existence` on the key and on any key below it answers `false` (absent), under any
+  subtype condition too, since the root reader reads the same keys whatever the subtype.
+- The dependent claims (`value_form`, `cardinality_minimum`, `cardinality_maximum`,
+  `scope_context`, on the key, its items and its annotations) answer `"not_a_field"`: the engine
+  reads no value there, so it has no form, count or scope. A claim that another rule already
+  answers or gaps is left alone.
+
+A registry whose answer is `Partial` keeps every unlisted key open: an unresolved path could read
+it. On M452 at Native `5143009` 19 registries are complete, and the rule covers 17 claims, all on
+three `common/timeline_events` keys (`type`, `text`, `texture`, which the engine reads as `types`,
+`override_text` and `override_texture`).
+
 ### Enum domains (SDK-818)
 
 Native's `Field.domain` lists the names that a keyword field accepts (`Listed`, SDK-828), or is
