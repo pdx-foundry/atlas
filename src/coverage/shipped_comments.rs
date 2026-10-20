@@ -57,6 +57,7 @@ fn line_keys(source: &str) -> Vec<Key> {
     // The key whose value has not started yet; a `{` as its next token opens its block.
     let mut pending: Option<usize> = None;
     let mut quoted = false;
+    let mut escaped = false;
     let mut offset = 0;
     let mut lines = 0;
 
@@ -69,8 +70,15 @@ fn line_keys(source: &str) -> Vec<Key> {
         while let Some(ch) = rest.chars().next() {
             let at = offset + code.len() - rest.len();
 
-            if quoted || ch == '"' {
-                quoted ^= ch == '"';
+            if quoted {
+                match ch {
+                    _ if escaped => escaped = false,
+                    '\\' => escaped = true,
+                    '"' => quoted = false,
+                    _ => {}
+                }
+            } else if ch == '"' {
+                quoted = true;
                 pending = None;
             } else if ch == '{' {
                 open.push(pending.take());
@@ -82,6 +90,13 @@ fn line_keys(source: &str) -> Vec<Key> {
                     keys[key].span.end_line = index + 1;
                 }
             } else if let Some((key, length)) = assignment(rest) {
+                if !valid_key(key) {
+                    // A scoped or otherwise invalid key is one token, never a field after it.
+                    pending = None;
+                    rest = &rest[length..];
+                    continue;
+                }
+
                 let path: Vec<String> = open
                     .iter()
                     .flatten()
@@ -111,20 +126,24 @@ fn line_keys(source: &str) -> Vec<Key> {
         offset += line.len();
     }
 
+    // A block that never closes holds every line to the end, its last line included.
     for key in open.into_iter().flatten() {
         keys[key].span.end = source.len();
-        keys[key].span.end_line = lines;
+        keys[key].span.end_line = lines + 1;
     }
 
     keys
 }
 
-/// The part of `line` before its first `#` outside quotes.
+/// The part of `line` before its first `#` outside quotes, escaped quotes included.
 fn code_part(line: &str) -> &str {
     let mut quoted = false;
+    let mut escaped = false;
 
     for (index, ch) in line.char_indices() {
         match ch {
+            _ if escaped => escaped = false,
+            '\\' if quoted => escaped = true,
             '"' => quoted = !quoted,
             '#' if !quoted => return &line[..index],
             _ => {}
@@ -134,17 +153,27 @@ fn code_part(line: &str) -> &str {
     line
 }
 
-/// A `key =` at the start of `text`, with the length through the `=`.
+/// The key token at the start of `text`, with the length to skip: through the `=` of an
+/// assignment, else the whole token (`None` when `text` starts with no key character). The token
+/// is taken whole, scope prefixes (`event_target:field`) included, so its tail is never a key.
 fn assignment(text: &str) -> Option<(&str, usize)> {
     let key_length = text
         .find(|c: char| !(c.is_alphanumeric() || "_@.-$:".contains(c)))
         .unwrap_or(text.len());
+
+    if key_length == 0 {
+        return None;
+    }
+
     let key = &text[..key_length];
     let after = &text[key_length..];
     let spaces = after.len() - after.trim_start().len();
 
-    (valid_key(key) && after.trim_start().starts_with('='))
-        .then_some((key, key_length + spaces + 1))
+    if after.trim_start().starts_with('=') {
+        Some((key, key_length + spaces + 1))
+    } else {
+        Some(("", key_length))
+    }
 }
 
 /// Adjacent comment lines that read as one text.

@@ -153,7 +153,8 @@ fn line_keys_extend_an_unclosed_block_to_the_end_of_the_file() {
     let source = "outer = {\n inner = 1\n # trailing prose\n";
     let keys = line_keys(source);
 
-    assert_eq!(line_key(&keys, &["outer"]).span.end_line, 3);
+    // Past the last line, so a comment on that line is inside the block.
+    assert!(line_key(&keys, &["outer"]).span.end_line > 3);
 }
 
 #[test]
@@ -171,4 +172,34 @@ fn line_keys_end_each_block_at_its_closing_brace() {
 
     assert_eq!(line_key(&keys, &["outer"]).span.end, close + 1);
     assert!(line_key(&keys, &["outer", "inner"]).span.end < close);
+}
+
+#[test]
+fn line_keys_skip_escaped_quotes_inside_a_quoted_value() {
+    let keys = line_keys("description = \"example: \\\"field = 0\\\"\" # Description\n");
+
+    assert!(keys.iter().all(|key| key.path != ["field"]));
+    line_key(&keys, &["description"]);
+}
+
+#[test]
+fn a_comment_on_the_last_line_of_an_unclosed_block_documents_it() {
+    let (parsed, errors) = parse(
+        "common/things/00_example.txt",
+        "outer = {\n inner = 1\n # Outer documentation",
+    );
+
+    assert!(!errors.is_empty());
+    assert!(
+        parsed
+            .iter()
+            .any(|c| c.key == ["outer"] && c.text == "Outer documentation")
+    );
+}
+
+#[test]
+fn line_keys_take_a_scoped_key_whole() {
+    let keys = line_keys("event_target:field = 1 # Scope documentation\n");
+
+    assert!(keys.iter().all(|key| key.path != ["field"]));
 }
