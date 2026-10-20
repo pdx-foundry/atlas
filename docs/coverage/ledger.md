@@ -107,7 +107,11 @@ before and after the change and pass the first run's `covered/` to the second `l
 Language rules join by the config's structure: `alias[effect:NAME]` command, scope and
 documentation claims; `modifiers.cwt` names and categories; `links.cwt` names, input and output
 scopes and data prefixes; localisation commands and links; `game_rules.cwt` names and
-`replace_scopes`; and `common/defines` names and value forms. A command's own `value_form` claim
+`replace_scopes`; and `common/defines` names and value forms. A define namespace's existence
+joins the existence of its first define by name: it exists where Native reads one of its defines,
+and all of them rest on the one defines answer. Native gives a define's broad value type only, so
+the namespace's block form, a list item's form and count, a texture define's file extensions and
+the absence of a define that Native does not list stay open. A command's own `value_form` claim
 joins its `forms`, and a scope annotation on the command joins its `scope_context`. Each key that
 Native's command grammar establishes is an `argument:{command}/{key path}` subject with the same
 facets as a registry field, and claims under that key join it through the field question table.

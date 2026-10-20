@@ -737,6 +737,9 @@ defines = {
     NGameplay = {
         LOGISTIC_CEILING_MIN = int
     }
+    NAtlasUnread = {
+        ATLAS_UNREAD = int
+    }
 }
 "#,
         ),
@@ -869,6 +872,11 @@ async fn language_claims_join_their_snapshot_answers() {
             "value_form",
         ),
         (
+            "common/defines/00_defines.cwt",
+            vec!["defines", "NGameplay"],
+            "field_existence",
+        ),
+        (
             "modifiers.cwt",
             vec!["modifiers", "pop_happiness"],
             "declaration_existence",
@@ -931,6 +939,18 @@ async fn language_claims_join_their_snapshot_answers() {
         (
             "on_actions.cwt",
             vec!["on_actions", "$item:2"],
+            "value_form",
+            "No qualified answer",
+        ),
+        (
+            "common/defines/00_defines.cwt",
+            vec!["defines", "NAtlasUnread"],
+            "field_existence",
+            "No qualified answer",
+        ),
+        (
+            "common/defines/00_defines.cwt",
+            vec!["defines", "NGameplay"],
             "value_form",
             "No qualified answer",
         ),
