@@ -18,20 +18,21 @@ evidence, and the verdict.
 **Status: in progress.** Group 4 (41 claims) is open until its conditional checks are read; every
 other group has a verdict. The review completes when group 4 does.
 
-Every covered claim in `common/` and `events/` whose comparison status is `different`: **579
+Every covered claim in `common/` and `events/` whose comparison status is `different`: **1,942
 claims in 19 groups**. The membership, one line per claim with its group number, is
 [`cwt-disagreements.tsv`](cwt-disagreements.tsv). A claim's group is the triple (property, the
 first 30 characters of the config answer, Atlas's answer form), as listed in the table.
 
 **Inputs.**
 
-- Atlas `740acce` (main `5e9a2d4` with the line-bound shipped comments of #48), config revision
+- Atlas `2fc635c` (main with #48 and #49, and #52, which compares every repeat behavior as
+  `inf`), config revision
   `8574760` (`config_sha256` `5c79cabb…039cc`).
 - The live M452 capture at Native `bb0cc04`: `rules.json` SHA-256 `8a6389f9…5804b`.
 - `ledger --config … --snapshot rules.json --game-content $STELLARIS_PATH --output R`, then
   `compare … rules.json R --script-docs …/script-docs/v4.5.0 --defines
   $STELLARIS_PATH/common/defines/00_defines.txt --answers <capture>/m452`. Outputs: `ledger.json`
-  `0c03b5a9…aca00`, `coverage.json` `89df3f9a…2ffe3`, `comparison.json` `106b1676…a5652`.
+  `0c03b5a9…aca00`, `coverage.json` `89df3f9a…2ffe3`, `comparison.json` `411e17a5…45855`.
 - Native methods behind the answers: `registry-fields/v64` (fields: repeat, requirement, value
   form, read scope), `loader-rules/v8` (extension, definition names) and
   `registry-directories/v8` (registry discovery: the content directory of `common/lawsuits`).
@@ -42,10 +43,9 @@ contradicts the config; **Atlas defect** or **Native defect** — Atlas's answer
 incomplete, with the cause; **open** — not decided yet.
 
 A repeat behavior says what the engine does with a repeated key; it is not an occurrence limit.
-`Merges` and `Accumulate` process a second occurrence, so a config maximum of 1 is stricter than
-the engine. `Replace` also processes it (the later value wins): Atlas compares it as a maximum of
-1 ([ledger](ledger.md), field subjects), which is not an engine limit, so a disagreement that rests
-only on that mapping is an Atlas comparison artifact.
+`Replace`, `Accumulate` and `Merges` all process a second occurrence and reject none (`Replace`
+keeps the later value), so Atlas compares each as `inf` ([ledger](ledger.md), field subjects), and
+a finite config maximum is stricter than the engine.
 
 | # | Property | CWT | Atlas | Claims | Verdict |
 | ---: | --- | --- | --- | ---: | --- |
@@ -54,7 +54,7 @@ only on that mapping is an Atlas comparison artifact.
 | 3 | `cardinality_maximum` | `1` | repeat `Accumulate` | 76 | CWT error: each repeat appends |
 | 4 | `cardinality_minimum` | `1` | `0` (Optional) | 41 | **Open.** The census loads a definition without the field and logs nothing, but a check that runs only when another field is set is not observed ([pin move B](pin-move-b.md): an `Optional` difference is a finding to investigate). Route: read each field's post-read hooks for a conditional absence check, or a fixture probe with the other fields set |
 | 5 | `value_form` | `int` | `number` | 32 | CWT error: the reader is fixed point (`FixedPoint`) and accepts a fraction |
-| 6 | `cardinality_maximum` | `inf` | repeat `Replace` | 14 | Atlas defect (comparison): `Replace` is compared as a maximum of 1; the engine processes repeats, so CWT's `inf` does not contradict it |
+| 6 | `cardinality_maximum` | `1` | repeat `Replace` | 1,377 | CWT error: a repeated key replaces the earlier value; the engine processes it and rejects none |
 | 7 | `value_form` | `block` | `reference` | 12 | Native defect, likely: lists of keys (`allowed_archetypes = { … }`) that Native reports as one `Scalar` reference per occurrence (`Accumulate`) |
 | 8 | `value_form` | `int` | `block` | 9 | Atlas defect: Native reports the weight block's bare value (`members.WeightBlock.scalar`, a `FixedPoint` reader) for all 17 fields of groups 8–9, but Atlas's `assemble_field_value_form` answers `block` for every `Block` reader without reading it |
 | 9 | `value_form` | `float` | `block` | 8 | Atlas defect, as #8 |
@@ -69,8 +69,10 @@ only on that mapping is an Atlas comparison artifact.
 | 18 | `loader_path` (`path`) | `game/common/lawsuit_type` | `common/lawsuits` | 1 | CWT error ([renamed directories](#renamed-directories); evidence `registry-directories/v8`) |
 | 19 | `cardinality_maximum` | `0` | repeat `Replace` | 1 | CWT error: `deposit/subtype[!null]/is_null` is read on every path (`conditions` `Always`); CWT's `0..0` describes the subtype that the key selects, not a rule the engine applies. The verdict rests on the unconditional read, not on `Replace` |
 
-Totals: CWT error 14 groups (495 claims); Atlas defect 3 groups (31 claims); Native defect 1 group
-(12 claims); open 1 group (41 claims).
+Totals: CWT error 15 groups (1,872 claims); Atlas defect 2 groups (17 claims); Native defect 1
+group (12 claims); open 1 group (41 claims). Group 6 was 14 `inf` claims against `Replace`, an
+artifact of comparing `Replace` as a maximum of 1; #52 removed it, and the 1,377 `1` claims are
+the new group 6.
 
 ### Examples
 
@@ -93,9 +95,9 @@ Each with its `.cwt` location, subject and the Native evidence of Atlas's answer
 5. `common/ship_sizes.cwt:84` `ship_size/max_hitpoints` (`#value_form`);
    `common/strategic_resources.cwt:42` `resource/subtype[tradable]/market_price`;
    `common/technologies_consolidated.cwt:192` `technology/subtype[repeatable]/cost_per_level`.
-6. `common/traits.cwt:254` `trait/subtype[leader_trait]/custom_tooltip_with_modifiers`;
-   `common/ascension_perks.cwt:95` `tradition_swap/custom_tooltip`; `common/traits.cwt:251`
-   `custom_tooltip`.
+6. `common/governments.cwt:184` `authority/localization_postfix`;
+   `common/graphical_cultures.cwt:61` `graphical_culture/selectable`; most in `ship_sizes` (92),
+   `country_types` (80), `governments` (68), `scripted_actions` (66) and `megastructures` (64).
 7. `common/megastructures.cwt:312` `megastructure/scripted_action`; `common/components.cwt:142`
    `component_template/size_restriction`; `common/megastructures.cwt:253`
    `megastructure/overclock_types`.
@@ -120,9 +122,6 @@ Each with its `.cwt` location, subject and the Native evidence of Atlas's answer
 - **Weight blocks' bare value (groups 8–9; 17 claims, Atlas).** `assemble_field_value_form`
   (`src/snapshot/registry.rs`) should give a `Block` reader whose members are a `WeightBlock` with
   a known `scalar` the value-form alternatives "block or the scalar's form". Its own PR.
-- **`Replace` in the maximum comparison (group 6; 14 claims, Atlas).** The comparison should not
-  read `Replace` as a maximum of 1: the engine processes repeats. Its own PR, with the ledger
-  contract.
 - **Key-reference lists (group 7; 12 claims, Native).** Native reports a `Reference` reader with
   shape `Scalar` and repeat `Accumulate`; vanilla writes a block of keys
   (`allowed_archetypes = { BIOLOGICAL LITHOID }`). Suspected: the key-reference list reader
