@@ -1,10 +1,10 @@
 config_sha256 5c79cabb8d1b25e40994c0d134f5623bc2aef2a6b964059aabfc4834e6d039cc
 ledger_sha256 0c03b5a9d04df962cda4a10d7f7c027904245b71f3cf189bdc9bdc3cb77aca00
-atlas_owned_covered 32103
+atlas_owned_covered 32123
 atlas_owned_total 56917
 observed_live true
 file aliases.cwt 6
-file common/agreements.cwt 147
+file common/agreements.cwt 150
 file common/ai_budget.cwt 20
 file common/ai_espionage.cwt 18
 file common/ambient_objects.cwt 16
@@ -78,7 +78,7 @@ file common/observation_station_missions.cwt 33
 file common/on_actions.cwt 7
 file common/patrons.cwt 218
 file common/personalities.cwt 227
-file common/planet_classes.cwt 274
+file common/planet_classes.cwt 275
 file common/policies.cwt 50
 file common/policy_categories.cwt 12
 file common/pop_categories.cwt 62
@@ -107,7 +107,7 @@ file common/solar_system_initializers.cwt 1
 file common/special_projects.cwt 122
 file common/specialist_subject_perks.cwt 34
 file common/specialist_subject_types.cwt 18
-file common/species_consolidated.cwt 348
+file common/species_consolidated.cwt 364
 file common/specimens.cwt 26
 file common/star_classes.cwt 49
 file common/starbases_consolidated.cwt 368

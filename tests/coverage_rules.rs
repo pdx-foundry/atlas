@@ -1817,6 +1817,39 @@ async fn event_kinds_credit_the_type_wide_definition_block() {
 }
 
 #[tokio::test]
+async fn a_naming_line_under_a_subtype_joins_only_an_unconditional_derived_name() {
+    let source = r#"
+types = {
+    type[tradition] = {
+        path = "game/common/traditions"
+        subtype[special] = { }
+        localisation = {
+            subtype[special] = {
+                name = "$"
+                desc = "$_desc"
+            }
+        }
+    }
+}
+tradition = { unlocks_agenda = scalar }
+"#;
+    let directory = SharedDirectory::evaluate(&[("traditions.cwt", source)], |_| {}).await;
+    let line = |key| {
+        [
+            "types",
+            "type[tradition]",
+            "localisation",
+            "subtype[special]",
+            key,
+        ]
+    };
+
+    // `$` is composed for every item (`Always`); `$_desc` only under an unresolved condition.
+    assert!(directory.covered("naming_rule", &line("name")));
+    assert!(!directory.covered("naming_rule", &line("desc")));
+}
+
+#[tokio::test]
 async fn an_unresolved_naming_rule_leaves_the_event_kinds_credit() {
     let events = event_kinds_named(EVENT_CONFIG, pdx_native::GrammarProperty::Unresolved).await;
 
