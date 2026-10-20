@@ -51,10 +51,10 @@ gate type, and its change against the baseline of `main` (`docs/coverage/covered
 from `origin/main`), with each claim that lost coverage. Run `compare` and `registries` into the same
 output folder first to add agreement with the config, a list of each disagreement (config answer beside Atlas's) and each type's registry join; a report of
 another config or snapshot is left out with a warning. A PR that changes coverage copies the new
-`covered-claims.txt` into `docs/coverage/`. The committed baseline is the live snapshot of the
-[pin move B capture](docs/coverage/pin-move-b.md) with the SDK-716 subtype rule, the SDK-860
-definition lines, the SDK-859 scope spelling and the M452 installation's shipped comments (29,956
-claims).
+`covered-claims.txt` into `docs/coverage/`. The committed baseline is a live snapshot at Native
+`4b4e1d6`, made with the [pin move B capture](docs/coverage/pin-move-b.md) commands, with the
+component template root statements, the root-statement agreement rule and the M452
+installation's shipped comments (31,322 claims).
 
 The [registry comparison](docs/coverage/registries.md) puts Native's registry list beside the
 config types and records a reason for each type that no registry names:
