@@ -16,10 +16,11 @@ pub(super) const PROPERTIES: &[&str] = &[
     "recursion",
     "duplicate_rule",
     "definition_names",
+    "keeps_definition_text",
 ];
 
 /// The rules that Native states once for the build and attaches to every answer.
-const BUILD_WIDE: &[&str] = &["file_order", "mod_over_vanilla"];
+const BUILD_WIDE: &[&str] = &["file_order", "mod_over_vanilla", "later_text_reads"];
 
 /// Assemble the loader rules of every requested registry, then the build-wide limits once.
 pub(super) fn assemble(snapshot: &mut Snapshot, extraction: &Extraction) -> Result<(), String> {
@@ -69,12 +70,14 @@ fn assemble_registry(
         json!(duplicate_rule)
     }));
     let root_forms = root_forms(&rules.definition_names);
+    let keeps_definition_text = whole(map(&rules.keeps_definition_text, |kept| json!(kept)));
 
     for (property, value) in [
         ("extension", extension),
         ("recursion", recursion),
         ("duplicate_rule", duplicate_rule),
         ("definition_names", root_forms),
+        ("keeps_definition_text", keeps_definition_text),
     ] {
         let link = link(snapshot, registry, answer, property)?;
 

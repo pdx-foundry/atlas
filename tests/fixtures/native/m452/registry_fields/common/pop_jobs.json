@@ -4508,7 +4508,7 @@
         },
         "shape": {
           "value": "Scalar",
-          "repeat": "Unknown"
+          "repeat": "Replace"
         },
         "read": [
           {
@@ -4528,7 +4528,7 @@
                 },
                 "shape": {
                   "value": "Scalar",
-                  "repeat": "Unknown"
+                  "repeat": "Replace"
                 }
               }
             }
@@ -8413,6 +8413,58 @@
         "requirement": "Optional"
       },
       {
+        "name": "auto_generate_description",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "b894933b2b2853a5",
+          "kind": "Boolean",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "b894933b2b2853a5",
+                  "kind": "Boolean",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": {
+          "Known": []
+        },
+        "accepted_categories": "NotApplicable",
+        "requirement": "Optional"
+      },
+      {
         "name": "allow_only_same_rank_pops",
         "reader": {
           "numeric": {
@@ -8546,22 +8598,6 @@
           "name": "triggered_tags"
         },
         "detail": "The field's alternatives do not establish one shared reader."
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "registry",
-          "name": "common/pop_jobs"
-        },
-        "detail": "The field's reader could not be established on at least one path."
-      },
-      {
-        "kind": "UnresolvedPath",
-        "subject": {
-          "kind": "registry",
-          "name": "common/pop_jobs"
-        },
-        "detail": "A path through the registry's reader could not be followed to its end."
       },
       {
         "kind": "UnresolvedCondition",
@@ -9872,14 +9908,6 @@
         "kind": "UnresolvedStorage",
         "subject": {
           "kind": "field",
-          "name": "category"
-        },
-        "detail": "Repeat behavior is not examined: the read is not a tail call, or its lookup does not store every resolution."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
           "name": "purge"
         },
         "detail": "Repeat behavior waits for one shared reader. Nested fields remain unresolved."
@@ -9944,7 +9972,7 @@
     "source": {
       "build": "c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b",
       "native_version": "0.1.0",
-      "method": "registry-fields/v45",
+      "method": "registry-fields/v64",
       "basis": "StaticAnalysis"
     }
   }
