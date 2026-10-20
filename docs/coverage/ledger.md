@@ -338,9 +338,8 @@ The key's claims are covered, and each joins the [CWT disagreement review](cwt-d
   answers or gaps is left alone.
 
 A registry whose answer is `Partial` keeps every unlisted key open: an unresolved path could read
-it. The live snapshot at Native `5143009` predates `keeps_definition_text`, so the rule credits
-nothing there. Native `8983b8b7` states `Known(false)` for all 19 registries whose
-`registry_fields` is `Complete` on M452; with that pin the rule would cover the 17
+it. On M452 at Native `bb0cc04` the snapshot has 149 `keeps_definition_text` rules, all
+`false`, including all 19 registries whose `registry_fields` is `Complete`; the rule covers 17
 `common/timeline_events` claims on `type`, `text` and `texture` (the engine reads `types`,
 `override_text` and `override_texture`).
 
