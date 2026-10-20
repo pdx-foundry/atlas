@@ -2493,7 +2493,22 @@ async fn a_partial_answer_or_another_gap_leaves_an_unlisted_key_open() {
     })
     .await;
 
-    for directory in [partial, unnamed] {
+    let unnamed_definitions =
+        SharedDirectory::evaluate(&[("traditions.cwt", UNREAD_KEYS)], |snapshot| {
+            let record = snapshot
+                .answers
+                .get_mut("registry_fields/common/traditions")
+                .unwrap();
+
+            record.completeness = pdx_native::Completeness::Complete;
+            record
+                .native_gaps
+                .retain(|gap| gap.kind == pdx_native::GapKind::OutsideMethod);
+            unresolve(snapshot, TRADITIONS, "definition_names");
+        })
+        .await;
+
+    for directory in [partial, unnamed, unnamed_definitions] {
         assert!(!directory.covered("field_existence", &["tradition", "never_read"]));
     }
 }

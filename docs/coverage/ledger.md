@@ -319,7 +319,8 @@ dynamic name or an unfollowed inherited or nested reader would have made the ans
 two boundaries every answer carries (defaults, domains, limits, nested grammars and runtime
 callers; entry contexts) say nothing about which root keys exist. The key must be literal (not
 `scalar`, `int`, `<type>`, `enum[X]`, `alias_name[X]` or a `$` parameter), not a root statement
-key, and not the field that names a definition. Root statements (`events`,
+key, and not the field that names a definition; the registry's `definition_names` must be
+established, since a loader can read a key to name its definitions. Root statements (`events`,
 `common/component_templates`) keep their own rules.
 
 The key's claims are covered, and each joins the [CWT disagreement review](cwt-disagreements.md):
@@ -332,7 +333,11 @@ The key's claims are covered, and each joins the [CWT disagreement review](cwt-d
   answers or gaps is left alone.
 
 A registry whose answer is `Partial` keeps every unlisted key open: an unresolved path could read
-it. On M452 at Native `5143009` 19 registries are complete, and the rule covers 17 claims, all on
+it. Open question (for review): the standard boundary also says that "non-owner runtime callers"
+are not established. This rule reads it as the callers that evaluate a field's stored value, which
+see no key that the root reader did not store; if it can mean code that reads a definition's
+script keys at use time, the boundary reaches every root key and this rule credits nothing until
+Native states that no such reader exists. On M452 at Native `5143009` 19 registries are complete, and the rule covers 17 claims, all on
 three `common/timeline_events` keys (`type`, `text`, `texture`, which the engine reads as `types`,
 `override_text` and `override_texture`).
 

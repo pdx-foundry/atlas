@@ -555,7 +555,9 @@ fn rule_answer(
 /// A key is "not a field" only where Native's root-field answer for the registry is `Complete`
 /// with no gap other than `OutsideMethod` boundaries: every reader path and field name is then
 /// resolved, so a key formed at run time or read by an unfollowed reader would make the answer
-/// partial. The key must be literal, unlisted, and not the field that names a definition.
+/// partial. The registry's `definition_names` must be established, since a loader can read a key
+/// to name its definitions. The key must be literal, unlisted, and not the field that names a
+/// definition.
 /// `field_existence` claims on the key and below it answer `false`; its other claims (value form,
 /// count, scope) answer `"not_a_field"`, since the engine reads no value there. Claims that the
 /// projection already answers or gaps are left alone. Root statements keep their own rules.
@@ -597,11 +599,17 @@ fn unread_key_answers(
         let Some(record) = rules.answers.get(&format!("registry_fields/{registry}")) else {
             continue;
         };
+        // A loader can read a key to name its definitions, so naming must be established too.
+        let naming_open = rules.gaps.iter().any(|gap| {
+            gap.subject == format!("registry:{registry}")
+                && gap.property.starts_with("definition_names")
+        });
         let complete = record.completeness == pdx_native::Completeness::Complete
             && record
                 .native_gaps
                 .iter()
-                .all(|gap| gap.kind == pdx_native::GapKind::OutsideMethod);
+                .all(|gap| gap.kind == pdx_native::GapKind::OutsideMethod)
+            && !naming_open;
 
         if !complete {
             continue;
