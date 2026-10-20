@@ -188,6 +188,7 @@ fn main_baseline() -> Result<Option<Baseline>, String> {
     let listing = git(&[
         "ls-tree",
         "-r",
+        "-z",
         "--name-only",
         BASELINE_REVISION,
         "--",
@@ -202,7 +203,7 @@ fn main_baseline() -> Result<Option<Baseline>, String> {
     };
     let mut texts = BTreeMap::new();
 
-    for path in listing.lines().filter(|path| path.ends_with(".txt")) {
+    for path in listing.split('\0').filter(|path| path.ends_with(".txt")) {
         let revision_path = format!("{BASELINE_REVISION}:{path}");
         let text =
             git(&["show", &revision_path]).ok_or(format!("git cannot show {revision_path}"))?;
