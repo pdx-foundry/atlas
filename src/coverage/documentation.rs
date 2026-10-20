@@ -19,10 +19,8 @@ pub struct Content {
     sha256: String,
     files: usize,
     comments: BTreeMap<String, Vec<Comment>>,
-    /// The folders of the shipped files with a parse problem, whose comments may be missed.
-    incomplete_folders: BTreeSet<String>,
-    /// Parse problems of the shipped files. A file that the parser repairs keeps the comments of
-    /// the repaired tree; a file that fails to parse keeps only its guide headings (`key: prose`).
+    /// Parse problems of the shipped files. Such a file binds its comments to the keys of its lines
+    /// as well as of the parse tree that the parser could build.
     pub diagnostics: Vec<String>,
 }
 
@@ -53,16 +51,11 @@ impl Content {
             sha256: files_sha256(files),
             files: files.len(),
             comments: BTreeMap::new(),
-            incomplete_folders: BTreeSet::new(),
             diagnostics: Vec::new(),
         };
 
         for (file, text) in files {
             let (comments, diagnostics) = shipped_comments::parse(file, text);
-
-            if !diagnostics.is_empty() {
-                content.incomplete_folders.insert(folder(file).into());
-            }
 
             content.diagnostics.extend(diagnostics);
 
@@ -198,8 +191,8 @@ pub(super) fn project(
 /// authored text (decision of 2026-10-20): CWT wrote it, so it is not an Atlas-owned claim. A
 /// comment holds the text when it contains it once both fold case, punctuation and whitespace,
 /// so a comment that CWT shortened or recapitalized keeps the claim content-derived. A claim whose
-/// directories `content` did not read completely (a folder outside `common/`, or a shipped file
-/// with a parse problem) also keeps its owner, since a missed comment is no proof.
+/// directories `content` did not read (a folder outside `common/`) also keeps its owner, since a
+/// missed comment is no proof. A shipped file with a parse problem binds its comments by lines.
 pub fn attribute_authored_text(ledger: &mut Ledger, content: &Content) {
     let authored: BTreeSet<_> = {
         let directories = TypeDirectories::new(ledger);
@@ -215,11 +208,7 @@ pub fn attribute_authored_text(ledger: &mut Ledger, content: &Content) {
                 let directories = claim_directories(claim, &directories);
                 let read_completely = directories
                     .iter()
-                    .all(|directory| in_directories(directory, &["common".into()]))
-                    && !content
-                        .incomplete_folders
-                        .iter()
-                        .any(|folder| in_directories(folder, &directories));
+                    .all(|directory| in_directories(directory, &["common".into()]));
 
                 read_completely
                     && !applicable_comments(claim, &key, &directories, content)

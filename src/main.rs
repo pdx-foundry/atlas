@@ -97,7 +97,7 @@ fn game_content(installation: &Path) -> Result<coverage::Content, Box<dyn std::e
 
     if !content.diagnostics.is_empty() {
         eprintln!(
-            "{} parse problems in the shipped files; their comments may be missed. See coverage.json.",
+            "{} parse problems in the shipped files; their comments are bound by lines. See coverage.json.",
             content.diagnostics.len()
         );
     }

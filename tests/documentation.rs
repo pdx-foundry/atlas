@@ -346,14 +346,27 @@ async fn documentation_that_no_shipped_comment_holds_is_authored_text() {
 }
 
 #[tokio::test]
-async fn documentation_whose_comments_were_not_all_read_keeps_its_owner() {
-    let config = format!("{THINGS}thing = {{\n ### Not shipped\n absent = int\n}}\n");
+async fn documentation_outside_the_read_corpus_keeps_its_owner() {
     let events = "types = { type[thing] = { path = \"game/events\" } }\nthing = {\n ### Not shipped\n absent = int\n}\n";
-    let (unparsed, _) = attributed(&config, &[("common/things/00.txt", "example = {\n")]).await;
     let (outside, _) = attributed(events, &[("common/things/00.txt", "a = 1\n")]).await;
 
-    assert_eq!(owner(&unparsed, "absent"), ledger::Owner::ContentDerived);
     assert_eq!(owner(&outside, "absent"), ledger::Owner::ContentDerived);
+}
+
+#[tokio::test]
+async fn a_file_that_fails_to_parse_binds_its_comments_by_lines() {
+    let config = format!(
+        "{THINGS}thing = {{\n ### Documented\n value = int\n ### Inner text\n inner = int\n}}\n"
+    );
+    let shipped = "# example = {\n#\tvalue = <x>  # Documented\n#\tblock = {\n#\t\t# Inner text\n#\t\tinner = 1\n#\t}\n# }\n";
+    let run = Run::live(
+        &[("common/things.cwt", &config)],
+        &[("common/things/99_README.txt", shipped)],
+    )
+    .await;
+
+    assert!(!run.report.content.as_ref().unwrap().diagnostics.is_empty());
+    assert!(run.documentation().iter().all(|a| a.covered));
 }
 
 #[tokio::test]
