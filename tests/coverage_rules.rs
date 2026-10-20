@@ -2591,12 +2591,14 @@ tradition = {
         scalar
     }
     archetypes = { <species_archetype> }
+    conditional_tags = { scalar }
 }
 "#;
 
 /// The recorded M452 answers with two traditions list fields that Native reads as blocks of bare
 /// values (`FieldMembers::Items`): `tags`, a list of strings, and `archetypes`, a list of keys
-/// whose own reader is a `Reference`, against [`LIST_ITEMS`].
+/// whose own reader is a `Reference`, and `conditional_tags`, read by two alternatives, against
+/// [`LIST_ITEMS`].
 async fn list_items() -> SharedDirectory {
     use pdx_native::{FieldMembers, FieldReadOutcome, ReaderKind};
 
@@ -2635,9 +2637,14 @@ async fn list_items() -> SharedDirectory {
         field
     };
 
+    let mut conditional = list("conditional_tags", ReaderKind::String, ReaderKind::Block);
+    let alternative = conditional.read[0].clone();
+
+    conditional.read.push(alternative);
     answer.value = vec![
         list("tags", ReaderKind::String, ReaderKind::Block),
         list("archetypes", ReaderKind::Reference, ReaderKind::Reference),
+        conditional,
     ];
     answer.gaps = Vec::new();
     extraction
@@ -2664,6 +2671,14 @@ async fn a_list_of_bare_values_answers_its_items() {
     // Each value is appended: no item maximum, but the needed count is not established.
     assert!(directory.covered("cardinality_maximum", &item_cardinality));
     assert!(!directory.covered("cardinality_minimum", &item_cardinality));
+}
+
+#[tokio::test]
+async fn a_conditionally_read_list_answers_no_item() {
+    let directory = list_items().await;
+    let item = ["tradition", "conditional_tags", "$item:1"];
+
+    assert!(!directory.covered("value_form", &item));
 }
 
 #[tokio::test]

@@ -599,7 +599,8 @@ impl<'a, T> FieldSet<'a, T> {
     /// The items of a block of bare values (`tags = { a b }`): one subject at the field's path
     /// with `$item`, which answers each `$item:N` claim. Each value is read by `reader` and
     /// appended, so the items take its value form and repeat `Accumulate` under the field's read
-    /// conditions; how many items a definition needs is not established.
+    /// conditions when the field is read unconditionally (a conditional read gives gaps, as for the
+    /// field); how many items a definition needs is not established.
     fn assemble_items(
         &self,
         snapshot: &mut Snapshot,
@@ -626,15 +627,40 @@ impl<'a, T> FieldSet<'a, T> {
             ),
             evidence.clone(),
         );
-        rule(
-            snapshot,
-            &id,
-            "repeat_behavior",
-            json!("Accumulate"),
-            evidence.clone(),
-        );
+        // As for the field itself, a conditional read establishes no unconditional form or repeat.
+        if conditional {
+            for (property, reason) in [
+                (
+                    "value_form",
+                    "Conditional alternatives do not establish an unconditional value form of this list's items",
+                ),
+                (
+                    "occurrences.maximum",
+                    "Native did not establish unconditional repeat behavior of this list's items",
+                ),
+            ] {
+                gap(
+                    snapshot,
+                    &id,
+                    property,
+                    reason,
+                    Some("field_conditions"),
+                    Vec::new(),
+                    vec![evidence.clone()],
+                );
+            }
+        } else {
+            rule(
+                snapshot,
+                &id,
+                "repeat_behavior",
+                json!("Accumulate"),
+                evidence.clone(),
+            );
+        }
 
         match scalar_form(reader.kind) {
+            _ if conditional => {}
             Some((form, _)) => rule(
                 snapshot,
                 &id,
