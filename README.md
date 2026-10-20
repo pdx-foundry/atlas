@@ -22,7 +22,7 @@ mode starts the game for the tradition fixtures and once more to read the loaded
 it exits 2 if an answer is missing or a game session did not confirm disposal. A registry that
 Native answers `Unsupported` is a gap, not a missing answer.
 Recorded answers keep their recorded basis and earn no current-engine coverage credit. The [version-2 schema](docs/contract/rule-snapshot-v2.schema.json)
-describes the snapshot. The [pin move B capture](docs/coverage/pin-move-b.md) records the current pin and its coverage and rates, after the [Milestone 5 sweep](docs/coverage/milestone-5.md), [pin move A](docs/coverage/pin-move-a.md) and [Milestone 4](docs/coverage/milestone-4.md) captures; the [unowned gap triage](docs/coverage/gap-triage.md) gives each gap without an owner its failure shape and disposition; [the language snapshot measurement](docs/coverage/language-snapshot.md)
+describes the snapshot. The [pin move B capture](docs/coverage/pin-move-b.md) records Native `2c94b30` and its coverage and rates (the current baseline is stated below), after the [Milestone 5 sweep](docs/coverage/milestone-5.md), [pin move A](docs/coverage/pin-move-a.md) and [Milestone 4](docs/coverage/milestone-4.md) captures; the [unowned gap triage](docs/coverage/gap-triage.md) gives each gap without an owner its failure shape and disposition; [the language snapshot measurement](docs/coverage/language-snapshot.md)
 states what it establishes and what stays a gap. The [shared-reader measurement](docs/coverage/shared-readers.md)
 records the first Milestone 4 capture and its historical baseline. The historical caller's findings and original source remain in the
 preserved Native evidence bundle; the production tests cover its recorded-answer and fixture cases.
@@ -52,9 +52,9 @@ from `origin/main`), with each claim that lost coverage. Run `compare` and `regi
 output folder first to add agreement with the config, a list of each disagreement (config answer beside Atlas's) and each type's registry join; a report of
 another config or snapshot is left out with a warning. A PR that changes coverage copies the new
 `covered-claims.txt` into `docs/coverage/`. The committed baseline is a live snapshot at Native
-`4b4e1d6`, made with the [pin move B capture](docs/coverage/pin-move-b.md) commands, with the
+`5143009`, made with the commands of the [pin move B capture](docs/coverage/pin-move-b.md#reproduce) (whose identities are for `2c94b30`), with the
 component template root statements, the root-statement agreement rule, the single alias join and
-the M452 installation's shipped comments (31,326 claims).
+the M452 installation's shipped comments (31,593 claims).
 
 The [registry comparison](docs/coverage/registries.md) puts Native's registry list beside the
 config types and records a reason for each type that no registry names:
