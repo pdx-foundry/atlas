@@ -221,6 +221,21 @@ async fn a_comment_of_another_key_that_contains_the_text_does_not_answer_it() {
 }
 
 #[tokio::test]
+async fn a_guide_heading_for_another_key_does_not_answer_the_next_key() {
+    let config = format!("{THINGS}thing = {{\n ### Source text for the field\n value = int\n}}\n");
+    let run = Run::live(
+        &[("common/things.cwt", &config)],
+        &[(
+            "common/things/00.txt",
+            "example = {\n # other: source text for the field\n value = 1\n}\n",
+        )],
+    )
+    .await;
+
+    assert!(!run.documentation()[0].covered);
+}
+
+#[tokio::test]
 async fn a_recorded_snapshot_earns_no_content_credit() {
     let config = format!("{THINGS}thing = {{\n ### Documented\n value = int\n}}\n");
     let run = Run::with(

@@ -10,8 +10,9 @@ use serde_json::Value;
 use sha2::{Digest, Sha256};
 use std::collections::{BTreeMap, BTreeSet};
 
-/// Method identity of the evidence that a shipped comment gives.
-const METHOD: &str = "shipped-comments/v1";
+/// Method identity of the evidence that a shipped comment gives. `v2` answers from a comment of
+/// the same key that holds the text, as well as from an exact one.
+const METHOD: &str = "shipped-comments/v2";
 
 /// The base-game shipped files of one identified installation build, with their comments parsed.
 pub struct Content {
@@ -37,9 +38,11 @@ pub struct ContentReport {
     pub files: usize,
     /// Parse problems of the shipped files.
     pub diagnostics: Vec<String>,
-    /// Content-derived documentation questions that every occurrence answers exactly.
+    /// Content-derived documentation questions that every occurrence answers: an exact comment,
+    /// or one of the same key that holds the text.
     pub answered: usize,
-    /// Content-derived documentation questions without an exact match, with the reason.
+    /// Content-derived documentation questions that some occurrence does not answer, with the
+    /// reason.
     pub gaps: Vec<Gap>,
 }
 
@@ -222,8 +225,10 @@ pub fn attribute_authored_text(ledger: &mut Ledger, content: &Content) {
                         .any(|folder| in_directories(folder, &directories));
 
                 read_completely
-                    && !applicable_comments(claim, &key, &directories, content)
-                        .any(|comment| holds(&comment.text, &claim.config_answer))
+                    && !matches!(
+                        compare(claim, &key, &directories, content),
+                        Comparison::Exact(_) | Comparison::Held(_)
+                    )
             })
             .map(|(index, _)| index)
             .collect()
@@ -438,7 +443,7 @@ fn compare(claim: &Claim, key: &str, directories: &[String], content: &Content) 
     }
 
     let holding: Vec<_> = applicable_comments(claim, key, directories, content)
-        .filter(|comment| holds(&comment.text, &claim.config_answer))
+        .filter(|comment| holds(&shipped_comments::own_text(comment), &claim.config_answer))
         .cloned()
         .collect();
 
