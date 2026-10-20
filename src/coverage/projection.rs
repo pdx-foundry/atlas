@@ -1099,6 +1099,23 @@ pub(super) fn config_directory(path: &str) -> &str {
     path.strip_prefix("game/").unwrap_or(path)
 }
 
+/// Config directories that the engine loads under another name, each with the engine's name. The
+/// config's `path` stays its claim, so the loader-path comparison shows the difference; the type
+/// joins the engine's registry and reads that folder's comments. `lawsuit`: the config writes
+/// `game/common/lawsuit_type`, but the executable names only `common/lawsuits`, the game ships that
+/// folder, and Native's registry reads the config's three fields (`cost`, `duration`, `effect`).
+const RENAMED_DIRECTORIES: &[(&str, &str)] = &[("common/lawsuit_type", "common/lawsuits")];
+
+/// The content directory that a type's config `path` names, as the engine loads it.
+pub(super) fn content_directory(path: &str) -> &str {
+    let directory = config_directory(path);
+
+    RENAMED_DIRECTORIES
+        .iter()
+        .find(|(config, _)| *config == directory)
+        .map_or(directory, |(_, engine)| engine)
+}
+
 pub(crate) fn registry_types(ledger: &Ledger) -> RegistryTypes {
     let mut candidates = RegistryTypes::new();
     let file_types = super::file_types(ledger);
@@ -1111,7 +1128,7 @@ pub(crate) fn registry_types(ledger: &Ledger) -> RegistryTypes {
             continue;
         }
         let type_name = &claim.subject[1];
-        let registry = config_directory(&claim.config_answer);
+        let registry = content_directory(&claim.config_answer);
         if file_types[&claim.file].contains(type_name) {
             candidates
                 .entry(registry.into())

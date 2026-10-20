@@ -1,7 +1,7 @@
 //! Content-derived documentation answered by the shipped comments of one installation (SDK-718).
 use super::{
     Answer, Evidence, Gap, Origin, Status, claim_type, file_types,
-    projection::config_directory,
+    projection::content_directory,
     shipped_comments::{self, Comment},
 };
 use crate::ledger::{Claim, Ledger, Owner};
@@ -306,7 +306,7 @@ impl<'a> TypeDirectories<'a> {
                 continue;
             }
 
-            let directory = config_directory(&claim.config_answer).trim_end_matches('/');
+            let directory = content_directory(&claim.config_answer).trim_end_matches('/');
 
             by_type
                 .entry((claim.file.as_str(), type_name.as_str()))

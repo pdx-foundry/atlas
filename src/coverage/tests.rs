@@ -256,3 +256,18 @@ fn incomplete_answer_states_remain_visible() {
         assert!(!assessment.covered);
     }
 }
+
+#[test]
+fn a_renamed_config_directory_joins_the_engine_registry() {
+    let source = "types = { type[lawsuit] = { path = \"game/common/lawsuit_type\" } }\nlawsuit = { duration = int }\n";
+    let ledger = inventory(&[("common/lawsuits.cwt".into(), source.into())].into());
+    let types = projection::registry_types(&ledger);
+
+    assert!(types.contains_key("common/lawsuits"));
+    assert!(!types.contains_key("common/lawsuit_type"));
+    // The config's own path stays its claim, so the comparison shows the difference.
+    assert_eq!(
+        projection::config_directory("game/common/lawsuit_type"),
+        "common/lawsuit_type"
+    );
+}
