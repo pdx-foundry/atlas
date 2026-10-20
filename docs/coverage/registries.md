@@ -106,6 +106,18 @@ The [Milestone 5 sweep](milestone-5.md) (SDK-798) ran at the same commit; its `r
 is byte-identical to this rerun's. So is that of [pin move B](pin-move-b.md) (SDK-818) at Native `2c94b30`: the
 registry list did not change.
 
+## Config directories the game does not ship (2026-10-20)
+
+Four gate types name a directory that M452 does not ship. Each was checked against the
+executable's string table and the shipped `common/` folders:
+
+| Type | Config directory | Executable | Shipped folder | Route |
+| --- | --- | --- | --- | --- |
+| `type[lawsuit]` | `common/lawsuit_type` | names `common/lawsuits` only | `common/lawsuits` (an example file) | Joined: the config directory is a renamed `common/lawsuits`, whose Native registry reads the config's `cost`, `duration` and `effect`. `RENAMED_DIRECTORIES` (projection) states the rename; the `path` claim keeps the config's text and joins the [CWT disagreement review](cwt-disagreements.md). |
+| `type[mandate]` | `common/mandates` | names `common/mandates` | none | Native: the engine names the directory, but Native's registry search (partial: "loaders outside the database schedule") does not find its loader. A late or custom loader, as for `common/solar_system_initializers`. |
+| `type[ai_force_species]` | `common/ai_force_species` | names `common/ai_force_species` | none | Native, as for `mandate`. |
+| `type[trade_conversion]` | `common/trade_conversions` | no `common/trade_conversions` path; `trade_conversions` is a token (`set_trade_conversions`) | none | Open: no loader names the folder, but the registry search is partial, so absence is not established. A Native answer that the search is complete for the folder (or a fixture probe that loads a file there and reads the error log) would make the type "not a type" and a CWT error. |
+
 ## Rerunning
 
 Rerun the command after each Native pin move, and for the sweep (SDK-798). A directory that a new
