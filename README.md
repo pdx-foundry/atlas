@@ -56,7 +56,8 @@ another config or snapshot is left out with a warning. A PR that changes coverag
 `5143009`, made with the [pin move B capture](docs/coverage/pin-move-b.md) commands, with the
 component template root statements, the root-statement agreement rule, the single alias join and
 the M452 installation's shipped comments, with documentation that no shipped comment holds as
-authored text, and the renamed lawsuit directory (31,612 of 57,159 claims).
+authored text, documentation that a comment of the same key holds, and the renamed lawsuit
+directory (31,687 of 57,146 claims).
 
 The [registry comparison](docs/coverage/registries.md) puts Native's registry list beside the
 config types and records a reason for each type that no registry names:
