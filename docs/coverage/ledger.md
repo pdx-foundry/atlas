@@ -422,12 +422,13 @@ the SDK-525 matcher (the association and comparison rules in [documentation.md](
   `common/defines` under the define's namespace; `common/on_actions`; and `common/game_rules`.
 - An exact match (comment markers removed, whitespace folded) answers the question. The answer
   lists the distinct matched texts, with one content-origin evidence item for each location
-  (`shipped-comment:FILE:LINE-END_LINE`, method `shipped-comments/v1`).
+  (`shipped-comment:FILE:LINE-END_LINE`, method `shipped-comments/v3`).
 - Otherwise a comment that documents the same key and holds the text answers it (decision of
   2026-10-20): it contains the text word for word once both fold case, punctuation and whitespace,
   as where the shipped line adds the example key or "Optional". A comment of another key never
-  answers. The answer lists the holding comments' texts. On M452 at Native `5143009` this credits
-  92 claims.
+  answers, and neither do the lines of a comment that are a guide heading for another key
+  (`other: prose`, a commented `other = …`, and the lines that continue it). The answer lists
+  the holding comments' texts. On M452 at Native `5143009` this credits 75 claims.
 - A question is answered only when each of its occurrences is answered. Otherwise it has one
   gap: "The shipped comment at FILE:LINE-END_LINE is a rewritten candidate, not the same text" for
   a rewritten candidate, or "No shipped comment in the installation has this text".
@@ -435,17 +436,16 @@ the SDK-525 matcher (the association and comparison rules in [documentation.md](
   (decision of 2026-10-20, as for SDK-718): CWT wrote it. `ledger --game-content` makes such a
   claim `authored_text` before it scores. A comment holds the text when it contains it, word for
   word, once both fold case, punctuation and whitespace, so a comment that CWT shortened or
-  recapitalized keeps the claim content-derived, and that comment answers it; every comment that
-  documents the key in the claim's directories is checked, not only the similar ones. A claim
-  keeps its owner when the installation was not read for it: a directory outside `common/` (the
-  corpus). A shipped file
-  with a parse problem (most README and example files, whose commented examples hold
-  placeholders) binds its comments to the keys of its lines as well as of the tree the parser
-  could build: each `key =` outside quotes and comments, with the blocks that open around it, so
-  inline, preceding and in-block comments bind as in a parsed file. So the denominator of a run
-  with `--game-content` depends on the installation; a run without it keeps every documentation
-  claim content-derived. On M452 at Native `5143009` this moves 708 claims, and every
-  content-derived documentation claim is answered or moved.
+  recapitalized keeps the claim content-derived, and that comment answers it (above); every
+  comment that documents the key in the claim's directories is checked, not only the similar
+  ones. A claim keeps its owner when the installation was not read for it: a directory outside
+  `common/` (the corpus). A shipped file with a parse problem (most README and example files,
+  whose commented examples hold placeholders) binds its comments to the keys of its lines as well
+  as of the tree the parser could build: each `key =` outside quotes and comments, with the blocks
+  that open around it, so inline, preceding and in-block comments bind as in a parsed file. So the
+  denominator of a run with `--game-content` depends on the installation; a run without it keeps
+  every documentation claim content-derived. On M452 at Native `5143009` this moves MOVED claims,
+  and every content-derived documentation claim is answered or moved.
 
 The content-origin rule: content evidence credits only content-derived claims, as the origin table
 of `coverage::suitable` already requires (an engine fact needs engine evidence). Its target is the
@@ -456,7 +456,8 @@ recording measures no current capture. `coverage.json` then has a `content` sect
 build, a digest of the sorted relative paths and file hashes, the file count, the parse problems,
 the number of answered questions and each gap. A file with a parse problem binds its comments
 to the keys of the repaired tree, as in SDK-525, and to the keys of its lines (above); a file that
-fails to parse also keeps its guide headings (`key: prose`). As with
+fails to parse also keeps its guide headings (`key: prose`). An answer still needs an exact or a
+held text. As with
 config diagnostics, the CLI exits 2 after writing the reports when the shipped files have parse
 problems.
 

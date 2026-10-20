@@ -408,6 +408,31 @@ fn named_heading(text: &str) -> Option<(&str, &str)> {
         .unwrap_or("");
     Some((key, prose))
 }
+/// The text of `comment` without the guide headings for another key (`other: prose`, or a
+/// commented `other = …`) and the lines that continue them until a blank line: those words
+/// document the other key, not the comment's own.
+pub(crate) fn own_text(comment: &Comment) -> String {
+    let own = comment.key.last().map(String::as_str);
+    let mut other = false;
+    let mut kept = Vec::new();
+
+    for line in comment.text.lines() {
+        let text = line.trim().trim_start_matches('#').trim();
+
+        match named_heading(text) {
+            Some((key, _)) => other = Some(key) != own,
+            None if text.is_empty() || text.starts_with('}') => other = false,
+            None => {}
+        }
+
+        if !other {
+            kept.push(line);
+        }
+    }
+
+    kept.join("\n")
+}
+
 fn named_comments(file: &str, source: &str) -> Vec<Comment> {
     let mut result = Vec::new();
     for comment in runs(source).into_iter().filter(|c| !c.inline) {
