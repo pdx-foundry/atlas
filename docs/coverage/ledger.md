@@ -163,14 +163,17 @@ Native answers another registry's root statements as fields.
 Every root statement is a definition of the root type, so the config's type-wide definition block
 (`event = { … }`, outside any subtype) describes each kind. An unconditional rule on a root
 statement itself answers that block's unconditional claims as a field rule answers a field's: its
-existence answers `field_existence` and its value form `value_form` (SDK-815). Each kind answers
-them, and a gap on any kind blocks the credit. On M452 all 22 kinds that Native
+existence answers `field_existence` and its value form `value_form` (SDK-815). The block holds
+for every kind, so the answer takes the agreement rule below: every statement that the config
+requires must answer alike, and a gap on any kind blocks the credit. On M452 all 22 kinds that Native
 lists are blocks with the one `CEvent::ReadMember` reader and the same 30 members; `pop_event`,
 which the config does not name as a kind, is no root statement and answers nothing.
 
 A field below the root statements answers the root type's claims that no subtype condition
 limits (`event/is_triggered_only`, `component_template/key`) only when every statement agrees.
-The statements are those of the registry whose keys select a subtype of the root type. Each one
+The statements are those that the config requires: each key whose `type_key_filter` alone
+selects a subtype of the root type. A configured key that Native does not answer prevents the
+agreement. Each one
 must answer the property for the field, with no rule conditions and the same value, and each must
 give the field the same read `conditions`. A statement that lacks the field or disagrees gives no
 credit, and a gap on any statement's field blocks it. Every statement's answer and read
