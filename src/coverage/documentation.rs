@@ -211,7 +211,7 @@ pub fn attribute_authored_text(ledger: &mut Ledger, content: &Content) {
                 let directories = claim_directories(claim, &directories);
                 let read_completely = directories
                     .iter()
-                    .all(|directory| directory.starts_with("common/"))
+                    .all(|directory| in_directories(directory, &["common".into()]))
                     && !content
                         .incomplete_folders
                         .iter()

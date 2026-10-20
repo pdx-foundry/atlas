@@ -323,6 +323,14 @@ async fn documentation_whose_comments_were_not_all_read_keeps_its_owner() {
 }
 
 #[tokio::test]
+async fn the_common_folder_itself_is_read() {
+    let config = "types = { type[thing] = { path = \"game/common\" } }\nthing = {\n ### Not shipped\n absent = int\n}\n";
+    let (ledger, _) = attributed(config, &[("common/00.txt", "a = 1\n")]).await;
+
+    assert_eq!(owner(&ledger, "absent"), ledger::Owner::AuthoredText);
+}
+
+#[tokio::test]
 async fn every_occurrence_of_a_question_must_match_exactly() {
     let content = [(
         "common/things/00.txt",
