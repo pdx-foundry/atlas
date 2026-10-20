@@ -137,6 +137,10 @@ impl Baseline {
                 .ok_or(format!("Baseline shard `{shard}` is missing"))?;
             let claims: BTreeSet<String> = text.lines().map(str::to_owned).collect();
 
+            if claims.len() != text.lines().count() {
+                return Err(format!("Baseline shard `{shard}` repeats a claim"));
+            }
+
             if claims.len() != count(listed)? {
                 return Err(format!(
                     "Baseline shard `{shard}` holds {} claims, not {listed}",
