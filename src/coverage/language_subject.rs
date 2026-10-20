@@ -12,18 +12,33 @@ use crate::{
 use serde_json::Value;
 use std::collections::{BTreeMap, BTreeSet};
 
-/// Config questions, with their conditions, answered by each snapshot rule or gap identity.
+/// A config question with its conditions, and the answer it takes in place of the rule's own
+/// when the join states one.
+pub(super) type LanguageQuestion = (String, Vec<String>, Option<&'static str>);
+
+/// Config questions answered by each snapshot rule or gap identity.
 pub(super) fn index(
     ledger: &Ledger,
     types: &ConfigTypes<'_>,
     snapshot: &Snapshot,
-) -> BTreeMap<String, BTreeSet<(String, Vec<String>)>> {
-    let mut index: BTreeMap<String, BTreeSet<(String, Vec<String>)>> = BTreeMap::new();
-    for (claim, subject) in classify(ledger, types, snapshot) {
-        index
-            .entry(subject.rule_id())
-            .or_default()
-            .insert((claim.question.clone(), claim.conditions.clone()));
+) -> BTreeMap<String, BTreeSet<LanguageQuestion>> {
+    let joins = joins(ledger, types, snapshot);
+    let mut index: BTreeMap<String, BTreeSet<LanguageQuestion>> = BTreeMap::new();
+    let classified = classify_with(ledger, &joins)
+        .into_iter()
+        .map(|(claim, subject)| (claim, subject, None));
+    let requirements = ledger.claims.iter().filter_map(|claim| {
+        let (subject, requirement) = naming_requirement_record(claim, &joins)?;
+
+        Some((claim, subject, Some(requirement)))
+    });
+
+    for (claim, subject, answer) in classified.chain(requirements) {
+        index.entry(subject.rule_id()).or_default().insert((
+            claim.question.clone(),
+            claim.conditions.clone(),
+            answer,
+        ));
     }
 
     index
@@ -49,7 +64,11 @@ pub(super) fn classify<'a>(
     types: &ConfigTypes<'a>,
     snapshot: &Snapshot,
 ) -> Vec<(&'a Claim, LanguageSubject)> {
-    let joins = Joins {
+    classify_with(ledger, &joins(ledger, types, snapshot))
+}
+
+fn joins<'a>(ledger: &'a Ledger, types: &ConfigTypes<'a>, snapshot: &'a Snapshot) -> Joins<'a> {
+    Joins {
         scopes: scope_join(ledger, snapshot),
         on_actions: on_action_names(ledger),
         arguments: snapshot
@@ -68,15 +87,39 @@ pub(super) fn classify<'a>(
             .collect(),
         unconditional_names: unconditional_names(snapshot),
         namespace_defines: namespace_defines(snapshot),
-    };
+        naming_lines: ledger
+            .claims
+            .iter()
+            .filter(|claim| claim.property == "naming_rule")
+            .map(|claim| {
+                (
+                    (claim.file.as_str(), claim.subject.as_slice()),
+                    claim.question.as_str(),
+                )
+            })
+            .collect(),
+        name_answers: snapshot
+            .rules
+            .iter()
+            .filter(|rule| rule.property == "derived_name" && rule.conditions.is_empty())
+            .filter_map(|rule| {
+                let name = rule.subject.strip_prefix("derived_name:")?;
+
+                Some((name, &rule.answer))
+            })
+            .collect(),
+    }
+}
+
+fn classify_with<'a>(ledger: &'a Ledger, joins: &Joins<'_>) -> Vec<(&'a Claim, LanguageSubject)> {
     ledger
         .claims
         .iter()
         .filter_map(|claim| {
             let subject = if claim.conditions.is_empty() {
-                record(claim, &joins)
+                record(claim, joins)
             } else {
-                subtype_naming_record(claim, &joins)
+                subtype_naming_record(claim, joins)
             };
 
             subject.map(|subject| (claim, subject))
@@ -107,8 +150,70 @@ fn subtype_naming_record(claim: &Claim, joins: &Joins<'_>) -> Option<LanguageSub
     }
 
     joins
-        .derived_name(claim, type_name, block)
+        .derived_name(&claim.question, &claim.file, type_name, block)
         .filter(|subject| joins.unconditional_names.contains(&subject.name))
+}
+
+/// The derived name that a `## optional` or `## required` naming line's requirement joins, with
+/// the requirement that Native's answer states (decision of 2026-10-20). The line's own naming
+/// question selects the name, as for the naming rule; under `subtype[…]` conditions too, since
+/// [`requirement`] holds whatever the subtype.
+fn naming_requirement_record(
+    claim: &Claim,
+    joins: &Joins<'_>,
+) -> Option<(LanguageSubject, &'static str)> {
+    let [types, type_name, block, between @ .., _, annotation] = claim.subject.as_slice() else {
+        return None;
+    };
+    let subtypes_only = between.iter().all(|segment| is_subtype(segment))
+        && claim
+            .conditions
+            .iter()
+            .all(|condition| is_subtype(condition));
+
+    if claim.property != "naming_requirement"
+        || types != "types"
+        || !matches!(block.as_str(), "localisation" | "images")
+        || !annotation.starts_with("$annotation:")
+        || !subtypes_only
+    {
+        return None;
+    }
+
+    let line = &claim.subject[..claim.subject.len() - 1];
+    let question = joins.naming_lines.get(&(claim.file.as_str(), line))?;
+    let subject = joins.derived_name(question, &claim.file, type_name, block)?;
+    let requirement = requirement(joins.name_answers.get(subject.name.as_str())?)?;
+
+    Some((subject, requirement))
+}
+
+/// The requirement that a derived name's rule states: `required` when an unconditional lookup
+/// logs a diagnostic for a missing name, `optional` when every lookup tolerates it (shows the
+/// key, stays silent or falls back to another name). A lookup whose miss behavior is unresolved
+/// or unknown, or a diagnostic under a condition, states none.
+fn requirement(answer: &Value) -> Option<&'static str> {
+    let alternatives = answer
+        .as_array()
+        .filter(|alternatives| !alternatives.is_empty())?;
+    let mut required = false;
+
+    for alternative in alternatives {
+        let on_missing = &alternative["on_missing"];
+        let tolerated = matches!(on_missing.as_str(), Some("ShowsKey" | "Silent"))
+            || on_missing.get("Fallback").is_some();
+
+        if on_missing == "Diagnostic" {
+            if alternative["condition"] != "Always" {
+                return None;
+            }
+            required = true;
+        } else if !tolerated {
+            return None;
+        }
+    }
+
+    Some(if required { "required" } else { "optional" })
 }
 
 /// The first define of each namespace, by name, among the defines with an unconditional existence
@@ -181,14 +286,24 @@ struct Joins<'a> {
     unconditional_names: BTreeSet<String>,
     /// The first define, by name, of each define namespace that the snapshot lists.
     namespace_defines: BTreeMap<String, String>,
+    /// The naming question of each naming line, by (file, subject).
+    naming_lines: BTreeMap<(&'a str, &'a [String]), &'a str>,
+    /// The answer of each derived name's unconditioned rule.
+    name_answers: BTreeMap<&'a str, &'a Value>,
 }
 
 impl Joins<'_> {
     /// The derived name that a type's naming line names. CWT identifies the name only by the
     /// line's value, so the value selects the subject; a question whose occurrences disagree, or
     /// that matches no name or several, has none.
-    fn derived_name(&self, claim: &Claim, type_name: &str, block: &str) -> Option<LanguageSubject> {
-        let value = self.naming_values.get(claim.question.as_str())?;
+    fn derived_name(
+        &self,
+        question: &str,
+        file: &str,
+        type_name: &str,
+        block: &str,
+    ) -> Option<LanguageSubject> {
+        let value = self.naming_values.get(question)?;
         let rendered = if value.contains(['$', '/']) {
             (*value).to_owned()
         } else {
@@ -200,10 +315,7 @@ impl Joins<'_> {
         };
         let mut matched = Vec::new();
 
-        for registry in self
-            .type_registries
-            .get(&(claim.file.as_str(), type_name))?
-        {
+        for registry in self.type_registries.get(&(file, type_name))? {
             for lookup in lookups {
                 let name = format!("{registry}/{lookup}/{rendered}");
 
@@ -363,7 +475,7 @@ fn record(claim: &Claim, joins: &Joins<'_>) -> Option<LanguageSubject> {
             language_subject(SubjectKind::OnAction, on_actions.get(item)?, "entry_scopes")
         }
         (_, ["types", type_name, block @ ("localisation" | "images"), _], "naming_rule") => {
-            joins.derived_name(claim, type_name, block)
+            joins.derived_name(&claim.question, &claim.file, type_name, block)
         }
         ("game_rules.cwt", ["game_rules", name], "field_existence") => {
             language_subject(SubjectKind::GameRule, name, "existence")
@@ -584,6 +696,49 @@ fn scope_join<'a>(
 mod tests {
     use super::*;
     use crate::ledger;
+    use serde_json::json;
+
+    #[test]
+    fn a_requirement_is_stated_only_by_explicit_miss_behavior() {
+        let lookup = |on_missing: Value, condition: &str| json!({"on_missing": on_missing, "condition": condition, "stage": "WhenUsed"});
+        let fallback = json!({"Fallback": ["ItemKey"]});
+
+        assert_eq!(
+            requirement(&json!([
+                lookup("ShowsKey".into(), "Unresolved"),
+                lookup("Silent".into(), "Always"),
+                lookup(fallback, "Always"),
+            ])),
+            Some("optional")
+        );
+        assert_eq!(
+            requirement(&json!([
+                lookup("ShowsKey".into(), "Always"),
+                lookup("Diagnostic".into(), "Always"),
+            ])),
+            Some("required")
+        );
+        // A diagnostic under a condition the engine may not meet does not require the name.
+        assert_eq!(
+            requirement(&json!([
+                lookup("ShowsKey".into(), "Always"),
+                lookup("Diagnostic".into(), "Unresolved"),
+            ])),
+            None
+        );
+        assert_eq!(
+            requirement(&json!([
+                lookup("Silent".into(), "Always"),
+                lookup("Unresolved".into(), "Always")
+            ])),
+            None
+        );
+        assert_eq!(
+            requirement(&json!([lookup("Other".into(), "Always")])),
+            None
+        );
+        assert_eq!(requirement(&json!([])), None);
+    }
 
     #[test]
     fn classifies_command_arguments_on_actions_scope_aliases_and_defines() {
@@ -629,6 +784,8 @@ mod tests {
             derived_names: BTreeSet::new(),
             unconditional_names: BTreeSet::new(),
             namespace_defines: BTreeMap::new(),
+            naming_lines: BTreeMap::new(),
+            name_answers: BTreeMap::new(),
         };
         let classified = |claim| record(claim, &joins).unwrap();
 

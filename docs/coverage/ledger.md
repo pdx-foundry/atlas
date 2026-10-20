@@ -369,6 +369,34 @@ it. On M452 at Native `bb0cc04` the snapshot has 149 `keeps_definition_text` rul
 `common/timeline_events` claims on `type`, `text` and `texture` (the engine reads `types`,
 `override_text` and `override_texture`).
 
+### Names and defines the engine never reads (decisions of 2026-10-20)
+
+The same conditions as for keys hold for two more absences; neither credits a claim yet.
+
+- **No such name.** A config naming pattern that matches no Native derived name is answered
+  "the engine has no such name" only where the registry's derived-name answer
+  (`derived_names/R`) is `Complete` and carries no gap that reaches the pattern. Covered claims
+  join the [CWT disagreement review](cwt-disagreements.md). On M452 at Native `ec3342f` all 90
+  derived-name answers are `Partial` with `UnresolvedPath` gaps on their registry, so no code
+  implements the rule; it reopens when Native's derived names for a registry are `Complete`.
+- **Not a define.** A config define that Native's defines answer does not list is answered "not a
+  define" only where that answer is `Complete` with no gap that reaches the define. The answer
+  is `Complete` but carries one `OutsideMethod` gap: dynamic define readers without a compiled
+  helper are outside the search. Unlike the boundaries of a root-field answer, that gap reaches
+  every unlisted define, so the rule credits nothing and no code implements it; it reopens when
+  Native closes the dynamic-reader boundary.
+
+### Naming requirements (decision of 2026-10-20)
+
+A `## required` or `## optional` naming line joins the derived name that its line joins (the line's
+naming question selects it, under `subtype[…]` conditions too) and takes the requirement that the
+name's miss behavior (`on_missing`) states. `optional` when every lookup tolerates a missing
+name: it shows the key (`ShowsKey`), stays silent (`Silent`) or falls back to another name
+(`Fallback`), under any condition. `required` when a lookup logs a diagnostic (`Diagnostic`)
+under the condition `Always`; a diagnostic under an unresolved or unmet condition does not make
+the name required, and the claim stays open. Any `Unresolved` or unknown miss behavior leaves the
+claim open.
+
 ### List items
 
 Native reports a block of bare values (`tags = { a b }`, a `ReadUniform<T>` list or a key-reference

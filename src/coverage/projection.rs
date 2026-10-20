@@ -3,6 +3,7 @@
 use super::{
     Answer, Evidence, Gap, Origin, Projection, Status,
     config_types::{ConfigTypes, KeySubtypes, is_subtype, subtypes},
+    language_subject::LanguageQuestion,
 };
 use crate::{
     ledger::{Claim, Ledger},
@@ -216,11 +217,14 @@ fn project_with_gap_facets(
         let conditions = conditions.unwrap_or_else(|| rule.conditions.clone());
         let mut conditioned_language = Vec::new();
         if rule.conditions.is_empty() {
-            for (question, conditions) in selectors.language_questions(&language, &rule.id) {
+            for (question, conditions, answer) in selectors.language_questions(&language, &rule.id)
+            {
+                let value = answer.map_or_else(|| rule.answer.clone(), Value::from);
+
                 if conditions.is_empty() {
-                    answers.push((question, rule.answer.clone()));
+                    answers.push((question, value));
                 } else {
-                    conditioned_language.push((question, conditions));
+                    conditioned_language.push((question, conditions, value));
                 }
             }
         }
@@ -247,9 +251,7 @@ fn project_with_gap_facets(
             .chain(
                 conditioned_language
                     .into_iter()
-                    .map(|(question, conditions)| {
-                        (question, conditions, rule.answer.clone(), &evidence)
-                    }),
+                    .map(|(question, conditions, value)| (question, conditions, value, &evidence)),
             );
         for (question, conditions, value, evidence) in answers {
             match rule_answer(
@@ -492,6 +494,7 @@ fn project_with_gap_facets(
         let (language_questions, conditioned_language): (Vec<_>, Vec<_>) = selectors
             .language_questions(&language, &gap.id)
             .into_iter()
+            .map(|(question, conditions, _)| (question, conditions))
             .partition(|(_, conditions)| conditions.is_empty());
         let unconditional = language_questions
             .into_iter()
@@ -1136,14 +1139,14 @@ impl<'a> TypeSelectors<'a> {
     /// definitions, not the registry items that Native's derived names describe.
     fn language_questions(
         &self,
-        language: &BTreeMap<String, BTreeSet<(String, Vec<String>)>>,
+        language: &BTreeMap<String, BTreeSet<LanguageQuestion>>,
         id: &str,
-    ) -> Vec<(String, Vec<String>)> {
+    ) -> Vec<LanguageQuestion> {
         language
             .get(id)
             .into_iter()
             .flatten()
-            .filter(|(question, _)| {
+            .filter(|(question, _, _)| {
                 !matches!(
                     self.questions.get(question.as_str()),
                     Some(Selector::Nested(_))

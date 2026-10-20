@@ -1850,6 +1850,40 @@ tradition = { unlocks_agenda = scalar }
 }
 
 #[tokio::test]
+async fn a_naming_requirement_takes_only_explicit_miss_behavior() {
+    let source = r#"
+types = {
+    type[tradition] = {
+        path = "game/common/traditions"
+        localisation = {
+            ## required
+            name = "$"
+            ## optional
+            delayed = "$_delayed"
+        }
+    }
+}
+tradition = { unlocks_agenda = scalar }
+"#;
+    let directory = SharedDirectory::evaluate(&[("traditions.cwt", source)], |_| {}).await;
+    let requirement =
+        |key, annotation| ["types", "type[tradition]", "localisation", key, annotation];
+    let name = requirement("name", "$annotation:required");
+
+    // `$` shows its key when missing, so the engine does not require it; CWT says required.
+    assert!(directory.covered("naming_requirement", &name));
+    assert_eq!(
+        directory.entry("naming_requirement", &name).atlas_answers,
+        [json!("optional")]
+    );
+    // One lookup of `$_delayed` has unresolved miss behavior.
+    assert!(!directory.covered(
+        "naming_requirement",
+        &requirement("delayed", "$annotation:optional")
+    ));
+}
+
+#[tokio::test]
 async fn an_unresolved_naming_rule_leaves_the_event_kinds_credit() {
     let events = event_kinds_named(EVENT_CONFIG, pdx_native::GrammarProperty::Unresolved).await;
 
