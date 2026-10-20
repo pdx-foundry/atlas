@@ -489,6 +489,8 @@ fn project_with_gap_facets(
     }
     let definition_gaps = definition_line_gaps(&claims, &selectors, &subjects, &projection.answers);
     projection.gaps.extend(definition_gaps);
+    let unread_keys = unread_key_answers(ledger, rules, &selectors, &projection, build, &target)?;
+    projection.answers.extend(unread_keys);
     let listed_field_gaps =
         ListedFields::new(rules, &subjects).gaps(ledger, &selectors, &projection);
     projection.gaps.extend(listed_field_gaps);
@@ -547,6 +549,234 @@ fn rule_answer(
         status,
         evidence: evidence.to_vec(),
     })
+}
+
+/// The answers to the claims on a root key that the engine never reads (decision of 2026-10-20).
+/// A key is "not a field" only where Native's root-field answer for the registry is `Complete`
+/// with no gap other than `OutsideMethod` boundaries: every reader path and field name is then
+/// resolved, so a key formed at run time or read by an unfollowed reader would make the answer
+/// partial. The registry's `definition_names` must be established, since a loader can read a key
+/// to name its definitions, and its loader rule `keeps_definition_text` must be `false` with
+/// qualified evidence (Native `loader-rules.md`, "Definition text after the read"), since kept
+/// text could be read again later. The key must be literal, unlisted, and not the field that names a
+/// definition.
+/// `field_existence` claims on the key and below it answer `false`; its other claims (value form,
+/// count, scope) answer `"not_a_field"`, since the engine reads no value there. Claims that the
+/// projection already answers or gaps are left alone. Root statements keep their own rules.
+fn unread_key_answers(
+    ledger: &Ledger,
+    rules: &snapshot::Snapshot,
+    selectors: &TypeSelectors<'_>,
+    projection: &Projection,
+    build: &pdx_native::BuildId,
+    target: &str,
+) -> Result<Vec<Answer>, String> {
+    const PROPERTIES: &[&str] = &[
+        "field_existence",
+        "value_form",
+        "cardinality_minimum",
+        "cardinality_maximum",
+        "scope_context",
+    ];
+
+    let projected: BTreeSet<_> = projection
+        .answers
+        .iter()
+        .map(|answer| (&answer.question, &answer.conditions))
+        .chain(
+            projection
+                .gaps
+                .iter()
+                .map(|gap| (&gap.question, &gap.conditions)),
+        )
+        .collect();
+    let mut answers = Vec::new();
+    let mut answered = BTreeSet::new();
+
+    for (registry, types) in &selectors.directories {
+        if ROOT_STATEMENT_REGISTRIES.contains(registry) {
+            continue;
+        }
+
+        let Some(record) = rules.answers.get(&format!("registry_fields/{registry}")) else {
+            continue;
+        };
+        // A loader can read a key to name its definitions, so naming must be established too.
+        let naming_open = rules.gaps.iter().any(|gap| {
+            gap.subject == format!("registry:{registry}")
+                && gap.property.starts_with("definition_names")
+        });
+        let complete = record.completeness == pdx_native::Completeness::Complete
+            && record
+                .native_gaps
+                .iter()
+                .all(|gap| gap.kind == pdx_native::GapKind::OutsideMethod)
+            && !naming_open;
+
+        if !complete {
+            continue;
+        }
+
+        let source = rules
+            .sources
+            .get(&record.source)
+            .ok_or("Missing Native source")?;
+
+        if source.build != *build {
+            return Err(format!(
+                "Source build differs from snapshot target: {}",
+                record.source
+            ));
+        }
+
+        // The loader must also drop the definition's text after the read (decision of
+        // 2026-10-20), or later code could read a key that the member reader skipped.
+        let kept_text = rules
+            .rules
+            .iter()
+            .find(|rule| rule.id == format!("registry:{registry}#keeps_definition_text"));
+        let Some(kept_text) = kept_text.filter(|rule| rule.answer == json!(false)) else {
+            continue;
+        };
+        // The naming rule must be stated, not only free of a gap: its fields are read keys.
+        let Some(naming) = rules
+            .rules
+            .iter()
+            .find(|rule| rule.id == format!("registry:{registry}#definition_names"))
+        else {
+            continue;
+        };
+        let premises = [
+            rule_evidence(rules, kept_text, build, target)?,
+            rule_evidence(rules, naming, build, target)?,
+        ];
+        let qualified = source.basis != Basis::Recorded
+            && premises.iter().all(|evidence| {
+                !evidence.is_empty() && evidence.iter().all(|evidence| evidence.qualified)
+            });
+        let premise_evidence: Vec<_> = premises.into_iter().flatten().collect();
+        let read_keys = read_root_keys(rules, registry);
+
+        for (type_name, file, selector) in types {
+            if *selector != Selector::Root {
+                continue;
+            }
+
+            let root = type_name.trim_start_matches("type[").trim_end_matches(']');
+
+            for claim in &ledger.claims {
+                let [claim_root, path @ ..] = claim.subject.as_slice() else {
+                    continue;
+                };
+                let mut fields = path
+                    .iter()
+                    .filter(|segment| !segment.starts_with("subtype["));
+                let Some(key) = fields.next() else {
+                    continue;
+                };
+                let unread = claim.file == *file
+                    && claim_root == root
+                    && PROPERTIES.contains(&claim.property.as_str())
+                    && literal_key(key)
+                    && !read_keys.contains(key.as_str())
+                    && !projected.contains(&(&claim.question, &claim.conditions));
+
+                if !unread || !answered.insert((&claim.question, &claim.conditions)) {
+                    continue;
+                }
+
+                let value = match claim.property.as_str() {
+                    "field_existence" => json!(false),
+                    _ => json!("not_a_field"),
+                };
+
+                answers.push(Answer {
+                    question: claim.question.clone(),
+                    conditions: claim.conditions.clone(),
+                    value,
+                    status: Status::Supported,
+                    evidence: [Evidence {
+                        id: format!("not_a_field:{registry}/{key}@{}", record.source),
+                        method: source.method.clone(),
+                        target: target.to_owned(),
+                        qualified,
+                        origin: Origin::Engine,
+                    }]
+                    .into_iter()
+                    .chain(premise_evidence.iter().map(|evidence| Evidence {
+                        qualified,
+                        ..evidence.clone()
+                    }))
+                    .collect(),
+                });
+            }
+        }
+    }
+
+    Ok(answers)
+}
+
+/// The root keys of `registry` that Native reads: the first key of each listed field, the root
+/// statement keys, and each field that names a definition.
+fn read_root_keys<'a>(rules: &'a snapshot::Snapshot, registry: &str) -> BTreeSet<&'a str> {
+    let listed = rules
+        .subjects
+        .iter()
+        .filter(|subject| subject.registry.as_deref() == Some(registry))
+        .filter_map(|subject| subject.field.as_deref())
+        .map(|field| field.split('/').next().unwrap_or(field));
+    let statements = ROOT_STATEMENT_KEYS
+        .iter()
+        .filter(|(statement_registry, _)| *statement_registry == registry)
+        .map(|(_, key)| *key);
+    let naming = rules
+        .rules
+        .iter()
+        .filter(|rule| rule.id == format!("registry:{registry}#definition_names"))
+        .flat_map(|rule| naming_fields(&rule.answer));
+
+    listed.chain(statements).chain(naming).collect()
+}
+
+/// Every `{"Field": NAME}` in a definition-names answer.
+fn naming_fields(answer: &Value) -> Vec<&str> {
+    match answer {
+        Value::Object(object) => object
+            .iter()
+            .flat_map(|(key, value)| match (key.as_str(), value) {
+                ("Field", Value::String(name)) => vec![name.as_str()],
+                _ => naming_fields(value),
+            })
+            .collect(),
+        Value::Array(items) => items.iter().flat_map(naming_fields).collect(),
+        _ => Vec::new(),
+    }
+}
+
+/// Whether a config key is one literal name, not a pattern such as `scalar`, `scope_field`, `<type>`,
+/// `enum[X]`, `alias_name[X]` or `$parameter`.
+fn literal_key(key: &str) -> bool {
+    const PATTERNS: &[&str] = &[
+        "scalar",
+        "int",
+        "float",
+        "bool",
+        "localisation",
+        "localisation_synced",
+        "localisation_inline",
+        "filepath",
+        "date_field",
+        "percentage_field",
+        "variable_field",
+        "int_variable_field",
+        "value_field",
+        "int_value_field",
+        "scope_field",
+    ];
+
+    !key.is_empty()
+        && key.chars().all(|c| c.is_ascii_alphanumeric() || c == '_')
+        && !PATTERNS.contains(&key)
 }
 
 /// The engine evidence of `rule`, each source checked against the snapshot's one `build`.

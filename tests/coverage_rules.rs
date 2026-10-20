@@ -1385,6 +1385,7 @@ relic = {}
     let unresolved =
         SharedDirectory::evaluate(&[("traditions.cwt", TRADITION_DEFINITION)], |snapshot| {
             unresolve(snapshot, TRADITIONS, "definition_names");
+            set_rule(snapshot, TRADITIONS, "keeps_definition_text", json!(false));
         })
         .await;
 
@@ -2418,6 +2419,148 @@ async fn a_gap_on_one_use_of_a_single_alias_blocks_its_claim() {
             .gaps("field_existence", &inherit_effects)
             .is_empty()
     );
+}
+
+const UNREAD_KEYS: &str = r#"
+types = {
+    type[tradition] = {
+        path = "game/common/traditions"
+        subtype[special] = { is_special = yes }
+    }
+}
+tradition = {
+    unlocks_agenda = scalar
+    ## cardinality = 0..1
+    never_read = int
+    scalar = int
+    scope_field = int
+    subtype[special] = { special_only = { inner = int } }
+}
+"#;
+
+/// [`UNREAD_KEYS`] against the recorded answers, with the traditions root-field answer
+/// `Complete` and only its `OutsideMethod` gaps, and a loader that keeps no definition text, then
+/// changed by `edit`.
+async fn unread_keys(edit: impl FnOnce(&mut snapshot::AnswerRecord)) -> SharedDirectory {
+    unread_keys_with(json!(false), edit).await
+}
+
+/// [`unread_keys`] with the loader rule `keeps_definition_text` answering `kept`, or a gap for
+/// `Value::Null`.
+async fn unread_keys_with(
+    kept: Value,
+    edit: impl FnOnce(&mut snapshot::AnswerRecord),
+) -> SharedDirectory {
+    SharedDirectory::evaluate(&[("traditions.cwt", UNREAD_KEYS)], |snapshot| {
+        let record = snapshot
+            .answers
+            .get_mut("registry_fields/common/traditions")
+            .unwrap();
+
+        record.completeness = pdx_native::Completeness::Complete;
+        record
+            .native_gaps
+            .retain(|gap| gap.kind == pdx_native::GapKind::OutsideMethod);
+        edit(record);
+
+        if kept.is_null() {
+            set_rule(snapshot, TRADITIONS, "keeps_definition_text", json!(true));
+            unresolve(snapshot, TRADITIONS, "keeps_definition_text");
+        } else {
+            set_rule(snapshot, TRADITIONS, "keeps_definition_text", kept);
+        }
+    })
+    .await
+}
+
+#[tokio::test]
+async fn an_unstated_or_recorded_naming_rule_leaves_an_unlisted_key_open() {
+    let naming = format!("{TRADITIONS}#definition_names");
+    let unstated = unread_keys_with(json!(false), |_| {}).await;
+    let mut snapshot = unstated.snapshot;
+    snapshot.rules.retain(|rule| rule.id != naming);
+    let unstated = SharedDirectory::as_recorded(unstated.ledger, snapshot);
+    let recorded = unread_keys_with(json!(false), |_| {}).await;
+    let mut snapshot = recorded.snapshot;
+    record(&mut snapshot, &naming);
+    let recorded = SharedDirectory::as_recorded(recorded.ledger, snapshot);
+
+    for directory in [unstated, recorded] {
+        assert!(!directory.covered("field_existence", &["tradition", "never_read"]));
+    }
+}
+
+#[tokio::test]
+async fn a_loader_that_may_keep_the_definition_text_leaves_an_unlisted_key_open() {
+    for kept in [json!(true), Value::Null] {
+        let directory = unread_keys_with(kept.clone(), |_| {}).await;
+
+        assert!(
+            !directory.covered("field_existence", &["tradition", "never_read"]),
+            "{kept}"
+        );
+    }
+}
+
+#[tokio::test]
+async fn a_key_that_a_complete_answer_does_not_list_is_not_a_field() {
+    let directory = unread_keys(|_| {}).await;
+
+    for (property, subject) in [
+        ("field_existence", &["tradition", "never_read"][..]),
+        ("value_form", &["tradition", "never_read"]),
+        (
+            "cardinality_maximum",
+            &["tradition", "never_read", "$annotation:cardinality"],
+        ),
+        (
+            "field_existence",
+            &["tradition", "subtype[special]", "special_only", "inner"],
+        ),
+    ] {
+        assert!(directory.covered(property, subject), "{subject:?}");
+    }
+
+    assert_eq!(
+        directory.status("field_existence", &["tradition", "never_read"]),
+        Status::Different
+    );
+    // A pattern key names no literal field.
+    assert!(!directory.covered("field_existence", &["tradition", "scalar"]));
+    assert!(!directory.covered("field_existence", &["tradition", "scope_field"]));
+}
+
+#[tokio::test]
+async fn a_partial_answer_or_another_gap_leaves_an_unlisted_key_open() {
+    let partial =
+        unread_keys(|record| record.completeness = pdx_native::Completeness::Partial).await;
+    let unnamed = unread_keys(|record| {
+        let mut gap = record.native_gaps[0].clone();
+
+        gap.kind = pdx_native::GapKind::UnnamedField;
+        record.native_gaps.push(gap);
+    })
+    .await;
+
+    let unnamed_definitions =
+        SharedDirectory::evaluate(&[("traditions.cwt", UNREAD_KEYS)], |snapshot| {
+            let record = snapshot
+                .answers
+                .get_mut("registry_fields/common/traditions")
+                .unwrap();
+
+            record.completeness = pdx_native::Completeness::Complete;
+            record
+                .native_gaps
+                .retain(|gap| gap.kind == pdx_native::GapKind::OutsideMethod);
+            unresolve(snapshot, TRADITIONS, "definition_names");
+            set_rule(snapshot, TRADITIONS, "keeps_definition_text", json!(false));
+        })
+        .await;
+
+    for directory in [partial, unnamed, unnamed_definitions] {
+        assert!(!directory.covered("field_existence", &["tradition", "never_read"]));
+    }
 }
 
 #[tokio::test]
