@@ -216,7 +216,7 @@ async fn content_needs_a_snapshot_of_its_build() {
 }
 
 #[tokio::test]
-async fn matching_changes_neither_ownership_nor_the_denominator() {
+async fn matching_alone_changes_neither_ownership_nor_the_denominator() {
     let config = format!(
         "{THINGS}thing = {{\n ### Documented\n value = int\n ### Not shipped\n other = int\n}}\n"
     );
@@ -231,26 +231,103 @@ async fn matching_changes_neither_ownership_nor_the_denominator() {
         with_content.report.totals.atlas_owned.total,
         without.report.totals.atlas_owned.total
     );
-    assert!(
-        with_content
-            .ledger
-            .claims
-            .iter()
-            .filter(|c| c.property == "documentation")
-            .all(|c| c.owner == ledger::Owner::ContentDerived)
-    );
-    assert_eq!(
-        with_content
-            .documentation()
-            .iter()
-            .map(|a| a.covered)
-            .collect::<Vec<_>>(),
-        [true, false]
-    );
     assert_eq!(
         with_content.gap_reasons(),
         ["No shipped comment in the installation has this text"]
     );
+}
+
+/// The owner of the documentation claim on `key` after attribution against `shipped`, and the
+/// change of the Atlas-owned denominator.
+async fn attributed(config: &str, shipped: &[(&str, &str)]) -> (ledger::Ledger, i64) {
+    let snapshot = live_snapshot(recorded_snapshot().await);
+    let mut ledger = ledger::inventory(&files(&[("common/things.cwt", config)]));
+    let total = |ledger: &ledger::Ledger| {
+        coverage::evaluate(ledger, None, None)
+            .unwrap()
+            .totals
+            .atlas_owned
+            .total as i64
+    };
+    let before = total(&ledger);
+
+    coverage::attribute_authored_text(
+        &mut ledger,
+        &coverage::Content::new(build(&snapshot), &files(shipped)),
+    );
+
+    let change = total(&ledger) - before;
+
+    (ledger, change)
+}
+
+fn owner(ledger: &ledger::Ledger, key: &str) -> ledger::Owner {
+    ledger
+        .claims
+        .iter()
+        .find(|c| c.property == "documentation" && c.subject.last().unwrap() == key)
+        .unwrap()
+        .owner
+}
+
+#[tokio::test]
+async fn documentation_that_no_shipped_comment_holds_is_authored_text() {
+    let config = format!(
+        "{THINGS}thing = {{
+ ### Documented
+ exact = int
+ ### Not shipped
+ absent = int
+ ### Changes the total amount of energy that is stored by the country
+ held = int
+ ### Short text
+ short = int
+ ### Changes the total amount of energy stored by the country
+ reworded = int
+}}
+"
+    );
+    let (ledger, change) = attributed(
+        &config,
+        &[(
+            "common/things/00.txt",
+            "example = {
+ exact = 2 # Documented
+ held = 2 # changes the total amount of energy that is stored by the country Optional
+ short = 2 # Short text, then a longer explanation of the field
+ # Changes the amount of energy stored by the country
+ reworded = 2
+}
+",
+        )],
+    )
+    .await;
+
+    assert_eq!(owner(&ledger, "exact"), ledger::Owner::ContentDerived);
+    assert_eq!(owner(&ledger, "held"), ledger::Owner::ContentDerived);
+    assert_eq!(owner(&ledger, "short"), ledger::Owner::ContentDerived);
+    assert_eq!(owner(&ledger, "absent"), ledger::Owner::AuthoredText);
+    assert_eq!(owner(&ledger, "reworded"), ledger::Owner::AuthoredText);
+    assert_eq!(change, -2);
+}
+
+#[tokio::test]
+async fn documentation_whose_comments_were_not_all_read_keeps_its_owner() {
+    let config = format!("{THINGS}thing = {{\n ### Not shipped\n absent = int\n}}\n");
+    let events = "types = { type[thing] = { path = \"game/events\" } }\nthing = {\n ### Not shipped\n absent = int\n}\n";
+    let (unparsed, _) = attributed(&config, &[("common/things/00.txt", "example = {\n")]).await;
+    let (outside, _) = attributed(events, &[("common/things/00.txt", "a = 1\n")]).await;
+
+    assert_eq!(owner(&unparsed, "absent"), ledger::Owner::ContentDerived);
+    assert_eq!(owner(&outside, "absent"), ledger::Owner::ContentDerived);
+}
+
+#[tokio::test]
+async fn the_common_folder_itself_is_read() {
+    let config = "types = { type[thing] = { path = \"game/common\" } }\nthing = {\n ### Not shipped\n absent = int\n}\n";
+    let (ledger, _) = attributed(config, &[("common/00.txt", "a = 1\n")]).await;
+
+    assert_eq!(owner(&ledger, "absent"), ledger::Owner::AuthoredText);
 }
 
 #[tokio::test]

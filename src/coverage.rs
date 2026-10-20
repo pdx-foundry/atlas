@@ -2,7 +2,7 @@
 /// Direct comparison of Atlas rule answers with config assertions.
 pub mod comparison;
 mod documentation;
-pub use documentation::{Content, ContentReport};
+pub use documentation::{Content, ContentReport, attribute_authored_text};
 mod language_subject;
 mod projection;
 pub(crate) use projection::registry_types;
