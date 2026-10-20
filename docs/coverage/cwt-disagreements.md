@@ -26,3 +26,11 @@ Native lists seven root fields: `fire_only_once`, `gui`, `tooltip`, `tooltip_del
 Open check: whether `text` and `texture` are read by another class at use time (the
 `add_timeline_event` effect takes `override_text` and `override_texture`). Native's answer covers
 the database reader only.
+
+## Renamed directories
+
+### `type[lawsuit]` (`common/lawsuits.cwt`)
+
+| Claim | CWT | Engine | Verdict |
+| --- | --- | --- | --- |
+| `types/type[lawsuit]/path` (`loader_path`) | `game/common/lawsuit_type` | `common/lawsuits` | CWT error: the executable names only `common/lawsuits`, the game ships `common/lawsuits/00_example.txt` (whose guide documents `effect`, `cost` and `duration`), and Native's `common/lawsuits` registry reads those three fields. |
