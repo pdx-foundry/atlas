@@ -121,7 +121,7 @@ fn project_with_gap_facets(
             None => (subjects[rule.subject.as_str()], rule.conditions.clone()),
         };
         let conditions = config_conditions(&key_subtypes, &selectors, subject, &rule_conditions);
-        let mut unconditional = conditions.as_deref().map_or_else(Vec::new, |conditions| {
+        let unconditional = conditions.as_deref().map_or_else(Vec::new, |conditions| {
             let mut questions = alias_blocks.questions(
                 &claims,
                 &selectors,
@@ -141,16 +141,6 @@ fn project_with_gap_facets(
             ));
             questions
         });
-
-        if statement.is_some() && rule.conditions.is_empty() {
-            unconditional.extend(definition_questions(
-                &claims,
-                &selectors,
-                subject,
-                &rule.property,
-                false,
-            ));
-        }
 
         let mut unconditional: Vec<_> = unconditional
             .into_iter()
@@ -275,20 +265,43 @@ fn project_with_gap_facets(
             }
         }
 
-        let mut unconditioned: Vec<_> = questions(
-            &claims,
-            &selectors,
-            &command_files,
-            &subject,
-            &first.property,
-            &[],
-            false,
-        )
-        .into_iter()
-        .chain(alias_blocks.questions(&claims, &selectors, &subject, &first.property, &[], false))
-        .chain(single_aliases.questions(&claims, &selectors, &subject, &first.property, &[], false))
-        .map(|question| (question, first.answer.clone()))
-        .collect();
+        // The statements themselves answer the root type's definition block; their fields answer
+        // its fields.
+        let root_questions = if subject.field.is_none() {
+            definition_questions(&claims, &selectors, &subject, &first.property, false)
+        } else {
+            let mut questions = questions(
+                &claims,
+                &selectors,
+                &command_files,
+                &subject,
+                &first.property,
+                &[],
+                false,
+            );
+
+            questions.extend(alias_blocks.questions(
+                &claims,
+                &selectors,
+                &subject,
+                &first.property,
+                &[],
+                false,
+            ));
+            questions.extend(single_aliases.questions(
+                &claims,
+                &selectors,
+                &subject,
+                &first.property,
+                &[],
+                false,
+            ));
+            questions
+        };
+        let mut unconditioned: Vec<_> = root_questions
+            .into_iter()
+            .map(|question| (question, first.answer.clone()))
+            .collect();
 
         if first.property == "domain" {
             let value_forms = field_value_forms(
@@ -310,9 +323,10 @@ fn project_with_gap_facets(
         }
 
         // An always-read field of every statement also holds under any subtype (SDK-716).
-        let every_always_read = agreed
-            .iter()
-            .all(|rule| subtype_claims.reads_always(&rule.subject));
+        let every_always_read = subject.field.is_some()
+            && agreed
+                .iter()
+                .all(|rule| subtype_claims.reads_always(&rule.subject));
         let subtype_answers = if every_always_read {
             subtype_claims.questions(
                 (&claims, &single_aliases),
@@ -565,12 +579,13 @@ fn rule_evidence(
     Ok(evidence)
 }
 
-/// The rules of a field below the root statements of a registry in
-/// [`ROOT_STATEMENT_REGISTRIES`] that every statement of the registry answers the same way, with
-/// the field below the key, and the `conditions` rules that establish the agreement. Every
-/// statement must answer the property, with no rule conditions, the same value, and the same read
-/// `conditions`; then the field answers the root type's claim that no subtype condition limits. A
-/// statement that lacks the field, or disagrees, gives none.
+/// The rules of a root statement, or of a field below it, in a registry of
+/// [`ROOT_STATEMENT_REGISTRIES`] that every statement the config requires there
+/// ([`configured_statement_keys`]) answers the same way, with the subject below the key and the
+/// `conditions` rules that establish the agreement. Every statement must answer the property, with
+/// no rule conditions, the same value, and the same read `conditions`; then the statement answers
+/// the root type's definition block, and the field the root type's claim that no subtype condition
+/// limits. A statement that lacks the field, or disagrees, gives none.
 fn agreed_statement_rules<'a>(
     rules: &'a snapshot::Snapshot,
     subjects: &BTreeMap<&str, &snapshot::Subject>,
@@ -583,21 +598,7 @@ fn agreed_statement_rules<'a>(
 )> {
     type Group<'a> = (snapshot::Subject, BTreeMap<String, &'a snapshot::Rule>);
 
-    let mut statements: BTreeMap<&str, BTreeSet<String>> = BTreeMap::new();
     let mut groups: BTreeMap<(String, String, &str), Group<'a>> = BTreeMap::new();
-
-    for subject in subjects.values() {
-        let Some((below, key)) = root_statement(key_subtypes, selectors, subject) else {
-            continue;
-        };
-
-        if below.field.is_none() {
-            statements
-                .entry(subject.registry.as_deref().unwrap_or_default())
-                .or_default()
-                .insert(key);
-        }
-    }
 
     for rule in &rules.rules {
         let Some((below, key)) =
@@ -605,9 +606,10 @@ fn agreed_statement_rules<'a>(
         else {
             continue;
         };
-        let (Some(registry), Some(field)) = (below.registry.clone(), below.field.clone()) else {
+        let Some(registry) = below.registry.clone() else {
             continue;
         };
+        let field = below.field.clone().unwrap_or_default();
 
         groups
             .entry((registry, field, rule.property.as_str()))
@@ -616,12 +618,21 @@ fn agreed_statement_rules<'a>(
             .insert(key, rule);
     }
 
+    let statements: BTreeMap<_, _> = ROOT_STATEMENT_REGISTRIES
+        .iter()
+        .map(|registry| {
+            let keys = configured_statement_keys(key_subtypes, selectors, registry);
+
+            (*registry, keys)
+        })
+        .collect();
     let agrees = |registry: &str, by_key: &BTreeMap<String, &snapshot::Rule>| {
         let keys: BTreeSet<_> = by_key.keys().cloned().collect();
         let mut answers = by_key.values().map(|rule| &rule.answer);
         let first = answers.next();
 
-        statements.get(registry) == Some(&keys)
+        !keys.is_empty()
+            && statements.get(registry) == Some(&keys)
             && by_key.values().all(|rule| rule.conditions.is_empty())
             && answers.all(|answer| Some(answer) == first)
     };
@@ -640,6 +651,30 @@ fn agreed_statement_rules<'a>(
                 )
             })
         })
+        .collect()
+}
+
+/// The `root_key[KEY]` condition of each statement that the config requires in `registry`: each
+/// key whose `type_key_filter` alone selects a subtype of the registry's root type. A key that
+/// Native does not answer is still required, so its absence prevents agreement.
+fn configured_statement_keys(
+    key_subtypes: &KeySubtypes<'_>,
+    selectors: &TypeSelectors<'_>,
+    registry: &str,
+) -> BTreeSet<String> {
+    let root_types: BTreeSet<_> = selectors
+        .directories
+        .get(registry)
+        .into_iter()
+        .flatten()
+        .filter(|(_, _, selector)| *selector == Selector::Root)
+        .map(|(type_name, file, _)| (*file, *type_name))
+        .collect();
+
+    key_subtypes
+        .keys()
+        .filter(|(file, type_name, _)| root_types.contains(&(*file, *type_name)))
+        .map(|(_, _, key)| format!("root_key[{key}]"))
         .collect()
 }
 
@@ -1207,8 +1242,9 @@ fn root_statement(
 
 /// The claims of the root type's unconditional definition block (`event = { … }`) that a root
 /// statement's own `property` answers. `subject` is the part below the statement: with no field,
-/// it is the statement itself. Every statement is a definition, so each one answers these claims
-/// and a gap on any of them blocks the credit.
+/// it is the statement itself. Every statement is a definition, so these claims take the
+/// agreement of every statement ([`agreed_statement_rules`]), and a gap on any of them blocks the
+/// credit.
 fn definition_questions(
     claims: &ClaimIndex<'_>,
     selectors: &TypeSelectors<'_>,

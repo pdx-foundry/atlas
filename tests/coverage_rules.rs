@@ -2151,6 +2151,7 @@ async fn a_component_template_key_answers_the_fields_of_its_subtype() {
 async fn a_field_that_every_root_statement_reads_alike_answers_the_root_type() {
     let directory = component_templates(|_| {}).await;
 
+    assert!(directory.covered("value_form", &["component_template"]));
     assert!(directory.covered("field_existence", &["component_template", "key"]));
     // An always-read field of every statement also holds under a value subtype (SDK-716).
     assert!(directory.covered(
@@ -2186,6 +2187,25 @@ async fn agreed_templates(field: &str, property: &str, answer: Value) -> SharedD
         }
     })
     .await
+}
+
+#[tokio::test]
+async fn a_configured_statement_that_native_does_not_answer_prevents_agreement() {
+    let directory = component_templates(|snapshot| {
+        let weapon = TEMPLATE_STATEMENTS[1];
+        let below_weapon = |id: &str| id == weapon || id.starts_with(&format!("{weapon}/"));
+
+        snapshot
+            .subjects
+            .retain(|subject| !below_weapon(&subject.id));
+        snapshot.rules.retain(|rule| !below_weapon(&rule.subject));
+        snapshot.gaps.retain(|gap| !below_weapon(&gap.subject));
+    })
+    .await;
+
+    assert!(!directory.covered("field_existence", &["component_template", "key"]));
+    // The statements' own value forms answer the definition block only when every one agrees.
+    assert!(!directory.covered("value_form", &["component_template"]));
 }
 
 #[tokio::test]
