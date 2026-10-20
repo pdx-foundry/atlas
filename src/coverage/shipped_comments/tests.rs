@@ -1,4 +1,4 @@
-use super::parse;
+use super::{line_keys, parse};
 
 #[test]
 fn comments_bind_to_keys_without_crossing_groups_or_reading_quoted_hashes() {
@@ -133,4 +133,87 @@ fn a_repaired_file_reports_its_problem_and_keeps_its_comments() {
             .iter()
             .any(|source| source.key == ["field"] && source.text == "Documented")
     );
+}
+
+fn line_key<'a>(keys: &'a [super::Key], path: &[&str]) -> &'a super::Key {
+    keys.iter()
+        .find(|key| key.path == path)
+        .unwrap_or_else(|| panic!("no line key {path:?}"))
+}
+
+#[test]
+fn line_keys_skip_assignments_inside_quotes() {
+    let keys = line_keys("description = \"field = 0\" # Field documentation\n");
+
+    assert!(keys.iter().all(|key| key.path != ["field"]));
+}
+
+#[test]
+fn line_keys_extend_an_unclosed_block_to_the_end_of_the_file() {
+    let source = "outer = {\n inner = 1\n # trailing prose\n";
+    let keys = line_keys(source);
+
+    // Past the last line, so a comment on that line is inside the block.
+    assert!(line_key(&keys, &["outer"]).span.end_line > 3);
+}
+
+#[test]
+fn line_keys_keep_a_block_that_opens_on_the_next_line() {
+    let keys = line_keys("N =\n{\n A = 1\n}\n");
+
+    line_key(&keys, &["N", "A"]);
+}
+
+#[test]
+fn line_keys_end_each_block_at_its_closing_brace() {
+    let source = "outer = { inner = { x = 1 } } # Outer documentation\n";
+    let keys = line_keys(source);
+    let close = source.rfind('}').unwrap();
+
+    assert_eq!(line_key(&keys, &["outer"]).span.end, close + 1);
+    assert!(line_key(&keys, &["outer", "inner"]).span.end < close);
+}
+
+#[test]
+fn line_keys_skip_escaped_quotes_inside_a_quoted_value() {
+    let keys = line_keys("description = \"example: \\\"field = 0\\\"\" # Description\n");
+
+    assert!(keys.iter().all(|key| key.path != ["field"]));
+    line_key(&keys, &["description"]);
+}
+
+#[test]
+fn a_comment_on_the_last_line_of_an_unclosed_block_documents_it() {
+    let (parsed, errors) = parse(
+        "common/things/00_example.txt",
+        "outer = {\n inner = 1\n # Outer documentation",
+    );
+
+    assert!(!errors.is_empty());
+    assert!(
+        parsed
+            .iter()
+            .any(|c| c.key == ["outer"] && c.text == "Outer documentation")
+    );
+}
+
+#[test]
+fn line_keys_take_a_scoped_key_whole() {
+    let keys = line_keys("event_target:field = 1 # Scope documentation\n");
+
+    assert!(keys.iter().all(|key| key.path != ["field"]));
+}
+
+#[test]
+fn line_keys_keep_a_quote_open_across_lines() {
+    let keys = line_keys("a = \"first line\nsecond # still quoted\"\nb = 1\n");
+
+    line_key(&keys, &["b"]);
+}
+
+#[test]
+fn line_keys_take_a_path_key_whole() {
+    let keys = line_keys("namespace/field = 1 # Field documentation\n");
+
+    assert!(keys.iter().all(|key| key.path != ["field"]));
 }

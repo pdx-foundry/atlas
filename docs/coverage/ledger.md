@@ -424,7 +424,7 @@ the SDK-525 matcher (the association and comparison rules in [documentation.md](
   `common/defines` under the define's namespace; `common/on_actions`; and `common/game_rules`.
 - An exact match (comment markers removed, whitespace folded) answers the question. The answer
   lists the distinct matched texts, with one content-origin evidence item for each location
-  (`shipped-comment:FILE:LINE-END_LINE`, method `shipped-comments/v2`).
+  (`shipped-comment:FILE:LINE-END_LINE`, method `shipped-comments/v3`).
 - Otherwise a comment that documents the same key and holds the text answers it (decision of
   2026-10-20): it contains the text word for word once both fold case, punctuation and whitespace,
   as where the shipped line adds the example key or "Optional". A comment of another key never
@@ -440,15 +440,14 @@ the SDK-525 matcher (the association and comparison rules in [documentation.md](
   word, once both fold case, punctuation and whitespace, so a comment that CWT shortened or
   recapitalized keeps the claim content-derived, and that comment answers it (above); every
   comment that documents the key in the claim's directories is checked, not only the similar
-  ones. A claim keeps its owner when
-  the installation was not read completely for it: a directory outside `common/` (the corpus), or
-  a directory with a shipped file that has a parse problem, since a file that fails to parse keeps
-  only its guide headings. So the denominator of a run with `--game-content` depends on the
-  installation; a run without it keeps every documentation claim content-derived. On M452 at
-  Native `5143009` this moves 497 claims (392 in `common/` and `events/`); 234 stay open, most in
-  the folders of the README and example files that fail to parse (`scripted_actions`,
-  `traits`, `missions`, `starbase_*`, `pop_faction_types`, `war_goals`). Reading those files'
-  comments without a parse tree would decide them.
+  ones. A claim keeps its owner when the installation was not read for it: a directory outside
+  `common/` (the corpus). A shipped file with a parse problem (most README and example files,
+  whose commented examples hold placeholders) binds its comments to the keys of its lines as well
+  as of the tree the parser could build: each `key =` outside quotes and comments, with the blocks
+  that open around it, so inline, preceding and in-block comments bind as in a parsed file. So the
+  denominator of a run with `--game-content` depends on the installation; a run without it keeps
+  every documentation claim content-derived. On M452 at Native `bb0cc04` this moves 726 claims,
+  and every content-derived documentation claim is answered or moved.
 
 The content-origin rule: content evidence credits only content-derived claims, as the origin table
 of `coverage::suitable` already requires (an engine fact needs engine evidence). Its target is the
@@ -457,9 +456,10 @@ rule snapshot of that build; `evaluate` refuses content of another build and con
 snapshot. A snapshot whose sources are all recorded makes the content evidence unqualified: a
 recording measures no current capture. `coverage.json` then has a `content` section with the
 build, a digest of the sorted relative paths and file hashes, the file count, the parse problems,
-the number of answered questions and each gap. A file that the parser repairs keeps the comments of
-the repaired tree, as in SDK-525; a file that fails to parse keeps only its guide headings
-(`key: prose`). A missed comment withholds credit; an answer still needs an exact or a held text. As with
+the number of answered questions and each gap. A file with a parse problem binds its comments
+to the keys of the repaired tree, as in SDK-525, and to the keys of its lines (above); a file that
+fails to parse also keeps its guide headings (`key: prose`). An answer still needs an exact or a
+held text. As with
 config diagnostics, the CLI exits 2 after writing the reports when the shipped files have parse
 problems.
 
