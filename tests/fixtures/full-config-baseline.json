@@ -8,20 +8,20 @@
   "claims": 61146,
   "totals": {
     "atlas_owned": {
-      "covered": 29466,
+      "covered": 29481,
       "total": 57643,
-      "percent": 51.118089
+      "percent": 51.144111
     },
     "all_claims": {
-      "covered": 29466,
+      "covered": 29481,
       "total": 61146,
-      "percent": 48.189579
+      "percent": 48.21411
     },
     "by_owner": {
       "engine_fact": {
-        "covered": 29466,
+        "covered": 29481,
         "total": 54689,
-        "percent": 53.879208
+        "percent": 53.906636
       },
       "content_derived": {
         "covered": 0,
@@ -138,9 +138,9 @@
     }
   ],
   "ledger_sha256": "bd245ba973a33bf896cdf3ed933a2348dd709c05cf870d5fdd85539b86975837",
-  "coverage_sha256": "b4e1f4454f93e2c8aeac9a74b8afb81254c5b51a062322868896bcf8e36d8594",
-  "atlas_revision": "d104d39f1ec5e5be2c134b3a32286af041d5c9dd",
+  "coverage_sha256": "946063347e5da0f303ce68b44c29bc91ccad3dc46baca0085923ba589a5d0919",
+  "atlas_revision": "719fc9d7fc876052ebd00021cd3921384f83a994",
   "native_revision": "51430090449a4848e289882fd043bd4ee38fcc96",
   "build": "c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b",
-  "atlas_working_changes": "The not-a-field rule over the pin move to 5143009; without shipped comments"
+  "atlas_working_changes": "The lawsuit directory rename over the pin move to 5143009; without shipped comments"
 }
