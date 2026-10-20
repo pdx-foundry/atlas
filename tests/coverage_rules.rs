@@ -902,7 +902,10 @@ async fn repeat_facts_answer_maximum_questions_without_publishing_engine_limits(
         ("Replace", "1", Status::Same),
         ("Accumulate", "inf", Status::Same),
         ("Merges", "inf", Status::Same),
-        ("Replace", "inf", Status::Different),
+        // A repeat that replaces is processed, so it is no limit: any maximum of 1 or more agrees.
+        ("Replace", "inf", Status::Same),
+        ("Replace", "20", Status::Same),
+        ("Replace", "0", Status::Different),
         ("Accumulate", "1", Status::Different),
         ("Merges", "1", Status::Different),
     ] {

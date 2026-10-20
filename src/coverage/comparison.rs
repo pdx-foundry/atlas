@@ -300,7 +300,8 @@ impl ComparisonKind {
                 )
             }),
             Self::Cardinality => match answer.as_str() {
-                Some("Replace") => Some(Value::from(1)),
+                // Not a limit: the engine processes the repeat and keeps the later value.
+                Some("Replace") => Some(Value::String("Replace".into())),
                 Some("Accumulate" | "Merges") => Some(Value::String("inf".into())),
                 _ => answer.as_u64().map(Value::from),
             },
@@ -324,6 +325,12 @@ impl ComparisonKind {
 
         if matches!(self, Self::PushScope) {
             return config == "any";
+        }
+
+        // A repeat that replaces keeps one value and rejects no occurrence, so it agrees with any
+        // maximum of 1 or more and differs from a maximum of 0.
+        if matches!(self, Self::Cardinality) && atlas == "Replace" {
+            return config == "inf" || config.as_u64().is_some_and(|maximum| maximum >= 1);
         }
 
         matches!(self, Self::ValueForm)
