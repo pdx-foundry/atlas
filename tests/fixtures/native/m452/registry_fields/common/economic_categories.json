@@ -16,7 +16,7 @@
         },
         "shape": {
           "value": "Scalar",
-          "repeat": "Unknown"
+          "repeat": "Replace"
         },
         "read": [
           {
@@ -36,7 +36,7 @@
                 },
                 "shape": {
                   "value": "Scalar",
-                  "repeat": "Unknown"
+                  "repeat": "Replace"
                 }
               }
             }
@@ -847,14 +847,6 @@
         "kind": "UnresolvedStorage",
         "subject": {
           "kind": "field",
-          "name": "parent"
-        },
-        "detail": "Repeat behavior is not examined: the read is not a tail call, or its lookup does not store every resolution."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
           "name": "triggered_cost_modifier"
         },
         "detail": "Repeat behavior waits for one shared reader. Nested fields remain unresolved."
@@ -903,7 +895,7 @@
     "source": {
       "build": "c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b",
       "native_version": "0.1.0",
-      "method": "registry-fields/v45",
+      "method": "registry-fields/v64",
       "basis": "StaticAnalysis"
     }
   }

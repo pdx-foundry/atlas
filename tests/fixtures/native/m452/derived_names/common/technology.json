@@ -3,6 +3,39 @@
     "value": [
       {
         "name": [
+          {
+            "Literal": "gfx/interface/icons/technologies/"
+          },
+          {
+            "Field": [
+              "technology_swap",
+              "name"
+            ]
+          },
+          {
+            "Literal": ".dds"
+          }
+        ],
+        "lookup": "File",
+        "stage": "OwnerInitialization",
+        "on_missing": "Unresolved",
+        "condition": {
+          "All": [
+            "Unresolved",
+            {
+              "FieldZero": {
+                "path": [
+                  "technology_swap",
+                  "name"
+                ],
+                "zero": false
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": [
           "ItemKey"
         ],
         "lookup": "Localization",
@@ -109,6 +142,22 @@
           "name": "common/technology"
         },
         "detail": "that the engine initializes every item after reading it is not established, so no name of the initialization is always used: another function constructs an item outside the database's code"
+      },
+      {
+        "kind": "UnresolvedCondition",
+        "subject": {
+          "kind": "answer_item",
+          "name": "gfx/interface/icons/technologies/{technology_swap/name}.dds"
+        },
+        "detail": "what a missing gfx/interface/icons/technologies/{technology_swap/name}.dds gives is not established"
+      },
+      {
+        "kind": "UnresolvedCondition",
+        "subject": {
+          "kind": "answer_item",
+          "name": "gfx/interface/icons/technologies/{technology_swap/name}.dds"
+        },
+        "detail": "gfx/interface/icons/technologies/{technology_swap/name}.dds also depends on field states that the method does not explore"
       },
       {
         "kind": "UnresolvedCondition",

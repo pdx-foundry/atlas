@@ -876,6 +876,10 @@ async fn loader_rules_become_registry_and_nested_field_rules() {
             "name": { "Field": "name" },
         })
     );
+    assert_eq!(
+        answer("registry:common/traditions#keeps_definition_text"),
+        json!(false)
+    );
     for limit in ["file_order", "mod_over_vanilla"] {
         let gap = snapshot
             .gaps
@@ -936,6 +940,7 @@ async fn partial_names_without_a_root_form_and_failed_loader_rules_are_gaps() {
         "recursion",
         "duplicate_rule",
         "definition_names",
+        "keeps_definition_text",
     ] {
         assert!(
             gap(&format!("registry:common/relics#{property}"))
@@ -958,7 +963,7 @@ async fn build_wide_limits_stay_gaps_when_every_loader_rule_question_fails() {
 
     let snapshot = snapshot::assemble(&extraction).unwrap();
 
-    for limit in ["file_order", "mod_over_vanilla"] {
+    for limit in ["file_order", "mod_over_vanilla", "later_text_reads"] {
         assert!(
             snapshot
                 .gaps

@@ -482,29 +482,298 @@
       {
         "name": "triggered_desc",
         "reader": {
-          "numeric": "Unresolved",
-          "scoped_operand": "Unresolved",
-          "id": null,
-          "kind": "Unknown",
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "ea301d40f2b4cb92",
+          "kind": "Block",
           "family": "Unknown"
         },
         "shape": {
-          "value": "Unknown",
-          "repeat": "Unknown"
+          "value": "Block",
+          "repeat": "Accumulate"
         },
         "read": [
           {
             "condition": "Always",
-            "outcome": "Unresolved"
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "ea301d40f2b4cb92",
+                  "kind": "Block",
+                  "family": "Unknown"
+                },
+                "shape": {
+                  "value": "Block",
+                  "repeat": "Accumulate"
+                }
+              }
+            }
           }
         ],
-        "members": "Unresolved",
+        "members": {
+          "Fields": [
+            {
+              "name": "text",
+              "reader": {
+                "numeric": "Unresolved",
+                "scoped_operand": "Unresolved",
+                "id": null,
+                "kind": "Unknown",
+                "family": "Unknown"
+              },
+              "shape": {
+                "value": "Unknown",
+                "repeat": "Unknown"
+              },
+              "read": [
+                {
+                  "condition": "Always",
+                  "outcome": "Unresolved"
+                }
+              ],
+              "members": "Unresolved",
+              "domain": "Unknown",
+              "uses": [],
+              "reference": "NotEstablished",
+              "entry_contexts": [],
+              "read_scope": "Unresolved",
+              "accepted_categories": "Unresolved",
+              "requirement": "Unknown"
+            },
+            {
+              "name": "trigger",
+              "reader": {
+                "numeric": "Unresolved",
+                "scoped_operand": "Unresolved",
+                "id": null,
+                "kind": "Unknown",
+                "family": "Unknown"
+              },
+              "shape": {
+                "value": "Unknown",
+                "repeat": "Unknown"
+              },
+              "read": [
+                {
+                  "condition": "Unresolved",
+                  "outcome": "Unresolved"
+                },
+                {
+                  "condition": "Unresolved",
+                  "outcome": "Unresolved"
+                }
+              ],
+              "members": "Unresolved",
+              "domain": "Unknown",
+              "uses": [],
+              "reference": "NotEstablished",
+              "entry_contexts": [],
+              "read_scope": "Unresolved",
+              "accepted_categories": "Unresolved",
+              "requirement": "Unknown"
+            },
+            {
+              "name": "exclusive_trigger",
+              "reader": {
+                "numeric": "Unresolved",
+                "scoped_operand": "Unresolved",
+                "id": null,
+                "kind": "Unknown",
+                "family": "Unknown"
+              },
+              "shape": {
+                "value": "Unknown",
+                "repeat": "Unknown"
+              },
+              "read": [
+                {
+                  "condition": "Always",
+                  "outcome": "Unresolved"
+                }
+              ],
+              "members": "Unresolved",
+              "domain": "Unknown",
+              "uses": [],
+              "reference": "NotEstablished",
+              "entry_contexts": [],
+              "read_scope": "Unresolved",
+              "accepted_categories": "Unresolved",
+              "requirement": "Unknown"
+            },
+            {
+              "name": "blocked",
+              "reader": {
+                "numeric": {
+                  "Known": null
+                },
+                "scoped_operand": {
+                  "Known": null
+                },
+                "id": "9bd187b656399df6",
+                "kind": "Block",
+                "family": "NotApplicable"
+              },
+              "shape": {
+                "value": "Block",
+                "repeat": "Accumulate"
+              },
+              "read": [
+                {
+                  "condition": "Always",
+                  "outcome": {
+                    "Read": {
+                      "reader": {
+                        "numeric": {
+                          "Known": null
+                        },
+                        "scoped_operand": {
+                          "Known": null
+                        },
+                        "id": "9bd187b656399df6",
+                        "kind": "Block",
+                        "family": "NotApplicable"
+                      },
+                      "shape": {
+                        "value": "Block",
+                        "repeat": "Accumulate"
+                      }
+                    }
+                  }
+                }
+              ],
+              "members": "Unresolved",
+              "domain": "Unknown",
+              "uses": [],
+              "reference": "NotEstablished",
+              "entry_contexts": [],
+              "read_scope": {
+                "Known": []
+              },
+              "accepted_categories": "NotApplicable",
+              "requirement": "Unknown"
+            },
+            {
+              "name": "mandatory",
+              "reader": {
+                "numeric": {
+                  "Known": null
+                },
+                "scoped_operand": {
+                  "Known": null
+                },
+                "id": "9bd187b656399df6",
+                "kind": "Block",
+                "family": "NotApplicable"
+              },
+              "shape": {
+                "value": "Block",
+                "repeat": "Accumulate"
+              },
+              "read": [
+                {
+                  "condition": "Always",
+                  "outcome": {
+                    "Read": {
+                      "reader": {
+                        "numeric": {
+                          "Known": null
+                        },
+                        "scoped_operand": {
+                          "Known": null
+                        },
+                        "id": "9bd187b656399df6",
+                        "kind": "Block",
+                        "family": "NotApplicable"
+                      },
+                      "shape": {
+                        "value": "Block",
+                        "repeat": "Accumulate"
+                      }
+                    }
+                  }
+                }
+              ],
+              "members": "Unresolved",
+              "domain": "Unknown",
+              "uses": [],
+              "reference": "NotEstablished",
+              "entry_contexts": [],
+              "read_scope": {
+                "Known": []
+              },
+              "accepted_categories": "NotApplicable",
+              "requirement": "Unknown"
+            },
+            {
+              "name": "themes",
+              "reader": {
+                "numeric": {
+                  "Known": null
+                },
+                "scoped_operand": {
+                  "Known": null
+                },
+                "id": "9bd187b656399df6",
+                "kind": "Block",
+                "family": "NotApplicable"
+              },
+              "shape": {
+                "value": "Block",
+                "repeat": "Accumulate"
+              },
+              "read": [
+                {
+                  "condition": "Always",
+                  "outcome": {
+                    "Read": {
+                      "reader": {
+                        "numeric": {
+                          "Known": null
+                        },
+                        "scoped_operand": {
+                          "Known": null
+                        },
+                        "id": "9bd187b656399df6",
+                        "kind": "Block",
+                        "family": "NotApplicable"
+                      },
+                      "shape": {
+                        "value": "Block",
+                        "repeat": "Accumulate"
+                      }
+                    }
+                  }
+                }
+              ],
+              "members": "Unresolved",
+              "domain": "Unknown",
+              "uses": [],
+              "reference": "NotEstablished",
+              "entry_contexts": [],
+              "read_scope": {
+                "Known": []
+              },
+              "accepted_categories": "NotApplicable",
+              "requirement": "Unknown"
+            }
+          ]
+        },
         "domain": "Unknown",
         "uses": [],
         "reference": "NotEstablished",
         "entry_contexts": [],
         "read_scope": "Unresolved",
-        "accepted_categories": "Unresolved",
+        "accepted_categories": "NotApplicable",
         "requirement": "Optional"
       },
       {
@@ -13153,6 +13422,58 @@
         "requirement": "Optional"
       },
       {
+        "name": "is_essential",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": "b894933b2b2853a5",
+          "kind": "Boolean",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": "b894933b2b2853a5",
+                  "kind": "Boolean",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": {
+          "Known": []
+        },
+        "accepted_categories": "NotApplicable",
+        "requirement": "Optional"
+      },
+      {
         "name": "additional_ai_weight",
         "reader": {
           "numeric": {
@@ -22491,6 +22812,34 @@
           "Known": []
         },
         "accepted_categories": "NotApplicable",
+        "requirement": "Optional"
+      },
+      {
+        "name": "show_in_tech",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Unknown",
+          "repeat": "Unknown"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved",
         "requirement": "Optional"
       },
       {
@@ -43128,14 +43477,6 @@
         "kind": "UnresolvedReader",
         "subject": {
           "kind": "field",
-          "name": "triggered_desc"
-        },
-        "detail": "The field's alternatives do not establish one shared reader."
-      },
-      {
-        "kind": "UnresolvedReader",
-        "subject": {
-          "kind": "field",
           "name": "desc"
         },
         "detail": "The field's alternatives do not establish one shared reader."
@@ -43208,6 +43549,14 @@
         "kind": "UnresolvedReader",
         "subject": {
           "kind": "field",
+          "name": "show_in_tech"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
           "name": "resources"
         },
         "detail": "The field's alternatives do not establish one shared reader."
@@ -43265,6 +43614,38 @@
         "subject": {
           "kind": "field",
           "name": "is_colony"
+        },
+        "detail": "A loader condition remains unresolved; its outcome is retained separately."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "triggered_desc.text"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "triggered_desc.trigger"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "triggered_desc.exclusive_trigger"
+        },
+        "detail": "The field's alternatives do not establish one shared reader."
+      },
+      {
+        "kind": "UnresolvedCondition",
+        "subject": {
+          "kind": "field",
+          "name": "triggered_desc.trigger"
         },
         "detail": "A loader condition remains unresolved; its outcome is retained separately."
       },
@@ -49846,6 +50227,14 @@
         "kind": "UnresolvedPath",
         "subject": {
           "kind": "field",
+          "name": "show_in_tech"
+        },
+        "detail": "read-scope: reader-path"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
           "name": "resources"
         },
         "detail": "read-scope: reader-path"
@@ -49871,6 +50260,39 @@
         "subject": {
           "kind": "field",
           "name": "is_colony"
+        },
+        "detail": "read-scope: reader-path"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "triggered_desc",
+            "text"
+          ]
+        },
+        "detail": "read-scope: reader-path"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "triggered_desc",
+            "trigger"
+          ]
+        },
+        "detail": "read-scope: reader-path"
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "key_path",
+          "path": [
+            "triggered_desc",
+            "exclusive_trigger"
+          ]
         },
         "detail": "read-scope: reader-path"
       },
@@ -49963,7 +50385,23 @@
         "kind": "UnresolvedStorage",
         "subject": {
           "kind": "field",
-          "name": "triggered_desc"
+          "name": "triggered_desc.text"
+        },
+        "detail": "Repeat behavior waits for one shared reader. Nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "triggered_desc.trigger"
+        },
+        "detail": "Repeat behavior waits for one shared reader. Nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "triggered_desc.exclusive_trigger"
         },
         "detail": "Repeat behavior waits for one shared reader. Nested fields remain unresolved."
       },
@@ -50035,6 +50473,14 @@
         "kind": "UnresolvedStorage",
         "subject": {
           "kind": "field",
+          "name": "show_in_tech"
+        },
+        "detail": "Repeat behavior waits for one shared reader. Nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
           "name": "resources"
         },
         "detail": "Repeat behavior waits for one shared reader. Nested fields remain unresolved."
@@ -50067,7 +50513,7 @@
     "source": {
       "build": "c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b",
       "native_version": "0.1.0",
-      "method": "registry-fields/v45",
+      "method": "registry-fields/v64",
       "basis": "StaticAnalysis"
     }
   }
