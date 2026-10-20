@@ -1,7 +1,7 @@
 //! Content-derived documentation answered by the shipped comments of one installation (SDK-718).
 use super::{
     Answer, Evidence, Gap, Origin, Status, claim_type, file_types,
-    projection::config_directory,
+    projection::content_directory,
     shipped_comments::{self, Comment},
 };
 use crate::ledger::{Claim, Ledger, Owner};
@@ -10,8 +10,9 @@ use serde_json::Value;
 use sha2::{Digest, Sha256};
 use std::collections::{BTreeMap, BTreeSet};
 
-/// Method identity of the evidence that a shipped comment gives.
-const METHOD: &str = "shipped-comments/v1";
+/// Method identity of the evidence that a shipped comment gives. `v2` answers from a comment of
+/// the same key that holds the text, as well as from an exact one.
+const METHOD: &str = "shipped-comments/v2";
 
 /// The base-game shipped files of one identified installation build, with their comments parsed.
 pub struct Content {
@@ -37,9 +38,11 @@ pub struct ContentReport {
     pub files: usize,
     /// Parse problems of the shipped files.
     pub diagnostics: Vec<String>,
-    /// Content-derived documentation questions that every occurrence answers exactly.
+    /// Content-derived documentation questions that every occurrence answers: an exact comment,
+    /// or one of the same key that holds the text.
     pub answered: usize,
-    /// Content-derived documentation questions without an exact match, with the reason.
+    /// Content-derived documentation questions that some occurrence does not answer, with the
+    /// reason.
     pub gaps: Vec<Gap>,
 }
 
@@ -102,6 +105,9 @@ fn files_sha256(files: &BTreeMap<String, String>) -> String {
 enum Comparison {
     /// Equal after removing comment markers and folding whitespace, at every listed location.
     Exact(Vec<Comment>),
+    /// Not equal, but each listed comment documents the same key and contains the text word for
+    /// word once both fold case, punctuation and whitespace (decision of 2026-10-20).
+    Held(Vec<Comment>),
     /// Similar but not equal text; the best candidates.
     Rewritten(Vec<Comment>),
     /// No comment in the claim's directory documents its key with similar text.
@@ -110,7 +116,8 @@ enum Comparison {
 
 /// The answers that `content` gives the content-derived documentation questions, and its report
 /// with the gaps of the others. A question is answered only when each of its occurrences matches
-/// a shipped comment exactly; the answer lists their distinct texts. `qualified` is false when
+/// a shipped comment exactly or is held by one of the same key; the answer lists their distinct
+/// texts. `qualified` is false when
 /// the rule snapshot is a recording, which earns no credit.
 pub(super) fn project(
     ledger: &Ledger,
@@ -218,8 +225,10 @@ pub fn attribute_authored_text(ledger: &mut Ledger, content: &Content) {
                         .any(|folder| in_directories(folder, &directories));
 
                 read_completely
-                    && !applicable_comments(claim, &key, &directories, content)
-                        .any(|comment| holds(&comment.text, &claim.config_answer))
+                    && !matches!(
+                        compare(claim, &key, &directories, content),
+                        Comparison::Exact(_) | Comparison::Held(_)
+                    )
             })
             .map(|(index, _)| index)
             .collect()
@@ -274,7 +283,7 @@ fn answer(comparisons: &[Comparison]) -> Result<Vec<&Comment>, String> {
     let mut comments: Vec<_> = comparisons
         .iter()
         .flat_map(|c| match c {
-            Comparison::Exact(comments) => comments.as_slice(),
+            Comparison::Exact(comments) | Comparison::Held(comments) => comments.as_slice(),
             Comparison::Rewritten(_) | Comparison::Absent => &[],
         })
         .collect();
@@ -306,7 +315,7 @@ impl<'a> TypeDirectories<'a> {
                 continue;
             }
 
-            let directory = config_directory(&claim.config_answer).trim_end_matches('/');
+            let directory = content_directory(&claim.config_answer).trim_end_matches('/');
 
             by_type
                 .entry((claim.file.as_str(), type_name.as_str()))
@@ -429,9 +438,18 @@ fn compare(claim: &Claim, key: &str, directories: &[String], content: &Content) 
         }
     }
 
+    if best_score == EXACT {
+        return Comparison::Exact(best);
+    }
+
+    let holding: Vec<_> = applicable_comments(claim, key, directories, content)
+        .filter(|comment| holds(&shipped_comments::own_text(comment), &claim.config_answer))
+        .cloned()
+        .collect();
+
     match best_score {
+        _ if !holding.is_empty() => Comparison::Held(holding),
         0 => Comparison::Absent,
-        EXACT => Comparison::Exact(best),
         _ => Comparison::Rewritten(best),
     }
 }
