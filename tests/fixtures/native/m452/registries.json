@@ -37,18 +37,18 @@
       {
         "kind": "OutsideMethod",
         "subject": null,
-        "detail": "Registries with nested or late loaders, or with loaders that the database schedule does not list, are not listed."
+        "detail": "Registries with nested loaders, or with loaders outside the database schedule whose own functions do not both enumerate a content directory and read statements, are not listed."
       },
       {
         "kind": "UnnamedRegistries",
         "subject": null,
-        "detail": "13 of 198 scheduled databases have no template loader, and their own functions enumerate no single content directory."
+        "detail": "10 of 198 scheduled databases have no template loader, and their own functions enumerate no content directory that the method establishes."
       }
     ],
     "source": {
       "build": "c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b",
       "native_version": "0.1.0",
-      "method": "registry-directories/v6",
+      "method": "registry-directories/v8",
       "basis": "StaticAnalysis"
     }
   }

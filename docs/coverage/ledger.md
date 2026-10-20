@@ -370,16 +370,18 @@ definition must contain this field, not a count above 1". `Optional` answers eve
 
 ### Loader rules (SDK-797)
 
-Native's `loader_rules` answer (`loader-rules/v4`) becomes four properties of each registry
-subject: `extension` (`{"suffix": …}`, `null` for every file), `recursion`, `duplicate_rule` and
-`definition_names` (the forms of root statements). A form that names a nested block becomes the
+Native's `loader_rules` answer (`loader-rules/v8`) becomes five properties of each registry
+subject: `extension` (`{"suffix": …}`, `null` for every file), `recursion`, `duplicate_rule`,
+`definition_names` (the forms of root statements) and `keeps_definition_text` (whether the loader
+keeps a definition's text after it reads it; no config question joins it). A form that names a nested block becomes the
 `definition_names` rule of the field at its path. A property that Native leaves unresolved, or a
 partial `extension`, `recursion` or `duplicate_rule`, is a gap on the registry that blocks every
 joined claim. A partial `definition_names` answer keeps its
 stated forms and publishes a `definition_names.partial` gap that joins no config question; with no
-root form it is unresolved. The file order and the mod-over-vanilla rule, which Native states once
-for the build (a live fixture control checks the file order for a template loader), are the gaps `inventory:loader_rules#file_order` and
-`#mod_over_vanilla`. They join no question, so a claim that needs only those stated facts and the
+root form it is unresolved. The file order, the mod-over-vanilla rule and whether other code reads a
+definition's file again, which Native states once for the build (a live fixture control checks the
+file order for a template loader), are the gaps `inventory:loader_rules#file_order`,
+`#mod_over_vanilla` and `#later_text_reads`. They join no question, so a claim that needs only those stated facts and the
 duplicate rule keeps its credit.
 
 The type lines join by the type's selector:
