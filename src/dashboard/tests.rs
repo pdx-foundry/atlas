@@ -274,7 +274,7 @@ fn baseline_text_round_trips() {
     assert_eq!(
         texts.keys().map(String::as_str).collect::<Vec<_>>(),
         [
-            "common/relics.cwt.txt",
+            "common%2Frelics.cwt.txt",
             BASELINE_INDEX,
             "traditions.cwt.txt"
         ]
@@ -321,7 +321,20 @@ fn a_change_to_one_files_claims_changes_only_its_shard_and_the_index() {
         before.keys().collect::<Vec<_>>(),
         after.keys().collect::<Vec<_>>()
     );
-    assert_eq!(differ, ["common/relics.cwt.txt", BASELINE_INDEX]);
+    assert_eq!(differ, ["common%2Frelics.cwt.txt", BASELINE_INDEX]);
+}
+
+#[test]
+fn shard_names_are_flat_and_distinct() {
+    assert_eq!(
+        shard_path("common/traditions.cwt"),
+        "common%2Ftraditions.cwt.txt"
+    );
+    assert_ne!(
+        shard_path("foo.cwt.txt/bar.cwt"),
+        shard_path("foo.cwt.txt%2Fbar.cwt")
+    );
+    assert!(!shard_path("foo.cwt.txt/bar.cwt").contains('/'));
 }
 
 #[test]
@@ -354,6 +367,23 @@ fn an_incomplete_or_inconsistent_baseline_is_refused() {
                 .push_str("question:x:1\n");
         })
         .contains("holds")
+    );
+    assert!(
+        edited(&|texts| {
+            let relic = texts["common%2Frelics.cwt.txt"]
+                .lines()
+                .next()
+                .unwrap()
+                .to_owned();
+            let tradition = texts["traditions.cwt.txt"]
+                .lines()
+                .next()
+                .unwrap()
+                .to_owned();
+            let shard = texts.get_mut("traditions.cwt.txt").unwrap();
+            *shard = shard.replacen(&tradition, &relic, 1);
+        })
+        .contains("more than one shard")
     );
     assert!(
         edited(&|texts| {

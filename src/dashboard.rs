@@ -40,7 +40,7 @@ pub const BASELINE_INDEX: &str = "index.txt";
 /// The covered claims of one coverage run, with the identity of the inputs it measured.
 ///
 /// Its text form, committed at `docs/coverage/covered/`, is one shard per config file
-/// (`<config path>.txt`, one covered claim ID per line, sorted) and an index ([`BASELINE_INDEX`])
+/// (`<config path>.txt` with `/` as `%2F`, one covered claim ID per line, sorted) and an index ([`BASELINE_INDEX`])
 /// with the run's identity, totals and the claim count of each shard. A change to one config
 /// file's coverage changes its shard and the index only.
 #[derive(Clone, Debug, PartialEq, Eq)]
@@ -162,6 +162,11 @@ impl Baseline {
             files,
         };
         let shard_claims = baseline.claims().count();
+        let distinct_claims = baseline.claims().collect::<BTreeSet<_>>().len();
+
+        if distinct_claims != shard_claims {
+            return Err("A baseline claim is in more than one shard".into());
+        }
 
         if shard_claims != covered {
             return Err(format!(
@@ -193,9 +198,12 @@ impl Baseline {
     }
 }
 
-/// The shard of one config file, relative to the baseline directory.
+/// The shard of one config file: its path with `%` and `/` percent-encoded, so every shard is a
+/// file of the baseline directory itself and no two config paths name one shard.
 fn shard_path(file: &str) -> String {
-    format!("{file}.txt")
+    let name = file.replace('%', "%25").replace('/', "%2F");
+
+    format!("{name}.txt")
 }
 
 fn count(value: &str) -> Result<usize, String> {
