@@ -288,17 +288,28 @@ impl ComparisonKind {
             Self::FileNamed => answer.get("statement").map(|_| Value::Bool(false)),
             Self::Priority => answer.as_str().map(|rule| Value::String(rule.into())),
             Self::PriorityListed => (!answer.is_null()).then_some(Value::Bool(true)),
-            Self::ValueForm => answer.get("form")?.as_str().map(|form| {
-                Value::String(
-                    match form {
-                        "boolean" => "bool",
-                        "integer" => "int",
-                        "number" => "float",
-                        other => other,
-                    }
-                    .into(),
-                )
-            }),
+            // A block that also takes a bare value (a weight block) compares as both forms.
+            Self::ValueForm => {
+                let config_form = |answer: &Value| {
+                    answer.get("form")?.as_str().map(|form| {
+                        Value::String(
+                            match form {
+                                "boolean" => "bool",
+                                "integer" => "int",
+                                "number" => "float",
+                                other => other,
+                            }
+                            .into(),
+                        )
+                    })
+                };
+                let form = config_form(answer)?;
+
+                match answer.get("scalar").and_then(config_form) {
+                    Some(scalar) => Some(json!([form, scalar])),
+                    None => Some(form),
+                }
+            }
             Self::Cardinality => match answer.as_str() {
                 // No repeat behavior rejects an occurrence, so none states a finite maximum.
                 Some("Replace" | "Accumulate" | "Merges") => Some(Value::String("inf".into())),
@@ -320,6 +331,10 @@ impl ComparisonKind {
     fn agrees(&self, config: &Value, atlas: &Value) -> bool {
         if config == atlas {
             return true;
+        }
+
+        if let (Self::ValueForm, Some(forms)) = (self, atlas.as_array()) {
+            return forms.iter().any(|form| self.agrees(config, form));
         }
 
         if matches!(self, Self::PushScope) {
