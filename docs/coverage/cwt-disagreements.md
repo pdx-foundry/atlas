@@ -38,41 +38,46 @@ first 30 characters of the config answer, Atlas's answer form), as listed in the
   `registry-directories/v8` (registry discovery: the content directory of `common/lawsuits`).
 
 Only the comparable properties are compared (presence, loader lines, basic value form, numeric
-cardinality, enum members, event-kind `push_scope`). Verdicts: **CWT error** — the engine fact
-contradicts the config; **Atlas defect** or **Native defect** — Atlas's answer is wrong or
-incomplete, with the cause; **open** — not decided yet.
+cardinality, enum members, event-kind `push_scope`). Verdicts: **CWT error** — the config states a
+fact that the engine contradicts (a wrong value form, a key or file the engine never reads);
+**modelling difference** — the config states a cwtools modelling decision, not engine knowledge
+(soft cardinality, subtypes: Native `docs/roadmap.md`, "The target, measured"), so neither side is
+wrong; **Atlas defect** or **Native defect** — Atlas's answer is wrong or incomplete, with the
+cause; **open** — not decided yet.
 
 A repeat behavior says what the engine does with a repeated key; it is not an occurrence limit.
 `Replace`, `Accumulate` and `Merges` all process a second occurrence and reject none (`Replace`
-keeps the later value), so Atlas compares each as `inf` ([ledger](ledger.md), field subjects), and
-a finite config maximum is stricter than the engine.
+keeps the later value), so Atlas compares each as `inf` ([ledger](ledger.md), field subjects). A
+finite config maximum against a repeat behavior is soft cardinality: the engine accepts the repeat,
+and a compiler may warn about it.
 
 | # | Property | CWT | Atlas | Claims | Verdict |
 | ---: | --- | --- | --- | ---: | --- |
-| 1 | `cardinality_maximum` | `1` | repeat `Merges` | 201 | CWT error: a repeated block merges into the first; the engine processes it |
+| 1 | `cardinality_maximum` | `1` | repeat `Merges` | 201 | Modelling difference: soft cardinality (a repeated block merges into the first; the engine accepts repeats, a compiler may warn) |
 | 2 | `loader_path` (`path_extension`) | `.txt` | no suffix filter | 167 | CWT error: a template loader reads every file of any extension (Native `loader-rules.md`, "The file enumeration") |
-| 3 | `cardinality_maximum` | `1` | repeat `Accumulate` | 76 | CWT error: each repeat appends |
+| 3 | `cardinality_maximum` | `1` | repeat `Accumulate` | 76 | Modelling difference: soft cardinality (each repeat appends; the engine accepts repeats, a compiler may warn) |
 | 4 | `cardinality_minimum` | `1` | `0` (Optional) | 41 | **Open.** The census loads a definition without the field and logs nothing, but a check that runs only when another field is set is not observed ([pin move B](pin-move-b.md): an `Optional` difference is a finding to investigate). Route: read each field's post-read hooks for a conditional absence check, or a fixture probe with the other fields set |
 | 5 | `value_form` | `int` | `number` | 32 | CWT error: the reader is fixed point (`FixedPoint`) and accepts a fraction |
-| 6 | `cardinality_maximum` | `1` | repeat `Replace` | 1,377 | CWT error: a repeated key replaces the earlier value; the engine processes it and rejects none |
+| 6 | `cardinality_maximum` | `1` | repeat `Replace` | 1,377 | Modelling difference: soft cardinality (a repeated key replaces the earlier value; the engine accepts repeats, a compiler may warn) |
 | 7 | `value_form` | `block` | `reference` | 12 | Native defect, likely: lists of keys (`allowed_archetypes = { … }`) that Native reports as one `Scalar` reference per occurrence (`Accumulate`) |
 | 8 | `value_form` | `int` | `block` | 9 | Atlas defect: Native reports the weight block's bare value (`members.WeightBlock.scalar`, a `FixedPoint` reader) for all 17 fields of groups 8–9, but Atlas's `assemble_field_value_form` answers `block` for every `Block` reader without reading it |
 | 9 | `value_form` | `float` | `block` | 8 | Atlas defect, as #8 |
 | 10 | `cardinality_minimum` | `0` | `1` (Required) | 6 | CWT error: the engine logs the field's absence (census) |
 | 11 | `value_form` | `float` | `integer` | 4 | CWT error: the reader is an `Integer` reader |
 | 12 | `loader_path` (`type_per_file`, `name_from_file`) | `yes` | names from the root key | 2 | CWT error: `common/diplomacy_economy` is a template loader (`loader-rules/v8`, `Known`), which names each root statement (`once`, …) by its key, not one definition per file |
-| 13 | `cardinality_maximum` | `20` | repeat `Accumulate` | 1 | CWT error: Native reads `policy/option` with repeat `Accumulate` into an array of `CPolicyOption` and states no limit, and the executable's strings hold no option-count diagnostic; a display limit would not be a load rule |
+| 13 | `cardinality_maximum` | `20` | repeat `Accumulate` | 1 | Modelling difference: soft cardinality (Native reads `policy/option` with repeat `Accumulate` into an array of `CPolicyOption` and states no limit, and the executable's strings hold no option-count diagnostic) |
 | 14 | `loader_path` (`name_field`) | `localization` | names none | 1 | CWT error: `common/start_screen_messages` holds anonymous `part = { … }` statements, and Native states that the loader names none of its definitions (`Known` empty) |
 | 15 | `scope_context` (`push_scope`) | `country` | `observer` | 1 | CWT error: observer events are read in the observer scope |
 | 16 | `loader_path` (`skip_root_key`) | `collection` | names from the root key | 1 | CWT error: `common/country_container` is a template loader that names the one root statement `collection`; the `…_unit` blocks are its members, which no other shipped file names |
 | 17 | `value_form` | `int` | `scoped_number` | 1 | CWT error: `scripted_action/cooldown` accepts a scripted value |
 | 18 | `loader_path` (`path`) | `game/common/lawsuit_type` | `common/lawsuits` | 1 | CWT error ([renamed directories](#renamed-directories); evidence `registry-directories/v8`) |
-| 19 | `cardinality_maximum` | `0` | repeat `Replace` | 1 | CWT error: `deposit/subtype[!null]/is_null` is read on every path (`conditions` `Always`); CWT's `0..0` describes the subtype that the key selects, not a rule the engine applies. The verdict rests on the unconditional read, not on `Replace` |
+| 19 | `cardinality_maximum` | `0` | repeat `Replace` | 1 | Modelling difference: subtypes (`deposit/subtype[!null]/is_null` is read on every path, `conditions` `Always`; CWT's `0..0` describes the subtype that the key selects, not a rule the engine applies) |
 
-Totals: CWT error 15 groups (1,872 claims); Atlas defect 2 groups (17 claims); Native defect 1
-group (12 claims); open 1 group (41 claims). Group 6 was 14 `inf` claims against `Replace`, an
-artifact of comparing `Replace` as a maximum of 1; #52 removed it, and the 1,377 `1` claims are
-the new group 6.
+Totals: CWT error 10 groups (216 claims); modelling difference 5 groups (1,656 claims: soft
+cardinality 1,655, subtypes 1); Atlas defect 2 groups (17 claims); Native defect 1 group (12
+claims); open 1 group (41 claims). Group 6 was 14 `inf` claims against `Replace`, an artifact of
+comparing `Replace` as a maximum of 1; #52 removed it, and the 1,377 `1` claims are the new group
+6.
 
 ### Examples
 
