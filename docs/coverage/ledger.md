@@ -483,9 +483,10 @@ Field subjects retain paired Native `read` alternatives, summary `shape`, `condi
 Unknown and Unresolved values remain explicit. The `uses` stage is `stored_value_selection`,
 not parser acceptance. Empty selections do not establish unconditional use. Domain Unknown values are published as gaps. An unconditional read publishes
 `repeat_behavior` as `Replace`, `Accumulate` or `Merges`; Atlas publishes no engine occurrence
-maximum. A repeat behavior is not an occurrence limit: each processes a repeated key. For config
-comparison, `Accumulate` and `Merges` correspond to `inf`, and `Replace` (the later value wins)
-agrees with any maximum of 1 or more and differs from a maximum of 0.
+maximum. A repeat behavior is not an occurrence limit: each processes a repeated key, and none
+rejects one (`Replace` keeps the later value). For config comparison, `Replace`, `Accumulate` and
+`Merges` all correspond to `inf`: they agree with a config maximum of `inf` and differ from any
+finite maximum.
 These facts answer maximum questions even when the CWT assertion differs; coverage and agreement
 remain separate. Unknown or conditional repeat behavior earns no unconditional credit. A minimum
 stays unresolved unless validation reports the field's absence; finite accepted fixtures do not
