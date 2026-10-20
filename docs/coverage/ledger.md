@@ -444,7 +444,7 @@ the SDK-525 matcher (the association and comparison rules in [documentation.md](
   as of the tree the parser could build: each `key =` outside quotes and comments, with the blocks
   that open around it, so inline, preceding and in-block comments bind as in a parsed file. So the
   denominator of a run with `--game-content` depends on the installation; a run without it keeps
-  every documentation claim content-derived. On M452 at Native `5143009` this moves MOVED claims,
+  every documentation claim content-derived. On M452 at Native `5143009` this moves 726 claims,
   and every content-derived documentation claim is answered or moved.
 
 The content-origin rule: content evidence credits only content-derived claims, as the origin table
