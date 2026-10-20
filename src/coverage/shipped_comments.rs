@@ -47,6 +47,120 @@ fn keys(items: &[Item], path: &[String], output: &mut Vec<Key>) {
         }
     }
 }
+/// The keys of `source` read line by line, without a parse tree: each `key =` outside quotes and
+/// comments, with the path of the blocks that open around it and the place where its own block
+/// closes (the end of the file for a block that never closes). A file that the parser cannot read
+/// still binds its comments to these keys.
+fn line_keys(source: &str) -> Vec<Key> {
+    let mut keys: Vec<Key> = Vec::new();
+    let mut open: Vec<Option<usize>> = Vec::new();
+    // The key whose value has not started yet; a `{` as its next token opens its block.
+    let mut pending: Option<usize> = None;
+    let mut quoted = false;
+    let mut escaped = false;
+    let mut offset = 0;
+    let mut lines = 0;
+
+    for (index, line) in source.split_inclusive('\n').enumerate() {
+        let mut rest = line;
+
+        lines = index + 1;
+
+        while let Some(ch) = rest.chars().next() {
+            let at = offset + line.len() - rest.len();
+
+            if quoted {
+                match ch {
+                    _ if escaped => escaped = false,
+                    '\\' => escaped = true,
+                    '"' => quoted = false,
+                    _ => {}
+                }
+            } else if ch == '#' {
+                // A comment ends the line's code; a quote that spans lines keeps its state.
+                break;
+            } else if ch == '"' {
+                quoted = true;
+                pending = None;
+            } else if ch == '{' {
+                open.push(pending.take());
+            } else if ch == '}' {
+                pending = None;
+
+                if let Some(Some(key)) = open.pop() {
+                    keys[key].span.end = at + 1;
+                    keys[key].span.end_line = index + 1;
+                }
+            } else if let Some((key, length)) = assignment(rest) {
+                if !valid_key(key) {
+                    // A scoped or otherwise invalid key is one token, never a field after it.
+                    pending = None;
+                    rest = &rest[length..];
+                    continue;
+                }
+
+                let path: Vec<String> = open
+                    .iter()
+                    .flatten()
+                    .map(|&parent| keys[parent].path.last().expect("key path").clone())
+                    .chain([key.to_string()])
+                    .collect();
+
+                keys.push(Key {
+                    path,
+                    span: Span {
+                        start: at,
+                        end: at + key.len(),
+                        line: index + 1,
+                        end_line: index + 1,
+                    },
+                });
+                pending = Some(keys.len() - 1);
+                rest = &rest[length..];
+                continue;
+            } else if !ch.is_whitespace() {
+                pending = None;
+            }
+
+            rest = &rest[ch.len_utf8()..];
+        }
+
+        offset += line.len();
+    }
+
+    // A block that never closes holds every line to the end, its last line included.
+    for key in open.into_iter().flatten() {
+        keys[key].span.end = source.len();
+        keys[key].span.end_line = lines + 1;
+    }
+
+    keys
+}
+
+/// The key token at the start of `text`, with the length to skip: through the `=` of an
+/// assignment, else the whole token (`None` when `text` starts with no key character). The token
+/// is taken whole, scope prefixes (`event_target:field`) and paths (`namespace/field`) included,
+/// so its tail is never a key.
+fn assignment(text: &str) -> Option<(&str, usize)> {
+    let key_length = text
+        .find(|c: char| !(c.is_alphanumeric() || "_@.-$:/".contains(c)))
+        .unwrap_or(text.len());
+
+    if key_length == 0 {
+        return None;
+    }
+
+    let key = &text[..key_length];
+    let after = &text[key_length..];
+    let spaces = after.len() - after.trim_start().len();
+
+    if after.trim_start().starts_with('=') {
+        Some((key, key_length + spaces + 1))
+    } else {
+        Some(("", key_length))
+    }
+}
+
 /// Adjacent comment lines that read as one text.
 #[derive(Clone)]
 struct Run {
@@ -151,8 +265,8 @@ fn runs(source: &str) -> Vec<Run> {
 /// Binds preceding, inline and empty-block comments to the parsed keys of one shipped file, and
 /// reads guide headings such as `key: prose`. Defines also inherit a leading group comment
 /// through adjacent siblings until a blank line. Example files expose commented assignments.
-/// Returns the comments and the file's parse problems. A file that the parser repairs keeps the
-/// comments of the repaired tree; a file that fails to parse keeps only its guide headings.
+/// Returns the comments and the file's parse problems. A file with a parse problem also binds
+/// its comments to the keys that [`line_keys`] reads, since a repaired or failed tree loses keys.
 pub(crate) fn parse(file: &str, source: &str) -> (Vec<Comment>, Vec<String>) {
     let example = file.rsplit('/').next().is_some_and(|name| {
         let name = name.to_ascii_lowercase();
@@ -163,17 +277,26 @@ pub(crate) fn parse(file: &str, source: &str) -> (Vec<Comment>, Vec<String>) {
     } else {
         source.into()
     };
-    let document = match script::parse(&view, file) {
-        Ok(document) => document,
-        Err(error) => return (named_comments(file, source), vec![error.to_string()]),
+    let (mut entries, diagnostics) = match script::parse(&view, file) {
+        Ok(document) => {
+            let diagnostics: Vec<_> = document
+                .diagnostics
+                .iter()
+                .map(|d| format!("{file}:{}: {:?}", d.span.line, d.kind))
+                .collect();
+            let mut entries = Vec::new();
+
+            keys(&document.items, &[], &mut entries);
+            (entries, diagnostics)
+        }
+        Err(error) => (Vec::new(), vec![error.to_string()]),
     };
-    let diagnostics = document
-        .diagnostics
-        .iter()
-        .map(|d| format!("{file}:{}: {:?}", d.span.line, d.kind))
-        .collect();
-    let mut entries = Vec::new();
-    keys(&document.items, &[], &mut entries);
+
+    // A repaired or failed parse can lose keys; the line keys bind those comments too.
+    if !diagnostics.is_empty() {
+        entries.extend(line_keys(&view));
+    }
+
     let lines: Vec<_> = view.lines().collect();
     let mut output = named_comments(file, source);
     for comment in runs(&view) {

@@ -873,21 +873,19 @@ fn assemble_field_value_form(
         .transpose()
         .map_err(|error| error.to_string())?;
     let shape = match reader.kind {
-        ReaderKind::Boolean => Some(("boolean", json!("boolean"))),
-        ReaderKind::Integer => Some(("integer", json!("integer"))),
-        ReaderKind::FixedPoint | ReaderKind::Float => Some(("number", json!("number"))),
-        // A literal number, or a script value or variable that the scope supplies.
-        ReaderKind::ScopedNumeric => Some(("scoped_number", json!(["number", "string"]))),
-        ReaderKind::String => Some(("string", json!("string"))),
-        ReaderKind::Reference => Some(("reference", json!("string"))),
+        // A weight or script-value block also takes a bare value, which Native reports with the
+        // block's members; the rule names that value's form beside the block.
         ReaderKind::Block => {
-            rule(
-                snapshot,
-                id,
-                "value_form",
-                json!({"form":"block","reader":reader_id}),
-                evidence.clone(),
-            );
+            let mut value_form = json!({"form":"block","reader":reader_id});
+
+            if let FieldMembers::WeightBlock(weight) = &field.members
+                && let GrammarProperty::Known(Some(scalar)) = &weight.scalar
+                && let Some((form, _)) = scalar_form(scalar.kind)
+            {
+                value_form["scalar"] = json!({"form": form, "reader": scalar.id});
+            }
+
+            rule(snapshot, id, "value_form", value_form, evidence.clone());
             return Ok(true);
         }
         // The accepted names are the value form. Two fields can share a converter and still
@@ -906,7 +904,7 @@ fn assemble_field_value_form(
 
             None
         }
-        _ => None,
+        kind => scalar_form(kind),
     };
     let Some((form, schema_type)) = shape else {
         gap(
@@ -943,6 +941,21 @@ fn assemble_field_value_form(
         evidence.clone(),
     );
     Ok(false)
+}
+
+/// The value form and JSON Schema type of a reader that takes one value, or `None` for a block,
+/// a keyword and an unknown reader.
+fn scalar_form(kind: ReaderKind) -> Option<(&'static str, Value)> {
+    Some(match kind {
+        ReaderKind::Boolean => ("boolean", json!("boolean")),
+        ReaderKind::Integer => ("integer", json!("integer")),
+        ReaderKind::FixedPoint | ReaderKind::Float => ("number", json!("number")),
+        // A literal number, or a script value or variable that the scope supplies.
+        ReaderKind::ScopedNumeric => ("scoped_number", json!(["number", "string"])),
+        ReaderKind::String => ("string", json!("string")),
+        ReaderKind::Reference => ("reference", json!("string")),
+        _ => return None,
+    })
 }
 
 fn assemble_field_repeat(

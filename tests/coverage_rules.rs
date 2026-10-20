@@ -2563,6 +2563,23 @@ async fn a_partial_answer_or_another_gap_leaves_an_unlisted_key_open() {
     }
 }
 
+#[tokio::test]
+async fn a_weight_block_compares_with_its_bare_value_form_too() {
+    let status = |form: &'static str| async move {
+        let source = format!(
+            "types = {{ type[tradition] = {{ path = \"game/common/traditions\" }} }}\ntradition = {{ ai_weight = {form} }}\n"
+        );
+        let directory = SharedDirectory::evaluate(&[("traditions.cwt", &source)], |_| {}).await;
+
+        directory.status("value_form", &["tradition", "ai_weight"])
+    };
+
+    // The weight block's bare value is a fixed-point number.
+    assert_eq!(status("float").await, Status::Same);
+    assert_eq!(status("block").await, Status::Same);
+    assert_eq!(status("int").await, Status::Different);
+}
+
 const AGENDA_KINDS: &str = r#"
 types = { type[tradition] = { path = "game/common/traditions" } }
 enums = { enum[agenda_kind] = { first second } }

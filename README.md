@@ -57,8 +57,8 @@ another config or snapshot is left out with a warning. A PR that changes coverag
 component template root statements, the root-statement agreement rule, the single alias join and
 the M452 installation's shipped comments, with documentation that no shipped comment holds as
 authored text, documentation that a comment of the same key holds, the renamed lawsuit
-directory, whether each loader keeps a definition's text, and the keys the engine never reads
-(32,007 of 57,146 claims).
+directory, whether each loader keeps a definition's text, and the comments of shipped files
+that fail to parse, bound by their lines (31,995 of 56,917 claims).
 
 The [registry comparison](docs/coverage/registries.md) puts Native's registry list beside the
 config types and records a reason for each type that no registry names:
@@ -95,6 +95,8 @@ for their exact build and Native method, including confirmed config/comment disa
 names without independent scope evidence. These recorded checks are separate from comparison
 with the current config. Callback scope rules include `prev` and apply the self-link assumption;
 missing independent evidence remains an entry-scope gap.
+A weight or script-value block whose bare value Native reports (`WeightBlock.scalar`) carries that
+value's form beside `block` in its `value_form` rule (`scalar`), and compares as either form.
 Generic CWT `scalar` is compatible with a concrete scalar reader; CWT aliases and other modeled
 forms remain unclassified until a semantic mapping exists.
 
