@@ -387,6 +387,14 @@ fn an_incomplete_or_inconsistent_baseline_is_refused() {
     );
     assert!(
         edited(&|texts| {
+            let shard = texts.get_mut("traditions.cwt.txt").unwrap();
+            let first = shard.lines().next().unwrap().to_owned();
+            shard.push_str(&format!("{first}\n"));
+        })
+        .contains("repeats a claim")
+    );
+    assert!(
+        edited(&|texts| {
             let index = texts.get_mut(BASELINE_INDEX).unwrap();
             *index = index.replace("observed_live true", "observed_live yes");
         })
