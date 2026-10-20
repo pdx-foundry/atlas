@@ -61,15 +61,12 @@ of its own kind: a named baseline of the other kind is an error, and the committ
 is left out for a static or recorded run. Run `compare` and `registries` into the same
 output folder first to add agreement with the config, a list of each disagreement (config answer beside Atlas's) and each type's registry join; a report of
 another config or snapshot is left out with a warning. A PR that changes coverage replaces
-`docs/coverage/covered/` with the new `covered/`; a change to one config file's coverage changes
-its shard and the index only. The committed baseline is a live snapshot at Native
-`ec3342f`, made with the [pin move B capture](docs/coverage/pin-move-b.md) commands, with the
-component template root statements, the root-statement agreement rule, the single alias join and
-the M452 installation's shipped comments, with documentation that no shipped comment holds as
-authored text, documentation that a comment of the same key holds, the renamed lawsuit
-directory, whether each loader keeps a definition's text, and the comments of shipped files
-that fail to parse, bound by their lines, and the keys the engine never reads (32,103 of 56,917
-claims).
+`docs/coverage/covered/` with the new `covered/`, made from the retained live snapshot of the
+current pin (no game), and updates `tests/fixtures/full-config-baseline.json`; a change to one
+config file's coverage changes its shard and the index only. The PR states its coverage delta in
+its description. The count below changes only at a pin move: the live snapshot at Native
+`ec3342f`, made with the [pin move B capture](docs/coverage/pin-move-b.md) commands, covers
+32,103 of 56,917 claims.
 
 The [registry comparison](docs/coverage/registries.md) puts Native's registry list beside the
 config types and records a reason for each type that no registry names:

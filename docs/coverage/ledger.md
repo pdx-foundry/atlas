@@ -467,7 +467,10 @@ whitespace edits, exact and contradictory answers, unsupported/synthetic/partial
 and condition mismatch, conflict/gap handling, duplicate evidence, denominator reconciliation,
 unknown formats, and relocated CLI inputs. The full-config gate separately pins both input hashes
 and both output digests. Baseline changes require inspecting the changed findings before updating
-the fixture; a changed digest is not a reason to rebaseline automatically.
+the fixture; a changed digest is not a reason to rebaseline automatically. A PR that changes Atlas
+output updates the fixture and `docs/coverage/covered/` from the retained live snapshot of the
+current pin, and states its coverage delta in its description; the README count changes only at a
+pin move.
 
 Direct snapshot-to-claim comparison is implemented by SDK-524 as a separate test report; SDK-570
 added the language name lists, the `script-docs` logs, the define files and the loaded modifier
