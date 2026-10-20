@@ -1,6 +1,9 @@
 //! Project Atlas rule records onto config questions without comparing answers.
 
-use super::{Answer, Evidence, Gap, Origin, Projection, Status};
+use super::{
+    Answer, Evidence, Gap, Origin, Projection, Status,
+    config_types::{ConfigTypes, KeySubtypes, is_subtype, subtypes},
+};
 use crate::{
     ledger::{Claim, Ledger},
     snapshot,
@@ -10,13 +13,8 @@ use serde_json::{Value, json};
 use std::collections::{BTreeMap, BTreeSet};
 
 type ClaimIndex<'a> = BTreeMap<(&'a str, &'a str, Vec<&'a str>, Vec<&'a str>), BTreeSet<&'a str>>;
-/// Config subtypes whose whole selector is a root key, by (file, type, root key).
-type KeySubtypes<'a> = BTreeMap<(&'a str, &'a str, &'a str), BTreeSet<&'a str>>;
-/// The config types that load from each content directory, as (type, file).
 /// A config node: its file, its path and the conditions under which the config writes it.
 type ConfigNode<'a> = (&'a str, Vec<&'a str>, Vec<&'a str>);
-
-type RegistryTypes = BTreeMap<String, BTreeSet<(String, String)>>;
 
 /// The lines of a config type that state how its loader selects files.
 const FILE_SELECTION_LINES: &[&str] = &["path", "path_extension", "path_strict", "path_file"];
@@ -71,19 +69,25 @@ fn items_path(subject: &[String]) -> Vec<&str> {
         .collect()
 }
 
-pub(super) fn project(ledger: &Ledger, rules: &snapshot::Snapshot) -> Result<Projection, String> {
-    project_with_gap_facets(ledger, rules, true)
+pub(super) fn project(
+    ledger: &Ledger,
+    types: &ConfigTypes<'_>,
+    rules: &snapshot::Snapshot,
+) -> Result<Projection, String> {
+    project_with_gap_facets(ledger, types, rules, true)
 }
 
 pub(super) fn project_for_comparison(
     ledger: &Ledger,
+    types: &ConfigTypes<'_>,
     rules: &snapshot::Snapshot,
 ) -> Result<Projection, String> {
-    project_with_gap_facets(ledger, rules, false)
+    project_with_gap_facets(ledger, types, rules, false)
 }
 
 fn project_with_gap_facets(
     ledger: &Ledger,
+    types: &ConfigTypes<'_>,
     rules: &snapshot::Snapshot,
     project_related_gap_facets: bool,
 ) -> Result<Projection, String> {
@@ -96,25 +100,24 @@ fn project_with_gap_facets(
         .as_str()
         .ok_or("Native build id is not a string")?
         .to_owned();
-    let registry_types = registry_types(ledger);
     let command_files = command_files(ledger);
     let claims = claim_index(ledger);
-    let key_subtypes = key_subtypes(ledger);
+    let key_subtypes = &types.key_subtypes;
     let alias_blocks = AliasBlocks::new(ledger);
-    let root_key_claims = root_key_subtype_claims(ledger);
-    let single_aliases = SingleAliases::new(ledger, &root_key_claims);
+    let root_key_claims = &types.root_key_subtype_claims;
+    let single_aliases = SingleAliases::new(ledger, root_key_claims);
     let enum_domains = EnumDomains::new(ledger);
     let counted_minimums = counted_minimums(ledger);
-    let language = super::language_subject::index(ledger, rules);
+    let language = super::language_subject::index(ledger, types, rules);
     let subjects: BTreeMap<_, _> = rules
         .subjects
         .iter()
         .map(|subject| (subject.id.as_str(), subject))
         .collect();
-    let subtype_claims = SubtypeClaims::new(ledger, rules, &subjects, &root_key_claims);
+    let subtype_claims = SubtypeClaims::new(ledger, rules, &subjects, root_key_claims);
     let selectors = TypeSelectors::new(
         ledger,
-        &registry_types,
+        types,
         &identified_fields(&rules.rules, &subjects),
         &named_root_keys(&rules.rules, &subjects),
     );
@@ -126,7 +129,7 @@ fn project_with_gap_facets(
         gaps: Vec::new(),
     };
     for rule in &rules.rules {
-        let statement = root_statement(&key_subtypes, &selectors, subjects[rule.subject.as_str()]);
+        let statement = root_statement(key_subtypes, &selectors, subjects[rule.subject.as_str()]);
         let (subject, rule_conditions) = match &statement {
             Some((subject, key)) => (
                 subject,
@@ -134,7 +137,7 @@ fn project_with_gap_facets(
             ),
             None => (subjects[rule.subject.as_str()], rule.conditions.clone()),
         };
-        let conditions = config_conditions(&key_subtypes, &selectors, subject, &rule_conditions);
+        let conditions = config_conditions(key_subtypes, &selectors, subject, &rule_conditions);
         let unconditional = conditions.as_deref().map_or_else(Vec::new, |conditions| {
             let mut questions = alias_blocks.questions(
                 &claims,
@@ -249,7 +252,7 @@ fn project_with_gap_facets(
         }
     }
     for (subject, agreed, read_conditions) in
-        agreed_statement_rules(rules, &subjects, &key_subtypes, &selectors)
+        agreed_statement_rules(rules, &subjects, key_subtypes, &selectors)
     {
         let [first, ..] = agreed.as_slice() else {
             continue;
@@ -381,17 +384,12 @@ fn project_with_gap_facets(
         }
     }
     for gap in &rules.gaps {
-        let statement = root_statement(&key_subtypes, &selectors, subjects[gap.subject.as_str()]);
+        let statement = root_statement(key_subtypes, &selectors, subjects[gap.subject.as_str()]);
         let (subject, conditions) = match &statement {
             Some((subject, key)) => (
                 subject,
-                config_conditions(
-                    &key_subtypes,
-                    &selectors,
-                    subject,
-                    std::slice::from_ref(key),
-                )
-                .unwrap_or_default(),
+                config_conditions(key_subtypes, &selectors, subject, std::slice::from_ref(key))
+                    .unwrap_or_default(),
             ),
             None => (subjects[gap.subject.as_str()], Vec::new()),
         };
@@ -682,9 +680,7 @@ fn unread_key_answers(
                 let [claim_root, path @ ..] = claim.subject.as_slice() else {
                     continue;
                 };
-                let mut fields = path
-                    .iter()
-                    .filter(|segment| !segment.starts_with("subtype["));
+                let mut fields = path.iter().filter(|segment| !is_subtype(segment));
                 let Some(key) = fields.next() else {
                     continue;
                 };
@@ -969,22 +965,18 @@ impl<'a> TypeSelectors<'a> {
     /// holds each (registry, root key) that Native's loader names as a form of its own.
     fn new(
         ledger: &'a Ledger,
-        registry_types: &'a RegistryTypes,
+        config_types: &'a ConfigTypes<'_>,
         identified_fields: &BTreeSet<(&str, &str)>,
         named_root_keys: &BTreeSet<(&str, &str)>,
     ) -> Self {
-        let selector_lines = selector_lines(ledger);
-        let no_lines = SelectorLines::default();
         let mut directories = BTreeMap::new();
         let mut single_files: BTreeMap<_, Vec<_>> = BTreeMap::new();
 
-        for (directory, types) in registry_types {
+        for (directory, types) in &config_types.registry_types {
             let types: Vec<_> = types
                 .iter()
                 .map(|(type_name, file)| {
-                    let lines = selector_lines
-                        .get(&(file.as_str(), type_name.as_str()))
-                        .unwrap_or(&no_lines);
+                    let lines = config_types.selector_lines(file, type_name);
 
                     (type_name.as_str(), file.as_str(), lines)
                 })
@@ -1044,12 +1036,11 @@ impl<'a> TypeSelectors<'a> {
             .flatten()
             .map(|(type_name, file, selector)| ((*file, *type_name), selector))
             .collect();
-        let file_types = super::file_types(ledger);
         let questions = ledger
             .claims
             .iter()
             .filter_map(|claim| {
-                let type_name = super::claim_type(claim, &file_types[&claim.file])?;
+                let type_name = config_types.claim_type(claim)?;
                 let selector = shared_types.get(&(claim.file.as_str(), type_name))?;
 
                 Some((claim.question.as_str(), (*selector).clone()))
@@ -1181,246 +1172,6 @@ fn named_root_keys<'a>(
         .collect()
 }
 
-/// A `## type_key_filter` annotation.
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
-enum KeyFilter<'a> {
-    /// `type_key_filter = KEY`: definitions whose key is `KEY`.
-    Equals(&'a str),
-    /// `type_key_filter <> KEY`: definitions whose key is not `KEY`.
-    Excludes(&'a str),
-    /// Any other form, such as a `{ … }` list or an empty key, as written after `type_key_filter`.
-    Other(&'a str),
-}
-
-/// The filter that a `## type_key_filter` annotation writes. `config_answer` drops a `<>`
-/// operator, so this reads the source text.
-fn key_filter(claim: &Claim) -> Option<KeyFilter<'_>> {
-    let rest = claim
-        .source_text
-        .trim_start_matches('#')
-        .trim()
-        .strip_prefix("type_key_filter")?
-        .trim_start();
-    let (excludes, key) = match rest.strip_prefix("<>") {
-        Some(key) => (true, key.trim()),
-        None => (false, rest.strip_prefix('=')?.trim()),
-    };
-    let one_key = !key.is_empty() && !key.contains(char::is_whitespace) && !key.contains('{');
-
-    Some(match (one_key, excludes) {
-        (false, _) => KeyFilter::Other(rest),
-        (true, true) => KeyFilter::Excludes(key),
-        (true, false) => KeyFilter::Equals(key),
-    })
-}
-
-/// The lines of a type's definition that select its definitions in the directory.
-#[derive(Debug, Default)]
-struct SelectorLines<'a> {
-    key_filter: Option<KeyFilter<'a>>,
-    /// `skip_root_key` keys in order: one key at 0, or the items of a `{ … }` list.
-    skip_root_key: BTreeMap<usize, &'a str>,
-    base_type: Option<&'a str>,
-    /// The one file of the type's directory that the type loads from.
-    path_file: Option<&'a str>,
-}
-
-impl SelectorLines<'_> {
-    /// Whether these lines leave the type among the directory's root definitions.
-    fn selects_root(&self) -> bool {
-        self.skip_root_key.is_empty()
-            && matches!(self.key_filter, None | Some(KeyFilter::Excludes(_)))
-    }
-
-    /// The root key that alone selects the type's definitions.
-    fn root_key(&self) -> Option<&str> {
-        let Some(KeyFilter::Equals(key)) = self.key_filter else {
-            return None;
-        };
-
-        self.skip_root_key.is_empty().then_some(key)
-    }
-
-    /// The field path of a nested definition below the `root` type's definitions.
-    fn nested_path(&self, root: Option<&str>) -> Option<String> {
-        let root = root?.strip_prefix("type[")?.strip_suffix(']')?;
-        let Some(KeyFilter::Equals(key)) = self.key_filter else {
-            return None;
-        };
-        let mut skipped = self.skip_root_key.values().copied();
-        let base = self.base_type?.split('.').next();
-
-        if skipped.next() != Some("any") || base != Some(root) {
-            return None;
-        }
-
-        Some(skipped.chain([key]).collect::<Vec<_>>().join("/"))
-    }
-
-    /// The gap reason for a type whose selector no Native answer identifies, naming its lines.
-    fn unresolved_reason(&self) -> String {
-        let mut lines = Vec::new();
-
-        match self.key_filter {
-            Some(KeyFilter::Equals(key)) => lines.push(format!("type_key_filter = {key}")),
-            Some(KeyFilter::Excludes(key)) => lines.push(format!("type_key_filter <> {key}")),
-            Some(KeyFilter::Other(text)) => lines.push(format!("type_key_filter {text}")),
-            None => {}
-        }
-
-        match self
-            .skip_root_key
-            .values()
-            .copied()
-            .collect::<Vec<_>>()
-            .as_slice()
-        {
-            [] => {}
-            [key] => lines.push(format!("skip_root_key = {key}")),
-            keys => lines.push(format!("skip_root_key = {{ {} }}", keys.join(" "))),
-        }
-
-        if let Some(base) = self.base_type {
-            lines.push(format!("base_type = {base}"));
-        }
-
-        if lines.is_empty() {
-            return "The type has no `type_key_filter = KEY` or `skip_root_key`, and neither has \
-                    another type in its directory; the applicable type is unresolved"
-                .into();
-        }
-
-        format!(
-            "The type is selected by `{}`; no Native answer identifies it",
-            lines.join("`, `")
-        )
-    }
-}
-
-/// The selector lines of each config type, by (file, type).
-fn selector_lines(ledger: &Ledger) -> BTreeMap<(&str, &str), SelectorLines<'_>> {
-    let mut selectors: BTreeMap<_, SelectorLines<'_>> = BTreeMap::new();
-
-    for claim in &ledger.claims {
-        let [types, type_name, line @ ..] = claim.subject.as_slice() else {
-            continue;
-        };
-
-        if types != "types" {
-            continue;
-        }
-
-        let lines = selectors
-            .entry((claim.file.as_str(), type_name.as_str()))
-            .or_default();
-        let answer = claim.config_answer.trim_matches('"');
-
-        match line {
-            [annotation] if annotation == "$annotation:type_key_filter" => {
-                lines.key_filter = key_filter(claim);
-            }
-            [key] if key == "skip_root_key" && answer != "block" => {
-                lines.skip_root_key.insert(0, answer);
-            }
-            [key, item] if key == "skip_root_key" => {
-                if let Some(position) = item.strip_prefix("$item:").and_then(|n| n.parse().ok()) {
-                    lines.skip_root_key.insert(position, answer);
-                }
-            }
-            [key] if key == "base_type" => lines.base_type = Some(answer),
-            [key] if key == "path_file" => lines.path_file = Some(answer),
-            _ => {}
-        }
-    }
-
-    selectors
-}
-
-/// The content directory of a config `path`. Two config types write their path without `game/`;
-/// the directory is the same.
-pub(super) fn config_directory(path: &str) -> &str {
-    let path = path.trim_matches('"');
-    path.strip_prefix("game/").unwrap_or(path)
-}
-
-/// Config directories that the engine loads under another name, each with the engine's name. The
-/// config's `path` stays its claim, so the loader-path comparison shows the difference; the type
-/// joins the engine's registry and reads that folder's comments. `lawsuit`: the config writes
-/// `game/common/lawsuit_type`, but the executable names only `common/lawsuits`, the game ships that
-/// folder, and Native's registry reads the config's three fields (`cost`, `duration`, `effect`).
-const RENAMED_DIRECTORIES: &[(&str, &str)] = &[("common/lawsuit_type", "common/lawsuits")];
-
-/// The content directory that a type's config `path` names, as the engine loads it.
-pub(super) fn content_directory(path: &str) -> &str {
-    let directory = config_directory(path);
-
-    RENAMED_DIRECTORIES
-        .iter()
-        .find(|(config, _)| *config == directory)
-        .map_or(directory, |(_, engine)| engine)
-}
-
-pub(crate) fn registry_types(ledger: &Ledger) -> RegistryTypes {
-    let mut candidates = RegistryTypes::new();
-    let file_types = super::file_types(ledger);
-    for claim in &ledger.claims {
-        if claim.property != "loader_path"
-            || claim.subject.len() != 3
-            || claim.subject[0] != "types"
-            || claim.subject[2] != "path"
-        {
-            continue;
-        }
-        let type_name = &claim.subject[1];
-        let registry = content_directory(&claim.config_answer);
-        if file_types[&claim.file].contains(type_name) {
-            candidates
-                .entry(registry.into())
-                .or_default()
-                .insert((type_name.clone(), claim.file.clone()));
-        }
-    }
-    candidates
-}
-
-/// Config subtypes that `## type_key_filter = KEY` selects and whose definition body is empty, so
-/// the root key is their whole selector. A subtype whose body holds any key is left out.
-fn key_subtypes(ledger: &Ledger) -> KeySubtypes<'_> {
-    let with_body = ledger
-        .claims
-        .iter()
-        .filter_map(|claim| match claim.subject.as_slice() {
-            [types, type_name, subtype, child, ..]
-                if types == "types" && !child.starts_with("$annotation:") =>
-            {
-                Some((claim.file.as_str(), type_name.as_str(), subtype.as_str()))
-            }
-            _ => None,
-        })
-        .collect::<BTreeSet<_>>();
-    let mut subtypes = KeySubtypes::new();
-    for claim in &ledger.claims {
-        let [types, type_name, subtype, annotation] = claim.subject.as_slice() else {
-            continue;
-        };
-        let Some(KeyFilter::Equals(key)) = key_filter(claim) else {
-            continue;
-        };
-        let selects_by_key = types == "types"
-            && annotation == "$annotation:type_key_filter"
-            && subtype.starts_with("subtype[");
-        if selects_by_key
-            && !with_body.contains(&(claim.file.as_str(), type_name.as_str(), subtype.as_str()))
-        {
-            subtypes
-                .entry((claim.file.as_str(), type_name.as_str(), key))
-                .or_default()
-                .insert(subtype.as_str());
-        }
-    }
-    subtypes
-}
-
 /// A rule's conditions in the config's terms. A `root_key[KEY]` condition becomes the one subtype
 /// of the registry's root type that the key alone selects; `None` when no such subtype is unique,
 /// or when another subtype or root-key condition goes with it.
@@ -1432,7 +1183,7 @@ fn config_conditions(
 ) -> Option<Vec<String>> {
     let selectors = conditions
         .iter()
-        .filter(|condition| condition.starts_with("root_key[") || condition.starts_with("subtype["))
+        .filter(|condition| condition.starts_with("root_key[") || is_subtype(condition))
         .count();
     conditions
         .iter()
@@ -1732,7 +1483,7 @@ impl<'a> ListedFields<'a> {
                 let mut path = path
                     .iter()
                     .map(String::as_str)
-                    .filter(|segment| !segment.starts_with("subtype["));
+                    .filter(|segment| !is_subtype(segment));
                 let field = path.next()?;
                 let below: Vec<_> = path.collect();
 
@@ -2252,14 +2003,6 @@ fn node_path<'a>(root: &'a str, conditions: &'a [String], field: &'a str) -> Vec
     path
 }
 
-/// The `subtype[…]` conditions, in order.
-fn subtypes(conditions: &[String]) -> impl Iterator<Item = &str> {
-    conditions
-        .iter()
-        .filter(|condition| condition.starts_with("subtype["))
-        .map(String::as_str)
-}
-
 /// The claims under `subtype[…]` conditions that an always-read field answers (SDK-716). When
 /// every read alternative of a field has the condition `Always`, Native reads it the same way on
 /// every path, so its unconditioned existence, value form and maximum also hold under any subtype.
@@ -2307,7 +2050,7 @@ impl<'a> SubtypeClaims<'a> {
 
             let base_path: Vec<_> = items_path(&claim.subject)
                 .into_iter()
-                .filter(|segment| !segment.starts_with("subtype["))
+                .filter(|segment| !is_subtype(segment))
                 .collect();
 
             index
@@ -2400,54 +2143,6 @@ impl<'a> SubtypeClaims<'a> {
             })
             .collect()
     }
-}
-
-/// The IDs of the claims under a subtype that a root key selects (`## type_key_filter`). Such a
-/// subtype keeps the SDK-800 rule, so the always-read rule (SDK-716) does not reach its claims.
-fn root_key_subtype_claims(ledger: &Ledger) -> BTreeSet<&str> {
-    let root_key_subtypes: BTreeSet<_> = ledger
-        .claims
-        .iter()
-        .filter_map(|claim| match claim.subject.as_slice() {
-            [types, type_name, subtype, annotation]
-                if types == "types" && annotation == "$annotation:type_key_filter" =>
-            {
-                let name = subtype.strip_prefix("subtype[")?.strip_suffix(']')?;
-
-                Some((claim.file.as_str(), type_name.as_str(), name))
-            }
-            _ => None,
-        })
-        .collect();
-    let file_types = super::file_types(ledger);
-
-    ledger
-        .claims
-        .iter()
-        .filter(|claim| {
-            let Some(type_name) = super::claim_type(claim, &file_types[&claim.file]) else {
-                return false;
-            };
-
-            claim
-                .conditions
-                .iter()
-                .flat_map(|condition| subtype_terms(condition))
-                .any(|name| root_key_subtypes.contains(&(claim.file.as_str(), type_name, name)))
-        })
-        .map(|claim| claim.id.as_str())
-        .collect()
-}
-
-/// The subtype names that a `subtype[…]` condition tests, without negation: `subtype[a&!b]`
-/// tests `a` and `b`.
-fn subtype_terms(condition: &str) -> impl Iterator<Item = &str> {
-    condition
-        .strip_prefix("subtype[")
-        .and_then(|terms| terms.strip_suffix(']'))
-        .into_iter()
-        .flat_map(|terms| terms.split('&'))
-        .map(|term| term.trim_start_matches('!'))
 }
 
 /// The subjects whose `conditions` rule lists only `Always` alternatives, each with whether every

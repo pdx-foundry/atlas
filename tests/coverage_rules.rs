@@ -150,6 +150,34 @@ async fn root_and_swapped_types_join_through_their_selectors() {
 }
 
 #[tokio::test]
+async fn one_ledger_resolves_a_selector_by_each_snapshots_answers() {
+    let swap = r#"
+    ## type_key_filter = tradition_swap
+    type[swapped_tradition] = {
+        base_type = tradition
+        path = "game/common/traditions"
+        skip_root_key = any
+    }"#;
+    let identified = swapped_tradition(swap).await;
+    let mut snapshot = recorded_snapshot().await;
+    let swap_field = "field:common/traditions/tradition_swap";
+    snapshot
+        .rules
+        .retain(|rule| rule.id != format!("{swap_field}#existence"));
+    let unidentified = SharedDirectory::from_snapshot(identified.ledger.clone(), snapshot);
+    let type_existence = &["types", "type[swapped_tradition]"][..];
+
+    assert!(identified.covered("type_existence", type_existence));
+    assert!(!unidentified.covered("type_existence", type_existence));
+    assert!(
+        unidentified
+            .gaps("type_existence", type_existence)
+            .iter()
+            .any(|gap| gap.contains("`type_key_filter = tradition_swap`"))
+    );
+}
+
+#[tokio::test]
 async fn nested_type_joins_through_a_skipped_key_path() {
     let swap = r#"
     ## type_key_filter = name

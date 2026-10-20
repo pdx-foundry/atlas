@@ -618,21 +618,22 @@ fn gate_types(
     baseline_covered: Option<&[&Claim]>,
     joins: Option<&BTreeMap<(&str, &str), String>>,
 ) -> Vec<Row> {
-    let file_types = coverage::file_types(ledger);
+    let types = coverage::ConfigTypes::new(ledger);
     let mut baseline_by_type: BTreeMap<(&str, &str), usize> = BTreeMap::new();
 
     for claim in baseline_covered.into_iter().flatten() {
-        if let Some(type_name) = coverage::claim_type(claim, &file_types[&claim.file]) {
+        if let Some(type_name) = types.claim_type(claim) {
             *baseline_by_type
                 .entry((type_name, claim.file.as_str()))
                 .or_default() += 1;
         }
     }
 
-    let mut rows: Vec<Row> = coverage::registry_types(ledger)
-        .into_iter()
+    let mut rows: Vec<Row> = types
+        .registry_types
+        .iter()
         .filter(|(directory, _)| coverage::registries::below(directory, GATE_DIRECTORIES))
-        .flat_map(|(_, types)| types)
+        .flat_map(|(_, types)| types.iter().cloned())
         .collect::<BTreeSet<_>>()
         .into_iter()
         .map(|(type_name, file)| {

@@ -1,7 +1,7 @@
 //! Native's registry list beside the config types' loader paths: found by both, engine only, and
 //! each config type that no registry names, with its reason.
 
-use super::projection::registry_types;
+use super::ConfigTypes;
 use crate::ledger::Ledger;
 use pdx_native::{Answer, Completeness, Gap, Registry};
 use serde::Serialize;
@@ -92,7 +92,7 @@ pub fn compare(ledger: &Ledger, registries: &Answer<Vec<Registry>>) -> Report {
         .iter()
         .map(|registry| registry.name.as_str())
         .collect();
-    let directories = registry_types(ledger);
+    let directories = ConfigTypes::new(ledger).registry_types;
     let mut rows = Vec::new();
     for (directory, types) in &directories {
         let registry = named

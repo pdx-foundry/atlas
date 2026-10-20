@@ -190,7 +190,7 @@ impl ComparisonKind {
                     claim.subject.as_slice(),
                     [types, _, subtype, annotation]
                         if types == "types"
-                            && subtype.starts_with("subtype[")
+                            && super::config_types::is_subtype(subtype)
                             && annotation == "$annotation:push_scope"
                 ) =>
             {
@@ -233,7 +233,9 @@ impl ComparisonKind {
                 "absent" => Some(Value::Bool(false)),
                 _ => None,
             },
-            Self::LoaderPath => Some(Value::String(projection::config_directory(raw).into())),
+            Self::LoaderPath => Some(Value::String(
+                super::config_types::config_directory(raw).into(),
+            )),
             Self::SingleFile | Self::Extension => Some(Value::String(text.into())),
             Self::FolderOnly | Self::FileNamed => yes_no(),
             Self::NameField => match text {
@@ -486,7 +488,8 @@ pub fn evaluate(ledger: &Ledger, input: &[u8], inputs: &Inputs) -> Result<Report
     if let Some(loaded) = inputs.loaded_modifiers {
         check_loaded_modifiers(&rules, loaded)?;
     }
-    let projection = projection::project_for_comparison(ledger, &rules)?;
+    let types = super::ConfigTypes::new(ledger);
+    let projection = projection::project_for_comparison(ledger, &types, &rules)?;
     let answers_by_question = question_index(&projection.answers, |answer: &Answer| {
         (&answer.question, &answer.conditions)
     });
@@ -549,7 +552,7 @@ pub fn evaluate(ledger: &Ledger, input: &[u8], inputs: &Inputs) -> Result<Report
         snapshot_id: projection.snapshot_id,
         inventory_complete: ledger.diagnostics.is_empty(),
         entries,
-        name_lists: name_lists::config_lists(ledger, &engine, inputs),
+        name_lists: name_lists::config_lists(ledger, &types, &engine, inputs),
         script_docs: script_docs::compare_logs(&engine, inputs)?,
         define_files: name_lists::define_files(&engine, inputs)?,
         loaded_modifiers_read: inputs.loaded_modifiers.is_some(),
