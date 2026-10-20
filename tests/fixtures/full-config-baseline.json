@@ -8,20 +8,20 @@
   "claims": 61146,
   "totals": {
     "atlas_owned": {
-      "covered": 29464,
+      "covered": 29481,
       "total": 57643,
-      "percent": 51.114619
+      "percent": 51.144111
     },
     "all_claims": {
-      "covered": 29464,
+      "covered": 29481,
       "total": 61146,
-      "percent": 48.186308
+      "percent": 48.21411
     },
     "by_owner": {
       "engine_fact": {
-        "covered": 29464,
+        "covered": 29481,
         "total": 54689,
-        "percent": 53.875551
+        "percent": 53.906636
       },
       "content_derived": {
         "covered": 0,
@@ -138,9 +138,9 @@
     }
   ],
   "ledger_sha256": "bd245ba973a33bf896cdf3ed933a2348dd709c05cf870d5fdd85539b86975837",
-  "coverage_sha256": "a4e31feeaf985ab26c2907d996a086134029d1f98b91c6d33fceae71ee628a2e",
-  "atlas_revision": "4cd99ee3c4191a4f78c87a2c71754366c90bba57",
+  "coverage_sha256": "946063347e5da0f303ce68b44c29bc91ccad3dc46baca0085923ba589a5d0919",
+  "atlas_revision": "8b14a6b6f13fe7d50b0a7588c7734349d12d7569",
   "native_revision": "51430090449a4848e289882fd043bd4ee38fcc96",
   "build": "c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b",
-  "atlas_working_changes": "The lawsuit directory rename over the subtype minimum rule at 5143009; without shipped comments"
+  "atlas_working_changes": "The not-a-field rule over main at 5143009; without shipped comments"
 }
