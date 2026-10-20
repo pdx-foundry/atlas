@@ -25,10 +25,11 @@ const NAMING_LINES: &[&str] = &[
     "name_from_file",
 ];
 /// The registries whose root fields are root statements: Native answers each event kind
-/// (`country_event`) as a root field of `events` (Native's `registry-fields.md`, "Event kinds").
-/// In every other registry a root field is a key inside a definition, except the keys of
+/// (`country_event`) as a root field of `events` (Native's `registry-fields.md`, "Event kinds"),
+/// and each component template class (`weapon_component_template`) as a root field of
+/// `common/component_templates` ("No owner (SDK-843)"). In every other registry a root field is a key inside a definition, except the keys of
 /// [`ROOT_STATEMENT_KEYS`].
-const ROOT_STATEMENT_REGISTRIES: &[&str] = &["events"];
+const ROOT_STATEMENT_REGISTRIES: &[&str] = &["common/component_templates", "events"];
 /// Root fields that Native answers as root statements of a type of their own, not as keys inside
 /// a definition, by (registry, key): `random_list` of `common/planet_classes` (Native's
 /// `registry-fields.md`, "Root-key owners (SDK-813)"). The type is the one whose selector is
