@@ -803,6 +803,15 @@ async fn language_claims_join_their_snapshot_answers() {
 
     assert_eq!(recorded.totals.atlas_owned.covered, 0);
 
+    // A define that only a gap names has no existence rule, and must not hide its namespace.
+    snapshot.subjects.push(snapshot::Subject {
+        id: "define:NGameplay.AAA_GAP_ONLY".into(),
+        kind: snapshot::SubjectKind::Define,
+        registry: None,
+        field: None,
+        conditional: None,
+        name: Some("NGameplay.AAA_GAP_ONLY".into()),
+    });
     qualify_as_live(&mut snapshot);
     let report = coverage::evaluate(
         &ledger,

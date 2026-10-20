@@ -111,30 +111,31 @@ fn subtype_naming_record(claim: &Claim, joins: &Joins<'_>) -> Option<LanguageSub
         .filter(|subject| joins.unconditional_names.contains(&subject.name))
 }
 
-/// The first define of each namespace, by name. A namespace exists where Native reads one of its
-/// defines, and every define's existence rests on the one defines answer, so any of them answers
-/// the namespace; the first keeps the join stable.
+/// The first define of each namespace, by name, among the defines with an unconditional existence
+/// rule. A namespace exists where Native reads one of its defines, and every define's existence
+/// rests on the one defines answer, so any of them answers the namespace; the first keeps the
+/// join stable. A define that only a gap names is not one of them.
 fn namespace_defines(snapshot: &Snapshot) -> BTreeMap<String, String> {
     let mut namespaces = BTreeMap::new();
+    let existing = snapshot
+        .rules
+        .iter()
+        .filter(|rule| rule.property == "existence" && rule.conditions.is_empty())
+        .filter_map(|rule| rule.subject.strip_prefix("define:"));
 
-    for subject in &snapshot.subjects {
-        let Some(define) = subject.name.as_deref() else {
-            continue;
-        };
+    for define in existing {
         let Some((namespace, _)) = define.split_once('.') else {
             continue;
         };
 
-        if subject.kind == SubjectKind::Define {
-            namespaces
-                .entry(namespace.to_owned())
-                .and_modify(|first: &mut String| {
-                    if define < first.as_str() {
-                        *first = define.to_owned();
-                    }
-                })
-                .or_insert_with(|| define.to_owned());
-        }
+        namespaces
+            .entry(namespace.to_owned())
+            .and_modify(|first: &mut String| {
+                if define < first.as_str() {
+                    *first = define.to_owned();
+                }
+            })
+            .or_insert_with(|| define.to_owned());
     }
 
     namespaces
