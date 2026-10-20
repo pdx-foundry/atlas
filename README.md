@@ -58,7 +58,8 @@ component template root statements, the root-statement agreement rule, the singl
 the M452 installation's shipped comments, with documentation that no shipped comment holds as
 authored text, documentation that a comment of the same key holds, the renamed lawsuit
 directory, whether each loader keeps a definition's text, and the comments of shipped files
-that fail to parse, bound by their lines (31,995 of 56,917 claims).
+that fail to parse, bound by their lines, and the keys the engine never reads (32,012 of 56,917
+claims).
 
 The [registry comparison](docs/coverage/registries.md) puts Native's registry list beside the
 config types and records a reason for each type that no registry names:
