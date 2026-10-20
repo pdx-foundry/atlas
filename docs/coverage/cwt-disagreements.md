@@ -124,9 +124,11 @@ Each with its `.cwt` location, subject and the Native evidence of Atlas's answer
 
 ### Defects to repair
 
-- **Weight blocks' bare value (groups 8–9; 17 claims, Atlas).** `assemble_field_value_form`
-  (`src/snapshot/registry.rs`) should give a `Block` reader whose members are a `WeightBlock` with
-  a known `scalar` the value-form alternatives "block or the scalar's form". Its own PR.
+- **Weight blocks' bare value (groups 8–9; 17 claims, Atlas).** Repaired by #51: the
+  `value_form` rule of a block with a known `WeightBlock.scalar` carries the bare value's form
+  (`scalar`), and the comparison accepts either form. With a snapshot assembled from the
+  capture's recording, group 9's 8 `float` claims agree; group 8's 9 `int` claims stay different
+  against a fixed-point bare value (as group 5: a CWT error). The live numbers wait for a capture.
 - **Key-reference lists (group 7; 12 claims, Native).** Native reports a `Reference` reader with
   shape `Scalar` and repeat `Accumulate`; vanilla writes a block of keys
   (`allowed_archetypes = { BIOLOGICAL LITHOID }`). Suspected: the key-reference list reader
