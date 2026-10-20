@@ -428,13 +428,18 @@ the SDK-525 matcher (the association and comparison rules in [documentation.md](
   a rewritten candidate, or "No shipped comment in the installation has this text".
 - Documentation that no shipped comment holds is authored text, not an Atlas-owned claim
   (decision of 2026-10-20, as for SDK-718): CWT wrote it. `ledger --game-content` makes such a
-  claim `authored_text` before it scores: a claim with no similar comment, and a rewritten
-  candidate whose text the comment does not contain once both fold case, punctuation and
-  whitespace (CWT reworded it). A rewritten candidate that holds the text (CWT shortened or
-  recapitalized a shipped comment) stays content-derived with its gap. So the denominator of a run
-  with `--game-content` depends on the installation; a run without it keeps every documentation
-  claim content-derived. On M452 at Native `5143009` this moves 754 claims (651 in `common/` and
-  `events/`) and leaves 54 held candidates open.
+  claim `authored_text` before it scores. A comment holds the text when it contains it, word for
+  word, once both fold case, punctuation and whitespace, so a comment that CWT shortened or
+  recapitalized keeps the claim content-derived with its gap; every comment that documents the key
+  in the claim's directories is checked, not only the similar ones. A claim keeps its owner when
+  the installation was not read completely for it: a directory outside `common/` (the corpus), or
+  a directory with a shipped file that has a parse problem, since a file that fails to parse keeps
+  only its guide headings. So the denominator of a run with `--game-content` depends on the
+  installation; a run without it keeps every documentation claim content-derived. On M452 at
+  Native `5143009` this moves 487 claims (388 in `common/` and `events/`); 322 stay open, most in
+  the folders of the README and example files that fail to parse (`scripted_actions`,
+  `traits`, `missions`, `starbase_*`, `pop_faction_types`, `war_goals`). Reading those files'
+  comments without a parse tree would decide them.
 
 The content-origin rule: content evidence credits only content-derived claims, as the origin table
 of `coverage::suitable` already requires (an engine fact needs engine evidence). Its target is the

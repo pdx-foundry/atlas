@@ -19,6 +19,8 @@ pub struct Content {
     sha256: String,
     files: usize,
     comments: BTreeMap<String, Vec<Comment>>,
+    /// The folders of the shipped files with a parse problem, whose comments may be missed.
+    incomplete_folders: BTreeSet<String>,
     /// Parse problems of the shipped files. A file that the parser repairs keeps the comments of
     /// the repaired tree; a file that fails to parse keeps only its guide headings (`key: prose`).
     pub diagnostics: Vec<String>,
@@ -51,11 +53,16 @@ impl Content {
             sha256: files_sha256(files),
             files: files.len(),
             comments: BTreeMap::new(),
+            incomplete_folders: BTreeSet::new(),
             diagnostics: Vec::new(),
         };
 
         for (file, text) in files {
             let (comments, diagnostics) = shipped_comments::parse(file, text);
+
+            if !diagnostics.is_empty() {
+                content.incomplete_folders.insert(folder(file).into());
+            }
 
             content.diagnostics.extend(diagnostics);
 
@@ -185,8 +192,10 @@ pub(super) fn project(
 
 /// Makes each content-derived documentation claim that no shipped comment of `content` holds
 /// authored text (decision of 2026-10-20): CWT wrote it, so it is not an Atlas-owned claim. A
-/// claim with an exact comment, or a rewritten candidate that holds its text with case and
-/// punctuation folded, stays content-derived.
+/// comment holds the text when it contains it once both fold case, punctuation and whitespace,
+/// so a comment that CWT shortened or recapitalized keeps the claim content-derived. A claim whose
+/// directories `content` did not read completely (a folder outside `common/`, or a shipped file
+/// with a parse problem) also keeps its owner, since a missed comment is no proof.
 pub fn attribute_authored_text(ledger: &mut Ledger, content: &Content) {
     let authored: BTreeSet<_> = {
         let directories = TypeDirectories::new(ledger);
@@ -200,14 +209,17 @@ pub fn attribute_authored_text(ledger: &mut Ledger, content: &Content) {
             .filter(|(_, claim)| {
                 let key = subject_key(claim, &item_names);
                 let directories = claim_directories(claim, &directories);
-
-                match compare(claim, &key, &directories, content) {
-                    Comparison::Exact(_) => false,
-                    Comparison::Rewritten(candidates) => !candidates
+                let read_completely = directories
+                    .iter()
+                    .all(|directory| directory.starts_with("common/"))
+                    && !content
+                        .incomplete_folders
                         .iter()
-                        .any(|candidate| holds(&candidate.text, &claim.config_answer)),
-                    Comparison::Absent => true,
-                }
+                        .any(|folder| in_directories(folder, &directories));
+
+                read_completely
+                    && !applicable_comments(claim, &key, &directories, content)
+                        .any(|comment| holds(&comment.text, &claim.config_answer))
             })
             .map(|(index, _)| index)
             .collect()
@@ -224,19 +236,21 @@ pub fn attribute_authored_text(ledger: &mut Ledger, content: &Content) {
     }
 }
 
-/// Whether `comment` contains `text` once both fold case, punctuation and whitespace: a shipped
-/// comment that CWT shortened or recapitalized still holds the text.
+/// Whether `comment` contains `text`, word for word, once both fold case, punctuation and
+/// whitespace.
 fn holds(comment: &str, text: &str) -> bool {
     let words = |text: &str| {
-        text.split(|c: char| !c.is_alphanumeric())
+        let words: Vec<_> = text
+            .split(|c: char| !c.is_alphanumeric())
             .filter(|word| !word.is_empty())
             .map(str::to_lowercase)
-            .collect::<Vec<_>>()
-            .join(" ")
+            .collect();
+
+        format!(" {} ", words.join(" "))
     };
     let text = words(text);
 
-    !text.is_empty() && words(comment).contains(&text)
+    text.trim() != "" && words(comment).contains(&text)
 }
 
 /// The exact locations of every occurrence, or the reason of the weakest occurrence.
@@ -402,25 +416,7 @@ fn compare(claim: &Claim, key: &str, directories: &[String], content: &Content) 
     let mut best_score = 0;
     let mut best = Vec::new();
 
-    for comment in content.comments.get(key).into_iter().flatten() {
-        let folder = comment
-            .file
-            .rsplit_once('/')
-            .map_or("", |(folder, _)| folder);
-        let in_directory = directories.iter().any(|directory| {
-            folder == directory
-                || folder
-                    .strip_prefix(directory.as_str())
-                    .is_some_and(|rest| rest.starts_with('/'))
-        });
-        let in_namespace = !claim.file.starts_with("common/defines/")
-            || (comment.key.len() + 1 == claim.subject.len()
-                && claim.subject.ends_with(&comment.key));
-
-        if !in_directory || !in_namespace {
-            continue;
-        }
-
+    for comment in applicable_comments(claim, key, directories, content) {
         let (score, excerpts) = best_excerpts(&text, comment);
 
         if score > best_score {
@@ -438,6 +434,43 @@ fn compare(claim: &Claim, key: &str, directories: &[String], content: &Content) 
         EXACT => Comparison::Exact(best),
         _ => Comparison::Rewritten(best),
     }
+}
+
+/// The comments that document `key` in one of `directories` (descendant folders included). A
+/// define comment must also sit under `claim`'s namespace.
+fn applicable_comments<'c>(
+    claim: &Claim,
+    key: &str,
+    directories: &[String],
+    content: &'c Content,
+) -> impl Iterator<Item = &'c Comment> {
+    content
+        .comments
+        .get(key)
+        .into_iter()
+        .flatten()
+        .filter(move |comment| {
+            let in_namespace = !claim.file.starts_with("common/defines/")
+                || (comment.key.len() + 1 == claim.subject.len()
+                    && claim.subject.ends_with(&comment.key));
+
+            in_directories(folder(&comment.file), directories) && in_namespace
+        })
+}
+
+/// Whether `folder` is one of `directories` or below one.
+fn in_directories(folder: &str, directories: &[String]) -> bool {
+    directories.iter().any(|directory| {
+        folder == directory
+            || folder
+                .strip_prefix(directory.as_str())
+                .is_some_and(|rest| rest.starts_with('/'))
+    })
+}
+
+/// The folder of a shipped file's relative path.
+fn folder(file: &str) -> &str {
+    file.rsplit_once('/').map_or("", |(folder, _)| folder)
 }
 
 /// The similarity score of equal text.

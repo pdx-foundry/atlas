@@ -237,6 +237,39 @@ async fn matching_alone_changes_neither_ownership_nor_the_denominator() {
     );
 }
 
+/// The owner of the documentation claim on `key` after attribution against `shipped`, and the
+/// change of the Atlas-owned denominator.
+async fn attributed(config: &str, shipped: &[(&str, &str)]) -> (ledger::Ledger, i64) {
+    let snapshot = live_snapshot(recorded_snapshot().await);
+    let mut ledger = ledger::inventory(&files(&[("common/things.cwt", config)]));
+    let total = |ledger: &ledger::Ledger| {
+        coverage::evaluate(ledger, None, None)
+            .unwrap()
+            .totals
+            .atlas_owned
+            .total as i64
+    };
+    let before = total(&ledger);
+
+    coverage::attribute_authored_text(
+        &mut ledger,
+        &coverage::Content::new(build(&snapshot), &files(shipped)),
+    );
+
+    let change = total(&ledger) - before;
+
+    (ledger, change)
+}
+
+fn owner(ledger: &ledger::Ledger, key: &str) -> ledger::Owner {
+    ledger
+        .claims
+        .iter()
+        .find(|c| c.property == "documentation" && c.subject.last().unwrap() == key)
+        .unwrap()
+        .owner
+}
+
 #[tokio::test]
 async fn documentation_that_no_shipped_comment_holds_is_authored_text() {
     let config = format!(
@@ -247,53 +280,46 @@ async fn documentation_that_no_shipped_comment_holds_is_authored_text() {
  absent = int
  ### Changes the total amount of energy that is stored by the country
  held = int
+ ### Short text
+ short = int
  ### Changes the total amount of energy stored by the country
  reworded = int
 }}
 "
     );
-    let shipped = files(&[(
-        "common/things/00.txt",
-        "example = {
+    let (ledger, change) = attributed(
+        &config,
+        &[(
+            "common/things/00.txt",
+            "example = {
  exact = 2 # Documented
  held = 2 # changes the total amount of energy that is stored by the country Optional
+ short = 2 # Short text, then a longer explanation of the field
  # Changes the amount of energy stored by the country
  reworded = 2
 }
 ",
-    )]);
-    let snapshot = live_snapshot(recorded_snapshot().await);
-    let mut ledger = ledger::inventory(&files(&[("common/things.cwt", &config)]));
-    let before = coverage::evaluate(&ledger, None, None)
-        .unwrap()
-        .totals
-        .atlas_owned
-        .total;
+        )],
+    )
+    .await;
 
-    coverage::attribute_authored_text(
-        &mut ledger,
-        &coverage::Content::new(build(&snapshot), &shipped),
-    );
+    assert_eq!(owner(&ledger, "exact"), ledger::Owner::ContentDerived);
+    assert_eq!(owner(&ledger, "held"), ledger::Owner::ContentDerived);
+    assert_eq!(owner(&ledger, "short"), ledger::Owner::ContentDerived);
+    assert_eq!(owner(&ledger, "absent"), ledger::Owner::AuthoredText);
+    assert_eq!(owner(&ledger, "reworded"), ledger::Owner::AuthoredText);
+    assert_eq!(change, -2);
+}
 
-    let owner = |key: &str| {
-        ledger
-            .claims
-            .iter()
-            .find(|c| c.property == "documentation" && c.subject.last().unwrap() == key)
-            .unwrap()
-            .owner
-    };
-    let after = coverage::evaluate(&ledger, None, None)
-        .unwrap()
-        .totals
-        .atlas_owned
-        .total;
+#[tokio::test]
+async fn documentation_whose_comments_were_not_all_read_keeps_its_owner() {
+    let config = format!("{THINGS}thing = {{\n ### Not shipped\n absent = int\n}}\n");
+    let events = "types = { type[thing] = { path = \"game/events\" } }\nthing = {\n ### Not shipped\n absent = int\n}\n";
+    let (unparsed, _) = attributed(&config, &[("common/things/00.txt", "example = {\n")]).await;
+    let (outside, _) = attributed(events, &[("common/things/00.txt", "a = 1\n")]).await;
 
-    assert_eq!(owner("exact"), ledger::Owner::ContentDerived);
-    assert_eq!(owner("held"), ledger::Owner::ContentDerived);
-    assert_eq!(owner("absent"), ledger::Owner::AuthoredText);
-    assert_eq!(owner("reworded"), ledger::Owner::AuthoredText);
-    assert_eq!(after, before - 2);
+    assert_eq!(owner(&unparsed, "absent"), ledger::Owner::ContentDerived);
+    assert_eq!(owner(&outside, "absent"), ledger::Owner::ContentDerived);
 }
 
 #[tokio::test]
