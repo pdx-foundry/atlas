@@ -417,7 +417,7 @@ fn subtype_selectors(ledger: &Ledger) -> SubtypeSelectors<'_> {
 
         match (line, claim.property.as_str()) {
             ([], _) => {}
-            ([key], "conditional_constraint") if !key.starts_with('$') => {
+            ([key], "conditional_constraint") if is_equality(&claim.source_text, key) => {
                 if let Some(tests) = selector {
                     tests.push(SelectorTest {
                         key,
@@ -427,7 +427,9 @@ fn subtype_selectors(ledger: &Ledger) -> SubtypeSelectors<'_> {
                 }
             }
             ([key, annotation], property) if annotation == "$annotation:cardinality" => {
-                if property == "cardinality_minimum" && claim.config_answer == "0" {
+                let zero = claim.config_answer.parse::<u64>() == Ok(0);
+
+                if property == "cardinality_minimum" && zero {
                     optional.insert((
                         claim.file.as_str(),
                         type_name.as_str(),
@@ -455,6 +457,15 @@ fn subtype_selectors(ledger: &Ledger) -> SubtypeSelectors<'_> {
     }
 
     selectors
+}
+
+/// Whether `source_text` is the line `key = value`, not another operator such as `key <> value`.
+fn is_equality(source_text: &str, key: &str) -> bool {
+    let Some((left, right)) = source_text.split_once('=') else {
+        return false;
+    };
+
+    left.trim() == key && !right.starts_with('=')
 }
 
 /// The IDs of the claims under a subtype that a root key selects (`## type_key_filter`). Such a

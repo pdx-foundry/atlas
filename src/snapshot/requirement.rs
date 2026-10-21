@@ -179,13 +179,18 @@ enum Dimension<'a> {
     Keyword(BTreeSet<&'a str>),
 }
 
+/// The most stored states that a space may hold. M452's widest cases (planet_classes) have 8;
+/// cases that test more fields than this allows answer nothing rather than enumerate them.
+const MAX_STATES: usize = 4096;
+
 /// The fields that the cases test, each with the values that tell the conditions apart.
 struct Space<'a> {
     dimensions: BTreeMap<&'a [String], Dimension<'a>>,
 }
 
 impl<'a> Space<'a> {
-    /// `None` where one field is tested both as zero and as a keyword.
+    /// `None` where one field is tested both as zero and as a keyword, or where the space would
+    /// hold more than [`MAX_STATES`] states.
     fn new(cases: &[Case<'a>]) -> Option<Self> {
         let mut dimensions = BTreeMap::new();
 
@@ -202,6 +207,19 @@ impl<'a> Space<'a> {
                 }
                 _ => return None,
             }
+        }
+
+        let mut states: usize = 1;
+
+        for dimension in dimensions.values() {
+            let values = match dimension {
+                Dimension::Zero => 2,
+                Dimension::Keyword(keywords) => keywords.len() + 1,
+            };
+
+            states = states
+                .checked_mul(values)
+                .filter(|states| *states <= MAX_STATES)?;
         }
 
         Some(Self { dimensions })
@@ -380,6 +398,14 @@ mod tests {
             case(zero("class", true), false),
             case(keyword("class", "big", true), true),
         ];
+
+        assert_eq!(minimum(&cases), None);
+    }
+
+    #[test]
+    fn cases_over_too_many_fields_answer_nothing() {
+        let fields: Vec<_> = (0..13).map(|n| zero(&format!("flag_{n}"), true)).collect();
+        let cases = [case(FieldCondition::All(fields), false)];
 
         assert_eq!(minimum(&cases), None);
     }

@@ -22,6 +22,7 @@ pub(super) const PROPERTIES: &[&str] = &[
     "loader_path",
     "occurrences.parser_accepted",
     "occurrences.minimum",
+    "requirement_cases",
     "value_form",
     "read",
     "shape",

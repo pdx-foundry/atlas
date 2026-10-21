@@ -3225,6 +3225,11 @@ types = {
             is_special = no
         }
         subtype[wide] = { is_special = yes is_hidden = yes }
+        subtype[unequal] = { is_special <> yes }
+        subtype[padded] = {
+            ## cardinality = 00..1
+            is_special = yes
+        }
     }
 }
 tradition = {
@@ -3244,6 +3249,14 @@ tradition = {
     }
     subtype[!special] = {
         ## cardinality = 0..1
+        unlocks_agenda = scalar
+    }
+    subtype[unequal] = {
+        ## cardinality = 1..1
+        unlocks_agenda = scalar
+    }
+    subtype[padded] = {
+        ## cardinality = 1..1
         unlocks_agenda = scalar
     }
 }
@@ -3295,7 +3308,12 @@ async fn a_requirement_case_answers_the_subtype_that_its_condition_selects() {
 async fn a_subtype_selector_that_no_case_matches_exactly_stays_open() {
     let directory = case_agenda(special_cases()).await;
 
-    for subtype in ["subtype[wide]", "subtype[!special]"] {
+    for subtype in [
+        "subtype[wide]",
+        "subtype[!special]",
+        "subtype[unequal]",
+        "subtype[padded]",
+    ] {
         assert!(
             !directory.covered("cardinality_minimum", &case_minimum(subtype)),
             "{subtype}"
