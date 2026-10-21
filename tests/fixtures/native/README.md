@@ -3,7 +3,7 @@
 `m452/` holds a sample of the Native answers that live `snapshot` runs recorded on M452
 (Stellaris 4.5.2, build `c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b`).
 Every answer was recorded on 2026-10-20 with Native
-`ec3342f3e5bc5af17cc60ca4542eb6bb4e3d18fc`, pinned in `Cargo.toml`, with no local path override
+`9fc7cedf355571166bf50ba48b33051d4a7a135d`, pinned in `Cargo.toml`, with no local path override
 (commands of the [pin move B capture](../../../docs/coverage/pin-move-b.md#reproduce)). The callback answers use `callbacks/v5`;
 the [entry-scope checks](../../../docs/coverage/entry-scope-checks.json) cover that method
 (SDK-818). To refresh the recording, record a full run into an
@@ -18,9 +18,9 @@ cargo run --release --locked --example trim_recording -- tests/fixtures/native/m
 ```
 
 A change of the callback method needs the entry-scope checks again before the callback answers
-are refreshed. Registries use `registry-directories/v8`, registry fields `registry-fields/v68`,
+are refreshed. Registries use `registry-directories/v9`, registry fields `registry-fields/v73`,
 derived names `derived-names/v5`, modifier families `modifier-families/v5`, loader rules
-`loader-rules/v9`, command declarations `command-declarations/v3`, command grammars
+`loader-rules/v10`, command declarations `command-declarations/v3`, command grammars
 `command-grammar/v31`, callbacks `callbacks/v5`, fixtures `observe-fixture/v9` and the loaded
 modifier table `loaded-modifiers/v1`; the other declarations use `v1`, except scope links
 (`scope-links/v2`).

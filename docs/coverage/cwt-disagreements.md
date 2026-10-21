@@ -49,6 +49,17 @@ from the derived name's miss behavior. Snapshot: static mode over the M452 recor
 | `types/type[situation_type]/localisation/name` (`common/situations.cwt`) | `## required` | `ShowsKey`: the text shows the key | **Open**, likely a modelling difference: the engine tolerates the missing name and logs nothing; CWT asks for it as a content check |
 | `types/type[ethic]/images/icon` (`common/ethics.cwt`) | `## required` | `Silent`: the engine skips the icon | As above |
 
+## Requirement cases at Native `9fc7ced`
+
+The [requirement-case rule](ledger.md#required-fields-sdk-818) answers a subtype's minimum from
+Native's subtype census (`registry-fields/v73`). Snapshot: live M452 capture at Native `9fc7ced`.
+Of the 41 subtype minimums it answers, 40 agree with CWT. This claim is outside the `bb0cc04`
+review below, so it has no line in `cwt-disagreements.tsv`.
+
+| Claim | CWT | Atlas | Verdict |
+| --- | --- | --- | --- |
+| `district/subtype[starting_district]/zone_slots/$annotation:cardinality` (`cardinality_minimum`, `common/districts.cwt:76`, `question:c425de6a…abec54`) | `1` | `0`: the census definition with `default_starting_district = yes` and no `zone_slots` logs no report of its absence | **Open.** As group 4 below: a check that the census definition does not reach (for example one that runs only for a district that a planet starts with) would not be observed. Route: read the district hooks for a conditional absence check of `zone_slots` |
+
 ## Covered disagreements at Native `bb0cc04`
 
 **Status: in progress.** Group 4 (41 claims) is open until its conditional checks are read; every

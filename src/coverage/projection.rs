@@ -7,9 +7,12 @@ use super::{
 };
 use crate::{
     ledger::{Claim, Ledger},
-    snapshot,
+    snapshot::{
+        self,
+        requirement::{self, SelectorTest},
+    },
 };
-use pdx_native::Basis;
+use pdx_native::{Basis, RequirementCase};
 use serde_json::{Value, json};
 use std::collections::{BTreeMap, BTreeSet};
 
@@ -115,13 +118,26 @@ fn project_with_gap_facets(
         .iter()
         .map(|subject| (subject.id.as_str(), subject))
         .collect();
-    let subtype_claims = SubtypeClaims::new(ledger, rules, &subjects, root_key_claims);
+    let subtype_claims = SubtypeClaims::new(ledger, types, rules, &subjects);
     let selectors = TypeSelectors::new(
         ledger,
         types,
         &identified_fields(&rules.rules, &subjects),
         &named_root_keys(&rules.rules, &subjects),
     );
+
+    let case_minimums = requirement_case_minimums(
+        rules,
+        &subjects,
+        types,
+        &subtype_claims,
+        (&selectors, key_subtypes, &command_files),
+        (build, &target),
+    )?;
+    let case_answered: BTreeSet<_> = case_minimums
+        .iter()
+        .map(|case| (case.question.clone(), case.conditions.clone()))
+        .collect();
 
     let mut projection = Projection {
         snapshot_id: format!("{}@{}", rules.snapshot.name, rules.snapshot.version),
@@ -435,7 +451,7 @@ fn project_with_gap_facets(
             })
             .collect();
         if statement.is_none() || statement_field {
-            questions.extend(subtype_claims.questions(
+            let subtype_questions = subtype_claims.questions(
                 (&claims, &single_aliases),
                 &selectors,
                 &command_files,
@@ -443,7 +459,14 @@ fn project_with_gap_facets(
                 &gap.property,
                 None,
                 project_related_gap_facets,
-            ));
+            );
+
+            // A requirement case that answers a subtype's minimum replaces the unconditioned gap.
+            questions.extend(
+                subtype_questions
+                    .into_iter()
+                    .filter(|question| !case_answered.contains(question)),
+            );
         }
 
         let definition = match statement {
@@ -520,6 +543,18 @@ fn project_with_gap_facets(
             });
         }
     }
+    for case in case_minimums {
+        match rule_answer(
+            &selectors,
+            &counted_minimums,
+            "occurrences.minimum",
+            (case.question, case.conditions, json!(case.minimum)),
+            &case.evidence,
+        ) {
+            Ok(answer) => projection.answers.push(answer),
+            Err(gap) => projection.gaps.push(gap),
+        }
+    }
     let definition_gaps = definition_line_gaps(&claims, &selectors, &subjects, &projection.answers);
     projection.gaps.extend(definition_gaps);
     let unread_keys = unread_key_answers(ledger, rules, &selectors, &projection, build, &target)?;
@@ -540,6 +575,65 @@ fn project_with_gap_facets(
             && left.reason == right.reason
     });
     Ok(projection)
+}
+
+/// A subtype's minimum that one of Native's requirement cases answers.
+struct CaseMinimum {
+    question: String,
+    conditions: Vec<String>,
+    minimum: u64,
+    evidence: Vec<Evidence>,
+}
+
+/// The minimums that Native's requirement cases answer under config subtypes: a subtype whose
+/// selector lines select exactly the stored states of one case takes that case's requirement
+/// ([`requirement::subtype_minimum`]). A subtype whose selector Atlas cannot match, and cases that
+/// Atlas cannot read, answer nothing.
+fn requirement_case_minimums(
+    rules: &snapshot::Snapshot,
+    subjects: &BTreeMap<&str, &snapshot::Subject>,
+    config_types: &ConfigTypes<'_>,
+    subtype_claims: &SubtypeClaims<'_>,
+    (selectors, key_subtypes, command_files): (
+        &TypeSelectors<'_>,
+        &KeySubtypes<'_>,
+        &BTreeMap<String, BTreeSet<String>>,
+    ),
+    (build, target): (&pdx_native::BuildId, &str),
+) -> Result<Vec<CaseMinimum>, String> {
+    let mut minimums = Vec::new();
+
+    for rule in &rules.rules {
+        let subject = subjects[rule.subject.as_str()];
+        let case_rule = rule.property == "requirement_cases" && rule.conditions.is_empty();
+
+        if !case_rule || root_statement(key_subtypes, selectors, subject).is_some() {
+            continue;
+        }
+
+        let Ok(cases) = serde_json::from_value::<Vec<RequirementCase>>(rule.answer.clone()) else {
+            continue;
+        };
+        let evidence = rule_evidence(rules, rule, build, target)?;
+        let questions =
+            subtype_claims.requirement_questions(config_types, selectors, command_files, subject);
+
+        for (question, conditions, selector) in questions {
+            let minimum =
+                selector.and_then(|selector| requirement::subtype_minimum(&cases, &selector));
+
+            if let Some(minimum) = minimum {
+                minimums.push(CaseMinimum {
+                    question,
+                    conditions,
+                    minimum,
+                    evidence: evidence.clone(),
+                });
+            }
+        }
+    }
+
+    Ok(minimums)
 }
 
 /// The answer that `value`, a rule's answer to `property`, gives to `question`, or the gap that
@@ -2037,6 +2131,8 @@ struct SubtypeClaims<'a> {
     index: ClaimIndex<'a>,
     /// The conditions of each question in `index`.
     conditions: BTreeMap<&'a str, &'a [String]>,
+    /// The file and config type of each question in `index`.
+    types: BTreeMap<&'a str, (&'a str, &'a str)>,
     /// The subjects whose read alternatives all have the condition `Always`, each with whether
     /// qualified evidence establishes that premise.
     always_read: BTreeMap<&'a str, bool>,
@@ -2057,15 +2153,20 @@ impl<'a> SubtypeClaims<'a> {
 
     fn new(
         ledger: &'a Ledger,
+        config_types: &'a ConfigTypes<'_>,
         rules: &'a snapshot::Snapshot,
         subjects: &BTreeMap<&str, &snapshot::Subject>,
-        root_key_claims: &BTreeSet<&str>,
     ) -> Self {
         let mut index = ClaimIndex::new();
         let mut conditions = BTreeMap::new();
+        let mut types = BTreeMap::new();
 
         for claim in &ledger.claims {
-            if claim.conditions.is_empty() || root_key_claims.contains(claim.id.as_str()) {
+            let root_key_claim = config_types
+                .root_key_subtype_claims
+                .contains(claim.id.as_str());
+
+            if claim.conditions.is_empty() || root_key_claim {
                 continue;
             }
 
@@ -2079,13 +2180,53 @@ impl<'a> SubtypeClaims<'a> {
                 .or_default()
                 .insert(&claim.question);
             conditions.insert(claim.question.as_str(), claim.conditions.as_slice());
+
+            if let Some(type_name) = config_types.claim_type(claim) {
+                types.insert(claim.question.as_str(), (claim.file.as_str(), type_name));
+            }
         }
 
         Self {
             index,
             conditions,
+            types,
             always_read: always_read_fields(rules, subjects),
         }
+    }
+
+    /// The minimum questions of `subject` under a subtype, each with its conditions and the
+    /// selector lines that those conditions name (`None` where they are not plain lines). Unlike
+    /// [`Self::questions`], they do not need the always-read premise: a requirement case states
+    /// the requirement of the definitions that meet it, whatever path reads the field.
+    fn requirement_questions<'t>(
+        &self,
+        config_types: &'t ConfigTypes<'_>,
+        selectors: &TypeSelectors<'_>,
+        command_files: &BTreeMap<String, BTreeSet<String>>,
+        subject: &snapshot::Subject,
+    ) -> Vec<(String, Vec<String>, Option<Vec<SelectorTest<'t>>>)> {
+        questions(
+            &self.index,
+            selectors,
+            command_files,
+            subject,
+            "occurrences.minimum",
+            &[],
+            false,
+        )
+        .into_iter()
+        .map(|question| {
+            let conditions = self.conditions[question.as_str()].to_vec();
+            let selector = self
+                .types
+                .get(question.as_str())
+                .and_then(|(file, type_name)| {
+                    config_types.subtype_selector(file, type_name, &conditions)
+                });
+
+            (question, conditions, selector)
+        })
+        .collect()
     }
 
     /// The subtype questions, with their conditions, that the unconditioned `property` of
