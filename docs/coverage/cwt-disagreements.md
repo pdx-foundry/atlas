@@ -38,6 +38,17 @@ definition keys.
 | --- | --- | --- | --- |
 | `types/type[lawsuit]/path` (`loader_path`) | `game/common/lawsuit_type` | `common/lawsuits` | CWT error: the executable names only `common/lawsuits`, the game ships `common/lawsuits/00_example.txt` (whose guide documents `effect`, `cost` and `duration`), and Native's `common/lawsuits` registry reads those three fields. |
 
+## Naming requirements
+
+The [naming-requirement rule](ledger.md#naming-requirements-decision-of-2026-10-20) answers these
+from the derived name's miss behavior. Snapshot: static mode over the M452 recording at Native
+`ec3342f` (`derived-names/v5`).
+
+| Claim | CWT | Engine (`on_missing`) | Verdict |
+| --- | --- | --- | --- |
+| `types/type[situation_type]/localisation/name` (`common/situations.cwt`) | `## required` | `ShowsKey`: the text shows the key | **Open**, likely a modelling difference: the engine tolerates the missing name and logs nothing; CWT asks for it as a content check |
+| `types/type[ethic]/images/icon` (`common/ethics.cwt`) | `## required` | `Silent`: the engine skips the icon | As above |
+
 ## Covered disagreements at Native `bb0cc04`
 
 **Status: in progress.** Group 4 (41 claims) is open until its conditional checks are read; every

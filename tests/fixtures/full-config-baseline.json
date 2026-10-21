@@ -8,20 +8,20 @@
   "claims": 61146,
   "totals": {
     "atlas_owned": {
-      "covered": 29907,
+      "covered": 29915,
       "total": 57643,
-      "percent": 51.883143
+      "percent": 51.897021
     },
     "all_claims": {
-      "covered": 29907,
+      "covered": 29915,
       "total": 61146,
-      "percent": 48.910804
+      "percent": 48.923887
     },
     "by_owner": {
       "engine_fact": {
-        "covered": 29907,
+        "covered": 29915,
         "total": 54689,
-        "percent": 54.685586
+        "percent": 54.700214
       },
       "content_derived": {
         "covered": 0,
@@ -138,9 +138,9 @@
     }
   ],
   "ledger_sha256": "bd245ba973a33bf896cdf3ed933a2348dd709c05cf870d5fdd85539b86975837",
-  "coverage_sha256": "571dcf4444122faa090368e1c2f4bc704e64ab52aaa132e5931c1ccc29b81eff",
+  "coverage_sha256": "5f85139900117027250c9f4e201da07730b479e02f0e8193a01e8426a49f5e98",
   "atlas_revision": "a06e912e1a71b67f2f1e1e542a14e5936f990878",
   "native_revision": "ec3342f3e5bc5af17cc60ca4542eb6bb4e3d18fc",
   "build": "c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b",
-  "atlas_working_changes": "The subtype naming join and the define namespace join over main at a06e912; without shipped comments"
+  "atlas_working_changes": "The subtype naming join, the define namespace join and the naming requirement join over main at a06e912; without shipped comments"
 }
