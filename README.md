@@ -65,8 +65,8 @@ another config or snapshot is left out with a warning. A PR that changes coverag
 current pin (no game), and updates `tests/fixtures/full-config-baseline.json`; a change to one
 config file's coverage changes its shard and the index only. The PR states its coverage delta in
 its description. The count below changes only at a pin move: the live snapshot at Native
-`ec3342f`, made with the [pin move B capture](docs/coverage/pin-move-b.md) commands, covers
-32,103 of 56,917 claims.
+`9fc7ced`, made with the [pin move B capture](docs/coverage/pin-move-b.md) commands, covers
+32,758 of 56,917 claims.
 
 The [registry comparison](docs/coverage/registries.md) puts Native's registry list beside the
 config types and records a reason for each type that no registry names:

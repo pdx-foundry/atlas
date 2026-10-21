@@ -106,6 +106,22 @@ The [Milestone 5 sweep](milestone-5.md) (SDK-798) ran at the same commit; its `r
 is byte-identical to this rerun's. So is that of [pin move B](pin-move-b.md) (SDK-818) at Native `2c94b30`: the
 registry list did not change.
 
+## Rerun at Native `9fc7ced` (2026-10-20)
+
+Over the full M452 recording of Native `9fc7ced` (`registry-directories/v9`, 199 registries; at
+`ec3342f`, 194), the `UnnamedRegistries` gap counts 5 of 198 scheduled databases (from 10). Native
+#300 names the loaders that enumerate a path they build on the stack. 192 directories are in both
+(from 187), and the seven engine-only registries are unchanged.
+
+| From | To | Types (directory) |
+| --- | --- | --- |
+| `no_named_registry` | `named` | `type[message_type]` (`common/message_types`), `type[scripted_loc]` (`common/scripted_loc`) |
+| `no_named_registry` | `several_types_in_directory` | `type[solar_system_initializer]` and `type[solar_system_initializer_random_list]` (`common/solar_system_initializers`) |
+| `deferred_format_family` | `named` | `type[pingmap]` (`gfx/pingmap`), `type[projectile]` (`gfx/projectiles`) |
+
+Types by join: `named` 177, `several_types_in_directory` 46, `no_named_registry` 8,
+`deferred_format_family` 24.
+
 ## Config directories the game does not ship (2026-10-20)
 
 Four gate types name a directory that M452 does not ship. Each was checked against the
@@ -114,7 +130,7 @@ executable's string table and the shipped `common/` folders:
 | Type | Config directory | Executable | Shipped folder | Route |
 | --- | --- | --- | --- | --- |
 | `type[lawsuit]` | `common/lawsuit_type` | names `common/lawsuits` only | `common/lawsuits` (an example file) | Joined: the config directory is a renamed `common/lawsuits`, whose Native registry reads the config's `cost`, `duration` and `effect`. `RENAMED_DIRECTORIES` (projection) states the rename; the `path` claim keeps the config's text and joins the [CWT disagreement review](cwt-disagreements.md). |
-| `type[mandate]` | `common/mandates` | names `common/mandates` | none | Native: the engine names the directory, but Native's registry search (partial: "loaders outside the database schedule") does not find its loader. A late or custom loader, as for `common/solar_system_initializers`. |
+| `type[mandate]` | `common/mandates` | names `common/mandates` | none | Native: the engine names the directory, but Native's registry search (partial: "loaders outside the database schedule") does not find its loader. A late or custom loader, as `common/solar_system_initializers` was until Native `9fc7ced`. |
 | `type[ai_force_species]` | `common/ai_force_species` | names `common/ai_force_species` | none | Native, as for `mandate`. |
 | `type[trade_conversion]` | `common/trade_conversions` | no `common/trade_conversions` path; `trade_conversions` is a token (`set_trade_conversions`) | none | Open: no loader names the folder, but the registry search is partial, so absence is not established. A Native answer that the search is complete for the folder (or a fixture probe that loads a file there and reads the error log) would make the type "not a type" and a CWT error. |
 

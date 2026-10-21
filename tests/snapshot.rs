@@ -1008,3 +1008,27 @@ async fn a_listed_keyword_field_publishes_its_names_and_its_requirement() {
                 .any(|property| gap.id.ends_with(&format!("#{property}")))
     }));
 }
+
+#[tokio::test]
+async fn requirement_cases_publish_their_cases_and_the_minimum_they_establish() {
+    let snapshot = snapshot::assemble(&recorded().await).unwrap();
+    let rule = |property: &str| {
+        let id = format!("field:common/economic_categories/parent#{property}");
+
+        snapshot
+            .rules
+            .iter()
+            .find(|rule| rule.id == id)
+            .unwrap_or_else(|| panic!("no rule {id}"))
+    };
+    let hidden = |zero: bool| json!({"FieldZero": {"path": ["hidden"], "zero": zero}});
+
+    assert_eq!(
+        rule("requirement_cases").answer,
+        json!([
+            {"condition": hidden(false), "required": false},
+            {"condition": hidden(true), "required": false},
+        ])
+    );
+    assert_eq!(rule("occurrences.minimum").answer, json!(0));
+}

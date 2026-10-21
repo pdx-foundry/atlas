@@ -3,7 +3,7 @@
 use super::scope::ScopeNames;
 use super::{
     EvidenceLink, Rule, Snapshot, Subject, SubjectKind, argument_id, conditional_rule, evidence,
-    field_id, gap, registry_id, rule,
+    field_id, gap, registry_id, requirement, rule,
 };
 use crate::extraction::Extraction;
 use pdx_native::{
@@ -592,7 +592,7 @@ impl<'a, T> FieldSet<'a, T> {
         assemble_field_repeat(snapshot, &id, unconditional_outcome, &evidence);
         self.assemble_reference(snapshot, &id, path, field, &evidence);
         assemble_accepted_categories(snapshot, &id, field, &evidence);
-        assemble_field_requirement(snapshot, &id, field.requirement, evidence);
+        assemble_field_requirement(snapshot, &id, &field.requirement, evidence);
         Ok(())
     }
 
@@ -1104,37 +1104,52 @@ fn assemble_field_repeat(
 
 /// The fewest occurrences of a field in a definition. Native reports a field as required only
 /// where loading a definition without it logs a report of its absence; a minimum above 1 is a
-/// count that this answer does not give.
+/// count that this answer does not give. Requirement cases are also published as they are
+/// (`requirement_cases`), so a config subtype whose selector matches one case can take its answer.
 fn assemble_field_requirement(
     snapshot: &mut Snapshot,
     id: &str,
-    requirement: FieldRequirement,
+    requirement: &FieldRequirement,
     evidence: EvidenceLink,
 ) {
     let minimum = match requirement {
-        FieldRequirement::Required => 1,
-        FieldRequirement::Optional => 0,
-        _ => {
-            gap(
+        FieldRequirement::Required => Ok(1),
+        FieldRequirement::Optional => Ok(0),
+        FieldRequirement::Cases(cases) => {
+            rule(
                 snapshot,
                 id,
-                "occurrences.minimum",
-                "Native did not establish whether a definition must contain this field",
-                None,
-                Vec::new(),
-                vec![evidence],
+                "requirement_cases",
+                json!(cases),
+                evidence.clone(),
             );
-            return;
+
+            requirement::minimum(cases).ok_or(
+                "Native's requirement cases do not establish whether every definition must \
+                 contain this field",
+            )
         }
+        _ => Err("Native did not establish whether a definition must contain this field"),
     };
 
-    rule(
-        snapshot,
-        id,
-        "occurrences.minimum",
-        json!(minimum),
-        evidence,
-    );
+    match minimum {
+        Ok(minimum) => rule(
+            snapshot,
+            id,
+            "occurrences.minimum",
+            json!(minimum),
+            evidence,
+        ),
+        Err(reason) => gap(
+            snapshot,
+            id,
+            "occurrences.minimum",
+            reason,
+            None,
+            Vec::new(),
+            vec![evidence],
+        ),
+    }
 }
 
 #[derive(Default)]

@@ -3213,6 +3213,107 @@ async fn a_required_field_answers_its_minimum_under_every_subtype() {
     ));
 }
 
+/// A traditions config whose `unlocks_agenda` is written under subtypes that `is_special` and
+/// another key select.
+const CASE_AGENDA: &str = r#"
+types = {
+    type[tradition] = {
+        path = "game/common/traditions"
+        subtype[special] = { is_special = yes }
+        subtype[plain] = {
+            ## cardinality = 0..1
+            is_special = no
+        }
+        subtype[wide] = { is_special = yes is_hidden = yes }
+    }
+}
+tradition = {
+    ## cardinality = 0..1
+    unlocks_agenda = scalar
+    subtype[special] = {
+        ## cardinality = 1..1
+        unlocks_agenda = scalar
+    }
+    subtype[plain] = {
+        ## cardinality = 0..1
+        unlocks_agenda = scalar
+    }
+    subtype[wide] = {
+        ## cardinality = 1..1
+        unlocks_agenda = scalar
+    }
+    subtype[!special] = {
+        ## cardinality = 0..1
+        unlocks_agenda = scalar
+    }
+}
+"#;
+
+/// [`CASE_AGENDA`] where `unlocks_agenda` is always read, its unconditioned minimum is a gap, and
+/// Native states `cases` for its requirement.
+async fn case_agenda(cases: Value) -> SharedDirectory {
+    SharedDirectory::evaluate(&[("traditions.cwt", CASE_AGENDA)], |snapshot| {
+        let conditions = format!("{UNLOCKS_AGENDA}#conditions");
+
+        assert!(snapshot.rules.iter().any(|rule| rule.id == conditions));
+        establish(snapshot, UNLOCKS_AGENDA, "occurrences.minimum", json!(0));
+        unresolve(snapshot, UNLOCKS_AGENDA, "occurrences.minimum");
+        establish(snapshot, UNLOCKS_AGENDA, "requirement_cases", cases);
+    })
+    .await
+}
+
+fn special_cases() -> Value {
+    json!([
+        {"condition": {"FieldZero": {"path": ["is_special"], "zero": false}}, "required": true},
+        {"condition": {"FieldZero": {"path": ["is_special"], "zero": true}}, "required": false},
+    ])
+}
+
+fn case_minimum(subtype: &str) -> Vec<&str> {
+    agenda_under("tradition", &[subtype], Some("$annotation:cardinality"))
+}
+
+#[tokio::test]
+async fn a_requirement_case_answers_the_subtype_that_its_condition_selects() {
+    let directory = case_agenda(special_cases()).await;
+
+    assert!(directory.covered("cardinality_minimum", &case_minimum("subtype[special]")));
+    assert_eq!(
+        directory.status("cardinality_minimum", &case_minimum("subtype[special]")),
+        Status::Same
+    );
+    assert!(directory.covered("cardinality_minimum", &case_minimum("subtype[plain]")));
+    assert_eq!(
+        directory.status("cardinality_minimum", &case_minimum("subtype[plain]")),
+        Status::Same
+    );
+    assert!(!directory.covered("cardinality_minimum", &AGENDA_CARDINALITY));
+}
+
+#[tokio::test]
+async fn a_subtype_selector_that_no_case_matches_exactly_stays_open() {
+    let directory = case_agenda(special_cases()).await;
+
+    for subtype in ["subtype[wide]", "subtype[!special]"] {
+        assert!(
+            !directory.covered("cardinality_minimum", &case_minimum(subtype)),
+            "{subtype}"
+        );
+    }
+}
+
+#[tokio::test]
+async fn an_unreadable_requirement_case_answers_no_subtype() {
+    let cases = json!([
+        {"condition": {"FieldZero": {"path": ["is_special"], "zero": false}}, "required": true},
+        {"condition": "Unresolved", "required": false},
+    ]);
+    let directory = case_agenda(cases).await;
+
+    assert!(!directory.covered("cardinality_minimum", &case_minimum("subtype[special]")));
+}
+
 #[tokio::test]
 async fn a_subtype_that_a_root_key_selects_takes_no_always_read_credit() {
     let directory = subtype_agenda(|_| {}).await;

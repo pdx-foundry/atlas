@@ -4,7 +4,10 @@
 //! They do not depend on a snapshot: the projection resolves each selector against the Native
 //! answers of the snapshot it projects.
 
-use crate::ledger::{Claim, Ledger};
+use crate::{
+    ledger::{Claim, Ledger},
+    snapshot::requirement::SelectorTest,
+};
 use std::collections::{BTreeMap, BTreeSet};
 
 /// The config types that load from each content directory, as (type, file).
@@ -13,6 +16,9 @@ pub(crate) type RegistryTypes = BTreeMap<String, BTreeSet<(String, String)>>;
 pub(crate) type KeySubtypes<'a> = BTreeMap<(&'a str, &'a str, &'a str), BTreeSet<&'a str>>;
 /// The config types that each file defines, including files that define none.
 pub(crate) type FileTypes = BTreeMap<String, BTreeSet<String>>;
+/// The selector lines of each config subtype by (file, type, `subtype[NAME]`), or `None` for a
+/// subtype that something other than `KEY = VALUE` lines also selects.
+type SubtypeSelectors<'a> = BTreeMap<(&'a str, &'a str, &'a str), Option<Vec<SelectorTest<'a>>>>;
 
 /// The config's facts about its types.
 pub(crate) struct ConfigTypes<'a> {
@@ -28,6 +34,7 @@ pub(crate) struct ConfigTypes<'a> {
     pub(crate) key_subtypes: KeySubtypes<'a>,
     /// The IDs of the claims under a subtype that a root key selects.
     pub(crate) root_key_subtype_claims: BTreeSet<&'a str>,
+    subtype_selectors: SubtypeSelectors<'a>,
 }
 
 impl<'a> ConfigTypes<'a> {
@@ -40,6 +47,7 @@ impl<'a> ConfigTypes<'a> {
             root_key_subtype_claims: root_key_subtype_claims(ledger, &file_types),
             selector_lines: selector_lines(ledger),
             key_subtypes: key_subtypes(ledger),
+            subtype_selectors: subtype_selectors(ledger),
             file_types,
             paths,
             registry_types,
@@ -68,6 +76,28 @@ impl<'a> ConfigTypes<'a> {
         let selector_lines: &BTreeMap<(&'s str, &'s str), SelectorLines<'a>> = &self.selector_lines;
 
         selector_lines.get(&(file, type_name)).unwrap_or(NO_LINES)
+    }
+
+    /// The `KEY = VALUE` lines that select the definitions of `type_name` in `file` that meet every
+    /// `subtype[NAME]` of `conditions`. `None` for any other condition, such as a negated or
+    /// combined subtype, or for a subtype that other lines also select.
+    pub(crate) fn subtype_selector(
+        &self,
+        file: &str,
+        type_name: &str,
+        conditions: &[String],
+    ) -> Option<Vec<SelectorTest<'a>>> {
+        let mut tests = Vec::new();
+
+        for condition in conditions {
+            let selector = self
+                .subtype_selectors
+                .get(&(file, type_name, condition.as_str()))?;
+
+            tests.extend(selector.as_deref()?);
+        }
+
+        Some(tests)
     }
 }
 
@@ -362,6 +392,69 @@ fn key_subtypes(ledger: &Ledger) -> KeySubtypes<'_> {
         }
     }
     subtypes
+}
+
+/// The selector lines of each config subtype: `subtype[habitable_planet] = { colonizable = yes }`
+/// is one test of `colonizable`. A `## cardinality` minimum of 0 on a line makes it optional. A
+/// subtype with a `## type_key_filter`, a block line or no line is `None`; the other annotations
+/// (`group`, `display_name`, `push_scope`) do not select.
+fn subtype_selectors(ledger: &Ledger) -> SubtypeSelectors<'_> {
+    let mut selectors = SubtypeSelectors::new();
+    let mut optional = BTreeSet::new();
+
+    for claim in &ledger.claims {
+        let [types, type_name, subtype, line @ ..] = claim.subject.as_slice() else {
+            continue;
+        };
+
+        if types != "types" || !is_subtype(subtype) {
+            continue;
+        }
+
+        let selector = selectors
+            .entry((claim.file.as_str(), type_name.as_str(), subtype.as_str()))
+            .or_insert_with(|| Some(Vec::new()));
+
+        match (line, claim.property.as_str()) {
+            ([], _) => {}
+            ([key], "conditional_constraint") if !key.starts_with('$') => {
+                if let Some(tests) = selector {
+                    tests.push(SelectorTest {
+                        key,
+                        value: claim.config_answer.trim_matches('"'),
+                        optional: false,
+                    });
+                }
+            }
+            ([key, annotation], property) if annotation == "$annotation:cardinality" => {
+                if property == "cardinality_minimum" && claim.config_answer == "0" {
+                    optional.insert((
+                        claim.file.as_str(),
+                        type_name.as_str(),
+                        subtype.as_str(),
+                        key.as_str(),
+                    ));
+                }
+            }
+            ([annotation], _)
+                if annotation.starts_with("$annotation:")
+                    && annotation != "$annotation:type_key_filter" => {}
+            _ => *selector = None,
+        }
+    }
+
+    for ((file, type_name, subtype), selector) in &mut selectors {
+        match selector {
+            Some(tests) if !tests.is_empty() => {
+                for test in tests {
+                    test.optional = optional.contains(&(*file, *type_name, *subtype, test.key));
+                }
+            }
+            _ => *selector = None,
+        }
+    }
+
+    selectors
 }
 
 /// The IDs of the claims under a subtype that a root key selects (`## type_key_filter`). Such a

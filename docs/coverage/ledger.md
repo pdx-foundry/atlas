@@ -97,7 +97,7 @@ the command exits 2.
 
 The replayed answers keep their recorded basis and earn no coverage, so a static-mode snapshot
 gives the same coverage as a live snapshot only while no covered claim rests on a live observation
-(none did at Native `ec3342f`). It is a development measure, not the milestone number, which comes
+(none did at Native `ec3342f` or `9fc7ced`). It is a development measure, not the milestone number, which comes
 only from a live snapshot. Each baseline's index records whether its snapshot held a live observation, and `ledger` compares
 a run only with a baseline of the same kind. The committed `docs/coverage/covered/` is a live
 capture, so a static-mode run is not compared with it. To measure a static change, run static mode
@@ -440,9 +440,37 @@ field's `cardinality_minimum` claim. A requirement gives presence, not a count, 
 not answer a config minimum above 1: that claim keeps the gap "Native establishes that a
 definition must contain this field, not a count above 1". `Optional` answers every minimum.
 
+`Cases` states requirement cases: each gives a condition on the definition's other stored root
+fields and whether a definition that meets it must contain the field; a definition that meets no
+case has no established requirement. The snapshot keeps the cases as the rule
+`requirement_cases` and reads them over the stored states that the conditions tell apart: each
+tested field is zero or nonzero (`FieldZero`), or holds one of the keywords that the conditions
+name or any other keyword (`FieldKeyword`). A condition that Atlas cannot read (`Unresolved`, a
+form it does not know, or one field tested both ways) leaves every answer below open, never 0.
+
+- Without a subtype, the minimum is 0 when some state meets a case that is not required, and 1
+  only when every case is required and every state meets a case (an explicit case for the other
+  states, or conditions that cover them). Cases that leave a state unmatched, such as patrons
+  `position` (required for each of the three categories; a definition with no category meets no
+  case), keep the gap "Native's requirement cases do not establish whether every definition must
+  contain this field". A 1 from cases crosses to the subtype claims of an always-read field, as
+  `Required` does.
+- Under `subtype[NAME]`, the subtype's selector lines (`colonizable = yes`) are read as the same
+  tests: `yes` or `no` for a zero test, and a keyword that a condition names for a keyword test.
+  A line with a `## cardinality` minimum of 0 is read only for `no`: a definition without the key
+  keeps its default, which the cases take as zero (Native's census case for the empty definition
+  is the zero state). When the states that the selector selects are exactly the states of one
+  case, that case's `required` answers the subtype's minimum, 1 or 0; under the decision of
+  2026-10-20, a case that is not required is the per-subtype probe that a 0 needs. The subtype
+  claim takes this answer without the always-read premise, and the unconditioned gap does not
+  cross to it. A selector that is wider or narrower than every case (planet_classes
+  `habitable_planet` is `colonizable = yes`, but each case also states `star` and `ringworld`), a
+  negated or combined subtype, a subtype with a `## type_key_filter` or a block line, and a line
+  whose key no condition tests stay open.
+
 ### Loader rules (SDK-797)
 
-Native's `loader_rules` answer (`loader-rules/v9`) becomes five properties of each registry
+Native's `loader_rules` answer (`loader-rules/v10`) becomes five properties of each registry
 subject: `extension` (`{"suffix": …}`, `null` for every file), `recursion`, `duplicate_rule`,
 `definition_names` (the forms of root statements) and `keeps_definition_text` (whether the loader
 keeps a definition's text after it reads it; no config question joins it). A form that names a nested block becomes the

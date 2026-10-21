@@ -4,6 +4,7 @@ mod failure;
 mod language;
 mod loader_rules;
 mod registry;
+pub(crate) mod requirement;
 mod scope;
 
 pub(crate) use language::loaded_summary;
