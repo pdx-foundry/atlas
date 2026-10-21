@@ -459,11 +459,12 @@ form it does not know, or one field tested both ways) leaves every answer below 
   tests: `yes` or `no` for a zero test, and a keyword that a condition names for a keyword test.
   A line with a `## cardinality` minimum of 0 is read only for `no`: a definition without the key
   keeps its default, which the cases take as zero (Native's census case for the empty definition
-  is the zero state). When the states that the selector selects are exactly the states of one
-  case, that case's `required` answers the subtype's minimum, 1 or 0; under the decision of
-  2026-10-20, a case that is not required is the per-subtype probe that a 0 needs. The subtype
-  claim takes this answer without the always-read premise, and the unconditioned gap does not
-  cross to it. A selector that is wider or narrower than every case (planet_classes
+  is the zero state). A traced check on a field whose default is not zero would break this
+  reading: such a case needs this rule changed before it is matched. When the states that the
+  selector selects are exactly the states of one case, that case's `required` answers the
+  subtype's minimum, 1 or 0; under the decision of 2026-10-20, a case that is not required is the
+  per-subtype probe that a 0 needs. The subtype claim takes this answer without the always-read
+  premise, and the unconditioned gap does not cross to it. A selector that is wider or narrower than every case (planet_classes
   `habitable_planet` is `colonizable = yes`, but each case also states `star` and `ringworld`), a
   negated or combined subtype, a subtype with a `## type_key_filter` or a block line, and a line
   whose key no condition tests stay open.
