@@ -67,6 +67,7 @@ pub(super) fn classify<'a>(
             .filter_map(|subject| subject.name.clone())
             .collect(),
         unconditional_names: unconditional_names(snapshot),
+        namespace_defines: namespace_defines(snapshot),
     };
     ledger
         .claims
@@ -110,6 +111,36 @@ fn subtype_naming_record(claim: &Claim, joins: &Joins<'_>) -> Option<LanguageSub
         .filter(|subject| joins.unconditional_names.contains(&subject.name))
 }
 
+/// The first define of each namespace, by name, among the defines with an unconditional existence
+/// rule. A namespace exists where Native reads one of its defines, and every define's existence
+/// rests on the one defines answer, so any of them answers the namespace; the first keeps the
+/// join stable. A define that only a gap names is not one of them.
+fn namespace_defines(snapshot: &Snapshot) -> BTreeMap<String, String> {
+    let mut namespaces = BTreeMap::new();
+    let existing = snapshot
+        .rules
+        .iter()
+        .filter(|rule| rule.property == "existence" && rule.conditions.is_empty())
+        .filter_map(|rule| rule.subject.strip_prefix("define:"));
+
+    for define in existing {
+        let Some((namespace, _)) = define.split_once('.') else {
+            continue;
+        };
+
+        namespaces
+            .entry(namespace.to_owned())
+            .and_modify(|first: &mut String| {
+                if define < first.as_str() {
+                    *first = define.to_owned();
+                }
+            })
+            .or_insert_with(|| define.to_owned());
+    }
+
+    namespaces
+}
+
 /// The derived names whose rule has only `Always` alternatives.
 fn unconditional_names(snapshot: &Snapshot) -> BTreeSet<String> {
     snapshot
@@ -148,6 +179,8 @@ struct Joins<'a> {
     derived_names: BTreeSet<String>,
     /// The derived names that the engine composes for every item.
     unconditional_names: BTreeSet<String>,
+    /// The first define, by name, of each define namespace that the snapshot lists.
+    namespace_defines: BTreeMap<String, String>,
 }
 
 impl Joins<'_> {
@@ -337,6 +370,11 @@ fn record(claim: &Claim, joins: &Joins<'_>) -> Option<LanguageSubject> {
         }
         ("game_rules.cwt", ["game_rules", name, "$annotation:replace_scopes"], "scope_context") => {
             language_subject(SubjectKind::GameRule, name, "entry_scopes")
+        }
+        (_, ["defines", namespace], "field_existence") if file.starts_with("common/defines/") => {
+            let define = joins.namespace_defines.get(*namespace)?;
+
+            language_subject(SubjectKind::Define, define, "existence")
         }
         (_, ["defines", namespace, name], "field_existence" | "value_form")
             if file.starts_with("common/defines/") =>
@@ -590,6 +628,7 @@ mod tests {
             naming_values: BTreeMap::new(),
             derived_names: BTreeSet::new(),
             unconditional_names: BTreeSet::new(),
+            namespace_defines: BTreeMap::new(),
         };
         let classified = |claim| record(claim, &joins).unwrap();
 

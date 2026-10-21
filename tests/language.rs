@@ -737,6 +737,9 @@ defines = {
     NGameplay = {
         LOGISTIC_CEILING_MIN = int
     }
+    NAtlasUnread = {
+        ATLAS_UNREAD = int
+    }
 }
 "#,
         ),
@@ -800,6 +803,15 @@ async fn language_claims_join_their_snapshot_answers() {
 
     assert_eq!(recorded.totals.atlas_owned.covered, 0);
 
+    // A define that only a gap names has no existence rule, and must not hide its namespace.
+    snapshot.subjects.push(snapshot::Subject {
+        id: "define:NGameplay.AAA_GAP_ONLY".into(),
+        kind: snapshot::SubjectKind::Define,
+        registry: None,
+        field: None,
+        conditional: None,
+        name: Some("NGameplay.AAA_GAP_ONLY".into()),
+    });
     qualify_as_live(&mut snapshot);
     let report = coverage::evaluate(
         &ledger,
@@ -869,6 +881,11 @@ async fn language_claims_join_their_snapshot_answers() {
             "value_form",
         ),
         (
+            "common/defines/00_defines.cwt",
+            vec!["defines", "NGameplay"],
+            "field_existence",
+        ),
+        (
             "modifiers.cwt",
             vec!["modifiers", "pop_happiness"],
             "declaration_existence",
@@ -931,6 +948,18 @@ async fn language_claims_join_their_snapshot_answers() {
         (
             "on_actions.cwt",
             vec!["on_actions", "$item:2"],
+            "value_form",
+            "No qualified answer",
+        ),
+        (
+            "common/defines/00_defines.cwt",
+            vec!["defines", "NAtlasUnread"],
+            "field_existence",
+            "No qualified answer",
+        ),
+        (
+            "common/defines/00_defines.cwt",
+            vec!["defines", "NGameplay"],
             "value_form",
             "No qualified answer",
         ),
