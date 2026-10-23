@@ -8,10 +8,10 @@ use super::{
 use crate::extraction::Extraction;
 use pdx_native::{
     AcceptedCategories, Answer, BlockFamily, Completeness, DerivedName, DiagnosticCoverage,
-    DiagnosticJoin, Disposal, Field, FieldCondition, FieldDomain, FieldMembers, FieldReadOutcome,
-    FieldReference, FieldRequirement, FixtureFieldOutcome, FixtureObservation, FixtureStorage,
-    Gap as NativeGap, GapKind, GapSubject, GrammarProperty, NameLookup, NamePart, ReaderKind,
-    ReferenceTarget, RepeatBehavior,
+    DiagnosticJoin, Disposal, Field, FieldCondition, FieldDomain, FieldMembers,
+    FieldReadAlternative, FieldReadOutcome, FieldReference, FieldRequirement, FixtureFieldOutcome,
+    FixtureObservation, FixtureStorage, Gap as NativeGap, GapKind, GapSubject, GrammarProperty,
+    NameLookup, NamePart, ReaderKind, ReferenceTarget, RepeatBehavior,
 };
 use serde_json::{Value, json};
 use std::collections::{BTreeMap, BTreeSet};
@@ -486,15 +486,12 @@ impl<'a, T> FieldSet<'a, T> {
         field: &Field,
         parent_conditional: bool,
     ) -> Result<(), String> {
-        let unconditional_outcome = match field.read.as_slice() {
-            [alternative]
-                if !parent_conditional && alternative.condition == FieldCondition::Always =>
-            {
-                Some(&alternative.outcome)
-            }
-            _ => None,
+        let read = if parent_conditional {
+            None
+        } else {
+            UnconditionalRead::of(&field.read)
         };
-        let conditional = unconditional_outcome.is_none();
+        let conditional = read.is_none();
         let subject = self.owner.subject(path, conditional);
         let id = subject.id.clone();
         snapshot.subjects.push(subject);
@@ -585,12 +582,11 @@ impl<'a, T> FieldSet<'a, T> {
                 )?;
             }
         }
-        let block =
-            assemble_field_value_form(snapshot, &id, field, &evidence, unconditional_outcome)?;
-        if block {
-            self.assemble_block(snapshot, &id, field, &evidence);
+        let block_family = assemble_field_value_form(snapshot, &id, field, &evidence, read)?;
+        if let Some(family) = block_family {
+            self.assemble_block(snapshot, &id, field, family, &evidence);
         }
-        assemble_field_repeat(snapshot, &id, unconditional_outcome, &evidence);
+        assemble_field_repeat(snapshot, &id, read, &evidence);
         self.assemble_reference(snapshot, &id, path, field, &evidence);
         assemble_accepted_categories(snapshot, &id, field, &evidence);
         assemble_field_requirement(snapshot, &id, &field.requirement, evidence);
@@ -691,15 +687,15 @@ impl<'a, T> FieldSet<'a, T> {
         );
     }
 
-    /// The nested grammar and scope context of an unconditional block reader.
+    /// The nested grammar and scope context of an unconditional block reader of `family`.
     fn assemble_block(
         &self,
         snapshot: &mut Snapshot,
         id: &str,
         field: &Field,
+        family: BlockFamily,
         evidence: &EvidenceLink,
     ) {
-        let family = field.reader.family;
         let members_established = matches!(
             field.members,
             FieldMembers::Fields(_)
@@ -720,7 +716,7 @@ impl<'a, T> FieldSet<'a, T> {
             );
         }
         // A compiler checks a modifier block's keys by its accepted categories, not by scope.
-        if !is_modifier_block(field) {
+        if !is_modifier_block(family, &field.members) {
             self.assemble_scope_context(snapshot, id, field, evidence);
         }
     }
@@ -902,7 +898,7 @@ fn assemble_accepted_categories(
             json!("enclosing"),
             evidence.clone(),
         ),
-        _ if is_modifier_block(field) => gap(
+        _ if is_modifier_block(field.reader.family, &field.members) => gap(
             snapshot,
             id,
             "accepted_categories",
@@ -915,19 +911,67 @@ fn assemble_accepted_categories(
     }
 }
 
-fn is_modifier_block(field: &Field) -> bool {
-    field.reader.family == BlockFamily::Modifier
-        || matches!(field.members, FieldMembers::ModifierBlock(_))
+fn is_modifier_block(family: BlockFamily, members: &FieldMembers) -> bool {
+    family == BlockFamily::Modifier || matches!(members, FieldMembers::ModifierBlock(_))
 }
 
-/// Publish the value form, and return whether the field is an unconditional block reader.
+/// How every path reads a field when no path depends on the definition's other fields.
+#[derive(Clone, Copy)]
+enum UnconditionalRead<'a> {
+    /// One outcome under the condition `Always`.
+    One(&'a FieldReadOutcome),
+    /// One outcome for a block value and one for any other value.
+    ByValueForm {
+        block: &'a FieldReadOutcome,
+        scalar: &'a FieldReadOutcome,
+    },
+}
+
+impl<'a> UnconditionalRead<'a> {
+    /// The unconditional read of `read`: exactly one `Always` alternative, or exactly the two
+    /// `ValueForm` alternatives, in either order. `None` for any other alternatives.
+    fn of(read: &'a [FieldReadAlternative]) -> Option<Self> {
+        let block_form = |alternative: &FieldReadAlternative| match alternative.condition {
+            FieldCondition::ValueForm { block } => Some(block),
+            _ => None,
+        };
+
+        match read {
+            [one] if one.condition == FieldCondition::Always => Some(Self::One(&one.outcome)),
+            [first, second] => match (block_form(first)?, block_form(second)?) {
+                (true, false) => Some(Self::ByValueForm {
+                    block: &first.outcome,
+                    scalar: &second.outcome,
+                }),
+                (false, true) => Some(Self::ByValueForm {
+                    block: &second.outcome,
+                    scalar: &first.outcome,
+                }),
+                _ => None,
+            },
+            _ => None,
+        }
+    }
+}
+
+/// Publish the value form, and return the block family when the field is an unconditional block
+/// reader.
 fn assemble_field_value_form(
     snapshot: &mut Snapshot,
     id: &str,
     field: &Field,
     evidence: &EvidenceLink,
-    outcome: Option<&FieldReadOutcome>,
-) -> Result<bool, String> {
+    read: Option<UnconditionalRead>,
+) -> Result<Option<BlockFamily>, String> {
+    let outcome = match read {
+        Some(UnconditionalRead::ByValueForm { block, scalar }) => {
+            return Ok(assemble_value_form_pair(
+                snapshot, id, block, scalar, evidence,
+            ));
+        }
+        Some(UnconditionalRead::One(outcome)) => Some(outcome),
+        None => None,
+    };
     let (reader, reason, owner) = match outcome {
         Some(FieldReadOutcome::Read { reader, .. }) => (Some(reader), "", None),
         Some(FieldReadOutcome::Rejected) => (
@@ -963,7 +1007,7 @@ fn assemble_field_value_form(
             evidence.native_gaps.clone(),
             vec![evidence.clone()],
         );
-        return Ok(false);
+        return Ok(None);
     };
     let reader_id = &reader.id;
     let reader_id = reader_id
@@ -981,7 +1025,7 @@ fn assemble_field_value_form(
             json!({"form":"block","reader":reader_id}),
             evidence.clone(),
         );
-        return Ok(true);
+        return Ok(Some(field.reader.family));
     }
 
     let shape = match reader.kind {
@@ -998,7 +1042,7 @@ fn assemble_field_value_form(
             }
 
             rule(snapshot, id, "value_form", value_form, evidence.clone());
-            return Ok(true);
+            return Ok(Some(field.reader.family));
         }
         // The accepted names are the value form. Two fields can share a converter and still
         // differ in domain, so the names stay on the rule, not on a reader-wide schema.
@@ -1011,7 +1055,7 @@ fn assemble_field_value_form(
                     json!({"form":"keyword","names":names,"reader":reader_id}),
                     evidence.clone(),
                 );
-                return Ok(false);
+                return Ok(None);
             }
 
             None
@@ -1028,7 +1072,7 @@ fn assemble_field_value_form(
             evidence.native_gaps.clone(),
             vec![evidence.clone()],
         );
-        return Ok(false);
+        return Ok(None);
     };
     let schema_name = format!(
         "reader-{}",
@@ -1052,7 +1096,52 @@ fn assemble_field_value_form(
         json!({"form":form,"schema":format!("#/schemas/$defs/{schema_name}"),"reader":reader_id}),
         evidence.clone(),
     );
-    Ok(false)
+    Ok(None)
+}
+
+/// Publish the value form of a field that reads a block value and any other value differently:
+/// the block, with the other value's form beside it (`scalar`), as for a weight block's bare
+/// value. Return the block reader's family, or `None` with a gap when Native establishes either
+/// form only as `Skipped` or not at all.
+fn assemble_value_form_pair(
+    snapshot: &mut Snapshot,
+    id: &str,
+    block: &FieldReadOutcome,
+    scalar: &FieldReadOutcome,
+    evidence: &EvidenceLink,
+) -> Option<BlockFamily> {
+    let block_reader = match block {
+        FieldReadOutcome::Read { reader, .. } if reader.kind == ReaderKind::Block => Some(reader),
+        _ => None,
+    };
+    let scalar_value_form = match scalar {
+        FieldReadOutcome::Read { reader, .. } => {
+            scalar_form(reader.kind).map(|(form, _)| json!({"form": form, "reader": reader.id}))
+        }
+        _ => None,
+    };
+    let (Some(block_reader), Some(scalar_value_form)) = (block_reader, scalar_value_form) else {
+        gap(
+            snapshot,
+            id,
+            "value_form",
+            "Native did not establish the value form of both a block value and any other value",
+            None,
+            evidence.native_gaps.clone(),
+            vec![evidence.clone()],
+        );
+        return None;
+    };
+
+    rule(
+        snapshot,
+        id,
+        "value_form",
+        json!({"form": "block", "reader": block_reader.id, "scalar": scalar_value_form}),
+        evidence.clone(),
+    );
+
+    Some(block_reader.family)
 }
 
 /// The value form and JSON Schema type of a reader that takes one value, or `None` for a block,
@@ -1066,32 +1155,38 @@ fn scalar_form(kind: ReaderKind) -> Option<(&'static str, Value)> {
         ReaderKind::ScopedNumeric => ("scoped_number", json!(["number", "string"])),
         ReaderKind::String => ("string", json!("string")),
         ReaderKind::Reference => ("reference", json!("string")),
+        // The key's presence is the fact, so any value has the same effect. The config writes a
+        // key whose value is ignored as the literal `yes` (`alias[effect:debug_break] = yes`).
+        ReaderKind::Presence => ("yes", json!(["boolean", "number", "string"])),
         _ => return None,
     })
 }
 
+/// The repeat behavior of an unconditional read. A field that reads each value form differently
+/// publishes the two forms' behaviors (`block`, `scalar`) when they differ.
 fn assemble_field_repeat(
     snapshot: &mut Snapshot,
     id: &str,
-    outcome: Option<&FieldReadOutcome>,
+    read: Option<UnconditionalRead>,
     evidence: &EvidenceLink,
 ) {
-    match outcome {
-        Some(FieldReadOutcome::Read { shape, .. })
-            if matches!(
-                shape.repeat,
-                RepeatBehavior::Replace | RepeatBehavior::Accumulate | RepeatBehavior::Merges
-            ) =>
-        {
-            rule(
-                snapshot,
-                id,
-                "repeat_behavior",
-                json!(shape.repeat),
-                evidence.clone(),
-            );
+    let repeat = match read {
+        Some(UnconditionalRead::One(outcome)) => {
+            established_repeat(outcome).map(|repeat| json!(repeat))
         }
-        _ => gap(
+        Some(UnconditionalRead::ByValueForm { block, scalar }) => {
+            match (established_repeat(block), established_repeat(scalar)) {
+                (Some(block), Some(scalar)) if block == scalar => Some(json!(block)),
+                (Some(block), Some(scalar)) => Some(json!({"block": block, "scalar": scalar})),
+                _ => None,
+            }
+        }
+        None => None,
+    };
+
+    match repeat {
+        Some(repeat) => rule(snapshot, id, "repeat_behavior", repeat, evidence.clone()),
+        None => gap(
             snapshot,
             id,
             "occurrences.maximum",
@@ -1100,6 +1195,21 @@ fn assemble_field_repeat(
             Vec::new(),
             vec![evidence.clone()],
         ),
+    }
+}
+
+/// The repeat behavior that a read outcome establishes: `Replace`, `Accumulate` or `Merges`.
+fn established_repeat(outcome: &FieldReadOutcome) -> Option<RepeatBehavior> {
+    match outcome {
+        FieldReadOutcome::Read { shape, .. }
+            if matches!(
+                shape.repeat,
+                RepeatBehavior::Replace | RepeatBehavior::Accumulate | RepeatBehavior::Merges
+            ) =>
+        {
+            Some(shape.repeat)
+        }
+        _ => None,
     }
 }
 

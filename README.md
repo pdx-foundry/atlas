@@ -104,7 +104,9 @@ names without independent scope evidence. These recorded checks are separate fro
 with the current config. Callback scope rules include `prev` and apply the self-link assumption;
 missing independent evidence remains an entry-scope gap.
 A weight or script-value block whose bare value Native reports (`WeightBlock.scalar`) carries that
-value's form beside `block` in its `value_form` rule (`scalar`), and compares as either form.
+value's form beside `block` in its `value_form` rule (`scalar`), and compares as either form. A
+field that reads a block value and any other value differently (`FieldCondition::ValueForm`)
+publishes its two forms the same way.
 Generic CWT `scalar` is compatible with a concrete scalar reader; CWT aliases and other modeled
 forms remain unclassified until a semantic mapping exists.
 

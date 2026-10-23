@@ -631,6 +631,22 @@ remain separate. Unknown or conditional repeat behavior earns no unconditional c
 stays unresolved unless validation reports the field's absence; finite accepted fixtures do not
 establish that a field is required or optional.
 
+A field whose read is exactly the two value-form alternatives (`ValueForm { block: true }` and
+`{ block: false }`) is read unconditionally: the condition is the form of the field's own written
+value, not another field's state. Its `value_form` rule is the block with the other value's form
+beside it (`scalar`), as for a weight block's bare value, and its block form takes the block
+alternative's family and `members`. Each alternative's own reader answers its form and its repeat:
+`repeat_behavior` is that behavior when both agree and `{"block": …, "scalar": …}` when they
+differ, which compares with a config maximum as `inf`. A form that is `Skipped` or unresolved
+leaves a `value_form` gap, and an unestablished repeat in either form leaves the maximum gap. The
+pair is not the always-read premise of the subtype rule below, so it gives no subtype claim.
+On M452 at Native `9b582cc`, 17 fields have the pair: `common/global_ship_designs` `upgrades_to`
+(a list of strings, or one string), `common/pop_categories` `can_change_category` and
+`common/ship_sizes` `hero_ship` (a block, or a Boolean) answer both forms; the other 14 skip a block
+and keep nothing of a scalar, so their value form and maximum stay gaps. A `Presence` reader (a key
+whose value has no effect) has the form `yes`, as the config writes a key whose value is ignored
+(`alias[effect:debug_break] = yes`); no M452 field has one.
+
 Conditional value forms keep all alternatives in one answer. A separate `value_form.unresolved`
 gap blocks unconditional credit, including nested children of conditional parents. Comparison
 retains the structured answer and gap. A CWT subtype name is not inferred from a Native predicate.
