@@ -1944,6 +1944,59 @@
                             ],
                             "members": {
                               "AnyKey": {
+                                "entry": {
+                                  "name": "",
+                                  "reader": {
+                                    "numeric": {
+                                      "Known": null
+                                    },
+                                    "scoped_operand": {
+                                      "Known": null
+                                    },
+                                    "id": null,
+                                    "kind": "String",
+                                    "family": "NotApplicable"
+                                  },
+                                  "shape": {
+                                    "value": "Scalar",
+                                    "repeat": "Accumulate"
+                                  },
+                                  "read": [
+                                    {
+                                      "condition": "Always",
+                                      "outcome": {
+                                        "Read": {
+                                          "reader": {
+                                            "numeric": {
+                                              "Known": null
+                                            },
+                                            "scoped_operand": {
+                                              "Known": null
+                                            },
+                                            "id": null,
+                                            "kind": "String",
+                                            "family": "NotApplicable"
+                                          },
+                                          "shape": {
+                                            "value": "Scalar",
+                                            "repeat": "Accumulate"
+                                          }
+                                        }
+                                      }
+                                    }
+                                  ],
+                                  "members": "None",
+                                  "domain": "Unknown",
+                                  "uses": [],
+                                  "reference": "NotEstablished",
+                                  "entry_contexts": [],
+                                  "read_scope": {
+                                    "Known": []
+                                  },
+                                  "accepted_categories": "NotApplicable",
+                                  "requirement": "Unknown"
+                                },
+                                "key_reference": "NotEstablished",
                                 "value_forms": {
                                   "Known": [
                                     "Number",
@@ -2954,6 +3007,59 @@
                         ],
                         "members": {
                           "AnyKey": {
+                            "entry": {
+                              "name": "",
+                              "reader": {
+                                "numeric": {
+                                  "Known": null
+                                },
+                                "scoped_operand": {
+                                  "Known": null
+                                },
+                                "id": null,
+                                "kind": "String",
+                                "family": "NotApplicable"
+                              },
+                              "shape": {
+                                "value": "Scalar",
+                                "repeat": "Accumulate"
+                              },
+                              "read": [
+                                {
+                                  "condition": "Always",
+                                  "outcome": {
+                                    "Read": {
+                                      "reader": {
+                                        "numeric": {
+                                          "Known": null
+                                        },
+                                        "scoped_operand": {
+                                          "Known": null
+                                        },
+                                        "id": null,
+                                        "kind": "String",
+                                        "family": "NotApplicable"
+                                      },
+                                      "shape": {
+                                        "value": "Scalar",
+                                        "repeat": "Accumulate"
+                                      }
+                                    }
+                                  }
+                                }
+                              ],
+                              "members": "None",
+                              "domain": "Unknown",
+                              "uses": [],
+                              "reference": "NotEstablished",
+                              "entry_contexts": [],
+                              "read_scope": {
+                                "Known": []
+                              },
+                              "accepted_categories": "NotApplicable",
+                              "requirement": "Unknown"
+                            },
+                            "key_reference": "NotEstablished",
                             "value_forms": {
                               "Known": [
                                 "Number",
@@ -14039,6 +14145,59 @@
                                   ],
                                   "members": {
                                     "AnyKey": {
+                                      "entry": {
+                                        "name": "",
+                                        "reader": {
+                                          "numeric": {
+                                            "Known": null
+                                          },
+                                          "scoped_operand": {
+                                            "Known": null
+                                          },
+                                          "id": null,
+                                          "kind": "String",
+                                          "family": "NotApplicable"
+                                        },
+                                        "shape": {
+                                          "value": "Scalar",
+                                          "repeat": "Accumulate"
+                                        },
+                                        "read": [
+                                          {
+                                            "condition": "Always",
+                                            "outcome": {
+                                              "Read": {
+                                                "reader": {
+                                                  "numeric": {
+                                                    "Known": null
+                                                  },
+                                                  "scoped_operand": {
+                                                    "Known": null
+                                                  },
+                                                  "id": null,
+                                                  "kind": "String",
+                                                  "family": "NotApplicable"
+                                                },
+                                                "shape": {
+                                                  "value": "Scalar",
+                                                  "repeat": "Accumulate"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        ],
+                                        "members": "None",
+                                        "domain": "Unknown",
+                                        "uses": [],
+                                        "reference": "NotEstablished",
+                                        "entry_contexts": [],
+                                        "read_scope": {
+                                          "Known": []
+                                        },
+                                        "accepted_categories": "NotApplicable",
+                                        "requirement": "Unknown"
+                                      },
+                                      "key_reference": "NotEstablished",
                                       "value_forms": {
                                         "Known": [
                                           "Number",
@@ -15049,6 +15208,59 @@
                               ],
                               "members": {
                                 "AnyKey": {
+                                  "entry": {
+                                    "name": "",
+                                    "reader": {
+                                      "numeric": {
+                                        "Known": null
+                                      },
+                                      "scoped_operand": {
+                                        "Known": null
+                                      },
+                                      "id": null,
+                                      "kind": "String",
+                                      "family": "NotApplicable"
+                                    },
+                                    "shape": {
+                                      "value": "Scalar",
+                                      "repeat": "Accumulate"
+                                    },
+                                    "read": [
+                                      {
+                                        "condition": "Always",
+                                        "outcome": {
+                                          "Read": {
+                                            "reader": {
+                                              "numeric": {
+                                                "Known": null
+                                              },
+                                              "scoped_operand": {
+                                                "Known": null
+                                              },
+                                              "id": null,
+                                              "kind": "String",
+                                              "family": "NotApplicable"
+                                            },
+                                            "shape": {
+                                              "value": "Scalar",
+                                              "repeat": "Accumulate"
+                                            }
+                                          }
+                                        }
+                                      }
+                                    ],
+                                    "members": "None",
+                                    "domain": "Unknown",
+                                    "uses": [],
+                                    "reference": "NotEstablished",
+                                    "entry_contexts": [],
+                                    "read_scope": {
+                                      "Known": []
+                                    },
+                                    "accepted_categories": "NotApplicable",
+                                    "requirement": "Unknown"
+                                  },
+                                  "key_reference": "NotEstablished",
                                   "value_forms": {
                                     "Known": [
                                       "Number",
@@ -16331,6 +16543,59 @@
                         ],
                         "members": {
                           "AnyKey": {
+                            "entry": {
+                              "name": "",
+                              "reader": {
+                                "numeric": {
+                                  "Known": null
+                                },
+                                "scoped_operand": {
+                                  "Known": null
+                                },
+                                "id": null,
+                                "kind": "String",
+                                "family": "NotApplicable"
+                              },
+                              "shape": {
+                                "value": "Scalar",
+                                "repeat": "Accumulate"
+                              },
+                              "read": [
+                                {
+                                  "condition": "Always",
+                                  "outcome": {
+                                    "Read": {
+                                      "reader": {
+                                        "numeric": {
+                                          "Known": null
+                                        },
+                                        "scoped_operand": {
+                                          "Known": null
+                                        },
+                                        "id": null,
+                                        "kind": "String",
+                                        "family": "NotApplicable"
+                                      },
+                                      "shape": {
+                                        "value": "Scalar",
+                                        "repeat": "Accumulate"
+                                      }
+                                    }
+                                  }
+                                }
+                              ],
+                              "members": "None",
+                              "domain": "Unknown",
+                              "uses": [],
+                              "reference": "NotEstablished",
+                              "entry_contexts": [],
+                              "read_scope": {
+                                "Known": []
+                              },
+                              "accepted_categories": "NotApplicable",
+                              "requirement": "Unknown"
+                            },
+                            "key_reference": "NotEstablished",
                             "value_forms": {
                               "Known": [
                                 "Number",
@@ -17411,6 +17676,59 @@
                   ],
                   "members": {
                     "AnyKey": {
+                      "entry": {
+                        "name": "",
+                        "reader": {
+                          "numeric": {
+                            "Known": null
+                          },
+                          "scoped_operand": {
+                            "Known": null
+                          },
+                          "id": null,
+                          "kind": "String",
+                          "family": "NotApplicable"
+                        },
+                        "shape": {
+                          "value": "Scalar",
+                          "repeat": "Accumulate"
+                        },
+                        "read": [
+                          {
+                            "condition": "Always",
+                            "outcome": {
+                              "Read": {
+                                "reader": {
+                                  "numeric": {
+                                    "Known": null
+                                  },
+                                  "scoped_operand": {
+                                    "Known": null
+                                  },
+                                  "id": null,
+                                  "kind": "String",
+                                  "family": "NotApplicable"
+                                },
+                                "shape": {
+                                  "value": "Scalar",
+                                  "repeat": "Accumulate"
+                                }
+                              }
+                            }
+                          }
+                        ],
+                        "members": "None",
+                        "domain": "Unknown",
+                        "uses": [],
+                        "reference": "NotEstablished",
+                        "entry_contexts": [],
+                        "read_scope": {
+                          "Known": []
+                        },
+                        "accepted_categories": "NotApplicable",
+                        "requirement": "Unknown"
+                      },
+                      "key_reference": "NotEstablished",
                       "value_forms": {
                         "Known": [
                           "Number",
@@ -20159,7 +20477,7 @@
     "source": {
       "build": "c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b",
       "native_version": "0.1.0",
-      "method": "registry-fields/v73",
+      "method": "registry-fields/ghidra-v1",
       "basis": "StaticAnalysis"
     }
   }

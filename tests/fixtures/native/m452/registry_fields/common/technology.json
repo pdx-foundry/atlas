@@ -4,29 +4,51 @@
       {
         "name": "icon",
         "reader": {
-          "numeric": "Unresolved",
-          "scoped_operand": "Unresolved",
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
           "id": null,
-          "kind": "Unknown",
-          "family": "Unknown"
+          "kind": "String",
+          "family": "NotApplicable"
         },
         "shape": {
-          "value": "Unknown",
-          "repeat": "Unknown"
+          "value": "Scalar",
+          "repeat": "Replace"
         },
         "read": [
           {
             "condition": "Always",
-            "outcome": "Unresolved"
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": null,
+                  "kind": "String",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
           }
         ],
-        "members": "Unresolved",
+        "members": "None",
         "domain": "Unknown",
         "uses": [],
         "reference": "NotEstablished",
         "entry_contexts": [],
         "read_scope": "Unresolved",
-        "accepted_categories": "Unresolved",
+        "accepted_categories": "NotApplicable",
         "requirement": "Unknown"
       },
       {
@@ -164,20 +186,42 @@
       {
         "name": "prerequisites",
         "reader": {
-          "numeric": "Unresolved",
-          "scoped_operand": "Unresolved",
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
           "id": null,
-          "kind": "Unknown",
+          "kind": "Block",
           "family": "Unknown"
         },
         "shape": {
-          "value": "Unknown",
+          "value": "Block",
           "repeat": "Unknown"
         },
         "read": [
           {
             "condition": "Always",
-            "outcome": "Unresolved"
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": null,
+                  "kind": "Block",
+                  "family": "Unknown"
+                },
+                "shape": {
+                  "value": "Block",
+                  "repeat": "Unknown"
+                }
+              }
+            }
           }
         ],
         "members": "Unresolved",
@@ -1164,7 +1208,7 @@
         },
         "shape": {
           "value": "Block",
-          "repeat": "Unknown"
+          "repeat": "Accumulate"
         },
         "read": [
           {
@@ -1184,7 +1228,7 @@
                 },
                 "shape": {
                   "value": "Block",
-                  "repeat": "Unknown"
+                  "repeat": "Accumulate"
                 }
               }
             }
@@ -14988,7 +15032,7 @@
               },
               "shape": {
                 "value": "Block",
-                "repeat": "Unknown"
+                "repeat": "Accumulate"
               },
               "read": [
                 {
@@ -15008,7 +15052,7 @@
                       },
                       "shape": {
                         "value": "Block",
-                        "repeat": "Unknown"
+                        "repeat": "Accumulate"
                       }
                     }
                   }
@@ -16125,6 +16169,59 @@
                         ],
                         "members": {
                           "AnyKey": {
+                            "entry": {
+                              "name": "",
+                              "reader": {
+                                "numeric": {
+                                  "Known": null
+                                },
+                                "scoped_operand": {
+                                  "Known": null
+                                },
+                                "id": null,
+                                "kind": "String",
+                                "family": "NotApplicable"
+                              },
+                              "shape": {
+                                "value": "Scalar",
+                                "repeat": "Accumulate"
+                              },
+                              "read": [
+                                {
+                                  "condition": "Always",
+                                  "outcome": {
+                                    "Read": {
+                                      "reader": {
+                                        "numeric": {
+                                          "Known": null
+                                        },
+                                        "scoped_operand": {
+                                          "Known": null
+                                        },
+                                        "id": null,
+                                        "kind": "String",
+                                        "family": "NotApplicable"
+                                      },
+                                      "shape": {
+                                        "value": "Scalar",
+                                        "repeat": "Accumulate"
+                                      }
+                                    }
+                                  }
+                                }
+                              ],
+                              "members": "None",
+                              "domain": "Unknown",
+                              "uses": [],
+                              "reference": "NotEstablished",
+                              "entry_contexts": [],
+                              "read_scope": {
+                                "Known": []
+                              },
+                              "accepted_categories": "NotApplicable",
+                              "requirement": "Unknown"
+                            },
+                            "key_reference": "NotEstablished",
                             "value_forms": {
                               "Known": [
                                 "Number",
@@ -17257,6 +17354,59 @@
                   ],
                   "members": {
                     "AnyKey": {
+                      "entry": {
+                        "name": "",
+                        "reader": {
+                          "numeric": {
+                            "Known": null
+                          },
+                          "scoped_operand": {
+                            "Known": null
+                          },
+                          "id": null,
+                          "kind": "String",
+                          "family": "NotApplicable"
+                        },
+                        "shape": {
+                          "value": "Scalar",
+                          "repeat": "Accumulate"
+                        },
+                        "read": [
+                          {
+                            "condition": "Always",
+                            "outcome": {
+                              "Read": {
+                                "reader": {
+                                  "numeric": {
+                                    "Known": null
+                                  },
+                                  "scoped_operand": {
+                                    "Known": null
+                                  },
+                                  "id": null,
+                                  "kind": "String",
+                                  "family": "NotApplicable"
+                                },
+                                "shape": {
+                                  "value": "Scalar",
+                                  "repeat": "Accumulate"
+                                }
+                              }
+                            }
+                          }
+                        ],
+                        "members": "None",
+                        "domain": "Unknown",
+                        "uses": [],
+                        "reference": "NotEstablished",
+                        "entry_contexts": [],
+                        "read_scope": {
+                          "Known": []
+                        },
+                        "accepted_categories": "NotApplicable",
+                        "requirement": "Unknown"
+                      },
+                      "key_reference": "NotEstablished",
                       "value_forms": {
                         "Known": [
                           "Number",
@@ -22213,6 +22363,176 @@
         },
         "accepted_categories": "NotApplicable",
         "requirement": "Unknown"
+      },
+      {
+        "name": "category",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Any",
+          "repeat": "Accumulate"
+        },
+        "read": [
+          {
+            "condition": "Unresolved",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": {
+          "Items": {
+            "reader": {
+              "numeric": {
+                "Known": null
+              },
+              "scoped_operand": {
+                "Known": null
+              },
+              "id": null,
+              "kind": "String",
+              "family": "NotApplicable"
+            }
+          }
+        },
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": {
+          "Known": []
+        },
+        "accepted_categories": "Unresolved",
+        "requirement": "Unknown"
+      },
+      {
+        "name": "technology",
+        "reader": {
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": null,
+          "kind": "Block",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Block",
+          "repeat": "Accumulate"
+        },
+        "read": [
+          {
+            "condition": "Unresolved",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": null,
+                  "kind": "Block",
+                  "family": "Unknown"
+                },
+                "shape": {
+                  "value": "Block",
+                  "repeat": "Accumulate"
+                }
+              }
+            }
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved",
+        "requirement": "Unknown"
+      },
+      {
+        "name": "tier",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": {
+            "Known": null
+          },
+          "id": null,
+          "kind": "Integer",
+          "family": "NotApplicable"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Always",
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": "Unresolved",
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": null,
+                  "kind": "Integer",
+                  "family": "NotApplicable"
+                },
+                "shape": {
+                  "value": "Scalar",
+                  "repeat": "Replace"
+                }
+              }
+            }
+          }
+        ],
+        "members": "None",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": {
+          "Known": []
+        },
+        "accepted_categories": "NotApplicable",
+        "requirement": "Unknown"
+      },
+      {
+        "name": "weight_groups",
+        "reader": {
+          "numeric": "Unresolved",
+          "scoped_operand": "Unresolved",
+          "id": null,
+          "kind": "Unknown",
+          "family": "Unknown"
+        },
+        "shape": {
+          "value": "Scalar",
+          "repeat": "Replace"
+        },
+        "read": [
+          {
+            "condition": "Unresolved",
+            "outcome": "Unresolved"
+          }
+        ],
+        "members": "Unresolved",
+        "domain": "Unknown",
+        "uses": [],
+        "reference": "NotEstablished",
+        "entry_contexts": [],
+        "read_scope": "Unresolved",
+        "accepted_categories": "Unresolved",
+        "requirement": "Unknown"
       }
     ],
     "completeness": "Partial",
@@ -26447,30 +26767,6 @@
         "kind": "UnresolvedStorage",
         "subject": {
           "kind": "field",
-          "name": "icon"
-        },
-        "detail": "Repeat behavior waits for one shared reader. Nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "prerequisites"
-        },
-        "detail": "Repeat behavior waits for one shared reader. Nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "feature_flags"
-        },
-        "detail": "Repeat behavior has no stated rule for this block reader, or the read is not a tail call."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
           "name": "prereqfor_desc"
         },
         "detail": "Repeat behavior waits for one shared reader. Nested fields remain unresolved."
@@ -26487,23 +26783,183 @@
         "kind": "UnresolvedStorage",
         "subject": {
           "kind": "field",
-          "name": "technology_swap.category"
+          "name": "technology_swap.prereqfor_desc"
         },
-        "detail": "Repeat behavior has no stated rule for this block reader, or the read is not a tail call."
+        "detail": "Repeat behavior waits for one shared reader. Nested fields remain unresolved."
+      },
+      {
+        "kind": "ReaderSemantics",
+        "subject": {
+          "kind": "field",
+          "name": "category"
+        },
+        "detail": "The key's path tests the value's token, and the reader export does not prove how it reads a block and a bare value."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "category"
+        },
+        "detail": "The reader export establishes the value form, not the shared reader's identity."
+      },
+      {
+        "kind": "UnresolvedCondition",
+        "subject": {
+          "kind": "field",
+          "name": "category"
+        },
+        "detail": "A loader condition remains unresolved; its outcome is retained separately."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "category"
+        },
+        "detail": "The reader export did not classify every path of the key."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "category"
+        },
+        "detail": "Whether the field reads a modifier container, and its categories, are not established."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "technology"
+        },
+        "detail": "The reader export establishes the value form, not the shared reader's identity."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "technology"
+        },
+        "detail": "read-scope: no-literal-mask"
+      },
+      {
+        "kind": "UnresolvedCondition",
+        "subject": {
+          "kind": "field",
+          "name": "technology"
+        },
+        "detail": "A loader condition remains unresolved; its outcome is retained separately."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "technology"
+        },
+        "detail": "The reader export did not classify every path of the key."
       },
       {
         "kind": "UnresolvedStorage",
         "subject": {
           "kind": "field",
-          "name": "technology_swap.prereqfor_desc"
+          "name": "technology"
+        },
+        "detail": "Nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "technology"
+        },
+        "detail": "Whether the field reads a modifier container, and its categories, are not established."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "prerequisites"
         },
         "detail": "Repeat behavior waits for one shared reader. Nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "tier"
+        },
+        "detail": "The reader export establishes the value form, not the shared reader's identity."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "tier"
+        },
+        "detail": "The reader export did not classify every path of the key."
+      },
+      {
+        "kind": "NumericConversion",
+        "subject": {
+          "kind": "field",
+          "name": "tier"
+        },
+        "detail": "The reader export does not establish numeric conversion."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "weight_groups"
+        },
+        "detail": "The reader export does not establish the field's reader."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "weight_groups"
+        },
+        "detail": "read-scope: no-literal-mask"
+      },
+      {
+        "kind": "UnresolvedCondition",
+        "subject": {
+          "kind": "field",
+          "name": "weight_groups"
+        },
+        "detail": "A loader condition remains unresolved; its outcome is retained separately."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "weight_groups"
+        },
+        "detail": "The reader export did not classify every path of the key."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "weight_groups"
+        },
+        "detail": "Nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "weight_groups"
+        },
+        "detail": "Whether the field reads a modifier container, and its categories, are not established."
       }
     ],
     "source": {
       "build": "c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b",
       "native_version": "0.1.0",
-      "method": "registry-fields/v73",
+      "method": "registry-fields/ghidra-v1",
       "basis": "StaticAnalysis"
     }
   }

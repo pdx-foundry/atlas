@@ -97,7 +97,7 @@ the command exits 2.
 
 The replayed answers keep their recorded basis and earn no coverage, so a static-mode snapshot
 gives the same coverage as a live snapshot only while no covered claim rests on a live observation
-(none did at Native `ec3342f` or `9fc7ced`). It is a development measure, not the milestone number, which comes
+(none did at Native `ec3342f`, `9fc7ced` or `9b582cc`). It is a development measure, not the milestone number, which comes
 only from a live snapshot. Each baseline's index records whether its snapshot held a live observation, and `ledger` compares
 a run only with a baseline of the same kind. The committed `docs/coverage/covered/` is a live
 capture, so a static-mode run is not compared with it. To measure a static change, run static mode
