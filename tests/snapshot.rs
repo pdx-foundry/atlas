@@ -683,8 +683,8 @@ async fn repeat_facts_require_an_unconditional_successful_read() {
 #[tokio::test]
 async fn a_field_read_by_value_form_is_unconditional_and_publishes_both_forms() {
     use pdx_native::{
-        FieldCondition, FieldMembers, FieldReadAlternative, FieldReadOutcome, ReaderKind,
-        RepeatBehavior,
+        BlockFamily, FieldCondition, FieldMembers, FieldReadAlternative, FieldReadOutcome,
+        ReaderKind, RepeatBehavior,
     };
     let mut extraction = recorded().await;
     let fields = extraction
@@ -704,13 +704,23 @@ async fn a_field_read_by_value_form_is_unconditional_and_publishes_both_forms() 
         reader.kind = kind;
         reader
     };
-    let read = |kind, repeat| {
+    let read_by = |reader, repeat| {
         let mut shape = base.shape;
         shape.repeat = repeat;
-        FieldReadOutcome::Read {
-            reader: reader(kind),
-            shape,
-        }
+        FieldReadOutcome::Read { reader, shape }
+    };
+    let read = |kind, repeat| read_by(reader(kind), repeat);
+    // The scalar branch's reader has no identity of its own, and the block branch's is the only
+    // one with a command family: the field's shared reader is Unknown.
+    let unidentified_boolean = || {
+        let mut reader = reader(ReaderKind::Boolean);
+        reader.id = None;
+        read_by(reader, RepeatBehavior::Replace)
+    };
+    let trigger_block = || {
+        let mut reader = reader(ReaderKind::Block);
+        reader.family = BlockFamily::Trigger;
+        read_by(reader, RepeatBehavior::Merges)
     };
     let by_form = |block, outcome| FieldReadAlternative {
         condition: FieldCondition::ValueForm { block },
@@ -719,6 +729,9 @@ async fn a_field_read_by_value_form_is_unconditional_and_publishes_both_forms() 
     let field = |name: &str, read, members| {
         let mut field = base.clone();
         field.name = name.into();
+        field.reader = reader(ReaderKind::Unknown);
+        field.reader.id = None;
+        field.reader.family = BlockFamily::Unknown;
         field.read = read;
         field.members = members;
         field
@@ -736,9 +749,41 @@ async fn a_field_read_by_value_form_is_unconditional_and_publishes_both_forms() 
             "persistent_or_boolean",
             vec![
                 by_form(true, read(ReaderKind::Block, RepeatBehavior::Merges)),
-                by_form(false, read(ReaderKind::Boolean, RepeatBehavior::Replace)),
+                by_form(false, unidentified_boolean()),
             ],
-            FieldMembers::Fields(vec![child]),
+            FieldMembers::Fields(vec![child.clone()]),
+        ),
+        field(
+            "triggers_or_boolean",
+            vec![
+                by_form(true, trigger_block()),
+                by_form(false, unidentified_boolean()),
+            ],
+            FieldMembers::None,
+        ),
+        field(
+            "unknown_scalar_repeat",
+            vec![
+                by_form(true, read(ReaderKind::Block, RepeatBehavior::Merges)),
+                by_form(false, read(ReaderKind::Boolean, RepeatBehavior::Unknown)),
+            ],
+            FieldMembers::None,
+        ),
+        // A pair under a conditional parent is as conditional as the parent.
+        field(
+            "conditional_parent",
+            vec![FieldReadAlternative {
+                condition: FieldCondition::Unresolved,
+                outcome: read(ReaderKind::Block, RepeatBehavior::Merges),
+            }],
+            FieldMembers::Fields(vec![field(
+                "pair",
+                vec![
+                    by_form(true, read(ReaderKind::Block, RepeatBehavior::Merges)),
+                    by_form(false, unidentified_boolean()),
+                ],
+                FieldMembers::Fields(vec![child]),
+            )]),
         ),
         // The scalar alternative first: the pair is the two forms in either order.
         field(
@@ -809,7 +854,7 @@ async fn a_field_read_by_value_form_is_unconditional_and_publishes_both_forms() 
         Some(json!({
             "form": "block",
             "reader": reader_id,
-            "scalar": {"form": "boolean", "reader": reader_id},
+            "scalar": {"form": "boolean", "reader": null},
         }))
     );
     assert_eq!(
@@ -837,6 +882,21 @@ async fn a_field_read_by_value_form_is_unconditional_and_publishes_both_forms() 
         answer("list_or_string/$item", "repeat_behavior"),
         Some(json!("Accumulate"))
     );
+
+    // The block takes the block branch's command family, not the shared reader's.
+    assert_eq!(
+        answer("triggers_or_boolean", "value_form").unwrap()["form"],
+        "block"
+    );
+    assert!(!has_gap("triggers_or_boolean", "nested_grammar"));
+
+    // Each form answers its own repeat; one unknown repeat leaves the maximum open.
+    assert!(answer("unknown_scalar_repeat", "value_form").is_some());
+    assert!(has_gap("unknown_scalar_repeat", "occurrences.maximum"));
+    assert_eq!(answer("unknown_scalar_repeat", "repeat_behavior"), None);
+
+    assert_eq!(conditional("conditional_parent/pair"), Some(true));
+    assert!(has_gap("conditional_parent/pair", "value_form.unresolved"));
 
     // A branch that keeps nothing of its value establishes no form and no repeat.
     assert!(has_gap("skipped", "value_form"));
