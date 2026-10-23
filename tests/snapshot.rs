@@ -457,7 +457,7 @@ async fn unresolved_value_forms_keep_only_their_field_gaps_and_correct_reason() 
     let unresolved = snapshot
         .gaps
         .iter()
-        .find(|gap| gap.id == "field:interface/resource_groups/localization#value_form.unresolved")
+        .find(|gap| gap.id == "field:interface/resource_groups/situation#value_form.unresolved")
         .unwrap();
     assert_eq!(
         unresolved.reason,
@@ -677,6 +677,274 @@ async fn repeat_facts_require_an_unconditional_successful_read() {
             .rules
             .iter()
             .all(|rule| rule.property != "occurrences.maximum")
+    );
+}
+
+#[tokio::test]
+async fn a_field_read_by_value_form_is_unconditional_and_publishes_both_forms() {
+    use pdx_native::{
+        BlockFamily, FieldCondition, FieldMembers, FieldReadAlternative, FieldReadOutcome,
+        ReaderKind, RepeatBehavior,
+    };
+    let mut extraction = recorded().await;
+    let fields = extraction
+        .fields
+        .get_mut(extraction::TRADITIONS)
+        .unwrap()
+        .as_mut()
+        .unwrap();
+    let base = fields
+        .value
+        .iter()
+        .find(|field| field.name == "unlocks_agenda")
+        .unwrap()
+        .clone();
+    let reader = |kind| {
+        let mut reader = base.reader.clone();
+        reader.kind = kind;
+        reader
+    };
+    let read_by = |reader, repeat| {
+        let mut shape = base.shape;
+        shape.repeat = repeat;
+        FieldReadOutcome::Read { reader, shape }
+    };
+    let read = |kind, repeat| read_by(reader(kind), repeat);
+    // The scalar branch's reader has no identity of its own, and the block branch's is the only
+    // one with a command family: the field's shared reader is Unknown.
+    let unidentified_boolean = || {
+        let mut reader = reader(ReaderKind::Boolean);
+        reader.id = None;
+        read_by(reader, RepeatBehavior::Replace)
+    };
+    let trigger_block = || {
+        let mut reader = reader(ReaderKind::Block);
+        reader.family = BlockFamily::Trigger;
+        read_by(reader, RepeatBehavior::Merges)
+    };
+    let by_form = |block, outcome| FieldReadAlternative {
+        condition: FieldCondition::ValueForm { block },
+        outcome,
+    };
+    let field = |name: &str, read, members| {
+        let mut field = base.clone();
+        field.name = name.into();
+        field.reader = reader(ReaderKind::Unknown);
+        field.reader.id = None;
+        field.reader.family = BlockFamily::Unknown;
+        field.read = read;
+        field.members = members;
+        field
+    };
+    let child = field(
+        "child",
+        vec![FieldReadAlternative {
+            condition: FieldCondition::Always,
+            outcome: read(ReaderKind::String, RepeatBehavior::Replace),
+        }],
+        FieldMembers::None,
+    );
+    fields.value.extend([
+        field(
+            "persistent_or_boolean",
+            vec![
+                by_form(true, read(ReaderKind::Block, RepeatBehavior::Merges)),
+                by_form(false, unidentified_boolean()),
+            ],
+            FieldMembers::Fields(vec![child.clone()]),
+        ),
+        field(
+            "triggers_or_boolean",
+            vec![
+                by_form(true, trigger_block()),
+                by_form(false, unidentified_boolean()),
+            ],
+            FieldMembers::None,
+        ),
+        field(
+            "unknown_scalar_repeat",
+            vec![
+                by_form(true, read(ReaderKind::Block, RepeatBehavior::Merges)),
+                by_form(false, read(ReaderKind::Boolean, RepeatBehavior::Unknown)),
+            ],
+            FieldMembers::None,
+        ),
+        // A pair under a conditional parent is as conditional as the parent.
+        field(
+            "conditional_parent",
+            vec![FieldReadAlternative {
+                condition: FieldCondition::Unresolved,
+                outcome: read(ReaderKind::Block, RepeatBehavior::Merges),
+            }],
+            FieldMembers::Fields(vec![field(
+                "pair",
+                vec![
+                    by_form(true, read(ReaderKind::Block, RepeatBehavior::Merges)),
+                    by_form(false, unidentified_boolean()),
+                ],
+                FieldMembers::Fields(vec![child]),
+            )]),
+        ),
+        // The scalar alternative first: the pair is the two forms in either order.
+        field(
+            "list_or_string",
+            vec![
+                by_form(false, read(ReaderKind::String, RepeatBehavior::Accumulate)),
+                by_form(true, read(ReaderKind::Block, RepeatBehavior::Accumulate)),
+            ],
+            FieldMembers::Items {
+                reader: reader(ReaderKind::String),
+            },
+        ),
+        field(
+            "skipped",
+            vec![
+                by_form(true, read(ReaderKind::Skipped, RepeatBehavior::Unknown)),
+                by_form(false, read(ReaderKind::Skipped, RepeatBehavior::Unknown)),
+            ],
+            FieldMembers::None,
+        ),
+        field(
+            "two_blocks",
+            vec![
+                by_form(true, read(ReaderKind::Block, RepeatBehavior::Merges)),
+                by_form(true, read(ReaderKind::Block, RepeatBehavior::Merges)),
+            ],
+            FieldMembers::None,
+        ),
+    ]);
+    let snapshot = snapshot::assemble(&extraction).unwrap();
+    let subject = |name: &str| format!("field:common/traditions/{name}");
+    let answer = |name: &str, property: &str| {
+        let id = format!("{}#{property}", subject(name));
+        snapshot
+            .rules
+            .iter()
+            .find(|rule| rule.id == id)
+            .map(|rule| rule.answer.clone())
+    };
+    let has_gap = |name: &str, property: &str| {
+        let id = format!("{}#{property}", subject(name));
+        snapshot.gaps.iter().any(|gap| gap.id == id)
+    };
+    let conditional = |name: &str| {
+        let id = subject(name);
+        snapshot
+            .subjects
+            .iter()
+            .find(|subject| subject.id == id)
+            .unwrap()
+            .conditional
+    };
+    let reader_id = json!(base.reader.id);
+
+    for name in [
+        "persistent_or_boolean",
+        "persistent_or_boolean/child",
+        "list_or_string",
+        "list_or_string/$item",
+        "skipped",
+    ] {
+        assert_eq!(conditional(name), Some(false), "{name}");
+        assert!(!has_gap(name, "value_form.unresolved"), "{name}");
+    }
+
+    assert_eq!(
+        answer("persistent_or_boolean", "value_form"),
+        Some(json!({
+            "form": "block",
+            "reader": reader_id,
+            "scalar": {"form": "boolean", "reader": null},
+        }))
+    );
+    assert_eq!(
+        answer("persistent_or_boolean", "repeat_behavior"),
+        Some(json!({"block": "Merges", "scalar": "Replace"}))
+    );
+    assert_eq!(
+        answer("persistent_or_boolean/child", "value_form").unwrap()["form"],
+        "string"
+    );
+
+    assert_eq!(
+        answer("list_or_string", "value_form").unwrap()["scalar"]["form"],
+        "string"
+    );
+    assert_eq!(
+        answer("list_or_string", "repeat_behavior"),
+        Some(json!("Accumulate"))
+    );
+    assert_eq!(
+        answer("list_or_string/$item", "value_form").unwrap()["form"],
+        "string"
+    );
+    assert_eq!(
+        answer("list_or_string/$item", "repeat_behavior"),
+        Some(json!("Accumulate"))
+    );
+
+    // The block takes the block branch's command family, not the shared reader's.
+    assert_eq!(
+        answer("triggers_or_boolean", "value_form").unwrap()["form"],
+        "block"
+    );
+    assert!(!has_gap("triggers_or_boolean", "nested_grammar"));
+
+    // Each form answers its own repeat; one unknown repeat leaves the maximum open.
+    assert!(answer("unknown_scalar_repeat", "value_form").is_some());
+    assert!(has_gap("unknown_scalar_repeat", "occurrences.maximum"));
+    assert_eq!(answer("unknown_scalar_repeat", "repeat_behavior"), None);
+
+    assert_eq!(conditional("conditional_parent/pair"), Some(true));
+    assert!(has_gap("conditional_parent/pair", "value_form.unresolved"));
+
+    // A branch that keeps nothing of its value establishes no form and no repeat.
+    assert!(has_gap("skipped", "value_form"));
+    assert!(has_gap("skipped", "occurrences.maximum"));
+    assert_eq!(answer("skipped", "value_form"), None);
+
+    // Two alternatives that are not one of each form keep the conditional answer.
+    assert_eq!(conditional("two_blocks"), Some(true));
+    assert!(has_gap("two_blocks", "value_form.unresolved"));
+    assert!(has_gap("two_blocks", "occurrences.maximum"));
+}
+
+#[tokio::test]
+async fn a_presence_reader_publishes_the_written_yes_form() {
+    use pdx_native::{FieldMembers, FieldReadOutcome, ReaderKind};
+    let mut extraction = recorded().await;
+    let fields = extraction
+        .fields
+        .get_mut(extraction::TRADITIONS)
+        .unwrap()
+        .as_mut()
+        .unwrap();
+    let mut field = fields
+        .value
+        .iter()
+        .find(|field| field.name == "unlocks_agenda")
+        .unwrap()
+        .clone();
+    field.name = "presence".into();
+    field.reader.kind = ReaderKind::Presence;
+    field.reader.id = None;
+    field.members = FieldMembers::None;
+    if let FieldReadOutcome::Read { reader, .. } = &mut field.read[0].outcome {
+        *reader = field.reader.clone();
+    }
+    fields.value.push(field);
+    let snapshot = snapshot::assemble(&extraction).unwrap();
+    let value_form = snapshot
+        .rules
+        .iter()
+        .find(|rule| rule.id == "field:common/traditions/presence#value_form")
+        .unwrap();
+
+    assert_eq!(value_form.answer["form"], "yes");
+    assert_eq!(value_form.answer["schema"], "#/schemas/$defs/reader-yes");
+    assert_eq!(
+        snapshot.schemas.definitions["reader-yes"],
+        json!({"type": ["boolean", "number", "string"]})
     );
 }
 

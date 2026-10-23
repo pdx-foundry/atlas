@@ -312,11 +312,22 @@ impl ComparisonKind {
                     None => Some(form),
                 }
             }
-            Self::Cardinality => match answer.as_str() {
-                // No repeat behavior rejects an occurrence, so none states a finite maximum.
-                Some("Replace" | "Accumulate" | "Merges") => Some(Value::String("inf".into())),
-                _ => answer.as_u64().map(Value::from),
-            },
+            // No repeat behavior rejects an occurrence, so none states a finite maximum, also
+            // where each value form repeats differently (`{"block": …, "scalar": …}`).
+            Self::Cardinality => {
+                let repeats = |answer: &Value| {
+                    matches!(answer.as_str(), Some("Replace" | "Accumulate" | "Merges"))
+                };
+                let repeats_by_value_form = answer
+                    .as_object()
+                    .is_some_and(|forms| !forms.is_empty() && forms.values().all(repeats));
+
+                if repeats(answer) || repeats_by_value_form {
+                    Some(Value::String("inf".into()))
+                } else {
+                    answer.as_u64().map(Value::from)
+                }
+            }
             Self::EnumMember => answer.as_bool().map(Value::Bool),
             Self::PushScope => {
                 let scopes: BTreeSet<_> = answer

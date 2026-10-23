@@ -679,20 +679,42 @@
       {
         "name": "triggered_cost_modifier",
         "reader": {
-          "numeric": "Unresolved",
-          "scoped_operand": "Unresolved",
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
           "id": null,
-          "kind": "Unknown",
+          "kind": "Block",
           "family": "Unknown"
         },
         "shape": {
-          "value": "Unknown",
-          "repeat": "Unknown"
+          "value": "Block",
+          "repeat": "Accumulate"
         },
         "read": [
           {
             "condition": "Always",
-            "outcome": "Unresolved"
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": null,
+                  "kind": "Block",
+                  "family": "Unknown"
+                },
+                "shape": {
+                  "value": "Block",
+                  "repeat": "Accumulate"
+                }
+              }
+            }
           }
         ],
         "members": "Unresolved",
@@ -732,20 +754,42 @@
       {
         "name": "triggered_produces_modifier",
         "reader": {
-          "numeric": "Unresolved",
-          "scoped_operand": "Unresolved",
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
           "id": null,
-          "kind": "Unknown",
+          "kind": "Block",
           "family": "Unknown"
         },
         "shape": {
-          "value": "Unknown",
-          "repeat": "Unknown"
+          "value": "Block",
+          "repeat": "Accumulate"
         },
         "read": [
           {
             "condition": "Always",
-            "outcome": "Unresolved"
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": null,
+                  "kind": "Block",
+                  "family": "Unknown"
+                },
+                "shape": {
+                  "value": "Block",
+                  "repeat": "Accumulate"
+                }
+              }
+            }
           }
         ],
         "members": "Unresolved",
@@ -785,20 +829,42 @@
       {
         "name": "triggered_upkeep_modifier",
         "reader": {
-          "numeric": "Unresolved",
-          "scoped_operand": "Unresolved",
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
           "id": null,
-          "kind": "Unknown",
+          "kind": "Block",
           "family": "Unknown"
         },
         "shape": {
-          "value": "Unknown",
-          "repeat": "Unknown"
+          "value": "Block",
+          "repeat": "Accumulate"
         },
         "read": [
           {
             "condition": "Always",
-            "outcome": "Unresolved"
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": null,
+                  "kind": "Block",
+                  "family": "Unknown"
+                },
+                "shape": {
+                  "value": "Block",
+                  "repeat": "Accumulate"
+                }
+              }
+            }
           }
         ],
         "members": "Unresolved",
@@ -838,20 +904,42 @@
       {
         "name": "triggered_logistics_modifier",
         "reader": {
-          "numeric": "Unresolved",
-          "scoped_operand": "Unresolved",
+          "numeric": {
+            "Known": null
+          },
+          "scoped_operand": {
+            "Known": null
+          },
           "id": null,
-          "kind": "Unknown",
+          "kind": "Block",
           "family": "Unknown"
         },
         "shape": {
-          "value": "Unknown",
-          "repeat": "Unknown"
+          "value": "Block",
+          "repeat": "Accumulate"
         },
         "read": [
           {
             "condition": "Always",
-            "outcome": "Unresolved"
+            "outcome": {
+              "Read": {
+                "reader": {
+                  "numeric": {
+                    "Known": null
+                  },
+                  "scoped_operand": {
+                    "Known": null
+                  },
+                  "id": null,
+                  "kind": "Block",
+                  "family": "Unknown"
+                },
+                "shape": {
+                  "value": "Block",
+                  "repeat": "Accumulate"
+                }
+              }
+            }
           }
         ],
         "members": "Unresolved",
@@ -1264,38 +1352,6 @@
         "kind": "UnresolvedStorage",
         "subject": {
           "kind": "field",
-          "name": "triggered_cost_modifier"
-        },
-        "detail": "Repeat behavior waits for one shared reader. Nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "triggered_produces_modifier"
-        },
-        "detail": "Repeat behavior waits for one shared reader. Nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "triggered_upkeep_modifier"
-        },
-        "detail": "Repeat behavior waits for one shared reader. Nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
-          "name": "triggered_logistics_modifier"
-        },
-        "detail": "Repeat behavior waits for one shared reader. Nested fields remain unresolved."
-      },
-      {
-        "kind": "UnresolvedStorage",
-        "subject": {
-          "kind": "field",
           "name": "generate_add_modifiers"
         },
         "detail": "Repeat behavior waits for one shared reader. Nested fields remain unresolved."
@@ -1307,12 +1363,44 @@
           "name": "generate_mult_modifiers"
         },
         "detail": "Repeat behavior waits for one shared reader. Nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "triggered_cost_modifier"
+        },
+        "detail": "Nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "triggered_produces_modifier"
+        },
+        "detail": "Nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "triggered_upkeep_modifier"
+        },
+        "detail": "Nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "triggered_logistics_modifier"
+        },
+        "detail": "Nested fields remain unresolved."
       }
     ],
     "source": {
       "build": "c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b",
       "native_version": "0.1.0",
-      "method": "registry-fields/v73",
+      "method": "registry-fields/ghidra-v1",
       "basis": "StaticAnalysis"
     }
   }

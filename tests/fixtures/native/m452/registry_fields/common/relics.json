@@ -7311,6 +7311,554 @@
               "read_scope": "Unresolved",
               "accepted_categories": "Unresolved",
               "requirement": "Unknown"
+            },
+            {
+              "name": "produces",
+              "reader": {
+                "numeric": {
+                  "Known": null
+                },
+                "scoped_operand": {
+                  "Known": null
+                },
+                "id": null,
+                "kind": "Block",
+                "family": "Unknown"
+              },
+              "shape": {
+                "value": "Block",
+                "repeat": "Unknown"
+              },
+              "read": [
+                {
+                  "condition": "Always",
+                  "outcome": {
+                    "Read": {
+                      "reader": {
+                        "numeric": {
+                          "Known": null
+                        },
+                        "scoped_operand": {
+                          "Known": null
+                        },
+                        "id": null,
+                        "kind": "Block",
+                        "family": "Unknown"
+                      },
+                      "shape": {
+                        "value": "Block",
+                        "repeat": "Unknown"
+                      }
+                    }
+                  }
+                }
+              ],
+              "members": {
+                "Fields": [
+                  {
+                    "name": "trigger",
+                    "reader": {
+                      "numeric": "Unresolved",
+                      "scoped_operand": "Unresolved",
+                      "id": null,
+                      "kind": "Unknown",
+                      "family": "Unknown"
+                    },
+                    "shape": {
+                      "value": "Unknown",
+                      "repeat": "Unknown"
+                    },
+                    "read": [
+                      {
+                        "condition": "Always",
+                        "outcome": "Unresolved"
+                      }
+                    ],
+                    "members": "Unresolved",
+                    "domain": "Unknown",
+                    "uses": [],
+                    "reference": "NotEstablished",
+                    "entry_contexts": [],
+                    "read_scope": "Unresolved",
+                    "accepted_categories": "Unresolved",
+                    "requirement": "Unknown"
+                  },
+                  {
+                    "name": "multiplier",
+                    "reader": {
+                      "numeric": "Unresolved",
+                      "scoped_operand": "Unresolved",
+                      "id": null,
+                      "kind": "Unknown",
+                      "family": "Unknown"
+                    },
+                    "shape": {
+                      "value": "Unknown",
+                      "repeat": "Unknown"
+                    },
+                    "read": [
+                      {
+                        "condition": "Always",
+                        "outcome": "Unresolved"
+                      }
+                    ],
+                    "members": "Unresolved",
+                    "domain": "Unknown",
+                    "uses": [],
+                    "reference": "NotEstablished",
+                    "entry_contexts": [],
+                    "read_scope": "Unresolved",
+                    "accepted_categories": "Unresolved",
+                    "requirement": "Unknown"
+                  },
+                  {
+                    "name": "mult",
+                    "reader": {
+                      "numeric": "Unresolved",
+                      "scoped_operand": "Unresolved",
+                      "id": null,
+                      "kind": "Unknown",
+                      "family": "Unknown"
+                    },
+                    "shape": {
+                      "value": "Unknown",
+                      "repeat": "Unknown"
+                    },
+                    "read": [
+                      {
+                        "condition": "Always",
+                        "outcome": "Unresolved"
+                      }
+                    ],
+                    "members": "Unresolved",
+                    "domain": "Unknown",
+                    "uses": [],
+                    "reference": "NotEstablished",
+                    "entry_contexts": [],
+                    "read_scope": "Unresolved",
+                    "accepted_categories": "Unresolved",
+                    "requirement": "Unknown"
+                  }
+                ]
+              },
+              "domain": "Unknown",
+              "uses": [],
+              "reference": "NotEstablished",
+              "entry_contexts": [],
+              "read_scope": "Unresolved",
+              "accepted_categories": "Unresolved",
+              "requirement": "Unknown"
+            },
+            {
+              "name": "upkeep",
+              "reader": {
+                "numeric": {
+                  "Known": null
+                },
+                "scoped_operand": {
+                  "Known": null
+                },
+                "id": null,
+                "kind": "Block",
+                "family": "Unknown"
+              },
+              "shape": {
+                "value": "Block",
+                "repeat": "Unknown"
+              },
+              "read": [
+                {
+                  "condition": "Always",
+                  "outcome": {
+                    "Read": {
+                      "reader": {
+                        "numeric": {
+                          "Known": null
+                        },
+                        "scoped_operand": {
+                          "Known": null
+                        },
+                        "id": null,
+                        "kind": "Block",
+                        "family": "Unknown"
+                      },
+                      "shape": {
+                        "value": "Block",
+                        "repeat": "Unknown"
+                      }
+                    }
+                  }
+                }
+              ],
+              "members": {
+                "Fields": [
+                  {
+                    "name": "trigger",
+                    "reader": {
+                      "numeric": "Unresolved",
+                      "scoped_operand": "Unresolved",
+                      "id": null,
+                      "kind": "Unknown",
+                      "family": "Unknown"
+                    },
+                    "shape": {
+                      "value": "Unknown",
+                      "repeat": "Unknown"
+                    },
+                    "read": [
+                      {
+                        "condition": "Always",
+                        "outcome": "Unresolved"
+                      }
+                    ],
+                    "members": "Unresolved",
+                    "domain": "Unknown",
+                    "uses": [],
+                    "reference": "NotEstablished",
+                    "entry_contexts": [],
+                    "read_scope": "Unresolved",
+                    "accepted_categories": "Unresolved",
+                    "requirement": "Unknown"
+                  },
+                  {
+                    "name": "multiplier",
+                    "reader": {
+                      "numeric": "Unresolved",
+                      "scoped_operand": "Unresolved",
+                      "id": null,
+                      "kind": "Unknown",
+                      "family": "Unknown"
+                    },
+                    "shape": {
+                      "value": "Unknown",
+                      "repeat": "Unknown"
+                    },
+                    "read": [
+                      {
+                        "condition": "Always",
+                        "outcome": "Unresolved"
+                      }
+                    ],
+                    "members": "Unresolved",
+                    "domain": "Unknown",
+                    "uses": [],
+                    "reference": "NotEstablished",
+                    "entry_contexts": [],
+                    "read_scope": "Unresolved",
+                    "accepted_categories": "Unresolved",
+                    "requirement": "Unknown"
+                  },
+                  {
+                    "name": "mult",
+                    "reader": {
+                      "numeric": "Unresolved",
+                      "scoped_operand": "Unresolved",
+                      "id": null,
+                      "kind": "Unknown",
+                      "family": "Unknown"
+                    },
+                    "shape": {
+                      "value": "Unknown",
+                      "repeat": "Unknown"
+                    },
+                    "read": [
+                      {
+                        "condition": "Always",
+                        "outcome": "Unresolved"
+                      }
+                    ],
+                    "members": "Unresolved",
+                    "domain": "Unknown",
+                    "uses": [],
+                    "reference": "NotEstablished",
+                    "entry_contexts": [],
+                    "read_scope": "Unresolved",
+                    "accepted_categories": "Unresolved",
+                    "requirement": "Unknown"
+                  }
+                ]
+              },
+              "domain": "Unknown",
+              "uses": [],
+              "reference": "NotEstablished",
+              "entry_contexts": [],
+              "read_scope": "Unresolved",
+              "accepted_categories": "Unresolved",
+              "requirement": "Unknown"
+            },
+            {
+              "name": "logistics",
+              "reader": {
+                "numeric": {
+                  "Known": null
+                },
+                "scoped_operand": {
+                  "Known": null
+                },
+                "id": null,
+                "kind": "Block",
+                "family": "Unknown"
+              },
+              "shape": {
+                "value": "Block",
+                "repeat": "Unknown"
+              },
+              "read": [
+                {
+                  "condition": "Always",
+                  "outcome": {
+                    "Read": {
+                      "reader": {
+                        "numeric": {
+                          "Known": null
+                        },
+                        "scoped_operand": {
+                          "Known": null
+                        },
+                        "id": null,
+                        "kind": "Block",
+                        "family": "Unknown"
+                      },
+                      "shape": {
+                        "value": "Block",
+                        "repeat": "Unknown"
+                      }
+                    }
+                  }
+                }
+              ],
+              "members": {
+                "Fields": [
+                  {
+                    "name": "trigger",
+                    "reader": {
+                      "numeric": "Unresolved",
+                      "scoped_operand": "Unresolved",
+                      "id": null,
+                      "kind": "Unknown",
+                      "family": "Unknown"
+                    },
+                    "shape": {
+                      "value": "Unknown",
+                      "repeat": "Unknown"
+                    },
+                    "read": [
+                      {
+                        "condition": "Always",
+                        "outcome": "Unresolved"
+                      }
+                    ],
+                    "members": "Unresolved",
+                    "domain": "Unknown",
+                    "uses": [],
+                    "reference": "NotEstablished",
+                    "entry_contexts": [],
+                    "read_scope": "Unresolved",
+                    "accepted_categories": "Unresolved",
+                    "requirement": "Unknown"
+                  },
+                  {
+                    "name": "multiplier",
+                    "reader": {
+                      "numeric": "Unresolved",
+                      "scoped_operand": "Unresolved",
+                      "id": null,
+                      "kind": "Unknown",
+                      "family": "Unknown"
+                    },
+                    "shape": {
+                      "value": "Unknown",
+                      "repeat": "Unknown"
+                    },
+                    "read": [
+                      {
+                        "condition": "Always",
+                        "outcome": "Unresolved"
+                      }
+                    ],
+                    "members": "Unresolved",
+                    "domain": "Unknown",
+                    "uses": [],
+                    "reference": "NotEstablished",
+                    "entry_contexts": [],
+                    "read_scope": "Unresolved",
+                    "accepted_categories": "Unresolved",
+                    "requirement": "Unknown"
+                  },
+                  {
+                    "name": "mult",
+                    "reader": {
+                      "numeric": "Unresolved",
+                      "scoped_operand": "Unresolved",
+                      "id": null,
+                      "kind": "Unknown",
+                      "family": "Unknown"
+                    },
+                    "shape": {
+                      "value": "Unknown",
+                      "repeat": "Unknown"
+                    },
+                    "read": [
+                      {
+                        "condition": "Always",
+                        "outcome": "Unresolved"
+                      }
+                    ],
+                    "members": "Unresolved",
+                    "domain": "Unknown",
+                    "uses": [],
+                    "reference": "NotEstablished",
+                    "entry_contexts": [],
+                    "read_scope": "Unresolved",
+                    "accepted_categories": "Unresolved",
+                    "requirement": "Unknown"
+                  }
+                ]
+              },
+              "domain": "Unknown",
+              "uses": [],
+              "reference": "NotEstablished",
+              "entry_contexts": [],
+              "read_scope": "Unresolved",
+              "accepted_categories": "Unresolved",
+              "requirement": "Unknown"
+            },
+            {
+              "name": "cost",
+              "reader": {
+                "numeric": {
+                  "Known": null
+                },
+                "scoped_operand": {
+                  "Known": null
+                },
+                "id": null,
+                "kind": "Block",
+                "family": "Unknown"
+              },
+              "shape": {
+                "value": "Block",
+                "repeat": "Unknown"
+              },
+              "read": [
+                {
+                  "condition": "Always",
+                  "outcome": {
+                    "Read": {
+                      "reader": {
+                        "numeric": {
+                          "Known": null
+                        },
+                        "scoped_operand": {
+                          "Known": null
+                        },
+                        "id": null,
+                        "kind": "Block",
+                        "family": "Unknown"
+                      },
+                      "shape": {
+                        "value": "Block",
+                        "repeat": "Unknown"
+                      }
+                    }
+                  }
+                }
+              ],
+              "members": {
+                "Fields": [
+                  {
+                    "name": "trigger",
+                    "reader": {
+                      "numeric": "Unresolved",
+                      "scoped_operand": "Unresolved",
+                      "id": null,
+                      "kind": "Unknown",
+                      "family": "Unknown"
+                    },
+                    "shape": {
+                      "value": "Unknown",
+                      "repeat": "Unknown"
+                    },
+                    "read": [
+                      {
+                        "condition": "Always",
+                        "outcome": "Unresolved"
+                      }
+                    ],
+                    "members": "Unresolved",
+                    "domain": "Unknown",
+                    "uses": [],
+                    "reference": "NotEstablished",
+                    "entry_contexts": [],
+                    "read_scope": "Unresolved",
+                    "accepted_categories": "Unresolved",
+                    "requirement": "Unknown"
+                  },
+                  {
+                    "name": "multiplier",
+                    "reader": {
+                      "numeric": "Unresolved",
+                      "scoped_operand": "Unresolved",
+                      "id": null,
+                      "kind": "Unknown",
+                      "family": "Unknown"
+                    },
+                    "shape": {
+                      "value": "Unknown",
+                      "repeat": "Unknown"
+                    },
+                    "read": [
+                      {
+                        "condition": "Always",
+                        "outcome": "Unresolved"
+                      }
+                    ],
+                    "members": "Unresolved",
+                    "domain": "Unknown",
+                    "uses": [],
+                    "reference": "NotEstablished",
+                    "entry_contexts": [],
+                    "read_scope": "Unresolved",
+                    "accepted_categories": "Unresolved",
+                    "requirement": "Unknown"
+                  },
+                  {
+                    "name": "mult",
+                    "reader": {
+                      "numeric": "Unresolved",
+                      "scoped_operand": "Unresolved",
+                      "id": null,
+                      "kind": "Unknown",
+                      "family": "Unknown"
+                    },
+                    "shape": {
+                      "value": "Unknown",
+                      "repeat": "Unknown"
+                    },
+                    "read": [
+                      {
+                        "condition": "Always",
+                        "outcome": "Unresolved"
+                      }
+                    ],
+                    "members": "Unresolved",
+                    "domain": "Unknown",
+                    "uses": [],
+                    "reference": "NotEstablished",
+                    "entry_contexts": [],
+                    "read_scope": "Unresolved",
+                    "accepted_categories": "Unresolved",
+                    "requirement": "Unknown"
+                  }
+                ]
+              },
+              "domain": "Unknown",
+              "uses": [],
+              "reference": "NotEstablished",
+              "entry_contexts": [],
+              "read_scope": "Unresolved",
+              "accepted_categories": "Unresolved",
+              "requirement": "Unknown"
             }
           ]
         },
@@ -8561,12 +9109,556 @@
           "name": "resources.category"
         },
         "detail": "Repeat behavior waits for one shared reader. Nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "resources.produces.trigger"
+        },
+        "detail": "The reader export does not establish the field's reader."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "resources.produces.trigger"
+        },
+        "detail": "read-scope: no-literal-mask"
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "resources.produces.trigger"
+        },
+        "detail": "The reader export does not establish repeat behavior. Nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "resources.produces.trigger"
+        },
+        "detail": "Whether the field reads a modifier container, and its categories, are not established."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "resources.produces.multiplier"
+        },
+        "detail": "The reader export does not establish the field's reader."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "resources.produces.multiplier"
+        },
+        "detail": "read-scope: no-literal-mask"
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "resources.produces.multiplier"
+        },
+        "detail": "The reader export does not establish repeat behavior. Nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "resources.produces.multiplier"
+        },
+        "detail": "Whether the field reads a modifier container, and its categories, are not established."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "resources.produces.mult"
+        },
+        "detail": "The reader export does not establish the field's reader."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "resources.produces.mult"
+        },
+        "detail": "read-scope: no-literal-mask"
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "resources.produces.mult"
+        },
+        "detail": "The reader export does not establish repeat behavior. Nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "resources.produces.mult"
+        },
+        "detail": "Whether the field reads a modifier container, and its categories, are not established."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "resources.produces"
+        },
+        "detail": "The reader export establishes the value form, not the shared reader's identity."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "resources.produces"
+        },
+        "detail": "read-scope: no-literal-mask"
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "resources.produces"
+        },
+        "detail": "The reader export does not establish repeat behavior."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "resources.produces"
+        },
+        "detail": "The reader export lists these nested fields, but its readers do not prove the block's keys."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "resources.produces"
+        },
+        "detail": "Whether the field reads a modifier container, and its categories, are not established."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "resources.upkeep.trigger"
+        },
+        "detail": "The reader export does not establish the field's reader."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "resources.upkeep.trigger"
+        },
+        "detail": "read-scope: no-literal-mask"
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "resources.upkeep.trigger"
+        },
+        "detail": "The reader export does not establish repeat behavior. Nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "resources.upkeep.trigger"
+        },
+        "detail": "Whether the field reads a modifier container, and its categories, are not established."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "resources.upkeep.multiplier"
+        },
+        "detail": "The reader export does not establish the field's reader."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "resources.upkeep.multiplier"
+        },
+        "detail": "read-scope: no-literal-mask"
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "resources.upkeep.multiplier"
+        },
+        "detail": "The reader export does not establish repeat behavior. Nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "resources.upkeep.multiplier"
+        },
+        "detail": "Whether the field reads a modifier container, and its categories, are not established."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "resources.upkeep.mult"
+        },
+        "detail": "The reader export does not establish the field's reader."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "resources.upkeep.mult"
+        },
+        "detail": "read-scope: no-literal-mask"
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "resources.upkeep.mult"
+        },
+        "detail": "The reader export does not establish repeat behavior. Nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "resources.upkeep.mult"
+        },
+        "detail": "Whether the field reads a modifier container, and its categories, are not established."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "resources.upkeep"
+        },
+        "detail": "The reader export establishes the value form, not the shared reader's identity."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "resources.upkeep"
+        },
+        "detail": "read-scope: no-literal-mask"
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "resources.upkeep"
+        },
+        "detail": "The reader export does not establish repeat behavior."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "resources.upkeep"
+        },
+        "detail": "The reader export lists these nested fields, but its readers do not prove the block's keys."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "resources.upkeep"
+        },
+        "detail": "Whether the field reads a modifier container, and its categories, are not established."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "resources.logistics.trigger"
+        },
+        "detail": "The reader export does not establish the field's reader."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "resources.logistics.trigger"
+        },
+        "detail": "read-scope: no-literal-mask"
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "resources.logistics.trigger"
+        },
+        "detail": "The reader export does not establish repeat behavior. Nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "resources.logistics.trigger"
+        },
+        "detail": "Whether the field reads a modifier container, and its categories, are not established."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "resources.logistics.multiplier"
+        },
+        "detail": "The reader export does not establish the field's reader."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "resources.logistics.multiplier"
+        },
+        "detail": "read-scope: no-literal-mask"
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "resources.logistics.multiplier"
+        },
+        "detail": "The reader export does not establish repeat behavior. Nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "resources.logistics.multiplier"
+        },
+        "detail": "Whether the field reads a modifier container, and its categories, are not established."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "resources.logistics.mult"
+        },
+        "detail": "The reader export does not establish the field's reader."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "resources.logistics.mult"
+        },
+        "detail": "read-scope: no-literal-mask"
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "resources.logistics.mult"
+        },
+        "detail": "The reader export does not establish repeat behavior. Nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "resources.logistics.mult"
+        },
+        "detail": "Whether the field reads a modifier container, and its categories, are not established."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "resources.logistics"
+        },
+        "detail": "The reader export establishes the value form, not the shared reader's identity."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "resources.logistics"
+        },
+        "detail": "read-scope: no-literal-mask"
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "resources.logistics"
+        },
+        "detail": "The reader export does not establish repeat behavior."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "resources.logistics"
+        },
+        "detail": "The reader export lists these nested fields, but its readers do not prove the block's keys."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "resources.logistics"
+        },
+        "detail": "Whether the field reads a modifier container, and its categories, are not established."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "resources.cost.trigger"
+        },
+        "detail": "The reader export does not establish the field's reader."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "resources.cost.trigger"
+        },
+        "detail": "read-scope: no-literal-mask"
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "resources.cost.trigger"
+        },
+        "detail": "The reader export does not establish repeat behavior. Nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "resources.cost.trigger"
+        },
+        "detail": "Whether the field reads a modifier container, and its categories, are not established."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "resources.cost.multiplier"
+        },
+        "detail": "The reader export does not establish the field's reader."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "resources.cost.multiplier"
+        },
+        "detail": "read-scope: no-literal-mask"
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "resources.cost.multiplier"
+        },
+        "detail": "The reader export does not establish repeat behavior. Nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "resources.cost.multiplier"
+        },
+        "detail": "Whether the field reads a modifier container, and its categories, are not established."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "resources.cost.mult"
+        },
+        "detail": "The reader export does not establish the field's reader."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "resources.cost.mult"
+        },
+        "detail": "read-scope: no-literal-mask"
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "resources.cost.mult"
+        },
+        "detail": "The reader export does not establish repeat behavior. Nested fields remain unresolved."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "resources.cost.mult"
+        },
+        "detail": "Whether the field reads a modifier container, and its categories, are not established."
+      },
+      {
+        "kind": "UnresolvedReader",
+        "subject": {
+          "kind": "field",
+          "name": "resources.cost"
+        },
+        "detail": "The reader export establishes the value form, not the shared reader's identity."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "resources.cost"
+        },
+        "detail": "read-scope: no-literal-mask"
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "resources.cost"
+        },
+        "detail": "The reader export does not establish repeat behavior."
+      },
+      {
+        "kind": "UnresolvedStorage",
+        "subject": {
+          "kind": "field",
+          "name": "resources.cost"
+        },
+        "detail": "The reader export lists these nested fields, but its readers do not prove the block's keys."
+      },
+      {
+        "kind": "UnresolvedPath",
+        "subject": {
+          "kind": "field",
+          "name": "resources.cost"
+        },
+        "detail": "Whether the field reads a modifier container, and its categories, are not established."
       }
     ],
     "source": {
       "build": "c621723d9c8e0c1cd153319208d30a9dfbb9e63675be86f9d0ae7debeaa7fe1b",
       "native_version": "0.1.0",
-      "method": "registry-fields/v73",
+      "method": "registry-fields/ghidra-v1",
       "basis": "StaticAnalysis"
     }
   }

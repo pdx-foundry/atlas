@@ -65,8 +65,8 @@ another config or snapshot is left out with a warning. A PR that changes coverag
 current pin (no game), and updates `tests/fixtures/full-config-baseline.json`; a change to one
 config file's coverage changes its shard and the index only. The PR states its coverage delta in
 its description. The count below changes only at a pin move: the live snapshot at Native
-`9fc7ced`, made with the [pin move B capture](docs/coverage/pin-move-b.md) commands, covers
-32,758 of 56,917 claims.
+`9b582cc`, made with the [pin move B capture](docs/coverage/pin-move-b.md) commands, covers
+33,392 of 56,917 claims.
 
 The [registry comparison](docs/coverage/registries.md) puts Native's registry list beside the
 config types and records a reason for each type that no registry names:
@@ -104,7 +104,9 @@ names without independent scope evidence. These recorded checks are separate fro
 with the current config. Callback scope rules include `prev` and apply the self-link assumption;
 missing independent evidence remains an entry-scope gap.
 A weight or script-value block whose bare value Native reports (`WeightBlock.scalar`) carries that
-value's form beside `block` in its `value_form` rule (`scalar`), and compares as either form.
+value's form beside `block` in its `value_form` rule (`scalar`), and compares as either form. A
+field that reads a block value and any other value differently (`FieldCondition::ValueForm`)
+publishes its two forms the same way.
 Generic CWT `scalar` is compatible with a concrete scalar reader; CWT aliases and other modeled
 forms remain unclassified until a semantic mapping exists.
 
